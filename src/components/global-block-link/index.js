@@ -151,6 +151,7 @@ const GlobalBlockStyles = ( props ) => {
                 } );
 
                 const justStrings = Object.fromEntries( filtered );
+                console.log(justStrings);
                 const newProps = {...props};
                 if ( style?.props ) {
                     newProps.attributes = {
@@ -158,6 +159,7 @@ const GlobalBlockStyles = ( props ) => {
                         ...justStrings
                     }
                 }
+                console.log(newProps);
                 const blockStyling = styling( newProps, baseSelector );
                 style.editorStyles = blockStyling;
                 style.props = newProps;
@@ -178,7 +180,6 @@ const GlobalBlockStyles = ( props ) => {
         setSaveToDatabase( true );
     };
     const updateGoogleFontData = ( attrs ) => {
-       
         Object.keys( attrs ).map( ( attribute ) => {
             
             if ( attribute.includes( 'Family' ) && '' !== attrs[attribute] ) {
