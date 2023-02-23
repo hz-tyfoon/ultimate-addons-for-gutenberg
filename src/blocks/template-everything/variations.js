@@ -47,17 +47,16 @@ const variations = [
 		icon: icons['style-2'],
 		title: __( 'Style 2', 'ultimate-addons-for-gutenberg' ),
 		attributes: {
-			topPaddingDesktop: 25,
-			bottomPaddingDesktop: 25,
-			leftPaddingDesktop: 25,
-			rightPaddingDesktop: 25,
+			topPaddingDesktop: 150,
+			bottomPaddingDesktop: 150,
+			leftPaddingDesktop: 150,
+			rightPaddingDesktop: 150,
 		},
-		isDefault: true,
 		innerBlocks: [
-			[ 'uagb/advanced-heading', { headingAlign: 'center', headingTitleToggle: true, headingDescToggle: true, headingDesc: 'Check out the team dashboard', headingTag: 'h1',headingTitle: 'Beautiful analytics to grow smarter' , headingDescPosition: 'above-heading', headSpace: 15, subHeadSpace: 0, blockTopPadding: 0, blockBottomPadding: 0, headFontWeight: 500, subHeadingColor: '#7F56D9' }],
-			[ 'uagb/advanced-heading', { headingAlign: 'center', headingTitleToggle: false, headingDescToggle: true, blockTopPadding: 0, blockBottomPadding: 0, subHeadSpace: 15, headingDesc: 'Powerful, self-serve product and growth analytics to help you convert, engage, and retain more users. Trusted by over 4,000 startups. Powerful, self-serve product and growth analytics to help you convert, engage, and retain more users. Trusted by over 4,000 startups.' } ],
+			[ 'uagb/advanced-heading', { headingAlign: 'center', headingTitleToggle: true, headingDescToggle: true, headingDesc: 'Check out the team dashboard', headingTag: 'h1',headingTitle: 'Beautiful analytics to grow smarter' , headingDescPosition: 'above-heading', headSpace: 24, subHeadSpace: 12, blockTopPadding: 0, blockBottomPadding: 0, headFontWeight: 500, subHeadingColor: '#7F56D9' }],
+			[ 'uagb/advanced-heading', { headingAlign: 'center', headingTitleToggle: false, headingDescToggle: true, blockTopPadding: 0, blockBottomPadding: 0, subHeadSpace: 32, headingDesc: 'Powerful, self-serve product and growth analytics to help you convert, engage, and retain more users. Trusted by over 4,000 startups. Powerful, self-serve product and growth analytics to help you convert, engage, and retain more users. Trusted by over 4,000 startups.' } ],
 			[ 'uagb/buttons', {}, [
-				[ 'uagb/buttons-child', { backgroundType: 'color', background: '#7F56D9', color: '#fff', topPadding: 12, rightPadding: 20, bottomPadding: 12, leftPadding: 20, btnBorderTopLeftRadius: 4, btnBorderTopRightRadius: 4, btnBorderBottomRightRadius: 4, btnBorderBottomLeftRadius: 4, btnBorderStyle: 'none' } ],
+				[ 'uagb/buttons-child', { backgroundType: 'color', background: '', color: '', topPadding: '', rightPadding: '', bottomPadding: '', leftPadding: '', btnBorderTopLeftRadius: '', btnBorderTopRightRadius: '', btnBorderBottomRightRadius: '', btnBorderBottomLeftRadius: '', btnBorderStyle: 'default' } ],
 				[ 'uagb/buttons-child', { backgroundType: 'transparent', color: '#667085', showIcon: true, iconPosition: 'after', btnBorderStyle: 'none' } ]
 			]]
 		],
@@ -68,7 +67,6 @@ const variations = [
 		icon: icons['style-3'],
 		title: __( 'Style 3', 'ultimate-addons-for-gutenberg' ),
 		attributes: {},
-		isDefault: true,
 		innerBlocks: [
 			[ 'uagb/container', { directionDesktop: 'row' }, [
 				[ 'uagb/container', {}, [
@@ -119,7 +117,6 @@ const variations = [
 			blockBorderRightWidth: 2,
 			blockBorderColor: '#0000002E'
 		},
-		isDefault: true,
 		innerBlocks: [
 			[ 'uagb/advanced-heading', { headingAlign: 'center', seperatorStyle: 'solid', headFontWeight: 500, subHeadingColor: '#0B63E5', seperatorPosition: 'below-heading', headingTitleToggle: true, headingDescToggle: true, headingDesc: 'Standard', headingTag: 'h2',headingTitle: '$25/-' , headingDescPosition: 'above-heading', headSpace: 15, subHeadSpace: 12, blockTopPadding: 15, blockBottomPadding: 0 }],
 			[ 'uagb/icon-list', { icon_count: 6 , blockBottomPadding: 20, Label: 'Lorem Ipsum dolor' , icon: 'check-square', align: 'center', iconColor: '#0B63E5'}],
@@ -134,7 +131,6 @@ const variations = [
 		icon: icons['style-5'],
 		title: __( 'Style 5', 'ultimate-addons-for-gutenberg' ),
 		attributes: {},
-		isDefault: true,
 		innerBlocks: [
 			[ 'uagb/container', { directionDesktop: 'row' }, [
 				[ 'uagb/container', {}, [
