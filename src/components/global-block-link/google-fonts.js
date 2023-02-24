@@ -7,7 +7,7 @@ const SpectraLoadGlobaGoogleFonts = () => {
     const globalBlockStylesFontFamilies = useSelect( ( spectraStoreSelect ) => {
         return spectraStoreSelect( storeName ).getGlobalBlockStylesFontFamilies();
     } );
-console.log(globalBlockStylesFontFamilies);
+
     const renderFonts = globalBlockStylesFontFamilies.map( ( family ) => {
         const hconfig = {
             google: {

@@ -42,7 +42,7 @@ const GlobalBlockStyles = ( props ) => {
         return spectraStoreSelect( storeName ).getGlobalBlockStylesFontFamilies();
     } );
     const [ uniqueID, setUniqueID ] = useState( false );
-    const [ tempStyleName, setTempStyleName ] = useState( false );
+    const [ tempStyleName, setTempStyleName ] = useState( '' );
     const [ saveToDatabase, setSaveToDatabase ] = useState( false );
     const [currentAttributesState, setCurrentAttributesState] = useState( attributes );
     const [ attributesChanged, setAttributesChanged ] = useState( false );
@@ -138,20 +138,21 @@ const GlobalBlockStyles = ( props ) => {
     const blockNameClass = name?.split( '/' )?.pop();
 
     const getBlockStyles = ( spectraGlobalStyles = globalBlockStyles) => {
-
         updateGoogleFontData( attributes );
-
+        
         spectraGlobalStyles.map( ( style ) => {
+            
             if ( ( style?.value === uniqueID ) || ( style?.value === globalBlockStyleId ) ) {
                 
                 const baseSelector = `.spectra-gbs-${blockNameClass}-${style?.label}`;
-                const asArray = Object.entries( props.attributes );
+                const asArray = Object.entries( attributes );
                 const filtered = asArray.filter( ( [key, value] ) => {
-                    return currentBlockDefaultAttributes[key]?.default !== value;
+                    if ( currentBlockDefaultAttributes[key]?.UAGCopyPaste ) {
+                        return currentBlockDefaultAttributes[key]?.default !== value;
+                    }
                 } );
 
                 const justStrings = Object.fromEntries( filtered );
-                console.log(justStrings);
                 const newProps = {...props};
                 if ( style?.props ) {
                     newProps.attributes = {
@@ -159,11 +160,10 @@ const GlobalBlockStyles = ( props ) => {
                         ...justStrings
                     }
                 }
-                console.log(newProps);
                 const blockStyling = styling( newProps, baseSelector );
                 style.editorStyles = blockStyling;
                 style.props = newProps;
-                setCurrentAttributesState(justStrings);
+                
                 let currentPostID = select( 'core/editor' ).getCurrentPostId()
                 if (style?.post_ids) {
                     style.post_ids.push(currentPostID);
@@ -239,7 +239,7 @@ const GlobalBlockStyles = ( props ) => {
                                             globalBlockStyleName: label 
                                         } 
                                     );
-                                    setCurrentAttributesState(attributes);
+                                    
                                     setSaveToDatabase( true );
                                 }
                             }
@@ -320,7 +320,7 @@ const GlobalBlockStyles = ( props ) => {
                                             globalBlockStyleName: label 
                                         } 
                                     );
-                                    setCurrentAttributesState(attributes);
+                                   
                                     setSaveToDatabase( true );
                                 }
                             }
@@ -332,7 +332,6 @@ const GlobalBlockStyles = ( props ) => {
                             <Button
                                 className="spectra-save-block-styles-button components-base-control"
                                 onClick={ () => {
-                                    setAttributesChanged( false );
                                     getBlockStyles();
                                 } }
                                 variant="primary"

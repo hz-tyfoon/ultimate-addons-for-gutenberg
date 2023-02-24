@@ -14,6 +14,7 @@ export function toggleGlobalBlockStylesPopup( value ) {
 }
 
 export function updateGlobalBlockStyles( value ) {
+	console.log(value);
 	return {
 		type: 'UPDATE_GLOBAL_BLOCK_STYLES',
 		value,

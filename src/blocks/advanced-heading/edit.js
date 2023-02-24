@@ -25,7 +25,7 @@ const UAGBAdvancedHeading = ( props ) => {
 		globalBlockStyleId,
 		globalBlockStyleName
 	} = props.attributes;
-
+	
 	const globalBlockStyles = useSelect( ( spectraStoreSelect ) => {
         return spectraStoreSelect( storeName ).getGlobalBlockStyles();
     } );
@@ -62,9 +62,12 @@ const UAGBAdvancedHeading = ( props ) => {
 	}, [deviceType] );
 
 	useEffect( () => {
+		console.log('in');
+		console.log(globalBlockStyles);
 		globalBlockStyles.map( ( style ) => {
-
+			
 			if ( style?.value === globalBlockStyleId && style?.label === globalBlockStyleName ) {
+				console.log(style);
 				addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, style?.editorStyles );
 				
 			}
