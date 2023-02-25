@@ -10,26 +10,24 @@ import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
 import { STORE_NAME as storeName } from '@Store/constants';
-import { useSelect } from '@wordpress/data';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
 //  Import CSS.
 import './style.scss';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const deviceType = useDeviceType();
+	const {
+		editorStyles,
+		attributes : {
+			UAGHideDesktop, 
+			UAGHideTab, 
+			UAGHideMob,
+			globalBlockStyleId
+		}
+	} = props
 	
-	const { 
-		UAGHideDesktop, 
-		UAGHideTab, 
-		UAGHideMob,
-		globalBlockStyleId,
-		globalBlockStyleName
-	} = props.attributes;
-	
-	const globalBlockStyles = useSelect( ( spectraStoreSelect ) => {
-        return spectraStoreSelect( storeName ).getGlobalBlockStyles();
-    } );
-
 	useEffect( () => {
 
 		responsiveConditionPreview( props );
@@ -62,21 +60,8 @@ const UAGBAdvancedHeading = ( props ) => {
 	}, [deviceType] );
 
 	useEffect( () => {
-		console.log('in');
-		console.log(globalBlockStyles);
-		globalBlockStyles.map( ( style ) => {
-			
-			if ( style?.value === globalBlockStyleId && style?.label === globalBlockStyleName ) {
-				console.log(style);
-				addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, style?.editorStyles );
-				
-			}
-
-			return style;
-
-		} );
-
-	}, [globalBlockStyleId, globalBlockStyleName, globalBlockStyles] );
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/advanced-heading.svg`;
 
@@ -92,4 +77,26 @@ const UAGBAdvancedHeading = ( props ) => {
 		)
 	);
 };
-export default UAGBAdvancedHeading;
+
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+		
+		let editorStyles = '';
+		for ( const style of globalBlockStyles ) {
+			if ( style?.value === globalBlockStyleId && style?.label === globalBlockStyleName ) {
+				editorStyles = style?.editorStyles
+				break;
+			}
+		}
+		return {
+			editorStyles: editorStyles,
+		};	
+	} )
+)( UAGBAdvancedHeading );
+

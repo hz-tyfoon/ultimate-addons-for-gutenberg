@@ -209,10 +209,13 @@ class UAGB_Post_Assets {
 	 */
 	public function __construct( $post_id ) {
 		// delete_option('spectra_global_block_styles');
+		// delete_option('spectra_gbs_google_fonts');
+
 		$this->post_id = intval( $post_id );
 
 		$this->preview            = isset( $_GET['preview'] ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
+		
 		$families                 = array();
 		foreach ( $spectra_gbs_google_fonts as $style ) {
 			if ( is_array( $style ) ) {

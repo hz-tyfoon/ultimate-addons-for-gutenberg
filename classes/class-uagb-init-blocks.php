@@ -136,7 +136,6 @@ class UAGB_Init_Blocks {
 				$_block_css                  = $desktop . $tab_styling_css . $mob_styling_css;
 				$global_block_styles[$key]['frontendStyles'] = $_block_css;
 				update_option( 'spectra_global_block_styles', $global_block_styles );
-				wp_send_json_success();
 			}
 		}
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
