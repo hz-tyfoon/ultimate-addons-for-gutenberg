@@ -1,5 +1,6 @@
-// Import classes
-import classnames from 'classnames';
+/**
+ * Block Icon : Save.
+ */
 import renderSVG from '@Controls/renderIcon';
 import { useBlockProps } from '@wordpress/block-editor';
 import { getProtocol, prependHTTP } from '@wordpress/url';
@@ -38,7 +39,7 @@ export default function save( props ){
 	}
 
 	const blockProps = useBlockProps.save( {
-		className: classnames( `uagb-block-${ block_id }` )
+		className: `uagb-block-${ block_id }`
 	} );
 
 	return (

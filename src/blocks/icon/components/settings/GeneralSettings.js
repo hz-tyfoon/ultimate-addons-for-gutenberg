@@ -1,8 +1,8 @@
 /**
  * Block Icon : General Settings.
  */
+import { memo } from '@wordpress/element';
 import UAGIconPicker from '@Components/icon-picker';
-import React from 'react';
 import { __ } from '@wordpress/i18n';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
@@ -212,4 +212,4 @@ const GeneralSettings = ( props ) => {
 	);
 };
 
-export default React.memo( GeneralSettings );
+export default memo( GeneralSettings );

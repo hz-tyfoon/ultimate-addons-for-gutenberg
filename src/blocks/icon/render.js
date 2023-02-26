@@ -1,7 +1,8 @@
-// Import classes
-import classnames from 'classnames';
+/**
+ * Block Icon : Render.
+ */
+import { memo } from '@wordpress/element';
 import renderSVG from '@Controls/renderIcon';
-import React from 'react';
 import { useBlockProps } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
@@ -18,7 +19,7 @@ const Render = ( props ) => {
 		)
 
 	const blockProps = useBlockProps( {
-		className: classnames( `uagb-block-${ block_id }` )
+		className: `uagb-block-${ block_id }`
 	} );
 
 	return (
@@ -29,4 +30,4 @@ const Render = ( props ) => {
 		</div>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

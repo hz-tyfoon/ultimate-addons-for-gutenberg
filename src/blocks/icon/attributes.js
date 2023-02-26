@@ -392,19 +392,71 @@ const attributes = {
 	...borderAttributes,
 	iconShadowColor: {
 		type: 'string',
-		default: '#eee',
+		default: '#00000070',
+		UAGCopyPaste: {
+			styleType: 'icon-shadow-color'
+		},
 	},
 	iconShadowHOffset: {
 		type: 'number',
-		default: 2,
+		default: 0,
+		UAGCopyPaste: {
+			styleType: 'icon-shadow-hoffset'
+		},
 	},
 	iconShadowVOffset: {
 		type: 'number',
-		default: 2,
+		default: 0,
+		UAGCopyPaste: {
+			styleType: 'icon-shadow-voffset'
+		},
 	},
 	iconShadowBlur:{
 		type: 'number',
-		default: 2,
+		default: 0,
+		UAGCopyPaste: {
+			styleType: 'icon-shadow-blur'
+		},
+	},
+	iconBoxShadowColor: {
+		type: 'string',
+		default: '#00000070',
+		UAGCopyPaste: {
+			styleType: 'icon-box-shadow-color'
+		},
+	},
+	iconBoxShadowHOffset: {
+		type: 'number',
+		default: 0,
+		UAGCopyPaste: {
+			styleType: 'icon-box-shadow-hoffset'
+		},
+	},
+	iconBoxShadowVOffset: {
+		type: 'number',
+		default: 0,
+		UAGCopyPaste: {
+			styleType: 'icon-box-shadow-voffset'
+		},
+	},
+	iconBoxShadowBlur: {
+		type: 'number',
+		UAGCopyPaste: {
+			styleType: 'icon-box-shadow-blur'
+		},
+	},
+	iconBoxShadowSpread: {
+		type: 'number',
+		UAGCopyPaste: {
+			styleType: 'icon-box-shadow-spread'
+		},
+	},
+	iconBoxShadowPosition: {
+		type: 'string',
+		default: 'outset',
+		UAGCopyPaste: {
+			styleType: 'icon-box-shadow-position'
+		},
 	},
 };
 

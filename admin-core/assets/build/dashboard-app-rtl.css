@@ -1015,9 +1015,6 @@ select {
 }.bg-slate-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(100 116 139 / var(--tw-bg-opacity));
-}.bg-gray-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }.bg-opacity-75 {
   --tw-bg-opacity: 0.75;
 }.bg-contain {

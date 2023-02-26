@@ -72,9 +72,16 @@ return array_merge(
 		'iconMobileMarginUnit'             => 'px',
 		'iconTabletMarginUnit'             => 'px',
 		// Shadow.
-		'iconShadowColor'                  => '#eee',
-		'iconShadowHOffset'                => 2,
-		'iconShadowVOffset'                => 2,
-		'iconShadowBlur'                   => 2,
+		'iconShadowColor'                  => '#00000070',
+		'iconShadowHOffset'                => 0,
+		'iconShadowVOffset'                => 0,
+		'iconShadowBlur'                   => 0,
+		// Box Shadow.
+		'iconBoxShadowColor'               => '#00000070',
+		'iconBoxShadowHOffset'             => 0,
+		'iconBoxShadowVOffset'             => 0,
+		'iconBoxShadowBlur'                => '',
+		'iconBoxShadowSpread'              => '',
+		'iconBoxShadowPosition'            => '',
 	)
 );

@@ -1,4 +1,7 @@
-import React from 'react';
+/**
+ * Block Icon : Settings.
+ */
+import { memo } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
 import InspectorTab, {
@@ -26,4 +29,4 @@ const Settings = ( props ) => {
 		</InspectorControls>
 	);
 };
-export default React.memo( Settings );
+export default memo( Settings );

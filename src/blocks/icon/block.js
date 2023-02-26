@@ -15,8 +15,8 @@ import { registerBlockType } from '@wordpress/blocks';
 registerBlockType( 'uagb/icon', {
 	apiVersion: 2,
 	title: __( 'Icon', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add beautiful Icon on your site.', 'ultimate-addons-for-gutenberg' ), // description can be changed.
-	icon: UAGB_Block_Icons.icon, // using temporary icon until new provided from designer.
+	description: __( 'Add beautiful icons to your website.', 'ultimate-addons-for-gutenberg' ),
+	icon: UAGB_Block_Icons.icon,
 	category: uagb_blocks_info.category,
 	keywords: [
 		// More keywords can be added.

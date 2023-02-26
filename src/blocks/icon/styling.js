@@ -1,5 +1,5 @@
 /**
- * Returns Dynamic Generated CSS
+ * Block Icon : Returns dynamic css for Editor.
  */
 
 import generateCSS from '@Controls/generateCSS';
@@ -79,6 +79,13 @@ function styling( props ) {
 		iconShadowHOffset,
 		iconShadowVOffset,
 		iconShadowBlur,
+		// Block Shadow
+		iconBoxShadowColor,
+		iconBoxShadowHOffset,
+		iconBoxShadowVOffset,
+		iconBoxShadowBlur,
+		iconBoxShadowSpread,
+		iconBoxShadowPosition,
 	} = attributes;
 
 	const iconWidth = getFallbackNumber( iconSize, 'iconSize', blockName );
@@ -92,6 +99,17 @@ function styling( props ) {
 
 	if( iconShadowColor && shadowH && shadowV && shadowBlur ) {
 		dropShadow =  shadowH+ ' ' + shadowV + ' ' + shadowBlur + ' ' + iconShadowColor;
+	}
+
+	let boxShadow = '';
+	const boxShadowH = generateCSSUnit( iconBoxShadowHOffset, 'px' );
+	const boxShadowV = generateCSSUnit( iconBoxShadowVOffset, 'px' );
+	const boxShadowBlur = generateCSSUnit( iconBoxShadowBlur, 'px' );
+	const boxShadowSpread = generateCSSUnit( iconBoxShadowSpread, 'px' );
+	const boxShadowPosition = iconBoxShadowPosition === 'outset' ? '' : iconBoxShadowPosition
+
+	if( iconBoxShadowColor && boxShadowH && boxShadowV && boxShadowBlur ) {
+		boxShadow =  boxShadowH+ ' ' + boxShadowV + ' ' + boxShadowBlur + ' ' + boxShadowSpread + ' ' + iconBoxShadowColor + ' ' + boxShadowPosition;
 	}
 
 	const selectors = {
@@ -124,7 +142,7 @@ function styling( props ) {
 			'border-style': iconBorderStyle,
 			'border-color': iconBorderColor,
 			...generateBorderCSS( attributes, 'icon' ),
-
+			'box-shadow' : boxShadow
 		},
 		'.uagb-icon-wrapper .uagb-svg-wrapper:hover': {
 			'border-color': iconBorderHColor,

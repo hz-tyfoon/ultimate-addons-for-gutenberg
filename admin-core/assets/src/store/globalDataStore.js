@@ -49,7 +49,7 @@ const initialState = {
         'container',
         'advanced-heading',
         'image',
-		'icon',
+        'icon',
         'buttons',
         'info-box',
         'call-to-action',

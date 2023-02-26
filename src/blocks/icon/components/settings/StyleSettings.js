@@ -1,16 +1,18 @@
 /**
  * Block Icon : Style Settings.
  */
-import React from 'react';
 import { __ } from '@wordpress/i18n';
-
+import { memo } from '@wordpress/element';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTabsControl from '@Components/tabs';
 import ColorSwitchControl from '@Components/color-switch-control';
 import ResponsiveBorder from '@Components/responsive-border';
 import TextShadowControl from '@Components/text-shadow';
+import BoxShadowControl from '@Components/box-shadow';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import SpacingControl from '@Components/spacing-control';
+import { dropShadowPresets, boxShadowPresets } from '../../presets';
+import UAGPresets from '@Components/presets';
 
 const StyleSettings = ( props ) => {
 
@@ -66,6 +68,13 @@ const StyleSettings = ( props ) => {
 		iconShadowHOffset,
 		iconShadowVOffset,
 		iconShadowBlur,
+		// Box Shadow
+		iconBoxShadowColor,
+		iconBoxShadowHOffset,
+		iconBoxShadowVOffset,
+		iconBoxShadowBlur,
+		iconBoxShadowSpread,
+		iconBoxShadowPosition,
 	} = attributes;
 
 	return (
@@ -163,15 +172,21 @@ const StyleSettings = ( props ) => {
 				prefix={'icon'}
 				attributes={ attributes }
 				deviceType={deviceType}
-				disableBottomSeparator={ false }
+				disableBottomSeparator={ true }
+			/>
+		</UAGAdvancedPanelBody>
+		<UAGAdvancedPanelBody
+			title={ __( 'Drop Shadow', 'ultimate-addons-for-gutenberg' ) }
+			initialOpen={ false }
+		>
+			<UAGPresets
+				setAttributes = { setAttributes }
+				presets = { dropShadowPresets }
+				presetInputType = 'radioImage'
 			/>
 			<TextShadowControl
 				blockId={ block_id }
 				setAttributes={ setAttributes }
-				label={ __(
-					'Drop Shadow',
-					'ultimate-addons-for-gutenberg'
-				) }
 				textShadowColor={ {
 					value: iconShadowColor,
 					label: 'iconShadowColor',
@@ -198,7 +213,60 @@ const StyleSettings = ( props ) => {
 					label: 'iconShadowBlur',
 					title: __( 'Blur', 'ultimate-addons-for-gutenberg' ),
 				} }
-				popup={ true }
+				popup={ false }
+			/>
+		</UAGAdvancedPanelBody>
+		<UAGAdvancedPanelBody
+			title={__( 'Box Shadow','ultimate-addons-for-gutenberg' )}
+			initialOpen={false}
+		>
+			<UAGPresets
+				setAttributes = { setAttributes }
+				presets = { boxShadowPresets }
+				presetInputType = 'radioImage'
+			/>
+			<BoxShadowControl
+				blockId={ block_id }
+				setAttributes={ setAttributes }
+				boxShadowColor={ {
+					value: iconBoxShadowColor,
+					label: 'iconBoxShadowColor',
+					title: __( 'Color', 'ultimate-addons-for-gutenberg' ),
+				} }
+				boxShadowHOffset={ {
+					value: iconBoxShadowHOffset,
+					label: 'iconBoxShadowHOffset',
+					title: __(
+						'Horizontal',
+						'ultimate-addons-for-gutenberg'
+					),
+				} }
+				boxShadowVOffset={ {
+					value: iconBoxShadowVOffset,
+					label: 'iconBoxShadowVOffset',
+					title: __(
+						'Vertical',
+						'ultimate-addons-for-gutenberg'
+					),
+				} }
+				boxShadowBlur={ {
+					value: iconBoxShadowBlur,
+					label: 'iconBoxShadowBlur',
+					title: __( 'Blur', 'ultimate-addons-for-gutenberg' ),
+				} }
+				boxShadowSpread={ {
+					value: iconBoxShadowSpread,
+					label: 'iconBoxShadowSpread',
+					title: __( 'Spread', 'ultimate-addons-for-gutenberg' ),
+				} }
+				boxShadowPosition={ {
+					value: iconBoxShadowPosition,
+					label: 'iconBoxShadowPosition',
+					title: __(
+						'Position',
+						'ultimate-addons-for-gutenberg'
+					),
+				} }
 			/>
 		</UAGAdvancedPanelBody>
 		<UAGAdvancedPanelBody title={__( 'Spacing', 'ultimate-addons-for-gutenberg' )} initialOpen={ false }>
@@ -347,4 +415,4 @@ const StyleSettings = ( props ) => {
 	);
 };
 
-export default React.memo( StyleSettings );
+export default memo( StyleSettings );

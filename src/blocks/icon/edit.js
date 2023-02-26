@@ -2,7 +2,7 @@
  * BLOCK: Icon - Edit
  */
 
-import React, { useEffect } from 'react';
+import { useEffect } from '@wordpress/element';
 
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
@@ -31,12 +31,10 @@ const UAGBIcon = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		if( true === isSelected ) {
 			// Replacement for componentDidUpdate.
 			const blockStyling = styling( props );
 			addBlockEditorDynamicStyles( 'uagb-style-icon-' + blockId, blockStyling );
-		}
-	}, [ props ] );
+	}, [ attributes ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
