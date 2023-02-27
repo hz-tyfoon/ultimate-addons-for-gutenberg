@@ -2,7 +2,7 @@
  * BLOCK: Template Everything.
  */
 import styling from './styling';
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useLayoutEffect } from 'react';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import { useDeviceType } from '@Controls/getPreviewType';
 import { __experimentalBlockVariationPicker } from '@wordpress/block-editor';
@@ -15,6 +15,7 @@ import { withNotices } from '@wordpress/components';
 import { compose, createHigherOrderComponent } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
 import './style.scss';
+import styles from './editor.lazy.scss';
 
 const UAGBTemplateEverything = ( props ) => {
 	const deviceType = useDeviceType();
@@ -31,6 +32,14 @@ const UAGBTemplateEverything = ( props ) => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
+	}, [] );
+
+	// Add and remove the CSS on the drop and remove of the component.
+	useLayoutEffect( () => {
+		styles.use();
+		return () => {
+			styles.unuse();
+		};
 	}, [] );
 
 	useEffect( () => {

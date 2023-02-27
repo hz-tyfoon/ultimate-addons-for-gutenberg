@@ -7,12 +7,11 @@
  * @package uagb
  */
 
-$block_name               = 'template-everything';
-$border_css               = UAGB_Block_Helper::uag_generate_border_css( $attr, 'block' );
-$border_css_tablet        = UAGB_Block_Helper::uag_generate_border_css( $attr, 'block', 'tablet' );
-$border_css_mobile        = UAGB_Block_Helper::uag_generate_border_css( $attr, 'block', 'mobile' );
-$row_gap_desktop_fallback = UAGB_Block_Helper::get_fallback_number( $attr['rowGapDesktop'], 'rowGapDesktop', $block_name );
-$box_shadow_position_css  = $attr['boxShadowPosition'];
+$block_name              = 'template-everything';
+$border_css              = UAGB_Block_Helper::uag_generate_border_css( $attr, 'block' );
+$border_css_tablet       = UAGB_Block_Helper::uag_generate_border_css( $attr, 'block', 'tablet' );
+$border_css_mobile       = UAGB_Block_Helper::uag_generate_border_css( $attr, 'block', 'mobile' );
+$box_shadow_position_css = $attr['boxShadowPosition'];
 
 if ( 'outset' === $attr['boxShadowPosition'] ) {
 	$box_shadow_position_css = '';
@@ -94,7 +93,7 @@ $info_box_css = array_merge( $info_box_css, $bg_css_desktop );
 $selectors    = array(
 	'.uagb-template-everything__wrap'                  => $info_box_css, // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	'.uagb-template-everything__wrap > div'            => array(
-		'margin-bottom' => UAGB_Helper::get_css_value( $row_gap_desktop_fallback, $attr['rowGapType'] ),
+		'margin-bottom' => UAGB_Helper::get_css_value( $attr['rowGapDesktop'], $attr['rowGapType'] ),
 	),
 	' :is(h1, h2, h3, h4, h5, h6)'                     => array(
 		'color' => $attr['headingColor'],

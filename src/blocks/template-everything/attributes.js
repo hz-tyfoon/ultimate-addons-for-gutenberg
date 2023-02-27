@@ -237,29 +237,25 @@ const attributes = {
 		type: 'number',
 		UAGCopyPaste: {
 			styleType: 'block-top-padding-desktop'
-		},
-		default: 10
+		}
 	},
 	bottomPaddingDesktop: {
 		type: 'number',
 		UAGCopyPaste: {
 			styleType: 'block-bottom-padding-desktop'
-		},
-		default: 10
+		}
 	},
 	leftPaddingDesktop: {
 		type: 'number',
 		UAGCopyPaste: {
 			styleType: 'block-left-padding-desktop'
-		},
-		default: 10
+		}
 	},
 	rightPaddingDesktop: {
 		type: 'number',
 		UAGCopyPaste: {
 			styleType: 'block-right-padding-desktop'
-		},
-		default: 10
+		}
 	},
 	topPaddingTablet: {
 		type: 'number',

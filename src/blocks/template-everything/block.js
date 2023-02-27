@@ -13,7 +13,7 @@ import './style.scss';
 registerBlockType( 'uagb/template-everything', {
 	title: __( 'Template Everything!', 'ultimate-addons-for-gutenberg' ),
 	description: __(
-		'Create beautiful layouts with multiple Spectra blocks.',
+		'Every Content Block you\'ll ever need - Choose from a wide variety of formations, or create your own!',
 		'ultimate-addons-for-gutenberg'
 	),
 	apiVersion: 2,
