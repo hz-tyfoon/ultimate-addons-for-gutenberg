@@ -236,21 +236,6 @@ if ( ! class_exists( 'UAGB_Block_JS' ) ) {
 		}
 
 		/**
-		 * Adds Google fonts for New block.
-		 *
-		 * @since x.x.x
-		 * @param array $attr the blocks attr.
-		 */
-		public static function blocks_new_block_gfont( $attr ) {
-
-			$text_load_google_font = isset( $attr['textLoadGoogleFonts'] ) ? $attr['textLoadGoogleFonts'] : '';
-			$text_font_family      = isset( $attr['textFontFamily'] ) ? $attr['textFontFamily'] : '';
-			$text_font_weight      = isset( $attr['textFontWeight'] ) ? $attr['textFontWeight'] : '';
-
-			UAGB_Helper::blocks_google_font( $text_load_google_font, $text_font_family, $text_font_weight );
-		}
-
-		/**
 		 * Adds Google fonts for Table Of Contents block.
 		 *
 		 * @since 1.13.0
