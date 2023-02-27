@@ -238,7 +238,7 @@ if ( ! class_exists( 'UAGB_Block_JS' ) ) {
 		/**
 		 * Adds Google fonts for New block.
 		 *
-		 * @since 2.3.1
+		 * @since x.x.x
 		 * @param array $attr the blocks attr.
 		 */
 		public static function blocks_new_block_gfont( $attr ) {

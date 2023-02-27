@@ -1,5 +1,5 @@
 /**
- * BLOCK: Info-Box 2.0
+ * BLOCK: Template Everything 
  */
 import UAGB_Block_Icons from '@Controls/block-icons';
 import attributes from './attributes';
