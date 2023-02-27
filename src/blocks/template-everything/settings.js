@@ -6,10 +6,7 @@ import InspectorTab, {
 } from '@Components/inspector-tabs/InspectorTab.js';
 import ResponsiveSlider from '@Components/responsive-slider';
 import { __ } from '@wordpress/i18n';
-import {
-	InspectorControls,
-	BlockControls
-} from '@wordpress/block-editor';
+import { InspectorControls, BlockControls } from '@wordpress/block-editor';
 import BoxShadowControl from '@Components/box-shadow';
 import SpacingControl from '@Components/spacing-control';
 import Background from '@Components/background';
@@ -19,9 +16,8 @@ import UAGTabsControl from '@Components/tabs';
 import { ToolbarGroup } from '@wordpress/components';
 
 const Settings = ( props ) => {
-
 	props = props.parentProps;
-	const { 
+	const {
 		attributes: {
 			block_id,
 			backgroundType,
@@ -117,10 +113,11 @@ const Settings = ( props ) => {
 			headingColor,
 			color,
 			linkColor,
-			linkHoverColor
-		}, 
-	setAttributes, deviceType } = props;
-	
+			linkHoverColor,
+		},
+		setAttributes,
+		deviceType,
+	} = props;
 
 	const backgroundSettings = () => {
 		return (
@@ -138,7 +135,7 @@ const Settings = ( props ) => {
 						value: backgroundImageColor,
 						label: 'backgroundImageColor',
 					} }
-					backgroundSize={{
+					backgroundSize={ {
 						desktop: {
 							value: backgroundSizeDesktop,
 							label: 'backgroundSizeDesktop',
@@ -151,8 +148,8 @@ const Settings = ( props ) => {
 							value: backgroundSizeMobile,
 							label: 'backgroundSizeMobile',
 						},
-					}}
-					backgroundCustomSize={{
+					} }
+					backgroundCustomSize={ {
 						desktop: {
 							value: backgroundCustomSizeDesktop,
 							label: 'backgroundCustomSizeDesktop',
@@ -165,12 +162,12 @@ const Settings = ( props ) => {
 							value: backgroundCustomSizeMobile,
 							label: 'backgroundCustomSizeMobile',
 						},
-					}}
-					backgroundCustomSizeType={{
+					} }
+					backgroundCustomSizeType={ {
 						value: backgroundCustomSizeType,
-						label: 'backgroundCustomSizeType'
-					}}
-					backgroundRepeat={{
+						label: 'backgroundCustomSizeType',
+					} }
+					backgroundRepeat={ {
 						desktop: {
 							value: backgroundRepeatDesktop,
 							label: 'backgroundRepeatDesktop',
@@ -183,8 +180,8 @@ const Settings = ( props ) => {
 							value: backgroundRepeatMobile,
 							label: 'backgroundRepeatMobile',
 						},
-					}}
-					backgroundAttachment={{
+					} }
+					backgroundAttachment={ {
 						desktop: {
 							value: backgroundAttachmentDesktop,
 							label: 'backgroundAttachmentDesktop',
@@ -197,8 +194,8 @@ const Settings = ( props ) => {
 							value: backgroundAttachmentMobile,
 							label: 'backgroundAttachmentMobile',
 						},
-					}}
-					backgroundPosition={{
+					} }
+					backgroundPosition={ {
 						desktop: {
 							value: backgroundPositionDesktop,
 							label: 'backgroundPositionDesktop',
@@ -211,8 +208,8 @@ const Settings = ( props ) => {
 							value: backgroundPositionMobile,
 							label: 'backgroundPositionMobile',
 						},
-					}}
-					backgroundImage={{
+					} }
+					backgroundImage={ {
 						desktop: {
 							value: backgroundImageDesktop,
 							label: 'backgroundImageDesktop',
@@ -225,8 +222,8 @@ const Settings = ( props ) => {
 							value: backgroundImageMobile,
 							label: 'backgroundImageMobile',
 						},
-					}}
-					imageResponsive={true}
+					} }
+					imageResponsive={ true }
 					backgroundColor={ {
 						value: backgroundColor,
 						label: 'backgroundColor',
@@ -235,65 +232,65 @@ const Settings = ( props ) => {
 						value: backgroundType,
 						label: 'backgroundType',
 					} }
-					overlayType={{
+					overlayType={ {
 						value: overlayType,
-						label: 'overlayType'
-					}}
-					gradientOverlay={{
+						label: 'overlayType',
+					} }
+					gradientOverlay={ {
 						value: true,
-					}}
-					customPosition={{
+					} }
+					customPosition={ {
 						value: customPosition,
-						label: 'customPosition'
-					}}
-					xPositionDesktop={{
+						label: 'customPosition',
+					} }
+					xPositionDesktop={ {
 						value: xPositionDesktop,
-						label: 'xPositionDesktop'
-					}}
-					xPositionTablet={{
+						label: 'xPositionDesktop',
+					} }
+					xPositionTablet={ {
 						value: xPositionTablet,
-						label: 'xPositionTablet'
-					}}
-					xPositionMobile={{
+						label: 'xPositionTablet',
+					} }
+					xPositionMobile={ {
 						value: xPositionMobile,
-						label: 'xPositionMobile'
-					}}
-					xPositionType={{
+						label: 'xPositionMobile',
+					} }
+					xPositionType={ {
 						value: xPositionType,
-						label: 'xPositionType'
-					}}
-					xPositionTypeTablet={{
+						label: 'xPositionType',
+					} }
+					xPositionTypeTablet={ {
 						value: xPositionTypeTablet,
-						label: 'xPositionTypeTablet'
-					}}
-					xPositionTypeMobile={{
+						label: 'xPositionTypeTablet',
+					} }
+					xPositionTypeMobile={ {
 						value: xPositionTypeMobile,
-						label: 'xPositionTypeMobile'
-					}}
-					yPositionDesktop={{
+						label: 'xPositionTypeMobile',
+					} }
+					yPositionDesktop={ {
 						value: yPositionDesktop,
-						label: 'yPositionDesktop'
-					}}
-					yPositionTablet={{
+						label: 'yPositionDesktop',
+					} }
+					yPositionTablet={ {
 						value: yPositionTablet,
-						label: 'yPositionTablet'
-					}}
-					yPositionMobile={{
+						label: 'yPositionTablet',
+					} }
+					yPositionMobile={ {
 						value: yPositionMobile,
-						label: 'yPositionMobile'
-					}}
-					yPositionType={{
+						label: 'yPositionMobile',
+					} }
+					yPositionType={ {
 						value: yPositionType,
-						label: 'yPositionType'
-					}}
-					yPositionTypeTablet={{
+						label: 'yPositionType',
+					} }
+					yPositionTypeTablet={ {
 						value: yPositionTypeTablet,
-						label: 'yPositionTypeTablet'
-					}}
-					yPositionTypeMobile={{
+						label: 'yPositionTypeTablet',
+					} }
+					yPositionTypeMobile={ {
 						value: yPositionTypeMobile,
-						label: 'yPositionTypeMobile'
-					}}
+						label: 'yPositionTypeMobile',
+					} }
 					backgroundVideoType={ {
 						value: false,
 					} }
@@ -304,7 +301,7 @@ const Settings = ( props ) => {
 	};
 
 	const borderSettings = () => {
-		return(
+		return (
 			<UAGAdvancedPanelBody
 				title={ __( 'Border', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ false }
@@ -315,19 +312,18 @@ const Settings = ( props ) => {
 					attributes={ props.attributes }
 					deviceType={ deviceType }
 					disableBottomSeparator={ true }
-					disabledBorderTitle= { true }
+					disabledBorderTitle={ true }
 				/>
 			</UAGAdvancedPanelBody>
 		);
-	}
+	};
 
 	const boxShadowSettings = () => {
-		return(
+		return (
 			<UAGAdvancedPanelBody
 				title={ __( 'Box Shadow', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ false }
 			>
-
 				<UAGTabsControl
 					tabs={ [
 						{
@@ -357,7 +353,10 @@ const Settings = ( props ) => {
 								boxShadowColor={ {
 									value: boxShadowColor,
 									label: 'boxShadowColor',
-									title: __( 'Color', 'ultimate-addons-for-gutenberg' ),
+									title: __(
+										'Color',
+										'ultimate-addons-for-gutenberg'
+									),
 								} }
 								boxShadowHOffset={ {
 									value: boxShadowHOffset,
@@ -378,12 +377,18 @@ const Settings = ( props ) => {
 								boxShadowBlur={ {
 									value: boxShadowBlur,
 									label: 'boxShadowBlur',
-									title: __( 'Blur', 'ultimate-addons-for-gutenberg' ),
+									title: __(
+										'Blur',
+										'ultimate-addons-for-gutenberg'
+									),
 								} }
 								boxShadowSpread={ {
 									value: boxShadowSpread,
 									label: 'boxShadowSpread',
-									title: __( 'Spread', 'ultimate-addons-for-gutenberg' ),
+									title: __(
+										'Spread',
+										'ultimate-addons-for-gutenberg'
+									),
 								} }
 								boxShadowPosition={ {
 									value: boxShadowPosition,
@@ -408,7 +413,10 @@ const Settings = ( props ) => {
 								boxShadowColor={ {
 									value: boxShadowColorHover,
 									label: 'boxShadowColorHover',
-									title: __( 'Color', 'ultimate-addons-for-gutenberg' ),
+									title: __(
+										'Color',
+										'ultimate-addons-for-gutenberg'
+									),
 								} }
 								boxShadowHOffset={ {
 									value: boxShadowHOffsetHover,
@@ -429,12 +437,18 @@ const Settings = ( props ) => {
 								boxShadowBlur={ {
 									value: boxShadowBlurHover,
 									label: 'boxShadowBlurHover',
-									title: __( 'Blur', 'ultimate-addons-for-gutenberg' ),
+									title: __(
+										'Blur',
+										'ultimate-addons-for-gutenberg'
+									),
 								} }
 								boxShadowSpread={ {
 									value: boxShadowSpreadHover,
 									label: 'boxShadowSpreadHover',
-									title: __( 'Spread', 'ultimate-addons-for-gutenberg' ),
+									title: __(
+										'Spread',
+										'ultimate-addons-for-gutenberg'
+									),
 								} }
 								boxShadowPosition={ {
 									value: boxShadowPositionHover,
@@ -451,10 +465,10 @@ const Settings = ( props ) => {
 				/>
 			</UAGAdvancedPanelBody>
 		);
-	}
+	};
 
 	const spacingSettings = () => {
-		return(
+		return (
 			<UAGAdvancedPanelBody
 				title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ false }
@@ -465,18 +479,18 @@ const Settings = ( props ) => {
 						desktop: {
 							value: rowGapDesktop,
 							label: 'rowGapDesktop',
-							unit:  {
+							unit: {
 								value: rowGapType,
 								label: 'rowGapType',
-							}
+							},
 						},
 						tablet: {
 							value: rowGapTablet,
 							label: 'rowGapTablet',
-							unit:  {
+							unit: {
 								value: rowGapTypeTablet,
 								label: 'rowGapTypeTablet',
-							}
+							},
 						},
 						mobile: {
 							value: rowGapMobile,
@@ -491,10 +505,7 @@ const Settings = ( props ) => {
 					max={ 200 }
 					units={ [
 						{
-							name: __(
-								'PX',
-								'ultimate-addons-for-gutenberg'
-							),
+							name: __( 'PX', 'ultimate-addons-for-gutenberg' ),
 							unitValue: 'px',
 						},
 						{
@@ -650,7 +661,7 @@ const Settings = ( props ) => {
 				/>
 			</UAGAdvancedPanelBody>
 		);
-	}
+	};
 
 	const getBlockControls = () => {
 		return (
@@ -660,7 +671,10 @@ const Settings = ( props ) => {
 						{
 							icon: 'update',
 							title: __( 'Change Variation' ),
-							onClick: () => setAttributes( { variationChange: ! variationChange } )
+							onClick: () =>
+								setAttributes( {
+									variationChange: ! variationChange,
+								} ),
 						},
 					] }
 				/>
@@ -669,7 +683,10 @@ const Settings = ( props ) => {
 						{
 							icon: 'lock',
 							title: __( 'Lock Template' ),
-							onClick: () => setAttributes( { lockTemplate: ! lockTemplate } )
+							onClick: () =>
+								setAttributes( {
+									lockTemplate: ! lockTemplate,
+								} ),
 						},
 					] }
 				/>
@@ -684,10 +701,7 @@ const Settings = ( props ) => {
 				initialOpen={ true }
 			>
 				<AdvancedPopColorControl
-					label={ __(
-						'Heading',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Heading', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ headingColor ? headingColor : '' }
 					data={ {
 						value: headingColor,
@@ -696,10 +710,7 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<AdvancedPopColorControl
-					label={ __(
-						'Text',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Text', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ color ? color : '' }
 					data={ {
 						value: color,
@@ -708,10 +719,7 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<AdvancedPopColorControl
-					label={ __(
-						'Link',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Link', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ linkColor ? linkColor : '' }
 					data={ {
 						value: linkColor,
@@ -737,10 +745,12 @@ const Settings = ( props ) => {
 
 	return (
 		<>
-			{ getBlockControls()}
+			{ getBlockControls() }
 			<InspectorControls>
-				<InspectorTabs 
-					defaultTab='style' tabs={ [ 'style', 'advance' ] }>
+				<InspectorTabs
+					defaultTab="style"
+					tabs={ [ 'style', 'advance' ] }
+				>
 					<InspectorTab { ...UAGTabs.style }>
 						{ textControls() }
 						{ backgroundSettings() }

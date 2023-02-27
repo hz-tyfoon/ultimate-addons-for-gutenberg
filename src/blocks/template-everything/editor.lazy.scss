@@ -1,5 +1,4 @@
 .uagb-template-everything_variations .block-editor-block-variation-picker {
-
 	.components-placeholder__label svg,
 	.block-editor-block-variation-picker__skip,
 	.block-editor-block-variation-picker__variation-label {
@@ -7,7 +6,6 @@
 	}
 
 	.block-editor-block-variation-picker__variations {
-
 		.block-editor-block-variation-picker__variation.components-button {
 			padding: 15px;
 		}
@@ -18,6 +16,9 @@
 	}
 }
 
-.uagb-template-everything__wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+.uagb-template-everything__wrap
+	> .block-editor-inner-blocks
+	> .block-editor-block-list__layout
+	> * {
 	display: block;
 }

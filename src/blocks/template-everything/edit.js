@@ -24,14 +24,12 @@ const UAGBTemplateEverything = ( props ) => {
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		isSelected,
 		setAttributes,
-		clientId
+		clientId,
 	} = props;
 
 	useEffect( () => {
-
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
 	}, [] );
 
 	// Add and remove the CSS on the drop and remove of the component.
@@ -45,22 +43,24 @@ const UAGBTemplateEverything = ( props ) => {
 	useEffect( () => {
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-template-everything-style-' + clientId.substr( 0, 8 ), blockStyling );
-		
+		addBlockEditorDynamicStyles(
+			'uagb-template-everything-style-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
-	    const blockStyling = styling( props );
+		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-template-everything-style-' + clientId.substr( 0, 8 ), blockStyling );
-
-	}, [deviceType] );
+		addBlockEditorDynamicStyles(
+			'uagb-template-everything-style-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
+	}, [ deviceType ] );
 
 	const {
 		innerBlocks, // eslint-disable-line no-unused-vars
@@ -68,43 +68,41 @@ const UAGBTemplateEverything = ( props ) => {
 		variations,
 		hasInnerBlocks,
 		defaultVariation,
-	} = useSelect(
-		( select ) => {
-			const { getBlocks } = select( 'core/block-editor' );
-			const {
-				getBlockType,
-				getBlockVariations,
-				getDefaultBlockVariation,
-			} = select( 'core/blocks' );
+	} = useSelect( ( select ) => {
+		const { getBlocks } = select( 'core/block-editor' );
+		const {
+			getBlockType,
+			getBlockVariations,
+			getDefaultBlockVariation,
+		} = select( 'core/blocks' );
 
-			return {
-				innerBlocks: getBlocks( clientId ),
-				hasInnerBlocks:
-					select( 'core/block-editor' ).getBlocks( clientId ).length >
-					0,
+		return {
+			innerBlocks: getBlocks( clientId ),
+			hasInnerBlocks:
+				select( 'core/block-editor' ).getBlocks( clientId ).length > 0,
 
-				blockType: getBlockType( props.name ),
-				defaultVariation:
-					typeof getDefaultBlockVariation === 'undefined'
-						? null
-						: getDefaultBlockVariation( props.name ),
-				variations:
-					typeof getBlockVariations === 'undefined'
-						? null
-						: getBlockVariations( props.name ),
-			};
-		},
-	);
+			blockType: getBlockType( props.name ),
+			defaultVariation:
+				typeof getDefaultBlockVariation === 'undefined'
+					? null
+					: getDefaultBlockVariation( props.name ),
+			variations:
+				typeof getBlockVariations === 'undefined'
+					? null
+					: getBlockVariations( props.name ),
+		};
+	} );
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 	const createBlocksFromInnerBlocksTemplate = useCallback(
 		( innerBlocksTemplate ) => {
-			return innerBlocksTemplate.map(
-				( [ name, attributes, innerBlocks = [] ] ) => // eslint-disable-line no-shadow
-					createBlock(
-						name,
-						attributes,
-						createBlocksFromInnerBlocksTemplate( innerBlocks )
-					)
+			return innerBlocksTemplate.map( (
+				[ name, attributes, innerBlocks = [] ] // eslint-disable-line no-shadow
+			) =>
+				createBlock(
+					name,
+					attributes,
+					createBlocksFromInnerBlocksTemplate( innerBlocks )
+				)
 			);
 		}
 	);
@@ -124,16 +122,21 @@ const UAGBTemplateEverything = ( props ) => {
 			}
 			props.setAttributes( { variationChange: false } );
 		}
-		
 	);
 
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/template-everything.svg`;	
+	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/template-everything.svg`;
 
-	if ( ( ! props.attributes.isPreview && ! hasInnerBlocks ) || props.attributes.variationChange && hasInnerBlocks ) {
+	if (
+		( ! props.attributes.isPreview && ! hasInnerBlocks ) ||
+		( props.attributes.variationChange && hasInnerBlocks )
+	) {
 		return (
-			<div className='uagb-template-everything_variations'>
+			<div className="uagb-template-everything_variations">
 				<__experimentalBlockVariationPicker
-					label={ __( 'Template Everything!', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Template Everything!',
+						'ultimate-addons-for-gutenberg'
+					) }
 					instructions={ __(
 						'Select a variation to start with.',
 						'ultimate-addons-for-gutenberg'
@@ -148,13 +151,13 @@ const UAGBTemplateEverything = ( props ) => {
 		);
 	}
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				{ isSelected && <Settings parentProps={ props } /> }
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			{ isSelected && <Settings parentProps={ props } /> }
+			<Render parentProps={ props } />
+		</>
 	);
 };
 const addAdvancedClasses = createHigherOrderComponent( ( BlockListBlock ) => {
@@ -168,7 +171,11 @@ const addAdvancedClasses = createHigherOrderComponent( ( BlockListBlock ) => {
 	};
 }, 'addAdvancedClasses' );
 
-wp.hooks.addFilter( 'editor.BlockListBlock', 'uagb/template-everything', addAdvancedClasses );
+wp.hooks.addFilter(
+	'editor.BlockListBlock',
+	'uagb/template-everything',
+	addAdvancedClasses
+);
 
 export default compose(
 	withNotices,

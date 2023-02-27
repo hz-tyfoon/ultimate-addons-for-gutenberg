@@ -10,32 +10,35 @@ const ALLOWED_BLOCKS = [
 	'uagb/buttons',
 	'uagb/icon-list',
 	'uagb/star-rating',
-	'uagb/container'
+	'uagb/container',
 ];
 
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
-
 	props = props.parentProps;
 
 	const deviceType = useDeviceType();
 
-	const { attributes: { block_id, lockTemplate } } = props;
+	const {
+		attributes: { block_id, lockTemplate },
+	} = props;
 
 	const blockProps = useBlockProps( {
 		className: classnames(
 			`uagb-block-${ block_id }`,
 			'uagb-template-everything__wrap',
 			`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
-		)
+		),
 	} );
-	
+
 	return (
 		<>
-			<div { ...blockProps } >
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS }
-   					templateLock={ lockTemplate ? 'all' : false } />
+			<div { ...blockProps }>
+				<InnerBlocks
+					allowedBlocks={ ALLOWED_BLOCKS }
+					templateLock={ lockTemplate ? 'all' : false }
+				/>
 			</div>
 		</>
 	);

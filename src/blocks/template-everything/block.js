@@ -1,5 +1,5 @@
 /**
- * BLOCK: Template Everything 
+ * BLOCK: Template Everything
  */
 import UAGB_Block_Icons from '@Controls/block-icons';
 import attributes from './attributes';
@@ -13,7 +13,7 @@ import './style.scss';
 registerBlockType( 'uagb/template-everything', {
 	title: __( 'Template Everything!', 'ultimate-addons-for-gutenberg' ),
 	description: __(
-		'Every Content Block you\'ll ever need - Choose from a wide variety of formations, or create your own!',
+		"Every Content Block you'll ever need - Choose from a wide variety of formations, or create your own!",
 		'ultimate-addons-for-gutenberg'
 	),
 	apiVersion: 2,
@@ -32,7 +32,7 @@ registerBlockType( 'uagb/template-everything', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	variations,
 	edit,

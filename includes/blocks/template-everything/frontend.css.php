@@ -67,17 +67,17 @@ $bottom_margin_mobile = '' !== $attr['bottomMarginMobile'] ? $attr['bottomMargin
 $info_box_css = array_merge(
 	array(
 		'box-shadow'     =>
-				UAGB_Helper::get_css_value( $attr['boxShadowHOffset'], 'px' ) .
-				' ' .
-				UAGB_Helper::get_css_value( $attr['boxShadowVOffset'], 'px' ) .
-				' ' .
-				UAGB_Helper::get_css_value( $attr['boxShadowBlur'], 'px' ) .
-				' ' .
-				UAGB_Helper::get_css_value( $attr['boxShadowSpread'], 'px' ) .
-				' ' .
-				$attr['boxShadowColor'] .
-				' ' .
-				$box_shadow_position_css,
+		UAGB_Helper::get_css_value( $attr['boxShadowHOffset'], 'px' ) .
+		' ' .
+		UAGB_Helper::get_css_value( $attr['boxShadowVOffset'], 'px' ) .
+		' ' .
+		UAGB_Helper::get_css_value( $attr['boxShadowBlur'], 'px' ) .
+		' ' .
+		UAGB_Helper::get_css_value( $attr['boxShadowSpread'], 'px' ) .
+		' ' .
+		$attr['boxShadowColor'] .
+		' ' .
+		$box_shadow_position_css,
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['topPaddingDesktop'], $attr['paddingType'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['bottomPaddingDesktop'], $attr['paddingType'] ),
 		'padding-left'   => UAGB_Helper::get_css_value( $attr['leftPaddingDesktop'], $attr['paddingType'] ),
@@ -91,7 +91,8 @@ $info_box_css = array_merge(
 );
 $info_box_css = array_merge( $info_box_css, $bg_css_desktop );
 $selectors    = array(
-	'.uagb-template-everything__wrap'                  => $info_box_css, // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	'.uagb-template-everything__wrap'                  => $info_box_css,
+	// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	'.uagb-template-everything__wrap > div'            => array(
 		'margin-bottom' => UAGB_Helper::get_css_value( $attr['rowGapDesktop'], $attr['rowGapType'] ),
 	),
@@ -133,16 +134,16 @@ $selectors['.uagb-template-everything__wrap:hover']['border-color'] = $attr['blo
 if ( ( ( '' !== $attr['boxShadowBlurHover'] ) && ( null !== $attr['boxShadowBlurHover'] ) ) || '' !== $attr['boxShadowColorHover'] ) {
 
 	$selectors[':hover']['box-shadow'] = UAGB_Helper::get_css_value( $attr['boxShadowHOffsetHover'], 'px' ) .
-																' ' .
-																UAGB_Helper::get_css_value( $attr['boxShadowVOffsetHover'], 'px' ) .
-																' ' .
-																UAGB_Helper::get_css_value( $attr['boxShadowBlurHover'], 'px' ) .
-																' ' .
-																UAGB_Helper::get_css_value( $attr['boxShadowSpreadHover'], 'px' ) .
-																' ' .
-																$attr['boxShadowColorHover'] .
-																' ' .
-																$box_shadow_position_css_hover;
+		' ' .
+		UAGB_Helper::get_css_value( $attr['boxShadowVOffsetHover'], 'px' ) .
+		' ' .
+		UAGB_Helper::get_css_value( $attr['boxShadowBlurHover'], 'px' ) .
+		' ' .
+		UAGB_Helper::get_css_value( $attr['boxShadowSpreadHover'], 'px' ) .
+		' ' .
+		$attr['boxShadowColorHover'] .
+		' ' .
+		$box_shadow_position_css_hover;
 
 }
 
@@ -183,7 +184,8 @@ $tablet_css    = array_merge(
 $tablet_css    = array_merge( $tablet_css, $bg_css_tablet );
 
 $t_selectors = array(
-	'.uagb-template-everything__wrap'       => $tablet_css, // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	'.uagb-template-everything__wrap'       => $tablet_css,
+	// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	'.uagb-template-everything__wrap > div' => array(
 		'margin-bottom' => UAGB_Helper::get_css_value( $attr['rowGapTablet'], $attr['rowGapTypeTablet'] ),
 	),
@@ -225,7 +227,8 @@ $mobile_css    = array_merge(
 $mobile_css    = array_merge( $mobile_css, $bg_css_mobile );
 
 $m_selectors = array(
-	'.uagb-template-everything__wrap'       => $mobile_css, // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	'.uagb-template-everything__wrap'       => $mobile_css,
+	// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	'.uagb-template-everything__wrap > div' => array(
 		'margin-bottom' => UAGB_Helper::get_css_value( $attr['rowGapMobile'], $attr['rowGapTypeMobile'] ),
 	),
