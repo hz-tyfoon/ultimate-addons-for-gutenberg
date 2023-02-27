@@ -6,7 +6,13 @@ import { ToolbarGroup } from '@wordpress/components';
 import { decodeEntities } from '@wordpress/html-entities';
 
 const Settings = ( props ) => {
-	const { state, togglePreview, inspectorControls, categoriesList, taxonomyList } = props;
+	const {
+		state,
+		togglePreview,
+		inspectorControls,
+		categoriesList,
+		taxonomyList,
+	} = props;
 
 	props = props.parentProps;
 
@@ -136,9 +142,7 @@ const Settings = ( props ) => {
 	return (
 		<>
 			{ inspectorControls }
-			<BlockControls>
-				{ getBlockControls() }
-			</BlockControls>
+			<BlockControls>{ getBlockControls() }</BlockControls>
 			{ loadTitleGoogleFonts }
 			{ loadMetaGoogleFonts }
 			{ loadExcerptGoogleFonts }

@@ -78,7 +78,9 @@ const Render = ( props ) => {
 	) {
 		urlChk = props.attributes.mainimage.url;
 		title = props.attributes.mainimage.title;
-		defaultedAlt = ( props.attributes.mainimage?.alt ) ? props.attributes.mainimage?.alt : '';
+		defaultedAlt = props.attributes.mainimage?.alt
+			? props.attributes.mainimage?.alt
+			: '';
 	}
 
 	let url = '';
@@ -97,8 +99,8 @@ const Render = ( props ) => {
 	}
 
 	useEffect( () => {
-		getImageHeightWidth( url, setAttributes )
-	}, [ url ] )
+		getImageHeightWidth( url, setAttributes );
+	}, [ url ] );
 
 	let imageIconHtml = '';
 
@@ -108,8 +110,8 @@ const Render = ( props ) => {
 				className="uagb-review__source-image"
 				src={ url }
 				title={ title }
-				width={ imgTagWidth}
-				height={ imgTagHeight}
+				width={ imgTagWidth }
+				height={ imgTagHeight }
 				loading="lazy"
 				alt={ defaultedAlt }
 			/>

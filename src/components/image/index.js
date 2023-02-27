@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { __ } from '@wordpress/i18n';
 import { BaseControl } from '@wordpress/components';
 import { MediaUpload } from '@wordpress/block-editor';
@@ -10,7 +10,7 @@ import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStora
 import UAGConfirmPopup from '../popup-confirm';
 
 const UAGMediaPicker = ( props ) => {
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	const selectedBlock = useSelect( ( select ) => {
@@ -21,8 +21,8 @@ const UAGMediaPicker = ( props ) => {
 	const blockNameForHook = selectedBlock?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
 	const [ isOpen, setOpen ] = useState( false );
 
@@ -35,7 +35,7 @@ const UAGMediaPicker = ( props ) => {
 		disableLabel = false,
 		disableRemove = false,
 		allow = [ 'image' ],
-		disableDynamicContent = false
+		disableDynamicContent = false,
 	} = props;
 
 	// This is used to render an icon in place of the background image when needed.
@@ -88,24 +88,42 @@ const UAGMediaPicker = ( props ) => {
 			);
 	}
 
-	const registerImageExtender = disableDynamicContent ? null : wp.hooks.applyFilters( 'uagb.registerImageExtender', '', selectedBlock?.name, onSelectImage )
-	const registerImageLinkExtender = disableDynamicContent ? null : wp.hooks.applyFilters( 'uagb.registerImageLinkExtender', '', selectedBlock?.name, 'bgImageLink', 'url' )
+	const registerImageExtender = disableDynamicContent
+		? null
+		: wp.hooks.applyFilters(
+				'uagb.registerImageExtender',
+				'',
+				selectedBlock?.name,
+				onSelectImage
+		  );
+	const registerImageLinkExtender = disableDynamicContent
+		? null
+		: wp.hooks.applyFilters(
+				'uagb.registerImageLinkExtender',
+				'',
+				selectedBlock?.name,
+				'bgImageLink',
+				'url'
+		  );
 
 	const isShowImageUploader = () => {
-		if( disableDynamicContent ){
+		if ( disableDynamicContent ) {
 			return true;
 		}
-		const dynamicContent = selectedBlock?.attributes?.dynamicContent
-		if( dynamicContent && dynamicContent?.bgImage?.enable === true ) {
-			return false
+		const dynamicContent = selectedBlock?.attributes?.dynamicContent;
+		if ( dynamicContent && dynamicContent?.bgImage?.enable === true ) {
+			return false;
 		}
 		return true;
-	}
+	};
 
 	const onConfirm = ( open ) => {
 		const formData = new window.FormData();
 		formData.append( 'action', 'uagb_svg_confirmation' );
-		formData.append( 'svg_nonce', uagb_blocks_info.uagb_svg_confirmation_nonce );
+		formData.append(
+			'svg_nonce',
+			uagb_blocks_info.uagb_svg_confirmation_nonce
+		);
 		formData.append( 'confirmation', 'yes' );
 
 		apiFetch( {
@@ -113,66 +131,80 @@ const UAGMediaPicker = ( props ) => {
 			method: 'POST',
 			body: formData,
 		} ).then( ( response ) => {
-			if( response.success ) {
-				uagLocalStorage.setItem( 'uagSvgConfirmation', JSON.stringify( 'yes' ) );
+			if ( response.success ) {
+				uagLocalStorage.setItem(
+					'uagSvgConfirmation',
+					JSON.stringify( 'yes' )
+				);
 				open();
 			}
 		} );
-	}
+	};
 
 	const OpenMediaUploader = ( open ) => {
-		const svgConfirmation = getUAGEditorStateLocalStorage( 'uagSvgConfirmation' );
-		if( slug !== 'svg' || svgConfirmation === 'yes' ){
+		const svgConfirmation =
+			getUAGEditorStateLocalStorage( 'uagSvgConfirmation' );
+		if ( slug !== 'svg' || svgConfirmation === 'yes' ) {
 			open();
 			return;
 		}
 
-		setOpen( true )
-	}
+		setOpen( true );
+	};
 
 	const renderMediaUploader = ( open ) => {
 		const uploadType = backgroundImage?.url ? 'replace' : 'add';
-		return(
+		return (
 			<>
-				{ 'add' === uploadType  && (
+				{ 'add' === uploadType && (
 					<button
 						className={ `spectra-media-control__clickable spectra-media-control__clickable--${ uploadType }` }
-						onClick={() => ( OpenMediaUploader( open ) ) }
+						onClick={ () => OpenMediaUploader( open ) }
 					>
-						{
-							renderButton( uploadType )
-						}
+						{ renderButton( uploadType ) }
 					</button>
-				)}
-				<div className='spectra-media-control__footer'>
+				) }
+				<div className="spectra-media-control__footer">
 					<button
 						className="uag-control-label"
-						onClick={() => ( OpenMediaUploader( open ) ) }
+						onClick={ () => OpenMediaUploader( open ) }
 					>
 						{ replaceMediaLabel }
 					</button>
-					{
-						registerImageExtender
-					}
+					{ registerImageExtender }
 				</div>
 				{ slug === 'svg' && (
 					<UAGConfirmPopup
-						isOpen = { isOpen }
-						setOpen = { setOpen }
-						onConfirm = { onConfirm }
-						title = { __( 'Upload SVG?', 'ultimate-addons-for-gutenberg' ) }
-						description = { __( 'Upload SVG can be potentially risky. Are you sure?', 'ultimate-addons-for-gutenberg' ) }
-						confirmLabel = { __( 'Upload Anyway', 'ultimate-addons-for-gutenberg' )}
-						cancelLabel = { __( 'Cancel', 'ultimate-addons-for-gutenberg' )}
-						executable = { open }
+						isOpen={ isOpen }
+						setOpen={ setOpen }
+						onConfirm={ onConfirm }
+						title={ __(
+							'Upload SVG?',
+							'ultimate-addons-for-gutenberg'
+						) }
+						description={ __(
+							'Upload SVG can be potentially risky. Are you sure?',
+							'ultimate-addons-for-gutenberg'
+						) }
+						confirmLabel={ __(
+							'Upload Anyway',
+							'ultimate-addons-for-gutenberg'
+						) }
+						cancelLabel={ __(
+							'Cancel',
+							'ultimate-addons-for-gutenberg'
+						) }
+						executable={ open }
 					/>
-				)}
+				) }
 			</>
-		)
+		);
 	};
 
 	const renderButton = ( buttonType ) => (
-		<div className={ `spectra-media-control__button spectra-media-control__button--${ buttonType }` }>
+		<div
+			className={ `spectra-media-control__button spectra-media-control__button--${ buttonType }` }
+		>
 			{ UAGB_Block_Icons[ buttonType ] }
 		</div>
 	);
@@ -181,7 +213,7 @@ const UAGMediaPicker = ( props ) => {
 	const generateBackground = ( media ) => {
 		const regex = /(?:\.([^.]+))?$/;
 		let mediaURL = media;
-		switch ( regex.exec( String( mediaURL ) )[1] ){
+		switch ( regex.exec( String( mediaURL ) )[ 1 ] ) {
 			// For Lottie JSON Files.
 			case 'json':
 				mediaURL = '';
@@ -201,77 +233,86 @@ const UAGMediaPicker = ( props ) => {
 				break;
 		}
 		return mediaURL;
-	}
+	};
 
 	const controlName = getIdFromString( props?.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
-		<div
-			ref={panelRef}
-			className="components-base-control"
-		>
-			{
-				controlBeforeDomElement
-			}
+		<div ref={ panelRef } className="components-base-control">
+			{ controlBeforeDomElement }
 			<BaseControl
 				className="spectra-media-control"
 				id={ `uagb-option-selector-${ slug }` }
 				label={ label }
 				hideLabelFromVision={ disableLabel }
 			>
-				{
-					isShowImageUploader() ? (
-						<>
-							<div
-								className="spectra-media-control__wrapper"
-								style={ {
-									backgroundImage: ( ! placeholderIcon && backgroundImage?.url && ! backgroundImage?.svg ) && (
-										`url("${ generateBackground( backgroundImage?.url ) }")`
-									),
-								} }
-							>
-								{ ( placeholderIcon && backgroundImage?.url ) && (
-									<div className="spectra-media-control__icon spectra-media-control__icon--stroke">
-										{ placeholderIcon }
-									</div>
-								) }
-								{ ( backgroundImage?.svg ) && (
-									<div className="spectra-media-control__icon spectra-media-control__icon--stroke" dangerouslySetInnerHTML={ { __html:backgroundImage.svg } }>
-									</div>
-								) }
-								<MediaUpload
-									title={ selectMediaLabel }
-									onSelect={ onSelectImage }
-									allowedTypes={ allow }
-									value={ backgroundImage }
-									render={ ( { open } ) => renderMediaUploader( open ) }
-								/>
-								{ ( ! disableRemove && backgroundImage?.url ) && (
-									<button
-										className='spectra-media-control__clickable spectra-media-control__clickable--close'
-										onClick={ onRemoveImage }
-									>
-										{ renderButton( 'close' ) }
-									</button>
-								) }
-							</div>
-							{ props.help && (
-								<p className="uag-control-help-notice">{ props.help }</p>
+				{ isShowImageUploader() ? (
+					<>
+						<div
+							className="spectra-media-control__wrapper"
+							style={ {
+								backgroundImage:
+									! placeholderIcon &&
+									backgroundImage?.url &&
+									! backgroundImage?.svg &&
+									`url("${ generateBackground(
+										backgroundImage?.url
+									) }")`,
+							} }
+						>
+							{ placeholderIcon && backgroundImage?.url && (
+								<div className="spectra-media-control__icon spectra-media-control__icon--stroke">
+									{ placeholderIcon }
+								</div>
 							) }
-						</>
-					) : (
-						registerImageExtender
-					)
-				}
+							{ backgroundImage?.svg && (
+								<div
+									className="spectra-media-control__icon spectra-media-control__icon--stroke"
+									dangerouslySetInnerHTML={ {
+										__html: backgroundImage.svg,
+									} }
+								></div>
+							) }
+							<MediaUpload
+								title={ selectMediaLabel }
+								onSelect={ onSelectImage }
+								allowedTypes={ allow }
+								value={ backgroundImage }
+								render={ ( { open } ) =>
+									renderMediaUploader( open )
+								}
+							/>
+							{ ! disableRemove && backgroundImage?.url && (
+								<button
+									className="spectra-media-control__clickable spectra-media-control__clickable--close"
+									onClick={ onRemoveImage }
+								>
+									{ renderButton( 'close' ) }
+								</button>
+							) }
+						</div>
+						{ props.help && (
+							<p className="uag-control-help-notice">
+								{ props.help }
+							</p>
+						) }
+					</>
+				) : (
+					registerImageExtender
+				) }
 			</BaseControl>
-			{
-				registerImageLinkExtender
-			}
-			{
-				controlAfterDomElement
-			}
+			{ registerImageLinkExtender }
+			{ controlAfterDomElement }
 		</div>
 	);
 };

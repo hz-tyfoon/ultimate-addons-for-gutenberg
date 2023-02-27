@@ -37,9 +37,7 @@ const RestMenuImagev2_0_14 = ( props ) => {
 				url = urlCheck;
 			}
 
-			return (
-				<img className="" src={ url } alt={ image.alt } />
-			);
+			return <img className="" src={ url } alt={ image.alt } />;
 		}
 		return null;
 	}

@@ -9,16 +9,18 @@ const CtaLink = ( props ) => {
 	}
 
 	if ( attributes.displayPostLink ) {
-
 		if ( setAttributes !== 'not_set' ) {
 			return (
-				<div className="uagb-timeline__link_parent wp-block-button"	>
+				<div className="uagb-timeline__link_parent wp-block-button">
 					<RichText
-						value={ attributes.readMoreText.replace( /(<([^>]+)>)/ig, '' ) }
+						value={ attributes.readMoreText.replace(
+							/(<([^>]+)>)/gi,
+							''
+						) }
 						onChange={ ( value ) => {
 							setAttributes( { readMoreText: value } );
 						} }
-						tagName='a'
+						tagName="a"
 						className="uagb-timeline__link wp-block-button__link"
 						href={ post.link }
 						target={ target }
@@ -29,7 +31,7 @@ const CtaLink = ( props ) => {
 		}
 
 		return (
-			<div className="uagb-timeline__link_parent wp-block-button"	>
+			<div className="uagb-timeline__link_parent wp-block-button">
 				<a
 					className="uagb-timeline__link wp-block-button__link"
 					href={ post.link }
@@ -37,12 +39,14 @@ const CtaLink = ( props ) => {
 					rel="noopener noreferrer"
 				>
 					<RichText.Content
-						value={ attributes.readMoreText.replace( /(<([^>]+)>)/ig, '' ) }
+						value={ attributes.readMoreText.replace(
+							/(<([^>]+)>)/gi,
+							''
+						) }
 					/>
 				</a>
 			</div>
 		);
-
 	}
 	return null;
 };

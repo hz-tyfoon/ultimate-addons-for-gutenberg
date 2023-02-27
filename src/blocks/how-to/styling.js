@@ -7,7 +7,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -80,15 +79,16 @@ function styling( props ) {
 	let tabletSelectors = {};
 	let mobileSelectors = {};
 
-	let sGap = '' !== getFallbackNumber( step_gap, 'step_gap', blockName ) ?
-					getFallbackNumber( step_gap, 'step_gap', blockName ) :
-					0;
+	let sGap =
+		'' !== getFallbackNumber( step_gap, 'step_gap', blockName )
+			? getFallbackNumber( step_gap, 'step_gap', blockName )
+			: 0;
 	sGap += 30;
 
 	const selectors = {
 		' .block-editor-rich-text__editable.uagb-howto-desc-text': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
@@ -101,44 +101,82 @@ function styling( props ) {
 				subHeadLineHeightType
 			),
 			'color': subHeadingColor,
-			'letter-spacing': generateCSSUnit( subHeadLetterSpacing, subHeadLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				subHeadLetterSpacing,
+				subHeadLetterSpacingType
+			),
 		},
 		'.uagb-how-to-main-wrap p': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap .uagb-how-to-tools__wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 		},
 
-		'.uagb-how-to-main-wrap .uagb-howto__source-wrap': { // For Backward
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+		'.uagb-how-to-main-wrap .uagb-howto__source-wrap': {
+			// For Backward
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap .uagb-howto__source-image': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap span.uagb-howto__time-wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 			'justify-content': overallAlignment,
 		},
 
 		'.uagb-how-to-main-wrap span.uagb-howto__cost-wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 			'justify-content': overallAlignment,
 		},
 
 		' .uagb-how-to-tools .uagb-how-to-tools-child__wrapper:last-child': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 		},
 
-		'.uagb-how-to-main-wrap .uagb-how-to-materials-child__wrapper:last-child': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
-		},
+		'.uagb-how-to-main-wrap .uagb-how-to-materials-child__wrapper:last-child':
+			{
+				'margin-bottom': generateCSSUnit(
+					getFallbackNumber( row_gap, 'row_gap', blockName ),
+					'px'
+				),
+			},
 		' h4.uagb-howto-req-steps-text': {
-			'margin-top': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
-			'margin-bottom': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+			'margin-top': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 		},
 		' h4.uagb-howto-req-materials-text': {
-			'margin-top': generateCSSUnit( getFallbackNumber( row_gap, 'row_gap' , blockName ), 'px' ),
+			'margin-top': generateCSSUnit(
+				getFallbackNumber( row_gap, 'row_gap', blockName ),
+				'px'
+			),
 		},
 		' .uagb-infobox__content-wrap': {
 			'margin-bottom': generateCSSUnit( sGap, 'px' ),
@@ -148,7 +186,7 @@ function styling( props ) {
 		},
 		' .block-editor-rich-text__editable.uagb-howto-timeNeeded-text': {
 			'font-family': priceFontFamily,
-			'font-style' : priceFontStyle,
+			'font-style': priceFontStyle,
 			'text-decoration': priceDecoration,
 			'text-transform': priceTransform,
 			'font-weight': priceFontWeight,
@@ -158,11 +196,14 @@ function styling( props ) {
 				priceLineHeightType
 			),
 			'color': showTotaltimecolor,
-			'letter-spacing': generateCSSUnit( priceLetterSpacing, priceLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				priceLetterSpacing,
+				priceLetterSpacingType
+			),
 		},
 		' .uagb-howto-timeNeeded-value': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
@@ -182,7 +223,7 @@ function styling( props ) {
 		},
 		' .uagb-howto-timeINmin-text ': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
@@ -198,7 +239,7 @@ function styling( props ) {
 		},
 		' .block-editor-rich-text__editable.uagb-howto-estcost-text': {
 			'font-family': priceFontFamily,
-			'font-style' : priceFontStyle,
+			'font-style': priceFontStyle,
 			'text-decoration': priceDecoration,
 			'text-transform': priceTransform,
 			'font-weight': priceFontWeight,
@@ -211,7 +252,7 @@ function styling( props ) {
 		},
 		' .block-editor-rich-text__editable.uagb-howto-estcost-value': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
@@ -227,12 +268,12 @@ function styling( props ) {
 			'margin-left': generateCSSUnit(
 				getFallbackNumber( costSpace, 'costSpace', blockName ),
 				'px'
-				),
+			),
 		},
 
 		' h4.block-editor-rich-text__editable': {
 			'font-family': priceFontFamily,
-			'font-style' : priceFontStyle,
+			'font-style': priceFontStyle,
 			'text-decoration': priceDecoration,
 			'text-transform': priceTransform,
 			'font-weight': priceFontWeight,
@@ -244,7 +285,7 @@ function styling( props ) {
 		},
 		' p.block-editor-rich-text__editable': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
@@ -260,7 +301,7 @@ function styling( props ) {
 
 		' .block-editor-rich-text__editable.uagb-howto-estcost-type': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
@@ -277,7 +318,7 @@ function styling( props ) {
 
 		' .block-editor-rich-text__editable.uagb-howto-req-tools-text': {
 			'font-family': priceFontFamily,
-			'font-style' : priceFontStyle,
+			'font-style': priceFontStyle,
 			'text-decoration': priceDecoration,
 			'text-transform': priceTransform,
 			'font-weight': priceFontWeight,
@@ -291,7 +332,7 @@ function styling( props ) {
 
 		'  .block-editor-rich-text__editable.uagb-tools__label': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
@@ -308,7 +349,7 @@ function styling( props ) {
 
 		' .block-editor-rich-text__editable.uagb-howto-req-materials-text': {
 			'font-family': priceFontFamily,
-			'font-style' : priceFontStyle,
+			'font-style': priceFontStyle,
 			'text-decoration': priceDecoration,
 			'text-transform': priceTransform,
 			'font-weight': priceFontWeight,
@@ -322,7 +363,7 @@ function styling( props ) {
 
 		' .block-editor-rich-text__editable.uagb-howto-req-steps-text': {
 			'font-family': priceFontFamily,
-			'font-style' : priceFontStyle,
+			'font-style': priceFontStyle,
 			'text-decoration': priceDecoration,
 			'text-transform': priceTransform,
 			'font-weight': priceFontWeight,
@@ -336,7 +377,7 @@ function styling( props ) {
 
 		' .block-editor-rich-text__editable.uagb-materials__label': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
@@ -363,7 +404,7 @@ function styling( props ) {
 			'.block-editor-rich-text__editable.uagb-howto-heading-text'
 	] = {
 		'font-family': headFontFamily,
-		'font-style' : headFontStyle,
+		'font-style': headFontStyle,
 		'text-decoration': headDecoration,
 		'text-transform': headTransform,
 		'font-weight': headFontWeight,
@@ -371,7 +412,10 @@ function styling( props ) {
 		'line-height': generateCSSUnit( headLineHeight, headLineHeightType ),
 		'color': headingColor,
 		'margin-bottom': generateCSSUnit( headSpace, 'px' ),
-		'letter-spacing': generateCSSUnit( headLetterSpacing, headLetterSpacingType ),
+		'letter-spacing': generateCSSUnit(
+			headLetterSpacing,
+			headLetterSpacingType
+		),
 	};
 
 	mobileSelectors = {
@@ -384,7 +428,10 @@ function styling( props ) {
 				headLineHeightMobile,
 				headLineHeightType
 			),
-		'letter-spacing': generateCSSUnit( headLetterSpacingMobile, headLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				headLetterSpacingMobile,
+				headLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-howto-desc-text': {
 			'font-size': generateCSSUnit(
@@ -395,7 +442,10 @@ function styling( props ) {
 				subHeadLineHeightMobile,
 				subHeadLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( subHeadLetterSpacingMobile, subHeadLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				subHeadLetterSpacingMobile,
+				subHeadLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-howto-timeNeeded-text': {
 			'font-size': generateCSSUnit(
@@ -406,7 +456,10 @@ function styling( props ) {
 				priceLineHeightMobile,
 				priceLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( priceLetterSpacingMobile, priceLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				priceLetterSpacingMobile,
+				priceLetterSpacingType
+			),
 		},
 		' .uagb-howto-timeNeeded-value': {
 			'font-size': generateCSSUnit(
@@ -499,35 +552,70 @@ function styling( props ) {
 			),
 		},
 		'.uagb-how-to-main-wrap p': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap .uagb-how-to-tools__wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap .uagb-howto__source-image': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap span.uagb-howto__time-wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
 		},
 
 		'.uagb-how-to-main-wrap span.uagb-howto__cost-wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
 		},
 
 		' .uagb-how-to-tools .uagb-how-to-tools-child__wrapper:last-child': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
 		},
 
-		'.uagb-how-to-main-wrap .uagb-how-to-materials-child__wrapper:last-child': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
-		},
+		'.uagb-how-to-main-wrap .uagb-how-to-materials-child__wrapper:last-child':
+			{
+				'margin-bottom': generateCSSUnit(
+					getFallbackNumber(
+						rowGapMobile,
+						'rowGapMobile',
+						blockName
+					),
+					'px'
+				),
+			},
 		' h4.uagb-howto-req-steps-text': {
-			'margin-top': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
+			'margin-top': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
 		},
 		' h4.uagb-howto-req-materials-text': {
-			'margin-top': generateCSSUnit( getFallbackNumber( rowGapMobile, 'rowGapMobile' , blockName ), 'px' ),
+			'margin-top': generateCSSUnit(
+				getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName ),
+				'px'
+			),
 		},
 	};
 
@@ -541,7 +629,10 @@ function styling( props ) {
 				headLineHeightTablet,
 				headLineHeightType
 			),
-		'letter-spacing': generateCSSUnit( headLetterSpacingTablet, headLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				headLetterSpacingTablet,
+				headLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-howto-desc-text': {
 			'font-size': generateCSSUnit(
@@ -552,7 +643,10 @@ function styling( props ) {
 				subHeadLineHeightTablet,
 				subHeadLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( subHeadLetterSpacingTablet, subHeadLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				subHeadLetterSpacingTablet,
+				subHeadLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-howto-timeNeeded-text': {
 			'font-size': generateCSSUnit(
@@ -563,7 +657,10 @@ function styling( props ) {
 				priceLineHeightTablet,
 				priceLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( priceLetterSpacingTablet, priceLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				priceLetterSpacingTablet,
+				priceLetterSpacingType
+			),
 		},
 		' .uagb-howto-timeNeeded-value': {
 			'font-size': generateCSSUnit(
@@ -656,35 +753,70 @@ function styling( props ) {
 			),
 		},
 		'.uagb-how-to-main-wrap p': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap .uagb-how-to-tools__wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap .uagb-howto__source-image': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
 		},
 		'.uagb-how-to-main-wrap span.uagb-howto__time-wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
 		},
 
 		'.uagb-how-to-main-wrap span.uagb-howto__cost-wrap': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
 		},
 
 		' .uagb-how-to-tools .uagb-how-to-tools-child__wrapper:last-child': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
 		},
 
-		'.uagb-how-to-main-wrap .uagb-how-to-materials-child__wrapper:last-child': {
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
-		},
+		'.uagb-how-to-main-wrap .uagb-how-to-materials-child__wrapper:last-child':
+			{
+				'margin-bottom': generateCSSUnit(
+					getFallbackNumber(
+						rowGapTablet,
+						'rowGapTablet',
+						blockName
+					),
+					'px'
+				),
+			},
 		' h4.uagb-howto-req-steps-text': {
-			'margin-top': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
-			'margin-bottom': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
+			'margin-top': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
+			'margin-bottom': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
 		},
 		' h4.uagb-howto-req-materials-text': {
-			'margin-top': generateCSSUnit( getFallbackNumber( rowGapTablet, 'rowGapTablet' , blockName ), 'px' ),
+			'margin-top': generateCSSUnit(
+				getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName ),
+				'px'
+			),
 		},
 	};
 

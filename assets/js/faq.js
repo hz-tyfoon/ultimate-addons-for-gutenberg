@@ -24,7 +24,6 @@ function slideUp( target, duration ) {
 }
 
 function slideDown( target, duration ) {
-
 	target.style.removeProperty( 'display' );
 	let display = window.getComputedStyle( target ).display;
 
@@ -72,17 +71,13 @@ function setupFAQ() {
 		pattern.test( hashval )
 	) {
 		const elementToOpen = document.getElementById( hashval );
-		
-		if (
-			elementToOpen !==
-			undefined
-		) {
-			elementToOpen
-				.classList.add( 'uagb-faq-item-active' );
-			elementToOpen
-				.setAttribute( 'aria-expanded', true );
-			const faqContent =  elementToOpen.getElementsByClassName( 'uagb-faq-content' )[0];
-			if( faqContent ){
+
+		if ( elementToOpen !== undefined ) {
+			elementToOpen.classList.add( 'uagb-faq-item-active' );
+			elementToOpen.setAttribute( 'aria-expanded', true );
+			const faqContent =
+				elementToOpen.getElementsByClassName( 'uagb-faq-content' )[ 0 ];
+			if ( faqContent ) {
 				slideDown( faqContent, 500 );
 			}
 		}
@@ -94,21 +89,22 @@ function setupFAQ() {
 					'uagb-faq-layout-accordion'
 				)
 			) {
-				let faqItem = expandFirstelements[ item ]
-				.querySelectorAll( '.uagb-faq-child__outer-wrap.uagb-faq-item' )[ 0 ];
+				let faqItem = expandFirstelements[ item ].querySelectorAll(
+					'.uagb-faq-child__outer-wrap.uagb-faq-item'
+				)[ 0 ];
 
 				if ( ! faqItem ) {
-					faqItem = expandFirstelements[ item ]
-					.querySelectorAll( '.uagb-faq-child__outer-wrap .uagb-faq-item' )[ 0 ];
+					faqItem = expandFirstelements[ item ].querySelectorAll(
+						'.uagb-faq-child__outer-wrap .uagb-faq-item'
+					)[ 0 ];
 				}
-
 
 				faqItem.classList.add( 'uagb-faq-item-active' );
 
 				faqItem.setAttribute( 'aria-expanded', true );
 				faqItem.querySelectorAll(
-						'.uagb-faq-content'
-					)[ 0 ].style.display = 'block';
+					'.uagb-faq-content'
+				)[ 0 ].style.display = 'block';
 			}
 		}
 	}
@@ -123,7 +119,7 @@ function setupFAQ() {
 				'.uagb-faq-child__outer-wrap.uagb-faq-item'
 			);
 
-			if( ! otherItems || 0 === otherItems.length ) {
+			if ( ! otherItems || 0 === otherItems.length ) {
 				otherItems = inactiveOtherelements[ item ].querySelectorAll(
 					'.uagb-faq-child__outer-wrap .uagb-faq-item'
 				);
@@ -134,14 +130,11 @@ function setupFAQ() {
 				childItem < otherItems.length;
 				childItem++
 			) {
-				otherItems[ childItem ]
-					.classList.add( 'uagb-faq-item-active' );
-				otherItems[ childItem ]
-					.setAttribute( 'aria-expanded', true );
-				otherItems[ childItem ]
-					.querySelectorAll(
-						'.uagb-faq-content'
-					)[ 0 ].style.display = 'block';
+				otherItems[ childItem ].classList.add( 'uagb-faq-item-active' );
+				otherItems[ childItem ].setAttribute( 'aria-expanded', true );
+				otherItems[ childItem ].querySelectorAll(
+					'.uagb-faq-content'
+				)[ 0 ].style.display = 'block';
 			}
 		}
 	}
@@ -157,9 +150,8 @@ window.addEventListener( 'load', function () {
 		const questionButtons = accordionElements[ item ].querySelectorAll(
 			'.uagb-faq-questions-button'
 		);
-		const faqItems = accordionElements[ item ].querySelectorAll(
-			'.uagb-faq-item'
-		);
+		const faqItems =
+			accordionElements[ item ].querySelectorAll( '.uagb-faq-item' );
 
 		for ( let button = 0; button < questionButtons.length; button++ ) {
 			questionButtons[ button ].addEventListener(
@@ -201,9 +193,8 @@ function faqClick( e, faqItem, questionButtons ) {
 				500
 			);
 			if ( 'true' === faqToggle ) {
-				questionButtons = parent.querySelectorAll(
-					'.uagb-faq-content'
-				);
+				questionButtons =
+					parent.querySelectorAll( '.uagb-faq-content' );
 				for (
 					let buttonChild = 0;
 					buttonChild < questionButtons.length;

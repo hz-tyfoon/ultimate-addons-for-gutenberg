@@ -25,7 +25,7 @@ export default function save( props ) {
 	let imageIconHtml = '';
 
 	if ( noticeDismiss ) {
-		imageIconHtml = ( renderSVG( icon )	);
+		imageIconHtml = renderSVG( icon );
 	}
 
 	let active = '';

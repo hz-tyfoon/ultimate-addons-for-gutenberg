@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import classnames from 'classnames';
 import { isBlobURL, getBlobByURL, revokeBlobURL } from '@wordpress/blob';
 import { ToolbarButton } from '@wordpress/components';
-import { useSelect, useDispatch  } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { upload } from '@wordpress/icons';
 import {
 	BlockControls,
@@ -10,26 +10,31 @@ import {
 	BlockIcon,
 	MediaPlaceholder,
 	useBlockProps,
-	__experimentalImageURLInputUI as ImageURLInputUI
+	__experimentalImageURLInputUI as ImageURLInputUI,
 } from '@wordpress/block-editor';
 import { store as coreStore } from '@wordpress/core-data';
 import { __ } from '@wordpress/i18n';
 import { useDeviceType } from '@Controls/getPreviewType';
 import UAGB_Block_Icons from '@Controls/block-icons';
-import Image from './image'
-import Layout from './layout'
+import Image from './image';
+import Layout from './layout';
 import styles from './editor.lazy.scss';
 
 /**
  * Internal dependencies
  */
-import {pickRelevantMediaFiles, isTemporaryImage, isExternalImage, hasDefaultSize, isMediaDestroyed} from './utils'
-
+import {
+	pickRelevantMediaFiles,
+	isTemporaryImage,
+	isExternalImage,
+	hasDefaultSize,
+	isMediaDestroyed,
+} from './utils';
 
 /**
  * Module constants
  */
- import {
+import {
 	LINK_DESTINATION_ATTACHMENT,
 	LINK_DESTINATION_CUSTOM,
 	LINK_DESTINATION_MEDIA,
@@ -50,7 +55,7 @@ const Render = ( props ) => {
 		insertBlocksAfter,
 		onReplace,
 		context,
-		clientId
+		clientId,
 	} = props.parentProps;
 
 	const {
@@ -67,7 +72,7 @@ const Render = ( props ) => {
 		imageHoverEffect,
 		href,
 		linkDestination,
-	} = attributes
+	} = attributes;
 
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -96,16 +101,15 @@ const Render = ( props ) => {
 	const { imageDefaultSize, mediaUpload } = useSelect( ( select ) => {
 		const { getSettings } = select( blockEditorStore );
 		// eslint-disable-next-line no-shadow
-		const {imageDefaultSize, mediaUpload} = getSettings();
-		return {imageDefaultSize, mediaUpload}
+		const { imageDefaultSize, mediaUpload } = getSettings();
+		return { imageDefaultSize, mediaUpload };
 	}, [] );
-
 
 	const { image } = useSelect(
 		( select ) => {
 			const { getMedia } = select( coreStore );
 			return {
-				image: id && isSelected ? getMedia( id ) : null
+				image: id && isSelected ? getMedia( id ) : null,
 			};
 		},
 		[ id, isSelected ]
@@ -139,13 +143,9 @@ const Render = ( props ) => {
 	}
 
 	function onUploadError( message ) {
-		createNotice(
-			'error',
-			message,
-			{
-				type: 'snackbar'
-			}
-		);
+		createNotice( 'error', message, {
+			type: 'snackbar',
+		} );
 	}
 
 	function onSelectImage( media ) {
@@ -160,7 +160,6 @@ const Render = ( props ) => {
 
 			return;
 		}
-
 
 		if ( isBlobURL( media.url ) ) {
 			setTemporaryURL( media.url );
@@ -177,7 +176,7 @@ const Render = ( props ) => {
 				...mediaAttributes,
 				alt: mediaAttributes.alt,
 				id: mediaAttributes.id,
-				link: mediaAttributes.link
+				link: mediaAttributes.link,
 			};
 		}
 
@@ -193,11 +192,11 @@ const Render = ( props ) => {
 					? imageDefaultSize
 					: 'full',
 				sizeSlugTablet: hasDefaultSize( media, imageDefaultSize )
-				? imageDefaultSize
-				: 'full',
+					? imageDefaultSize
+					: 'full',
 				sizeSlugMobile: hasDefaultSize( media, imageDefaultSize )
-				? imageDefaultSize
-				: 'full',
+					? imageDefaultSize
+					: 'full',
 			};
 		} else {
 			// Keep the same url when selecting the same file, so "Image Size"
@@ -250,7 +249,7 @@ const Render = ( props ) => {
 			...mediaAttributes,
 			...additionalAttributes,
 			linkDestination,
-		}
+		};
 		setAttributes( imageAttributes );
 	}
 
@@ -287,13 +286,9 @@ const Render = ( props ) => {
 				allowedTypes: ALLOWED_MEDIA_TYPES,
 				onError: ( message ) => {
 					isTemp = false;
-					createNotice(
-						'error',
-						message,
-						{
-							type: 'snackbar'
-						}
-					);
+					createNotice( 'error', message, {
+						type: 'snackbar',
+					} );
 					setAttributes( {
 						src: undefined,
 						id: undefined,
@@ -325,7 +320,6 @@ const Render = ( props ) => {
 		/>
 	);
 
-
 	// If an image is externally hosted, try to fetch the image data. This may
 	// fail if the image host doesn't allow CORS with the domain. If it works,
 	// we can enable a button in the toolbar to upload the image.
@@ -353,23 +347,15 @@ const Render = ( props ) => {
 				}
 
 				setExternalBlob();
-				createNotice(
-					'success',
-					__( 'Image uploaded.' ),
-					{
-						type: 'snackbar'
-					}
-				);
+				createNotice( 'success', __( 'Image uploaded.' ), {
+					type: 'snackbar',
+				} );
 			},
 			allowedTypes: ALLOWED_MEDIA_TYPES,
 			onError( message ) {
-				createNotice(
-					'error',
-					message,
-					{
-						type: 'snackbar'
-					}
-				);
+				createNotice( 'error', message, {
+					type: 'snackbar',
+				} );
 			},
 		} );
 	}
@@ -379,7 +365,7 @@ const Render = ( props ) => {
 	}
 
 	const blockProps = useBlockProps( {
-		ref
+		ref,
 	} );
 
 	return (
@@ -403,48 +389,52 @@ const Render = ( props ) => {
 					/>
 				) }
 			</BlockControls>
-			<div {...blockProps} className={ classnames(
-				className,
-				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ block_id }`,
-				`wp-block-uagb-image--layout-${ layout }`,
-				`wp-block-uagb-image--effect-${imageHoverEffect}`,
-				`wp-block-uagb-image--align-${align ? align : 'none'}`
-			) }>
+			<div
+				{ ...blockProps }
+				className={ classnames(
+					className,
+					`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
+					`uagb-block-${ block_id }`,
+					`wp-block-uagb-image--layout-${ layout }`,
+					`wp-block-uagb-image--effect-${ imageHoverEffect }`,
+					`wp-block-uagb-image--align-${ align ? align : 'none' }`
+				) }
+			>
 				{ ( temporaryURL || url ) && (
-				<figure className='wp-block-uagb-image__figure'>
-					<Image
-						temporaryURL={ temporaryURL }
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						isSelected={ isSelected }
-						insertBlocksAfter={ insertBlocksAfter }
-						onReplace={ onReplace }
-						onSelectImage={ onSelectImage }
-						onSelectURL={ onSelectURL }
-						onUploadError={ onUploadError }
-						containerRef={ ref }
-						context={ context }
-						clientId={ clientId }
-						onCloseModal={ onCloseModal }
-						onImageLoadError={ onImageError }
-					/>
-					<Layout
-						captionRef={captionRef}
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						isSelected={ isSelected }
-					/>
-				</figure>
+					<figure className="wp-block-uagb-image__figure">
+						<Image
+							temporaryURL={ temporaryURL }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							isSelected={ isSelected }
+							insertBlocksAfter={ insertBlocksAfter }
+							onReplace={ onReplace }
+							onSelectImage={ onSelectImage }
+							onSelectURL={ onSelectURL }
+							onUploadError={ onUploadError }
+							containerRef={ ref }
+							context={ context }
+							clientId={ clientId }
+							onCloseModal={ onCloseModal }
+							onImageLoadError={ onImageError }
+						/>
+						<Layout
+							captionRef={ captionRef }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							isSelected={ isSelected }
+						/>
+					</figure>
 				) }
 				<MediaPlaceholder
 					icon={ <BlockIcon icon={ UAGB_Block_Icons.image } /> }
-					labels={
-						{
-							title: __( 'Image', 'ultimate-addons-for-gutenberg' ),
-							instructions: __( 'Upload an image file, pick one from your media library, or add one with a URL.', 'ultimate-addons-for-gutenberg' )
-						}
-					}
+					labels={ {
+						title: __( 'Image', 'ultimate-addons-for-gutenberg' ),
+						instructions: __(
+							'Upload an image file, pick one from your media library, or add one with a URL.',
+							'ultimate-addons-for-gutenberg'
+						),
+					} }
 					onSelect={ onSelectImage }
 					onSelectURL={ onSelectURL }
 					onError={ onUploadError }
@@ -458,7 +448,7 @@ const Render = ( props ) => {
 			</div>
 		</React.Fragment>
 	);
-}
+};
 
 Render.propTypes = propTypes;
 Render.defaultProps = defaultProps;

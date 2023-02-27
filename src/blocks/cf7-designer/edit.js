@@ -1,5 +1,5 @@
 import styling from './styling';
-import React, {   useEffect,  } from 'react';
+import React, { useEffect } from 'react';
 
 import apiFetch from '@wordpress/api-fetch';
 import { useDeviceType } from '@Controls/getPreviewType';
@@ -13,40 +13,35 @@ import Render from './render';
 import { useSelect } from '@wordpress/data';
 
 const UAGBCF7 = ( props ) => {
-
 	const deviceType = useDeviceType();
-	useSelect(
-		( select ) => { // eslint-disable-line  no-unused-vars
-			const { setAttributes } = props;
-			const { formId, isHtml } = props.attributes;
-			let jsonData = '';
+	useSelect( ( select ) => {
+		// eslint-disable-line  no-unused-vars
+		const { setAttributes } = props;
+		const { formId, isHtml } = props.attributes;
+		let jsonData = '';
 
-			if ( formId && -1 !== formId && 0 !== formId && ! isHtml ) {
-				const formData = new window.FormData();
+		if ( formId && -1 !== formId && 0 !== formId && ! isHtml ) {
+			const formData = new window.FormData();
 
-				formData.append( 'action', 'uagb_cf7_shortcode' );
-				formData.append(
-					'nonce',
-					uagb_blocks_info.uagb_ajax_nonce
-				);
-				formData.append( 'formId', formId );
+			formData.append( 'action', 'uagb_cf7_shortcode' );
+			formData.append( 'nonce', uagb_blocks_info.uagb_ajax_nonce );
+			formData.append( 'formId', formId );
 
-				apiFetch( {
-					url: uagb_blocks_info.ajax_url,
-					method: 'POST',
-					body: formData,
-				} ).then( ( data ) => {
-					setAttributes( { isHtml: true } );
-					setAttributes( { formJson: data } );
-					jsonData = data;
-				} );
-			}
+			apiFetch( {
+				url: uagb_blocks_info.ajax_url,
+				method: 'POST',
+				body: formData,
+			} ).then( ( data ) => {
+				setAttributes( { isHtml: true } );
+				setAttributes( { formJson: data } );
+				jsonData = data;
+			} );
+		}
 
-			return {
-				formHTML: jsonData,
-			};
-		},
-	);
+		return {
+			formHTML: jsonData,
+		};
+	} );
 
 	useEffect( () => {
 		// Assigning block_id in the attribute.
@@ -162,114 +157,138 @@ const UAGBCF7 = ( props ) => {
 			}
 		}
 
-		if( fieldBorderWidth ){
-			if( undefined === inputBorderTopWidth ) {
+		if ( fieldBorderWidth ) {
+			if ( undefined === inputBorderTopWidth ) {
 				props.setAttributes( {
 					inputBorderTopWidth: fieldBorderWidth,
 				} );
 			}
-			if( undefined === inputBorderLeftWidth ) {
-				props.setAttributes( { inputBorderLeftWidth : fieldBorderWidth} );
+			if ( undefined === inputBorderLeftWidth ) {
+				props.setAttributes( {
+					inputBorderLeftWidth: fieldBorderWidth,
+				} );
 			}
-			if( undefined === inputBorderRightWidth ) {
-				props.setAttributes( { inputBorderRightWidth : fieldBorderWidth} );
+			if ( undefined === inputBorderRightWidth ) {
+				props.setAttributes( {
+					inputBorderRightWidth: fieldBorderWidth,
+				} );
 			}
-			if( undefined === inputBorderBottomWidth ) {
-				props.setAttributes( { inputBorderBottomWidth : fieldBorderWidth} );
-			}
-		}
-
-		if( fieldBorderRadius ){
-
-			if( undefined === inputBorderTopLeftRadius ) {
-				props.setAttributes( { inputBorderTopLeftRadius : fieldBorderRadius} );
-			}
-			if( undefined === inputBorderTopRightRadius ) {
-				props.setAttributes( { inputBorderTopRightRadius : fieldBorderRadius} );
-			}
-			if( undefined === inputBorderBottomLeftRadius ) {
-				props.setAttributes( { inputBorderBottomLeftRadius : fieldBorderRadius} );
-			}
-			if( undefined === inputBorderBottomRightRadius ) {
-				props.setAttributes( { inputBorderBottomRightRadius : fieldBorderRadius} );
+			if ( undefined === inputBorderBottomWidth ) {
+				props.setAttributes( {
+					inputBorderBottomWidth: fieldBorderWidth,
+				} );
 			}
 		}
 
-		if( fieldBorderColor ){
-			if( undefined === inputBorderColor ) {
-				props.setAttributes( { inputBorderColor : fieldBorderColor} );
+		if ( fieldBorderRadius ) {
+			if ( undefined === inputBorderTopLeftRadius ) {
+				props.setAttributes( {
+					inputBorderTopLeftRadius: fieldBorderRadius,
+				} );
+			}
+			if ( undefined === inputBorderTopRightRadius ) {
+				props.setAttributes( {
+					inputBorderTopRightRadius: fieldBorderRadius,
+				} );
+			}
+			if ( undefined === inputBorderBottomLeftRadius ) {
+				props.setAttributes( {
+					inputBorderBottomLeftRadius: fieldBorderRadius,
+				} );
+			}
+			if ( undefined === inputBorderBottomRightRadius ) {
+				props.setAttributes( {
+					inputBorderBottomRightRadius: fieldBorderRadius,
+				} );
 			}
 		}
 
-		if( fieldBorderHColor ){
-			if( undefined === inputBorderHColor ) {
-				props.setAttributes( { inputBorderHColor : fieldBorderHColor} );
+		if ( fieldBorderColor ) {
+			if ( undefined === inputBorderColor ) {
+				props.setAttributes( { inputBorderColor: fieldBorderColor } );
 			}
 		}
 
-		if( fieldBorderStyle ){
-			if( undefined === inputBorderStyle ) {
-				props.setAttributes( { inputBorderStyle : fieldBorderStyle} );
+		if ( fieldBorderHColor ) {
+			if ( undefined === inputBorderHColor ) {
+				props.setAttributes( { inputBorderHColor: fieldBorderHColor } );
 			}
 		}
 
+		if ( fieldBorderStyle ) {
+			if ( undefined === inputBorderStyle ) {
+				props.setAttributes( { inputBorderStyle: fieldBorderStyle } );
+			}
+		}
 
-		if( buttonBorderWidth ){
-			if( undefined === btnBorderTopWidth ) {
+		if ( buttonBorderWidth ) {
+			if ( undefined === btnBorderTopWidth ) {
 				props.setAttributes( {
 					btnBorderTopWidth: buttonBorderWidth,
 				} );
 			}
-			if( undefined === btnBorderLeftWidth ) {
-				props.setAttributes( { btnBorderLeftWidth : buttonBorderWidth} );
+			if ( undefined === btnBorderLeftWidth ) {
+				props.setAttributes( {
+					btnBorderLeftWidth: buttonBorderWidth,
+				} );
 			}
-			if( undefined === btnBorderRightWidth ) {
-				props.setAttributes( { btnBorderRightWidth : buttonBorderWidth} );
+			if ( undefined === btnBorderRightWidth ) {
+				props.setAttributes( {
+					btnBorderRightWidth: buttonBorderWidth,
+				} );
 			}
-			if( undefined === btnBorderBottomWidth ) {
-				props.setAttributes( { btnBorderBottomWidth : buttonBorderWidth} );
-			}
-		}
-
-		if( buttonBorderRadius ){
-
-			if( undefined === btnBorderTopLeftRadius ) {
-				props.setAttributes( { btnBorderTopLeftRadius : buttonBorderRadius} );
-			}
-			if( undefined === btnBorderTopRightRadius ) {
-				props.setAttributes( { btnBorderTopRightRadius : buttonBorderRadius} );
-			}
-			if( undefined === btnBorderBottomLeftRadius ) {
-				props.setAttributes( { btnBorderBottomLeftRadius : buttonBorderRadius} );
-			}
-			if( undefined === btnBorderBottomRightRadius ) {
-				props.setAttributes( { btnBorderBottomRightRadius : buttonBorderRadius} );
+			if ( undefined === btnBorderBottomWidth ) {
+				props.setAttributes( {
+					btnBorderBottomWidth: buttonBorderWidth,
+				} );
 			}
 		}
 
-		if( buttonBorderColor ){
-			if( undefined === btnBorderColor ) {
-				props.setAttributes( { btnBorderColor : buttonBorderColor} );
+		if ( buttonBorderRadius ) {
+			if ( undefined === btnBorderTopLeftRadius ) {
+				props.setAttributes( {
+					btnBorderTopLeftRadius: buttonBorderRadius,
+				} );
+			}
+			if ( undefined === btnBorderTopRightRadius ) {
+				props.setAttributes( {
+					btnBorderTopRightRadius: buttonBorderRadius,
+				} );
+			}
+			if ( undefined === btnBorderBottomLeftRadius ) {
+				props.setAttributes( {
+					btnBorderBottomLeftRadius: buttonBorderRadius,
+				} );
+			}
+			if ( undefined === btnBorderBottomRightRadius ) {
+				props.setAttributes( {
+					btnBorderBottomRightRadius: buttonBorderRadius,
+				} );
 			}
 		}
 
-		if( buttonBorderHColor ){
-			if( undefined === btnBorderHColor ) {
-				props.setAttributes( { btnBorderHColor : buttonBorderHColor} );
+		if ( buttonBorderColor ) {
+			if ( undefined === btnBorderColor ) {
+				props.setAttributes( { btnBorderColor: buttonBorderColor } );
 			}
 		}
 
-		if( buttonBorderStyle ){
-			if( undefined === btnBorderStyle ) {
-				props.setAttributes( { btnBorderStyle : buttonBorderStyle} );
+		if ( buttonBorderHColor ) {
+			if ( undefined === btnBorderHColor ) {
+				props.setAttributes( { btnBorderHColor: buttonBorderHColor } );
 			}
 		}
-		
+
+		if ( buttonBorderStyle ) {
+			if ( undefined === btnBorderStyle ) {
+				props.setAttributes( { btnBorderStyle: buttonBorderStyle } );
+			}
+		}
 	}, [] );
 
 	useEffect( () => {
 		const submitButton = document.querySelector( '.wpcf7-submit' );
-		if( submitButton !== null ){
+		if ( submitButton !== null ) {
 			submitButton.addEventListener( 'click', function ( event ) {
 				event.preventDefault();
 			} );
@@ -277,35 +296,38 @@ const UAGBCF7 = ( props ) => {
 
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-cf7-styler-' + props.clientId.substr( 0, 8 ), blockStyling );
-		
+		addBlockEditorDynamicStyles(
+			'uagb-cf7-styler-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-cf7-styler-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-cf7-styler-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/contact-form-7-styler.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } deviceType = { deviceType }/>
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } deviceType={ deviceType } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 export default UAGBCF7;

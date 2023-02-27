@@ -5,7 +5,7 @@ import {
 	renderPostLayout,
 } from '.././function';
 import { useDeviceType } from '@Controls/getPreviewType';
-import React, {    useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
@@ -14,7 +14,8 @@ import Slider from 'react-slick';
 function Blog( props ) {
 	const blockName = props.name.replace( 'uagb/', '' );
 	const article = useRef();
-	const { attributes, className, latestPosts, block_id, setAttributes } = props;
+	const { attributes, className, latestPosts, block_id, setAttributes } =
+		props;
 	const deviceType = useDeviceType();
 
 	const {
@@ -38,56 +39,86 @@ function Blog( props ) {
 		rowGap,
 	} = attributes;
 
-	const postsToShowFallback = getFallbackNumber( postsToShow, 'postsToShow', blockName );
+	const postsToShowFallback = getFallbackNumber(
+		postsToShow,
+		'postsToShow',
+		blockName
+	);
 	const columnsFallback = getFallbackNumber( columns, 'columns', blockName );
-	const tcolumnsFallback = getFallbackNumber( tcolumns, 'tcolumns', blockName );
-	const mcolumnsFallback = getFallbackNumber( mcolumns, 'mcolumns', blockName );
+	const tcolumnsFallback = getFallbackNumber(
+		tcolumns,
+		'tcolumns',
+		blockName
+	);
+	const mcolumnsFallback = getFallbackNumber(
+		mcolumns,
+		'mcolumns',
+		blockName
+	);
 	const rowGapFallback = getFallbackNumber( rowGap, 'rowGap', blockName );
-	const autoplaySpeedFallback = getFallbackNumber( autoplaySpeed, 'autoplaySpeed', blockName );
-	const transitionSpeedFallback = getFallbackNumber( transitionSpeed, 'transitionSpeed', blockName );
-	const arrowSizeFallback = getFallbackNumber( arrowSize, 'arrowSize', blockName );
-	const arrowBorderSizeFallback = getFallbackNumber( arrowBorderSize, 'arrowBorderSize', blockName );
-	const isImageEnabled = ( attributes.displayPostImage === true ) ? 'uagb-post__image-enabled' : 'uagb-post__image-disabled';
-
+	const autoplaySpeedFallback = getFallbackNumber(
+		autoplaySpeed,
+		'autoplaySpeed',
+		blockName
+	);
+	const transitionSpeedFallback = getFallbackNumber(
+		transitionSpeed,
+		'transitionSpeed',
+		blockName
+	);
+	const arrowSizeFallback = getFallbackNumber(
+		arrowSize,
+		'arrowSize',
+		blockName
+	);
+	const arrowBorderSizeFallback = getFallbackNumber(
+		arrowBorderSize,
+		'arrowBorderSize',
+		blockName
+	);
+	const isImageEnabled =
+		attributes.displayPostImage === true
+			? 'uagb-post__image-enabled'
+			: 'uagb-post__image-disabled';
 
 	const updateImageBgWidth = () => {
-
 		setTimeout( () => {
-
-			if( article?.current ){
-				const articleWidth  = article?.current?.offsetWidth;
-				const imageWidth = 100 - ( rowGapFallback / articleWidth ) * 100;
-				const parent = article?.current?.closest( '.uagb-post__image-position-background' );
+			if ( article?.current ) {
+				const articleWidth = article?.current?.offsetWidth;
+				const imageWidth =
+					100 - ( rowGapFallback / articleWidth ) * 100;
+				const parent = article?.current?.closest(
+					'.uagb-post__image-position-background'
+				);
 
 				if ( parent ) {
-					const images = parent?.getElementsByClassName( 'uagb-post__image' );
-					for( const image of images ) {
+					const images =
+						parent?.getElementsByClassName( 'uagb-post__image' );
+					for ( const image of images ) {
 						if ( image ) {
 							image.style.width = imageWidth + '%';
 							image.style.marginLeft = rowGapFallback / 2 + 'px';
-
 						}
 					}
 				}
 			}
-
-		}, 100 )
+		}, 100 );
 	};
 	useEffect( () => {
 		updateImageBgWidth();
-    }, [ ] );
+	}, [] );
 
 	useEffect( () => {
 		updateImageBgWidth();
-    }, [ props ] );
+	}, [ props ] );
 
 	useEffect( () => {
 		updateImageBgWidth();
-    }, [article] );
+	}, [ article ] );
 
 	useEffect( () => {
 		updateImageBgWidth();
-    }, [imgPosition] );
+	}, [ imgPosition ] );
 
 	// Removing posts from display should be instant.
 	const displayPosts =
@@ -179,7 +210,7 @@ function Blog( props ) {
 	};
 
 	const all_posts = displayPosts.map( ( post, i ) => (
-		<article ref={article} key={ i } className="uagb-post__inner-wrap">
+		<article ref={ article } key={ i } className="uagb-post__inner-wrap">
 			{ renderPostLayout(
 				'uagb/post-carousel',
 				post,

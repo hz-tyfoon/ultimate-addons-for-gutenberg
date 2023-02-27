@@ -8,7 +8,6 @@ import { RichText } from '@wordpress/block-editor';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 export default function save( props ) {
-
 	const blockName = 'forms-textarea';
 
 	const { attributes } = props;

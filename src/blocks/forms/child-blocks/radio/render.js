@@ -52,8 +52,7 @@ const Render = ( props ) => {
 				/>
 				<label // eslint-disable-line jsx-a11y/label-has-associated-control
 					htmlFor={ option.optiontitle }
-				>
-				</label>
+				></label>
 				<input
 					className="uagb-inner-input-view"
 					aria-label={ option.optiontitle }

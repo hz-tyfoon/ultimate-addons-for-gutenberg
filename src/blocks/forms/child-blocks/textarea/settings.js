@@ -11,7 +11,6 @@ import InspectorTab, {
 import { InspectorControls } from '@wordpress/block-editor';
 import UAGTextControl from '@Components/text-control';
 
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
@@ -35,8 +34,17 @@ const Settings = ( props ) => {
 					} }
 					setAttributes={ setAttributes }
 					options={ [
-						{ label: __( 'Off', 'ultimate-addons-for-gutenberg' ), value: 'off' },
-						{ label: __( 'Address', 'ultimate-addons-for-gutenberg' ), value: 'street-address' },
+						{
+							label: __( 'Off', 'ultimate-addons-for-gutenberg' ),
+							value: 'off',
+						},
+						{
+							label: __(
+								'Address',
+								'ultimate-addons-for-gutenberg'
+							),
+							value: 'street-address',
+						},
 					] }
 				/>
 				<UAGTextControl
@@ -45,10 +53,10 @@ const Settings = ( props ) => {
 						'ultimate-addons-for-gutenberg'
 					) }
 					value={ placeholder }
-					data={{
+					data={ {
 						value: placeholder,
 						label: 'placeholder',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( { placeholder: value } )

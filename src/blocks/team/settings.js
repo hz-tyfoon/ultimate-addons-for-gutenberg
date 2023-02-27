@@ -28,14 +28,9 @@ let imageSizeOptions = [
 	{ value: 'full', label: __( 'Large', 'ultimate-addons-for-gutenberg' ) },
 ];
 
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 
-import {
-	ToggleControl,
-	Icon,
-} from '@wordpress/components';
+import { ToggleControl, Icon } from '@wordpress/components';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
 
@@ -180,16 +175,18 @@ const Settings = ( props ) => {
 		setAttributes( { image: media } );
 	};
 	const presetSettings = () => {
-		return <UAGAdvancedPanelBody
-					title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ true }
-				>
-					<UAGPresets
-						setAttributes = { setAttributes }
-						presets = { presets }
-						presetInputType = 'radioImage'
-					/>
-				</UAGAdvancedPanelBody>
+		return (
+			<UAGAdvancedPanelBody
+				title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ true }
+			>
+				<UAGPresets
+					setAttributes={ setAttributes }
+					presets={ presets }
+					presetInputType="radioImage"
+				/>
+			</UAGAdvancedPanelBody>
+		);
 	};
 	/*
 	 * Event to set Image as null while removing.
@@ -291,7 +288,10 @@ const Settings = ( props ) => {
 						},
 						{
 							value: 'span',
-							label: __( 'Span', 'ultimate-addons-for-gutenberg' ),
+							label: __(
+								'Span',
+								'ultimate-addons-for-gutenberg'
+							),
 						},
 						{
 							value: 'div',
@@ -299,7 +299,7 @@ const Settings = ( props ) => {
 						},
 					] }
 				/>
-				{ imgPosition === 'above' &&
+				{ imgPosition === 'above' && (
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
 						label={ __(
@@ -355,7 +355,7 @@ const Settings = ( props ) => {
 						] }
 						showIcons={ true }
 					/>
-				}
+				) }
 				<UAGMediaPicker
 					onSelectImage={ onSelectImage }
 					backgroundImage={ image }
@@ -613,12 +613,15 @@ const Settings = ( props ) => {
 						{ twitterIcon && (
 							<>
 								<UAGTextControl
-									label={ __( 'URL', 'ultimate-addons-for-gutenberg' ) }
+									label={ __(
+										'URL',
+										'ultimate-addons-for-gutenberg'
+									) }
 									value={ twitterLink }
-									data={{
+									data={ {
 										value: twitterLink,
 										label: 'twitterLink',
-									}}
+									} }
 									setAttributes={ setAttributes }
 									onChange={ ( value ) =>
 										setAttributes( { twitterLink: value } )
@@ -631,10 +634,7 @@ const Settings = ( props ) => {
 							</>
 						) }
 						<p className="components-base-control__label">
-							{ __(
-								'Item 2',
-								'ultimate-addons-for-gutenberg'
-							) }
+							{ __( 'Item 2', 'ultimate-addons-for-gutenberg' ) }
 						</p>
 						<UAGIconPicker
 							label={ __(
@@ -649,12 +649,15 @@ const Settings = ( props ) => {
 						{ fbIcon && (
 							<>
 								<UAGTextControl
-									label={ __( 'URL', 'ultimate-addons-for-gutenberg' ) }
+									label={ __(
+										'URL',
+										'ultimate-addons-for-gutenberg'
+									) }
 									value={ fbLink }
-									data={{
+									data={ {
 										value: fbLink,
 										label: 'fbLink',
-									}}
+									} }
 									setAttributes={ setAttributes }
 									onChange={ ( value ) =>
 										setAttributes( { fbLink: value } )
@@ -667,10 +670,7 @@ const Settings = ( props ) => {
 							</>
 						) }
 						<p className="components-base-control__label">
-							{ __(
-								'Item 3',
-								'ultimate-addons-for-gutenberg'
-							) }
+							{ __( 'Item 3', 'ultimate-addons-for-gutenberg' ) }
 						</p>
 						<UAGIconPicker
 							label={ __(
@@ -685,12 +685,15 @@ const Settings = ( props ) => {
 						{ linkedinIcon && (
 							<>
 								<UAGTextControl
-									label={ __( 'URL', 'ultimate-addons-for-gutenberg' ) }
+									label={ __(
+										'URL',
+										'ultimate-addons-for-gutenberg'
+									) }
 									value={ linkedinLink }
-									data={{
+									data={ {
 										value: linkedinLink,
 										label: 'linkedinLink',
-									}}
+									} }
 									setAttributes={ setAttributes }
 									onChange={ ( value ) =>
 										setAttributes( { linkedinLink: value } )
@@ -703,10 +706,7 @@ const Settings = ( props ) => {
 							</>
 						) }
 						<p className="components-base-control__label">
-							{ __(
-								'Item 4',
-								'ultimate-addons-for-gutenberg'
-							) }
+							{ __( 'Item 4', 'ultimate-addons-for-gutenberg' ) }
 						</p>
 						<UAGIconPicker
 							label={ __(
@@ -721,12 +721,15 @@ const Settings = ( props ) => {
 						{ pinIcon && (
 							<>
 								<UAGTextControl
-									label={ __( 'URL', 'ultimate-addons-for-gutenberg' ) }
+									label={ __(
+										'URL',
+										'ultimate-addons-for-gutenberg'
+									) }
 									value={ pinLink }
-									data={{
+									data={ {
 										value: pinLink,
 										label: 'pinLink',
-									}}
+									} }
 									setAttributes={ setAttributes }
 									onChange={ ( value ) =>
 										setAttributes( { pinLink: value } )
@@ -1117,133 +1120,136 @@ const Settings = ( props ) => {
 	const getSocialIconPanelColorSettings = () => {
 		return (
 			<>
-				{ socialEnable &&
+				{ socialEnable && (
 					<UAGAdvancedPanelBody
-					title={ __( 'Social Icons', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ false }
-				>
-					<ResponsiveSlider
-						label={__(
-							'Icon Size',
-							'ultimate-addons-for-gutenberg'
-						)}
-						data={{
-							desktop: {
-								value: socialFontSize,
-								label: 'socialFontSize',
-							},
-							tablet: {
-								value: socialFontSizeTablet,
-								label: 'socialFontSizeTablet',
-							},
-							mobile: {
-								value: socialFontSizeMobile,
-								label: 'socialFontSizeMobile',
-							},
-						}}
-						units={ [
-							{
-								name: __(
-									'Pixel',
-									'ultimate-addons-for-gutenberg'
-								),
-								unitValue: 'px',
-							},
-							{
-								name: __(
-									'EM',
-									'ultimate-addons-for-gutenberg'
-								),
-								unitValue: 'em',
-							},
-						] }
-						unit={ {
-							value: socialFontSizeType,
-							label: 'socialFontSizeType',
-						} }
-						min={0}
-						limitMax={ { px: 100, em: 100 } }
-						displayUnit={true}
-						setAttributes={setAttributes}
-					/>
-					<ResponsiveSlider
-						label={ __(
-							'Icon Spacing',
+						title={ __(
+							'Social Icons',
 							'ultimate-addons-for-gutenberg'
 						) }
-						data={ {
-							desktop: {
-								value: socialSpace,
-								label: 'socialSpace',
-							},
-							tablet: {
-								value: socialSpaceTablet,
-								label: 'socialSpaceTablet',
-							},
-							mobile: {
-								value: socialSpaceMobile,
-								label: 'socialSpaceMobile',
-							},
-						} }
-						min={ 0 }
-						max={ 50 }
-						displayUnit={ false }
-						setAttributes={ setAttributes }
-					/>
-					<UAGTabsControl
-						tabs={ [
-							{
-								name: 'normal',
-								title: __(
-									'Normal',
-									'ultimate-addons-for-gutenberg'
-								),
-							},
-							{
-								name: 'hover',
-								title: __(
-									'Hover',
-									'ultimate-addons-for-gutenberg'
-								),
-							},
-						] }
-						normal={
-							<AdvancedPopColorControl
-								label={ __(
-									'Color',
-									'ultimate-addons-for-gutenberg'
-								) }
-								colorValue={ socialColor ? socialColor : '' }
-								data={ {
-									value: socialColor,
-									label: 'socialColor',
-								} }
-								setAttributes={ setAttributes }
-							/>
-						}
-						hover={
-							<AdvancedPopColorControl
-								label={ __(
-									'Color',
-									'ultimate-addons-for-gutenberg'
-								) }
-								colorValue={
-									socialHoverColor ? socialHoverColor : ''
-								}
-								data={ {
-									value: socialHoverColor,
-									label: 'socialHoverColor',
-								} }
-								setAttributes={ setAttributes }
-							/>
-						}
-						disableBottomSeparator={ true }
-					/>
-				</UAGAdvancedPanelBody>
-				}
+						initialOpen={ false }
+					>
+						<ResponsiveSlider
+							label={ __(
+								'Icon Size',
+								'ultimate-addons-for-gutenberg'
+							) }
+							data={ {
+								desktop: {
+									value: socialFontSize,
+									label: 'socialFontSize',
+								},
+								tablet: {
+									value: socialFontSizeTablet,
+									label: 'socialFontSizeTablet',
+								},
+								mobile: {
+									value: socialFontSizeMobile,
+									label: 'socialFontSizeMobile',
+								},
+							} }
+							units={ [
+								{
+									name: __(
+										'Pixel',
+										'ultimate-addons-for-gutenberg'
+									),
+									unitValue: 'px',
+								},
+								{
+									name: __(
+										'EM',
+										'ultimate-addons-for-gutenberg'
+									),
+									unitValue: 'em',
+								},
+							] }
+							unit={ {
+								value: socialFontSizeType,
+								label: 'socialFontSizeType',
+							} }
+							min={ 0 }
+							limitMax={ { px: 100, em: 100 } }
+							displayUnit={ true }
+							setAttributes={ setAttributes }
+						/>
+						<ResponsiveSlider
+							label={ __(
+								'Icon Spacing',
+								'ultimate-addons-for-gutenberg'
+							) }
+							data={ {
+								desktop: {
+									value: socialSpace,
+									label: 'socialSpace',
+								},
+								tablet: {
+									value: socialSpaceTablet,
+									label: 'socialSpaceTablet',
+								},
+								mobile: {
+									value: socialSpaceMobile,
+									label: 'socialSpaceMobile',
+								},
+							} }
+							min={ 0 }
+							max={ 50 }
+							displayUnit={ false }
+							setAttributes={ setAttributes }
+						/>
+						<UAGTabsControl
+							tabs={ [
+								{
+									name: 'normal',
+									title: __(
+										'Normal',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+								{
+									name: 'hover',
+									title: __(
+										'Hover',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+							] }
+							normal={
+								<AdvancedPopColorControl
+									label={ __(
+										'Color',
+										'ultimate-addons-for-gutenberg'
+									) }
+									colorValue={
+										socialColor ? socialColor : ''
+									}
+									data={ {
+										value: socialColor,
+										label: 'socialColor',
+									} }
+									setAttributes={ setAttributes }
+								/>
+							}
+							hover={
+								<AdvancedPopColorControl
+									label={ __(
+										'Color',
+										'ultimate-addons-for-gutenberg'
+									) }
+									colorValue={
+										socialHoverColor ? socialHoverColor : ''
+									}
+									data={ {
+										value: socialHoverColor,
+										label: 'socialHoverColor',
+									} }
+									setAttributes={ setAttributes }
+								/>
+							}
+							disableBottomSeparator={ true }
+						/>
+					</UAGAdvancedPanelBody>
+				) }
 			</>
-
-
 		);
 	};
 
@@ -1358,12 +1364,11 @@ const Settings = ( props ) => {
 
 	const getFontSettings = () => {
 		return (
-				<>
+			<>
 				{ loadTitleGoogleFonts }
 				{ loadPrefixGoogleFonts }
 				{ loadDescGoogleFonts }
-				</>
-
+			</>
 		);
 	};
 

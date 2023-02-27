@@ -8,15 +8,8 @@ import { RichText } from '@wordpress/block-editor';
 
 export default function save( props ) {
 	const { className } = props;
-	const {
-		block_id,
-		question,
-		answer,
-		icon,
-		iconActive,
-		layout,
-		headingTag,
-	} = props.attributes;
+	const { block_id, question, answer, icon, iconActive, layout, headingTag } =
+		props.attributes;
 
 	const faqRenderIcon = () => {
 		return (
@@ -41,7 +34,11 @@ export default function save( props ) {
 						className="uagb-question"
 					/>
 				</div>
-				<RichText.Content className="uagb-faq-content" tagName="p" value={ answer } />
+				<RichText.Content
+					className="uagb-faq-content"
+					tagName="p"
+					value={ answer }
+				/>
 			</>
 		);
 	};

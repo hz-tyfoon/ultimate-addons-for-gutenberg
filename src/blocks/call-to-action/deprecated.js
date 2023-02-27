@@ -388,15 +388,26 @@ const deprecated = [
 				ctaTarget,
 				ctaTitle,
 				description,
-				enabledSecondCtaButton
+				enabledSecondCtaButton,
 			} = props.attributes;
-		
+
 			const isCta = (
-				<CTANew attributes={ props.attributes } setAttributes="not_set" />
+				<CTANew
+					attributes={ props.attributes }
+					setAttributes="not_set"
+				/>
 			);
-		
-			const secondCtaButton = ( 'button' === ctaType && enabledSecondCtaButton ) ? <SecondCTAButton attributes={ props.attributes } setAttributes="not_set" /> : '';
-		
+
+			const secondCtaButton =
+				'button' === ctaType && enabledSecondCtaButton ? (
+					<SecondCTAButton
+						attributes={ props.attributes }
+						setAttributes="not_set"
+					/>
+				) : (
+					''
+				);
+
 			// Get description and seperator components.
 			const desc = (
 				<>
@@ -408,7 +419,7 @@ const deprecated = [
 					) }
 				</>
 			);
-		
+
 			// Get Title components.
 			const titleText = (
 				<>
@@ -420,48 +431,47 @@ const deprecated = [
 					) }
 				</>
 			);
-		
+
 			const output = (
 				<>
 					<div className="uagb-cta__wrap">
 						{ titleText }
 						{ desc }
 					</div>
-					<div className='uagb-cta__buttons'>
-						{isCta}
-						{secondCtaButton}
+					<div className="uagb-cta__buttons">
+						{ isCta }
+						{ secondCtaButton }
 					</div>
 				</>
 			);
-		
+
 			let target = '';
 			if ( ctaTarget ) {
 				target = '_blank';
 			}
-		
+
 			return (
 				<div
 					className={ classnames(
 						`uagb-block-${ block_id }`,
-						'button' === ctaType ? 'wp-block-button' : '',
+						'button' === ctaType ? 'wp-block-button' : ''
 					) }
 				>
 					{ ctaType === 'all' && (
 						<>
-						<a
-							href={ ctaLink }
-							className="uagb-cta__link-to-all"
-							target={ target }
-							rel="noopener noreferrer"
-						>
-						</a>
-						{ output }
+							<a
+								href={ ctaLink }
+								className="uagb-cta__link-to-all"
+								target={ target }
+								rel="noopener noreferrer"
+							></a>
+							{ output }
 						</>
 					) }
 					{ ctaType !== 'all' && output }
 				</div>
 			);
-		}
+		},
 	},
 ];
 

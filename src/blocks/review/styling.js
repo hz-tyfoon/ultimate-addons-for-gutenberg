@@ -101,28 +101,34 @@ function styling( props ) {
 			'font-size': generateCSSUnit( headFontSize, headFontSizeType ),
 			'font-weight': headFontWeight,
 			'font-family': headFontFamily,
-			'font-style' : headFontStyle,
+			'font-style': headFontStyle,
 			'text-decoration': headDecoration,
 			'text-transform': headTransform,
 			'line-height': generateCSSUnit(
 				headLineHeight,
 				headLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( headLetterSpacing, headLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				headLetterSpacing,
+				headLetterSpacingType
+			),
 			'color': titleColor,
 		},
 		' .uagb_review_entry': {
 			'font-size': generateCSSUnit( headFontSize, headFontSizeType ),
 			'font-weight': headFontWeight,
 			'font-family': headFontFamily,
-			'font-style' : headFontStyle,
+			'font-style': headFontStyle,
 			'text-decoration': headDecoration,
 			'text-transform': headTransform,
 			'line-height': generateCSSUnit(
 				headLineHeight,
 				headLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( headLetterSpacing, headLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				headLetterSpacing,
+				headLetterSpacingType
+			),
 		},
 		' .uagb-rating-desc': {
 			'font-size': generateCSSUnit(
@@ -131,14 +137,17 @@ function styling( props ) {
 			),
 			'font-weight': subHeadFontWeight,
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'line-height': generateCSSUnit(
 				subHeadLineHeight,
 				subHeadLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( subHeadLetterSpacing, subHeadLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				subHeadLetterSpacing,
+				subHeadLetterSpacingType
+			),
 			'color': descColor,
 		},
 		' .uagb-rating-author': {
@@ -148,14 +157,17 @@ function styling( props ) {
 			),
 			'font-weight': subHeadFontWeight,
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'line-height': generateCSSUnit(
 				subHeadLineHeight,
 				subHeadLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( subHeadLetterSpacing, subHeadLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				subHeadLetterSpacing,
+				subHeadLetterSpacingType
+			),
 			'color': authorColor,
 		},
 		' .uagb_review_block': {
@@ -165,23 +177,27 @@ function styling( props ) {
 			'padding-bottom': generateCSSUnit( bottomPadding, paddingUnit ),
 			'text-align': overallAlignment,
 		},
-		' .uagb_review_summary, p.rich-text.block-editor-rich-text__editable.uagb_review_summary_title': {
-			'font-size': generateCSSUnit(
-				contentFontSize,
-				contentFontSizeType
-			),
-			'font-weight': contentFontWeight,
-			'font-family': contentFontFamily,
-			'font-style' : contentFontStyle,
-			'text-decoration': contentDecoration,
-			'text-transform': contentTransform,
-			'line-height': generateCSSUnit(
-				contentLineHeight,
-				contentLineHeightType
-			),
-			'letter-spacing': generateCSSUnit( contentLetterSpacing, contentLetterSpacingType ),
-			'color': summaryColor,
-		},
+		' .uagb_review_summary, p.rich-text.block-editor-rich-text__editable.uagb_review_summary_title':
+			{
+				'font-size': generateCSSUnit(
+					contentFontSize,
+					contentFontSizeType
+				),
+				'font-weight': contentFontWeight,
+				'font-family': contentFontFamily,
+				'font-style': contentFontStyle,
+				'text-decoration': contentDecoration,
+				'text-transform': contentTransform,
+				'line-height': generateCSSUnit(
+					contentLineHeight,
+					contentLineHeightType
+				),
+				'letter-spacing': generateCSSUnit(
+					contentLetterSpacing,
+					contentLetterSpacingType
+				),
+				'color': summaryColor,
+			},
 		' .uagb_review_entry .rich-text': {
 			'color': contentColor,
 		},
@@ -204,7 +220,10 @@ function styling( props ) {
 				headLineHeightMobile,
 				headLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( headLetterSpacingMobile, headLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				headLetterSpacingMobile,
+				headLetterSpacingType
+			),
 		},
 		' .uagb-rating-desc, .uagb-rating-author': {
 			'font-size': generateCSSUnit(
@@ -215,19 +234,26 @@ function styling( props ) {
 				subHeadLineHeightMobile,
 				subHeadLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( subHeadLetterSpacingMobile, subHeadLetterSpacingType ),
-		},
-		' .uagb_review_summary, p.rich-text.block-editor-rich-text__editable.uagb_review_summary_title': {
-			'font-size': generateCSSUnit(
-				contentFontSizeMobile,
-				contentFontSizeType
+			'letter-spacing': generateCSSUnit(
+				subHeadLetterSpacingMobile,
+				subHeadLetterSpacingType
 			),
-			'line-height': generateCSSUnit(
-				contentLineHeightMobile,
-				contentLineHeightType
-			),
-			'letter-spacing': generateCSSUnit( contentLetterSpacingMobile, contentLetterSpacingType ),
 		},
+		' .uagb_review_summary, p.rich-text.block-editor-rich-text__editable.uagb_review_summary_title':
+			{
+				'font-size': generateCSSUnit(
+					contentFontSizeMobile,
+					contentFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					contentLineHeightMobile,
+					contentLineHeightType
+				),
+				'letter-spacing': generateCSSUnit(
+					contentLetterSpacingMobile,
+					contentLetterSpacingType
+				),
+			},
 		' .uagb_review_block': {
 			'padding-left': generateCSSUnit(
 				paddingLeftMobile,
@@ -258,7 +284,10 @@ function styling( props ) {
 				headLineHeightTablet,
 				headLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( headLetterSpacingTablet, headLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				headLetterSpacingTablet,
+				headLetterSpacingType
+			),
 		},
 		' .uagb-rating-desc, .uagb-rating-author': {
 			'font-size': generateCSSUnit(
@@ -269,19 +298,26 @@ function styling( props ) {
 				subHeadLineHeightTablet,
 				subHeadLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( subHeadLetterSpacingTablet, subHeadLetterSpacingType ),
-		},
-		' .uagb_review_summary, p.rich-text.block-editor-rich-text__editable.uagb_review_summary_title': {
-			'font-size': generateCSSUnit(
-				contentFontSizeTablet,
-				contentFontSizeType
+			'letter-spacing': generateCSSUnit(
+				subHeadLetterSpacingTablet,
+				subHeadLetterSpacingType
 			),
-			'line-height': generateCSSUnit(
-				contentLineHeightTablet,
-				contentLineHeightType
-			),
-			'letter-spacing': generateCSSUnit( contentLetterSpacingTablet, contentLetterSpacingType ),
 		},
+		' .uagb_review_summary, p.rich-text.block-editor-rich-text__editable.uagb_review_summary_title':
+			{
+				'font-size': generateCSSUnit(
+					contentFontSizeTablet,
+					contentFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					contentLineHeightTablet,
+					contentLineHeightType
+				),
+				'letter-spacing': generateCSSUnit(
+					contentLetterSpacingTablet,
+					contentLetterSpacingType
+				),
+			},
 		' .uagb_review_block': {
 			'padding-left': generateCSSUnit(
 				paddingLeftTablet,
@@ -302,7 +338,10 @@ function styling( props ) {
 		},
 	};
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id.substr( 0 , 8 ) }`;
+	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id.substr(
+		0,
+		8
+	) }`;
 
 	let stylingCss = generateCSS( selectors, baseSelector );
 

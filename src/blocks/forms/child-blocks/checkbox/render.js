@@ -25,8 +25,8 @@ const Render = ( props ) => {
 	const { block_id, checkboxRequired, options, checkboxName } = attributes;
 
 	const isRequired = checkboxRequired
-	? __( 'required', 'ultimate-addons-for-gutenberg' )
-	: '';
+		? __( 'required', 'ultimate-addons-for-gutenberg' )
+		: '';
 
 	const addOption = () => {
 		const newOption = {

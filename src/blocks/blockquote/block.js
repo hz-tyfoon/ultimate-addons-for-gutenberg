@@ -34,7 +34,7 @@ registerBlockType( 'uagb/blockquote', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	deprecated,
 	transforms: {
@@ -48,7 +48,9 @@ registerBlockType( 'uagb/blockquote', {
 						author: attribute.citation,
 						align: attribute.align,
 						descColor: colourNameToHex( attribute.textColor ),
-						authorColor: colourNameToHex( attribute.backgroundColor )
+						authorColor: colourNameToHex(
+							attribute.backgroundColor
+						),
 					} );
 				},
 			},
@@ -60,7 +62,9 @@ registerBlockType( 'uagb/blockquote', {
 						descriptionText: attribute.content,
 						align: attribute.textAlign,
 						descColor: colourNameToHex( attribute.textColor ),
-						authorColor: colourNameToHex( attribute.backgroundColor )
+						authorColor: colourNameToHex(
+							attribute.backgroundColor
+						),
 					} );
 				},
 			},
@@ -71,7 +75,9 @@ registerBlockType( 'uagb/blockquote', {
 					return createBlock( 'uagb/blockquote', {
 						descriptionText: attribute.content,
 						descColor: colourNameToHex( attribute.textColor ),
-						authorColor: colourNameToHex( attribute.backgroundColor )
+						authorColor: colourNameToHex(
+							attribute.backgroundColor
+						),
 					} );
 				},
 			},
@@ -82,15 +88,17 @@ registerBlockType( 'uagb/blockquote', {
 					const newitems = [];
 					childBlocks.forEach( ( item, i ) => {
 						newitems.push( {
-							text: childBlocks[i].attributes.content
-						} )
+							text: childBlocks[ i ].attributes.content,
+						} );
 					} );
 
 					return newitems.map( ( text ) =>
 						createBlock( 'uagb/blockquote', {
 							descriptionText: text.text,
 							descColor: colourNameToHex( _attributes.textColor ),
-							authorColor: colourNameToHex( _attributes.backgroundColor )
+							authorColor: colourNameToHex(
+								_attributes.backgroundColor
+							),
 						} )
 					);
 				},

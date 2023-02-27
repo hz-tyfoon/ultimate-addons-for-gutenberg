@@ -20,8 +20,6 @@ import {
 } from '@wordpress/block-editor';
 import { ToggleControl, Icon } from '@wordpress/components';
 
-
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
@@ -124,74 +122,79 @@ const Settings = ( props ) => {
 				/>
 				{ 'boxed' === contentWidth && (
 					<>
-					<MultiButtonsControl
-						setAttributes={ setAttributes }
-						label={ __(
-							'Alignment',
-							'ultimate-addons-for-gutenberg'
-						) }
-						data={ {
-							value: align,
-							label: 'align',
-						} }
-						className="uagb-multi-button-alignment-control"
-						options={ [
-							{
-								value: 'left',
-								icon: (
-									<Icon
-										icon={ renderSVG( 'fa fa-align-left' ) }
-									/>
-								),
-								tooltip: __(
-									'Left',
-									'ultimate-addons-for-gutenberg'
-								),
-							},
-							{
-								value: 'center',
-								icon: (
-									<Icon
-										icon={ renderSVG(
-											'fa fa-align-center'
-										) }
-									/>
-								),
-								tooltip: __(
-									'Center',
-									'ultimate-addons-for-gutenberg'
-								),
-							},
-							{
-								value: 'right',
-								icon: (
-									<Icon
-										icon={ renderSVG(
-											'fa fa-align-right'
-										) }
-									/>
-								),
-								tooltip: __(
-									'Right',
-									'ultimate-addons-for-gutenberg'
-								),
-							},
-						] }
-						showIcons={ true }
-					/>
-					<Range
-						label={ __( 'Width', 'ultimate-addons-for-gutenberg' ) }
-						setAttributes={ setAttributes }
-						value={ width }
-						data={ {
-							value: width,
-							label: 'width',
-						} }
-						min={ 0 }
-						max={ 2000 }
-						displayUnit={ false }
-					/>
-				</>
+						<MultiButtonsControl
+							setAttributes={ setAttributes }
+							label={ __(
+								'Alignment',
+								'ultimate-addons-for-gutenberg'
+							) }
+							data={ {
+								value: align,
+								label: 'align',
+							} }
+							className="uagb-multi-button-alignment-control"
+							options={ [
+								{
+									value: 'left',
+									icon: (
+										<Icon
+											icon={ renderSVG(
+												'fa fa-align-left'
+											) }
+										/>
+									),
+									tooltip: __(
+										'Left',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+								{
+									value: 'center',
+									icon: (
+										<Icon
+											icon={ renderSVG(
+												'fa fa-align-center'
+											) }
+										/>
+									),
+									tooltip: __(
+										'Center',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+								{
+									value: 'right',
+									icon: (
+										<Icon
+											icon={ renderSVG(
+												'fa fa-align-right'
+											) }
+										/>
+									),
+									tooltip: __(
+										'Right',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+							] }
+							showIcons={ true }
+						/>
+						<Range
+							label={ __(
+								'Width',
+								'ultimate-addons-for-gutenberg'
+							) }
+							setAttributes={ setAttributes }
+							value={ width }
+							data={ {
+								value: width,
+								label: 'width',
+							} }
+							min={ 0 }
+							max={ 2000 }
+							displayUnit={ false }
+						/>
+					</>
 				) }
 				{ contentWidth !== 'boxed' && (
 					<ToggleControl
@@ -249,10 +252,7 @@ const Settings = ( props ) => {
 					/>
 				) }
 				<UAGSelectControl
-					label={ __(
-						'HTML Tag',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'HTML Tag', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: tag,
 						label: 'tag',
@@ -484,9 +484,9 @@ const Settings = ( props ) => {
 						value: overlayType,
 						label: 'overlayType',
 					} }
-					gradientOverlay={{
+					gradientOverlay={ {
 						value: true,
-					}}
+					} }
 					backgroundSize={ {
 						value: backgroundSize,
 						label: 'backgroundSize',
@@ -530,7 +530,9 @@ const Settings = ( props ) => {
 						value: backgroundVideoOpacity,
 						label: 'backgroundVideoOpacity',
 					} }
-					onOpacityChange = { ( opacity ) => setAttributes( { backgroundVideoOpacity: opacity } ) }
+					onOpacityChange={ ( opacity ) =>
+						setAttributes( { backgroundVideoOpacity: opacity } )
+					}
 					{ ...props }
 				/>
 			</UAGAdvancedPanelBody>
@@ -546,11 +548,11 @@ const Settings = ( props ) => {
 				>
 					<ResponsiveBorder
 						setAttributes={ setAttributes }
-						prefix={'overall'}
+						prefix={ 'overall' }
 						attributes={ attributes }
-						deviceType={ deviceType}
+						deviceType={ deviceType }
 						disableBottomSeparator={ true }
-						disabledBorderTitle= { true }
+						disabledBorderTitle={ true }
 					/>
 				</UAGAdvancedPanelBody>
 				<UAGAdvancedPanelBody title="Box Shadow" initialOpen={ false }>
@@ -634,7 +636,7 @@ const Settings = ( props ) => {
 		);
 	};
 	return (
-			<>
+		<>
 			<BlockControls>
 				<AlignmentToolbar
 					value={ align }
@@ -645,8 +647,7 @@ const Settings = ( props ) => {
 				/>
 			</BlockControls>
 			<InspectorControls>{ generalSetting() }</InspectorControls>
-			</>
-
+		</>
 	);
 };
 

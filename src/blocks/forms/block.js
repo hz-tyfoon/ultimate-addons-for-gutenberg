@@ -15,7 +15,10 @@ import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType( 'uagb/forms', {
 	title: __( 'Form', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add easily customizable forms to gather information.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add easily customizable forms to gather information.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.forms,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -25,7 +28,7 @@ registerBlockType( 'uagb/forms', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	attributes,
 	variations,

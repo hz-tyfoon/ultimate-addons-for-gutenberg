@@ -2,7 +2,7 @@
 	overflow-y: scroll;
 }
 
-#wpbody-content > .notice:not(.uag-notice),
+#wpbody-content > .notice:not( .uag-notice ),
 #wpbody-content > .error {
 	display: none !important;
 }
@@ -24,13 +24,11 @@
 }
 // This Class Can Be Cleared Before Final Push.
 #uag-menu-page .uag-accordion {
-
 	svg {
 		fill: $slate-200;
 	}
 
 	&:hover {
-
 		svg {
 			fill: $slate-600;
 		}
@@ -42,7 +40,6 @@
 	}
 
 	&:focus-visible {
-
 		svg {
 			fill: $slate-600;
 		}
@@ -54,21 +51,20 @@
 }
 
 .uag-menu-page-wrapper .uag-settings-app {
-	font-family: var(--heading-font-family);
+	font-family: var( --heading-font-family );
 	left: -20px;
 	position: relative;
-	width: calc(100% + 20px);
+	width: calc( 100% + 20px );
 	// Button CSS.
 	.uag-normal-button-control {
-
 		.uag-button {
 			display: inline-block;
 			text-decoration: none;
 			font-size: 14px;
 			margin: 0;
-			font-weight: var(--heading-weight-400);
-			font-family: var(--heading-font-family);
-			font-style: var(--heading-font-style);
+			font-weight: var( --heading-weight-400 );
+			font-family: var( --heading-font-family );
+			font-style: var( --heading-font-style );
 			padding: 10px 16px;
 			cursor: pointer;
 			-webkit-appearance: none;
@@ -77,28 +73,26 @@
 			box-sizing: border-box;
 			text-transform: capitalize;
 		}
-
 	}
 
 	h2 {
-		font-family: var(--heading-font-family);
-		font-weight: var(--heading-weight-500);
+		font-family: var( --heading-font-family );
+		font-weight: var( --heading-weight-500 );
 		font-size: 24px;
 		margin-bottom: 20px;
 		margin-top: 0;
-		color: var(--content-color);
+		color: var( --content-color );
 		line-height: 32px;
-
 	}
 
 	h3 {
 		margin: 0;
 		margin-bottom: 10px;
-		color: var(--content-color);
-		font-family: var(--heading-font-family);
-		font-weight: var(--heading-weight-500);
+		color: var( --content-color );
+		font-family: var( --heading-font-family );
+		font-weight: var( --heading-weight-500 );
 		font-size: 18px;
-		font-style: var(--heading-font-style);
+		font-style: var( --heading-font-style );
 		line-height: 1.3em;
 	}
 
@@ -107,9 +101,9 @@
 	}
 	// Paragraph CSS.
 	p {
-		color: var(--content-color);
-		font-family: var(--heading-font-family);
-		font-weight: var(--heading-weight-400);
+		color: var( --content-color );
+		font-family: var( --heading-font-family );
+		font-weight: var( --heading-weight-400 );
 		font-size: 14px;
 		margin-top: 0;
 		margin-bottom: 20px;
@@ -123,11 +117,11 @@
 }
 
 .spectra-recaptcha__heading {
-	color: var(--content-color);
+	color: var( --content-color );
 }
 
 .uag-user-info {
-	background: var(--background-light-color);
+	background: var( --background-light-color );
 	padding: 35px 0;
 	box-sizing: border-box;
 	width: 1200px;
@@ -142,20 +136,20 @@
 .uag-button--primary:hover,
 .uag-button--primary:focus,
 .uag-button--primary:active {
-	background: var(--accent-hv-color);
-	color: var(--metabox-background-color);
+	background: var( --accent-hv-color );
+	color: var( --metabox-background-color );
 }
 
 .uag-button--primary {
 	border-width: 0;
-	border: 1px solid var(--accent-color);
-	background: var(--accent-color);
-	color: var(--background-light-color);
+	border: 1px solid var( --accent-color );
+	background: var( --accent-color );
+	color: var( --background-light-color );
 }
 
 .uag-button--secondary {
-	color: var(--accent-color);
-	border: 1px solid var(--accent-color);
+	color: var( --accent-color );
+	border: 1px solid var( --accent-color );
 	background: #fff;
 	vertical-align: top;
 }
@@ -164,8 +158,8 @@
 .uag-button--secondary:focus,
 .uag-button--secondary:active {
 	background: #f0f0f1;
-	border-color: var(--accent-hv-color);
-	color: var(--accent-hv-color);
+	border-color: var( --accent-hv-color );
+	color: var( --accent-hv-color );
 }
 
 .uag-control__status-yes,
@@ -173,9 +167,9 @@
 	display: inline-flex;
 	color: #639102;
 	align-items: center;
-	font-weight: var(--heading-weight-400);
-	font-family: var(--heading-font-family);
-	font-style: var(--heading-font-style);
+	font-weight: var( --heading-weight-400 );
+	font-family: var( --heading-font-family );
+	font-style: var( --heading-font-style );
 
 	img {
 		margin-left: 5px;
@@ -186,9 +180,9 @@
 .uag-control__status-no,
 .uag-control__status-disabled {
 	color: #f00;
-	font-weight: var(--heading-weight-400);
-	font-family: var(--heading-font-family);
-	font-style: var(--heading-font-style);
+	font-weight: var( --heading-weight-400 );
+	font-family: var( --heading-font-family );
+	font-style: var( --heading-font-style );
 	display: inline-flex;
 	align-items: center;
 
@@ -201,7 +195,6 @@
 	background-color: $slate-50;
 
 	.spectra-admin {
-
 		&__input-field {
 			color: $slate-500;
 			background-color: #fff;
@@ -248,7 +241,6 @@
 
 	// This is required since Tailwind CSS is overridden by load-styles
 	.spectra-content-width-input-wrap {
-
 		> input {
 			padding: 0.5rem 0 0.5rem 0.75rem;
 			border-radius: 0.25rem 0 0 0.25rem;
@@ -307,19 +299,17 @@
 
 // The Block SVGs when Disabled
 .spectra-icon-transition {
-
 	svg,
 	path,
 	rect,
 	circle {
 		transition-property: stroke;
-		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-timing-function: cubic-bezier( 0.4, 0, 0.2, 1 );
 		transition-duration: 150ms;
 	}
 }
 
 .spectra-disabled-icon {
-
 	svg,
 	path,
 	rect,
@@ -330,7 +320,6 @@
 
 // Changelog Styling.
 .spectra-changelog-description {
-
 	strong {
 		font-weight: 500;
 		font-size: 0.875rem;
@@ -411,9 +400,7 @@
 }
 
 .spectra {
-
 	&__settings {
-
 		& > section:last-child {
 			border-bottom: none;
 		}
@@ -426,7 +413,6 @@
 }
 
 .uag-dashboard-app {
-
 	.uag-radio-input {
 		width: 20px !important;
 		height: 20px !important;
@@ -460,5 +446,5 @@
 }
 
 [dir="rtl"] .uag-dashboard-app button.bg-spectra[aria-checked="true"] span {
-	transform: translateX(20px);
+	transform: translateX( 20px );
 }

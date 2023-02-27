@@ -17,10 +17,7 @@ import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 
-import {
-	ToggleControl,
-	Icon,
-} from '@wordpress/components';
+import { ToggleControl, Icon } from '@wordpress/components';
 
 import presets from './presets';
 import UAGPresets from '@Components/presets';
@@ -28,7 +25,7 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
-	const { attributes, setAttributes , deviceType} = props;
+	const { attributes, setAttributes, deviceType } = props;
 
 	const {
 		tabsStyleD,
@@ -136,13 +133,13 @@ const Settings = ( props ) => {
 		iconSizeTablet,
 		iconSizeMobile,
 		activeiconColor,
-		titleFontStyle
+		titleFontStyle,
 	} = attributes;
 
 	const onInitialTabChange = ( value ) => {
 		setAttributes( {
 			tabActiveFrontend: parseInt( value ),
-		} )
+		} );
 	};
 
 	const tabStyleSettings = () => {
@@ -545,11 +542,11 @@ const Settings = ( props ) => {
 			>
 				<ResponsiveBorder
 					setAttributes={ setAttributes }
-					prefix={'tab'}
+					prefix={ 'tab' }
 					attributes={ attributes }
-					deviceType={deviceType}
+					deviceType={ deviceType }
 					disableBottomSeparator={ true }
-					disabledBorderTitle= {true}
+					disabledBorderTitle={ true }
 				/>
 			</UAGAdvancedPanelBody>
 		);
@@ -572,7 +569,7 @@ const Settings = ( props ) => {
 					} }
 					setAttributes={ setAttributes }
 				/>
-					<AdvancedPopColorControl
+				<AdvancedPopColorControl
 					label={ __(
 						'Background Color',
 						'ultimate-addons-for-gutenberg'
@@ -728,16 +725,18 @@ const Settings = ( props ) => {
 		);
 	};
 	const presetSettings = () => {
-		return <UAGAdvancedPanelBody
-					title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ true }
-				>
-					<UAGPresets
-						setAttributes = { setAttributes }
-						presets = { presets }
-						presetInputType = 'radioImage'
-					/>
-				</UAGAdvancedPanelBody>
+		return (
+			<UAGAdvancedPanelBody
+				title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ true }
+			>
+				<UAGPresets
+					setAttributes={ setAttributes }
+					presets={ presets }
+					presetInputType="radioImage"
+				/>
+			</UAGAdvancedPanelBody>
+		);
 	};
 	const tabTitleStyle = () => {
 		const tabOutputNormal = (
@@ -1077,10 +1076,7 @@ const Settings = ( props ) => {
 				initialOpen={ false }
 			>
 				<ResponsiveSlider
-					label={ __(
-						'Size',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Size', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
 							value: iconSize,
@@ -1121,10 +1117,7 @@ const Settings = ( props ) => {
 					active={ tabOutputActive }
 				/>
 				<ResponsiveSlider
-					label={ __(
-						'Spacing',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
 							value: iconSpacing,

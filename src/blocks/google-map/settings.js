@@ -17,7 +17,7 @@ const Settings = ( props ) => {
 
 	const {
 		setAttributes,
-		attributes: { 
+		attributes: {
 			height,
 			heightTablet,
 			heightMobile,
@@ -40,12 +40,15 @@ const Settings = ( props ) => {
 						</p>
 
 						<UAGTextControl
-							label={ __( 'Address', 'ultimate-addons-for-gutenberg' ) }
+							label={ __(
+								'Address',
+								'ultimate-addons-for-gutenberg'
+							) }
 							value={ address }
-							data={{
+							data={ {
 								value: address,
 								label: 'address',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( {

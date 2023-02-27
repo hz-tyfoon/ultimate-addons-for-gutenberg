@@ -17,7 +17,10 @@ import { registerBlockType } from '@wordpress/blocks';
 // Register the block
 registerBlockType( 'uagb/post-grid', {
 	title: __( 'Post Grid', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Display your posts in a grid layout.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Display your posts in a grid layout.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.post_grid,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -29,7 +32,7 @@ registerBlockType( 'uagb/post-grid', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	// Render via PHP
 	save() {

@@ -2,7 +2,7 @@
  * BLOCK: Content Timeline child.
  */
 
-import React, { useEffect,    } from 'react';
+import React, { useEffect } from 'react';
 
 import { useDeviceType } from '@Controls/getPreviewType';
 
@@ -19,21 +19,25 @@ const ContentTimelineChildComponent = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		const loadContentTimelineEditor = new CustomEvent( 'UAGTimelineEditor', { // eslint-disable-line no-undef
-			detail: {},
-		} );
+		const loadContentTimelineEditor = new CustomEvent(
+			'UAGTimelineEditor',
+			{
+				// eslint-disable-line no-undef
+				detail: {},
+			}
+		);
 		document.dispatchEvent( loadContentTimelineEditor );
 	}, [ props, deviceType ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/children/content-timeline-child.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

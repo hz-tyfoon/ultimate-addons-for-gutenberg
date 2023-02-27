@@ -22,14 +22,14 @@ const AuthorImage = ( { attributes } ) => {
 				: urlChk;
 
 		return (
-				<img
-					className=""
-					src={ url }
-					alt={ attributes.authorImage.alt }
-					width={authorImageWidth}
-					height={authorImageWidth}
-					loading="lazy"
-				/>
+			<img
+				className=""
+				src={ url }
+				alt={ attributes.authorImage.alt }
+				width={ authorImageWidth }
+				height={ authorImageWidth }
+				loading="lazy"
+			/>
 		);
 	}
 

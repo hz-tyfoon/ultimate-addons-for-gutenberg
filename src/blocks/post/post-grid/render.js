@@ -1,8 +1,7 @@
 /**
  * BLOCK: Post Grid - Editor Render.
  */
-import React, {    useLayoutEffect } from 'react';
-
+import React, { useLayoutEffect } from 'react';
 
 import Blog from './blog';
 
@@ -33,12 +32,7 @@ const Render = ( props ) => {
 	const { isEditing } = props.state;
 
 	// Caching all Props.
-	const {
-		attributes,
-		deviceType,
-		name,
-		setAttributes
-	} = props.parentProps;
+	const { attributes, deviceType, name, setAttributes } = props.parentProps;
 
 	const renderEditMode = () => {
 		const onDone = () => {
@@ -57,7 +51,8 @@ const Render = ( props ) => {
 
 		const onReset = () => {
 			const newBlocks = [];
-			DEFAULT_POST_LIST_LAYOUT.map( ( [ name, attribute ] ) => { // eslint-disable-line no-shadow
+			DEFAULT_POST_LIST_LAYOUT.map( ( [ name, attribute ] ) => {
+				// eslint-disable-line no-shadow
 				newBlocks.push( createBlock( name, attribute ) );
 				return true;
 			} );
@@ -125,17 +120,17 @@ const Render = ( props ) => {
 
 	const renderViewMode = () => {
 		return (
-				<Blog
-					attributes={ attributes }
-					className={ props.parentProps.className }
-					latestPosts={ latestPosts }
-					block_id={ props.parentProps.clientId.substr( 0, 8 ) }
-					categoriesList={ categoriesList }
-					deviceType={ deviceType }
-					name={ name }
-					setAttributes = { setAttributes }
-				/>
-			);
+			<Blog
+				attributes={ attributes }
+				className={ props.parentProps.className }
+				latestPosts={ latestPosts }
+				block_id={ props.parentProps.clientId.substr( 0, 8 ) }
+				categoriesList={ categoriesList }
+				deviceType={ deviceType }
+				name={ name }
+				setAttributes={ setAttributes }
+			/>
+		);
 	};
 
 	return <>{ renderViewMode() }</>;

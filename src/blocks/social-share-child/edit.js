@@ -6,7 +6,7 @@
 
 import styling from './styling';
 
-import React, { useEffect,    } from 'react';
+import React, { useEffect } from 'react';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
@@ -28,34 +28,39 @@ const SocialShareChildComponent = ( props ) => {
 				current_url: select( 'core/editor' ).getPermalink(),
 			} );
 		}
-
 	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-style-social-share-child-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-social-share-child-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
+		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-style-social-share-child-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-social-share-child-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/children/social-share-child.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

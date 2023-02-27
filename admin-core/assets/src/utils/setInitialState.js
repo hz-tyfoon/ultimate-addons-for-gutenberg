@@ -1,29 +1,29 @@
 import apiFetch from '@wordpress/api-fetch';
 
 const setInitialState = ( store ) => {
-    apiFetch( {
-        path: '/uag/v1/admin/commonsettings/',
-    } ).then( ( data ) => {
-        const initialState = {
-            initialStateSetFlag : true,
-            activeBlocksFilterTab : 'all',
-            activeSettingsNavigationTab : 'global-settings',
+	apiFetch( {
+		path: '/uag/v1/admin/commonsettings/',
+	} ).then( ( data ) => {
+		const initialState = {
+			initialStateSetFlag: true,
+			activeBlocksFilterTab: 'all',
+			activeSettingsNavigationTab: 'global-settings',
 			settingsSavedNotification: '',
-            blocksStatuses : data.blocks_activation_and_deactivation,
-            enableFileGeneration : data.enable_file_generation,
-            enableTemplates : data.enable_templates_button,
-			enableOnPageCSS : data.enable_on_page_css_button,
-            enableBeta : data.enable_beta_updates,
-            enableSelectedFontFamilies : data.load_select_font_globally,
-            selectedFontFamilies :  data.select_font_globally,
-            enableLoadFontsLocally : data.load_gfonts_locally,
-            enablePreloadLocalFonts : data.preload_local_fonts,
-            enableCollapsePanels : data.collapse_panels,
-            enableCopyPasteStyles : data.copy_paste,
-            enableDisplayConditions: data.enable_block_condition,
-            enableMasonryExtension: data.enable_masonry_gallery,
-            enableDynamicContentExtension: data.enable_dynamic_content,
-            dynamicContentMode: data.dynamic_content_mode,
+			blocksStatuses: data.blocks_activation_and_deactivation,
+			enableFileGeneration: data.enable_file_generation,
+			enableTemplates: data.enable_templates_button,
+			enableOnPageCSS: data.enable_on_page_css_button,
+			enableBeta: data.enable_beta_updates,
+			enableSelectedFontFamilies: data.load_select_font_globally,
+			selectedFontFamilies: data.select_font_globally,
+			enableLoadFontsLocally: data.load_gfonts_locally,
+			enablePreloadLocalFonts: data.preload_local_fonts,
+			enableCollapsePanels: data.collapse_panels,
+			enableCopyPasteStyles: data.copy_paste,
+			enableDisplayConditions: data.enable_block_condition,
+			enableMasonryExtension: data.enable_masonry_gallery,
+			enableDynamicContentExtension: data.enable_dynamic_content,
+			dynamicContentMode: data.dynamic_content_mode,
 			enableResponsiveConditions: data.enable_block_responsive,
 			contentWidth: data.uag_content_width,
 			siteKeyV2: data.recaptcha_site_key_v2,
@@ -39,12 +39,14 @@ const setInitialState = ( store ) => {
 			enableAutoBlockRecovery: data.uag_auto_block_recovery,
 			enableLegacyBlocks: data.uag_enable_legacy_blocks,
 			social: data.social,
-            coreBlocks: data.spectra_core_blocks,
-        };
+			coreBlocks: data.spectra_core_blocks,
+		};
 
-        store.dispatch( {type: 'UPDATE_INITIAL_STATE', payload: initialState} );
-
-    } );
+		store.dispatch( {
+			type: 'UPDATE_INITIAL_STATE',
+			payload: initialState,
+		} );
+	} );
 };
 
 export default setInitialState;

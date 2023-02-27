@@ -22,11 +22,7 @@ const DeprecatedAuthorImageV2_0_14 = ( { attributes } ) => {
 				: urlChk;
 
 		return (
-				<img
-					className=""
-					src={ url }
-					alt={ attributes.authorImage.alt }
-				/>
+			<img className="" src={ url } alt={ attributes.authorImage.alt } />
 		);
 	}
 

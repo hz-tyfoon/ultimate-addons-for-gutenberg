@@ -40,6 +40,6 @@ registerBlockType( 'uagb/image-gallery', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

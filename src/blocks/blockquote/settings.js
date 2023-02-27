@@ -1,4 +1,3 @@
-
 import React from 'react';
 import WebfontLoader from '@Components/typography/fontloader';
 import TypographyControl from '@Components/typography';
@@ -16,14 +15,8 @@ import UAGMediaPicker from '@Components/image';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import renderSVG from '@Controls/renderIcon';
 import UAGSelectControl from '@Components/select-control';
-import {
-	ToggleControl,
-	Icon,
-} from '@wordpress/components';
-import {
-	BlockControls,
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { ToggleControl, Icon } from '@wordpress/components';
+import { BlockControls, InspectorControls } from '@wordpress/block-editor';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
 
@@ -319,7 +312,7 @@ const Settings = ( props ) => {
 							showIcons={ false }
 						/>
 					</>
-			) }
+				) }
 		</>
 	);
 
@@ -420,7 +413,9 @@ const Settings = ( props ) => {
 	);
 
 	const skinSettings = (
-		<UAGAdvancedPanelBody title={ __( 'Layout', 'ultimate-addons-for-gutenberg' ) }>
+		<UAGAdvancedPanelBody
+			title={ __( 'Layout', 'ultimate-addons-for-gutenberg' ) }
+		>
 			<MultiButtonsControl
 				setAttributes={ setAttributes }
 				label={ __( 'Type', 'ultimate-addons-for-gutenberg' ) }
@@ -444,81 +439,94 @@ const Settings = ( props ) => {
 				] }
 				showIcons={ false }
 			/>
-			{ 'quotation' === skinStyle &&
-			<>
-				<MultiButtonsControl
-					setAttributes={ setAttributes }
-					label={ __( 'Quotation Type', 'ultimate-addons-for-gutenberg' ) }
-					data={ {
-						value: quoteStyle,
-						label: 'quoteStyle',
-					} }
-					className="uagb-multi-button-alignment-control"
-					options={ [
-						{
-							value: 'style_1',
-							label: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
-						},
-						{
-							value: 'style_2',
-							label: __(
-								'Inline',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-					] }
-					showIcons={ false }
-				/>
-				<MultiButtonsControl
-					setAttributes={ setAttributes }
-					label={ __( 'Text Alignment', 'ultimate-addons-for-gutenberg' ) }
-					data={ {
-						value: align,
-						label: 'align',
-					} }
-					className="uagb-multi-button-alignment-control"
-					options={ [
-						{
-							value: 'left',
-							icon: (
-								<Icon
-									icon={ renderSVG( 'fa fa-align-left' ) }
-								/>
-							),
-							tooltip: __(
-								'Left',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-						{
-							value: 'center',
-							icon: (
-								<Icon
-									icon={ renderSVG( 'fa fa-align-center' ) }
-								/>
-							),
-							tooltip: __(
-								'Center',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-						{
-							value: 'right',
-							icon: (
-								<Icon
-									icon={ renderSVG( 'fa fa-align-right' ) }
-								/>
-							),
-							tooltip: __(
-								'Right',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-					] }
-					showIcons={ true }
-				/>
-			</>
-			}
+			{ 'quotation' === skinStyle && (
+				<>
+					<MultiButtonsControl
+						setAttributes={ setAttributes }
+						label={ __(
+							'Quotation Type',
+							'ultimate-addons-for-gutenberg'
+						) }
+						data={ {
+							value: quoteStyle,
+							label: 'quoteStyle',
+						} }
+						className="uagb-multi-button-alignment-control"
+						options={ [
+							{
+								value: 'style_1',
+								label: __(
+									'Normal',
+									'ultimate-addons-for-gutenberg'
+								),
+							},
+							{
+								value: 'style_2',
+								label: __(
+									'Inline',
+									'ultimate-addons-for-gutenberg'
+								),
+							},
+						] }
+						showIcons={ false }
+					/>
+					<MultiButtonsControl
+						setAttributes={ setAttributes }
+						label={ __(
+							'Text Alignment',
+							'ultimate-addons-for-gutenberg'
+						) }
+						data={ {
+							value: align,
+							label: 'align',
+						} }
+						className="uagb-multi-button-alignment-control"
+						options={ [
+							{
+								value: 'left',
+								icon: (
+									<Icon
+										icon={ renderSVG( 'fa fa-align-left' ) }
+									/>
+								),
+								tooltip: __(
+									'Left',
+									'ultimate-addons-for-gutenberg'
+								),
+							},
+							{
+								value: 'center',
+								icon: (
+									<Icon
+										icon={ renderSVG(
+											'fa fa-align-center'
+										) }
+									/>
+								),
+								tooltip: __(
+									'Center',
+									'ultimate-addons-for-gutenberg'
+								),
+							},
+							{
+								value: 'right',
+								icon: (
+									<Icon
+										icon={ renderSVG(
+											'fa fa-align-right'
+										) }
+									/>
+								),
+								tooltip: __(
+									'Right',
+									'ultimate-addons-for-gutenberg'
+								),
+							},
+						] }
+						showIcons={ true }
+					/>
+				</>
+			) }
 			{ imageControls }
 		</UAGAdvancedPanelBody>
 	);
@@ -705,7 +713,10 @@ const Settings = ( props ) => {
 						} }
 					/>
 					<AdvancedPopColorControl
-						label={ __( 'Author Color', 'ultimate-addons-for-gutenberg' ) }
+						label={ __(
+							'Author Color',
+							'ultimate-addons-for-gutenberg'
+						) }
 						colorValue={ authorColor ? authorColor : '' }
 						data={ {
 							value: authorColor,
@@ -714,7 +725,7 @@ const Settings = ( props ) => {
 						setAttributes={ setAttributes }
 					/>
 				</>
-			)}
+			) }
 			{ authorImage &&
 				authorImage.url !== 'null' &&
 				authorImage.url !== '' && (
@@ -802,7 +813,7 @@ const Settings = ( props ) => {
 							setAttributes={ setAttributes }
 						/>
 					</>
-			) }
+				) }
 		</UAGAdvancedPanelBody>
 	);
 
@@ -825,10 +836,10 @@ const Settings = ( props ) => {
 							'Twitter Username',
 							'ultimate-addons-for-gutenberg'
 						) }
-						data={{
+						data={ {
 							value: iconShareVia,
 							label: 'iconShareVia',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						value={ iconShareVia }
 						onChange={ ( value ) =>
@@ -945,10 +956,10 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							value={ customUrl }
-							data={{
+							data={ {
 								value: customUrl,
 								label: 'customUrl',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( { customUrl: value } )
@@ -962,10 +973,10 @@ const Settings = ( props ) => {
 					<UAGTextControl
 						label={ __( 'Label', 'ultimate-addons-for-gutenberg' ) }
 						value={ iconLabel }
-						data={{
+						data={ {
 							value: iconLabel,
 							label: 'iconLabel',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { iconLabel: value } )
@@ -981,7 +992,7 @@ const Settings = ( props ) => {
 			title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) }
 			initialOpen={ false }
 		>
-			{ ( authorImage && authorImage.url ) && (
+			{ authorImage && authorImage.url && (
 				<ResponsiveSlider
 					label={ __(
 						'Author - Image Gap',
@@ -1775,8 +1786,7 @@ const Settings = ( props ) => {
 	};
 	return (
 		<>
-			<BlockControls key="controls">
-			</BlockControls>
+			<BlockControls key="controls"></BlockControls>
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
@@ -1793,8 +1803,7 @@ const Settings = ( props ) => {
 					<InspectorTab
 						{ ...UAGTabs.advance }
 						parentProps={ props }
-					>
-					</InspectorTab>
+					></InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 			{ loadDescGoogleFonts }

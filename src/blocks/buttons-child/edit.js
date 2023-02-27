@@ -5,7 +5,7 @@
 // Import classes
 import styling from './styling';
 
-import React, { useEffect, useState,    } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
@@ -28,62 +28,84 @@ const ButtonsChildComponent = ( props ) => {
 		// Assigning block_id in the attribute.
 		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 
-		const { borderStyle, borderWidth, borderRadius, borderColor, borderHColor } = props.attributes
+		const {
+			borderStyle,
+			borderWidth,
+			borderRadius,
+			borderColor,
+			borderHColor,
+		} = props.attributes;
 		// border migration
-		if( borderWidth || borderRadius || borderColor || borderHColor || borderStyle ){
-			migrateBorderAttributes( 'btn', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHColor',
-				value: borderHColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'btn',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHColor',
+					value: borderHColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				props.setAttributes,
+				props.attributes
 			);
-
 		}
 	}, [] );
 
 	useEffect( () => {
-
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-button-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-button-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-button-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-button-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/children/buttons-child.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings
-					parentProps={ props }
-					state={ state }
-					setStateValue={ setStateValue }
-					deviceType = { deviceType }
-				/>
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings
+				parentProps={ props }
+				state={ state }
+				setStateValue={ setStateValue }
+				deviceType={ deviceType }
+			/>
+			<Render parentProps={ props } />
+		</>
 	);
 };
 export default ButtonsChildComponent;

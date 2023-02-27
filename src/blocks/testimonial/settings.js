@@ -17,9 +17,7 @@ import UAGSelectControl from '@Components/select-control';
 import InspectorTab, {
 	UAGTabs,
 } from '@Components/inspector-tabs/InspectorTab.js';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import { ToggleControl, Icon } from '@wordpress/components';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
@@ -183,7 +181,11 @@ const Settings = ( props ) => {
 		companyLetterSpacingType,
 	} = attributes;
 
-	const testItemCountFallback = getFallbackNumber( test_item_count, 'test_item_count', blockName );
+	const testItemCountFallback = getFallbackNumber(
+		test_item_count,
+		'test_item_count',
+		blockName
+	);
 
 	let loadNameGoogleFonts;
 	let loadCompanyGoogleFonts;
@@ -451,8 +453,7 @@ const Settings = ( props ) => {
 							max={ 50 }
 							unit={ {
 								value: arrowBorderSizeUnit,
-								label:
-									'arrowBorderSizeUnit',
+								label: 'arrowBorderSizeUnit',
 							} }
 							units={ [
 								{
@@ -479,8 +480,7 @@ const Settings = ( props ) => {
 							max={ 50 }
 							unit={ {
 								value: arrowBorderRadiusUnit,
-								label:
-									'arrowBorderRadiusUnit',
+								label: 'arrowBorderRadiusUnit',
 							} }
 							units={ [
 								{
@@ -541,10 +541,22 @@ const Settings = ( props ) => {
 			>
 				<ResponsiveBorder
 					setAttributes={ setAttributes }
-					borderStyleLabel={ __( 'Style', 'ultimate-addons-for-gutenberg' ) }
-					borderWidthLabel={ __( 'Width', 'ultimate-addons-for-gutenberg' ) }
-					borderRadiusLabel={ __( 'Radius', 'ultimate-addons-for-gutenberg' ) }
-					borderColorLabel={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
+					borderStyleLabel={ __(
+						'Style',
+						'ultimate-addons-for-gutenberg'
+					) }
+					borderWidthLabel={ __(
+						'Width',
+						'ultimate-addons-for-gutenberg'
+					) }
+					borderRadiusLabel={ __(
+						'Radius',
+						'ultimate-addons-for-gutenberg'
+					) }
+					borderColorLabel={ __(
+						'Color',
+						'ultimate-addons-for-gutenberg'
+					) }
 					borderHoverColorLabel={ __(
 						'Hover Color',
 						'ultimate-addons-for-gutenberg'
@@ -553,7 +565,7 @@ const Settings = ( props ) => {
 					attributes={ attributes }
 					deviceType={ deviceType }
 					disableBottomSeparator={ true }
-					disabledBorderTitle= { true }
+					disabledBorderTitle={ true }
 				/>
 			</UAGAdvancedPanelBody>
 		);
@@ -666,7 +678,6 @@ const Settings = ( props ) => {
 		);
 	};
 	const backgroundStyle = () => {
-
 		return (
 			<UAGAdvancedPanelBody
 				title={ __( 'Background', 'ultimate-addons-for-gutenberg' ) }
@@ -686,9 +697,9 @@ const Settings = ( props ) => {
 						value: overlayType,
 						label: 'overlayType',
 					} }
-					gradientOverlay={{
+					gradientOverlay={ {
 						value: true,
-					}}
+					} }
 					backgroundSize={ {
 						value: backgroundSize,
 						label: 'backgroundSize',
@@ -1176,7 +1187,8 @@ const Settings = ( props ) => {
 	};
 
 	let cnt = 0;
-	test_block.map( ( item, thisIndex ) => { // eslint-disable-line array-callback-return
+	test_block.map( ( item, thisIndex ) => {
+		// eslint-disable-line array-callback-return
 		const imageArray = test_block[ thisIndex ];
 		if ( imageArray && typeof imageArray !== 'undefined' ) {
 			const image = imageArray.image;
@@ -1212,10 +1224,18 @@ const Settings = ( props ) => {
 								} }
 								onChange={ ( newCount ) => {
 									const cloneTest_block = [ ...test_block ];
-									const newCountFallback = getFallbackNumber( newCount, 'test_item_count', 'testimonial' )
-									if ( cloneTest_block.length < newCountFallback ) {
+									const newCountFallback = getFallbackNumber(
+										newCount,
+										'test_item_count',
+										'testimonial'
+									);
+									if (
+										cloneTest_block.length <
+										newCountFallback
+									) {
 										const incAmount = Math.abs(
-											newCountFallback - cloneTest_block.length
+											newCountFallback -
+												cloneTest_block.length
 										);
 										for ( let i = 0; i < incAmount; i++ ) {
 											cloneTest_block.push( {
@@ -1231,7 +1251,8 @@ const Settings = ( props ) => {
 										} );
 									} else {
 										const incAmount = Math.abs(
-											newCountFallback - cloneTest_block.length
+											newCountFallback -
+												cloneTest_block.length
 										);
 										const data_new = cloneTest_block;
 										for ( let i = 0; i < incAmount; i++ ) {
@@ -1300,7 +1321,9 @@ const Settings = ( props ) => {
 										value: 'left',
 										icon: (
 											<Icon
-												icon={ renderSVG( 'fa fa-align-left' ) }
+												icon={ renderSVG(
+													'fa fa-align-left'
+												) }
 											/>
 										),
 										tooltip: __(
@@ -1341,20 +1364,22 @@ const Settings = ( props ) => {
 								responsive={ true }
 							/>
 							{ columns > 1 && (
-							<ToggleControl
-								label={ __(
-									'Equal Height',
-									'ultimate-addons-for-gutenberg'
-								) }
-								checked={ equalHeight }
-								onChange={ () =>
-									setAttributes( { equalHeight: ! equalHeight } )
-								}
-								help={ __(
-									"Note: Above setting will only take effect once you are on the live page, and not while you're editing.",
-									'ultimate-addons-for-gutenberg'
-								) }
-							/>
+								<ToggleControl
+									label={ __(
+										'Equal Height',
+										'ultimate-addons-for-gutenberg'
+									) }
+									checked={ equalHeight }
+									onChange={ () =>
+										setAttributes( {
+											equalHeight: ! equalHeight,
+										} )
+									}
+									help={ __(
+										"Note: Above setting will only take effect once you are on the live page, and not while you're editing.",
+										'ultimate-addons-for-gutenberg'
+									) }
+								/>
 							) }
 						</UAGAdvancedPanelBody>
 						<UAGAdvancedPanelBody
@@ -1571,15 +1596,13 @@ const Settings = ( props ) => {
 		);
 	};
 
-
 	return (
-			<>
+		<>
 			{ inspectControl() }
 			{ loadNameGoogleFonts }
 			{ loadCompanyGoogleFonts }
 			{ loadDescGoogleFonts }
-			</>
-
+		</>
 	);
 };
 export default React.memo( Settings );

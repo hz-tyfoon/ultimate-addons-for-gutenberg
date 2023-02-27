@@ -3,7 +3,10 @@ const uagb_deactivated_blocks = uagb_deactivate_blocks.deactivated_blocks;
 if ( uagb_deactivated_blocks.length ) {
 	if ( typeof wp.blocks.unregisterBlockType !== 'undefined' ) {
 		for ( const block_index in uagb_deactivated_blocks ) {
-			if ( 'uagb/masonry-gallery' === uagb_deactivated_blocks[ block_index ] ) {
+			if (
+				'uagb/masonry-gallery' ===
+				uagb_deactivated_blocks[ block_index ]
+			) {
 				continue;
 			}
 

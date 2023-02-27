@@ -19,14 +19,22 @@ export default function save( props ) {
 		ctaTarget,
 		ctaTitle,
 		description,
-		enabledSecondCtaButton
+		enabledSecondCtaButton,
 	} = props.attributes;
 
 	const isCta = (
 		<CTA attributes={ props.attributes } setAttributes="not_set" />
 	);
 
-	const secondCtaButton = ( 'button' === ctaType && enabledSecondCtaButton ) ? <SecondCTAButton attributes={ props.attributes } setAttributes="not_set" /> : '';
+	const secondCtaButton =
+		'button' === ctaType && enabledSecondCtaButton ? (
+			<SecondCTAButton
+				attributes={ props.attributes }
+				setAttributes="not_set"
+			/>
+		) : (
+			''
+		);
 
 	// Get description and seperator components.
 	const desc = (
@@ -58,9 +66,9 @@ export default function save( props ) {
 				{ titleText }
 				{ desc }
 			</div>
-			<div className='uagb-cta__buttons'>
-				{isCta}
-				{secondCtaButton}
+			<div className="uagb-cta__buttons">
+				{ isCta }
+				{ secondCtaButton }
 			</div>
 		</>
 	);
@@ -74,19 +82,18 @@ export default function save( props ) {
 		<div
 			className={ classnames(
 				`uagb-block-${ block_id }`,
-				'button' === ctaType ? 'wp-block-button' : '',
+				'button' === ctaType ? 'wp-block-button' : ''
 			) }
 		>
 			{ ctaType === 'all' && (
 				<>
-				<a
-					href={ ctaLink }
-					className="uagb-cta__link-to-all"
-					target={ target }
-					rel="noopener noreferrer"
-				>
-				</a>
-				{ output }
+					<a
+						href={ ctaLink }
+						className="uagb-cta__link-to-all"
+						target={ target }
+						rel="noopener noreferrer"
+					></a>
+					{ output }
 				</>
 			) }
 			{ ctaType !== 'all' && output }

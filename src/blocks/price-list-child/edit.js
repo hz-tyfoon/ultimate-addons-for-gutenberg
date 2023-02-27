@@ -2,8 +2,7 @@
  * BLOCK: Price List
  */
 
-import React, {    useEffect } from 'react';
-
+import React, { useEffect } from 'react';
 
 import Settings from './settings';
 import Render from './render';
@@ -15,13 +14,13 @@ const UAGBRestaurantMenuChild = ( props ) => {
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/children/price-list-child.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

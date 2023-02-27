@@ -5,7 +5,6 @@
 import generateCSS from '@Controls/generateCSS';
 
 function styling( props ) {
-
 	const {
 		width,
 		widthTablet,
@@ -20,10 +19,18 @@ function styling( props ) {
 	const widthFallback = isNaN( width ) ? 'auto' : `${ width }px`;
 	const heightFallback = isNaN( height ) ? 'auto' : `${ height }px`;
 
-	const widthTabletFallback = isNaN( widthTablet ) ? widthFallback : `${ widthTablet }px`;
-	const widthMobFallback = isNaN( widthMob ) ? widthTabletFallback : `${ widthMob }px`;
-	const heightTabletFallback = isNaN( heightTablet ) ? heightFallback : `${ heightTablet }px`;
-	const heightMobFallback = isNaN( heightMob ) ? heightTabletFallback : `${ heightMob }px`;
+	const widthTabletFallback = isNaN( widthTablet )
+		? widthFallback
+		: `${ widthTablet }px`;
+	const widthMobFallback = isNaN( widthMob )
+		? widthTabletFallback
+		: `${ widthMob }px`;
+	const heightTabletFallback = isNaN( heightTablet )
+		? heightFallback
+		: `${ heightTablet }px`;
+	const heightMobFallback = isNaN( heightMob )
+		? heightTabletFallback
+		: `${ heightMob }px`;
 
 	const selectors = {
 		'.uagb-lottie__outer-wrap': {

@@ -13,7 +13,10 @@ import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType( 'uagb/how-to', {
 	title: __( 'How To', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add instructions/steps on processes using how to block.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add instructions/steps on processes using how to block.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.how_to,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -27,7 +30,7 @@ registerBlockType( 'uagb/how-to', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	attributes,
 	edit,

@@ -12,9 +12,7 @@ import SpacingControl from '@Components/spacing-control';
 import Range from '@Components/range/Range.js';
 import ResponsiveSlider from '@Components/responsive-slider';
 import MultiButtonsControl from '@Components/multi-buttons-control';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 
 import { select } from '@wordpress/data';
 import renderSVG from '@Controls/renderIcon';
@@ -156,7 +154,6 @@ const Settings = ( props ) => {
 		setAttributes( { cookies: value } );
 	};
 
-
 	// Notice dismiss options
 	const noticeDismissOptions = [
 		{
@@ -194,10 +191,7 @@ const Settings = ( props ) => {
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __(
-						'Alignment',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Alignment', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: noticeAlignment,
 						label: 'noticeAlignment',
@@ -220,9 +214,7 @@ const Settings = ( props ) => {
 							value: 'center',
 							icon: (
 								<Icon
-									icon={ renderSVG(
-										'fa fa-align-center'
-									) }
+									icon={ renderSVG( 'fa fa-align-center' ) }
 								/>
 							),
 							tooltip: __(
@@ -234,9 +226,7 @@ const Settings = ( props ) => {
 							value: 'right',
 							icon: (
 								<Icon
-									icon={ renderSVG(
-										'fa fa-align-right'
-									) }
+									icon={ renderSVG( 'fa fa-align-right' ) }
 								/>
 							),
 							tooltip: __(
@@ -382,7 +372,7 @@ const Settings = ( props ) => {
 						onChange={ updateCookieId }
 					/>
 				) }
-				{ ( cookies && noticeDismiss ) && (
+				{ cookies && noticeDismiss && (
 					<Range
 						label={ __(
 							'Show Closed Notice After (Days)',

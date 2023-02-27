@@ -9,7 +9,6 @@ import MultiButtonsControl from '@Components/multi-buttons-control';
 import { InspectorControls } from '@wordpress/block-editor';
 import UAGTextControl from '@Components/text-control';
 
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
@@ -17,28 +16,22 @@ const Settings = ( props ) => {
 
 	const { attributes, setAttributes } = props;
 
-	const {
-		toggleRequired,
-		toggleStatus,
-		layout,
-		trueValue,
-		falseValue,
-	} = attributes;
+	const { toggleRequired, toggleStatus, layout, trueValue, falseValue } =
+		attributes;
 
 	const toggleInspectorControls = () => {
 		return (
 			<UAGAdvancedPanelBody initialOpen={ true }>
-				
 				<UAGTextControl
 					label={ __(
 						'True State',
 						'ultimate-addons-for-gutenberg'
 					) }
 					value={ trueValue }
-					data={{
+					data={ {
 						value: trueValue,
 						label: 'trueValue',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( { trueValue: value } )
@@ -50,10 +43,10 @@ const Settings = ( props ) => {
 						'ultimate-addons-for-gutenberg'
 					) }
 					value={ falseValue }
-					data={{
+					data={ {
 						value: falseValue,
 						label: 'falseValue',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( { falseValue: value } )

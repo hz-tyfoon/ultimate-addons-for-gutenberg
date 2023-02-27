@@ -57,35 +57,35 @@ const Render = ( props ) => {
 			<blockquote className="uagb-blockquote">
 				{ skinStyle === 'quotation' && (
 					<span className="uagb-blockquote__icon">
-							{ UAGB_Block_Icons.quote_inline_icon }
+						{ UAGB_Block_Icons.quote_inline_icon }
 					</span>
 				) }
-					<Description
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						props={ props }
-					/>
-					<footer>
-						<div
-							className={ classnames(
-								'uagb-blockquote__author-wrap',
-								authorImage !== ''
-									? `uagb-blockquote__author-at-${ authorImgPosition }`
-									: ''
-							) }
-						>
-							<AuthorImage attributes={ attributes } />
-
-							<AuthorText
-									attributes={ attributes }
-									setAttributes={ setAttributes }
-									props={ props }
-								/>
-						</div>
-						{ enableTweet && (
-							<TweetButtonCTA attributes={ attributes } />
+				<Description
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					props={ props }
+				/>
+				<footer>
+					<div
+						className={ classnames(
+							'uagb-blockquote__author-wrap',
+							authorImage !== ''
+								? `uagb-blockquote__author-at-${ authorImgPosition }`
+								: ''
 						) }
-					</footer>
+					>
+						<AuthorImage attributes={ attributes } />
+
+						<AuthorText
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							props={ props }
+						/>
+					</div>
+					{ enableTweet && (
+						<TweetButtonCTA attributes={ attributes } />
+					) }
+				</footer>
 			</blockquote>
 		</div>
 	);

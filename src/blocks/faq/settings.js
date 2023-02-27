@@ -23,10 +23,7 @@ import UAGTabsControl from '@Components/tabs';
 
 import { InspectorControls } from '@wordpress/block-editor';
 
-import {
-	ToggleControl,
-	Icon,
-} from '@wordpress/components';
+import { ToggleControl, Icon } from '@wordpress/components';
 import presets from './presets';
 import UAGPresets from '@Components/presets';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
@@ -443,12 +440,18 @@ const Settings = ( props ) => {
 				className="uagb__url-panel-body"
 			>
 				<UAGIconPicker
-					label={ __( 'Inactive Icon', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Inactive Icon',
+						'ultimate-addons-for-gutenberg'
+					) }
 					value={ icon }
 					onChange={ ( value ) => onchangeIcon( value ) }
 				/>
 				<UAGIconPicker
-					label={ __( 'Active Icon', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Active Icon',
+						'ultimate-addons-for-gutenberg'
+					) }
 					value={ iconActive }
 					onChange={ ( value ) => onchangeActiveIcon( value ) }
 				/>
@@ -656,7 +659,7 @@ const Settings = ( props ) => {
 							</>
 						}
 					/>
-				)}
+				) }
 				{ 'grid' === layout && (
 					<>
 						<AdvancedPopColorControl
@@ -684,7 +687,7 @@ const Settings = ( props ) => {
 							setAttributes={ setAttributes }
 						/>
 					</>
-				)}
+				) }
 				<SpacingControl
 					{ ...props }
 					label={ __( 'Padding', 'ultimate-addons-for-gutenberg' ) }
@@ -866,7 +869,7 @@ const Settings = ( props ) => {
 						label: 'answerLetterSpacingMobile',
 					} }
 					letterSpacingType={ {
-						value:answerLetterSpacingType,
+						value: answerLetterSpacingType,
 						label: 'answerLetterSpacingType',
 					} }
 				/>
@@ -984,7 +987,10 @@ const Settings = ( props ) => {
 						<>
 							<MultiButtonsControl
 								setAttributes={ setAttributes }
-								label={ __( 'Background Type', 'ultimate-addons-for-gutenberg' ) }
+								label={ __(
+									'Background Type',
+									'ultimate-addons-for-gutenberg'
+								) }
 								data={ {
 									value: boxBgType,
 									label: 'boxBgType',
@@ -1007,7 +1013,7 @@ const Settings = ( props ) => {
 									},
 								] }
 							/>
-							{ boxBgType === 'color' &&
+							{ boxBgType === 'color' && (
 								<AdvancedPopColorControl
 									label={ __(
 										'Background Color',
@@ -1020,14 +1026,17 @@ const Settings = ( props ) => {
 									} }
 									setAttributes={ setAttributes }
 								/>
-							}
+							) }
 						</>
 					}
 					hover={
 						<>
 							<MultiButtonsControl
 								setAttributes={ setAttributes }
-								label={ __( 'Background Type', 'ultimate-addons-for-gutenberg' ) }
+								label={ __(
+									'Background Type',
+									'ultimate-addons-for-gutenberg'
+								) }
 								data={ {
 									value: boxBgHoverType,
 									label: 'boxBgHoverType',
@@ -1050,7 +1059,7 @@ const Settings = ( props ) => {
 									},
 								] }
 							/>
-							{ boxBgHoverType === 'color' &&
+							{ boxBgHoverType === 'color' && (
 								<AdvancedPopColorControl
 									label={ __(
 										'Background Color',
@@ -1063,35 +1072,31 @@ const Settings = ( props ) => {
 									} }
 									setAttributes={ setAttributes }
 								/>
-							}
+							) }
 						</>
 					}
 				/>
 				<ResponsiveSlider
-					label={ __(
-						'Rows Gap',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Rows Gap', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
 							value: rowsGap,
-							label: 'rowsGap'
+							label: 'rowsGap',
 						},
 						tablet: {
 							value: rowsGapTablet,
-							label: 'rowsGapTablet'
+							label: 'rowsGapTablet',
 						},
 						mobile: {
 							value: rowsGapMobile,
-							label: 'rowsGapMobile'
+							label: 'rowsGapMobile',
 						},
 					} }
 					min={ 0 }
 					max={ 50 }
 					unit={ {
 						value: rowsGapUnit,
-						label:
-							'rowsGapUnit',
+						label: 'rowsGapUnit',
 					} }
 					units={ [
 						{
@@ -1114,23 +1119,22 @@ const Settings = ( props ) => {
 							data={ {
 								desktop: {
 									value: columnsGap,
-									label: 'columnsGap'
+									label: 'columnsGap',
 								},
 								tablet: {
 									value: columnsGapTablet,
-									label: 'columnsGapTablet'
+									label: 'columnsGapTablet',
 								},
 								mobile: {
 									value: columnsGapMobile,
-									label: 'columnsGapMobile'
+									label: 'columnsGapMobile',
 								},
 							} }
 							min={ 0 }
 							max={ 50 }
 							unit={ {
 								value: columnsGapUnit,
-								label:
-									'columnsGapUnit',
+								label: 'columnsGapUnit',
 							} }
 							units={ [
 								{
@@ -1159,9 +1163,9 @@ const Settings = ( props ) => {
 				<ResponsiveBorder
 					setAttributes={ setAttributes }
 					prefix={ 'overall' }
-					disabledBorderTitle= {false}
+					disabledBorderTitle={ false }
 					attributes={ attributes }
-					deviceType={deviceType}
+					deviceType={ deviceType }
 					disableBottomSeparator={ true }
 				/>
 			</UAGAdvancedPanelBody>
@@ -1215,7 +1219,10 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<ResponsiveSlider
-					label={ __( 'Background Size', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Background Size',
+						'ultimate-addons-for-gutenberg'
+					) }
 					data={ {
 						desktop: {
 							value: iconBgSize,
@@ -1253,7 +1260,9 @@ const Settings = ( props ) => {
 				/>
 				<ResponsiveSlider
 					label={ __(
-						'Gap between Icon and Question', 'ultimate-addons-for-gutenberg' ) }
+						'Gap between Icon and Question',
+						'ultimate-addons-for-gutenberg'
+					) }
 					data={ {
 						desktop: {
 							value: gapBtwIconQUestion,
@@ -1270,14 +1279,11 @@ const Settings = ( props ) => {
 					} }
 					min={ -100 }
 					max={ 100 }
-					displayUnit = { false }
+					displayUnit={ false }
 					setAttributes={ setAttributes }
 				/>
 				<AdvancedPopColorControl
-					label={ __(
-						'Color',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ iconColor }
 					data={ {
 						value: iconColor,
@@ -1312,7 +1318,7 @@ const Settings = ( props ) => {
 				<ResponsiveBorder
 					setAttributes={ setAttributes }
 					prefix={ 'icon' }
-					disabledBorderTitle= { false }
+					disabledBorderTitle={ false }
 					attributes={ attributes }
 					deviceType={ deviceType }
 					disableBottomSeparator={ true }
@@ -1354,20 +1360,22 @@ const Settings = ( props ) => {
 		);
 	}
 	const presetSettings = () => {
-		return <UAGAdvancedPanelBody
-					title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ true }
-				>
-					<UAGPresets
-						setAttributes = { setAttributes }
-						presets = { presets }
-						presetInputType = 'radioImage'
-					/>
-				</UAGAdvancedPanelBody>
+		return (
+			<UAGAdvancedPanelBody
+				title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ true }
+			>
+				<UAGPresets
+					setAttributes={ setAttributes }
+					presets={ presets }
+					presetInputType="radioImage"
+				/>
+			</UAGAdvancedPanelBody>
+		);
 	};
 
 	return (
-			<>
+		<>
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
@@ -1389,7 +1397,7 @@ const Settings = ( props ) => {
 			</InspectorControls>
 			{ loadQuestionGoogleFonts }
 			{ loadAnswerGoogleFonts }
-			</>
+		</>
 	);
 };
 

@@ -275,9 +275,9 @@ const Settings = ( props ) => {
 						value: overlayType,
 						label: 'overlayType',
 					} }
-					gradientOverlay={{
+					gradientOverlay={ {
 						value: true,
-					}}
+					} }
 					backgroundSize={ {
 						value: backgroundSize,
 						label: 'backgroundSize',
@@ -323,35 +323,33 @@ const Settings = ( props ) => {
 			>
 				<ResponsiveBorder
 					setAttributes={ setAttributes }
-					prefix={'column'}
+					prefix={ 'column' }
 					attributes={ props.attributes }
 					deviceType={ deviceType }
 					disableBottomSeparator={ true }
-					disabledBorderTitle= { true }
+					disabledBorderTitle={ true }
 				/>
 			</UAGAdvancedPanelBody>
 		);
 	};
 
 	return (
-
-			<InspectorControls>
-				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
-						{ layoutSettings() }
-					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
-						{ backgroundSettings() }
-						{ borderSettings() }
-						{ spacingSettings() }
-					</InspectorTab>
-					<InspectorTab
-						{ ...UAGTabs.advance }
-						parentProps={ props }
-					></InspectorTab>
-				</InspectorTabs>
-			</InspectorControls>
-
+		<InspectorControls>
+			<InspectorTabs>
+				<InspectorTab { ...UAGTabs.general }>
+					{ layoutSettings() }
+				</InspectorTab>
+				<InspectorTab { ...UAGTabs.style }>
+					{ backgroundSettings() }
+					{ borderSettings() }
+					{ spacingSettings() }
+				</InspectorTab>
+				<InspectorTab
+					{ ...UAGTabs.advance }
+					parentProps={ props }
+				></InspectorTab>
+			</InspectorTabs>
+		</InspectorControls>
 	);
 };
 

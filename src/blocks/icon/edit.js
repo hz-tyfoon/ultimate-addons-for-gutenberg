@@ -13,13 +13,8 @@ import Settings from './settings';
 import Render from './render';
 
 const UAGBIcon = ( props ) => {
-
 	const deviceType = useDeviceType();
-	const {
-		clientId,
-		attributes,
-		isSelected,
-	} = props;
+	const { clientId, attributes, isSelected } = props;
 	const blockId = clientId.substr( 0, 8 );
 
 	props = { ...props, deviceType };
@@ -31,32 +26,38 @@ const UAGBIcon = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-			// Replacement for componentDidUpdate.
-			const blockStyling = styling( props );
-			addBlockEditorDynamicStyles( 'uagb-style-icon-' + blockId, blockStyling );
+		// Replacement for componentDidUpdate.
+		const blockStyling = styling( props );
+		addBlockEditorDynamicStyles(
+			'uagb-style-icon-' + blockId,
+			blockStyling
+		);
 	}, [ attributes ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
-		addBlockEditorDynamicStyles( 'uagb-style-icon-' + blockId, blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-icon-' + blockId,
+			blockStyling
+		);
 		scrollBlockToView();
 	}, [ deviceType ] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = attributes;
 	useEffect( () => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/icon.svg`;
 
-	return (
-		attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				{ isSelected && <Settings { ...props } /> }
-				<Render { ...props } />
-			</>
-		)
+	return attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 

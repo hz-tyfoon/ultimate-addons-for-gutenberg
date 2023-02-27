@@ -9,9 +9,10 @@ import { format } from '@wordpress/date';
 import { __ } from '@wordpress/i18n';
 
 // Since the default description has been changed, we add the old description here.
-attributes.time_desc.default = __( 'This is Timeline description, you can change me anytime click here ',
-									'ultimate-addons-for-gutenberg'
-								);
+attributes.time_desc.default = __(
+	'This is Timeline description, you can change me anytime click here ',
+	'ultimate-addons-for-gutenberg'
+);
 
 const deprecated = [
 	{
@@ -151,54 +152,63 @@ const deprecated = [
 						'uagb-timeline__field',
 						`uagb-timeline-child-${ block_id }`,
 						contentClass
-					)}
+					) }
 				>
-						<div className={ classnames( 'uagb-timeline__marker out-view-uagb-timeline__icon' ) } >
-								{ renderSVG13( icon ) }
-						</div>
+					<div
+						className={ classnames(
+							'uagb-timeline__marker out-view-uagb-timeline__icon'
+						) }
+					>
+						{ renderSVG13( icon ) }
+					</div>
 
-						<div className={ classnames( dayalignClass, 'uagb-timeline__events-inner-new' ) }>
-							<div className='uagb-timeline__events-inner--content'>
-								{ displayPostDate !== true && t_date && (
-									<div
-										className={
-											'uagb-timeline__date-hide uagb-timeline__inner-date-new'
-										}
-									>
-										{ ( 'custom' !== dateFormat &&
-												format( dateFormat, postDate ) ) ||
-												postDate }
-									</div>
-								) }
-									<RichText.Content
-										tagName={ headingTag }
-										value={ time_heading }
-										className="uagb-timeline__heading"
-									/>
-
-								<RichText.Content
-									tagName="p"
-									value={ time_desc }
-									className="uagb-timeline-desc-content"
-								/>
-
-								<div className="uagb-timeline__arrow"></div>
-							</div>
-						</div>
-						{ displayInnerDate && (
-							<div className="uagb-timeline__date-new">
-								{ displayPostDate !== true && t_date && (
-									<>
+					<div
+						className={ classnames(
+							dayalignClass,
+							'uagb-timeline__events-inner-new'
+						) }
+					>
+						<div className="uagb-timeline__events-inner--content">
+							{ displayPostDate !== true && t_date && (
+								<div
+									className={
+										'uagb-timeline__date-hide uagb-timeline__inner-date-new'
+									}
+								>
 									{ ( 'custom' !== dateFormat &&
 										format( dateFormat, postDate ) ) ||
 										postDate }
-									</>
-								) }
-							</div>
-						) }
+								</div>
+							) }
+							<RichText.Content
+								tagName={ headingTag }
+								value={ time_heading }
+								className="uagb-timeline__heading"
+							/>
+
+							<RichText.Content
+								tagName="p"
+								value={ time_desc }
+								className="uagb-timeline-desc-content"
+							/>
+
+							<div className="uagb-timeline__arrow"></div>
+						</div>
+					</div>
+					{ displayInnerDate && (
+						<div className="uagb-timeline__date-new">
+							{ displayPostDate !== true && t_date && (
+								<>
+									{ ( 'custom' !== dateFormat &&
+										format( dateFormat, postDate ) ) ||
+										postDate }
+								</>
+							) }
+						</div>
+					) }
 				</article>
 			);
-		}
+		},
 	},
 ];
 

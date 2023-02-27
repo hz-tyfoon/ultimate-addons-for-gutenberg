@@ -4,7 +4,7 @@ import InspectorTab, {
 	UAGTabs,
 } from '@Components/inspector-tabs/InspectorTab.js';
 import { __ } from '@wordpress/i18n';
-import {InspectorControls} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import { Icon, ToggleControl } from '@wordpress/components';
 import UAGMediaPicker from '@Components/image';
 import UAGIconPicker from '@Components/icon-picker';
@@ -22,7 +22,7 @@ import WebfontLoader from '@Components/typography/fontloader';
 import UAGTabsControl from '@Components/tabs';
 import ResponsiveBorder from '@Components/responsive-border';
 import Background from '@Components/background';
-import  { buttonsPresets } from './presets';
+import { buttonsPresets } from './presets';
 import UAGPresets from '@Components/presets';
 
 let imageSizeOptions = [
@@ -242,7 +242,6 @@ export default function Settings( props ) {
 	 * Event to set Image as while adding.
 	 */
 	const onSelectImage = ( media ) => {
-
 		if ( ! media || ! media.url ) {
 			setAttributes( { iconImage: null } );
 			return;
@@ -275,51 +274,23 @@ export default function Settings( props ) {
 	let alignmentOptions = [
 		{
 			value: 'left',
-			icon: (
-				<Icon
-					icon={ renderSVG( 'fa fa-align-left' ) }
-				/>
-			),
-			tooltip: __(
-				'Left',
-				'ultimate-addons-for-gutenberg'
-			),
+			icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+			tooltip: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'center',
-			icon: (
-				<Icon
-					icon={ renderSVG( 'fa fa-align-center' ) }
-				/>
-			),
-			tooltip: __(
-				'Center',
-				'ultimate-addons-for-gutenberg'
-			),
+			icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
+			tooltip: __( 'Center', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'right',
-			icon: (
-				<Icon
-					icon={ renderSVG( 'fa fa-align-right' ) }
-				/>
-			),
-			tooltip: __(
-				'Right',
-				'ultimate-addons-for-gutenberg'
-			),
+			icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
+			tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'full',
-			icon: (
-				<Icon
-					icon={ renderSVG( 'fa fa-align-justify' ) }
-				/>
-			),
-			tooltip: __(
-				'Full Width',
-				'ultimate-addons-for-gutenberg'
-			),
+			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
+			tooltip: __( 'Full Width', 'ultimate-addons-for-gutenberg' ),
 		},
 	];
 
@@ -327,39 +298,18 @@ export default function Settings( props ) {
 		alignmentOptions = [
 			{
 				value: 'left',
-				icon: (
-					<Icon
-						icon={ renderSVG( 'fa fa-align-left' ) }
-					/>
-				),
-				tooltip: __(
-					'Left',
-					'ultimate-addons-for-gutenberg'
-				),
+				icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+				tooltip: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 			},
 			{
 				value: 'center',
-				icon: (
-					<Icon
-						icon={ renderSVG( 'fa fa-align-center' ) }
-					/>
-				),
-				tooltip: __(
-					'Center',
-					'ultimate-addons-for-gutenberg'
-				),
+				icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
+				tooltip: __( 'Center', 'ultimate-addons-for-gutenberg' ),
 			},
 			{
 				value: 'right',
-				icon: (
-					<Icon
-						icon={ renderSVG( 'fa fa-align-right' ) }
-					/>
-				),
-				tooltip: __(
-					'Right',
-					'ultimate-addons-for-gutenberg'
-				),
+				icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
+				tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 			},
 		];
 		if ( 'full' === modalAlign ) {
@@ -400,63 +350,60 @@ export default function Settings( props ) {
 					},
 				] }
 			/>
-				{ modalTrigger === 'icon' && (
-					<>
-						<UAGIconPicker
-							label={ __(
-								'Icon',
-								'ultimate-addons-for-gutenberg'
-							) }
-							value={ icon }
-							onChange={ ( value ) =>
-								setAttributes( { icon: value } )
-							}
-						/>
-					</>
-				) }
-				{ modalTrigger === 'image' && (
-					<>
-						<UAGMediaPicker
-							onSelectImage={ onSelectImage }
-							backgroundImage={ iconImage }
-							onRemoveImage={ onRemoveImage }
-						/>
-						{ iconImage &&
-							iconImage.url !== 'null' &&
-							iconImage.url !== '' && (
-								<UAGSelectControl
-									label={ __(
-										'Image Size',
-										'ultimate-addons-for-gutenberg'
-									) }
-									data={ {
-										value: imageSize,
-										label: 'imageSize',
-									} }
-									setAttributes={ setAttributes }
-									options={ imageSizeOptions }
-								/>
-							) }
-					</>
-				) }
-				{ modalTrigger === 'button' && (
-					<>
-						<UAGPresets
-							setAttributes = { setAttributes }
-							presets = { buttonsPresets }
-							presetInputType = 'radioImage'
-						/>
-						<ToggleControl
-							label={ __(
-								'Enable Icon',
-								'ultimate-addons-for-gutenberg'
-							) }
-							checked={ showBtnIcon }
-							onChange={ () =>
-								setAttributes( { showBtnIcon : ! showBtnIcon } )
-							}
-						/>
-						{ showBtnIcon &&
+			{ modalTrigger === 'icon' && (
+				<>
+					<UAGIconPicker
+						label={ __( 'Icon', 'ultimate-addons-for-gutenberg' ) }
+						value={ icon }
+						onChange={ ( value ) =>
+							setAttributes( { icon: value } )
+						}
+					/>
+				</>
+			) }
+			{ modalTrigger === 'image' && (
+				<>
+					<UAGMediaPicker
+						onSelectImage={ onSelectImage }
+						backgroundImage={ iconImage }
+						onRemoveImage={ onRemoveImage }
+					/>
+					{ iconImage &&
+						iconImage.url !== 'null' &&
+						iconImage.url !== '' && (
+							<UAGSelectControl
+								label={ __(
+									'Image Size',
+									'ultimate-addons-for-gutenberg'
+								) }
+								data={ {
+									value: imageSize,
+									label: 'imageSize',
+								} }
+								setAttributes={ setAttributes }
+								options={ imageSizeOptions }
+							/>
+						) }
+				</>
+			) }
+			{ modalTrigger === 'button' && (
+				<>
+					<UAGPresets
+						setAttributes={ setAttributes }
+						presets={ buttonsPresets }
+						presetInputType="radioImage"
+					/>
+					<ToggleControl
+						label={ __(
+							'Enable Icon',
+							'ultimate-addons-for-gutenberg'
+						) }
+						checked={ showBtnIcon }
+						onChange={ () =>
+							setAttributes( { showBtnIcon: ! showBtnIcon } )
+						}
+					/>
+					{ showBtnIcon && (
 						<UAGIconPicker
 							label={ __(
 								'Button Icon',
@@ -467,65 +414,64 @@ export default function Settings( props ) {
 								setAttributes( { buttonIcon: value } )
 							}
 						/>
-						}
-						{ showBtnIcon && '' !== buttonIcon && (
-								<>
-									<MultiButtonsControl
-										setAttributes={ setAttributes }
-										label={ __(
-											'Position',
+					) }
+					{ showBtnIcon && '' !== buttonIcon && (
+						<>
+							<MultiButtonsControl
+								setAttributes={ setAttributes }
+								label={ __(
+									'Position',
+									'ultimate-addons-for-gutenberg'
+								) }
+								data={ {
+									value: buttonIconPosition,
+									label: 'buttonIconPosition',
+								} }
+								className="uagb-multi-button-alignment-control"
+								options={ [
+									{
+										value: 'before',
+										label: __(
+											'Before Text',
 											'ultimate-addons-for-gutenberg'
-										) }
-										data={ {
-											value: buttonIconPosition,
-											label: 'buttonIconPosition',
-										} }
-										className="uagb-multi-button-alignment-control"
-										options={ [
-											{
-												value: 'before',
-												label: __(
-													'Before Text',
-													'ultimate-addons-for-gutenberg'
-												),
-											},
-											{
-												value: 'after',
-												label: __(
-													'After Text',
-													'ultimate-addons-for-gutenberg'
-												),
-											},
-										] }
-									/>
-								</>
-							)
-						}
-					</>
-				) }
-				<MultiButtonsControl
-					setAttributes={ setAttributes }
-					label={ __( 'Alignment', 'ultimate-addons-for-gutenberg' ) }
-					data={ {
-						desktop: {
-							value: modalAlign,
-							label: 'modalAlign',
-						},
-						tablet: {
-							value: modalAlignTablet,
-							label: 'modalAlignTablet',
-						},
-						mobile: {
-							value: modalAlignMobile,
-							label: 'modalAlignMobile',
-						},
-					} }
-					options={ alignmentOptions }
-					showIcons={ true }
-					responsive={true}
-				/>
+										),
+									},
+									{
+										value: 'after',
+										label: __(
+											'After Text',
+											'ultimate-addons-for-gutenberg'
+										),
+									},
+								] }
+							/>
+						</>
+					) }
+				</>
+			) }
+			<MultiButtonsControl
+				setAttributes={ setAttributes }
+				label={ __( 'Alignment', 'ultimate-addons-for-gutenberg' ) }
+				data={ {
+					desktop: {
+						value: modalAlign,
+						label: 'modalAlign',
+					},
+					tablet: {
+						value: modalAlignTablet,
+						label: 'modalAlignTablet',
+					},
+					mobile: {
+						value: modalAlignMobile,
+						label: 'modalAlignMobile',
+					},
+				} }
+				options={ alignmentOptions }
+				showIcons={ true }
+				responsive={ true }
+			/>
 		</UAGAdvancedPanelBody>
-	)
+	);
 
 	const modalContentPanel = (
 		<UAGAdvancedPanelBody
@@ -559,17 +505,11 @@ export default function Settings( props ) {
 				} }
 				units={ [
 					{
-						name: __(
-							'Pixel',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( 'Pixel', 'ultimate-addons-for-gutenberg' ),
 						unitValue: 'px',
 					},
 					{
-						name: __(
-							'%',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( '%', 'ultimate-addons-for-gutenberg' ),
 						unitValue: '%',
 					},
 				] }
@@ -577,7 +517,10 @@ export default function Settings( props ) {
 			/>
 			<MultiButtonsControl
 				setAttributes={ setAttributes }
-				label={ __( 'Modal Popup Height', 'ultimate-addons-for-gutenberg' ) }
+				label={ __(
+					'Modal Popup Height',
+					'ultimate-addons-for-gutenberg'
+				) }
 				data={ {
 					value: modalBoxHeight,
 					label: 'modalBoxHeight',
@@ -585,24 +528,17 @@ export default function Settings( props ) {
 				options={ [
 					{
 						value: 'auto',
-						label: __(
-							'Auto',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Auto', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'custom',
-						label: __(
-							'Custom',
-							'ultimate-addons-for-gutenberg'
-						),
-					}
+						label: __( 'Custom', 'ultimate-addons-for-gutenberg' ),
+					},
 				] }
 				showIcons={ false }
 				responsive={ false }
 			/>
-			{
-				modalBoxHeight!== 'custom' &&
+			{ modalBoxHeight !== 'custom' && (
 				<ResponsiveSlider
 					label={ __(
 						'Max Height',
@@ -630,63 +566,57 @@ export default function Settings( props ) {
 					} }
 					units={ [
 						{
-							name: __(
-								'VH',
-								'ultimate-addons-for-gutenberg'
-							),
+							name: __( 'VH', 'ultimate-addons-for-gutenberg' ),
 							unitValue: 'vh',
 						},
 					] }
 					setAttributes={ setAttributes }
 				/>
-			}
-			{ modalBoxHeight !== 'auto' &&
-			<ResponsiveSlider
-				label={ __(
-					'Modal Popup Height',
-					'ultimate-addons-for-gutenberg'
-				) }
-				data={ {
-					desktop: {
-						value: modalHeight,
-						label: 'modalHeight',
-					},
-					tablet: {
-						value: modalHeightTablet,
-						label: 'modalHeightTablet',
-					},
-					mobile: {
-						value: modalHeightMobile,
-						label: 'modalHeightMobile',
-					},
-				} }
-				min={ '%' === modalHeightType ? 10 : 130 }
-				max={ '%' === modalHeightType ? 100 : 1500 }
-				unit={ {
-					value: modalHeightType,
-					label: 'modalHeightType',
-				} }
-				units={ [
-					{
-						name: __(
-							'Pixel',
-							'ultimate-addons-for-gutenberg'
-						),
-						unitValue: 'px',
-					},
-					{
-						name: __(
-							'%',
-							'ultimate-addons-for-gutenberg'
-						),
-						unitValue: '%',
-					},
-				] }
-				setAttributes={ setAttributes }
-			/>
-			}
+			) }
+			{ modalBoxHeight !== 'auto' && (
+				<ResponsiveSlider
+					label={ __(
+						'Modal Popup Height',
+						'ultimate-addons-for-gutenberg'
+					) }
+					data={ {
+						desktop: {
+							value: modalHeight,
+							label: 'modalHeight',
+						},
+						tablet: {
+							value: modalHeightTablet,
+							label: 'modalHeightTablet',
+						},
+						mobile: {
+							value: modalHeightMobile,
+							label: 'modalHeightMobile',
+						},
+					} }
+					min={ '%' === modalHeightType ? 10 : 130 }
+					max={ '%' === modalHeightType ? 100 : 1500 }
+					unit={ {
+						value: modalHeightType,
+						label: 'modalHeightType',
+					} }
+					units={ [
+						{
+							name: __(
+								'Pixel',
+								'ultimate-addons-for-gutenberg'
+							),
+							unitValue: 'px',
+						},
+						{
+							name: __( '%', 'ultimate-addons-for-gutenberg' ),
+							unitValue: '%',
+						},
+					] }
+					setAttributes={ setAttributes }
+				/>
+			) }
 		</UAGAdvancedPanelBody>
-	)
+	);
 
 	const modalClosePanel = (
 		<UAGAdvancedPanelBody
@@ -694,14 +624,9 @@ export default function Settings( props ) {
 			initialOpen={ false }
 		>
 			<UAGIconPicker
-				label={ __(
-					'Icon',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Icon', 'ultimate-addons-for-gutenberg' ) }
 				value={ closeIcon }
-				onChange={ ( value ) =>
-					setAttributes( { closeIcon: value } )
-				}
+				onChange={ ( value ) => setAttributes( { closeIcon: value } ) }
 			/>
 			{ closeIcon !== '' && (
 				<UAGSelectControl
@@ -731,16 +656,14 @@ export default function Settings( props ) {
 						},
 					] }
 				/>
-			)}
+			) }
 			<ToggleControl
 				label={ __(
 					'Close on ESC Keypress',
 					'ultimate-addons-for-gutenberg'
 				) }
 				checked={ escPress }
-				onChange={ () =>
-					setAttributes( { escPress: ! escPress } )
-				}
+				onChange={ () => setAttributes( { escPress: ! escPress } ) }
 			/>
 			<ToggleControl
 				label={ __(
@@ -752,16 +675,14 @@ export default function Settings( props ) {
 					setAttributes( { overlayClick: ! overlayClick } )
 				}
 			/>
-
 		</UAGAdvancedPanelBody>
-	)
+	);
 
-	const triggerStylePanel =  (
+	const triggerStylePanel = (
 		<UAGAdvancedPanelBody
 			title={ __( 'Trigger', 'ultimate-addons-for-gutenberg' ) }
 			initialOpen={ true }
 		>
-
 			{ 'icon' === modalTrigger && icon !== '' && (
 				<>
 					<Range
@@ -784,11 +705,7 @@ export default function Settings( props ) {
 							'Icon Color',
 							'ultimate-addons-for-gutenberg'
 						) }
-						colorValue={
-							iconColor
-								? iconColor
-								: ''
-						}
+						colorValue={ iconColor ? iconColor : '' }
 						data={ {
 							value: iconColor,
 							label: 'iconColor',
@@ -796,14 +713,11 @@ export default function Settings( props ) {
 						setAttributes={ setAttributes }
 					/>
 				</>
-			)}
+			) }
 
-			{ modalTrigger === 'icon' &&
-				icon === '' && (
+			{ modalTrigger === 'icon' && icon === '' && (
 				<p className="uagb-settings-notice">
-				{ __(
-					'For the styling options please select the Icon.'
-				) }
+					{ __( 'For the styling options please select the Icon.' ) }
 				</p>
 			) }
 
@@ -814,11 +728,7 @@ export default function Settings( props ) {
 							'Text Color',
 							'ultimate-addons-for-gutenberg'
 						) }
-						colorValue={
-							textColor
-								? textColor
-								: ''
-						}
+						colorValue={ textColor ? textColor : '' }
 						data={ {
 							value: textColor,
 							label: 'textColor',
@@ -907,65 +817,107 @@ export default function Settings( props ) {
 						} }
 					/>
 				</>
-			)}
+			) }
 
 			{ modalTrigger === 'image' &&
 				iconImage &&
 				iconImage.url !== 'null' &&
 				iconImage.url !== '' && (
-				<>
-					<ToggleControl
-						checked={ imageWidthType }
-						onChange={ () =>
-							setAttributes( {
-								imageWidthType: ! imageWidthType,
-							} )
-						}
-						label={ __(
-							'Custom Width',
-							'ultimate-addons-for-gutenberg'
-						) }
-						help={ __(
-							'Turn this off to inherit the natural width of Image.',
-							'ultimate-addons-for-gutenberg'
-						) }
-					/>
-
-					{ imageWidthType && (
-						<ResponsiveSlider
+					<>
+						<ToggleControl
+							checked={ imageWidthType }
+							onChange={ () =>
+								setAttributes( {
+									imageWidthType: ! imageWidthType,
+								} )
+							}
 							label={ __(
-								'Width',
+								'Custom Width',
 								'ultimate-addons-for-gutenberg'
 							) }
-							data={ {
-								desktop: {
-									value: imageWidth,
-									label: 'imageWidth',
-									unit: {
-										value: imageWidthUnit,
-										label: 'imageWidthUnit',
-									},
-								},
-								tablet: {
-									value: imageWidthTablet,
-									label: 'imageWidthTablet',
-									unit: {
-										value: imageWidthUnitTablet,
-										label: 'imageWidthUnitTablet',
-									},
+							help={ __(
+								'Turn this off to inherit the natural width of Image.',
+								'ultimate-addons-for-gutenberg'
+							) }
+						/>
 
-								},
-								mobile: {
-									value: imageWidthMobile,
-									label: 'imageWidthMobile',
-									unit: {
-										value: imageWidthUnitMobile,
-										label: 'imageWidthUnitMobile',
+						{ imageWidthType && (
+							<ResponsiveSlider
+								label={ __(
+									'Width',
+									'ultimate-addons-for-gutenberg'
+								) }
+								data={ {
+									desktop: {
+										value: imageWidth,
+										label: 'imageWidth',
+										unit: {
+											value: imageWidthUnit,
+											label: 'imageWidthUnit',
+										},
 									},
-								},
+									tablet: {
+										value: imageWidthTablet,
+										label: 'imageWidthTablet',
+										unit: {
+											value: imageWidthUnitTablet,
+											label: 'imageWidthUnitTablet',
+										},
+									},
+									mobile: {
+										value: imageWidthMobile,
+										label: 'imageWidthMobile',
+										unit: {
+											value: imageWidthUnitMobile,
+											label: 'imageWidthUnitMobile',
+										},
+									},
+								} }
+								min={ 0 }
+								limitMax={ { px: 500, '%': 100, em: 100 } } // eslint-disable-line quote-props
+								units={ [
+									{
+										name: __(
+											'Pixel',
+											'ultimate-addons-for-gutenberg'
+										),
+										unitValue: 'px',
+									},
+									{
+										name: __(
+											'%',
+											'ultimate-addons-for-gutenberg'
+										),
+										unitValue: '%',
+									},
+									{
+										name: __(
+											'EM',
+											'ultimate-addons-for-gutenberg'
+										),
+										unitValue: 'em',
+									},
+								] }
+								setAttributes={ setAttributes }
+							/>
+						) }
+						<Range
+							label={ __(
+								'Border Radius',
+								'ultimate-addons-for-gutenberg'
+							) }
+							setAttributes={ setAttributes }
+							value={ iconimgBorderRadius }
+							data={ {
+								value: iconimgBorderRadius,
+								label: 'iconimgBorderRadius',
 							} }
 							min={ 0 }
-							limitMax={ { 'px': 500, '%': 100, 'em': 100 } } // eslint-disable-line quote-props
+							max={ 100 }
+							unit={ {
+								value: iconimgBorderRadiusUnit,
+								label: 'iconimgBorderRadiusUnit',
+							} }
 							units={ [
 								{
 									name: __(
@@ -976,10 +928,57 @@ export default function Settings( props ) {
 								},
 								{
 									name: __(
-										'%',
+										'EM',
 										'ultimate-addons-for-gutenberg'
 									),
-									unitValue: '%',
+									unitValue: 'em',
+								},
+							] }
+						/>
+					</>
+				) }
+
+			{ modalTrigger === 'image' && iconImage === undefined && (
+				<p className="uagb-settings-notice">
+					{ __( 'For the styling options please select the Image.' ) }
+				</p>
+			) }
+
+			{ modalTrigger === 'button' && (
+				<>
+					{ showBtnIcon && '' !== buttonIcon && (
+						<ResponsiveSlider
+							label={ __(
+								'Icon Spacing',
+								'ultimate-addons-for-gutenberg'
+							) }
+							data={ {
+								desktop: {
+									value: buttonIconSpace,
+									label: 'buttonIconSpace',
+								},
+								tablet: {
+									value: buttonIconSpaceTablet,
+									label: 'buttonIconSpaceTablet',
+								},
+								mobile: {
+									value: buttonIconSpaceMobile,
+									label: 'buttonIconSpaceMobile',
+								},
+							} }
+							min={ 0 }
+							max={ 50 }
+							unit={ {
+								value: buttonIconSpaceType,
+								label: 'buttonIconSpaceType',
+							} }
+							units={ [
+								{
+									name: __(
+										'Pixel',
+										'ultimate-addons-for-gutenberg'
+									),
+									unitValue: 'px',
 								},
 								{
 									name: __(
@@ -992,100 +991,6 @@ export default function Settings( props ) {
 							setAttributes={ setAttributes }
 						/>
 					) }
-					<Range
-						label={ __(
-							'Border Radius',
-							'ultimate-addons-for-gutenberg'
-						) }
-						setAttributes={ setAttributes }
-						value={ iconimgBorderRadius }
-						data={ {
-							value: iconimgBorderRadius,
-							label: 'iconimgBorderRadius',
-						} }
-						min={ 0 }
-						max={ 100 }
-						unit={ {
-							value: iconimgBorderRadiusUnit,
-							label:
-								'iconimgBorderRadiusUnit',
-						} }
-						units={ [
-							{
-								name: __(
-									'Pixel',
-									'ultimate-addons-for-gutenberg'
-								),
-								unitValue: 'px',
-							},
-							{
-								name: __(
-									'EM',
-									'ultimate-addons-for-gutenberg'
-								),
-								unitValue: 'em',
-							},
-						] }
-					/>
-				</>
-			) }
-
-			{ ( modalTrigger === 'image' &&
-				iconImage === undefined ) && (
-				<p className="uagb-settings-notice">
-				{ __(
-					'For the styling options please select the Image.'
-				) }
-				</p>
-			) }
-
-			{ modalTrigger === 'button' && (
-				<>
-				{ showBtnIcon && '' !== buttonIcon && (
-					<ResponsiveSlider
-						label={ __(
-							'Icon Spacing',
-							'ultimate-addons-for-gutenberg'
-						) }
-						data={ {
-							desktop: {
-								value: buttonIconSpace,
-								label: 'buttonIconSpace',
-							},
-							tablet: {
-								value: buttonIconSpaceTablet,
-								label: 'buttonIconSpaceTablet',
-							},
-							mobile: {
-								value: buttonIconSpaceMobile,
-								label: 'buttonIconSpaceMobile',
-							},
-						} }
-						min={ 0 }
-						max={ 50 }
-						unit={ {
-							value: buttonIconSpaceType,
-							label: 'buttonIconSpaceType',
-						} }
-						units={ [
-							{
-								name: __(
-									'Pixel',
-									'ultimate-addons-for-gutenberg'
-								),
-								unitValue: 'px',
-							},
-							{
-								name: __(
-									'EM',
-									'ultimate-addons-for-gutenberg'
-								),
-								unitValue: 'em',
-							},
-						] }
-						setAttributes={ setAttributes }
-					/>
-				) }
 					<TypographyControl
 						label={ __(
 							'Typography',
@@ -1167,33 +1072,31 @@ export default function Settings( props ) {
 						} }
 					/>
 					<UAGTabsControl
-					tabs={ [
-						{
-							name: 'normal',
-							title: __(
-								'Normal',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-						{
-							name: 'hover',
-							title: __(
-								'Hover',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-					] }
-					normal={
-						<>
-							<AdvancedPopColorControl
+						tabs={ [
+							{
+								name: 'normal',
+								title: __(
+									'Normal',
+									'ultimate-addons-for-gutenberg'
+								),
+							},
+							{
+								name: 'hover',
+								title: __(
+									'Hover',
+									'ultimate-addons-for-gutenberg'
+								),
+							},
+						] }
+						normal={
+							<>
+								<AdvancedPopColorControl
 									label={ __(
 										'Text Color',
 										'ultimate-addons-for-gutenberg'
 									) }
 									colorValue={
-										btnLinkColor
-											? btnLinkColor
-											: ''
+										btnLinkColor ? btnLinkColor : ''
 									}
 									data={ {
 										value: btnLinkColor,
@@ -1201,117 +1104,123 @@ export default function Settings( props ) {
 									} }
 									setAttributes={ setAttributes }
 								/>
-							<MultiButtonsControl
-								setAttributes={ setAttributes }
-								label={ __( 'Background Type', 'ultimate-addons-for-gutenberg' ) }
-								data={ {
-									value: modalTriggerBgType,
-									label: 'modalTriggerBgType',
-								} }
-								className="uagb-multi-button-alignment-control"
-								options={ [
-									{
-										value: 'transparent',
-										label: __(
-											'Transparent',
-											'ultimate-addons-for-gutenberg'
-										),
-									},
-									{
-										value: 'color',
-										label: __(
-											'Color',
-											'ultimate-addons-for-gutenberg'
-										),
-									},
-								] }
-							/>
-							{ 'color' === modalTriggerBgType && (
-								<>
-									<AdvancedPopColorControl
-										label={ __(
-											'Background Color',
-											'ultimate-addons-for-gutenberg'
-										) }
-										colorValue={
-											btnBgColor ? btnBgColor : ''
-										}
-										data={ {
-											value: btnBgColor,
-											label: 'btnBgColor',
-										} }
-										setAttributes={ setAttributes }
-									/>
-								</>
-							) }
-						</>
-					}
-					hover={
-						<>
-							<AdvancedPopColorControl
-								label={ __(
-									'Text Color',
-									'ultimate-addons-for-gutenberg'
+								<MultiButtonsControl
+									setAttributes={ setAttributes }
+									label={ __(
+										'Background Type',
+										'ultimate-addons-for-gutenberg'
+									) }
+									data={ {
+										value: modalTriggerBgType,
+										label: 'modalTriggerBgType',
+									} }
+									className="uagb-multi-button-alignment-control"
+									options={ [
+										{
+											value: 'transparent',
+											label: __(
+												'Transparent',
+												'ultimate-addons-for-gutenberg'
+											),
+										},
+										{
+											value: 'color',
+											label: __(
+												'Color',
+												'ultimate-addons-for-gutenberg'
+											),
+										},
+									] }
+								/>
+								{ 'color' === modalTriggerBgType && (
+									<>
+										<AdvancedPopColorControl
+											label={ __(
+												'Background Color',
+												'ultimate-addons-for-gutenberg'
+											) }
+											colorValue={
+												btnBgColor ? btnBgColor : ''
+											}
+											data={ {
+												value: btnBgColor,
+												label: 'btnBgColor',
+											} }
+											setAttributes={ setAttributes }
+										/>
+									</>
 								) }
-								colorValue={
-									btnLinkHoverColor
-										? btnLinkHoverColor
-										: ''
-								}
-								data={ {
-									value: btnLinkHoverColor,
-									label: 'btnLinkHoverColor',
-								} }
-								setAttributes={ setAttributes }
-							/>
-							<MultiButtonsControl
-								setAttributes={ setAttributes }
-								label={ __( 'Background Type', 'ultimate-addons-for-gutenberg' ) }
-								data={ {
-									value: modalTriggerBgHoverType,
-									label: 'modalTriggerBgHoverType',
-								} }
-								className="uagb-multi-button-alignment-control"
-								options={ [
-									{
-										value: 'transparent',
-										label: __(
-											'Transparent',
-											'ultimate-addons-for-gutenberg'
-										),
-									},
-									{
-										value: 'color',
-										label: __(
-											'Color',
-											'ultimate-addons-for-gutenberg'
-										),
-									},
-								] }
-							/>
-							{ 'color' === modalTriggerBgHoverType && (
-								<>
-									<AdvancedPopColorControl
-										label={ __(
-											'Background Color',
-											'ultimate-addons-for-gutenberg'
-										) }
-										colorValue={
-											btnBgHoverColor
-												? btnBgHoverColor
-												: ''
-										}
-										data={ {
-											value: btnBgHoverColor,
-											label: 'btnBgHoverColor',
-										} }
-										setAttributes={ setAttributes }
-									/>
-								</>
-							) }
-						</>
-					}
-				/>
+							</>
+						}
+						hover={
+							<>
+								<AdvancedPopColorControl
+									label={ __(
+										'Text Color',
+										'ultimate-addons-for-gutenberg'
+									) }
+									colorValue={
+										btnLinkHoverColor
+											? btnLinkHoverColor
+											: ''
+									}
+									data={ {
+										value: btnLinkHoverColor,
+										label: 'btnLinkHoverColor',
+									} }
+									setAttributes={ setAttributes }
+								/>
+								<MultiButtonsControl
+									setAttributes={ setAttributes }
+									label={ __(
+										'Background Type',
+										'ultimate-addons-for-gutenberg'
+									) }
+									data={ {
+										value: modalTriggerBgHoverType,
+										label: 'modalTriggerBgHoverType',
+									} }
+									className="uagb-multi-button-alignment-control"
+									options={ [
+										{
+											value: 'transparent',
+											label: __(
+												'Transparent',
+												'ultimate-addons-for-gutenberg'
+											),
+										},
+										{
+											value: 'color',
+											label: __(
+												'Color',
+												'ultimate-addons-for-gutenberg'
+											),
+										},
+									] }
+								/>
+								{ 'color' === modalTriggerBgHoverType && (
+									<>
+										<AdvancedPopColorControl
+											label={ __(
+												'Background Color',
+												'ultimate-addons-for-gutenberg'
+											) }
+											colorValue={
+												btnBgHoverColor
+													? btnBgHoverColor
+													: ''
+											}
+											data={ {
+												value: btnBgHoverColor,
+												label: 'btnBgHoverColor',
+											} }
+											setAttributes={ setAttributes }
+										/>
+									</>
+								) }
+							</>
+						}
+					/>
 					<SpacingControl
 						{ ...props }
 						label={ __(
@@ -1394,41 +1303,36 @@ export default function Settings( props ) {
 								unitValue: 'px',
 							},
 							{
-								name: __( '%', 'ultimate-addons-for-gutenberg' ),
+								name: __(
+									'%',
+									'ultimate-addons-for-gutenberg'
+								),
 								unitValue: '%',
 							},
 						] }
 					/>
 					<hr className="uagb-editor__separator" />
 					<ResponsiveBorder
-						disabledBorderTitle= {false}
+						disabledBorderTitle={ false }
 						setAttributes={ setAttributes }
-						prefix={'btn'}
+						prefix={ 'btn' }
 						attributes={ attributes }
 						deviceType={ deviceType }
 						disableBottomSeparator={ true }
 					/>
 				</>
 			) }
-
 		</UAGAdvancedPanelBody>
-	)
+	);
 
-	const contentStylePanel =  (
+	const contentStylePanel = (
 		<UAGAdvancedPanelBody
 			title={ __( 'Container', 'ultimate-addons-for-gutenberg' ) }
 			initialOpen={ false }
 		>
 			<AdvancedPopColorControl
-				label={ __(
-					'Overlay Color',
-					'ultimate-addons-for-gutenberg'
-				) }
-				colorValue={
-					overlayColor
-						? overlayColor
-						: ''
-				}
+				label={ __( 'Overlay Color', 'ultimate-addons-for-gutenberg' ) }
+				colorValue={ overlayColor ? overlayColor : '' }
 				data={ {
 					value: overlayColor,
 					label: 'overlayColor',
@@ -1438,10 +1342,7 @@ export default function Settings( props ) {
 
 			<SpacingControl
 				{ ...props }
-				label={ __(
-					'Padding',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Padding', 'ultimate-addons-for-gutenberg' ) }
 				valueTop={ {
 					value: paddingModalTop,
 					label: 'paddingModalTop',
@@ -1511,10 +1412,7 @@ export default function Settings( props ) {
 				} }
 				units={ [
 					{
-						name: __(
-							'Pixel',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( 'Pixel', 'ultimate-addons-for-gutenberg' ),
 						unitValue: 'px',
 					},
 					{
@@ -1525,26 +1423,23 @@ export default function Settings( props ) {
 			/>
 			<hr className="uagb-editor__separator" />
 			<ResponsiveBorder
-				disabledBorderTitle= {false}
+				disabledBorderTitle={ false }
 				setAttributes={ setAttributes }
-				prefix={'content'}
+				prefix={ 'content' }
 				attributes={ attributes }
 				deviceType={ deviceType }
 				disableBottomSeparator={ true }
 			/>
 		</UAGAdvancedPanelBody>
-	)
+	);
 
-	const closeStylePanel =  (
+	const closeStylePanel = (
 		<UAGAdvancedPanelBody
 			title={ __( 'Close Button', 'ultimate-addons-for-gutenberg' ) }
 			initialOpen={ false }
 		>
 			<Range
-				label={ __(
-					'Icon Size',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Icon Size', 'ultimate-addons-for-gutenberg' ) }
 				setAttributes={ setAttributes }
 				value={ closeIconSize }
 				data={ {
@@ -1556,220 +1451,211 @@ export default function Settings( props ) {
 				displayUnit={ false }
 			/>
 			<AdvancedPopColorControl
-				label={ __(
-					'Icon Color',
-					'ultimate-addons-for-gutenberg'
-				) }
-				colorValue={
-					closeIconColor
-						? closeIconColor
-						: ''
-				}
+				label={ __( 'Icon Color', 'ultimate-addons-for-gutenberg' ) }
+				colorValue={ closeIconColor ? closeIconColor : '' }
 				data={ {
 					value: closeIconColor,
 					label: 'closeIconColor',
 				} }
 				setAttributes={ setAttributes }
 			/>
-
 		</UAGAdvancedPanelBody>
-	)
+	);
 
 	const backgroundSettings = (
-			<UAGAdvancedPanelBody
-				title={ __( 'Background', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
-				<Background
-					setAttributes={ setAttributes }
-					backgroundGradient={ {
-						value: gradientValue,
-						label: 'gradientValue',
-					} }
-					backgroundImageColor={ {
-						value: backgroundImageColor,
-						label: 'backgroundImageColor',
-					} }
-					backgroundSize={{
-						desktop: {
-							value: backgroundSizeDesktop,
-							label: 'backgroundSizeDesktop',
-						},
-						tablet: {
-							value: backgroundSizeTablet,
-							label: 'backgroundSizeTablet',
-						},
-						mobile: {
-							value: backgroundSizeMobile,
-							label: 'backgroundSizeMobile',
-						},
-					}}
-					backgroundCustomSize={{
-						desktop: {
-							value: backgroundCustomSizeDesktop,
-							label: 'backgroundCustomSizeDesktop',
-						},
-						tablet: {
-							value: backgroundCustomSizeTablet,
-							label: 'backgroundCustomSizeTablet',
-						},
-						mobile: {
-							value: backgroundCustomSizeMobile,
-							label: 'backgroundCustomSizeMobile',
-						},
-					}}
-					backgroundCustomSizeType={{
-						value: backgroundCustomSizeType,
-						label: 'backgroundCustomSizeType'
-					}}
-					backgroundRepeat={{
-						desktop: {
-							value: backgroundRepeatDesktop,
-							label: 'backgroundRepeatDesktop',
-						},
-						tablet: {
-							value: backgroundRepeatTablet,
-							label: 'backgroundRepeatTablet',
-						},
-						mobile: {
-							value: backgroundRepeatMobile,
-							label: 'backgroundRepeatMobile',
-						},
-					}}
-					backgroundAttachment={{
-						desktop: {
-							value: backgroundAttachmentDesktop,
-							label: 'backgroundAttachmentDesktop',
-						},
-						tablet: {
-							value: backgroundAttachmentTablet,
-							label: 'backgroundAttachmentTablet',
-						},
-						mobile: {
-							value: backgroundAttachmentMobile,
-							label: 'backgroundAttachmentMobile',
-						},
-					}}
-					backgroundPosition={{
-						desktop: {
-							value: backgroundPositionDesktop,
-							label: 'backgroundPositionDesktop',
-						},
-						tablet: {
-							value: backgroundPositionTablet,
-							label: 'backgroundPositionTablet',
-						},
-						mobile: {
-							value: backgroundPositionMobile,
-							label: 'backgroundPositionMobile',
-						},
-					}}
-					backgroundImage={{
-						desktop: {
-							value: backgroundImageDesktop,
-							label: 'backgroundImageDesktop',
-						},
-						tablet: {
-							value: backgroundImageTablet,
-							label: 'backgroundImageTablet',
-						},
-						mobile: {
-							value: backgroundImageMobile,
-							label: 'backgroundImageMobile',
-						},
-					}}
-					imageResponsive={true}
-					backgroundColor={ {
-						value: backgroundColor,
-						label: 'backgroundColor',
-					} }
-					backgroundType={ {
-						value: backgroundType,
-						label: 'backgroundType',
-					} }
-					overlayType={{
-						value: overlayType,
-						label: 'overlayType'
-					}}
-					gradientOverlay={{
-						value: true,
-					}}
-					customPosition={{
-						value: customPosition,
-						label: 'customPosition'
-					}}
-					xPositionDesktop={{
-						value: xPositionDesktop,
-						label: 'xPositionDesktop'
-					}}
-					xPositionTablet={{
-						value: xPositionTablet,
-						label: 'xPositionTablet'
-					}}
-					xPositionMobile={{
-						value: xPositionMobile,
-						label: 'xPositionMobile'
-					}}
-					xPositionType={{
-						value: xPositionType,
-						label: 'xPositionType'
-					}}
-					xPositionTypeTablet={{
-						value: xPositionTypeTablet,
-						label: 'xPositionTypeTablet'
-					}}
-					xPositionTypeMobile={{
-						value: xPositionTypeMobile,
-						label: 'xPositionTypeMobile'
-					}}
-					yPositionDesktop={{
-						value: yPositionDesktop,
-						label: 'yPositionDesktop'
-					}}
-					yPositionTablet={{
-						value: yPositionTablet,
-						label: 'yPositionTablet'
-					}}
-					yPositionMobile={{
-						value: yPositionMobile,
-						label: 'yPositionMobile'
-					}}
-					yPositionType={{
-						value: yPositionType,
-						label: 'yPositionType'
-					}}
-					yPositionTypeTablet={{
-						value: yPositionTypeTablet,
-						label: 'yPositionTypeTablet'
-					}}
-					yPositionTypeMobile={{
-						value: yPositionTypeMobile,
-						label: 'yPositionTypeMobile'
-					}}
-					backgroundVideoType={ {
-						value: false,
-					} }
-					{ ...props }
-				/>
-			</UAGAdvancedPanelBody>
-	)
+		<UAGAdvancedPanelBody
+			title={ __( 'Background', 'ultimate-addons-for-gutenberg' ) }
+			initialOpen={ false }
+		>
+			<Background
+				setAttributes={ setAttributes }
+				backgroundGradient={ {
+					value: gradientValue,
+					label: 'gradientValue',
+				} }
+				backgroundImageColor={ {
+					value: backgroundImageColor,
+					label: 'backgroundImageColor',
+				} }
+				backgroundSize={ {
+					desktop: {
+						value: backgroundSizeDesktop,
+						label: 'backgroundSizeDesktop',
+					},
+					tablet: {
+						value: backgroundSizeTablet,
+						label: 'backgroundSizeTablet',
+					},
+					mobile: {
+						value: backgroundSizeMobile,
+						label: 'backgroundSizeMobile',
+					},
+				} }
+				backgroundCustomSize={ {
+					desktop: {
+						value: backgroundCustomSizeDesktop,
+						label: 'backgroundCustomSizeDesktop',
+					},
+					tablet: {
+						value: backgroundCustomSizeTablet,
+						label: 'backgroundCustomSizeTablet',
+					},
+					mobile: {
+						value: backgroundCustomSizeMobile,
+						label: 'backgroundCustomSizeMobile',
+					},
+				} }
+				backgroundCustomSizeType={ {
+					value: backgroundCustomSizeType,
+					label: 'backgroundCustomSizeType',
+				} }
+				backgroundRepeat={ {
+					desktop: {
+						value: backgroundRepeatDesktop,
+						label: 'backgroundRepeatDesktop',
+					},
+					tablet: {
+						value: backgroundRepeatTablet,
+						label: 'backgroundRepeatTablet',
+					},
+					mobile: {
+						value: backgroundRepeatMobile,
+						label: 'backgroundRepeatMobile',
+					},
+				} }
+				backgroundAttachment={ {
+					desktop: {
+						value: backgroundAttachmentDesktop,
+						label: 'backgroundAttachmentDesktop',
+					},
+					tablet: {
+						value: backgroundAttachmentTablet,
+						label: 'backgroundAttachmentTablet',
+					},
+					mobile: {
+						value: backgroundAttachmentMobile,
+						label: 'backgroundAttachmentMobile',
+					},
+				} }
+				backgroundPosition={ {
+					desktop: {
+						value: backgroundPositionDesktop,
+						label: 'backgroundPositionDesktop',
+					},
+					tablet: {
+						value: backgroundPositionTablet,
+						label: 'backgroundPositionTablet',
+					},
+					mobile: {
+						value: backgroundPositionMobile,
+						label: 'backgroundPositionMobile',
+					},
+				} }
+				backgroundImage={ {
+					desktop: {
+						value: backgroundImageDesktop,
+						label: 'backgroundImageDesktop',
+					},
+					tablet: {
+						value: backgroundImageTablet,
+						label: 'backgroundImageTablet',
+					},
+					mobile: {
+						value: backgroundImageMobile,
+						label: 'backgroundImageMobile',
+					},
+				} }
+				imageResponsive={ true }
+				backgroundColor={ {
+					value: backgroundColor,
+					label: 'backgroundColor',
+				} }
+				backgroundType={ {
+					value: backgroundType,
+					label: 'backgroundType',
+				} }
+				overlayType={ {
+					value: overlayType,
+					label: 'overlayType',
+				} }
+				gradientOverlay={ {
+					value: true,
+				} }
+				customPosition={ {
+					value: customPosition,
+					label: 'customPosition',
+				} }
+				xPositionDesktop={ {
+					value: xPositionDesktop,
+					label: 'xPositionDesktop',
+				} }
+				xPositionTablet={ {
+					value: xPositionTablet,
+					label: 'xPositionTablet',
+				} }
+				xPositionMobile={ {
+					value: xPositionMobile,
+					label: 'xPositionMobile',
+				} }
+				xPositionType={ {
+					value: xPositionType,
+					label: 'xPositionType',
+				} }
+				xPositionTypeTablet={ {
+					value: xPositionTypeTablet,
+					label: 'xPositionTypeTablet',
+				} }
+				xPositionTypeMobile={ {
+					value: xPositionTypeMobile,
+					label: 'xPositionTypeMobile',
+				} }
+				yPositionDesktop={ {
+					value: yPositionDesktop,
+					label: 'yPositionDesktop',
+				} }
+				yPositionTablet={ {
+					value: yPositionTablet,
+					label: 'yPositionTablet',
+				} }
+				yPositionMobile={ {
+					value: yPositionMobile,
+					label: 'yPositionMobile',
+				} }
+				yPositionType={ {
+					value: yPositionType,
+					label: 'yPositionType',
+				} }
+				yPositionTypeTablet={ {
+					value: yPositionTypeTablet,
+					label: 'yPositionTypeTablet',
+				} }
+				yPositionTypeMobile={ {
+					value: yPositionTypeMobile,
+					label: 'yPositionTypeMobile',
+				} }
+				backgroundVideoType={ {
+					value: false,
+				} }
+				{ ...props }
+			/>
+		</UAGAdvancedPanelBody>
+	);
 
 	return (
 		<>
 			<InspectorControls>
 				<InspectorTabs>
-
 					<InspectorTab { ...UAGTabs.general }>
-						{modalTriggerPanel}
-						{modalContentPanel}
-						{modalClosePanel}
+						{ modalTriggerPanel }
+						{ modalContentPanel }
+						{ modalClosePanel }
 					</InspectorTab>
 
 					<InspectorTab { ...UAGTabs.style }>
-						{triggerStylePanel}
-						{contentStylePanel}
+						{ triggerStylePanel }
+						{ contentStylePanel }
 						{ '' !== closeIcon && closeStylePanel }
-						{backgroundSettings}
+						{ backgroundSettings }
 					</InspectorTab>
 					<InspectorTab
 						{ ...UAGTabs.advance }

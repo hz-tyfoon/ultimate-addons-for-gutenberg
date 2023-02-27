@@ -17,10 +17,7 @@ module.exports = {
 			...defaultConfig.resolve.alias,
 			'@Admin': path.resolve( __dirname, 'assets/src/' ),
 			'@Utils': path.resolve( __dirname, 'assets/src/utils/' ),
-			'@Fields': path.resolve(
-				__dirname,
-				'assets/src/fields/'
-			),
+			'@Fields': path.resolve( __dirname, 'assets/src/fields/' ),
 			'@Skeleton': path.resolve(
 				__dirname,
 				'assets/src/common/skeleton/'
@@ -37,10 +34,7 @@ module.exports = {
 				newPath,
 				'blocks-config/uagb-controls/'
 			),
-			'@Common': path.resolve(
-				__dirname,
-				'assets/src/common/'
-			),
+			'@Common': path.resolve( __dirname, 'assets/src/common/' ),
 		},
 	},
 	output: {
@@ -51,12 +45,10 @@ module.exports = {
 		rules: [
 			...defaultConfig.module.rules,
 			{
-                test: /\.(png|jpg|jpeg|gif|ico|svg)$/,
-                use: [
-                    'file-loader'
-                ]
-            }
-		]
+				test: /\.(png|jpg|jpeg|gif|ico|svg)$/,
+				use: [ 'file-loader' ],
+			},
+		],
 	},
 	plugins: [
 		// ...defaultConfig.plugins,

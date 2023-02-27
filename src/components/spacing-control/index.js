@@ -12,7 +12,7 @@ import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGReset from '../reset';
 
 const SpacingControl = ( props ) => {
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -25,9 +25,8 @@ const SpacingControl = ( props ) => {
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
-
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
 	const deviceType = useDeviceType();
 	const responsive = true;
@@ -88,20 +87,22 @@ const SpacingControl = ( props ) => {
 				break;
 		}
 	};
-	const onChangeTopValue = ( event, device, value = '', resetLink = false ) => {
+	const onChangeTopValue = (
+		event,
+		device,
+		value = '',
+		resetLink = false
+	) => {
 		let newValue = value;
 		if ( '' === value && '' !== event ) {
-
 			newValue =
-				event.target.value === ''
-					? 0
-					: Number( event.target.value );
+				event.target.value === '' ? 0 : Number( event.target.value );
 		}
 
 		if ( ! resetLink ) {
 			if ( link.value ) {
 				changeLinkedValues( newValue, device );
-			} else{
+			} else {
 				changedUnLinkedValues( device );
 			}
 		}
@@ -117,48 +118,118 @@ const SpacingControl = ( props ) => {
 				setAttributes( { [ valueTopMobile.label ]: newValue } );
 				break;
 		}
-
 	};
 	const changedUnLinkedValues = ( device ) => {
-
 		switch ( device ) {
 			case 'desktop':
 				// code block
-				setAttributes( { [ valueTop.label ]: ( '' === valueTop.value || undefined === valueTop.value ) ? 0 : valueTop.value  } );
-				setAttributes( { [ valueRight.label ]: ( '' === valueRight.value || undefined === valueRight.value ) ? 0 : valueRight.value  } );
-				setAttributes( { [ valueBottom.label ]: ( '' === valueBottom.value || undefined === valueBottom.value ) ? 0 : valueBottom.value  } );
-				setAttributes( { [ valueLeft.label ]: ( '' === valueLeft.value || undefined === valueLeft.value ) ? 0 : valueLeft.value  } );
+				setAttributes( {
+					[ valueTop.label ]:
+						'' === valueTop.value || undefined === valueTop.value
+							? 0
+							: valueTop.value,
+				} );
+				setAttributes( {
+					[ valueRight.label ]:
+						'' === valueRight.value ||
+						undefined === valueRight.value
+							? 0
+							: valueRight.value,
+				} );
+				setAttributes( {
+					[ valueBottom.label ]:
+						'' === valueBottom.value ||
+						undefined === valueBottom.value
+							? 0
+							: valueBottom.value,
+				} );
+				setAttributes( {
+					[ valueLeft.label ]:
+						'' === valueLeft.value || undefined === valueLeft.value
+							? 0
+							: valueLeft.value,
+				} );
 				break;
 			case 'tablet':
 				// code block
-				setAttributes( { [ valueTopTablet.label ]: ( undefined === valueTopTablet.value || '' === valueTopTablet.value ) ? 0 : valueTopTablet.value } );
-				setAttributes( { [ valueRightTablet.label ]: ( undefined === valueRightTablet.value || '' === valueRightTablet.value ) ? 0 : valueRightTablet.value } );
-				setAttributes( { [ valueBottomTablet.label ]: ( undefined === valueBottomTablet.value || '' === valueBottomTablet.value ) ? 0 : valueBottomTablet.value } );
-				setAttributes( { [ valueLeftTablet.label ]: ( undefined === valueLeftTablet.value || '' === valueLeftTablet.value ) ? 0 : valueLeftTablet.value } );
+				setAttributes( {
+					[ valueTopTablet.label ]:
+						undefined === valueTopTablet.value ||
+						'' === valueTopTablet.value
+							? 0
+							: valueTopTablet.value,
+				} );
+				setAttributes( {
+					[ valueRightTablet.label ]:
+						undefined === valueRightTablet.value ||
+						'' === valueRightTablet.value
+							? 0
+							: valueRightTablet.value,
+				} );
+				setAttributes( {
+					[ valueBottomTablet.label ]:
+						undefined === valueBottomTablet.value ||
+						'' === valueBottomTablet.value
+							? 0
+							: valueBottomTablet.value,
+				} );
+				setAttributes( {
+					[ valueLeftTablet.label ]:
+						undefined === valueLeftTablet.value ||
+						'' === valueLeftTablet.value
+							? 0
+							: valueLeftTablet.value,
+				} );
 				break;
 			case 'mobile':
 				// code block
-				setAttributes( { [ valueTopMobile.label ]: ( '' === valueTopMobile.value || undefined === valueTopMobile.value ) ? 0 : valueTopMobile.value } );
-				setAttributes( { [ valueRightMobile.label ]: ( '' === valueRightMobile.value || undefined === valueRightMobile.value ) ? 0 : valueRightMobile.value } );
-				setAttributes( { [ valueBottomMobile.label ]: ( '' === valueBottomMobile.value || undefined === valueBottomMobile.value ) ? 0 : valueBottomMobile.value } );
-				setAttributes( { [ valueLeftMobile.label ]: ( '' === valueLeftMobile.value || undefined === valueLeftMobile.value ) ? 0 : valueLeftMobile.value } );
+				setAttributes( {
+					[ valueTopMobile.label ]:
+						'' === valueTopMobile.value ||
+						undefined === valueTopMobile.value
+							? 0
+							: valueTopMobile.value,
+				} );
+				setAttributes( {
+					[ valueRightMobile.label ]:
+						'' === valueRightMobile.value ||
+						undefined === valueRightMobile.value
+							? 0
+							: valueRightMobile.value,
+				} );
+				setAttributes( {
+					[ valueBottomMobile.label ]:
+						'' === valueBottomMobile.value ||
+						undefined === valueBottomMobile.value
+							? 0
+							: valueBottomMobile.value,
+				} );
+				setAttributes( {
+					[ valueLeftMobile.label ]:
+						'' === valueLeftMobile.value ||
+						undefined === valueLeftMobile.value
+							? 0
+							: valueLeftMobile.value,
+				} );
 				break;
 		}
-
 	};
-	const onChangeRightValue = ( event, device, value = '', resetLink = false ) => {
+	const onChangeRightValue = (
+		event,
+		device,
+		value = '',
+		resetLink = false
+	) => {
 		let newValue = value;
 
 		if ( '' === value && '' !== event ) {
 			newValue =
-				event.target.value === ''
-					? 0
-					: Number( event.target.value );
+				event.target.value === '' ? 0 : Number( event.target.value );
 		}
 		if ( ! resetLink ) {
 			if ( link.value ) {
 				changeLinkedValues( newValue, device );
-			}else {
+			} else {
 				changedUnLinkedValues( device );
 			}
 		}
@@ -176,19 +247,22 @@ const SpacingControl = ( props ) => {
 		}
 	};
 
-	const onChangeBottomValue = ( event, device, value = '', resetLink = false ) => {
+	const onChangeBottomValue = (
+		event,
+		device,
+		value = '',
+		resetLink = false
+	) => {
 		let newValue = value;
 
 		if ( '' === value && '' !== event ) {
 			newValue =
-				event.target.value === ''
-					? 0
-					: Number( event.target.value );
+				event.target.value === '' ? 0 : Number( event.target.value );
 		}
 		if ( ! resetLink ) {
 			if ( link.value ) {
 				changeLinkedValues( newValue, device );
-			}else {
+			} else {
 				changedUnLinkedValues( deviceType );
 			}
 		}
@@ -206,19 +280,22 @@ const SpacingControl = ( props ) => {
 		}
 	};
 
-	const onChangeLeftValue = ( event, device, value = '', resetLink = false ) => {
+	const onChangeLeftValue = (
+		event,
+		device,
+		value = '',
+		resetLink = false
+	) => {
 		let newValue = value;
 
 		if ( '' === value && '' !== event ) {
 			newValue =
-				event.target.value === ''
-					? 0
-					: Number( event.target.value );
+				event.target.value === '' ? 0 : Number( event.target.value );
 		}
 		if ( ! resetLink ) {
-		if ( link.value && ! resetLink ) {
+			if ( link.value && ! resetLink ) {
 				changeLinkedValues( newValue, device );
-			}else {
+			} else {
 				changedUnLinkedValues( deviceType );
 			}
 		}
@@ -357,25 +434,31 @@ const SpacingControl = ( props ) => {
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeTopValue( e, 'desktop' ) }
-					value={ ( undefined !== valueTop.value ) ? valueTop.value : '' }
+					value={ undefined !== valueTop.value ? valueTop.value : '' }
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeRightValue( e, 'desktop' ) }
-					value={ ( undefined !== valueRight.value ) ? valueRight.value : '' }
+					value={
+						undefined !== valueRight.value ? valueRight.value : ''
+					}
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeBottomValue( e, 'desktop' ) }
-					value={ ( undefined !== valueBottom.value ) ? valueBottom.value : '' }
+					value={
+						undefined !== valueBottom.value ? valueBottom.value : ''
+					}
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeLeftValue( e, 'desktop' ) }
-					value={ ( undefined !== valueLeft.value ) ? valueLeft.value : '' }
+					value={
+						undefined !== valueLeft.value ? valueLeft.value : ''
+					}
 				/>
 				{ linkHtml }
 			</div>
@@ -388,25 +471,41 @@ const SpacingControl = ( props ) => {
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeTopValue( e, 'tablet' ) }
-					value={ ( undefined !== valueTopTablet.value ) ? valueTopTablet.value : '' }
+					value={
+						undefined !== valueTopTablet.value
+							? valueTopTablet.value
+							: ''
+					}
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeRightValue( e, 'tablet' ) }
-					value={ ( undefined !== valueRightTablet.value ) ? valueRightTablet.value : '' }
+					value={
+						undefined !== valueRightTablet.value
+							? valueRightTablet.value
+							: ''
+					}
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeBottomValue( e, 'tablet' ) }
-					value={ ( undefined !== valueBottomTablet.value ) ? valueBottomTablet.value : '' }
+					value={
+						undefined !== valueBottomTablet.value
+							? valueBottomTablet.value
+							: ''
+					}
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeLeftValue( e, 'tablet' ) }
-					value={ ( undefined !== valueLeftTablet.value ) ? valueLeftTablet.value : '' }
+					value={
+						undefined !== valueLeftTablet.value
+							? valueLeftTablet.value
+							: ''
+					}
 				/>
 				{ linkHtml }
 			</div>
@@ -419,25 +518,41 @@ const SpacingControl = ( props ) => {
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeTopValue( e, 'mobile' ) }
-					value={ ( undefined !== valueTopMobile.value ) ? valueTopMobile.value : '' }
+					value={
+						undefined !== valueTopMobile.value
+							? valueTopMobile.value
+							: ''
+					}
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeRightValue( e, 'mobile' ) }
-					value={ ( undefined !== valueRightMobile.value ) ? valueRightMobile.value : '' }
+					value={
+						undefined !== valueRightMobile.value
+							? valueRightMobile.value
+							: ''
+					}
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeBottomValue( e, 'mobile' ) }
-					value={ ( undefined !== valueBottomMobile.value ) ? valueBottomMobile.value : '' }
+					value={
+						undefined !== valueBottomMobile.value
+							? valueBottomMobile.value
+							: ''
+					}
 				/>
 				<input
 					className="uagb-spacing-control__number"
 					type="number"
 					onChange={ ( e ) => onChangeLeftValue( e, 'mobile' ) }
-					value={ ( undefined !== valueLeftMobile.value ) ? valueLeftMobile.value : '' }
+					value={
+						undefined !== valueLeftMobile.value
+							? valueLeftMobile.value
+							: ''
+					}
 				/>
 				{ linkHtml }
 			</div>
@@ -449,52 +564,121 @@ const SpacingControl = ( props ) => {
 
 		switch ( device ) {
 			case 'desktop':
-				onChangeTopValue( '', 'desktop', defaultValues[valueTop.label], true );
-				onChangeRightValue( '', 'desktop', defaultValues[valueRight.label], true );
-				onChangeBottomValue( '', 'desktop', defaultValues[valueBottom.label], true );
-				onChangeLeftValue( '', 'desktop', defaultValues[valueLeft.label], true );
-				setAttributes( { [ unit?.label ]: defaultValues[unit?.label] } );
+				onChangeTopValue(
+					'',
+					'desktop',
+					defaultValues[ valueTop.label ],
+					true
+				);
+				onChangeRightValue(
+					'',
+					'desktop',
+					defaultValues[ valueRight.label ],
+					true
+				);
+				onChangeBottomValue(
+					'',
+					'desktop',
+					defaultValues[ valueBottom.label ],
+					true
+				);
+				onChangeLeftValue(
+					'',
+					'desktop',
+					defaultValues[ valueLeft.label ],
+					true
+				);
+				setAttributes( {
+					[ unit?.label ]: defaultValues[ unit?.label ],
+				} );
 				break;
 			case 'tablet':
-				onChangeTopValue( '', 'tablet', defaultValues[valueTopTablet.label], true );
-				onChangeRightValue( '', 'tablet', defaultValues[valueRightTablet.label], true );
-				onChangeBottomValue( '', 'tablet', defaultValues[valueBottomTablet.label], true );
-				onChangeLeftValue( '', 'tablet', defaultValues[valueLeftTablet.label], true );
-				setAttributes( { [ tUnit?.label ]: defaultValues[tUnit?.label] } );
+				onChangeTopValue(
+					'',
+					'tablet',
+					defaultValues[ valueTopTablet.label ],
+					true
+				);
+				onChangeRightValue(
+					'',
+					'tablet',
+					defaultValues[ valueRightTablet.label ],
+					true
+				);
+				onChangeBottomValue(
+					'',
+					'tablet',
+					defaultValues[ valueBottomTablet.label ],
+					true
+				);
+				onChangeLeftValue(
+					'',
+					'tablet',
+					defaultValues[ valueLeftTablet.label ],
+					true
+				);
+				setAttributes( {
+					[ tUnit?.label ]: defaultValues[ tUnit?.label ],
+				} );
 				break;
 			case 'mobile':
-				onChangeTopValue( '', 'mobile', defaultValues[valueTopMobile.label], true );
-				onChangeRightValue( '', 'mobile', defaultValues[valueRightMobile.label], true );
-				onChangeBottomValue( '', 'mobile', defaultValues[valueBottomMobile.label], true );
-				onChangeLeftValue( '', 'mobile', defaultValues[valueLeftMobile.label], true );
-				setAttributes( { [ mUnit?.label ]: defaultValues[mUnit?.label] } );
+				onChangeTopValue(
+					'',
+					'mobile',
+					defaultValues[ valueTopMobile.label ],
+					true
+				);
+				onChangeRightValue(
+					'',
+					'mobile',
+					defaultValues[ valueRightMobile.label ],
+					true
+				);
+				onChangeBottomValue(
+					'',
+					'mobile',
+					defaultValues[ valueBottomMobile.label ],
+					true
+				);
+				onChangeLeftValue(
+					'',
+					'mobile',
+					defaultValues[ valueLeftMobile.label ],
+					true
+				);
+				setAttributes( {
+					[ mUnit?.label ]: defaultValues[ mUnit?.label ],
+				} );
 				break;
 		}
 	};
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
-		<div
-			ref={panelRef}
-			className="components-base-control"
-		>
-			{
-				controlBeforeDomElement
-			}
+		<div ref={ panelRef } className="components-base-control">
+			{ controlBeforeDomElement }
 			<div className="uagb-spacing-control">
 				<div className="uagb-size-type-field-tabs">
 					<div className="uagb-control__header">
-					<ResponsiveToggle
-						label= { label }
-						responsive= { responsive }
-					/>
+						<ResponsiveToggle
+							label={ label }
+							responsive={ responsive }
+						/>
 						<div className="uagb-control__actions">
 							<UAGReset
-								onReset={resetValues}
-								attributeNames = {[
+								onReset={ resetValues }
+								attributeNames={ [
 									valueTop?.label,
 									valueRight?.label,
 									valueBottom?.label,
@@ -509,8 +693,8 @@ const SpacingControl = ( props ) => {
 									valueLeftMobile?.label,
 									unit?.label,
 									tUnit?.label,
-									mUnit?.label
-								]}
+									mUnit?.label,
+								] }
 							/>
 							<ButtonGroup
 								className="uagb-control__units"
@@ -519,11 +703,14 @@ const SpacingControl = ( props ) => {
 									'ultimate-addons-for-gutenberg'
 								) }
 							>
-								{ !disableUnits && onUnitSizeClick( unitSizes ) }
+								{ ! disableUnits &&
+									onUnitSizeClick( unitSizes ) }
 							</ButtonGroup>
 						</div>
 					</div>
-					{ output[ deviceType ] ? output[ deviceType ] : output.Desktop }
+					{ output[ deviceType ]
+						? output[ deviceType ]
+						: output.Desktop }
 					<div className="uagb-spacing-control__input-labels">
 						<span className="uagb-spacing-control__number-label">
 							{ __( 'Top', 'ultimate-addons-for-gutenberg' ) }
@@ -544,12 +731,9 @@ const SpacingControl = ( props ) => {
 					<p className="uag-control-help-notice">{ props.help }</p>
 				) }
 			</div>
-			{
-				controlAfterDomElement
-			}
+			{ controlAfterDomElement }
 		</div>
 	);
-
 };
 
 export default SpacingControl;

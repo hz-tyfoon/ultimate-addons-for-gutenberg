@@ -16,14 +16,8 @@ import UAGTabsControl from '@Components/tabs';
 import SpacingControl from '@Components/spacing-control';
 import UAGSelectControl from '@Components/select-control';
 import { dateI18n } from '@wordpress/date';
-import {
-	QueryControls,
-	ToggleControl,
-	Icon,
-} from '@wordpress/components';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { QueryControls, ToggleControl, Icon } from '@wordpress/components';
+import { InspectorControls } from '@wordpress/block-editor';
 import ResponsiveSlider from '@Components/responsive-slider';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { useDeviceType } from '@Controls/getPreviewType';
@@ -218,17 +212,20 @@ const Settings = ( props ) => {
 		horizontalSpaceMobile,
 		horizontalSpaceUnit,
 		horizontalSpaceUnitTablet,
-		horizontalSpaceUnitMobile
+		horizontalSpaceUnitMobile,
 	} = attributes;
 
 	let device = deviceType;
 
 	// For desktop, attribute name does not have `desktop` suffix to support backward compatibility.
-	if( 'Desktop' === deviceType ) {
+	if ( 'Desktop' === deviceType ) {
 		device = '';
 	}
 
-	const timelinAlignment = 'undefined' !== typeof attributes['timelinAlignment' + device ] ? attributes['timelinAlignment' + device ] :  attributes.timelinAlignment;
+	const timelinAlignment =
+		'undefined' !== typeof attributes[ 'timelinAlignment' + device ]
+			? attributes[ 'timelinAlignment' + device ]
+			: attributes.timelinAlignment;
 
 	const onSelectPostType = ( value ) => {
 		setAttributes( { postType: value } );
@@ -358,10 +355,7 @@ const Settings = ( props ) => {
 				initialOpen={ true }
 			>
 				<UAGSelectControl
-					label={ __(
-						'Post Type',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Post Type', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: postType,
 					} }
@@ -548,11 +542,14 @@ const Settings = ( props ) => {
 						},
 					] }
 					showIcons={ true }
-					responsive={true}
+					responsive={ true }
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __( 'Text Alignment', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Text Alignment',
+						'ultimate-addons-for-gutenberg'
+					) }
 					data={ {
 						desktop: {
 							value: align,
@@ -607,7 +604,7 @@ const Settings = ( props ) => {
 						},
 					] }
 					showIcons={ true }
-					responsive={true}
+					responsive={ true }
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
@@ -875,10 +872,10 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							value={ readMoreText }
-							data={{
+							data={ {
 								value: readMoreText,
 								label: 'readMoreText',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( { readMoreText: value } )
@@ -1902,13 +1899,10 @@ const Settings = ( props ) => {
 						},
 					} }
 					min={ 0 }
-					limitMax={ { 'px': 100, '%': 100, 'em': 100 } }
+					limitMax={ { px: 100, '%': 100, em: 100 } }
 					units={ [
 						{
-							name: __(
-								'PX',
-								'ultimate-addons-for-gutenberg'
-							),
+							name: __( 'PX', 'ultimate-addons-for-gutenberg' ),
 							unitValue: 'px',
 						},
 						{
@@ -1954,13 +1948,10 @@ const Settings = ( props ) => {
 						},
 					} }
 					min={ 0 }
-					limitMax={ { 'px': 50, '%': 100, 'em': 50 } }
+					limitMax={ { px: 50, '%': 100, em: 50 } }
 					units={ [
 						{
-							name: __(
-								'PX',
-								'ultimate-addons-for-gutenberg'
-							),
+							name: __( 'PX', 'ultimate-addons-for-gutenberg' ),
 							unitValue: 'px',
 						},
 						{

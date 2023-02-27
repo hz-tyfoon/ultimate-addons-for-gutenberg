@@ -12,14 +12,8 @@ const deprecated = [
 		attributes,
 		save( props ) {
 			const { className } = props;
-			const {
-				block_id,
-				question,
-				answer,
-				icon,
-				iconActive,
-				layout,
-			} = props.attributes;
+			const { block_id, question, answer, icon, iconActive, layout } =
+				props.attributes;
 
 			const faqRenderIcon = () => {
 				return (

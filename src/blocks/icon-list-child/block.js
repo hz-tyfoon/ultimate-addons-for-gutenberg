@@ -13,7 +13,10 @@ import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType( 'uagb/icon-list-child', {
 	title: __( 'Icon', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add and customize content for this list component.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add and customize content for this list component.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.icon_list_child,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/icon-list' ],
@@ -24,6 +27,6 @@ registerBlockType( 'uagb/icon-list-child', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

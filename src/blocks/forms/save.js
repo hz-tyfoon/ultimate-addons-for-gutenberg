@@ -26,7 +26,7 @@ export default function save( props ) {
 			<button className="uagb-forms-main-submit-button wp-block-button__link">
 				<RichText.Content
 					tagName="div"
-					value={ submitButtonText.replace( /(<([^>]+)>)/ig, '' ) }
+					value={ submitButtonText.replace( /(<([^>]+)>)/gi, '' ) }
 					className="uagb-forms-main-submit-button-text"
 				/>
 			</button>
@@ -67,18 +67,17 @@ export default function save( props ) {
 						value={ `uagb-form-${ block_id }` }
 					/>
 				</div>
-				{ reCaptchaEnable &&
-					'v2' === reCaptchaType && (
-						<>
-							<div
-								className="g-recaptcha uagb-forms-field-set"
-								data-sitekey= ''
-							></div>
-						</>
-					) }
-					<div
-						className={ `uagb-form-reacaptcha-error-${ block_id }` }
-					></div>
+				{ reCaptchaEnable && 'v2' === reCaptchaType && (
+					<>
+						<div
+							className="g-recaptcha uagb-forms-field-set"
+							data-sitekey=""
+						></div>
+					</>
+				) }
+				<div
+					className={ `uagb-form-reacaptcha-error-${ block_id }` }
+				></div>
 				<div className="uagb-forms-main-submit-button-wrap wp-block-button">
 					{ renderButtonHtml() }
 				</div>

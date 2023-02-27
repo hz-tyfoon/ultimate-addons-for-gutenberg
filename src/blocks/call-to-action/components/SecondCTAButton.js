@@ -14,19 +14,23 @@ const SecondCTAButton = ( props ) => {
 	let secondCtaIconOutput = '';
 	if ( attributes.showSecondIcon && attributes.secondCtaIcon !== '' ) {
 		if ( setAttributes !== 'not_set' ) {
-			secondCtaIconOutput = renderSVG( attributes.secondCtaIcon, setAttributes );
+			secondCtaIconOutput = renderSVG(
+				attributes.secondCtaIcon,
+				setAttributes
+			);
 		} else {
 			secondCtaIconOutput = renderSVG( attributes.secondCtaIcon );
 		}
 	}
 
 	let link = '/';
-	let preventDefaultFunc = ( e ) => {  // Disables click events for link in editor.
+	let preventDefaultFunc = ( e ) => {
+		// Disables click events for link in editor.
 		e.preventDefault();
-	}
+	};
 	if ( setAttributes === 'not_set' ) {
 		link = attributes.secondCtaLink;
-		preventDefaultFunc = false;  // Ensures click events for links aren't disabled for frontend.
+		preventDefaultFunc = false; // Ensures click events for links aren't disabled for frontend.
 	}
 
 	if ( setAttributes !== 'not_set' ) {
@@ -36,21 +40,26 @@ const SecondCTAButton = ( props ) => {
 					href={ link }
 					className={ classnames(
 						'uagb-cta-second__button',
-						'wp-block-button__link',
+						'wp-block-button__link'
 					) }
 					target={ target }
 					rel={ rel }
 					onClick={ preventDefaultFunc }
 				>
-					{ attributes.secondCtaIconPosition === 'before' && secondCtaIconOutput }
+					{ attributes.secondCtaIconPosition === 'before' &&
+						secondCtaIconOutput }
 					<RichText
-						value={ attributes.secondCtaLabel.replace( /(<([^>]+)>)/ig, '' ) }
+						value={ attributes.secondCtaLabel.replace(
+							/(<([^>]+)>)/gi,
+							''
+						) }
 						onChange={ ( value ) => {
 							setAttributes( { secondCtaLabel: value } );
 						} }
 						allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
 					/>
-					{ attributes.secondCtaIconPosition === 'after' && secondCtaIconOutput }
+					{ attributes.secondCtaIconPosition === 'after' &&
+						secondCtaIconOutput }
 				</a>
 			</>
 		);
@@ -62,18 +71,23 @@ const SecondCTAButton = ( props ) => {
 				href={ link }
 				className={ classnames(
 					'uagb-cta-second__button',
-					'wp-block-button__link',
+					'wp-block-button__link'
 				) }
 				target={ target }
 				rel={ rel }
 				onClick={ preventDefaultFunc }
 			>
-				{ attributes.secondCtaIconPosition === 'before' && secondCtaIconOutput }
+				{ attributes.secondCtaIconPosition === 'before' &&
+					secondCtaIconOutput }
 				<RichText.Content
-					value={ attributes.secondCtaLabel.replace( /(<([^>]+)>)/ig, '' ) }
+					value={ attributes.secondCtaLabel.replace(
+						/(<([^>]+)>)/gi,
+						''
+					) }
 				/>
-				{/* { attributes.secondCtaLabel } */}
-				{ attributes.secondCtaIconPosition === 'after' && secondCtaIconOutput }
+				{ /* { attributes.secondCtaLabel } */ }
+				{ attributes.secondCtaIconPosition === 'after' &&
+					secondCtaIconOutput }
 			</a>
 		</>
 	);

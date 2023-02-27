@@ -11,7 +11,10 @@ import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType( 'uagb/lottie', {
 	title: __( 'Lottie Animation', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add customizable lottie animation on your page.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add customizable lottie animation on your page.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.lottie,
 	keywords: [
 		__( 'lottie', 'ultimate-addons-for-gutenberg' ),
@@ -21,7 +24,7 @@ registerBlockType( 'uagb/lottie', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	category: uagb_blocks_info.category,
 	edit,

@@ -4,9 +4,7 @@ import WebfontLoader from '@Components/typography/fontloader';
 import TypographyControl from '@Components/typography';
 import './style.scss';
 import { __ } from '@wordpress/i18n';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
 import InspectorTab, {
@@ -16,11 +14,7 @@ import Range from '@Components/range/Range.js';
 import UAGMediaPicker from '@Components/image';
 import { getImageSize } from '@Utils/Helpers';
 import renderSVG from '@Controls/renderIcon';
-import {
-	ToggleControl,
-	ExternalLink,
-	Icon
-} from '@wordpress/components';
+import { ToggleControl, ExternalLink, Icon } from '@wordpress/components';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import ResponsiveSlider from '@Components/responsive-slider';
 import UAGSelectControl from '@Components/select-control';
@@ -32,7 +26,6 @@ let imageSizeOptions = [
 	{ value: 'medium', label: __( 'Medium', 'ultimate-addons-for-gutenberg' ) },
 	{ value: 'full', label: __( 'Large', 'ultimate-addons-for-gutenberg' ) },
 ];
-
 
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
@@ -278,9 +271,7 @@ const Settings = ( props ) => {
 							value: 'center',
 							icon: (
 								<Icon
-									icon={ renderSVG(
-										'fa fa-align-center'
-									) }
+									icon={ renderSVG( 'fa fa-align-center' ) }
 								/>
 							),
 							tooltip: __(
@@ -292,9 +283,7 @@ const Settings = ( props ) => {
 							value: 'right',
 							icon: (
 								<Icon
-									icon={ renderSVG(
-										'fa fa-align-right'
-									) }
+									icon={ renderSVG( 'fa fa-align-right' ) }
 								/>
 							),
 							tooltip: __(
@@ -509,7 +498,11 @@ const Settings = ( props ) => {
 						} }
 						onChange={ ( newCount ) => {
 							const cloneIcons = [ ...tools ];
-							const newCountFallback = getFallbackNumber( newCount, 'tools_count', 'how-to' );
+							const newCountFallback = getFallbackNumber(
+								newCount,
+								'tools_count',
+								'how-to'
+							);
 
 							if ( cloneIcons.length < newCountFallback ) {
 								const incAmount = Math.abs(
@@ -581,7 +574,11 @@ const Settings = ( props ) => {
 						} }
 						onChange={ ( newCount ) => {
 							const cloneIcons = [ ...materials ];
-							const newCountFallback = getFallbackNumber( newCount, 'material_count', 'how-to' );
+							const newCountFallback = getFallbackNumber(
+								newCount,
+								'material_count',
+								'how-to'
+							);
 
 							if ( cloneIcons.length < newCountFallback ) {
 								const incAmount = Math.abs(
@@ -609,7 +606,9 @@ const Settings = ( props ) => {
 								}
 								setAttributes( { materials: data_new } );
 							}
-							setAttributes( { material_count: newCountFallback } );
+							setAttributes( {
+								material_count: newCountFallback,
+							} );
 						} }
 						min={ 1 }
 						max={ 50 }
@@ -955,10 +954,7 @@ const Settings = ( props ) => {
 					/>
 				) }
 				<ResponsiveSlider
-					label={ __(
-						'Row Gap',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Row Gap', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
 							value: row_gap,
@@ -997,9 +993,8 @@ const Settings = ( props ) => {
 		);
 	};
 
-
 	return (
-			<>
+		<>
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
@@ -1025,8 +1020,7 @@ const Settings = ( props ) => {
 			{ loadHeadingGoogleFonts }
 			{ loadSubHeadingGoogleFonts }
 			{ loadPriceGoogleFonts }
-			</>
-
+		</>
 	);
 };
 

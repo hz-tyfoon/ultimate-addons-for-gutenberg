@@ -3,7 +3,6 @@ import React, { useLayoutEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
 
-
 import { RichText } from '@wordpress/block-editor';
 
 const Render = ( props ) => {

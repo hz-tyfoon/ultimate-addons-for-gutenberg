@@ -3,9 +3,7 @@ import WebfontLoader from '@Components/typography/fontloader';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
 import InspectorTab, {
@@ -17,11 +15,7 @@ import MultiButtonsControl from '@Components/multi-buttons-control';
 import UAGSelectControl from '@Components/select-control';
 import { getImageSize } from '@Utils/Helpers';
 import renderSVG from '@Controls/renderIcon';
-import {
-	ToggleControl,
-	DateTimePicker,
-	Icon
-} from '@wordpress/components';
+import { ToggleControl, DateTimePicker, Icon } from '@wordpress/components';
 import UAGTextControl from '@Components/text-control';
 
 let imageSizeOptions = [
@@ -38,7 +32,6 @@ export const removeFromArray = ( arr, removedElems ) =>
 			? ! removedElems.includes( a )
 			: a !== removedElems
 	);
-
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
@@ -170,16 +163,12 @@ const Settings = ( props ) => {
 			setAttributes( { enableDescription: true } );
 		}
 		if (
-			! subtypeCategories.hasOwnProperty(
-				itemType
-			) ||
-			! subtypeCategories[ itemType ].includes(
-				itemSubtype
-			)
+			! subtypeCategories.hasOwnProperty( itemType ) ||
+			! subtypeCategories[ itemType ].includes( itemSubtype )
 		) {
 			setAttributes( { itemSubtype: 'None' } );
 		}
-	}
+	};
 
 	/*
 	 * Event to set Image as while adding.
@@ -732,10 +721,10 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 						value={ reviewPublisher }
-						data={{
+						data={ {
 							value: reviewPublisher,
 							label: 'reviewPublisher',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { reviewPublisher: value } )
@@ -771,10 +760,10 @@ const Settings = ( props ) => {
 											'ultimate-addons-for-gutenberg'
 										) }
 										value={ brand }
-										data={{
+										data={ {
 											value: brand,
 											label: 'brand',
-										}}
+										} }
 										setAttributes={ setAttributes }
 										onChange={ ( value ) =>
 											setAttributes( { brand: value } )
@@ -786,10 +775,10 @@ const Settings = ( props ) => {
 											'ultimate-addons-for-gutenberg'
 										) }
 										value={ sku }
-										data={{
+										data={ {
 											value: sku,
 											label: 'sku',
-										}}
+										} }
 										setAttributes={ setAttributes }
 										onChange={ ( value ) =>
 											setAttributes( { sku: value } )
@@ -801,10 +790,10 @@ const Settings = ( props ) => {
 											'ultimate-addons-for-gutenberg'
 										) }
 										value={ identifier }
-										data={{
+										data={ {
 											value: identifier,
 											label: 'identifier',
-										}}
+										} }
 										setAttributes={ setAttributes }
 										onChange={ ( value ) =>
 											setAttributes( {
@@ -847,10 +836,10 @@ const Settings = ( props ) => {
 											'ultimate-addons-for-gutenberg'
 										) }
 										value={ offerCurrency }
-										data={{
+										data={ {
 											value: offerCurrency,
 											label: 'offerCurrency',
-										}}
+										} }
 										setAttributes={ setAttributes }
 										onChange={ ( value ) =>
 											setAttributes( {
@@ -868,10 +857,10 @@ const Settings = ( props ) => {
 											'ultimate-addons-for-gutenberg'
 										) }
 										value={ offerPrice }
-										data={{
+										data={ {
 											value: offerPrice,
 											label: 'offerPrice',
-										}}
+										} }
 										setAttributes={ setAttributes }
 										onChange={ ( value ) =>
 											setAttributes( {
@@ -895,72 +884,63 @@ const Settings = ( props ) => {
 										setAttributes={ props.setAttributes }
 										options={ [
 											{
-												value:
-													'https://schema.org/Discontinued',
+												value: 'https://schema.org/Discontinued',
 												label: __(
 													'Discontinued',
 													'ultimate-addons-for-gutenberg'
 												),
 											},
 											{
-												value:
-													'https://schema.org/InStock',
+												value: 'https://schema.org/InStock',
 												label: __(
 													'In Stock',
 													'ultimate-addons-for-gutenberg'
 												),
 											},
 											{
-												value:
-													'https://schema.org/InStoreOnly',
+												value: 'https://schema.org/InStoreOnly',
 												label: __(
 													'In Store Only',
 													'ultimate-addons-for-gutenberg'
 												),
 											},
 											{
-												value:
-													'https://schema.org/LimitedAvailability',
+												value: 'https://schema.org/LimitedAvailability',
 												label: __(
 													'Limited Availability',
 													'ultimate-addons-for-gutenberg'
 												),
 											},
 											{
-												value:
-													'https://schema.org/OnlineOnly',
+												value: 'https://schema.org/OnlineOnly',
 												label: __(
 													'Online Only',
 													'ultimate-addons-for-gutenberg'
 												),
 											},
 											{
-												value:
-													'https://schema.org/OutOfStock',
+												value: 'https://schema.org/OutOfStock',
 												label: __(
 													'Out Of Stock',
 													'ultimate-addons-for-gutenberg'
 												),
 											},
 											{
-												value:
-													'https://schema.org/PreOrder',
+												value: 'https://schema.org/PreOrder',
 												label: __(
 													'Pre Order',
 													'ultimate-addons-for-gutenberg'
 												),
 											},
 											{
-												value:
-													'https://schema.org/PreSale',
+												value: 'https://schema.org/PreSale',
 												label: __(
 													'Pre Sale',
 													'ultimate-addons-for-gutenberg'
 												),
 											},
 											{
-												value:
-													'https://schema.org/SoldOut',
+												value: 'https://schema.org/SoldOut',
 												label: __(
 													'Sold Out',
 													'ultimate-addons-for-gutenberg'
@@ -1122,10 +1102,7 @@ const Settings = ( props ) => {
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __(
-						'Alignment',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Alignment', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: overallAlignment,
 						label: 'overallAlignment',
@@ -1148,9 +1125,7 @@ const Settings = ( props ) => {
 							value: 'center',
 							icon: (
 								<Icon
-									icon={ renderSVG(
-										'fa fa-align-center'
-									) }
+									icon={ renderSVG( 'fa fa-align-center' ) }
 								/>
 							),
 							tooltip: __(
@@ -1162,9 +1137,7 @@ const Settings = ( props ) => {
 							value: 'right',
 							icon: (
 								<Icon
-									icon={ renderSVG(
-										'fa fa-align-right'
-									) }
+									icon={ renderSVG( 'fa fa-align-right' ) }
 								/>
 							),
 							tooltip: __(
@@ -1246,10 +1219,10 @@ const Settings = ( props ) => {
 				<UAGTextControl
 					label={ __( 'Link', 'ultimate-addons-for-gutenberg' ) }
 					value={ ctaLink }
-					data={{
+					data={ {
 						value: ctaLink,
 						label: 'ctaLink',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( { ctaLink: value } )
@@ -1371,10 +1344,10 @@ const Settings = ( props ) => {
 					<UAGTextControl
 						label={ __( 'ISBN', 'ultimate-addons-for-gutenberg' ) }
 						value={ isbn }
-						data={{
+						data={ {
 							value: isbn,
 							label: 'isbn',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { isbn: value } )
@@ -1390,10 +1363,10 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 						value={ bookAuthorName }
-						data={{
+						data={ {
 							value: bookAuthorName,
 							label: 'bookAuthorName',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { bookAuthorName: value } )
@@ -1416,10 +1389,10 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 						value={ provider }
-						data={{
+						data={ {
 							value: provider,
 							label: 'provider',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { provider: value } )
@@ -1439,10 +1412,10 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 						value={ appCategory }
-						data={{
+						data={ {
 							value: appCategory,
 							label: 'appCategory',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { appCategory: value } )
@@ -1454,10 +1427,10 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 						value={ operatingSystem }
-						data={{
+						data={ {
 							value: operatingSystem,
 							label: 'operatingSystem',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { operatingSystem: value } )
@@ -1476,10 +1449,10 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 						value={ directorname }
-						data={{
+						data={ {
 							value: directorname,
 							label: 'directorname',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { directorname: value } )
@@ -1499,7 +1472,7 @@ const Settings = ( props ) => {
 	}
 
 	return (
-<>
+		<>
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>

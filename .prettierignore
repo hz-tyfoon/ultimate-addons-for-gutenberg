@@ -1,5 +1,7 @@
 .cache
 build
+dist
+admin-core
 build-module
 build-types
 packages/block-serialization-spec-parser/parser.js
@@ -16,3 +18,4 @@ node_modules
 *-rtl*
 *.md
 .distignore
+font-awesome-pollyfiller.js

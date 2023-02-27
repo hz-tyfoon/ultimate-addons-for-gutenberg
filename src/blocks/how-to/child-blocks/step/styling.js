@@ -71,41 +71,38 @@ function styling( props ) {
 
 	const selectors = {
 		' .uagb-step-link-text': {
-			'color': urlColor,
+			color: urlColor,
 			'font-family': urlFontFamily,
 			'font-style': urlFontStyle,
 			'text-transform': urlTransform,
 			'text-decoration': urlDecoration,
 			'font-weight': urlFontWeight,
-			'font-size': generateCSSUnit(
-				urlFontSize,
-				urlFontSizeType
+			'font-size': generateCSSUnit( urlFontSize, urlFontSizeType ),
+			'line-height': generateCSSUnit( urlLineHeight, urlLineHeightType ),
+			'letter-spacing': generateCSSUnit(
+				urlLetterSpacing,
+				urlLetterSpacingType
 			),
-			'line-height': generateCSSUnit(
-				urlLineHeight,
-				urlLineHeightType
-			),
-			'letter-spacing': generateCSSUnit( urlLetterSpacing, urlLetterSpacingType ),
 		},
 		' .block-editor-rich-text__editable.uagb-how-to-step-name': {
-			'color': titleColor,
+			color: titleColor,
 			'font-family': titleFontFamily,
 			'font-style': titleFontStyle,
 			'text-transform': titleTransform,
 			'text-decoration': titleDecoration,
 			'font-weight': titleFontWeight,
-			'font-size': generateCSSUnit(
-				titleFontSize,
-				titleFontSizeType
-			),
+			'font-size': generateCSSUnit( titleFontSize, titleFontSizeType ),
 			'line-height': generateCSSUnit(
 				titleLineHeight,
 				titleLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( titleLetterSpacing, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacing,
+				titleLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-how-to-step-description': {
-			'color': descriptionColor,
+			color: descriptionColor,
 			'font-family': descriptionFontFamily,
 			'font-style': descriptionFontStyle,
 			'text-transform': descriptionTransform,
@@ -119,21 +116,24 @@ function styling( props ) {
 				descriptionLineHeight,
 				descriptionLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( descriptionLetterSpacing, descriptionLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descriptionLetterSpacing,
+				descriptionLetterSpacingType
+			),
 		},
 	};
 
 	mobileSelectors = {
 		' .uagb-step-link-text': {
-			'font-size': generateCSSUnit(
-				urlFontSizeMobile,
-				urlFontSizeType
-			),
+			'font-size': generateCSSUnit( urlFontSizeMobile, urlFontSizeType ),
 			'line-height': generateCSSUnit(
 				urlLineHeightMobile,
 				urlLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( urlLetterSpacingMobile, urlLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				urlLetterSpacingMobile,
+				urlLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-how-to-step-name': {
 			'font-size': generateCSSUnit(
@@ -144,7 +144,10 @@ function styling( props ) {
 				titleLineHeightMobile,
 				titleLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( titleLetterSpacingMobile, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacingMobile,
+				titleLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-how-to-step-description': {
 			'font-size': generateCSSUnit(
@@ -155,21 +158,24 @@ function styling( props ) {
 				descriptionLineHeightMobile,
 				descriptionLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( descriptionLetterSpacingMobile, descriptionLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descriptionLetterSpacingMobile,
+				descriptionLetterSpacingType
+			),
 		},
 	};
 
 	tabletSelectors = {
 		' .uagb-step-link-text': {
-			'font-size': generateCSSUnit(
-				urlFontSizeTablet,
-				urlFontSizeType
-			),
+			'font-size': generateCSSUnit( urlFontSizeTablet, urlFontSizeType ),
 			'line-height': generateCSSUnit(
 				urlLineHeightTablet,
 				urlLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( urlLetterSpacingTablet, urlLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				urlLetterSpacingTablet,
+				urlLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-how-to-step-name': {
 			'font-size': generateCSSUnit(
@@ -180,7 +186,10 @@ function styling( props ) {
 				titleLineHeightTablet,
 				titleLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( titleLetterSpacingTablet, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacingTablet,
+				titleLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-how-to-step-description': {
 			'font-size': generateCSSUnit(
@@ -191,7 +200,10 @@ function styling( props ) {
 				descriptionLineHeightTablet,
 				descriptionLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( descriptionLetterSpacingTablet, descriptionLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descriptionLetterSpacingTablet,
+				descriptionLetterSpacingType
+			),
 		},
 	};
 

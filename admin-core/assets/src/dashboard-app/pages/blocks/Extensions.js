@@ -9,11 +9,11 @@ const Extensions = ( { currentTab } ) => {
 	if ( 'extensions' === currentTab || 'all' === currentTab ) {
 		return (
 			<>
-				<DisplayConditionsExtension/>
-				{/* This Component will be rendered once Spectra Pro is Released. */}
-				{/* <DynamicContentExtension/> */}
-				<MasonryGalleryExtension/>
-				<ResponsiveConditionsExtention/>
+				<DisplayConditionsExtension />
+				{ /* This Component will be rendered once Spectra Pro is Released. */ }
+				{ /* <DynamicContentExtension/> */ }
+				<MasonryGalleryExtension />
+				<ResponsiveConditionsExtention />
 			</>
 		);
 	}

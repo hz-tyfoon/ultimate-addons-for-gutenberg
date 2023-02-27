@@ -11,11 +11,7 @@ import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const UAGBImageGallery = ( props ) => {
-	const {
-		clientId,
-		attributes,
-		isSelected
-	} = props;
+	const { clientId, attributes, isSelected } = props;
 
 	const deviceType = useDeviceType();
 	useEffect( () => {
@@ -28,15 +24,16 @@ const UAGBImageGallery = ( props ) => {
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
-        addBlockEditorDynamicStyles( 'uagb-image-gallery-style-' + clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-image-gallery-style-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props, deviceType ] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = attributes;
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	// Lightbox disabled by default for the block on every instance.
@@ -51,13 +48,15 @@ const UAGBImageGallery = ( props ) => {
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/image-gallery.svg`;
 
-	return (
-		attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings { ...{ ...props, lightboxPreview, setLightboxPreview } } />
-				<Render { ...{ ...props, lightboxPreview, setLightboxPreview } } />
-			</>
-		)
+	return attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings
+				{ ...{ ...props, lightboxPreview, setLightboxPreview } }
+			/>
+			<Render { ...{ ...props, lightboxPreview, setLightboxPreview } } />
+		</>
 	);
 };
 

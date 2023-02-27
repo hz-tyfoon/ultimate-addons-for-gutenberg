@@ -3,7 +3,7 @@
  */
 
 import styling from './styling';
-import React, {    useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
@@ -20,79 +20,106 @@ import maybeGetColorForVariable from '@Controls/maybeGetColorForVariable';
 const UAGBSectionEdit = ( props ) => {
 	const deviceType = useDeviceType();
 	useEffect( () => {
-		const { borderStyle,borderWidth,borderRadius,borderColor,borderHoverColor } = props.attributes;
+		const {
+			borderStyle,
+			borderWidth,
+			borderRadius,
+			borderColor,
+			borderHoverColor,
+		} = props.attributes;
 		// Backward Border Migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'overall', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHoverColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'overall',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				props.setAttributes,
+				props.attributes
 			);
-
 		}
-		
-	}, [ ] );
+	}, [] );
 	useEffect( () => {
-
 		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-section-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-		
+		addBlockEditorDynamicStyles(
+			'uagb-section-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
+		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-section-style-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-section-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	useEffect( () => {
-
 		const { setAttributes, attributes } = props;
 
 		const {
-			 backgroundOpacity,
-			 backgroundImageColor,
-			 gradientOverlayColor1,
-			 gradientOverlayColor2,
-			 backgroundType,
-			 overlayType,
-			 gradientOverlayAngle,
-			 gradientOverlayLocation1,
-			 gradientOverlayPosition,
-			 gradientOverlayLocation2,
-			 gradientOverlayType,
-			 backgroundVideoOpacity,
-			 backgroundVideoColor
-			} = attributes;
+			backgroundOpacity,
+			backgroundImageColor,
+			gradientOverlayColor1,
+			gradientOverlayColor2,
+			backgroundType,
+			overlayType,
+			gradientOverlayAngle,
+			gradientOverlayLocation1,
+			gradientOverlayPosition,
+			gradientOverlayLocation2,
+			gradientOverlayType,
+			backgroundVideoOpacity,
+			backgroundVideoColor,
+		} = attributes;
 
-		if( 101 !== backgroundOpacity && 'image' === backgroundType && 'gradient' === overlayType ){
-			const color1 = hexToRGBA( maybeGetColorForVariable( gradientOverlayColor1 ), backgroundOpacity );
-			const color2 = hexToRGBA( maybeGetColorForVariable( gradientOverlayColor2 ), backgroundOpacity );
+		if (
+			101 !== backgroundOpacity &&
+			'image' === backgroundType &&
+			'gradient' === overlayType
+		) {
+			const color1 = hexToRGBA(
+				maybeGetColorForVariable( gradientOverlayColor1 ),
+				backgroundOpacity
+			);
+			const color2 = hexToRGBA(
+				maybeGetColorForVariable( gradientOverlayColor2 ),
+				backgroundOpacity
+			);
 			let gradientVal;
 			if ( 'linear' === gradientOverlayType ) {
 				gradientVal = `linear-gradient(${ gradientOverlayAngle }deg, ${ color1 } ${ gradientOverlayLocation1 }%, ${ color2 } ${ gradientOverlayLocation2 }%)`;
@@ -109,7 +136,10 @@ const UAGBSectionEdit = ( props ) => {
 
 		if ( 'image' === backgroundType ) {
 			if ( 101 !== backgroundOpacity ) {
-				const color = hexToRGBA( maybeGetColorForVariable( backgroundImageColor ), backgroundOpacity );
+				const color = hexToRGBA(
+					maybeGetColorForVariable( backgroundImageColor ),
+					backgroundOpacity
+				);
 				setAttributes( { backgroundImageColor: color } );
 				setAttributes( { backgroundOpacity: 101 } );
 			}
@@ -117,22 +147,24 @@ const UAGBSectionEdit = ( props ) => {
 
 		if ( 'video' === backgroundType ) {
 			if ( 101 !== backgroundVideoOpacity ) {
-				const color = hexToRGBA( maybeGetColorForVariable( backgroundVideoColor ), backgroundVideoOpacity );
+				const color = hexToRGBA(
+					maybeGetColorForVariable( backgroundVideoColor ),
+					backgroundVideoOpacity
+				);
 				setAttributes( { backgroundVideoColor: color } );
 			}
 		}
-
 	}, [] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/advanced-row.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } /> 
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

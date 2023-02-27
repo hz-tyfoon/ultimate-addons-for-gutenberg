@@ -19,13 +19,8 @@ const Render = ( props ) => {
 	const deviceType = useDeviceType();
 	const { attributes, setAttributes } = props;
 
-	const {
-		block_id,
-		layout,
-		placeholder,
-		buttonType,
-		buttonText,
-	} = attributes;
+	const { block_id, layout, placeholder, buttonType, buttonText } =
+		attributes;
 
 	const renderClassic = () => {
 		if ( 'input-button' === layout ) {

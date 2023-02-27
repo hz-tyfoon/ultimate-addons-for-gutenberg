@@ -13,8 +13,11 @@ import { __ } from '@wordpress/i18n';
 
 registerBlockType( 'uagb/column', {
 	title: __( 'Column', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Immediate child of Advanced Columns', 'ultimate-addons-for-gutenberg' ),
-	icon: renderLegacyBlockEditorIcon ( 'column' ),
+	description: __(
+		'Immediate child of Advanced Columns',
+		'ultimate-addons-for-gutenberg'
+	),
+	icon: renderLegacyBlockEditorIcon( 'column' ),
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/columns' ],
 	supports: {
@@ -29,7 +32,6 @@ registerBlockType( 'uagb/column', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );
-

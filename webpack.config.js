@@ -5,10 +5,19 @@ const { spawn } = require( 'child_process' );
 
 class UAGBRunAdditionalProcess {
 	apply( compiler ) {
-		compiler.hooks.afterEmit.tapAsync( 'UAGBRunAdditionalProcess', ( compilation, callback ) => {
-			spawn( /^win/.test( process.platform ) ? 'npm-run-all.cmd' : 'npm-run-all', ['--sequential', 'build:sass', 'build:placeholder'], { stdio: 'inherit' } );
-			callback();
-		} );
+		compiler.hooks.afterEmit.tapAsync(
+			'UAGBRunAdditionalProcess',
+			( compilation, callback ) => {
+				spawn(
+					/^win/.test( process.platform )
+						? 'npm-run-all.cmd'
+						: 'npm-run-all',
+					[ '--sequential', 'build:sass', 'build:placeholder' ],
+					{ stdio: 'inherit' }
+				);
+				callback();
+			}
+		);
 	}
 }
 
@@ -44,7 +53,10 @@ module.exports = {
 			'@Components': path.resolve( __dirname, 'src/components/' ),
 			'@Utils': path.resolve( __dirname, 'blocks-config/utils/' ),
 			'@Blocks': path.resolve( __dirname, 'src/blocks/' ),
-			'@Attributes': path.resolve( __dirname, 'blocks-config/blocks-attributes/' ),
+			'@Attributes': path.resolve(
+				__dirname,
+				'blocks-config/blocks-attributes/'
+			),
 		},
 	},
 	module: {

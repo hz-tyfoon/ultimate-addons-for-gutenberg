@@ -19,7 +19,7 @@ function inlineStyles( props ) {
 		backgroundRepeat,
 		backgroundType,
 		desktopMarginType,
-		desktopPaddingType
+		desktopPaddingType,
 	} = props.attributes;
 
 	const borderCSS = generateBorderCSS( props.attributes, 'columns' );
@@ -30,8 +30,11 @@ function inlineStyles( props ) {
 		'padding-left': generateCSSUnit( leftPadding, desktopPaddingType ),
 		'padding-right': generateCSSUnit( rightPadding, desktopPaddingType ),
 		'margin-top': generateCSSUnit( topMarginDesktop, desktopMarginType ),
-		'margin-bottom': generateCSSUnit( bottomMarginDesktop, desktopMarginType ),
-		...borderCSS
+		'margin-bottom': generateCSSUnit(
+			bottomMarginDesktop,
+			desktopMarginType
+		),
+		...borderCSS,
 	};
 
 	const position = backgroundPosition.replace( '-', ' ' );

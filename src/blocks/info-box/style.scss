@@ -46,8 +46,7 @@ a.uagb-infobox-link-wrap,
 a.uagb-infobox-cta-link:hover,
 .entry .entry-content a.uagb-infobox-cta-link:hover,
 a.uagb-infobox-link-wrap:hover,
-.entry .entry-content a.uagb-infobox-link-wrap:hover
-.entry .entry-content a.uagb-infobox-cta-link:hover {
+.entry .entry-content a.uagb-infobox-link-wrap:hover .entry .entry-content a.uagb-infobox-cta-link:hover {
 	color: inherit;
 }
 
@@ -267,7 +266,6 @@ a.uagb-infobox-link-wrap {
 }
 
 .uagb-infobox__content-wrap .uagb-ifb-content {
-
 	img {
 		display: inline-block;
 		max-width: 100%;
@@ -293,7 +291,6 @@ a.uagb-infobox-link-wrap {
 
 .uagb-infobox-cta-link {
 	display: inline-flex;
-
 }
 
 .block-editor-page #wpwrap .uagb-infobox-cta-link svg,
@@ -343,8 +340,7 @@ a.uagb-infbox__link-to-all {
 	-webkit-box-shadow: none;
 }
 
-@media only screen and (max-width: 976px) {
-
+@media only screen and ( max-width: 976px ) {
 	.uagb-infobox-stacked-tablet.uagb-infobox__content-wrap .uagb-ifb-image-content {
 		padding: 0;
 		margin-bottom: 20px;
@@ -386,7 +382,6 @@ a.uagb-infbox__link-to-all {
 
 	.uagb-infobox-icon-left-title.uagb-infobox-stacked-tablet,
 	.uagb-infobox-icon-left.uagb-infobox-stacked-tablet {
-
 		.uagb-ifb-image-content,
 		.uagb-ifb-icon-wrap {
 			margin-right: 0;
@@ -395,7 +390,6 @@ a.uagb-infbox__link-to-all {
 
 	.uagb-infobox-icon-right-title.uagb-infobox-stacked-tablet,
 	.uagb-infobox-icon-right.uagb-infobox-stacked-tablet {
-
 		.uagb-ifb-image-content,
 		.uagb-ifb-icon-wrap {
 			margin-left: 0;
@@ -407,8 +401,7 @@ a.uagb-infbox__link-to-all {
 	}
 }
 
-@media screen and (max-width: 767px) {
-
+@media screen and ( max-width: 767px ) {
 	.uagb-infobox-stacked-mobile.uagb-infobox__content-wrap {
 		display: inline-block;
 
@@ -443,12 +436,10 @@ a.uagb-infbox__link-to-all {
 			width: 100%;
 			text-align: center;
 		}
-
 	}
 
 	.uagb-infobox-icon-left-title.uagb-infobox-stacked-mobile,
 	.uagb-infobox-icon-left.uagb-infobox-stacked-mobile {
-
 		.uagb-ifb-image-content,
 		.uagb-ifb-icon-wrap {
 			margin-right: 0;
@@ -457,7 +448,6 @@ a.uagb-infbox__link-to-all {
 
 	.uagb-infobox-icon-right-title.uagb-infobox-stacked-mobile,
 	.uagb-infobox-icon-right.uagb-infobox-stacked-mobile {
-
 		.uagb-ifb-image-content,
 		.uagb-ifb-icon-wrap {
 			margin-left: 0;

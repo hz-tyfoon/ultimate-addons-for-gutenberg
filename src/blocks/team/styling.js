@@ -7,7 +7,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -108,15 +107,43 @@ function styling( props ) {
 		descLetterSpacingType,
 	} = props.attributes;
 
-	const imgWidthFallback = getFallbackNumber( imgWidth, 'imgWidth', blockName );
-	const titleSpaceFallback = getFallbackNumber( titleSpace, 'titleSpace', blockName );
-	const prefixSpaceFallback = getFallbackNumber( prefixSpace, 'prefixSpace', blockName );
-	const descSpaceFallback = getFallbackNumber( descSpace, 'descSpace', blockName );
-	const socialFontSizeFallback = getFallbackNumber( socialFontSize, 'socialFontSize', blockName );
-	const socialSpaceFallback = getFallbackNumber( socialSpace, 'socialSpace', blockName );
+	const imgWidthFallback = getFallbackNumber(
+		imgWidth,
+		'imgWidth',
+		blockName
+	);
+	const titleSpaceFallback = getFallbackNumber(
+		titleSpace,
+		'titleSpace',
+		blockName
+	);
+	const prefixSpaceFallback = getFallbackNumber(
+		prefixSpace,
+		'prefixSpace',
+		blockName
+	);
+	const descSpaceFallback = getFallbackNumber(
+		descSpace,
+		'descSpace',
+		blockName
+	);
+	const socialFontSizeFallback = getFallbackNumber(
+		socialFontSize,
+		'socialFontSize',
+		blockName
+	);
+	const socialSpaceFallback = getFallbackNumber(
+		socialSpace,
+		'socialSpace',
+		blockName
+	);
 
-	const socialSpaceTabletFallback = isNaN( socialSpaceTablet ) ? socialSpaceFallback : socialSpaceTablet;
-	const socialSpaceMobileFallback = isNaN( socialSpaceMobile ) ? socialSpaceTabletFallback : socialSpaceMobile;
+	const socialSpaceTabletFallback = isNaN( socialSpaceTablet )
+		? socialSpaceFallback
+		: socialSpaceTablet;
+	const socialSpaceMobileFallback = isNaN( socialSpaceMobile )
+		? socialSpaceTabletFallback
+		: socialSpaceMobile;
 
 	let tabletSelectors = {};
 	let mobileSelectors = {};
@@ -129,18 +156,21 @@ function styling( props ) {
 				descLineHeightType
 			),
 			'font-family': descFontFamily,
-			'font-style' : descFontStyle,
+			'font-style': descFontStyle,
 			'text-decoration': descDecoration,
 			'text-transform': descTransform,
 			'font-weight': descFontWeight,
 			'color': descColor,
 			'margin-bottom': generateCSSUnit( descSpaceFallback, 'px' ),
 			'margin-top': generateCSSUnit( prefixSpaceFallback, 'px' ),
-			'letter-spacing': generateCSSUnit( descLetterSpacing, descLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacing,
+				descLetterSpacingType
+			),
 		},
 		' .rich-text.block-editor-rich-text__editable.uagb-team__prefix': {
 			'font-family': prefixFontFamily,
-			'font-style' : prefixFontStyle,
+			'font-style': prefixFontStyle,
 			'text-decoration': prefixDecoration,
 			'text-transform': prefixTransform,
 			'font-weight': prefixFontWeight,
@@ -150,13 +180,25 @@ function styling( props ) {
 				prefixLineHeightType
 			),
 			'color': prefixColor,
-			'letter-spacing': generateCSSUnit( prefixLetterSpacing, prefixLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				prefixLetterSpacing,
+				prefixLetterSpacingType
+			),
 		},
 		' .uagb-team__social-icon a': {
 			'color': socialColor,
-			'font-size': generateCSSUnit( socialFontSizeFallback, socialFontSizeType ),
-			'width': generateCSSUnit( socialFontSizeFallback, socialFontSizeType ),
-			'height': generateCSSUnit( socialFontSizeFallback, socialFontSizeType ),
+			'font-size': generateCSSUnit(
+				socialFontSizeFallback,
+				socialFontSizeType
+			),
+			'width': generateCSSUnit(
+				socialFontSizeFallback,
+				socialFontSizeType
+			),
+			'height': generateCSSUnit(
+				socialFontSizeFallback,
+				socialFontSizeType
+			),
 			'line-height': generateCSSUnit(
 				socialFontSizeFallback,
 				socialFontSizeType
@@ -164,8 +206,14 @@ function styling( props ) {
 		},
 		' .uagb-team__social-icon svg': {
 			'fill': socialColor,
-			'width': generateCSSUnit( socialFontSizeFallback, socialFontSizeType ),
-			'height': generateCSSUnit( socialFontSizeFallback, socialFontSizeType ),
+			'width': generateCSSUnit(
+				socialFontSizeFallback,
+				socialFontSizeType
+			),
+			'height': generateCSSUnit(
+				socialFontSizeFallback,
+				socialFontSizeType
+			),
 		},
 		' .uagb-team__social-icon:hover a': {
 			'color': socialHoverColor,
@@ -181,26 +229,36 @@ function styling( props ) {
 			'margin-left': generateCSSUnit( socialSpaceFallback, 'px' ),
 			'margin-right': '0',
 		},
-		'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon': {
-			'margin-right': generateCSSUnit( socialSpaceFallback / 2, 'px' ),
-			'margin-left': generateCSSUnit( socialSpaceFallback / 2, 'px' ),
-		},
-		'.uagb-team__image-position-above.uagb-team__align-left .uagb-team__social-icon': {
-			'margin-right': generateCSSUnit( socialSpaceFallback, 'px' ),
-			'margin-left': '0',
-		},
-		'.uagb-team__image-position-above.uagb-team__align-right .uagb-team__social-icon': {
-			'margin-left': generateCSSUnit( socialSpaceFallback, 'px' ),
-			'margin-right': '0',
-		},
-		' .uagb-team__image-wrap': { // For Backword.
+		'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon':
+			{
+				'margin-right': generateCSSUnit(
+					socialSpaceFallback / 2,
+					'px'
+				),
+				'margin-left': generateCSSUnit( socialSpaceFallback / 2, 'px' ),
+			},
+		'.uagb-team__image-position-above.uagb-team__align-left .uagb-team__social-icon':
+			{
+				'margin-right': generateCSSUnit( socialSpaceFallback, 'px' ),
+				'margin-left': '0',
+			},
+		'.uagb-team__image-position-above.uagb-team__align-right .uagb-team__social-icon':
+			{
+				'margin-left': generateCSSUnit( socialSpaceFallback, 'px' ),
+				'margin-right': '0',
+			},
+		' .uagb-team__image-wrap': {
+			// For Backword.
 			'margin-top': generateCSSUnit( imageTopMargin, imageMarginUnit ),
 			'margin-bottom': generateCSSUnit(
 				imageBottomMargin,
 				imageMarginUnit
 			),
 			'margin-left': generateCSSUnit( imageLeftMargin, imageMarginUnit ),
-			'margin-right': generateCSSUnit( imageRightMargin, imageMarginUnit ),
+			'margin-right': generateCSSUnit(
+				imageRightMargin,
+				imageMarginUnit
+			),
 			'width': generateCSSUnit( imgWidthFallback, 'px' ),
 		},
 		' img': {
@@ -210,7 +268,10 @@ function styling( props ) {
 				imageMarginUnit
 			),
 			'margin-left': generateCSSUnit( imageLeftMargin, imageMarginUnit ),
-			'margin-right': generateCSSUnit( imageRightMargin, imageMarginUnit ),
+			'margin-right': generateCSSUnit(
+				imageRightMargin,
+				imageMarginUnit
+			),
 			'width': generateCSSUnit( imgWidthFallback, 'px' ),
 			'height': generateCSSUnit( imgWidthFallback, 'px' ),
 		},
@@ -218,13 +279,13 @@ function styling( props ) {
 
 	if ( 'above' === imgPosition ) {
 		if ( 'center' === align ) {
-			selectors[' img']['margin-left'] = 'auto';
-			selectors[' img']['margin-right'] = 'auto';
+			selectors[ ' img' ][ 'margin-left' ] = 'auto';
+			selectors[ ' img' ][ 'margin-right' ] = 'auto';
 			selectors[ ' .uagb-team__social-list' ] = {
 				'justify-content': 'center',
 			};
 		} else if ( 'left' === align ) {
-			selectors[' img']['margin-right'] = 'auto';
+			selectors[ ' img' ][ 'margin-right' ] = 'auto';
 			selectors[ ' .uagb-team__social-list' ] = {
 				'justify-content': 'flex-start',
 			};
@@ -232,14 +293,14 @@ function styling( props ) {
 			selectors[ ' .uagb-team__social-list' ] = {
 				'justify-content': 'flex-end',
 			};
-			selectors[' img']['margin-left'] = 'auto';
+			selectors[ ' img' ][ 'margin-left' ] = 'auto';
 		}
 	}
 
 	if ( 'above' !== imgPosition ) {
 		if ( 'middle' === imgAlign ) {
 			selectors[ ' img' ][ 'align-self' ] = 'center';
-			selectors[ ' .uagb-team__content'] = { 'align-self': 'center', };
+			selectors[ ' .uagb-team__content' ] = { 'align-self': 'center' };
 		} else {
 			selectors[ ' img' ][ 'align-self' ] = 'flex-start';
 		}
@@ -251,7 +312,7 @@ function styling( props ) {
 			'.rich-text.block-editor-rich-text__editable.uagb-team__title'
 	] = {
 		'font-family': titleFontFamily,
-		'font-style' : titleFontStyle,
+		'font-style': titleFontStyle,
 		'text-decoration': titleDecoration,
 		'text-transform': titleTransform,
 		'font-weight': titleFontWeight,
@@ -259,7 +320,10 @@ function styling( props ) {
 		'line-height': generateCSSUnit( titleLineHeight, titleLineHeightType ),
 		'color': titleColor,
 		'margin-bottom': generateCSSUnit( titleSpaceFallback, 'px' ),
-		'letter-spacing': generateCSSUnit( titleLetterSpacing, titleLetterSpacingType ),
+		'letter-spacing': generateCSSUnit(
+			titleLetterSpacing,
+			titleLetterSpacingType
+		),
 	};
 
 	mobileSelectors = {
@@ -274,7 +338,10 @@ function styling( props ) {
 			),
 			'margin-top': generateCSSUnit( prefixSpaceMobile, 'px' ),
 			'margin-bottom': generateCSSUnit( descSpaceMobile, 'px' ),
-			'letter-spacing': generateCSSUnit( descLetterSpacingMobile, descLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacingMobile,
+				descLetterSpacingType
+			),
 			'line-height': generateCSSUnit(
 				descLineHeightMobile,
 				descLineHeightType
@@ -285,7 +352,10 @@ function styling( props ) {
 				prefixFontSizeMobile,
 				prefixFontSizeType
 			),
-			'letter-spacing': generateCSSUnit( prefixLetterSpacingMobile, prefixLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				prefixLetterSpacingMobile,
+				prefixLetterSpacingType
+			),
 			'line-height': generateCSSUnit(
 				prefixLineHeightMobile,
 				prefixLineHeightType
@@ -316,8 +386,14 @@ function styling( props ) {
 				imageMarginBottomMobile,
 				mobileImageMarginUnit
 			),
-			'margin-left': generateCSSUnit( imageMarginLeftMobile, mobileImageMarginUnit ),
-			'margin-right': generateCSSUnit( imageMarginRightMobile, mobileImageMarginUnit ),
+			'margin-left': generateCSSUnit(
+				imageMarginLeftMobile,
+				mobileImageMarginUnit
+			),
+			'margin-right': generateCSSUnit(
+				imageMarginRightMobile,
+				mobileImageMarginUnit
+			),
 		},
 		'.uagb-team__image-position-left .uagb-team__social-icon': {
 			'margin-right': generateCSSUnit( socialSpaceMobile, 'px' ),
@@ -327,10 +403,17 @@ function styling( props ) {
 			'margin-left': generateCSSUnit( socialSpaceMobile, 'px' ),
 			'margin-right': '0',
 		},
-		'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon': {
-			'margin-right': generateCSSUnit( socialSpaceMobileFallback / 2, 'px' ),
-			'margin-left': generateCSSUnit( socialSpaceMobileFallback / 2, 'px' ),
-		},
+		'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon':
+			{
+				'margin-right': generateCSSUnit(
+					socialSpaceMobileFallback / 2,
+					'px'
+				),
+				'margin-left': generateCSSUnit(
+					socialSpaceMobileFallback / 2,
+					'px'
+				),
+			},
 	};
 	mobileSelectors[
 		' ' +
@@ -338,8 +421,14 @@ function styling( props ) {
 			'.rich-text.block-editor-rich-text__editable.uagb-team__title'
 	] = {
 		'margin-bottom': generateCSSUnit( titleSpaceMobile, 'px' ),
-		'letter-spacing': generateCSSUnit( titleLetterSpacingMobile, titleLetterSpacingType ),
-		'line-height': generateCSSUnit( titleLineHeightMobile, titleLineHeightType ),
+		'letter-spacing': generateCSSUnit(
+			titleLetterSpacingMobile,
+			titleLetterSpacingType
+		),
+		'line-height': generateCSSUnit(
+			titleLineHeightMobile,
+			titleLineHeightType
+		),
 	};
 	tabletSelectors = {
 		' img': {
@@ -353,7 +442,10 @@ function styling( props ) {
 			),
 			'margin-top': generateCSSUnit( prefixSpaceTablet, 'px' ),
 			'margin-bottom': generateCSSUnit( descSpaceTablet, 'px' ),
-			'letter-spacing': generateCSSUnit( descLetterSpacingTablet, descLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacingTablet,
+				descLetterSpacingType
+			),
 			'line-height': generateCSSUnit(
 				descLineHeightTablet,
 				descLineHeightType
@@ -364,7 +456,10 @@ function styling( props ) {
 				prefixFontSizeTablet,
 				prefixFontSizeType
 			),
-			'letter-spacing': generateCSSUnit( prefixLetterSpacingTablet, prefixLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				prefixLetterSpacingTablet,
+				prefixLetterSpacingType
+			),
 			'line-height': generateCSSUnit(
 				prefixLineHeightTablet,
 				prefixLineHeightType
@@ -395,8 +490,14 @@ function styling( props ) {
 				imageMarginBottomTablet,
 				tabletImageMarginUnit
 			),
-			'margin-left': generateCSSUnit( imageMarginLeftTablet, tabletImageMarginUnit ),
-			'margin-right': generateCSSUnit( imageMarginRightTablet, tabletImageMarginUnit ),
+			'margin-left': generateCSSUnit(
+				imageMarginLeftTablet,
+				tabletImageMarginUnit
+			),
+			'margin-right': generateCSSUnit(
+				imageMarginRightTablet,
+				tabletImageMarginUnit
+			),
 		},
 		'.uagb-team__image-position-left .uagb-team__social-icon': {
 			'margin-right': generateCSSUnit( socialSpaceTablet, 'px' ),
@@ -406,10 +507,17 @@ function styling( props ) {
 			'margin-left': generateCSSUnit( socialSpaceTablet, 'px' ),
 			'margin-right': '0',
 		},
-		'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon': {
-			'margin-right': generateCSSUnit( socialSpaceTabletFallback / 2, 'px' ),
-			'margin-left': generateCSSUnit( socialSpaceTabletFallback / 2, 'px' ),
-		},
+		'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon':
+			{
+				'margin-right': generateCSSUnit(
+					socialSpaceTabletFallback / 2,
+					'px'
+				),
+				'margin-left': generateCSSUnit(
+					socialSpaceTabletFallback / 2,
+					'px'
+				),
+			},
 	};
 	tabletSelectors[
 		' ' +
@@ -417,8 +525,14 @@ function styling( props ) {
 			'.rich-text.block-editor-rich-text__editable.uagb-team__title'
 	] = {
 		'margin-bottom': generateCSSUnit( titleSpaceTablet, 'px' ),
-		'letter-spacing': generateCSSUnit( titleLetterSpacingTablet, titleLetterSpacingType ),
-		'line-height': generateCSSUnit( titleLineHeightTablet, titleLineHeightType ),
+		'letter-spacing': generateCSSUnit(
+			titleLetterSpacingTablet,
+			titleLetterSpacingType
+		),
+		'line-height': generateCSSUnit(
+			titleLineHeightTablet,
+			titleLineHeightType
+		),
 	};
 	mobileSelectors[ ' ' + tag + '.uagb-team__title' ] = {
 		'font-size': generateCSSUnit( titleFontSizeMobile, titleFontSizeType ),

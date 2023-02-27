@@ -18,9 +18,7 @@ import InspectorTab, {
 } from '@Components/inspector-tabs/InspectorTab.js';
 import ResponsiveSlider from '@Components/responsive-slider';
 import UAGTabsControl from '@Components/tabs';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import { ToggleControl } from '@wordpress/components';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
@@ -357,10 +355,7 @@ const Settings = ( props ) => {
 					) }
 				/>
 				<UAGSelectControl
-					label={ __(
-						'HTML Tag',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'HTML Tag', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: tag,
 						label: 'tag',
@@ -444,7 +439,10 @@ const Settings = ( props ) => {
 	};
 	const spacingSettings = () => {
 		return (
-			<UAGAdvancedPanelBody title={ __( 'Spacing' ) } initialOpen={ false }>
+			<UAGAdvancedPanelBody
+				title={ __( 'Spacing' ) }
+				initialOpen={ false }
+			>
 				<SpacingControl
 					{ ...props }
 					label={ __( 'Padding', 'ultimate-addons-for-gutenberg' ) }
@@ -608,9 +606,9 @@ const Settings = ( props ) => {
 						value: overlayType,
 						label: 'overlayType',
 					} }
-					gradientOverlay={{
+					gradientOverlay={ {
 						value: true,
-					}}
+					} }
 					backgroundSize={ {
 						value: backgroundSize,
 						label: 'backgroundSize',
@@ -654,7 +652,9 @@ const Settings = ( props ) => {
 						value: backgroundVideoOpacity,
 						label: 'backgroundVideoOpacity',
 					} }
-					onOpacityChange = { ( opacity ) => setAttributes( { backgroundVideoOpacity: opacity } ) }
+					onOpacityChange={ ( opacity ) =>
+						setAttributes( { backgroundVideoOpacity: opacity } )
+					}
 					{ ...props }
 				/>
 			</UAGAdvancedPanelBody>
@@ -760,10 +760,7 @@ const Settings = ( props ) => {
 		const topSettings = (
 			<>
 				<UAGSelectControl
-					label={ __(
-						'Type',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Type', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: topType,
 						label: 'topType',
@@ -842,7 +839,8 @@ const Settings = ( props ) => {
 							checked={ topContentAboveShape }
 							onChange={ () =>
 								setAttributes( {
-									topContentAboveShape: ! topContentAboveShape,
+									topContentAboveShape:
+										! topContentAboveShape,
 								} )
 							}
 						/>
@@ -854,10 +852,7 @@ const Settings = ( props ) => {
 		const bottomSettings = (
 			<>
 				<UAGSelectControl
-					label={ __(
-						'Type',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Type', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: bottomType,
 						label: 'bottomType',
@@ -936,7 +931,8 @@ const Settings = ( props ) => {
 							checked={ bottomContentAboveShape }
 							onChange={ () =>
 								setAttributes( {
-									bottomContentAboveShape: ! bottomContentAboveShape,
+									bottomContentAboveShape:
+										! bottomContentAboveShape,
 								} )
 							}
 						/>
@@ -984,8 +980,8 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 					prefix={ 'columns' }
 					attributes={ attributes }
-					deviceType={deviceType}
-					disabledBorderTitle= {true}
+					deviceType={ deviceType }
+					disabledBorderTitle={ true }
 				/>
 			</UAGAdvancedPanelBody>
 		);
@@ -1043,26 +1039,24 @@ const Settings = ( props ) => {
 		);
 	};
 	return (
-
-			<InspectorControls>
-				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
-						{ layoutSettings() }
-					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
-						{ backgroundSettings() }
-						{ shapeDividersSettings() }
-						{ borderSettings() }
-						{ boxShadowSettings() }
-						{ spacingSettings() }
-					</InspectorTab>
-					<InspectorTab
-						{ ...UAGTabs.advance }
-						parentProps={ props }
-					></InspectorTab>
-				</InspectorTabs>
-			</InspectorControls>
-
+		<InspectorControls>
+			<InspectorTabs>
+				<InspectorTab { ...UAGTabs.general }>
+					{ layoutSettings() }
+				</InspectorTab>
+				<InspectorTab { ...UAGTabs.style }>
+					{ backgroundSettings() }
+					{ shapeDividersSettings() }
+					{ borderSettings() }
+					{ boxShadowSettings() }
+					{ spacingSettings() }
+				</InspectorTab>
+				<InspectorTab
+					{ ...UAGTabs.advance }
+					parentProps={ props }
+				></InspectorTab>
+			</InspectorTabs>
+		</InspectorControls>
 	);
 };
 

@@ -17,13 +17,8 @@ const Render = ( props ) => {
 	const deviceType = useDeviceType();
 	const { attributes, isSelected, className } = props;
 
-	const {
-		align,
-		contentWidth,
-		tag,
-		backgroundType,
-		backgroundVideo,
-	} = attributes;
+	const { align, contentWidth, tag, backgroundType, backgroundVideo } =
+		attributes;
 
 	const CustomTag = `${ tag }`;
 

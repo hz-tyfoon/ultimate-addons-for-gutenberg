@@ -3,7 +3,7 @@
  */
 
 import styling from './styling';
-import React, {    useEffect } from 'react';
+import React, { useEffect } from 'react';
 import apiFetch from '@wordpress/api-fetch';
 
 import { useDeviceType } from '@Controls/getPreviewType';
@@ -18,43 +18,38 @@ const UAGBTaxonomyList = ( props ) => {
 	const deviceType = useDeviceType();
 	let categoriesList = [];
 
-	const {
-		taxonomyList,
-		termsList,
-	} = useSelect(
-		( select ) => { // eslint-disable-line  no-unused-vars
-			const {
-				postType,
-				taxonomyType,
-				showEmptyTaxonomy,
-				listInJson
-			} = props.attributes;
+	const { taxonomyList, termsList } = useSelect( ( select ) => {
+		// eslint-disable-line  no-unused-vars
+		const { postType, taxonomyType, showEmptyTaxonomy, listInJson } =
+			props.attributes;
 
-			const allTaxonomy = ( null !== listInJson ) ? listInJson.data : '';
-			const currentTax = ( '' !== allTaxonomy ) ? allTaxonomy[ postType ] : 'undefined';
+		const allTaxonomy = null !== listInJson ? listInJson.data : '';
+		const currentTax =
+			'' !== allTaxonomy ? allTaxonomy[ postType ] : 'undefined';
 
-			const listToShowTaxonomy = showEmptyTaxonomy
-				? 'with_empty_taxonomy'
-				: 'without_empty_taxonomy';
+		const listToShowTaxonomy = showEmptyTaxonomy
+			? 'with_empty_taxonomy'
+			: 'without_empty_taxonomy';
 
-			if ( 'undefined' !== typeof currentTax ) {
-				if (
-					'undefined' !== typeof currentTax[ listToShowTaxonomy ] &&
-					'undefined' !==
-						typeof currentTax[ listToShowTaxonomy ][ taxonomyType ]
-				) {
-					categoriesList = currentTax[ listToShowTaxonomy ][ taxonomyType ];
-				}
+		if ( 'undefined' !== typeof currentTax ) {
+			if (
+				'undefined' !== typeof currentTax[ listToShowTaxonomy ] &&
+				'undefined' !==
+					typeof currentTax[ listToShowTaxonomy ][ taxonomyType ]
+			) {
+				categoriesList =
+					currentTax[ listToShowTaxonomy ][ taxonomyType ];
 			}
+		}
 
-			return {
-				categoriesList,
-				taxonomyList:
-					'undefined' !== typeof currentTax ? currentTax.taxonomy : [],
-				termsList: 'undefined' !== typeof currentTax ? currentTax.terms : [],
-			};
-		},
-	);
+		return {
+			categoriesList,
+			taxonomyList:
+				'undefined' !== typeof currentTax ? currentTax.taxonomy : [],
+			termsList:
+				'undefined' !== typeof currentTax ? currentTax.terms : [],
+		};
+	} );
 
 	useEffect( () => {
 		// Assigning block_id in the attribute.
@@ -63,10 +58,7 @@ const UAGBTaxonomyList = ( props ) => {
 		const formData = new window.FormData();
 
 		formData.append( 'action', 'uagb_get_taxonomy' );
-		formData.append(
-			'nonce',
-			uagb_blocks_info.uagb_ajax_nonce
-		);
+		formData.append( 'nonce', uagb_blocks_info.uagb_ajax_nonce );
 		apiFetch( {
 			url: uagb_blocks_info.ajax_url,
 			method: 'POST',
@@ -93,92 +85,112 @@ const UAGBTaxonomyList = ( props ) => {
 			overallBorderStyle,
 		} = props.attributes;
 
-		if( borderThickness ){
-			if( undefined === overallBorderTopWidth ) {
+		if ( borderThickness ) {
+			if ( undefined === overallBorderTopWidth ) {
 				props.setAttributes( {
 					overallBorderTopWidth: borderThickness,
 				} );
 			}
-			if( undefined === overallBorderLeftWidth ) {
-				props.setAttributes( { overallBorderLeftWidth : borderThickness} );
+			if ( undefined === overallBorderLeftWidth ) {
+				props.setAttributes( {
+					overallBorderLeftWidth: borderThickness,
+				} );
 			}
-			if( undefined === overallBorderRightWidth ) {
-				props.setAttributes( { overallBorderRightWidth : borderThickness} );
+			if ( undefined === overallBorderRightWidth ) {
+				props.setAttributes( {
+					overallBorderRightWidth: borderThickness,
+				} );
 			}
-			if( undefined === overallBorderBottomWidth ) {
-				props.setAttributes( { overallBorderBottomWidth : borderThickness} );
-			}
-		}
-
-		if( borderRadius ){
-
-			if( undefined === overallBorderTopLeftRadius ) {
-				props.setAttributes( { overallBorderTopLeftRadius : borderRadius} );
-			}
-			if( undefined === overallBorderTopRightRadius ) {
-				props.setAttributes( { overallBorderTopRightRadius : borderRadius} );
-			}
-			if( undefined === overallBorderBottomLeftRadius ) {
-				props.setAttributes( { overallBorderBottomLeftRadius : borderRadius} );
-			}
-			if( undefined === overallBorderBottomRightRadius ) {
-				props.setAttributes( { overallBorderBottomRightRadius : borderRadius} );
+			if ( undefined === overallBorderBottomWidth ) {
+				props.setAttributes( {
+					overallBorderBottomWidth: borderThickness,
+				} );
 			}
 		}
 
-		if( borderColor ){
-			if( undefined === overallBorderColor ) {
-				props.setAttributes( { overallBorderColor : borderColor} );
+		if ( borderRadius ) {
+			if ( undefined === overallBorderTopLeftRadius ) {
+				props.setAttributes( {
+					overallBorderTopLeftRadius: borderRadius,
+				} );
+			}
+			if ( undefined === overallBorderTopRightRadius ) {
+				props.setAttributes( {
+					overallBorderTopRightRadius: borderRadius,
+				} );
+			}
+			if ( undefined === overallBorderBottomLeftRadius ) {
+				props.setAttributes( {
+					overallBorderBottomLeftRadius: borderRadius,
+				} );
+			}
+			if ( undefined === overallBorderBottomRightRadius ) {
+				props.setAttributes( {
+					overallBorderBottomRightRadius: borderRadius,
+				} );
 			}
 		}
 
-		if( borderHoverColor ){
-			if( undefined === overallBorderHColor ) {
-				props.setAttributes( { overallBorderHColor : borderHoverColor} );
+		if ( borderColor ) {
+			if ( undefined === overallBorderColor ) {
+				props.setAttributes( { overallBorderColor: borderColor } );
 			}
 		}
 
-		if( borderStyle ){
-			if( undefined === overallBorderStyle ) {
-				props.setAttributes( { overallBorderStyle : borderStyle} );
+		if ( borderHoverColor ) {
+			if ( undefined === overallBorderHColor ) {
+				props.setAttributes( {
+					overallBorderHColor: borderHoverColor,
+				} );
 			}
 		}
-		
+
+		if ( borderStyle ) {
+			if ( undefined === overallBorderStyle ) {
+				props.setAttributes( { overallBorderStyle: borderStyle } );
+			}
+		}
 	}, [] );
 
 	useEffect( () => {
-
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-taxonomy-list-' + props.clientId.substr( 0, 8 ), blockStyling );
-		
+		addBlockEditorDynamicStyles(
+			'uagb-style-taxonomy-list-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-taxonomy-list-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-taxonomy-list-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/taxonomy-list.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } taxonomyList={ taxonomyList } termsList={ termsList } />
-				<Render parentProps={ props } categoriesList={ categoriesList } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings
+				parentProps={ props }
+				taxonomyList={ taxonomyList }
+				termsList={ termsList }
+			/>
+			<Render parentProps={ props } categoriesList={ categoriesList } />
+		</>
 	);
 };
 

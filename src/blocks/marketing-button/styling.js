@@ -7,7 +7,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -96,12 +95,36 @@ function styling( props ) {
 		prefixLetterSpacingType,
 	} = props.attributes;
 
-	const gradientLocation1Fallback = getFallbackNumber( gradientLocation1, 'gradientLocation1', blockName );
-	const gradientLocation2Fallback = getFallbackNumber( gradientLocation2, 'gradientLocation2', blockName );
-	const gradientAngleFallback = getFallbackNumber( gradientAngle, 'gradientAngle', blockName );
-	const iconSpaceFallback = getFallbackNumber( iconSpace, 'iconSpace', blockName );
-	const iconFontSizeFallback = getFallbackNumber( iconFontSize, 'iconFontSize', blockName );
-	const titleSpaceFallback = getFallbackNumber( titleSpace, 'titleSpace', blockName );
+	const gradientLocation1Fallback = getFallbackNumber(
+		gradientLocation1,
+		'gradientLocation1',
+		blockName
+	);
+	const gradientLocation2Fallback = getFallbackNumber(
+		gradientLocation2,
+		'gradientLocation2',
+		blockName
+	);
+	const gradientAngleFallback = getFallbackNumber(
+		gradientAngle,
+		'gradientAngle',
+		blockName
+	);
+	const iconSpaceFallback = getFallbackNumber(
+		iconSpace,
+		'iconSpace',
+		blockName
+	);
+	const iconFontSizeFallback = getFallbackNumber(
+		iconFontSize,
+		'iconFontSize',
+		blockName
+	);
+	const titleSpaceFallback = getFallbackNumber(
+		titleSpace,
+		'titleSpace',
+		blockName
+	);
 
 	let selectors = {};
 	let tabletSelectors = {};
@@ -111,9 +134,17 @@ function styling( props ) {
 	const setIconHoverColor =
 		'' === iconHoverColor ? titleHoverColor : iconHoverColor;
 
-	const btnBorderCSS = generateBorderCSS( props.attributes, 'btn' )
-	const btnBorderCSSTablet = generateBorderCSS( props.attributes, 'btn', 'tablet' )
-	const btnBorderCSSMobile = generateBorderCSS( props.attributes, 'btn', 'mobile' )
+	const btnBorderCSS = generateBorderCSS( props.attributes, 'btn' );
+	const btnBorderCSSTablet = generateBorderCSS(
+		props.attributes,
+		'btn',
+		'tablet'
+	);
+	const btnBorderCSSMobile = generateBorderCSS(
+		props.attributes,
+		'btn',
+		'mobile'
+	);
 
 	selectors = {
 		' .uagb-marketing-btn__prefix': {
@@ -131,7 +162,10 @@ function styling( props ) {
 			'text-transform': titleTransform,
 			'text-decoration': titleDecoration,
 			'color': titleColor,
-			'letter-spacing': generateCSSUnit( titleLetterSpacing, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacing,
+				titleLetterSpacingType
+			),
 		},
 		' svg': {
 			'fill': setIconColor,
@@ -150,20 +184,27 @@ function styling( props ) {
 			'font-style': prefixFontStyle,
 			'text-transform': prefixTransform,
 			'text-decoration': prefixDecoration,
-			'letter-spacing': generateCSSUnit( prefixLetterSpacing, prefixLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				prefixLetterSpacing,
+				prefixLetterSpacingType
+			),
 		},
-		' .uagb-marketing-btn__link:hover .block-editor-rich-text__editable.uagb-marketing-btn__title': {
-			'color': titleHoverColor,
-		},
-		' .uagb-marketing-btn__link:focus .block-editor-rich-text__editable.uagb-marketing-btn__title': {
-			'color': titleHoverColor,
-		},
-		' .uagb-marketing-btn__link:hover .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
-			'color': prefixHoverColor,
-		},
-		' .uagb-marketing-btn__link:focus .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
-			'color': prefixHoverColor,
-		},
+		' .uagb-marketing-btn__link:hover .block-editor-rich-text__editable.uagb-marketing-btn__title':
+			{
+				'color': titleHoverColor,
+			},
+		' .uagb-marketing-btn__link:focus .block-editor-rich-text__editable.uagb-marketing-btn__title':
+			{
+				'color': titleHoverColor,
+			},
+		' .uagb-marketing-btn__link:hover .block-editor-rich-text__editable.uagb-marketing-btn__prefix':
+			{
+				'color': prefixHoverColor,
+			},
+		' .uagb-marketing-btn__link:focus .block-editor-rich-text__editable.uagb-marketing-btn__prefix':
+			{
+				'color': prefixHoverColor,
+			},
 		' .uagb-marketing-btn__link:hover svg': {
 			'fill': setIconHoverColor,
 		},
@@ -189,39 +230,53 @@ function styling( props ) {
 	};
 
 	if ( 'transparent' === backgroundType ) {
-		selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ]  = {
-			'background-color' : 'transparent'
-		}
+		selectors[
+			':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)'
+		] = {
+			'background-color': 'transparent',
+		};
 	} else if ( 'color' === backgroundType ) {
-		selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ]  = {
-			'background-color' : backgroundColor
-		}
+		selectors[
+			':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)'
+		] = {
+			'background-color': backgroundColor,
+		};
 
 		// Hover Background
-		selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background):hover' ]  = {
-			'background-color' : backgroundHoverColor
-		}
+		selectors[
+			':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background):hover'
+		] = {
+			'background-color': backgroundHoverColor,
+		};
 	} else if ( 'gradient' === backgroundType ) {
-		selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ]  = {
-			'background-color' : 'transparent'
-		}
+		selectors[
+			':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)'
+		] = {
+			'background-color': 'transparent',
+		};
 
 		if ( 'linear' === gradientType ) {
-			selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ][
+			selectors[
+				':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)'
+			][
 				'background-image'
-			] = `linear-gradient(${ gradientAngleFallback }deg, ${ gradientColor1 } ${ gradientLocation1Fallback }%, ${	gradientColor2 } ${ gradientLocation2Fallback }%)`;
+			] = `linear-gradient(${ gradientAngleFallback }deg, ${ gradientColor1 } ${ gradientLocation1Fallback }%, ${ gradientColor2 } ${ gradientLocation2Fallback }%)`;
 		} else {
-			selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ][
+			selectors[
+				':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)'
+			][
 				'background-image'
-			] = `radial-gradient( at center center, ${ gradientColor1} ${ gradientLocation1Fallback }%, ${ gradientColor2 } ${ gradientLocation2Fallback }%)`;
+			] = `radial-gradient( at center center, ${ gradientColor1 } ${ gradientLocation1Fallback }%, ${ gradientColor2 } ${ gradientLocation2Fallback }%)`;
 		}
 	}
 
-	const marginType = 'after' === iconPosition ? 'margin-left' : 'margin-right';
+	const marginType =
+		'after' === iconPosition ? 'margin-left' : 'margin-right';
 
-	selectors[ ' svg' ][
-		marginType
-	] = generateCSSUnit( iconSpaceFallback, 'px' );
+	selectors[ ' svg' ][ marginType ] = generateCSSUnit(
+		iconSpaceFallback,
+		'px'
+	);
 
 	tabletSelectors = {
 		' .uagb-marketing-btn__prefix': {
@@ -236,7 +291,10 @@ function styling( props ) {
 				titleLineHeightTablet,
 				titleLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( titleLetterSpacingTablet, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacingTablet,
+				titleLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
 			'font-size': generateCSSUnit(
@@ -247,7 +305,10 @@ function styling( props ) {
 				prefixLineHeightTablet,
 				prefixLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( prefixLetterSpacingTablet, prefixLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				prefixLetterSpacingTablet,
+				prefixLetterSpacingType
+			),
 		},
 		' svg': {
 			'width': generateCSSUnit( iconFontSizeTablet, iconFontSizeType ),
@@ -287,7 +348,10 @@ function styling( props ) {
 				titleLineHeightMobile,
 				titleLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( titleLetterSpacingMobile, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacingMobile,
+				titleLetterSpacingType
+			),
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
 			'font-size': generateCSSUnit(
@@ -298,7 +362,10 @@ function styling( props ) {
 				prefixLineHeightMobile,
 				prefixLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( prefixLetterSpacingMobile, prefixLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				prefixLetterSpacingMobile,
+				prefixLetterSpacingType
+			),
 		},
 		' svg': {
 			'width': generateCSSUnit( iconFontSizeMobile, iconFontSizeType ),
@@ -321,19 +388,24 @@ function styling( props ) {
 				paddingBtnBottomMobile,
 				mobilePaddingBtnUnit
 			),
-			...btnBorderCSSMobile
+			...btnBorderCSSMobile,
 		},
 	};
 
-	tabletSelectors[ ' svg' ][
-		marginType
-	] = generateCSSUnit( iconSpaceTablet, 'px' );
+	tabletSelectors[ ' svg' ][ marginType ] = generateCSSUnit(
+		iconSpaceTablet,
+		'px'
+	);
 
-	mobileSelectors[ ' svg' ][
-		marginType
-	] = generateCSSUnit( iconSpaceMobile, 'px' );
+	mobileSelectors[ ' svg' ][ marginType ] = generateCSSUnit(
+		iconSpaceMobile,
+		'px'
+	);
 
-	const id = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
+		0,
+		8
+	) }`;
 
 	let stylingCss = generateCSS( selectors, id );
 

@@ -33,113 +33,89 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				>
 					<option value="off">
-						{ __(
-						'Off',
-						'ultimate-addons-for-gutenberg'
-						) }
+						{ __( 'Off', 'ultimate-addons-for-gutenberg' ) }
 					</option>
 					<option value="name">
-						{ __(
-						'Full Name',
-						'ultimate-addons-for-gutenberg'
-						) }
+						{ __( 'Full Name', 'ultimate-addons-for-gutenberg' ) }
 					</option>
 					<optgroup label="Name Breakdown">
 						<option value="honorific-prefix">
-							{ __(
-							'Prefix',
-							'ultimate-addons-for-gutenberg'
-							) }
+							{ __( 'Prefix', 'ultimate-addons-for-gutenberg' ) }
 						</option>
 						<option value="given-name">
 							{ __(
-							'First Name',
-							'ultimate-addons-for-gutenberg'
+								'First Name',
+								'ultimate-addons-for-gutenberg'
 							) }
 						</option>
 						<option value="additional-name">
 							{ __(
-							'Middle Name',
-							'ultimate-addons-for-gutenberg'
+								'Middle Name',
+								'ultimate-addons-for-gutenberg'
 							) }
 						</option>
 						<option value="family-name">
 							{ __(
-							'Last Name',
-							'ultimate-addons-for-gutenberg'
+								'Last Name',
+								'ultimate-addons-for-gutenberg'
 							) }
 						</option>
 						<option value="honorific-suffix">
-							{ __(
-							'Suffix',
-							'ultimate-addons-for-gutenberg'
-							) }
+							{ __( 'Suffix', 'ultimate-addons-for-gutenberg' ) }
 						</option>
 					</optgroup>
 					<option value="username">
-						{ __(
-						'Username',
-						'ultimate-addons-for-gutenberg'
-						) }
-						</option>
+						{ __( 'Username', 'ultimate-addons-for-gutenberg' ) }
+					</option>
 					<option value="nickname">
-						{ __(
-						'Nickname',
-						'ultimate-addons-for-gutenberg'
-						) }
+						{ __( 'Nickname', 'ultimate-addons-for-gutenberg' ) }
 					</option>
 					<option value="organization">
 						{ __(
-						'Company Name',
-						'ultimate-addons-for-gutenberg'
+							'Company Name',
+							'ultimate-addons-for-gutenberg'
 						) }
 					</option>
 					<option value="organization-title">
-						{ __(
-						'Job Title',
-						'ultimate-addons-for-gutenberg'
-						) }
+						{ __( 'Job Title', 'ultimate-addons-for-gutenberg' ) }
 					</option>
 					<optgroup label="Address Lines">
 						<option value="address-line1">
 							{ __(
-							'Address Line 1',
-							'ultimate-addons-for-gutenberg'
+								'Address Line 1',
+								'ultimate-addons-for-gutenberg'
 							) }
 						</option>
 						<option value="address-line2">
 							{ __(
-							'Address Line 2',
-							'ultimate-addons-for-gutenberg'
+								'Address Line 2',
+								'ultimate-addons-for-gutenberg'
 							) }
 						</option>
 						<option value="address-line3">
 							{ __(
-							'Address Line 3',
-							'ultimate-addons-for-gutenberg'
+								'Address Line 3',
+								'ultimate-addons-for-gutenberg'
 							) }
 						</option>
 					</optgroup>
 					<option value="country-name">
-						{ __(
-						'Country',
-						'ultimate-addons-for-gutenberg'
-						) }
+						{ __( 'Country', 'ultimate-addons-for-gutenberg' ) }
 					</option>
 					<option value="postal-code">
 						{ __(
-						'Postal / ZIP Code',
-						'ultimate-addons-for-gutenberg'
+							'Postal / ZIP Code',
+							'ultimate-addons-for-gutenberg'
 						) }
 					</option>
 				</UAGSelectControl>
 				<UAGTextControl
 					label="Placeholder"
 					value={ placeholder }
-					data={{
+					data={ {
 						value: placeholder,
 						label: 'placeholder',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( { placeholder: value } )

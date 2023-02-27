@@ -13,10 +13,17 @@ import { __ } from '@wordpress/i18n';
 
 import { registerBlockType } from '@wordpress/blocks';
 
-if ( uagb_blocks_info.cf7_is_active && ( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 || 'yes' === uagb_blocks_info.enable_legacy_blocks ) ) {
+if (
+	uagb_blocks_info.cf7_is_active &&
+	( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ||
+		'yes' === uagb_blocks_info.enable_legacy_blocks )
+) {
 	registerBlockType( 'uagb/cf7-styler', {
 		title: __( 'Contact Form 7 Designer', 'ultimate-addons-for-gutenberg' ), // Block title.
-		description: __( 'Highly customize and style your Contact Form 7 forms .', 'ultimate-addons-for-gutenberg' ), // Block description.
+		description: __(
+			'Highly customize and style your Contact Form 7 forms .',
+			'ultimate-addons-for-gutenberg'
+		), // Block description.
 		icon: renderLegacyBlockEditorIcon( 'cf7_styler' ),
 		keywords: [
 			__( 'CF7 styler', 'ultimate-addons-for-gutenberg' ),
@@ -31,7 +38,7 @@ if ( uagb_blocks_info.cf7_is_active && ( 'yes' === uagb_blocks_info.uagb_old_use
 		example: {
 			attributes: {
 				isPreview: true,
-			}
+			},
 		},
 		save() {
 			return null;

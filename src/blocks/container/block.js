@@ -33,7 +33,7 @@ registerBlockType( 'uagb/container', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	variations,
 	edit,

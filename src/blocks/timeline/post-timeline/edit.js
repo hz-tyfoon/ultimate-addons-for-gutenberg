@@ -2,7 +2,7 @@
  * External dependencies
  */
 
-import React, { useEffect,  useState  } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
@@ -20,10 +20,9 @@ import { useSelect } from '@wordpress/data';
 
 const PostTimelineComponent = ( props ) => {
 	const deviceType = useDeviceType();
-	const [ isTaxonomyLoading, setIsTaxonomyLoading] = useState( false );
+	const [ isTaxonomyLoading, setIsTaxonomyLoading ] = useState( false );
 
 	useEffect( () => {
-
 		// Replacement for componentDidMount.
 		//Store Client id.
 		props.setAttributes( { block_id: props.clientId } );
@@ -32,59 +31,71 @@ const PostTimelineComponent = ( props ) => {
 			timelinAlignment,
 			stack,
 			timelinAlignmentTablet,
-			timelinAlignmentMobile
+			timelinAlignmentMobile,
 		} = props.attributes;
 
-		if( timelinAlignment ) {
-            if( 'none' === stack ) {
-                if( undefined === timelinAlignmentTablet ) {
-                    props.setAttributes( { timelinAlignmentTablet: timelinAlignment } );
-                }
-                if( undefined === timelinAlignmentMobile ) {
-                    props.setAttributes( { timelinAlignmentMobile: timelinAlignment } );
-                }
-            } else {
-                if( undefined === timelinAlignmentTablet && 'tablet' === stack ) {
-                    props.setAttributes( { timelinAlignmentTablet: 'left' } );
-                    props.setAttributes( { timelinAlignmentMobile: 'left' } );
-                }
+		if ( timelinAlignment ) {
+			if ( 'none' === stack ) {
+				if ( undefined === timelinAlignmentTablet ) {
+					props.setAttributes( {
+						timelinAlignmentTablet: timelinAlignment,
+					} );
+				}
+				if ( undefined === timelinAlignmentMobile ) {
+					props.setAttributes( {
+						timelinAlignmentMobile: timelinAlignment,
+					} );
+				}
+			} else {
+				if (
+					undefined === timelinAlignmentTablet &&
+					'tablet' === stack
+				) {
+					props.setAttributes( { timelinAlignmentTablet: 'left' } );
+					props.setAttributes( { timelinAlignmentMobile: 'left' } );
+				}
 
-                if( undefined === timelinAlignmentMobile && 'mobile' === stack ) {
-                    props.setAttributes( { timelinAlignmentMobile: 'left' } );
-                    props.setAttributes( { timelinAlignmentTablet: timelinAlignment } );
-                }
-            }
-        }
-
+				if (
+					undefined === timelinAlignmentMobile &&
+					'mobile' === stack
+				) {
+					props.setAttributes( { timelinAlignmentMobile: 'left' } );
+					props.setAttributes( {
+						timelinAlignmentTablet: timelinAlignment,
+					} );
+				}
+			}
+		}
 	}, [] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = contentTimelineStyle( props );
 
-        addBlockEditorDynamicStyles( 'uagb-timeline-style-' + props.clientId, blockStyling );
-		const loadPostTimelineEditor = new CustomEvent( 'UAGTimelineEditor', { // eslint-disable-line no-undef
+		addBlockEditorDynamicStyles(
+			'uagb-timeline-style-' + props.clientId,
+			blockStyling
+		);
+		const loadPostTimelineEditor = new CustomEvent( 'UAGTimelineEditor', {
+			// eslint-disable-line no-undef
 			detail: {},
 		} );
 		document.dispatchEvent( loadPostTimelineEditor );
-
 	}, [ props, deviceType ] );
-
 
 	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	let categoriesList = [];
 
-	const { latestPosts, taxonomyList, block } = useSelect( // eslint-disable-line no-unused-vars
+	const { latestPosts, taxonomyList, block } = useSelect(
+		// eslint-disable-line no-unused-vars
 		( select ) => {
 			const {
 				categories,
@@ -94,10 +105,14 @@ const PostTimelineComponent = ( props ) => {
 				postType,
 				taxonomyType,
 				excludeCurrentPost,
-				allTaxonomyStore
+				allTaxonomyStore,
 			} = props.attributes;
 
-			const postsToShowFallback = getFallbackNumber( postsToShow, 'postsToShow', 'post-timeline' );
+			const postsToShowFallback = getFallbackNumber(
+				postsToShow,
+				'postsToShow',
+				'post-timeline'
+			);
 			const { getEntityRecords } = select( 'core' );
 
 			if ( ! allTaxonomyStore && ! isTaxonomyLoading ) {
@@ -110,13 +125,22 @@ const PostTimelineComponent = ( props ) => {
 				} );
 			}
 			const allTaxonomy = allTaxonomyStore;
-			const currentTax = allTaxonomy ? allTaxonomy[ postType ] : undefined;
+			const currentTax = allTaxonomy
+				? allTaxonomy[ postType ]
+				: undefined;
 
 			let restBase = '';
 
 			if ( 'undefined' !== typeof currentTax ) {
-				if ( 'undefined' !== typeof currentTax.taxonomy[ taxonomyType ] ) {
-					restBase = ( currentTax.taxonomy[taxonomyType].rest_base === false || currentTax.taxonomy[taxonomyType].rest_base === null ) ? currentTax.taxonomy[taxonomyType].name : currentTax.taxonomy[taxonomyType].rest_base
+				if (
+					'undefined' !== typeof currentTax.taxonomy[ taxonomyType ]
+				) {
+					restBase =
+						currentTax.taxonomy[ taxonomyType ].rest_base ===
+							false ||
+						currentTax.taxonomy[ taxonomyType ].rest_base === null
+							? currentTax.taxonomy[ taxonomyType ].name
+							: currentTax.taxonomy[ taxonomyType ].rest_base;
 				}
 
 				if ( '' !== taxonomyType ) {
@@ -136,7 +160,8 @@ const PostTimelineComponent = ( props ) => {
 			};
 
 			if ( excludeCurrentPost ) {
-				latestPostsQuery.exclude = select( 'core/editor' ).getCurrentPostId();
+				latestPostsQuery.exclude =
+					select( 'core/editor' ).getCurrentPostId();
 			}
 			const category = [];
 			const temp = parseInt( categories );
@@ -158,23 +183,33 @@ const PostTimelineComponent = ( props ) => {
 						: category;
 			}
 			return {
-				latestPosts: getEntityRecords( 'postType', postType, latestPostsQuery ),
+				latestPosts: getEntityRecords(
+					'postType',
+					postType,
+					latestPostsQuery
+				),
 				categoriesList,
 				taxonomyList:
-					'undefined' !== typeof currentTax ? currentTax.taxonomy : [],
+					'undefined' !== typeof currentTax
+						? currentTax.taxonomy
+						: [],
 			};
-		},
+		}
 	);
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/post-timeline.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } taxonomyList={ taxonomyList } categoriesList={ categoriesList } />
-				<Render parentProps={ props } latestPosts={ latestPosts } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings
+				parentProps={ props }
+				taxonomyList={ taxonomyList }
+				categoriesList={ categoriesList }
+			/>
+			<Render parentProps={ props } latestPosts={ latestPosts } />
+		</>
 	);
 };
-export default PostTimelineComponent
+export default PostTimelineComponent;

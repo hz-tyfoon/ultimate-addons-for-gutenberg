@@ -26,12 +26,15 @@ const Settings = ( props ) => {
 		return (
 			<UAGAdvancedPanelBody initialOpen={ true }>
 				<UAGTextControl
-					label={ __( 'Date (mm/dd/yyyy)', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Date (mm/dd/yyyy)',
+						'ultimate-addons-for-gutenberg'
+					) }
 					value={ t_date }
-					data={{
+					data={ {
 						value: t_date,
 						label: 't_date',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) => setAttributes( { t_date: value } ) }
 				/>

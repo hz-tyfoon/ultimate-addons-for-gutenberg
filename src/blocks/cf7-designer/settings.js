@@ -22,11 +22,7 @@ import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 
-import {
-	ToggleControl,
-	Icon,
-} from '@wordpress/components';
-
+import { ToggleControl, Icon } from '@wordpress/components';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
@@ -411,12 +407,11 @@ const Settings = ( props ) => {
 	};
 
 	const generalSettings = (
-		<UAGAdvancedPanelBody title={ __( 'General', 'ultimate-addons-for-gutenberg' ) }>
+		<UAGAdvancedPanelBody
+			title={ __( 'General', 'ultimate-addons-for-gutenberg' ) }
+		>
 			<UAGSelectControl
-				label={ __(
-					'Select Form',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Select Form', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					value: formId,
 				} }
@@ -437,24 +432,13 @@ const Settings = ( props ) => {
 				options={ [
 					{
 						value: 'left',
-						icon: (
-							<Icon
-								icon={ renderSVG( 'fa fa-align-left' ) }
-							/>
-						),
-						tooltip: __(
-							'Left',
-							'ultimate-addons-for-gutenberg'
-						),
+						icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+						tooltip: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'center',
 						icon: (
-							<Icon
-								icon={ renderSVG(
-									'fa fa-align-center'
-								) }
-							/>
+							<Icon icon={ renderSVG( 'fa fa-align-center' ) } />
 						),
 						tooltip: __(
 							'Center',
@@ -464,16 +448,9 @@ const Settings = ( props ) => {
 					{
 						value: 'right',
 						icon: (
-							<Icon
-								icon={ renderSVG(
-									'fa fa-align-right'
-								) }
-							/>
+							<Icon icon={ renderSVG( 'fa fa-align-right' ) } />
 						),
-						tooltip: __(
-							'Right',
-							'ultimate-addons-for-gutenberg'
-						),
+						tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 					},
 				] }
 				showIcons={ true }
@@ -587,7 +564,10 @@ const Settings = ( props ) => {
 		>
 			<MultiButtonsControl
 				setAttributes={ setAttributes }
-				label={ __( 'Button Alignment', 'ultimate-addons-for-gutenberg' ) }
+				label={ __(
+					'Button Alignment',
+					'ultimate-addons-for-gutenberg'
+				) }
 				data={ {
 					desktop: {
 						value: buttonAlignment,
@@ -605,22 +585,13 @@ const Settings = ( props ) => {
 				options={ [
 					{
 						value: 'left',
-						icon: (
-							<Icon
-								icon={ renderSVG( 'fa fa-align-left' ) }
-							/>
-						),
-						tooltip: __(
-							'Left',
-							'ultimate-addons-for-gutenberg'
-						),
+						icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+						tooltip: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'center',
 						icon: (
-							<Icon
-								icon={ renderSVG( 'fa fa-align-center' ) }
-							/>
+							<Icon icon={ renderSVG( 'fa fa-align-center' ) } />
 						),
 						tooltip: __(
 							'Center',
@@ -630,21 +601,14 @@ const Settings = ( props ) => {
 					{
 						value: 'right',
 						icon: (
-							<Icon
-								icon={ renderSVG( 'fa fa-align-right' ) }
-							/>
+							<Icon icon={ renderSVG( 'fa fa-align-right' ) } />
 						),
-						tooltip: __(
-							'Right',
-							'ultimate-addons-for-gutenberg'
-						),
+						tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'justify',
 						icon: (
-							<Icon
-								icon={ renderSVG( 'fa fa-align-justify' ) }
-							/>
+							<Icon icon={ renderSVG( 'fa fa-align-justify' ) } />
 						),
 						tooltip: __(
 							'Justified',
@@ -653,7 +617,7 @@ const Settings = ( props ) => {
 					},
 				] }
 				showIcons={ true }
-				responsive={true}
+				responsive={ true }
 			/>
 		</UAGAdvancedPanelBody>
 	);
@@ -881,47 +845,44 @@ const Settings = ( props ) => {
 		>
 			{ fieldStyle === 'underline' && (
 				<ResponsiveSlider
-				label={ __(
-					'Border Bottom',
-					'ultimate-addons-for-gutenberg'
-				) }
-				data={ {
-					desktop: {
-						value: inputBorderBottomWidth,
-						label: 'inputBorderBottomWidth',
-					},
-					tablet: {
-						value: inputBorderBottomWidthTablet,
-						label: 'inputBorderBottomWidthTablet',
-					},
-					mobile: {
-						value: inputBorderBottomWidthMobile,
-						label: 'inputBorderBottomWidthMobile',
-					},
-				} }
-				min={ 0 }
-				max={ 20 }
-				displayUnit={ false }
-				setAttributes={ setAttributes }
-			/>
-			)}
+					label={ __(
+						'Border Bottom',
+						'ultimate-addons-for-gutenberg'
+					) }
+					data={ {
+						desktop: {
+							value: inputBorderBottomWidth,
+							label: 'inputBorderBottomWidth',
+						},
+						tablet: {
+							value: inputBorderBottomWidthTablet,
+							label: 'inputBorderBottomWidthTablet',
+						},
+						mobile: {
+							value: inputBorderBottomWidthMobile,
+							label: 'inputBorderBottomWidthMobile',
+						},
+					} }
+					min={ 0 }
+					max={ 20 }
+					displayUnit={ false }
+					setAttributes={ setAttributes }
+				/>
+			) }
 			<ResponsiveBorder
-				disabledBorderTitle= {false}
+				disabledBorderTitle={ false }
 				setAttributes={ setAttributes }
-				borderHoverColorLabel={__(
+				borderHoverColorLabel={ __(
 					'Active Color',
 					'ultimate-addons-for-gutenberg'
-				)}
-				prefix={'input'}
+				) }
+				prefix={ 'input' }
 				attributes={ attributes }
-				deviceType={deviceType}
-				showWidth = {fieldStyle === 'box' ? true : false}
+				deviceType={ deviceType }
+				showWidth={ fieldStyle === 'box' ? true : false }
 			/>
 			<ResponsiveSlider
-				label={ __(
-					'Fields Space',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Fields Space', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					desktop: {
 						value: fieldSpacing,
@@ -1019,10 +980,7 @@ const Settings = ( props ) => {
 			initialOpen={ false }
 		>
 			<ResponsiveSlider
-				label={ __(
-					'Size',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Size', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					desktop: {
 						value: radioCheckSize,
@@ -1179,8 +1137,7 @@ const Settings = ( props ) => {
 					max={ 50 }
 					unit={ {
 						value: radioCheckBorderWidthUnit,
-						label:
-							'radioCheckBorderWidthUnit',
+						label: 'radioCheckBorderWidthUnit',
 					} }
 					units={ [
 						{
@@ -1222,17 +1179,11 @@ const Settings = ( props ) => {
 				} }
 				units={ [
 					{
-						name: __(
-							'Pixel',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( 'Pixel', 'ultimate-addons-for-gutenberg' ),
 						unitValue: 'px',
 					},
 					{
-						name: __(
-							'%',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( '%', 'ultimate-addons-for-gutenberg' ),
 						unitValue: '%',
 					},
 				] }
@@ -1262,10 +1213,10 @@ const Settings = ( props ) => {
 			/>
 			<ResponsiveBorder
 				setAttributes={ setAttributes }
-				prefix={'btn'}
+				prefix={ 'btn' }
 				attributes={ attributes }
-				deviceType={deviceType}
-				disabledBorderTitle= {false}
+				deviceType={ deviceType }
+				disabledBorderTitle={ false }
 			/>
 			<TypographyControl
 				label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
@@ -1692,10 +1643,7 @@ const Settings = ( props ) => {
 				setAttributes={ setAttributes }
 			/>
 			<Range
-				label={ __(
-					'Border Width',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Border Width', 'ultimate-addons-for-gutenberg' ) }
 				setAttributes={ setAttributes }
 				value={ msgBorderSize }
 				data={ {
@@ -1706,15 +1654,11 @@ const Settings = ( props ) => {
 				max={ 50 }
 				unit={ {
 					value: msgBorderSizeUnit,
-					label:
-						'msgBorderSizeUnit',
+					label: 'msgBorderSizeUnit',
 				} }
 				units={ [
 					{
-						name: __(
-							'Pixel',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( 'Pixel', 'ultimate-addons-for-gutenberg' ),
 						unitValue: 'px',
 					},
 				] }
@@ -1817,7 +1761,7 @@ const Settings = ( props ) => {
 		</UAGAdvancedPanelBody>
 	);
 	return (
-			<>
+		<>
 			<BlockControls key="controls">
 				<AlignmentToolbar
 					value={ align }
@@ -1852,7 +1796,7 @@ const Settings = ( props ) => {
 			{ loadRadioGoogleFonts }
 			{ loadValidationGoogleFonts }
 			{ loadMsgGoogleFonts }
-			</>
+		</>
 	);
 };
 

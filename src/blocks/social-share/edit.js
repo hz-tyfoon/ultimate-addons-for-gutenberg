@@ -3,7 +3,7 @@
  */
 import styling from './styling';
 
-import React, { useEffect,    } from 'react';
+import React, { useEffect } from 'react';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
@@ -18,62 +18,63 @@ const SocialShareComponent = ( props ) => {
 		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 		props.setAttributes( { classMigrate: true } );
 		props.setAttributes( { childMigrate: true } );
-
-
 	}, [] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-style-social-share-' + props.clientId.substr( 0, 8 ), blockStyling );
-
+		addBlockEditorDynamicStyles(
+			'uagb-style-social-share-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
+		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-style-social-share-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-social-share-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	useEffect( () => {
-
 		select( 'core/block-editor' )
-            .getBlocksByClientId( props.clientId )[0]
-            ?.innerBlocks.forEach( function( block ) {
-
-                dispatch( 'core/block-editor' ).updateBlockAttributes(
-                    block.clientId, {
-                        parentSize: props.attributes.size,
-                        parentSizeMobile: props.attributes.sizeMobile,
-                        parentSizeTablet: props.attributes.sizeTablet,
-
-                    }
-                );
-
-            } );
-
-	}, [ props.attributes.size, props.attributes.sizeMobile, props.attributes.sizeTablet ] );
+			.getBlocksByClientId( props.clientId )[ 0 ]
+			?.innerBlocks.forEach( function ( block ) {
+				dispatch( 'core/block-editor' ).updateBlockAttributes(
+					block.clientId,
+					{
+						parentSize: props.attributes.size,
+						parentSizeMobile: props.attributes.sizeMobile,
+						parentSizeTablet: props.attributes.sizeTablet,
+					}
+				);
+			} );
+	}, [
+		props.attributes.size,
+		props.attributes.sizeMobile,
+		props.attributes.sizeTablet,
+	] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/social-share.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

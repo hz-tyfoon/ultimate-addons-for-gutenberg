@@ -14,7 +14,6 @@ import { useDeviceType } from '@Controls/getPreviewType';
 import styles from './editor.lazy.scss';
 import { SwiperSlide } from 'swiper/react';
 
-
 const UAGBSlider = ( props ) => {
 	const deviceType = useDeviceType();
 
@@ -27,53 +26,58 @@ const UAGBSlider = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-
 		// Assigning block_id in the attribute.
 		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
 	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-slider-style-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-slider-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
+		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-slider-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
-	}, [deviceType] );
+		addBlockEditorDynamicStyles(
+			'uagb-slider-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
+	}, [ deviceType ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/slider.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 
-const applyWithSelect = withSelect( ( select, props ) => { // eslint-disable-line no-shadow
+const applyWithSelect = withSelect( ( select, props ) => {
+	// eslint-disable-line no-shadow
 	const { insertBlock } = useDispatch( 'core/block-editor' );
 
 	const { getSelectedBlock, getBlockParents } = select( 'core/block-editor' );
 	const selectedBlock = getSelectedBlock();
 	const parentBlockIds = getBlockParents( selectedBlock?.clientId );
-	const blockParents = select( 'core/block-editor' ).getBlocksByClientId( parentBlockIds );
+	const blockParents =
+		select( 'core/block-editor' ).getBlocksByClientId( parentBlockIds );
 
 	return {
 		insertBlock,
-		block: ( select( 'core/block-editor' ) || select( 'core/editor' ) ).getBlock(
-			props.clientId
-		),
-		blockParents
+		block: (
+			select( 'core/block-editor' ) || select( 'core/editor' )
+		).getBlock( props.clientId ),
+		blockParents,
 	};
 } );
 export default compose( applyWithSelect )( UAGBSlider );
@@ -81,48 +85,59 @@ export default compose( applyWithSelect )( UAGBSlider );
 const { createHigherOrderComponent } = wp.compose;
 
 const uagbSlideClass = createHigherOrderComponent( ( BlockListBlock ) => {
-    return ( props ) => {
-
+	return ( props ) => {
 		const deviceType = useDeviceType();
 
 		const onSwiperChildClick = ( e ) => {
+			const isBlockAppender = e.target
+				.closest( 'div' )
+				.classList.contains( 'block-editor-inserter' );
+			const closestBlock = e.target.closest(
+				'.block-editor-block-list__block'
+			);
 
-			const isBlockAppender = e.target.closest( 'div' ).classList.contains( 'block-editor-inserter' );
-			const closestBlock = e.target.closest( '.block-editor-block-list__block' );
-
-			if( !isBlockAppender && closestBlock && closestBlock.hasAttribute( 'data-block' ) ) {
+			if (
+				! isBlockAppender &&
+				closestBlock &&
+				closestBlock.hasAttribute( 'data-block' )
+			) {
 				const closestBlockClientId = closestBlock.dataset.block;
-				const isBlockSelected = wp.data.select( 'core/block-editor' ).isBlockSelected( closestBlockClientId );
-				if( ! isBlockSelected ) {
-					wp.data.dispatch( 'core/block-editor' ).selectBlock( closestBlockClientId );
+				const isBlockSelected = wp.data
+					.select( 'core/block-editor' )
+					.isBlockSelected( closestBlockClientId );
+				if ( ! isBlockSelected ) {
+					wp.data
+						.dispatch( 'core/block-editor' )
+						.selectBlock( closestBlockClientId );
 				}
 			}
 		};
 
-		if( 'uagb/slider-child' === props.name ) {
-
+		if ( 'uagb/slider-child' === props.name ) {
 			const wrapperProps = {
 				className: `uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				...props.wrapperProps
+				...props.wrapperProps,
 			};
 
-			return <SwiperSlide
-			onClick={( e ) => onSwiperChildClick( e )}
-			aria-hidden="true"
-			><BlockListBlock
-			{ ...props } 
-			wrapperProps={ wrapperProps } /></SwiperSlide>;
+			return (
+				<SwiperSlide
+					onClick={ ( e ) => onSwiperChildClick( e ) }
+					aria-hidden="true"
+				>
+					<BlockListBlock
+						{ ...props }
+						wrapperProps={ wrapperProps }
+					/>
+				</SwiperSlide>
+			);
 		}
 
-		return <BlockListBlock
-			{ ...props }
-		/>;
-
-    };
+		return <BlockListBlock { ...props } />;
+	};
 }, 'uagbSlideClass' );
 
 wp.hooks.addFilter(
-    'editor.BlockListBlock',
-    'uagb/slider-child',
-    uagbSlideClass
+	'editor.BlockListBlock',
+	'uagb/slider-child',
+	uagbSlideClass
 );

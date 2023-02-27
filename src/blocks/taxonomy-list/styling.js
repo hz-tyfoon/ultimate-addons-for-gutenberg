@@ -8,7 +8,6 @@ import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -116,17 +115,49 @@ function styling( props ) {
 		seperatorColor,
 	} = props.attributes;
 
-	const listBottomMarginFallback = getFallbackNumber( listBottomMargin, 'listBottomMargin', blockName );
+	const listBottomMarginFallback = getFallbackNumber(
+		listBottomMargin,
+		'listBottomMargin',
+		blockName
+	);
 	const columnsFallback = getFallbackNumber( columns, 'columns', blockName );
-	const tcolumnsFallback = getFallbackNumber( tcolumns, 'tcolumns', blockName );
-	const mcolumnsFallback = getFallbackNumber( mcolumns, 'mcolumns', blockName );
-	const titleBottomSpaceFallback = getFallbackNumber( titleBottomSpace, 'titleBottomSpace', blockName );
+	const tcolumnsFallback = getFallbackNumber(
+		tcolumns,
+		'tcolumns',
+		blockName
+	);
+	const mcolumnsFallback = getFallbackNumber(
+		mcolumns,
+		'mcolumns',
+		blockName
+	);
+	const titleBottomSpaceFallback = getFallbackNumber(
+		titleBottomSpace,
+		'titleBottomSpace',
+		blockName
+	);
 	const rowGapFallback = getFallbackNumber( rowGap, 'rowGap', blockName );
-	const columnGapFallback = getFallbackNumber( columnGap, 'columnGap', blockName );
+	const columnGapFallback = getFallbackNumber(
+		columnGap,
+		'columnGap',
+		blockName
+	);
 
-	const overallBorderCSS = generateBorderCSS( props.attributes, 'overall', '' );
-	const overallBorderCSSTablet = generateBorderCSS( props.attributes,'overall', 'tablet' );
-	const overallBorderCSSMobile = generateBorderCSS( props.attributes,'overall', 'mobile' );
+	const overallBorderCSS = generateBorderCSS(
+		props.attributes,
+		'overall',
+		''
+	);
+	const overallBorderCSSTablet = generateBorderCSS(
+		props.attributes,
+		'overall',
+		'tablet'
+	);
+	const overallBorderCSSMobile = generateBorderCSS(
+		props.attributes,
+		'overall',
+		'mobile'
+	);
 
 	let selectors = {};
 	let tabletSelectors = {};
@@ -191,7 +222,10 @@ function styling( props ) {
 			'font-style': countFontStyle,
 			'text-decoration': countDecoration,
 			'text-transform': countTransform,
-			'letter-spacing': generateCSSUnit( countLetterSpacing, countLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				countLetterSpacing,
+				countLetterSpacingType
+			),
 		},
 		'.uagb-layout-grid .uagb-tax-title': {
 			'color': titleColor,
@@ -207,7 +241,10 @@ function styling( props ) {
 			'font-style': titleFontStyle,
 			'text-decoration': titleDecoration,
 			'text-transform': titleTransform,
-			'letter-spacing': generateCSSUnit( titleLetterSpacing, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacing,
+				titleLetterSpacingType
+			),
 		},
 		'.uagb-layout-list .uagb-tax-list': {
 			'list-style': listStyle,
@@ -222,12 +259,17 @@ function styling( props ) {
 			'font-style': listFontStyle,
 			'text-decoration': listDecoration,
 			'text-transform': listTransform,
-			'letter-spacing': generateCSSUnit( listLetterSpacing, listLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				listLetterSpacing,
+				listLetterSpacingType
+			),
 		},
-		'.uagb-layout-list .uagb-tax-list:hover': { // For Bullets.
+		'.uagb-layout-list .uagb-tax-list:hover': {
+			// For Bullets.
 			'color': hoverlistStyleColor,
 		},
-		'.uagb-layout-list .uagb-tax-link-wrap:hover': { // For Numbers.
+		'.uagb-layout-list .uagb-tax-link-wrap:hover': {
+			// For Numbers.
 			'color': hoverlistStyleColor,
 		},
 		'.uagb-layout-list .uagb-tax-list a.uagb-tax-link': {
@@ -367,7 +409,6 @@ function styling( props ) {
 		'border-top-color': seperatorHoverColor,
 	};
 
-
 	selectors[ ' .uagb-taxomony-box' ] = overallBorderCSS;
 	selectors[ ' .uagb-taxomony-box:hover' ] = {
 		'border-color': overallBorderHColor,
@@ -376,8 +417,8 @@ function styling( props ) {
 	mobileSelectors = {
 		'.uagb-taxonomy__outer-wrap.uagb-layout-grid': {
 			'grid-template-columns': 'repeat(' + mcolumnsFallback + ', 1fr)',
-			'grid-column-gap': generateCSSUnit( columnGapMobile , 'px' ),
-			'grid-row-gap': generateCSSUnit( rowGapMobile , 'px' ),
+			'grid-column-gap': generateCSSUnit( columnGapMobile, 'px' ),
+			'grid-row-gap': generateCSSUnit( rowGapMobile, 'px' ),
 		},
 		'.uagb-layout-grid .uagb-taxomony-box': {
 			'padding-top': generateCSSUnit(
@@ -396,7 +437,7 @@ function styling( props ) {
 				contentRightPaddingMobile,
 				mobileContentPaddingUnit
 			),
-			...overallBorderCSSMobile
+			...overallBorderCSSMobile,
 		},
 		'.uagb-layout-grid .uagb-tax-title': {
 			'font-size': generateCSSUnit(
@@ -408,7 +449,10 @@ function styling( props ) {
 				titleLineHeightType
 			),
 			'margin-bottom': generateCSSUnit( titleBottomSpaceMobile, 'px' ),
-			'letter-spacing': generateCSSUnit( titleLetterSpacingMobile, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacingMobile,
+				titleLetterSpacingType
+			),
 		},
 		'.uagb-layout-grid .uagb-tax-link': {
 			'font-size': generateCSSUnit(
@@ -419,7 +463,10 @@ function styling( props ) {
 				countLineHeightMobile,
 				countLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( countLetterSpacingMobile, countLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				countLetterSpacingMobile,
+				countLetterSpacingType
+			),
 		},
 		'.uagb-layout-list .uagb-tax-list': {
 			'font-size': generateCSSUnit(
@@ -430,7 +477,10 @@ function styling( props ) {
 				listLineHeightMobile,
 				listLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( listLetterSpacingMobile, listLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				listLetterSpacingMobile,
+				listLetterSpacingType
+			),
 		},
 		/* For Backword */
 		' .uagb-taxonomy-wrap.uagb-layout-grid': {
@@ -490,8 +540,8 @@ function styling( props ) {
 	tabletSelectors = {
 		'.uagb-taxonomy__outer-wrap.uagb-layout-grid': {
 			'grid-template-columns': 'repeat(' + tcolumnsFallback + ', 1fr)',
-			'grid-column-gap': generateCSSUnit( columnGapTablet , 'px' ),
-			'grid-row-gap': generateCSSUnit( rowGapTablet , 'px' ),
+			'grid-column-gap': generateCSSUnit( columnGapTablet, 'px' ),
+			'grid-row-gap': generateCSSUnit( rowGapTablet, 'px' ),
 		},
 		'.uagb-layout-grid .uagb-taxomony-box': {
 			'padding-top': generateCSSUnit(
@@ -510,7 +560,7 @@ function styling( props ) {
 				contentRightPaddingTablet,
 				tabletContentPaddingUnit
 			),
-			...overallBorderCSSTablet
+			...overallBorderCSSTablet,
 		},
 		'.uagb-layout-grid .uagb-tax-title': {
 			'font-size': generateCSSUnit(
@@ -523,7 +573,10 @@ function styling( props ) {
 			),
 
 			'margin-bottom': generateCSSUnit( titleBottomSpaceTablet, 'px' ),
-			'letter-spacing': generateCSSUnit( titleLetterSpacingTablet, titleLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				titleLetterSpacingTablet,
+				titleLetterSpacingType
+			),
 		},
 		'.uagb-layout-grid .uagb-tax-link': {
 			'font-size': generateCSSUnit(
@@ -534,7 +587,10 @@ function styling( props ) {
 				countLineHeightTablet,
 				countLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( countLetterSpacingTablet, countLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				countLetterSpacingTablet,
+				countLetterSpacingType
+			),
 		},
 		'.uagb-layout-list .uagb-tax-list': {
 			'font-size': generateCSSUnit(
@@ -545,7 +601,10 @@ function styling( props ) {
 				listLineHeightTablet,
 				listLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( listLetterSpacingTablet, listLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				listLetterSpacingTablet,
+				listLetterSpacingType
+			),
 		},
 		/* For Backword. */
 		' .uagb-taxonomy-wrap.uagb-layout-grid': {

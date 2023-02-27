@@ -22,11 +22,14 @@ import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 export { TypographyStyles };
 
 const TypographyControl = ( props ) => {
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	const [ showAdvancedControls, toggleAdvancedControls ] = useState( false );
-	const allBlocksAttributes = wp.hooks.applyFilters( 'uagb.blocksAttributes', blocksAttributes ); // eslint-disable-line @wordpress/no-unused-vars-before-return
+	const allBlocksAttributes = wp.hooks.applyFilters(
+		'uagb.blocksAttributes',
+		blocksAttributes
+	); // eslint-disable-line @wordpress/no-unused-vars-before-return
 
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -37,27 +40,48 @@ const TypographyControl = ( props ) => {
 	}, [] );
 
 	useLayoutEffect( () => {
-		window.addEventListener( 'click', function( e ){
-			const popupButton = document.querySelector( `.active.popup-${props?.attributes?.block_id} .spectra-control-popup__options--action-button` );
-			const popupWrap = document.querySelector( `.active.popup-${props?.attributes?.block_id} .spectra-control-popup` );
+		window.addEventListener( 'click', function ( e ) {
+			const popupButton = document.querySelector(
+				`.active.popup-${ props?.attributes?.block_id } .spectra-control-popup__options--action-button`
+			);
+			const popupWrap = document.querySelector(
+				`.active.popup-${ props?.attributes?.block_id } .spectra-control-popup`
+			);
 
-			if ( popupButton && ! popupButton?.contains( e.target ) && popupWrap && ! popupWrap?.contains( e.target ) && ! e.target?.parentElement?.parentElement?.classList?.contains( 'uag-font-family-select__menu' ) && ! e.target?.classList?.contains( 'uag-responsive-common-button' ) && ! e.target?.closest( '.uag-responsive-common-button' ) && ! e.target?.parentElement?.closest( '.uagb-reset' ) ) {
-				toggleAdvancedControls( false )
+			if (
+				popupButton &&
+				! popupButton?.contains( e.target ) &&
+				popupWrap &&
+				! popupWrap?.contains( e.target ) &&
+				! e.target?.parentElement?.parentElement?.classList?.contains(
+					'uag-font-family-select__menu'
+				) &&
+				! e.target?.classList?.contains(
+					'uag-responsive-common-button'
+				) &&
+				! e.target?.closest( '.uag-responsive-common-button' ) &&
+				! e.target?.parentElement?.closest( '.uagb-reset' )
+			) {
+				toggleAdvancedControls( false );
 
 				const blockName = getSelectedBlock()?.name;
-				const uagSettingState = getUAGEditorStateLocalStorage( 'uagSettingState' );
+				const uagSettingState =
+					getUAGEditorStateLocalStorage( 'uagSettingState' );
 
 				const data = {
 					...uagSettingState,
-					[blockName] : {
-						...uagSettingState?.[blockName],
-						selectedSetting : false
-					}
-				}
+					[ blockName ]: {
+						...uagSettingState?.[ blockName ],
+						selectedSetting: false,
+					},
+				};
 
 				const uagLocalStorage = getUAGEditorStateLocalStorage();
 				if ( uagLocalStorage ) {
-					uagLocalStorage.setItem( 'uagSettingState', JSON.stringify( data ) );
+					uagLocalStorage.setItem(
+						'uagSettingState',
+						JSON.stringify( data )
+					);
 				}
 			}
 		} );
@@ -85,8 +109,9 @@ const TypographyControl = ( props ) => {
 	if ( true !== disableFontFamily ) {
 		fontFamily = <FontFamilyControl { ...props } />;
 	}
-	const lineHeightStepsVal = ( 'em' === props.lineHeightType?.value ? 0.1 : 1 ); // fractional value when unit is em.
-	const letterSpacingStepsVal = ( 'em' === props.letterSpacingType?.value ? 0.1 : 1 ); // fractional value when unit is em.
+	const lineHeightStepsVal = 'em' === props.lineHeightType?.value ? 0.1 : 1; // fractional value when unit is em.
+	const letterSpacingStepsVal =
+		'em' === props.letterSpacingType?.value ? 0.1 : 1; // fractional value when unit is em.
 
 	// Array of all the current Typography Control's Labels.
 	const attributeNames = [];
@@ -95,7 +120,7 @@ const TypographyControl = ( props ) => {
 		attributeNames.push(
 			props.fontFamily.label,
 			props.fontWeight.label,
-			props.fontStyle.label,
+			props.fontStyle.label
 		);
 	}
 
@@ -104,7 +129,7 @@ const TypographyControl = ( props ) => {
 			props.fontSizeType.label,
 			props.fontSize.label,
 			props.fontSizeMobile.label,
-			props.fontSizeTablet.label,
+			props.fontSizeTablet.label
 		);
 	}
 
@@ -113,20 +138,16 @@ const TypographyControl = ( props ) => {
 			props.lineHeightType.label,
 			props.lineHeight.label,
 			props.lineHeightMobile.label,
-			props.lineHeightTablet.label,
+			props.lineHeightTablet.label
 		);
 	}
 
 	if ( ! disableTransform ) {
-		attributeNames.push(
-			props.transform.label,
-		);
+		attributeNames.push( props.transform.label );
 	}
 
 	if ( ! disableDecoration ) {
-		attributeNames.push(
-			props.decoration.label,
-		);
+		attributeNames.push( props.decoration.label );
 	}
 
 	if ( props.letterSpacing ) {
@@ -134,15 +155,15 @@ const TypographyControl = ( props ) => {
 			props.letterSpacing.label,
 			props.letterSpacingTablet.label,
 			props.letterSpacingMobile.label,
-			props.letterSpacingType.label,
+			props.letterSpacingType.label
 		);
 	}
 
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
 	// Function to get the Block's default Typography Values.
 	const getBlockTypographyValue = () => {
@@ -151,16 +172,24 @@ const TypographyControl = ( props ) => {
 		if ( 'undefined' !== typeof allBlocksAttributes[ selectedBlockName ] ) {
 			attributeNames.forEach( ( attributeName ) => {
 				if ( attributeName ) {
-					const blockDefaultAttributeValue = ( 'undefined' !== typeof allBlocksAttributes[ selectedBlockName ][ attributeName ]?.default ) ? allBlocksAttributes[ selectedBlockName ][ attributeName ]?.default : '';
+					const blockDefaultAttributeValue =
+						'undefined' !==
+						typeof allBlocksAttributes[ selectedBlockName ][
+							attributeName
+						]?.default
+							? allBlocksAttributes[ selectedBlockName ][
+									attributeName
+							  ]?.default
+							: '';
 					defaultValues = {
 						...defaultValues,
-						[ attributeName ] : blockDefaultAttributeValue,
-					}
+						[ attributeName ]: blockDefaultAttributeValue,
+					};
 				}
 			} );
 		}
 		return defaultValues;
-	}
+	};
 
 	// Function to check if any Typography Setting has changed.
 	const getUpdateState = () => {
@@ -168,7 +197,11 @@ const TypographyControl = ( props ) => {
 		const selectedBlockAttributes = getSelectedBlock()?.attributes;
 		let isTypographyUpdated = false;
 		attributeNames.forEach( ( attributeName ) => {
-			if ( selectedBlockAttributes?.[ attributeName ] && ( selectedBlockAttributes?.[ attributeName ] !== defaultValues?.[ attributeName ] ) ) {
+			if (
+				selectedBlockAttributes?.[ attributeName ] &&
+				selectedBlockAttributes?.[ attributeName ] !==
+					defaultValues?.[ attributeName ]
+			) {
 				isTypographyUpdated = true;
 			}
 		} );
@@ -239,10 +272,7 @@ const TypographyControl = ( props ) => {
 	if ( ! disableTransform && props.transform ) {
 		transform = (
 			<UAGSelectControl
-				label={ __(
-					'Transform',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Transform', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					value: props.transform.value,
 					label: props.transform.label,
@@ -251,17 +281,11 @@ const TypographyControl = ( props ) => {
 				options={ [
 					{
 						value: '',
-						label: __(
-							'Default',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'normal',
-						label: __(
-							'Normal',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'capitalize',
@@ -348,43 +372,48 @@ const TypographyControl = ( props ) => {
 				className="uag-typography-button spectra-control-popup__options--action-button"
 				aria-pressed={ showAdvancedControls }
 				onClick={ () => {
-
-						const allPopups = document.querySelectorAll( '.spectra-control-popup__options' );
-						if ( allPopups && 0 < allPopups.length ) {
-							for ( let i = 0; i < allPopups.length; i++ ) {
-								const popupButton = allPopups[i]?.querySelector( '.spectra-control-popup__options.active .spectra-control-popup__options--action-button' );
-								popupButton?.click();
-							}
+					const allPopups = document.querySelectorAll(
+						'.spectra-control-popup__options'
+					);
+					if ( allPopups && 0 < allPopups.length ) {
+						for ( let i = 0; i < allPopups.length; i++ ) {
+							const popupButton = allPopups[ i ]?.querySelector(
+								'.spectra-control-popup__options.active .spectra-control-popup__options--action-button'
+							);
+							popupButton?.click();
 						}
-						toggleAdvancedControls( ! showAdvancedControls )
-
-						const blockName = getSelectedBlock()?.name;
-						const uagSettingState = getUAGEditorStateLocalStorage( 'uagSettingState' );
-						let data = {
-							...uagSettingState,
-							[blockName] : {
-								...uagSettingState?.[blockName],
-								selectedSetting : '.uag-typography-options'
-							}
-						}
-
-						if ( showAdvancedControls ) {
-							data = {
-								...uagSettingState,
-								[blockName] : {
-									...uagSettingState?.[blockName],
-									selectedSetting : false
-								}
-							}
-						}
-
-						const uagLocalStorage = getUAGEditorStateLocalStorage();
-						if ( uagLocalStorage ) {
-							uagLocalStorage.setItem( 'uagSettingState', JSON.stringify( data ) );
-						}
-
 					}
-				}
+					toggleAdvancedControls( ! showAdvancedControls );
+
+					const blockName = getSelectedBlock()?.name;
+					const uagSettingState =
+						getUAGEditorStateLocalStorage( 'uagSettingState' );
+					let data = {
+						...uagSettingState,
+						[ blockName ]: {
+							...uagSettingState?.[ blockName ],
+							selectedSetting: '.uag-typography-options',
+						},
+					};
+
+					if ( showAdvancedControls ) {
+						data = {
+							...uagSettingState,
+							[ blockName ]: {
+								...uagSettingState?.[ blockName ],
+								selectedSetting: false,
+							},
+						};
+					}
+
+					const uagLocalStorage = getUAGEditorStateLocalStorage();
+					if ( uagLocalStorage ) {
+						uagLocalStorage.setItem(
+							'uagSettingState',
+							JSON.stringify( data )
+						);
+					}
+				} }
 			>
 				<Dashicon icon="edit" />
 			</Button>
@@ -419,7 +448,7 @@ const TypographyControl = ( props ) => {
 				<span className="uag-control-label">
 					{ props.label }
 					{ isTypographyUpdated && (
-						<div className="spectra__change-indicator--dot-right"/>
+						<div className="spectra__change-indicator--dot-right" />
 					) }
 				</span>
 				{ fontAdvancedControls }
@@ -428,20 +457,22 @@ const TypographyControl = ( props ) => {
 	}
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
-
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
-		<div
-			ref={panelRef}
-			className="components-base-control"
-		>
-			{
-				controlBeforeDomElement
-			}
+		<div ref={ panelRef } className="components-base-control">
+			{ controlBeforeDomElement }
 			<div
-				className={ ` uag-typography-options spectra-control-popup__options popup-${props?.attributes?.block_id} ${ activeClass }` }
+				className={ ` uag-typography-options spectra-control-popup__options popup-${ props?.attributes?.block_id } ${ activeClass }` }
 			>
 				{ ! disableAdvancedOptions && (
 					<>
@@ -450,9 +481,7 @@ const TypographyControl = ( props ) => {
 					</>
 				) }
 			</div>
-			{
-				controlAfterDomElement
-			}
+			{ controlAfterDomElement }
 		</div>
 	);
 };

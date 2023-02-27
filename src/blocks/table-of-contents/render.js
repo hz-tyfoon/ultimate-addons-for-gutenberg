@@ -37,7 +37,7 @@ const Render = ( props ) => {
 	useEffect( () => {
 		if ( UAGBTableOfContents ) {
 			const baseSelector = classMigrate ? '.uagb-block-' : '#uagb-toc-';
-			const selector      = baseSelector + props.clientId.substr( 0, 8 );
+			const selector = baseSelector + props.clientId.substr( 0, 8 );
 			UAGBTableOfContents.init( selector );
 		}
 	}, [] );
@@ -46,9 +46,11 @@ const Render = ( props ) => {
 	const tocRoot = useRef();
 
 	useEffect( () => {
-		if ( (
-			tocRoot.current && ! makeCollapsible
-		) && tocRoot.current.classList.contains( 'uagb-toc__collapse' ) ) {
+		if (
+			tocRoot.current &&
+			! makeCollapsible &&
+			tocRoot.current.classList.contains( 'uagb-toc__collapse' )
+		) {
 			tocRoot.current.classList.remove( 'uagb-toc__collapse' );
 			UAGBTableOfContents._slideDown(
 				tocRoot.current.querySelector( '.uagb-toc__list-wrap' ),
@@ -69,8 +71,12 @@ const Render = ( props ) => {
 			className={ classnames(
 				className,
 				`uagb-toc__align-${ align }`,
-				`uagb-toc__columns-${ getFallbackNumber( tColumnsDesktop, 'tColumnsDesktop', blockName ) }`,
-				( makeCollapsible && initialCollapse ) ? 'uagb-toc__collapse' : '',
+				`uagb-toc__columns-${ getFallbackNumber(
+					tColumnsDesktop,
+					'tColumnsDesktop',
+					blockName
+				) }`,
+				makeCollapsible && initialCollapse ? 'uagb-toc__collapse' : '',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
 				`uagb-block-${ props.clientId.substr( 0, 8 ) }`
 			) }
@@ -91,11 +97,10 @@ const Render = ( props ) => {
 						onRemove={ () => props.onReplace( [] ) }
 					/>
 					{ iconHtml }
-					</div>
-					{ separatorStyle !== 'none' && (
-							<div className='uagb-toc__separator'></div>
-						)
-					}
+				</div>
+				{ separatorStyle !== 'none' && (
+					<div className="uagb-toc__separator"></div>
+				) }
 				<TableOfContents
 					mappingHeaders={ mappingHeaders }
 					headers={ headers }

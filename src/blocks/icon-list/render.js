@@ -20,11 +20,7 @@ const Render = ( props ) => {
 	const deviceType = useDeviceType();
 	const { attributes } = props;
 
-	const {
-		className,
-		icon_count,
-		block_id,
-	} = attributes;
+	const { className, icon_count, block_id } = attributes;
 
 	const getIconTemplate = useMemo( () => {
 		const childIconList = [];

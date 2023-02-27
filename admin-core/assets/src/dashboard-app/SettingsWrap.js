@@ -5,18 +5,17 @@ import SettingsRoute from './SettingsRoute';
 import SettingsSavedNotification from './SettingsSavedNotification';
 
 const SettingsWrap = () => {
-
-    return (
-        <Router>
-            <MainNav/>
-			<SettingsSavedNotification/>
+	return (
+		<Router>
+			<MainNav />
+			<SettingsSavedNotification />
 			<Switch>
 				<Route path="/">
 					<SettingsRoute />
 				</Route>
 			</Switch>
 		</Router>
-    );
+	);
 };
 
 export default SettingsWrap;

@@ -14,7 +14,10 @@ import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType( 'uagb/table-of-contents', {
 	title: __( 'Table Of Contents', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add a table of contents to allow page navigation.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add a table of contents to allow page navigation.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.table_of_contents,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -34,7 +37,7 @@ registerBlockType( 'uagb/table-of-contents', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	deprecated,
 } );

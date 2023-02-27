@@ -11,7 +11,6 @@ import GeneralSettings from './components/settings/GeneralSettings';
 import StyleSettings from './components/settings/StyleSettings';
 
 const Settings = ( props ) => {
-
 	return (
 		<InspectorControls>
 			<InspectorTabs>

@@ -4,7 +4,7 @@
 
 import RestMenuStyle from './inline-styles';
 import { select, dispatch } from '@wordpress/data';
-import React, {    useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
@@ -20,18 +20,16 @@ const UAGBRestaurantMenu = ( props ) => {
 		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 		props.setAttributes( { classMigrate: true } );
 		props.setAttributes( { childMigrate: true } );
-		const {
-			imagePosition
-		} = props.attributes;
+		const { imagePosition } = props.attributes;
 
-		if( imagePosition ){
-			if( 'left' === imagePosition ){
+		if ( imagePosition ) {
+			if ( 'left' === imagePosition ) {
 				props.setAttributes( { imgAlign: 'side' } );
 			}
-			if( 'right' === imagePosition ){
+			if ( 'right' === imagePosition ) {
 				props.setAttributes( { imgAlign: 'side' } );
 			}
-			if( 'top' === imagePosition ){
+			if ( 'top' === imagePosition ) {
 				props.setAttributes( { imgAlign: 'top' } );
 			}
 		}
@@ -44,70 +42,67 @@ const UAGBRestaurantMenu = ( props ) => {
 			pricelistChild.attributes.imageAlignment =
 				props.attributes.imageAlignment;
 		} );
-		
 	}, [] );
 
 	useEffect( () => {
-
 		const blockStyling = RestMenuStyle( props );
 
-		addBlockEditorDynamicStyles( 'uagb-restaurant-menu-style-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-restaurant-menu-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
-		const {
-			imgAlign,
-			imagePosition,
-		} = props.attributes;
+		const { imgAlign, imagePosition } = props.attributes;
 
-
-		if( 'side' === imgAlign && 'right' !== imagePosition ){
-			props.setAttributes( { imagePosition : 'left' } );
-			props.setAttributes( { headingAlign : 'left' } );
+		if ( 'side' === imgAlign && 'right' !== imagePosition ) {
+			props.setAttributes( { imagePosition: 'left' } );
+			props.setAttributes( { headingAlign: 'left' } );
 		}
-		if( 'top' === imgAlign ){
-			props.setAttributes( { imagePosition : 'top' } );
+		if ( 'top' === imgAlign ) {
+			props.setAttributes( { imagePosition: 'top' } );
 		}
-		
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = RestMenuStyle( props );
 
-		addBlockEditorDynamicStyles( 'uagb-restaurant-menu-style-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-restaurant-menu-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
 		// Set showImage attribute in child blocks based on current parent block's value.
 		select( 'core/block-editor' )
-            .getBlocksByClientId( props.clientId )[0]
-            ?.innerBlocks.forEach( function( block ) {
-                dispatch( 'core/block-editor' ).updateBlockAttributes(
-                    block.clientId, {
-                        showImage: props.attributes.showImage,
-                    }
-                );
-
-            } );
+			.getBlocksByClientId( props.clientId )[ 0 ]
+			?.innerBlocks.forEach( function ( block ) {
+				dispatch( 'core/block-editor' ).updateBlockAttributes(
+					block.clientId,
+					{
+						showImage: props.attributes.showImage,
+					}
+				);
+			} );
 	}, [ props.attributes.showImage ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/price-list.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 export default UAGBRestaurantMenu;

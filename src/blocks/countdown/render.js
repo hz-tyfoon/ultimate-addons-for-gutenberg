@@ -6,7 +6,6 @@ import { useBlockProps } from '@wordpress/block-editor';
 import CountdownBox from './components/CountdownBox';
 
 const Render = ( props ) => {
-
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
 		styles.use();
@@ -28,23 +27,37 @@ const Render = ( props ) => {
 			labelHours,
 			labelMinutes,
 			labelSeconds,
-		}
+		},
 	} = props;
 
 	const blockProps = useBlockProps( {
 		className: `uagb-block-${ block_id } uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-		ref: countdownRef
+		ref: countdownRef,
 	} );
 
-	return(
-			<div
-				{ ...blockProps }
-			>
-				<CountdownBox unitType='days' showLabels={ showLabels } label={ labelDays } />
-				<CountdownBox unitType='hours' showLabels={ showLabels } label={ labelHours } />
-				<CountdownBox unitType='minutes' showLabels={ showLabels } label={ labelMinutes } />
-				<CountdownBox unitType='seconds' showLabels={ showLabels } label={ labelSeconds } />
-			</div>
+	return (
+		<div { ...blockProps }>
+			<CountdownBox
+				unitType="days"
+				showLabels={ showLabels }
+				label={ labelDays }
+			/>
+			<CountdownBox
+				unitType="hours"
+				showLabels={ showLabels }
+				label={ labelHours }
+			/>
+			<CountdownBox
+				unitType="minutes"
+				showLabels={ showLabels }
+				label={ labelMinutes }
+			/>
+			<CountdownBox
+				unitType="seconds"
+				showLabels={ showLabels }
+				label={ labelSeconds }
+			/>
+		</div>
 	);
 };
 

@@ -12,70 +12,70 @@ import newSaveV2_0_14 from './deprecated/v2_0_14/save';
 
 const attributes = {
 	block_id: {
-		type: "string"
+		type: 'string',
 	},
 	label: {
 		type: 'html',
-		selector: ".uagb-icon-list__label",
-		default: "#Label"
+		selector: '.uagb-icon-list__label',
+		default: '#Label',
 	},
 	image_icon: {
-		type: "string",
-		default: "icon"
+		type: 'string',
+		default: 'icon',
 	},
 	hideLabel: {
-		type: "boolean",
-		default: false
+		type: 'boolean',
+		default: false,
 	},
 	icon: {
-		type: "string",
-		default: "fab fa-arrow-circle-right"
+		type: 'string',
+		default: 'fab fa-arrow-circle-right',
 	},
 	image: {
-		type: "object",
+		type: 'object',
 	},
 	icon_color: {
-		type: "string",
-		default: "#3a3a3a"
+		type: 'string',
+		default: '#3a3a3a',
 	},
 	label_color: {
-		type: "string"
+		type: 'string',
 	},
 	icon_hover_color: {
-		type: "string"
+		type: 'string',
 	},
 	label_hover_color: {
-		type: "string"
+		type: 'string',
 	},
 	icon_bg_color: {
-		type: "string"
+		type: 'string',
 	},
 	icon_bg_hover_color: {
-		type: "string"
+		type: 'string',
 	},
 	icon_border_color: {
-		type: "string"
+		type: 'string',
 	},
 	icon_border_hover_color: {
-		type: "string"
+		type: 'string',
 	},
 	link: {
-		type: "string",
-		default: "#"
+		type: 'string',
+		default: '#',
 	},
 	target: {
-		type: "boolean",
-		default: false
+		type: 'boolean',
+		default: false,
 	},
 	disableLink: {
-		type: "boolean",
-		default: true
+		type: 'boolean',
+		default: true,
 	},
 	deviceType: {
-		type: "string",
-		default: 'Desktop'
-	}
-}
+		type: 'string',
+		default: 'Desktop',
+	},
+};
 
 const deprecated = [
 	{
@@ -93,7 +93,7 @@ const deprecated = [
 				target,
 				disableLink,
 				hideLabel,
-				fromParentIcon
+				fromParentIcon,
 			} = attributes;
 
 			let imageIconHtml = '';
@@ -102,7 +102,9 @@ const deprecated = [
 				if ( icon || fromParentIcon ) {
 					imageIconHtml = (
 						<span className="uagb-icon-list__source-icon">
-							{ icon ? renderSVG( icon ) : renderSVG( fromParentIcon ) }
+							{ icon
+								? renderSVG( icon )
+								: renderSVG( fromParentIcon ) }
 						</span>
 					);
 				}
@@ -229,7 +231,8 @@ const deprecated = [
 			);
 		},
 	},
-	{ // Deprecated for 2.0.12.
+	{
+		// Deprecated for 2.0.12.
 		attributes,
 		save( props ) {
 			const { attributes, className } = props;
@@ -244,16 +247,18 @@ const deprecated = [
 				target,
 				disableLink,
 				hideLabel,
-				fromParentIcon
+				fromParentIcon,
 			} = attributes;
 
-			const defaultedAlt = ( image && image?.alt ) ? image?.alt : '';
+			const defaultedAlt = image && image?.alt ? image?.alt : '';
 
 			let imageIconHtml = '';
 
 			if ( image_icon === 'icon' ) {
-				if( icon || fromParentIcon ){
-					imageIconHtml = icon ? newrenderSVG( icon ) : newrenderSVG( fromParentIcon );
+				if ( icon || fromParentIcon ) {
+					imageIconHtml = icon
+						? newrenderSVG( icon )
+						: newrenderSVG( fromParentIcon );
 				}
 			} else if ( image && image.url && image_icon !== 'none' ) {
 				imageIconHtml = (
@@ -285,13 +290,11 @@ const deprecated = [
 							{ ' ' }
 						</a>
 					) }
-					{
-						imageIconHtml && (
-							<span className="uagb-icon-list__source-wrap">
-								{ imageIconHtml }
-							</span>
-						)
-					}
+					{ imageIconHtml && (
+						<span className="uagb-icon-list__source-wrap">
+							{ imageIconHtml }
+						</span>
+					) }
 					{ ! hideLabel && '' !== label && (
 						<RichText.Content
 							tagName="span"
@@ -303,10 +306,11 @@ const deprecated = [
 			);
 		},
 	},
-	{ // Deprecated for 2.0.13.
-		attributes : newAttributesV2_0_13,
+	{
+		// Deprecated for 2.0.13.
+		attributes: newAttributesV2_0_13,
 		save( props ) {
-			const { attributes , className } = props;
+			const { attributes, className } = props;
 
 			const {
 				label,
@@ -318,16 +322,18 @@ const deprecated = [
 				target,
 				disableLink,
 				hideLabel,
-				fromParentIcon
+				fromParentIcon,
 			} = attributes;
 
-			const defaultedAlt = ( image && image?.alt ) ? image?.alt : '';
+			const defaultedAlt = image && image?.alt ? image?.alt : '';
 
 			let imageIconHtml = '';
 
 			if ( image_icon === 'icon' ) {
-				if( icon || fromParentIcon ){
-					imageIconHtml = icon ? newrenderSVG( icon ) : newrenderSVG( fromParentIcon );
+				if ( icon || fromParentIcon ) {
+					imageIconHtml = icon
+						? newrenderSVG( icon )
+						: newrenderSVG( fromParentIcon );
 				}
 			} else if ( image && image.url && image_icon !== 'none' ) {
 				imageIconHtml = (
@@ -352,20 +358,18 @@ const deprecated = [
 					{ disableLink && (
 						<a
 							target={ targetVal }
-							aria-label={ label.replace( /(<([^>]+)>)/ig, '' ) }
+							aria-label={ label.replace( /(<([^>]+)>)/gi, '' ) }
 							rel="noopener noreferrer"
 							href={ linkUrl }
 						>
 							{ ' ' }
 						</a>
 					) }
-					{
-						imageIconHtml && (
-							<span className="uagb-icon-list__source-wrap">
-								{ imageIconHtml }
-							</span>
-						)
-					}
+					{ imageIconHtml && (
+						<span className="uagb-icon-list__source-wrap">
+							{ imageIconHtml }
+						</span>
+					) }
 					{ ! hideLabel && '' !== label && (
 						<RichText.Content
 							tagName="span"
@@ -375,12 +379,13 @@ const deprecated = [
 					) }
 				</div>
 			);
-		}
+		},
 	},
-	{ // Deprecated for 2.0.14
-		attributes : newAttributesV2_0_14,
-		save : newSaveV2_0_14
-	}
+	{
+		// Deprecated for 2.0.14
+		attributes: newAttributesV2_0_14,
+		save: newSaveV2_0_14,
+	},
 ];
 
 export default deprecated;

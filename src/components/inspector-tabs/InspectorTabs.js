@@ -29,7 +29,9 @@ const InspectorTabs = ( props ) => {
 	const uagSettingState = getUAGEditorStateLocalStorage( 'uagSettingState' );
 
 	const { defaultTab, children, tabs } = props;
-	const [ currentTab, setCurrentTab ] = useState( defaultTab ? defaultTab : tabs[ 0 ] );
+	const [ currentTab, setCurrentTab ] = useState(
+		defaultTab ? defaultTab : tabs[ 0 ]
+	);
 
 	const tabContainer = useRef();
 
@@ -40,39 +42,70 @@ const InspectorTabs = ( props ) => {
 	} );
 
 	const renderUAGTabsSettingsInOrder = () => {
-
 		// Inspector Tabs Priority Rendering Code. (Conflicts with 3rd Party plugin panels in Inspector Panel)
-		const tabsContainer = document.querySelector( '.uagb-inspector-tabs-container' );
-		let dynamicContentContainer = document.querySelector( '.components-panel__body.uagb-dynamic-content-wrap' );
-		let tabsGeneralContainer = document.querySelector( '.uagb-tab-content-general' );
-		let tabsStyleContainer = document.querySelector( '.uagb-tab-content-style' );
-		let tabsAdvanceContainer = document.querySelector( '.uagb-tab-content-advance' );
+		const tabsContainer = document.querySelector(
+			'.uagb-inspector-tabs-container'
+		);
+		let dynamicContentContainer = document.querySelector(
+			'.components-panel__body.uagb-dynamic-content-wrap'
+		);
+		let tabsGeneralContainer = document.querySelector(
+			'.uagb-tab-content-general'
+		);
+		let tabsStyleContainer = document.querySelector(
+			'.uagb-tab-content-style'
+		);
+		let tabsAdvanceContainer = document.querySelector(
+			'.uagb-tab-content-advance'
+		);
 
 		if ( tabsContainer ) {
 			const tabsParent = tabsContainer.parentElement;
 
 			if ( tabsParent ) {
-				dynamicContentContainer = dynamicContentContainer ? dynamicContentContainer : '';
-				tabsGeneralContainer = tabsGeneralContainer ? tabsGeneralContainer : '';
-				tabsStyleContainer = tabsStyleContainer ? tabsStyleContainer : '';
-				tabsAdvanceContainer = tabsAdvanceContainer ? tabsAdvanceContainer : '';
-				tabsParent.prepend( dynamicContentContainer, tabsContainer,tabsGeneralContainer,tabsStyleContainer,tabsAdvanceContainer );
+				dynamicContentContainer = dynamicContentContainer
+					? dynamicContentContainer
+					: '';
+				tabsGeneralContainer = tabsGeneralContainer
+					? tabsGeneralContainer
+					: '';
+				tabsStyleContainer = tabsStyleContainer
+					? tabsStyleContainer
+					: '';
+				tabsAdvanceContainer = tabsAdvanceContainer
+					? tabsAdvanceContainer
+					: '';
+				tabsParent.prepend(
+					dynamicContentContainer,
+					tabsContainer,
+					tabsGeneralContainer,
+					tabsStyleContainer,
+					tabsAdvanceContainer
+				);
 			}
 		}
 	};
 
 	// component did mount
 	useEffect( () => {
-
 		renderUAGTabsSettingsInOrder();
 
 		const { getSelectedBlock } = select( 'core/block-editor' );
 		const blockName = getSelectedBlock()?.name;
 		// This code is to fix the side-effect of the editor responsive click settings panel refresh issue.
-		if ( uagSettingState && uagSettingState[blockName] && currentTab !== uagSettingState[blockName]?.selectedTab ) {
-			setCurrentTab( uagSettingState[blockName]?.selectedTab || 'general' )
+		if (
+			uagSettingState &&
+			uagSettingState[ blockName ] &&
+			currentTab !== uagSettingState[ blockName ]?.selectedTab
+		) {
+			setCurrentTab(
+				uagSettingState[ blockName ]?.selectedTab || 'general'
+			);
 			if ( sidebarPanel ) {
-				sidebarPanel.setAttribute( 'data-uagb-tab', uagSettingState[blockName]?.selectedTab || 'general' );
+				sidebarPanel.setAttribute(
+					'data-uagb-tab',
+					uagSettingState[ blockName ]?.selectedTab || 'general'
+				);
 			}
 		} else if ( sidebarPanel ) {
 			sidebarPanel.setAttribute( 'data-uagb-tab', 'general' );
@@ -80,24 +113,22 @@ const InspectorTabs = ( props ) => {
 		// Above Section Ends.
 		// component will unmount
 		return () => {
-
-			if( sidebarPanel ) {
+			if ( sidebarPanel ) {
 				const inspectorTabs = sidebarPanel.querySelector(
 					'.uagb-inspector-tabs-container'
 				);
 
-				if( ! inspectorTabs || null === inspectorTabs ) {
+				if ( ! inspectorTabs || null === inspectorTabs ) {
 					sidebarPanel.removeAttribute( 'data-uagb-tab' );
 				}
 			}
 		};
-
 	}, [] );
 
 	const _onTabChange = ( tab ) => {
 		renderUAGTabsSettingsInOrder();
 		setCurrentTab( tab );
-		doAction( `uag_inspector_change_tab`,tab );
+		doAction( `uag_inspector_change_tab`, tab );
 		if ( sidebarPanel ) {
 			sidebarPanel.setAttribute( 'data-uagb-tab', tab );
 		}
@@ -107,13 +138,16 @@ const InspectorTabs = ( props ) => {
 
 		const data = {
 			...uagSettingState,
-			[blockName] : {
-				selectedTab : tab
-			}
-		}
+			[ blockName ]: {
+				selectedTab: tab,
+			},
+		};
 		const uagLocalStorage = getUAGEditorStateLocalStorage();
 		if ( uagLocalStorage ) {
-			uagLocalStorage.setItem( 'uagSettingState', JSON.stringify( data ) );
+			uagLocalStorage.setItem(
+				'uagSettingState',
+				JSON.stringify( data )
+			);
 		}
 	};
 
@@ -197,7 +231,7 @@ const InspectorTabs = ( props ) => {
 
 			{ Array.isArray( children ) &&
 				Children.map( children, ( child, index ) => {
-					if( ! child ) return child;
+					if ( ! child ) return child;
 					if ( ! child.key ) {
 						throw new Error(
 							'props.key not found in <InspectorTab />, you must use `key` prop'

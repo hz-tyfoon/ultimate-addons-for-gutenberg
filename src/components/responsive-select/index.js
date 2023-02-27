@@ -10,7 +10,7 @@ import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import styles from './editor.lazy.scss';
 
 const ResponsiveSelectControl = ( props ) => {
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	// Add and remove the CSS on the drop and remove of the component.
@@ -25,9 +25,8 @@ const ResponsiveSelectControl = ( props ) => {
 
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
-
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
 	const { label, data, setAttributes, options } = props;
 
@@ -65,33 +64,36 @@ const ResponsiveSelectControl = ( props ) => {
 	);
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
-
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
 		<div
-			ref={panelRef}
+			ref={ panelRef }
 			className="uagb-responsive-select-control components-base-control"
 		>
-			{
-				controlBeforeDomElement
-			}
-				<div className="uagb-size-type-field-tabs">
-					<div className="uagb-control__header">
-						<ResponsiveToggle
-							label= { label }
-							responsive= { responsive }
-						/>
-					</div>
-					{ output[ deviceType ] ? output[ deviceType ] : output.Desktop }
+			{ controlBeforeDomElement }
+			<div className="uagb-size-type-field-tabs">
+				<div className="uagb-control__header">
+					<ResponsiveToggle
+						label={ label }
+						responsive={ responsive }
+					/>
 				</div>
-				{ props.help && (
-					<p className="uag-control-help-notice">{ props.help }</p>
-				) }
-			{
-				controlAfterDomElement
-			}
+				{ output[ deviceType ] ? output[ deviceType ] : output.Desktop }
+			</div>
+			{ props.help && (
+				<p className="uag-control-help-notice">{ props.help }</p>
+			) }
+			{ controlAfterDomElement }
 		</div>
 	);
 };

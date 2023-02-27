@@ -21,11 +21,21 @@ const Render = ( props ) => {
 	const deviceType = useDeviceType();
 
 	// Setup the attributes.
-	const { block_id, ctaType, enabledSecondCtaButton  } = attributes;
+	const { block_id, ctaType, enabledSecondCtaButton } = attributes;
 
-	const isCta = <CTA attributes={ attributes } setAttributes={ setAttributes } />;
+	const isCta = (
+		<CTA attributes={ attributes } setAttributes={ setAttributes } />
+	);
 
-	const secondCtaButton = ( 'button' === ctaType && enabledSecondCtaButton ) ? <SecondCTAButton attributes={ attributes } setAttributes={ setAttributes } /> : '';
+	const secondCtaButton =
+		'button' === ctaType && enabledSecondCtaButton ? (
+			<SecondCTAButton
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+			/>
+		) : (
+			''
+		);
 
 	// Get description components.
 	const descText = (
@@ -52,9 +62,9 @@ const Render = ( props ) => {
 					{ titleText }
 					{ descText }
 				</div>
-				<div className='uagb-cta__buttons'>
-					{isCta}
-					{secondCtaButton}
+				<div className="uagb-cta__buttons">
+					{ isCta }
+					{ secondCtaButton }
 				</div>
 			</>
 		);
@@ -66,20 +76,20 @@ const Render = ( props ) => {
 				`uagb-block-${ block_id }`,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
 				'uagb-cta__outer-wrap',
-				'button' === ctaType ? 'wp-block-button' : '',
+				'button' === ctaType ? 'wp-block-button' : ''
 			) }
 		>
 			{ ctaType === 'all' && (
 				<>
-				<a
-					href="/"
-					className="uagb-cta__link-to-all"
-					rel="noopener noreferrer"
-					onClick={ ( e ) => e.preventDefault() }
-				>
-					{ ' ' }
-				</a>
-				{ output() }
+					<a
+						href="/"
+						className="uagb-cta__link-to-all"
+						rel="noopener noreferrer"
+						onClick={ ( e ) => e.preventDefault() }
+					>
+						{ ' ' }
+					</a>
+					{ output() }
 				</>
 			) }
 			{ ctaType !== 'all' && output() }

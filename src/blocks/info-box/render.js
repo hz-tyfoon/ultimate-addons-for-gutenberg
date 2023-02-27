@@ -38,12 +38,14 @@ const Render = ( props ) => {
 		showDesc,
 		block_id,
 		imageWidthType,
-		imageWidth
+		imageWidth,
 	} = attributes;
 	// Get icon/Image components.
 	let isImage = '';
 	if ( source_type === 'icon' && icon !== '' ) {
-		isImage = <Icon attributes={ attributes } setAttributes={ setAttributes }/>;
+		isImage = (
+			<Icon attributes={ attributes } setAttributes={ setAttributes } />
+		);
 	} else {
 		isImage = <InfoBoxIconImage attributes={ attributes } />;
 	}
@@ -77,18 +79,21 @@ const Render = ( props ) => {
 		}
 	}
 
-	useEffect( ()=> {
-		if( imageWidthType ){
-			getImageHeightWidth( url, setAttributes, { type: 'width', value: imageWidth } )
+	useEffect( () => {
+		if ( imageWidthType ) {
+			getImageHeightWidth( url, setAttributes, {
+				type: 'width',
+				value: imageWidth,
+			} );
+		} else {
+			getImageHeightWidth( url, setAttributes );
 		}
-		else{
-			getImageHeightWidth( url, setAttributes )
-		}
-	}, [ url, imageWidth, imageWidthType ] )
+	}, [ url, imageWidth, imageWidthType ] );
 
 	if (
 		seperatorPos === 'after_icon' &&
-		( iconimgPosition === 'above-title' || iconimgPosition === 'below-title' )
+		( iconimgPosition === 'above-title' ||
+			iconimgPosition === 'below-title' )
 	) {
 		showSeperator = false;
 		iconImageHtml = (
@@ -102,16 +107,14 @@ const Render = ( props ) => {
 	if (
 		seperatorPos === 'after_icon' &&
 		( iconimgPosition === 'left-title' ||
-			iconimgPosition === 'right-title' || iconimgPosition === 'left' ||
+			iconimgPosition === 'right-title' ||
+			iconimgPosition === 'left' ||
 			iconimgPosition === 'right' )
 	) {
 		seperatorPos = 'after_title';
 	}
 
-	if (
-		iconimgPosition === 'below-title' &&
-		seperatorPos === 'after_title'
-	) {
+	if ( iconimgPosition === 'below-title' && seperatorPos === 'after_title' ) {
 		showSeperator = false;
 		iconImageHtml = (
 			<>
@@ -128,22 +131,22 @@ const Render = ( props ) => {
 				seperatorPos === 'after_title' &&
 				showSeperator &&
 				seperatorHtml }
-				{ showDesc && (
-					<InfoBoxDesc
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						props={ props }
-					/>
-				) }
-				{ 'none' !== seperatorStyle &&
-					seperatorPos === 'after_desc' &&
-					seperatorHtml }
-					{ ctaType !== 'none' && (
-						<CallToAction
-							attributes={ attributes }
-							setAttributes={ setAttributes }
-						/>
-					)}
+			{ showDesc && (
+				<InfoBoxDesc
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					props={ props }
+				/>
+			) }
+			{ 'none' !== seperatorStyle &&
+				seperatorPos === 'after_desc' &&
+				seperatorHtml }
+			{ ctaType !== 'none' && (
+				<CallToAction
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+				/>
+			) }
 		</>
 	);
 
@@ -231,7 +234,9 @@ const Render = ( props ) => {
 		>
 			{ ctaType === 'all' && (
 				<a // eslint-disable-line jsx-a11y/anchor-has-content
-					className={ 'uagb-infobox-link-wrap uagb-infbox__link-to-all' }
+					className={
+						'uagb-infobox-link-wrap uagb-infbox__link-to-all'
+					}
 					aria-label={ 'Infobox Link' }
 					rel="noopener noreferrer"
 					href="/"

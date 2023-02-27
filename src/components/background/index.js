@@ -13,12 +13,12 @@ import ResponsiveUAGImage from '@Components/responsive-image';
 import ResponsiveUAGFocalPointPicker from '@Components/responsive-focal-point-picker';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import UAGB_Block_Icons from '@Controls/block-icons';
-import {getPanelIdFromRef} from '@Utils/Helpers';
+import { getPanelIdFromRef } from '@Utils/Helpers';
 import { select } from '@wordpress/data';
 
 const Background = ( props ) => {
 	const { getSelectedBlock } = select( 'core/block-editor' );
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	// Add and remove the CSS on the drop and remove of the component.
@@ -63,13 +63,13 @@ const Background = ( props ) => {
 		yPositionType,
 		yPositionTypeTablet,
 		yPositionTypeMobile,
-		backgroundVideoOpacity
+		backgroundVideoOpacity,
 	} = props;
 
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
 	const onRemoveImage = () => {
 		setAttributes( { [ backgroundImage.label ]: null } );
@@ -108,90 +108,54 @@ const Background = ( props ) => {
 	overlayOptions = [
 		{
 			value: 'none',
-			label: __(
-				'None',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'None', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'color',
-			label: __(
-				'Classic',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Classic', 'ultimate-addons-for-gutenberg' ),
 		},
 	];
 	if ( gradientOverlay.value ) {
 		overlayOptions.push( {
 			value: 'gradient',
-			label: __(
-				'Gradient',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Gradient', 'ultimate-addons-for-gutenberg' ),
 		} );
 	}
 
 	const bgIconOptions = [
 		{
 			value: 'color',
-			icon: (
-				UAGB_Block_Icons.bg_color
-			),
-			tooltip: __(
-				'Color',
-				'ultimate-addons-for-gutenberg'
-			),
+			icon: UAGB_Block_Icons.bg_color,
+			tooltip: __( 'Color', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'gradient',
-			icon: (
-				UAGB_Block_Icons.bg_gradient
-			),
-			tooltip: __(
-				'Gradient',
-				'ultimate-addons-for-gutenberg'
-			),
+			icon: UAGB_Block_Icons.bg_gradient,
+			tooltip: __( 'Gradient', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'image',
-			icon: (
-				UAGB_Block_Icons.bg_image
-			),
-			tooltip: __(
-				'Image',
-				'ultimate-addons-for-gutenberg'
-			),
+			icon: UAGB_Block_Icons.bg_image,
+			tooltip: __( 'Image', 'ultimate-addons-for-gutenberg' ),
 		},
 	];
 
 	let bgSizeOptions = [
 		{
 			value: 'auto',
-			label: __(
-				'Auto',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Auto', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'cover',
-			label: __(
-				'Cover',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Cover', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'contain',
-			label: __(
-				'Contain',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Contain', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'custom',
-			label: __(
-				'Custom',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Custom', 'ultimate-addons-for-gutenberg' ),
 		},
 	];
 
@@ -199,24 +163,15 @@ const Background = ( props ) => {
 		bgSizeOptions = [
 			{
 				value: 'auto',
-				label: __(
-					'Auto',
-					'ultimate-addons-for-gutenberg'
-				),
+				label: __( 'Auto', 'ultimate-addons-for-gutenberg' ),
 			},
 			{
 				value: 'cover',
-				label: __(
-					'Cover',
-					'ultimate-addons-for-gutenberg'
-				),
+				label: __( 'Cover', 'ultimate-addons-for-gutenberg' ),
 			},
 			{
 				value: 'contain',
-				label: __(
-					'Contain',
-					'ultimate-addons-for-gutenberg'
-				),
+				label: __( 'Contain', 'ultimate-addons-for-gutenberg' ),
 			},
 		];
 	}
@@ -224,26 +179,24 @@ const Background = ( props ) => {
 	if ( backgroundVideoType.value ) {
 		bgIconOptions.push( {
 			value: 'video',
-			icon: (
-				UAGB_Block_Icons.bg_video
-			),
-			tooltip: __(
-				'Video',
-				'ultimate-addons-for-gutenberg'
-			),
+			icon: UAGB_Block_Icons.bg_video,
+			tooltip: __( 'Video', 'ultimate-addons-for-gutenberg' ),
 		} );
 	}
 
-	const setImage = imageResponsive && ( backgroundImage.desktop?.value || backgroundImage.tablet?.value || backgroundImage.mobile?.value ) ? true : false;
+	const setImage =
+		imageResponsive &&
+		( backgroundImage.desktop?.value ||
+			backgroundImage.tablet?.value ||
+			backgroundImage.mobile?.value )
+			? true
+			: false;
 
 	const advancedControls = (
 		<>
 			<MultiButtonsControl
 				setAttributes={ setAttributes }
-				label={ __(
-					'Type',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Type', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					value: backgroundType.value,
 					label: backgroundType.label,
@@ -270,14 +223,14 @@ const Background = ( props ) => {
 			) }
 			{ 'image' === backgroundType.value && (
 				<div className="uag-background-image">
-					{ ! imageResponsive &&
+					{ ! imageResponsive && (
 						<UAGMediaPicker
 							onSelectImage={ onSelectImage }
 							backgroundImage={ backgroundImage.value }
 							onRemoveImage={ onRemoveImage }
 							disableLabel={ true }
 						/>
-					}
+					) }
 					{ ! imageResponsive && backgroundImage.value && (
 						<>
 							<div className="uag-background-image-position">
@@ -368,7 +321,8 @@ const Background = ( props ) => {
 									value={ backgroundAttachment.value }
 									onChange={ ( value ) =>
 										setAttributes( {
-											[ backgroundAttachment.label ]: value,
+											[ backgroundAttachment.label ]:
+												value,
 										} )
 									}
 									options={ [
@@ -447,61 +401,78 @@ const Background = ( props ) => {
 									}
 									options={ bgSizeOptions }
 								/>
-								{ 'custom' === backgroundSize.value && backgroundCustomSize &&
-									<ResponsiveSlider
-										label={ __(
-											'Width',
-											'ultimate-addons-for-gutenberg'
-										) }
-										data={ {
-											desktop: {
-												value: backgroundCustomSize.desktop.value,
-												label: backgroundCustomSize.desktop.label,
-											},
-											tablet: {
-												value: backgroundCustomSize.tablet.value,
-												label: backgroundCustomSize.tablet.label,
-											},
-											mobile: {
-												value: backgroundCustomSize.mobile.value,
-												label: backgroundCustomSize.mobile.label,
-											},
-										} }
-										min={ 0 }
-										limitMax={ { 'px': 1600, '%': 100, 'em': 574 } }
-										unit={ {
-											value: backgroundCustomSizeType.value,
-											label: backgroundCustomSizeType.label,
-										} }
-										units={ [
-											{
-												name: __(
-													'PX',
-													'ultimate-addons-for-gutenberg'
-												),
-												unitValue: 'px',
-											},
-											{
-												name: __( '%', 'ultimate-addons-for-gutenberg' ),
-												unitValue: '%',
-											},
-											{
-												name: __( 'EM', 'ultimate-addons-for-gutenberg' ),
-												unitValue: 'em',
-											},
-										] }
-										setAttributes={ setAttributes }
-									/>
-								}
+								{ 'custom' === backgroundSize.value &&
+									backgroundCustomSize && (
+										<ResponsiveSlider
+											label={ __(
+												'Width',
+												'ultimate-addons-for-gutenberg'
+											) }
+											data={ {
+												desktop: {
+													value: backgroundCustomSize
+														.desktop.value,
+													label: backgroundCustomSize
+														.desktop.label,
+												},
+												tablet: {
+													value: backgroundCustomSize
+														.tablet.value,
+													label: backgroundCustomSize
+														.tablet.label,
+												},
+												mobile: {
+													value: backgroundCustomSize
+														.mobile.value,
+													label: backgroundCustomSize
+														.mobile.label,
+												},
+											} }
+											min={ 0 }
+											limitMax={ {
+												px: 1600,
+												'%': 100,
+												em: 574,
+											} }
+											unit={ {
+												value: backgroundCustomSizeType.value,
+												label: backgroundCustomSizeType.label,
+											} }
+											units={ [
+												{
+													name: __(
+														'PX',
+														'ultimate-addons-for-gutenberg'
+													),
+													unitValue: 'px',
+												},
+												{
+													name: __(
+														'%',
+														'ultimate-addons-for-gutenberg'
+													),
+													unitValue: '%',
+												},
+												{
+													name: __(
+														'EM',
+														'ultimate-addons-for-gutenberg'
+													),
+													unitValue: 'em',
+												},
+											] }
+											setAttributes={ setAttributes }
+										/>
+									) }
 							</div>
 						</>
 					) }
-					{ imageResponsive && backgroundImage &&
+					{ imageResponsive && backgroundImage && (
 						<ResponsiveUAGImage
-							backgroundImage={backgroundImage}
-							setAttributes={setAttributes}
+							backgroundImage={ backgroundImage }
+							setAttributes={ setAttributes }
 						/>
-					}
+					) }
 					{ imageResponsive && backgroundImage && setImage && (
 						<>
 							<div className="uag-background-image-position">
@@ -516,17 +487,25 @@ const Background = ( props ) => {
 										label: customPosition.label,
 									} }
 									options={ [
-										{ value: 'default', label: __( 'Default' ) },
-										{ value: 'custom', label: __( 'Custom' ) },
+										{
+											value: 'default',
+											label: __( 'Default' ),
+										},
+										{
+											value: 'custom',
+											label: __( 'Custom' ),
+										},
 									] }
 								/>
 							</div>
 							{ 'custom' !== customPosition.value && (
 								<div className="uag-background-image-position">
 									<ResponsiveUAGFocalPointPicker
-										backgroundPosition={backgroundPosition}
+										backgroundPosition={
+											backgroundPosition
+										}
 										setAttributes={ setAttributes }
-										backgroundImage={backgroundImage}
+										backgroundImage={ backgroundImage }
 									/>
 								</div>
 							) }
@@ -534,7 +513,10 @@ const Background = ( props ) => {
 								<>
 									<div className="uag-background-image-position">
 										<ResponsiveSlider
-											label={ __( 'X Position', 'ultimate-addons-for-gutenberg' ) }
+											label={ __(
+												'X Position',
+												'ultimate-addons-for-gutenberg'
+											) }
 											data={ {
 												desktop: {
 													value: xPositionDesktop.value,
@@ -561,8 +543,18 @@ const Background = ( props ) => {
 													},
 												},
 											} }
-											limitMin={ { 'px': -800, '%': -100, 'em': -100, 'vw': -100 } }
-											limitMax={ { 'px': 800, '%': 100, 'em': 100, 'vw': 100 } }
+											limitMin={ {
+												px: -800,
+												'%': -100,
+												em: -100,
+												vw: -100,
+											} }
+											limitMax={ {
+												px: 800,
+												'%': 100,
+												em: 100,
+												vw: 100,
+											} }
 											units={ [
 												{
 													name: __(
@@ -572,15 +564,24 @@ const Background = ( props ) => {
 													unitValue: 'px',
 												},
 												{
-													name: __( '%', 'ultimate-addons-for-gutenberg' ),
+													name: __(
+														'%',
+														'ultimate-addons-for-gutenberg'
+													),
 													unitValue: '%',
 												},
 												{
-													name: __( 'EM', 'ultimate-addons-for-gutenberg' ),
+													name: __(
+														'EM',
+														'ultimate-addons-for-gutenberg'
+													),
 													unitValue: 'em',
 												},
 												{
-													name: __( 'VW', 'ultimate-addons-for-gutenberg' ),
+													name: __(
+														'VW',
+														'ultimate-addons-for-gutenberg'
+													),
 													unitValue: 'vw',
 												},
 											] }
@@ -589,7 +590,10 @@ const Background = ( props ) => {
 									</div>
 									<div className="uag-background-image-position">
 										<ResponsiveSlider
-											label={ __( 'Y Position', 'ultimate-addons-for-gutenberg' ) }
+											label={ __(
+												'Y Position',
+												'ultimate-addons-for-gutenberg'
+											) }
 											data={ {
 												desktop: {
 													value: yPositionDesktop.value,
@@ -616,8 +620,18 @@ const Background = ( props ) => {
 													},
 												},
 											} }
-											limitMin={ { 'px': -800, '%': -100, 'em': -100, 'vh': -100 } }
-											limitMax={ { 'px': 800, '%': 100, 'em': 100, 'vh': 100 } }
+											limitMin={ {
+												px: -800,
+												'%': -100,
+												em: -100,
+												vh: -100,
+											} }
+											limitMax={ {
+												px: 800,
+												'%': 100,
+												em: 100,
+												vh: 100,
+											} }
 											units={ [
 												{
 													name: __(
@@ -627,15 +641,24 @@ const Background = ( props ) => {
 													unitValue: 'px',
 												},
 												{
-													name: __( '%', 'ultimate-addons-for-gutenberg' ),
+													name: __(
+														'%',
+														'ultimate-addons-for-gutenberg'
+													),
 													unitValue: '%',
 												},
 												{
-													name: __( 'EM', 'ultimate-addons-for-gutenberg' ),
+													name: __(
+														'EM',
+														'ultimate-addons-for-gutenberg'
+													),
 													unitValue: 'em',
 												},
 												{
-													name: __( 'VH', 'ultimate-addons-for-gutenberg' ),
+													name: __(
+														'VH',
+														'ultimate-addons-for-gutenberg'
+													),
 													unitValue: 'vh',
 												},
 											] }
@@ -646,211 +669,168 @@ const Background = ( props ) => {
 							) }
 							<div className="uag-background-image-attachment">
 								<ResponsiveSelectControl
-									label={ __( 'Attachment', 'ultimate-addons-for-gutenberg' ) }
-									data={backgroundAttachment}
-									options={ { desktop: [
-										{
-											value: 'fixed',
-											label: __(
-												'Fixed',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-										{
-											value: 'scroll',
-											label: __(
-												'Scroll',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-									] } }
+									label={ __(
+										'Attachment',
+										'ultimate-addons-for-gutenberg'
+									) }
+									data={ backgroundAttachment }
+									options={ {
+										desktop: [
+											{
+												value: 'fixed',
+												label: __(
+													'Fixed',
+													'ultimate-addons-for-gutenberg'
+												),
+											},
+											{
+												value: 'scroll',
+												label: __(
+													'Scroll',
+													'ultimate-addons-for-gutenberg'
+												),
+											},
+										],
+									} }
 									setAttributes={ setAttributes }
 								/>
 							</div>
 							<div className="uag-background-image-repeat">
 								<ResponsiveSelectControl
-									label={ __( 'Repeat', 'ultimate-addons-for-gutenberg' ) }
-									data={backgroundRepeat}
-									options={ { desktop: [
-										{
-											value: 'no-repeat',
-											label: __(
-												'No Repeat',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-										{
-											value: 'repeat',
-											label: __(
-												'Repeat',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-										{
-											value: 'repeat-x',
-											label: __(
-												'Repeat-x',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-										{
-											value: 'repeat-y',
-											label: __(
-												'Repeat-y',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-									] } }
+									label={ __(
+										'Repeat',
+										'ultimate-addons-for-gutenberg'
+									) }
+									data={ backgroundRepeat }
+									options={ {
+										desktop: [
+											{
+												value: 'no-repeat',
+												label: __(
+													'No Repeat',
+													'ultimate-addons-for-gutenberg'
+												),
+											},
+											{
+												value: 'repeat',
+												label: __(
+													'Repeat',
+													'ultimate-addons-for-gutenberg'
+												),
+											},
+											{
+												value: 'repeat-x',
+												label: __(
+													'Repeat-x',
+													'ultimate-addons-for-gutenberg'
+												),
+											},
+											{
+												value: 'repeat-y',
+												label: __(
+													'Repeat-y',
+													'ultimate-addons-for-gutenberg'
+												),
+											},
+										],
+									} }
 									setAttributes={ setAttributes }
 								/>
 							</div>
 							<div className="uag-background-image-size">
 								<ResponsiveSelectControl
-									label={ __( 'Size', 'ultimate-addons-for-gutenberg' ) }
-									data={backgroundSize}
-									options={ { desktop: [
-										{
-											value: 'auto',
-											label: __(
-												'Auto',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-										{
-											value: 'cover',
-											label: __(
-												'Cover',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-										{
-											value: 'contain',
-											label: __(
-												'Contain',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-										{
-											value: 'custom',
-											label: __(
-												'Custom',
-												'ultimate-addons-for-gutenberg'
-											),
-										},
-									] } }
-									setAttributes={ setAttributes }
-								/>
-								{ 'custom' === backgroundSize[deviceType].value && backgroundCustomSize &&
-									<ResponsiveSlider
-										label={ __(
-											'Width',
-											'ultimate-addons-for-gutenberg'
-										) }
-										data={ backgroundCustomSize }
-										min={ 0 }
-										limitMax={ { 'px': 1600, '%': 100, 'em': 574 } }
-										unit={ {
-											value: backgroundCustomSizeType.value,
-											label: backgroundCustomSizeType.label,
-										} }
-										units={ [
+									label={ __(
+										'Size',
+										'ultimate-addons-for-gutenberg'
+									) }
+									data={ backgroundSize }
+									options={ {
+										desktop: [
 											{
-												name: __(
-													'PX',
+												value: 'auto',
+												label: __(
+													'Auto',
 													'ultimate-addons-for-gutenberg'
 												),
-												unitValue: 'px',
 											},
 											{
-												name: __( '%', 'ultimate-addons-for-gutenberg' ),
-												unitValue: '%',
+												value: 'cover',
+												label: __(
+													'Cover',
+													'ultimate-addons-for-gutenberg'
+												),
 											},
 											{
-												name: __( 'EM', 'ultimate-addons-for-gutenberg' ),
-												unitValue: 'em',
+												value: 'contain',
+												label: __(
+													'Contain',
+													'ultimate-addons-for-gutenberg'
+												),
 											},
-										] }
-										setAttributes={ setAttributes }
-									/>
-								}
+											{
+												value: 'custom',
+												label: __(
+													'Custom',
+													'ultimate-addons-for-gutenberg'
+												),
+											},
+										],
+									} }
+									setAttributes={ setAttributes }
+								/>
+								{ 'custom' ===
+									backgroundSize[ deviceType ].value &&
+									backgroundCustomSize && (
+										<ResponsiveSlider
+											label={ __(
+												'Width',
+												'ultimate-addons-for-gutenberg'
+											) }
+											data={ backgroundCustomSize }
+											min={ 0 }
+											limitMax={ {
+												px: 1600,
+												'%': 100,
+												em: 574,
+											} }
+											unit={ {
+												value: backgroundCustomSizeType.value,
+												label: backgroundCustomSizeType.label,
+											} }
+											units={ [
+												{
+													name: __(
+														'PX',
+														'ultimate-addons-for-gutenberg'
+													),
+													unitValue: 'px',
+												},
+												{
+													name: __(
+														'%',
+														'ultimate-addons-for-gutenberg'
+													),
+													unitValue: '%',
+												},
+												{
+													name: __(
+														'EM',
+														'ultimate-addons-for-gutenberg'
+													),
+													unitValue: 'em',
+												},
+											] }
+											setAttributes={ setAttributes }
+										/>
+									) }
 							</div>
 						</>
 					) }
-					{ overlayType && backgroundImage && ( ( imageResponsive && setImage ) || ( ! imageResponsive && backgroundImage?.value ) ) &&
-						<>
-							<div className="uag-background-image-overlay-type">
-								<MultiButtonsControl
-									setAttributes={ setAttributes }
-									label={ __(
-										'Overlay Type',
-										'ultimate-addons-for-gutenberg'
-									) }
-									data={ {
-										value: overlayType.value,
-										label: overlayType.label,
-									} }
-									className="uagb-multi-button-alignment-control"
-									options={ overlayOptions }
-									showIcons={ false }
-								/>
-							</div>
-							{ 'color' === overlayType.value && (
-								<div className="uag-background-image-overlay-color">
-									<AdvancedPopColorControl
-										label={ __(
-											'Image Overlay Color',
-											'ultimate-addons-for-gutenberg'
-										) }
-										colorValue={
-											backgroundImageColor.value
-										}
-										data={ {
-											value: backgroundImageColor.value,
-											label: backgroundImageColor.label,
-										} }
-										setAttributes={ setAttributes }
-									/>
-								</div>
-							) }
-							{ 'gradient' === overlayType.value && (
-								<div className="uag-background-image-overlay-gradient">
-									<GradientSettings
-										backgroundGradient={
-											props.backgroundGradient
-										}
-										setAttributes={ setAttributes }
-									/>
-								</div>
-							) }
-						</>
-					}
-				</div>
-			) }
-			{  gradientOverlay.value && 'gradient' === backgroundType.value && (
-				<div className="uag-background-gradient">
-					<GradientSettings
-						backgroundGradient={ props.backgroundGradient }
-						setAttributes={ props.setAttributes }
-					/>
-				</div>
-			) }
-			{ 'video' === backgroundType.value && backgroundVideoType.value && (
-				<div className="uag-background-video">
-					<UAGMediaPicker
-						onSelectImage={ onSelectVideo }
-						backgroundImage={ backgroundVideo.value }
-						onRemoveImage={ onRemoveVideo }
-						slug={ 'video' }
-						label={ __( 'Video', 'ultimate-addons-for-gutenberg' ) }
-						allow={ [ 'video' ] }
-					/>
-				</div>
-			) }
-			{ 'video' === backgroundType.value &&
-				backgroundVideo.value &&
-				backgroundVideoType.value && (
-					<div className="uag-background-video-overlay">
-						{ overlayType && backgroundVideo && backgroundVideo.value &&
+					{ overlayType &&
+						backgroundImage &&
+						( ( imageResponsive && setImage ) ||
+							( ! imageResponsive &&
+								backgroundImage?.value ) ) && (
 							<>
 								<div className="uag-background-image-overlay-type">
 									<MultiButtonsControl
@@ -876,22 +856,17 @@ const Background = ( props ) => {
 												'ultimate-addons-for-gutenberg'
 											) }
 											colorValue={
-												backgroundVideoColor.value
+												backgroundImageColor.value
 											}
 											data={ {
-												value: backgroundVideoColor.value,
-												label: backgroundVideoColor.label,
+												value: backgroundImageColor.value,
+												label: backgroundImageColor.label,
 											} }
 											setAttributes={ setAttributes }
-											onOpacityChange={onOpacityChange}
-											backgroundVideoOpacity={ {
-												value: backgroundVideoOpacity.value,
-												label: backgroundVideoOpacity.label,
-											} }
 										/>
 									</div>
 								) }
-								{ gradientOverlay.value && 'gradient' === overlayType.value && (
+								{ 'gradient' === overlayType.value && (
 									<div className="uag-background-image-overlay-gradient">
 										<GradientSettings
 											backgroundGradient={
@@ -902,30 +877,115 @@ const Background = ( props ) => {
 									</div>
 								) }
 							</>
-						}
+						) }
+				</div>
+			) }
+			{ gradientOverlay.value && 'gradient' === backgroundType.value && (
+				<div className="uag-background-gradient">
+					<GradientSettings
+						backgroundGradient={ props.backgroundGradient }
+						setAttributes={ props.setAttributes }
+					/>
+				</div>
+			) }
+			{ 'video' === backgroundType.value && backgroundVideoType.value && (
+				<div className="uag-background-video">
+					<UAGMediaPicker
+						onSelectImage={ onSelectVideo }
+						backgroundImage={ backgroundVideo.value }
+						onRemoveImage={ onRemoveVideo }
+						slug={ 'video' }
+						label={ __( 'Video', 'ultimate-addons-for-gutenberg' ) }
+						allow={ [ 'video' ] }
+					/>
+				</div>
+			) }
+			{ 'video' === backgroundType.value &&
+				backgroundVideo.value &&
+				backgroundVideoType.value && (
+					<div className="uag-background-video-overlay">
+						{ overlayType &&
+							backgroundVideo &&
+							backgroundVideo.value && (
+								<>
+									<div className="uag-background-image-overlay-type">
+										<MultiButtonsControl
+											setAttributes={ setAttributes }
+											label={ __(
+												'Overlay Type',
+												'ultimate-addons-for-gutenberg'
+											) }
+											data={ {
+												value: overlayType.value,
+												label: overlayType.label,
+											} }
+											className="uagb-multi-button-alignment-control"
+											options={ overlayOptions }
+											showIcons={ false }
+										/>
+									</div>
+									{ 'color' === overlayType.value && (
+										<div className="uag-background-image-overlay-color">
+											<AdvancedPopColorControl
+												label={ __(
+													'Image Overlay Color',
+													'ultimate-addons-for-gutenberg'
+												) }
+												colorValue={
+													backgroundVideoColor.value
+												}
+												data={ {
+													value: backgroundVideoColor.value,
+													label: backgroundVideoColor.label,
+												} }
+												setAttributes={ setAttributes }
+												onOpacityChange={
+													onOpacityChange
+												}
+												backgroundVideoOpacity={ {
+													value: backgroundVideoOpacity.value,
+													label: backgroundVideoOpacity.label,
+												} }
+											/>
+										</div>
+									) }
+									{ gradientOverlay.value &&
+										'gradient' === overlayType.value && (
+											<div className="uag-background-image-overlay-gradient">
+												<GradientSettings
+													backgroundGradient={
+														props.backgroundGradient
+													}
+													setAttributes={
+														setAttributes
+													}
+												/>
+											</div>
+										) }
+								</>
+							) }
 					</div>
 				) }
 		</>
 	);
 
 	const controlName = 'background'; // there is no label props that's why keep hard coded label
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
-		<div
-			ref={panelRef}
-			className="components-base-control"
-		>
-			{
-				controlBeforeDomElement
-			}
-			<div className="uag-bg-select-control">
-				{ advancedControls }
-			</div>
-			{
-				controlAfterDomElement
-			}
+		<div ref={ panelRef } className="components-base-control">
+			{ controlBeforeDomElement }
+			<div className="uag-bg-select-control">{ advancedControls }</div>
+			{ controlAfterDomElement }
 		</div>
 	);
 };

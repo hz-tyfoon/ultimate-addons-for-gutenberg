@@ -14,7 +14,10 @@ import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType( 'uagb/testimonial', {
 	title: __( 'Testimonials', 'ultimate-addons-for-gutenberg' ), // Block title.
-	description: __( 'Display customer testimonials in customizable layouts.', 'ultimate-addons-for-gutenberg' ), // Block description.
+	description: __(
+		'Display customer testimonials in customizable layouts.',
+		'ultimate-addons-for-gutenberg'
+	), // Block description.
 	icon: UAGB_Block_Icons.testimonial, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	keywords: [
 		__( 'testimonial', 'ultimate-addons-for-gutenberg' ),
@@ -30,7 +33,7 @@ registerBlockType( 'uagb/testimonial', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	deprecated,
 } );

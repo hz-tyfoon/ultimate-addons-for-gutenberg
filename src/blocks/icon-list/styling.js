@@ -7,7 +7,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -107,24 +106,60 @@ function styling( props ) {
 
 	const gapFallback = getFallbackNumber( gap, 'gap', blockName );
 	const bgSizeFallback = getFallbackNumber( bgSize, 'bgSize', blockName );
-	const borderRadiusFallback = getFallbackNumber( borderRadius, 'borderRadius', blockName );
-	const borderRadiusTabletFallback = getFallbackNumber( borderRadiusTablet, 'borderRadiusTablet', blockName );
-	const borderRadiusMobileFallback = getFallbackNumber( borderRadiusMobile, 'borderRadiusMobile', blockName );
+	const borderRadiusFallback = getFallbackNumber(
+		borderRadius,
+		'borderRadius',
+		blockName
+	);
+	const borderRadiusTabletFallback = getFallbackNumber(
+		borderRadiusTablet,
+		'borderRadiusTablet',
+		blockName
+	);
+	const borderRadiusMobileFallback = getFallbackNumber(
+		borderRadiusMobile,
+		'borderRadiusMobile',
+		blockName
+	);
 	const borderFallback = getFallbackNumber( border, 'border', blockName );
 	const sizeFallback = getFallbackNumber( size, 'size', blockName );
-	const innerGapFallback = getFallbackNumber( inner_gap, 'inner_gap', blockName );
-	const innerGapTabletFallback = getFallbackNumber( innerGapTablet, 'innerGapTablet', blockName );
-	const innerGapMobileFallback = getFallbackNumber( innerGapMobile, 'innerGapMobile', blockName );
-	
+	const innerGapFallback = getFallbackNumber(
+		inner_gap,
+		'inner_gap',
+		blockName
+	);
+	const innerGapTabletFallback = getFallbackNumber(
+		innerGapTablet,
+		'innerGapTablet',
+		blockName
+	);
+	const innerGapMobileFallback = getFallbackNumber(
+		innerGapMobile,
+		'innerGapMobile',
+		blockName
+	);
+
 	// Responsive Fallback Values that Need to be Numeric for Math.
 	const sizeTabletFallback = isNaN( sizeTablet ) ? sizeFallback : sizeTablet;
-	const sizeMobileFallback = isNaN( sizeMobile ) ? sizeTabletFallback : sizeMobile;
-	const bgSizeTabletFallback = isNaN( bgSizeTablet ) ? bgSizeFallback : bgSizeTablet;
-	const bgSizeMobileFallback = isNaN( bgSizeMobile ) ? bgSizeTabletFallback : bgSizeMobile;
-	const borderTabletFallback = isNaN( borderTablet ) ? borderFallback : borderTablet;
-	const borderMobileFallback = isNaN( borderMobile ) ? borderTabletFallback : borderMobile;
+	const sizeMobileFallback = isNaN( sizeMobile )
+		? sizeTabletFallback
+		: sizeMobile;
+	const bgSizeTabletFallback = isNaN( bgSizeTablet )
+		? bgSizeFallback
+		: bgSizeTablet;
+	const bgSizeMobileFallback = isNaN( bgSizeMobile )
+		? bgSizeTabletFallback
+		: bgSizeMobile;
+	const borderTabletFallback = isNaN( borderTablet )
+		? borderFallback
+		: borderTablet;
+	const borderMobileFallback = isNaN( borderMobile )
+		? borderTabletFallback
+		: borderMobile;
 	const gapTabletFallback = isNaN( gapTablet ) ? gapFallback : gapTablet;
-	const gapMobileFallback = isNaN( gapMobile ) ? gapTabletFallback : gapMobile;
+	const gapMobileFallback = isNaN( gapMobile )
+		? gapTabletFallback
+		: gapMobile;
 
 	let selectors = {};
 	let tabletSelectors = {};
@@ -158,26 +193,29 @@ function styling( props ) {
 		mobileAlignment = 'center';
 	}
 
-	const iconListLayout = icon_layout
-	const iconListLayoutTablet = iconLayoutTablet ? iconLayoutTablet : iconListLayout
-	const iconListLayoutMobile = iconLayoutMobile ? iconLayoutMobile : iconListLayoutTablet
+	const iconListLayout = icon_layout;
+	const iconListLayoutTablet = iconLayoutTablet
+		? iconLayoutTablet
+		: iconListLayout;
+	const iconListLayoutMobile = iconLayoutMobile
+		? iconLayoutMobile
+		: iconListLayoutTablet;
 
 	const position = iconPosition === 'top' ? 'flex-start' : 'center';
 	let positionTablet = '';
 	let positionMobile = '';
 
-	if( iconPositionTablet === 'top' ) {
+	if ( iconPositionTablet === 'top' ) {
 		positionTablet = 'flex-start';
-		
-	} else if( iconPositionTablet === 'middle' ) {
+	} else if ( iconPositionTablet === 'middle' ) {
 		positionTablet = 'center';
 	} else {
 		positionTablet = position;
 	}
 
-	if( iconPositionMobile === 'top' ) {
+	if ( iconPositionMobile === 'top' ) {
 		positionMobile = 'flex-start';
-	} else if( iconPositionMobile === 'middle' ) {
+	} else if ( iconPositionMobile === 'middle' ) {
 		positionMobile = 'center';
 	} else {
 		positionMobile = positionTablet;
@@ -188,20 +226,23 @@ function styling( props ) {
 			'background': iconBgColor,
 			'border-color': iconBorderColor,
 			'padding': generateCSSUnit( bgSizeFallback, bgSizeType ),
-			'border-radius': generateCSSUnit( borderRadiusFallback, borderRadiusType ),
-			'border-style': ( 0 === borderFallback || undefined === borderFallback ) ? 'none' : 'solid',
+			'border-radius': generateCSSUnit(
+				borderRadiusFallback,
+				borderRadiusType
+			),
+			'border-style':
+				0 === borderFallback || undefined === borderFallback
+					? 'none'
+					: 'solid',
 			'border-width': generateCSSUnit( borderFallback, borderType ),
-			'align-self' : position,
+			'align-self': position,
 		},
 		' .uagb-icon-list__source-image': {
 			'width': generateCSSUnit( sizeFallback, sizeType ),
 		},
 		' .uagb-icon-list__wrap .block-editor-inner-blocks': {
 			'text-align': align,
-			'margin-top': generateCSSUnit(
-				blockTopMargin,
-				blockMarginUnit
-			),
+			'margin-top': generateCSSUnit( blockTopMargin, blockMarginUnit ),
 			'margin-right': generateCSSUnit(
 				blockRightMargin,
 				blockMarginUnit
@@ -210,14 +251,8 @@ function styling( props ) {
 				blockBottomMargin,
 				blockMarginUnit
 			),
-			'margin-left': generateCSSUnit(
-				blockLeftMargin,
-				blockMarginUnit
-			),
-			'padding-top': generateCSSUnit(
-				blockTopPadding,
-				blockPaddingUnit
-			),
+			'margin-left': generateCSSUnit( blockLeftMargin, blockMarginUnit ),
+			'padding-top': generateCSSUnit( blockTopPadding, blockPaddingUnit ),
 			'padding-right': generateCSSUnit(
 				blockRightPadding,
 				blockPaddingUnit
@@ -235,10 +270,11 @@ function styling( props ) {
 			'color': iconColor,
 			'fill': iconColor,
 		},
-		' .wp-block-uagb-icon-list-child:hover .uagb-icon-list__source-wrap svg': {
-			'color': iconHoverColor,
-			'fill': iconHoverColor,
-		},
+		' .wp-block-uagb-icon-list-child:hover .uagb-icon-list__source-wrap svg':
+			{
+				'color': iconHoverColor,
+				'fill': iconHoverColor,
+			},
 		' .wp-block-uagb-icon-list-child .uagb-icon-list__label': {
 			'color': labelColor,
 		},
@@ -344,31 +380,37 @@ function styling( props ) {
 		'font-size': generateCSSUnit( sizeTabletFallback, sizeType ),
 	};
 
-	mobileSelectors[' .uagb-icon-list__source-wrap svg' ] = {
+	mobileSelectors[ ' .uagb-icon-list__source-wrap svg' ] = {
 		'width': generateCSSUnit( sizeMobileFallback, sizeType ),
 		'height': generateCSSUnit( sizeMobileFallback, sizeType ),
 		'font-size': generateCSSUnit( sizeMobileFallback, sizeType ),
 	};
 
 	if ( 'horizontal' === iconListLayout ) {
-		selectors[ ' .uagb-icon-list__wrap .block-editor-block-list__layout'] = {
-			'justify-content': alignment,
-			'-webkit-box-pack': alignment,
-			'-ms-flex-pack': alignment,
-			'align-items' : 'center',
-			'display': 'inline-flex',
-			'flex-direction': 'row',
-		};
-		selectors[' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]' ] = {
+		selectors[ ' .uagb-icon-list__wrap .block-editor-block-list__layout' ] =
+			{
+				'justify-content': alignment,
+				'-webkit-box-pack': alignment,
+				'-ms-flex-pack': alignment,
+				'align-items': 'center',
+				'display': 'inline-flex',
+				'flex-direction': 'row',
+			};
+		selectors[
+			' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]'
+		] = {
 			'margin-right': generateCSSUnit( gapFallback / 2, gapType ),
 		};
-		selectors[' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]:not(:first-child)' ] = {
+		selectors[
+			' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]:not(:first-child)'
+		] = {
 			'margin-left': generateCSSUnit( gapFallback / 2, gapType ),
 		};
-	} else if( 'vertical' === iconListLayout ) {
-		selectors[ ' .uagb-icon-list__wrap .block-editor-block-list__layout' ] = {
-			'flex-direction': 'column',
-		};
+	} else if ( 'vertical' === iconListLayout ) {
+		selectors[ ' .uagb-icon-list__wrap .block-editor-block-list__layout' ] =
+			{
+				'flex-direction': 'column',
+			};
 		selectors[ ' .wp-block[data-type="uagb/icon-list-child"]' ] = {
 			'display': 'block',
 			'margin-left': 0,
@@ -377,109 +419,125 @@ function styling( props ) {
 		};
 	}
 
-	if( 'horizontal' === iconListLayoutTablet ){
-		tabletSelectors[ ' .uagb-icon-list__wrap .block-editor-block-list__layout'] = {
+	if ( 'horizontal' === iconListLayoutTablet ) {
+		tabletSelectors[
+			' .uagb-icon-list__wrap .block-editor-block-list__layout'
+		] = {
 			'justify-content': tabletAlignment,
 			'-webkit-box-pack': tabletAlignment,
 			'-ms-flex-pack': tabletAlignment,
-			'align-items' : 'center',
+			'align-items': 'center',
 			'display': 'inline-flex',
 			'flex-direction': 'row',
 		};
-		tabletSelectors[' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]' ] = {
+		tabletSelectors[
+			' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]'
+		] = {
 			'margin-right': generateCSSUnit( gapTabletFallback / 2, gapType ),
 		};
-		tabletSelectors[' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]:not(:first-child)' ] = {
+		tabletSelectors[
+			' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]:not(:first-child)'
+		] = {
 			'margin-left': generateCSSUnit( gapTabletFallback / 2, gapType ),
 		};
-	} else if( 'vertical' === iconListLayoutTablet ) {
+	} else if ( 'vertical' === iconListLayoutTablet ) {
 		tabletSelectors[ ' .wp-block[data-type="uagb/icon-list-child"]' ] = {
 			'margin-left': 0 + ' !important',
 			'margin-right': 0 + ' !important',
 			'margin-bottom': generateCSSUnit( gapTabletFallback, gapType ),
 		};
-		tabletSelectors[ ' .uagb-icon-list__wrap .block-editor-block-list__layout' ] = {
+		tabletSelectors[
+			' .uagb-icon-list__wrap .block-editor-block-list__layout'
+		] = {
 			'flex-direction': 'column',
 		};
 	}
 
-	if( 'horizontal' === iconListLayoutMobile ){
-		mobileSelectors[ ' .uagb-icon-list__wrap .block-editor-block-list__layout'] = {
+	if ( 'horizontal' === iconListLayoutMobile ) {
+		mobileSelectors[
+			' .uagb-icon-list__wrap .block-editor-block-list__layout'
+		] = {
 			'justify-content': mobileAlignment,
 			'-webkit-box-pack': mobileAlignment,
 			'-ms-flex-pack': mobileAlignment,
-			'align-items' : 'center',
+			'align-items': 'center',
 			'display': 'inline-flex',
 			'flex-direction': 'row',
 		};
-		mobileSelectors[' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]' ] = {
+		mobileSelectors[
+			' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]'
+		] = {
 			'margin-right': generateCSSUnit( gapMobileFallback / 2, gapType ),
 		};
-		mobileSelectors[' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]:not(:first-child)' ] = {
+		mobileSelectors[
+			' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]:not(:first-child)'
+		] = {
 			'margin-left': generateCSSUnit( gapMobileFallback / 2, gapType ),
 		};
-	} else if( 'vertical' === iconListLayoutMobile ) {
+	} else if ( 'vertical' === iconListLayoutMobile ) {
 		mobileSelectors[ ' .wp-block[data-type="uagb/icon-list-child"]' ] = {
 			'display': 'block',
 			'margin-left': 0 + ' !important',
 			'margin-right': 0 + ' !important',
 			'margin-bottom': generateCSSUnit( gapMobileFallback, gapType ),
 		};
-		mobileSelectors[ ' .uagb-icon-list__wrap .block-editor-block-list__layout' ] = {
+		mobileSelectors[
+			' .uagb-icon-list__wrap .block-editor-block-list__layout'
+		] = {
 			'flex-direction': 'column',
 		};
 	}
 
 	if ( 'right' === align && hideLabel ) {
-		selectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
+		selectors[ ' .uagb-icon-list__source-wrap' ] = {
 			'margin-left': generateCSSUnit( innerGapFallback, innerGapType ),
 		};
-		mobileSelectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
-			'margin-left': generateCSSUnit( innerGapMobileFallback, innerGapType ),
+		mobileSelectors[ ' .uagb-icon-list__source-wrap' ] = {
+			'margin-left': generateCSSUnit(
+				innerGapMobileFallback,
+				innerGapType
+			),
 		};
-		tabletSelectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
-			'margin-left': generateCSSUnit( innerGapTabletFallback, innerGapType ),
+		tabletSelectors[ ' .uagb-icon-list__source-wrap' ] = {
+			'margin-left': generateCSSUnit(
+				innerGapTabletFallback,
+				innerGapType
+			),
 		};
 		selectors[ ' .wp-block-uagb-icon-list-child ' ] = {
 			'flex-direction': 'row-reverse',
 		};
 	} else if ( 'before' === iconPlacement && ! hideLabel ) {
-		selectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
+		selectors[ ' .uagb-icon-list__source-wrap' ] = {
 			'margin-right': generateCSSUnit( innerGapFallback, innerGapType ),
 		};
-		mobileSelectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
-			'margin-right': generateCSSUnit( innerGapMobileFallback, innerGapType ),
+		mobileSelectors[ ' .uagb-icon-list__source-wrap' ] = {
+			'margin-right': generateCSSUnit(
+				innerGapMobileFallback,
+				innerGapType
+			),
 		};
-		tabletSelectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
-			'margin-right': generateCSSUnit( innerGapTabletFallback, innerGapType ),
+		tabletSelectors[ ' .uagb-icon-list__source-wrap' ] = {
+			'margin-right': generateCSSUnit(
+				innerGapTabletFallback,
+				innerGapType
+			),
 		};
 	} else if ( 'after' === iconPlacement && ! hideLabel ) {
-		selectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
+		selectors[ ' .uagb-icon-list__source-wrap' ] = {
 			'margin-left': generateCSSUnit( innerGapFallback, innerGapType ),
 		};
-		mobileSelectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
-			'margin-left': generateCSSUnit( innerGapMobileFallback, innerGapType ),
+		mobileSelectors[ ' .uagb-icon-list__source-wrap' ] = {
+			'margin-left': generateCSSUnit(
+				innerGapMobileFallback,
+				innerGapType
+			),
 		};
-		tabletSelectors[
-			' .uagb-icon-list__source-wrap'
-		] = {
-			'margin-left': generateCSSUnit( innerGapTabletFallback, innerGapType ),
+		tabletSelectors[ ' .uagb-icon-list__source-wrap' ] = {
+			'margin-left': generateCSSUnit(
+				innerGapTabletFallback,
+				innerGapType
+			),
 		};
 		selectors[ ' .wp-block-uagb-icon-list-child ' ] = {
 			'flex-direction': 'row-reverse',
@@ -489,41 +547,70 @@ function styling( props ) {
 	selectors[ ' .wp-block-uagb-icon-list-child .uagb-icon-list__label' ] = {
 		'font-size': generateCSSUnit( fontSize, fontSizeType ),
 		'font-family': fontFamily,
-		'font-style' : fontStyle,
+		'font-style': fontStyle,
 		'text-decoration': fontDecoration,
 		'text-transform': fontTransform,
 		'font-weight': fontWeight,
 		'line-height': generateCSSUnit( lineHeight, lineHeightType ),
-		'letter-spacing': generateCSSUnit( labelLetterSpacing, labelLetterSpacingType ),
+		'letter-spacing': generateCSSUnit(
+			labelLetterSpacing,
+			labelLetterSpacingType
+		),
 		'color': labelColor,
 	};
 
-	mobileSelectors[ ' .wp-block-uagb-icon-list-child .uagb-icon-list__label' ] = {
+	mobileSelectors[
+		' .wp-block-uagb-icon-list-child .uagb-icon-list__label'
+	] = {
 		'font-size': generateCSSUnit( fontSizeMobile, fontSizeType ),
 		'line-height': generateCSSUnit( lineHeightMobile, lineHeightType ),
-		'letter-spacing': generateCSSUnit( labelLetterSpacingMobile, labelLetterSpacingType ),
+		'letter-spacing': generateCSSUnit(
+			labelLetterSpacingMobile,
+			labelLetterSpacingType
+		),
 	};
 
-	tabletSelectors[ ' .wp-block-uagb-icon-list-child .uagb-icon-list__label' ] = {
+	tabletSelectors[
+		' .wp-block-uagb-icon-list-child .uagb-icon-list__label'
+	] = {
 		'font-size': generateCSSUnit( fontSizeTablet, fontSizeType ),
 		'line-height': generateCSSUnit( lineHeightTablet, lineHeightType ),
-		'letter-spacing': generateCSSUnit( labelLetterSpacingTablet, labelLetterSpacingType ),
+		'letter-spacing': generateCSSUnit(
+			labelLetterSpacingTablet,
+			labelLetterSpacingType
+		),
 	};
 
-	mobileSelectors[ ' .wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap' ] = {
-		'border-radius': generateCSSUnit( borderRadiusMobileFallback, borderRadiusType ),
+	mobileSelectors[
+		' .wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap'
+	] = {
+		'border-radius': generateCSSUnit(
+			borderRadiusMobileFallback,
+			borderRadiusType
+		),
 		'padding': generateCSSUnit( bgSizeMobileFallback, 'px' ),
-		'border-style':	( 0 === borderMobileFallback || undefined === borderMobileFallback ) ? 'none' : 'solid',
+		'border-style':
+			0 === borderMobileFallback || undefined === borderMobileFallback
+				? 'none'
+				: 'solid',
 		'border-width': generateCSSUnit( borderMobileFallback, borderType ),
-		'align-self' : positionMobile,
+		'align-self': positionMobile,
 	};
 
-	tabletSelectors[ ' .wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap' ] = {
-		'border-radius': generateCSSUnit( borderRadiusTabletFallback, borderRadiusType ),
+	tabletSelectors[
+		' .wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap'
+	] = {
+		'border-radius': generateCSSUnit(
+			borderRadiusTabletFallback,
+			borderRadiusType
+		),
 		'padding': generateCSSUnit( bgSizeTabletFallback, 'px' ),
-		'border-style':	( 0 === borderTabletFallback || undefined === borderTabletFallback ) ? 'none' : 'solid',
+		'border-style':
+			0 === borderTabletFallback || undefined === borderTabletFallback
+				? 'none'
+				: 'solid',
 		'border-width': generateCSSUnit( borderTabletFallback, borderType ),
-		'align-self' : positionTablet,
+		'align-self': positionTablet,
 	};
 
 	let stylingCss = '';

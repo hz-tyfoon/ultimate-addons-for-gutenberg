@@ -2,7 +2,6 @@
  * BLOCK: Social Share - Settings.
  */
 
-
 import React from 'react';
 import Range from '@Components/range/Range.js';
 import ResponsiveSlider from '@Components/responsive-slider';
@@ -13,9 +12,7 @@ import InspectorTab, {
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import { __ } from '@wordpress/i18n';
 import renderSVG from '@Controls/renderIcon';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import { Icon } from '@wordpress/components';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTabsControl from '@Components/tabs';
@@ -52,7 +49,10 @@ const Settings = ( props ) => {
 
 	const generalSettings = () => {
 		return (
-			<UAGAdvancedPanelBody title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
+			<UAGAdvancedPanelBody
+				title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ false }
+			>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
 					label={ __( 'Layout', 'ultimate-addons-for-gutenberg' ) }
@@ -81,10 +81,7 @@ const Settings = ( props ) => {
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __(
-						'Alignment',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Alignment', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
 							value: align,
@@ -117,9 +114,7 @@ const Settings = ( props ) => {
 							value: 'center',
 							icon: (
 								<Icon
-									icon={ renderSVG(
-										'fa fa-align-center'
-									) }
+									icon={ renderSVG( 'fa fa-align-center' ) }
 								/>
 							),
 							tooltip: __(
@@ -131,9 +126,7 @@ const Settings = ( props ) => {
 							value: 'right',
 							icon: (
 								<Icon
-									icon={ renderSVG(
-										'fa fa-align-right'
-									) }
+									icon={ renderSVG( 'fa fa-align-right' ) }
 								/>
 							),
 							tooltip: __(
@@ -172,7 +165,6 @@ const Settings = ( props ) => {
 										'Desktop',
 										'ultimate-addons-for-gutenberg'
 									),
-
 								},
 								{
 									value: 'tablet',
@@ -180,7 +172,6 @@ const Settings = ( props ) => {
 										'Tablet',
 										'ultimate-addons-for-gutenberg'
 									),
-
 								},
 								{
 									value: 'mobile',
@@ -188,7 +179,6 @@ const Settings = ( props ) => {
 										'Mobile',
 										'ultimate-addons-for-gutenberg'
 									),
-
 								},
 							] }
 							showIcons={ false }
@@ -237,16 +227,18 @@ const Settings = ( props ) => {
 		);
 	};
 	const presetSettings = () => {
-		return <UAGAdvancedPanelBody
-					title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ true }
-				>
-					<UAGPresets
-						setAttributes = { setAttributes }
-						presets = { presets }
-						presetInputType = 'radioImage'
-					/>
-				</UAGAdvancedPanelBody>
+		return (
+			<UAGAdvancedPanelBody
+				title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ true }
+			>
+				<UAGPresets
+					setAttributes={ setAttributes }
+					presets={ presets }
+					presetInputType="radioImage"
+				/>
+			</UAGAdvancedPanelBody>
+		);
 	};
 
 	const iconSettings = () => {
@@ -255,7 +247,7 @@ const Settings = ( props ) => {
 				title={ __( 'Icon', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ true }
 			>
-								<ResponsiveSlider
+				<ResponsiveSlider
 					label={ __( 'Size', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
@@ -346,7 +338,10 @@ const Settings = ( props ) => {
 					normal={
 						<>
 							<AdvancedPopColorControl
-								label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
+								label={ __(
+									'Color',
+									'ultimate-addons-for-gutenberg'
+								) }
 								colorValue={ iconColor ? iconColor : '' }
 								data={ {
 									value: iconColor,
@@ -371,8 +366,13 @@ const Settings = ( props ) => {
 					hover={
 						<>
 							<AdvancedPopColorControl
-								label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
-								colorValue={ iconHoverColor ? iconHoverColor : '' }
+								label={ __(
+									'Color',
+									'ultimate-addons-for-gutenberg'
+								) }
+								colorValue={
+									iconHoverColor ? iconHoverColor : ''
+								}
 								data={ {
 									value: iconHoverColor,
 									label: 'iconHoverColor',
@@ -402,24 +402,22 @@ const Settings = ( props ) => {
 	};
 
 	return (
-
-			<InspectorControls>
-				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
-						{ presetSettings() }
-						{ generalSettings() }
-					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
-						{iconSettings()}
-						{ spacingSettings() }
-					</InspectorTab>
-					<InspectorTab
-						{ ...UAGTabs.advance }
-						parentProps={ props }
-					></InspectorTab>
-				</InspectorTabs>
-			</InspectorControls>
-
+		<InspectorControls>
+			<InspectorTabs>
+				<InspectorTab { ...UAGTabs.general }>
+					{ presetSettings() }
+					{ generalSettings() }
+				</InspectorTab>
+				<InspectorTab { ...UAGTabs.style }>
+					{ iconSettings() }
+					{ spacingSettings() }
+				</InspectorTab>
+				<InspectorTab
+					{ ...UAGTabs.advance }
+					parentProps={ props }
+				></InspectorTab>
+			</InspectorTabs>
+		</InspectorControls>
 	);
 };
 

@@ -13,14 +13,21 @@ import { RichText } from '@wordpress/block-editor';
 export default function save( props ) {
 	const { attributes } = props;
 
-	const { block_id, phoneRequired, phoneName, pattern, selectPhoneCode, autocomplete } = attributes;
+	const {
+		block_id,
+		phoneRequired,
+		phoneName,
+		pattern,
+		selectPhoneCode,
+		autocomplete,
+	} = attributes;
 
 	let placeholder = '';
 	if ( pattern === '[0-9]{3}-?[0-9]{2}-?[0-9]{3}' ) {
 		placeholder = __( '123-45-678', 'ultimate-addons-for-gutenberg' );
 	} else if ( pattern === '[0-9]{3}-?[0-9]{3}-?[0-9]{4}' ) {
 		placeholder = __( '123-456-7890', 'ultimate-addons-for-gutenberg' );
-	} else if ( pattern === '[0-9]{3}\s?[0-9]{3}\s?[0-9]{4}' ) {
+	} else if ( pattern === '[0-9]{3}s?[0-9]{3}s?[0-9]{4}' ) {
 		placeholder = __( '123 456 7890', 'ultimate-addons-for-gutenberg' );
 	}
 
@@ -75,7 +82,11 @@ export default function save( props ) {
 					name={ `${ phoneName }[]` }
 				>
 					{ countryOptions.map( ( o, index ) => (
-						<option value={ o.props.value } key={ index } selected={o.props.value === selectPhoneCode}>
+						<option
+							value={ o.props.value }
+							key={ index }
+							selected={ o.props.value === selectPhoneCode }
+						>
 							{ o.props.children }
 						</option>
 					) ) }

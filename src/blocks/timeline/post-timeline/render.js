@@ -30,26 +30,30 @@ const Render = ( props ) => {
 	const deviceType = useDeviceType();
 	const { attributes, className, setAttributes } = props;
 
-	const {
-		displayPostLink,
-		postsToShow,
-	} = attributes;
+	const { displayPostLink, postsToShow } = attributes;
 
-	const timelinAlignment = 'undefined' !== typeof attributes['timelinAlignment' + deviceType ] ? attributes['timelinAlignment' + deviceType ] :  attributes.timelinAlignment;
-	const postsToShowFallback = getFallbackNumber( postsToShow, 'postsToShow', blockName );
+	const timelinAlignment =
+		'undefined' !== typeof attributes[ 'timelinAlignment' + deviceType ]
+			? attributes[ 'timelinAlignment' + deviceType ]
+			: attributes.timelinAlignment;
+	const postsToShowFallback = getFallbackNumber(
+		postsToShow,
+		'postsToShow',
+		blockName
+	);
 
 	/* Render output at backend */
 	const getContent = () => {
-
 		const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
 
 		if ( ! hasPosts ) {
 			return (
 				<Placeholder
 					icon="admin-post"
-					label={
-						__( 'Post Timeline', 'ultimate-addons-for-gutenberg' )
-					}
+					label={ __(
+						'Post Timeline',
+						'ultimate-addons-for-gutenberg'
+					) }
 				>
 					{ ! Array.isArray( latestPosts ) ? (
 						<Spinner />
@@ -89,12 +93,20 @@ const Render = ( props ) => {
 
 					return (
 						<article
-							className={ classnames( 'uagb-timeline__field ', contentAlignClass ) }
+							className={ classnames(
+								'uagb-timeline__field ',
+								contentAlignClass
+							) }
 							key={ index }
 						>
 							{ <Icon attributes={ attributes } /> }
-							<div className={ classnames( dayAlignClass, 'uagb-timeline__events-inner-new' ) }>
-								<div className='uagb-timeline__events-inner--content'>
+							<div
+								className={ classnames(
+									dayAlignClass,
+									'uagb-timeline__events-inner-new'
+								) }
+							>
+								<div className="uagb-timeline__events-inner--content">
 									<PostDate
 										post={ post }
 										attributes={ attributes }
@@ -106,34 +118,34 @@ const Render = ( props ) => {
 											attributes={ attributes }
 										/>
 									}
-										{
-											<Title
-												post={ post }
-												attributes={ attributes }
-											/>
-										}
-										{
-											<Author
-												post={ post }
-												attributes={ attributes }
-											/>
-										}
-										{
-											<Excerpt
-												post={ post }
-												attributes={ attributes }
-											/>
-										}
-										{
-											<CtaLink
-												post={ post }
-												attributes={ attributes }
-												setAttributes ={ setAttributes }
-											/>
-										}
+									{
+										<Title
+											post={ post }
+											attributes={ attributes }
+										/>
+									}
+									{
+										<Author
+											post={ post }
+											attributes={ attributes }
+										/>
+									}
+									{
+										<Excerpt
+											post={ post }
+											attributes={ attributes }
+										/>
+									}
+									{
+										<CtaLink
+											post={ post }
+											attributes={ attributes }
+											setAttributes={ setAttributes }
+										/>
+									}
 
-										<div className="uagb-timeline__arrow"></div>
-									</div>
+									<div className="uagb-timeline__arrow"></div>
+								</div>
 							</div>
 							{ displayInnerDate && (
 								<>

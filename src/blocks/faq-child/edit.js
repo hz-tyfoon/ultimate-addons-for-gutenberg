@@ -2,8 +2,7 @@
  * BLOCK: FAQ - Child
  */
 
-import React, { useEffect,    useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 
 import Settings from './settings';
 import Render from './render';
@@ -44,13 +43,13 @@ const FaqChildComponent = ( props ) => {
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/children/faq-child.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings />
-				<Render parentProps={ props } state={ state } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings />
+			<Render parentProps={ props } state={ state } />
+		</>
 	);
 };
 

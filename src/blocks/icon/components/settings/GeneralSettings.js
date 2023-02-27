@@ -16,8 +16,7 @@ import Range from '@Components/range/Range.js';
 import UAGPresets from '@Components/presets';
 
 const GeneralSettings = ( props ) => {
-
-	const { attributes, setAttributes} = props;
+	const { attributes, setAttributes } = props;
 
 	const {
 		icon,
@@ -42,27 +41,22 @@ const GeneralSettings = ( props ) => {
 				initialOpen={ true }
 			>
 				<UAGPresets
-					setAttributes = { setAttributes }
-					presets = { iconPresets }
-					presetInputType = 'radioImage'
+					setAttributes={ setAttributes }
+					presets={ iconPresets }
+					presetInputType="radioImage"
 				/>
 			</UAGAdvancedPanelBody>
-			<UAGAdvancedPanelBody title={__( 'Icon', 'ultimate-addons-for-gutenberg' )} initialOpen={ false }>
+			<UAGAdvancedPanelBody
+				title={ __( 'Icon', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ false }
+			>
 				<UAGIconPicker
-					label={ __(
-						'Icon',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Icon', 'ultimate-addons-for-gutenberg' ) }
 					value={ icon }
-					onChange={ ( value ) =>
-						setAttributes( { icon: value } )
-					}
+					onChange={ ( value ) => setAttributes( { icon: value } ) }
 				/>
 				<ResponsiveSlider
-					label={ __(
-						'Size',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Size', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
 							value: iconSize,
@@ -141,13 +135,10 @@ const GeneralSettings = ( props ) => {
 						},
 					] }
 					showIcons={ true }
-					responsive={true}
+					responsive={ true }
 				/>
 				<Range
-					label={ __(
-						'Rotation',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Rotation', 'ultimate-addons-for-gutenberg' ) }
 					setAttributes={ setAttributes }
 					value={ rotation }
 					data={ {
@@ -180,12 +171,15 @@ const GeneralSettings = ( props ) => {
 				{ disableLink && (
 					<>
 						<UAGTextControl
-							label={__( 'URL', 'ultimate-addons-for-gutenberg' )}
+							label={ __(
+								'URL',
+								'ultimate-addons-for-gutenberg'
+							) }
 							value={ link }
-							data={{
+							data={ {
 								value: link,
 								label: 'link',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( { link: value } )

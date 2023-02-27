@@ -11,8 +11,7 @@ import { select } from '@wordpress/data';
 import styles from './editor.lazy.scss';
 
 const ResponsiveUAGFocalPointPicker = ( props ) => {
-
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	const { backgroundPosition, backgroundImage, setAttributes } = props;
@@ -20,8 +19,8 @@ const ResponsiveUAGFocalPointPicker = ( props ) => {
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
 	const responsive = true;
 
@@ -36,24 +35,28 @@ const ResponsiveUAGFocalPointPicker = ( props ) => {
 	}, [] );
 
 	const output = {};
-	const url = backgroundImage[device]?.value?.url;
-	const value = backgroundPosition[device]?.value;
+	const url = backgroundImage[ device ]?.value?.url;
+	const value = backgroundPosition[ device ]?.value;
 
-	 output.Desktop = (
+	output.Desktop = (
 		<FocalPointPicker
 			url={ url }
 			value={ value }
 			onChange={ ( focalPoint ) => {
-				setAttributes( { [ backgroundPosition[device]?.label ]: focalPoint } );
+				setAttributes( {
+					[ backgroundPosition[ device ]?.label ]: focalPoint,
+				} );
 			} }
 		/>
-	 );
-	 output.Tablet = (
+	);
+	output.Tablet = (
 		<FocalPointPicker
 			url={ url ? url : backgroundImage.desktop?.value?.url }
 			value={ value }
 			onChange={ ( focalPoint ) => {
-				setAttributes( { [ backgroundPosition[device]?.label ]: focalPoint } );
+				setAttributes( {
+					[ backgroundPosition[ device ]?.label ]: focalPoint,
+				} );
 			} }
 		/>
 	);
@@ -62,37 +65,48 @@ const ResponsiveUAGFocalPointPicker = ( props ) => {
 			url={ url ? url : backgroundImage.desktop?.value?.url }
 			value={ value }
 			onChange={ ( focalPoint ) => {
-				setAttributes( { [ backgroundPosition[device]?.label ]: focalPoint } );
+				setAttributes( {
+					[ backgroundPosition[ device ]?.label ]: focalPoint,
+				} );
 			} }
 		/>
 	);
 
 	const controlName = 'position'; // There is no label props that's why keep hard coded label
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
-		<div
-			ref={panelRef}
-			className="components-base-control"
-			
-		>
-			{controlBeforeDomElement}
+		<div ref={ panelRef } className="components-base-control">
+			{ controlBeforeDomElement }
 			<div className="uagb-responsive-select-control">
 				<div className="uagb-size-type-field-tabs">
 					<div className="uagb-control__header">
 						<ResponsiveToggle
-							label= { __( 'Position', 'ultimate-addons-for-gutenberg' ) }
-							responsive= { responsive }
+							label={ __(
+								'Position',
+								'ultimate-addons-for-gutenberg'
+							) }
+							responsive={ responsive }
 						/>
 					</div>
-					{ output[ deviceType ] ? output[ deviceType ] : output.Desktop }
+					{ output[ deviceType ]
+						? output[ deviceType ]
+						: output.Desktop }
 				</div>
 				{ props.help && (
 					<p className="uag-control-help-notice">{ props.help }</p>
 				) }
 			</div>
-			{controlAfterDomElement}
+			{ controlAfterDomElement }
 		</div>
 	);
 };

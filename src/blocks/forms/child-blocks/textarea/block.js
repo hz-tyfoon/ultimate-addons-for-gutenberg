@@ -12,7 +12,10 @@ import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType( 'uagb/forms-textarea', {
 	title: __( 'Textarea', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add a text field in your form.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add a text field in your form.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.textarea,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/forms' ],
@@ -24,7 +27,7 @@ registerBlockType( 'uagb/forms-textarea', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	save,
 	deprecated,

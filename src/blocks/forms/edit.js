@@ -1,6 +1,6 @@
 /**
  * BLOCK: Forms - Edit
- */import React, { useEffect, useCallback, useLayoutEffect } from 'react';
+ */ import React, { useEffect, useCallback, useLayoutEffect } from 'react';
 import styling from './styling';
 import UAGB_Block_Icons from '@Controls/block-icons';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
@@ -24,7 +24,7 @@ import { __ } from '@wordpress/i18n';
 
 import apiFetch from '@wordpress/api-fetch';
 
-import {migrateBorderAttributes} from '@Controls/generateAttributes';
+import { migrateBorderAttributes } from '@Controls/generateAttributes';
 
 import styles from './editor.lazy.scss';
 
@@ -37,33 +37,28 @@ const UAGBFormsEdit = ( props ) => {
 		variations,
 		hasInnerBlocks,
 		defaultVariation,
-	} = useSelect(
-		( select ) => {
-			const { getBlocks } = select( 'core/block-editor' );
-			const {
-				getBlockType,
-				getBlockVariations,
-				getDefaultBlockVariation,
-			} = select( 'core/blocks' );
+	} = useSelect( ( select ) => {
+		const { getBlocks } = select( 'core/block-editor' );
+		const { getBlockType, getBlockVariations, getDefaultBlockVariation } =
+			select( 'core/blocks' );
 
-			return {
-				innerBlocks: getBlocks( props.clientId ),
-				hasInnerBlocks:
-					select( 'core/block-editor' ).getBlocks( props.clientId ).length >
-					0,
+		return {
+			innerBlocks: getBlocks( props.clientId ),
+			hasInnerBlocks:
+				select( 'core/block-editor' ).getBlocks( props.clientId )
+					.length > 0,
 
-				blockType: getBlockType( props.name ),
-				defaultVariation:
-					typeof getDefaultBlockVariation === 'undefined'
-						? null
-						: getDefaultBlockVariation( props.name ),
-				variations:
-					typeof getBlockVariations === 'undefined'
-						? null
-						: getBlockVariations( props.name ),
-			};
-		},
-	);
+			blockType: getBlockType( props.name ),
+			defaultVariation:
+				typeof getDefaultBlockVariation === 'undefined'
+					? null
+					: getDefaultBlockVariation( props.name ),
+			variations:
+				typeof getBlockVariations === 'undefined'
+					? null
+					: getBlockVariations( props.name ),
+		};
+	} );
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -85,29 +80,36 @@ const UAGBFormsEdit = ( props ) => {
 			reCaptchaSecretKeyV3,
 			reCaptchaEnable,
 			toggleColor,
-			bgColor
+			bgColor,
 		} = props.attributes;
 
-		if( bgColor ) {
+		if ( bgColor ) {
 			if ( undefined === toggleColor ) {
 				setAttributes( { toggleColor: bgColor } );
 			}
 		}
-		
+
 		const id = props.clientId;
 
 		window.addEventListener( 'load', renderReadyClasses( id ) );
 
-		if( reCaptchaEnable ) {
-
+		if ( reCaptchaEnable ) {
 			const keys = {};
-			if( '' === uagb_blocks_info.recaptcha_site_key_v2 && '' === uagb_blocks_info.recaptcha_secret_key_v2 && reCaptchaSiteKeyV2 && reCaptchaSecretKeyV2 ) {
-
+			if (
+				'' === uagb_blocks_info.recaptcha_site_key_v2 &&
+				'' === uagb_blocks_info.recaptcha_secret_key_v2 &&
+				reCaptchaSiteKeyV2 &&
+				reCaptchaSecretKeyV2
+			) {
 				keys.reCaptchaSiteKeyV2 = reCaptchaSiteKeyV2;
 				keys.reCaptchaSecretKeyV2 = reCaptchaSecretKeyV2;
 			}
-			if( '' === uagb_blocks_info.recaptcha_site_key_v3 && '' === uagb_blocks_info.recaptcha_secret_key_v3 && reCaptchaSiteKeyV3 && reCaptchaSecretKeyV3 ) {
-
+			if (
+				'' === uagb_blocks_info.recaptcha_site_key_v3 &&
+				'' === uagb_blocks_info.recaptcha_secret_key_v3 &&
+				reCaptchaSiteKeyV3 &&
+				reCaptchaSecretKeyV3
+			) {
 				keys.reCaptchaSiteKeyV3 = reCaptchaSiteKeyV3;
 				keys.reCaptchaSecretKeyV3 = reCaptchaSecretKeyV3;
 			}
@@ -119,13 +121,11 @@ const UAGBFormsEdit = ( props ) => {
 			formData.append( 'value', JSON.stringify( keys ) );
 
 			if ( Object.keys( keys ).length !== 0 ) {
-
 				apiFetch( {
 					url: uagb_blocks_info.ajax_url,
 					method: 'POST',
 					body: formData,
-				} ).then( () => {
-				} );
+				} ).then( () => {} );
 			}
 		}
 		const {
@@ -142,96 +142,126 @@ const UAGBFormsEdit = ( props ) => {
 		} = props.attributes;
 
 		// inputborder
-		if( inputborderWidth || inputborderRadius || inputborderColor || inputborderHoverColor || inputborderStyle ){
-			migrateBorderAttributes( 'field', {
-				label: 'inputborderWidth',
-				value: inputborderWidth,
-			}, {
-				label: 'inputborderRadius',
-				value: inputborderRadius
-			}, {
-				label: 'inputborderColor',
-				value: inputborderColor
-			}, {
-				label: 'inputborderHoverColor',
-				value: inputborderHoverColor
-			},{
-				label: 'inputborderStyle',
-				value: inputborderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if (
+			inputborderWidth ||
+			inputborderRadius ||
+			inputborderColor ||
+			inputborderHoverColor ||
+			inputborderStyle
+		) {
+			migrateBorderAttributes(
+				'field',
+				{
+					label: 'inputborderWidth',
+					value: inputborderWidth,
+				},
+				{
+					label: 'inputborderRadius',
+					value: inputborderRadius,
+				},
+				{
+					label: 'inputborderColor',
+					value: inputborderColor,
+				},
+				{
+					label: 'inputborderHoverColor',
+					value: inputborderHoverColor,
+				},
+				{
+					label: 'inputborderStyle',
+					value: inputborderStyle,
+				},
+				props.setAttributes,
+				props.attributes
 			);
-			migrateBorderAttributes( 'checkBoxToggle', {
-				label: 'inputborderWidth',
-				value: inputborderWidth,
-			}, {
-				label: 'inputborderRadius',
-				value: inputborderRadius
-			}, {
-				label: 'inputborderColor',
-				value: inputborderColor
-			}, {
-				label: 'inputborderHoverColor',
-				value: inputborderHoverColor
-			},{
-				label: 'inputborderStyle',
-				value: inputborderStyle
-			},
-			props.setAttributes,
-			props.attributes
-			);
-		}
-		if( submitborderWidth || submitborderRadius || submitborderColor || submitborderHoverColor || submitborderStyle ){
-			migrateBorderAttributes( 'btn', {
-				label: 'submitborderWidth',
-				value: submitborderWidth,
-			}, {
-				label: 'submitborderRadius',
-				value: submitborderRadius
-			}, {
-				label: 'submitborderColor',
-				value: submitborderColor
-			}, {
-				label: 'submitborderHoverColor',
-				value: submitborderHoverColor
-			},{
-				label: 'submitborderStyle',
-				value: submitborderStyle
-			},
-			props.setAttributes,
-			props.attributes
+			migrateBorderAttributes(
+				'checkBoxToggle',
+				{
+					label: 'inputborderWidth',
+					value: inputborderWidth,
+				},
+				{
+					label: 'inputborderRadius',
+					value: inputborderRadius,
+				},
+				{
+					label: 'inputborderColor',
+					value: inputborderColor,
+				},
+				{
+					label: 'inputborderHoverColor',
+					value: inputborderHoverColor,
+				},
+				{
+					label: 'inputborderStyle',
+					value: inputborderStyle,
+				},
+				props.setAttributes,
+				props.attributes
 			);
 		}
-		
+		if (
+			submitborderWidth ||
+			submitborderRadius ||
+			submitborderColor ||
+			submitborderHoverColor ||
+			submitborderStyle
+		) {
+			migrateBorderAttributes(
+				'btn',
+				{
+					label: 'submitborderWidth',
+					value: submitborderWidth,
+				},
+				{
+					label: 'submitborderRadius',
+					value: submitborderRadius,
+				},
+				{
+					label: 'submitborderColor',
+					value: submitborderColor,
+				},
+				{
+					label: 'submitborderHoverColor',
+					value: submitborderHoverColor,
+				},
+				{
+					label: 'submitborderStyle',
+					value: submitborderStyle,
+				},
+				props.setAttributes,
+				props.attributes
+			);
+		}
 	}, [] );
 
 	useEffect( () => {
-
 		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-style-forms-' + props.clientId.substr( 0, 8 ), blockStyling );
-		
+		addBlockEditorDynamicStyles(
+			'uagb-style-forms-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
+		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-style-forms-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-forms-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
 
-		const id = props.clientId
-		window.addEventListener( 'load', renderReadyClasses( id ) )
+		const id = props.clientId;
+		window.addEventListener( 'load', renderReadyClasses( id ) );
+	}, [ deviceType ] );
 
-	}, [deviceType] );
-
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	const blockVariationPickerOnSelect = useCallback(
@@ -253,7 +283,9 @@ const UAGBFormsEdit = ( props ) => {
 	const createBlocksFromInnerBlocksTemplate = useCallback(
 		( innerBlocksTemplate ) => {
 			return innerBlocksTemplate.map(
-				( [ name, attributes, innerBlocks = [] ] ) => // eslint-disable-line no-shadow
+				(
+					[ name, attributes, innerBlocks = [] ] // eslint-disable-line no-shadow
+				) =>
 					createBlock(
 						name,
 						attributes,
@@ -264,15 +296,21 @@ const UAGBFormsEdit = ( props ) => {
 	);
 
 	const renderReadyClasses = useCallback( ( id ) => {
-		const iframeEl = document.querySelector( `iframe[name='editor-canvas']` );
+		const iframeEl = document.querySelector(
+			`iframe[name='editor-canvas']`
+		);
 		let mainDiv;
 		let formscope;
-		if( iframeEl ){
-			mainDiv = iframeEl.contentDocument.getElementById( 'block-' + id )
-			formscope = mainDiv.getElementsByClassName( 'uagb-forms__outer-wrap' )
+		if ( iframeEl ) {
+			mainDiv = iframeEl.contentDocument.getElementById( 'block-' + id );
+			formscope = mainDiv.getElementsByClassName(
+				'uagb-forms__outer-wrap'
+			);
 		} else {
-			mainDiv = document.getElementById( 'block-' + id )
-			formscope = mainDiv?.getElementsByClassName( 'uagb-forms__outer-wrap' )
+			mainDiv = document.getElementById( 'block-' + id );
+			formscope = mainDiv?.getElementsByClassName(
+				'uagb-forms__outer-wrap'
+			);
 		}
 
 		if ( formscope && formscope[ 0 ] ) {
@@ -332,36 +370,36 @@ const UAGBFormsEdit = ( props ) => {
 	} );
 
 	if ( ! props.attributes.isPreview && ! hasInnerBlocks ) {
-		return (
-			props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-				<div className='uagb-forms-variations'>
-					<__experimentalBlockVariationPicker
-						icon={ UAGB_Block_Icons.forms }
-						label={ __( 'Forms', 'ultimate-addons-for-gutenberg' ) }
-						instructions={ __(
-							'Select a variation to start with.',
-							'ultimate-addons-for-gutenberg'
-						) }
-						variations={ variations }
-						allowSkip
-						onSelect={ ( nextVariation ) =>
-							blockVariationPickerOnSelect( nextVariation )
-						}
-					/>
-				</div>
-			)
+		return props.attributes.isPreview ? (
+			<img width="100%" src={ previewImageData } alt="" />
+		) : (
+			<div className="uagb-forms-variations">
+				<__experimentalBlockVariationPicker
+					icon={ UAGB_Block_Icons.forms }
+					label={ __( 'Forms', 'ultimate-addons-for-gutenberg' ) }
+					instructions={ __(
+						'Select a variation to start with.',
+						'ultimate-addons-for-gutenberg'
+					) }
+					variations={ variations }
+					allowSkip
+					onSelect={ ( nextVariation ) =>
+						blockVariationPickerOnSelect( nextVariation )
+					}
+				/>
+			</div>
 		);
 	}
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/form.svg`;
 
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 
@@ -378,7 +416,4 @@ const addAdvancedClasses = createHigherOrderComponent( ( BlockListBlock ) => {
 
 wp.hooks.addFilter( 'editor.BlockListBlock', 'uagb/forms', addAdvancedClasses );
 
-export default compose(
-	withNotices,
-	addAdvancedClasses
-)( UAGBFormsEdit );
+export default compose( withNotices, addAdvancedClasses )( UAGBFormsEdit );

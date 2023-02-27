@@ -3,19 +3,16 @@
  */
 
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
-function PositionClasses( attributes , name = 'uagb/restaurant-menu' ) {
-	const {
-		columns,
-		tcolumns,
-		mcolumns
-	} = attributes;
+function PositionClasses( attributes, name = 'uagb/restaurant-menu' ) {
+	const { columns, tcolumns, mcolumns } = attributes;
 
 	let iconimgStyleClass = '';
 	let imgeCount = 0;
 	const image = attributes.image;
 
 	if ( typeof attributes.rest_menu_item_arr !== 'undefined' ) {
-		attributes.rest_menu_item_arr.map( ( item ) => { // eslint-disable-line  array-callback-return
+		attributes.rest_menu_item_arr.map( ( item ) => {
+			// eslint-disable-line  array-callback-return
 			const image_arr = item.image;
 			if ( image_arr && typeof image_arr !== 'undefined' ) {
 				imgeCount++;
@@ -51,8 +48,16 @@ function PositionClasses( attributes , name = 'uagb/restaurant-menu' ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const columnsFallback = getFallbackNumber( columns, 'columns', blockName );
-	const tcolumnsFallback = getFallbackNumber( tcolumns, 'tcolumns', blockName );
-	const mcolumnsFallback = getFallbackNumber( mcolumns, 'mcolumns', blockName );
+	const tcolumnsFallback = getFallbackNumber(
+		tcolumns,
+		'tcolumns',
+		blockName
+	);
+	const mcolumnsFallback = getFallbackNumber(
+		mcolumns,
+		'mcolumns',
+		blockName
+	);
 
 	iconimgStyleClass += 'uagb-rm__desk-column-' + columnsFallback + ' ';
 	iconimgStyleClass += 'uagb-rm__tablet-column-' + tcolumnsFallback + ' ';

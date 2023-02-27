@@ -7,21 +7,20 @@ import { createElement as el } from '@wordpress/element';
 const iconColor = '#1e293b';
 
 const UAGB_Block_Icons = {
-
 	// -----------------------------.
 	// Spectra Blocks and Extensions.
 	// -----------------------------.
 
-	'section': el(
+	section: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
 			d: 'M21 15V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19L3 15M21 15L3 15M21 15V9M3 15L3 9M21 9V5C21 3.89543 20.1046 3 19 3L5 3C3.89543 3 3 3.89543 3 5L3 9M21 9L3 9',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
-	'buttons': el(
+	buttons: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -29,7 +28,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'advanced-heading': el(
 		'svg',
@@ -39,7 +38,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'google-map': el(
 		'svg',
@@ -48,7 +47,7 @@ const UAGB_Block_Icons = {
 			d: 'M9 3.00002L4.10557 5.44723C3.428 5.78601 3 6.47854 3 7.23608V20.382C3 21.1254 3.78231 21.6089 4.44721 21.2764L9 19M9 3.00002L15 5.00002M9 3.00002V19M9 19L15 21M15 5.00002L19.5528 2.72362C20.2177 2.39117 21 2.87467 21 3.61805V16.7639C21 17.5215 20.572 18.214 19.8944 18.5528L15 21M15 5.00002V21',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 	'info-box': el(
 		'svg',
@@ -58,7 +57,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'post-carousel': el(
 		'svg',
@@ -73,7 +72,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'post-masonry': el(
 		'svg',
@@ -97,7 +96,7 @@ const UAGB_Block_Icons = {
 			d: 'M3 3C3 1.89543 3.89543 1 5 1H8C9.10457 1 10 1.89543 10 3V6C10 7.10457 9.10457 8 8 8H5C3.89543 8 3 7.10457 3 6V3Z',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 	'post-grid': el(
 		'svg',
@@ -121,9 +120,9 @@ const UAGB_Block_Icons = {
 			d: 'M14 5C14 3.89543 14.8954 3 16 3H19C20.1046 3 21 3.89543 21 5V8C21 9.10457 20.1046 10 19 10H16C14.8954 10 14 9.10457 14 8V5Z',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
-	'testimonial': el(
+	testimonial: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -132,7 +131,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
 	'cf7-styler': el(
 		'svg',
@@ -141,7 +140,7 @@ const UAGB_Block_Icons = {
 			d: 'M4.51555 17C6.13007 19.412 8.87958 21 12 21C15.1204 21 17.8699 19.412 19.4845 17M4.51555 17C3.55827 15.5699 3 13.8501 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 13.8501 20.4417 15.5699 19.4845 17M4.51555 17C5.75777 17 7.12889 15 8.43944 13M19.4845 17C18.2422 17 16.8711 15 15.5606 13M8.43944 13C9.75 11 11 9 12 9C13 9 14.25 11 15.5606 13M8.43944 13L9.09522 14.2607C9.47211 14.9852 10.5116 14.9769 10.8768 14.2464L11.3795 13.241C11.6848 12.6305 12.4984 12.4984 12.9811 12.9811L13.4309 13.4309C13.7632 13.7632 14.282 13.8193 14.6776 13.5658L15.5606 13',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 	'gf-styler': el(
 		'svg',
@@ -150,7 +149,7 @@ const UAGB_Block_Icons = {
 			d: 'M17 12V15H7L6.99998 12.9996C6.99998 10.7905 8.79083 9.00001 10.9999 9.00001H17.5M3.33984 8.71466V15.2854C3.33984 16.0317 3.75541 16.7159 4.41768 17.0601L11.0779 20.5208C11.656 20.8212 12.3442 20.8212 12.9223 20.5208L19.5825 17.0601C20.2448 16.7159 20.6604 16.0317 20.6604 15.2854V8.71466C20.6604 7.96832 20.2448 7.28407 19.5825 6.93995L12.9223 3.47918C12.3442 3.1788 11.656 3.1788 11.0779 3.47918L4.41768 6.93995C3.75541 7.28407 3.33984 7.96832 3.33984 8.71466Z',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 	'content-timeline': el(
 		'svg',
@@ -160,7 +159,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'call-to-action': el(
 		'svg',
@@ -171,7 +170,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
 	'post-timeline': el(
 		'svg',
@@ -181,7 +180,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'icon-list': el(
 		'svg',
@@ -209,9 +208,9 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
-	'team': el(
+	team: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -220,16 +219,16 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'tabs': el(
+	tabs: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
 			d: 'M10 3V6C10 7.10457 10.8954 8 12 8H15.5M15.5 8H21M15.5 8V3M5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21Z',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 	'social-share': el(
 		'svg',
@@ -253,7 +252,7 @@ const UAGB_Block_Icons = {
 			d: 'M9 10.5L15 7M9 13.5L15 17',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 	'restaurant-menu': el(
 		'svg',
@@ -281,9 +280,9 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
-	'blockquote': el(
+	blockquote: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -292,16 +291,16 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'columns': el(
+	columns: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
 			d: 'M15 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H15M15 3V21M15 3H9M15 21H9M9 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H9M9 3V21',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 	'marketing-button': el(
 		'svg',
@@ -317,7 +316,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'table-of-contents': el(
 		'svg',
@@ -327,9 +326,9 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
-	'faq': el(
+	faq: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -338,9 +337,9 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'forms': el(
+	forms: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -348,7 +347,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'how-to': el(
 		'svg',
@@ -359,7 +358,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
 	'inline-notice': el(
 		'svg',
@@ -369,7 +368,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'wp-search': el(
 		'svg',
@@ -380,7 +379,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
 	'taxonomy-list': el(
 		'svg',
@@ -390,9 +389,9 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
-	'review': el(
+	review: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -401,9 +400,9 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'lottie': el(
+	lottie: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -411,7 +410,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'star-rating': el(
 		'svg',
@@ -426,7 +425,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'display-conditions': el(
 		'svg',
@@ -444,7 +443,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
 	'masonry-gallery': el(
 		'svg',
@@ -454,7 +453,7 @@ const UAGB_Block_Icons = {
 			stroke: iconColor,
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
-		} ),
+		} )
 	),
 	'responsive-conditions': el(
 		'svg',
@@ -471,9 +470,9 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'container': el(
+	container: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -490,18 +489,18 @@ const UAGB_Block_Icons = {
 			d: 'M3 5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V8C21 9.10457 20.1046 10 19 10H5C3.89543 10 3 9.10457 3 8V5Z',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
-	'image': el(
+	image: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
 			d: 'M3 17L7.41995 12.58C8.26284 11.7372 9.65125 11.8141 10.3959 12.7449L11.789 14.4863C12.4639 15.3298 13.6866 15.4851 14.5508 14.8369L15.6123 14.0408C16.4086 13.4436 17.5228 13.5228 18.2265 14.2265L21 17M17 8C17 8.55228 16.5523 9 16 9C15.4477 9 15 8.55228 15 8C15 7.44772 15.4477 7 16 7C16.5523 7 17 7.44772 17 8ZM5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21Z',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
-	'counter': el(
+	counter: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -510,7 +509,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
 	'image-gallery': el(
 		'svg',
@@ -519,9 +518,9 @@ const UAGB_Block_Icons = {
 			d: 'M3 8.5V5C3 3.89543 3.89543 3 5 3H8.5C9.60457 3 10.5 3.89543 10.5 5V8.5M3 8.5C3 9.60457 3.89543 10.5 5 10.5H8.5C9.60457 10.5 10.5 9.60457 10.5 8.5M3 8.5L4.94679 6.87767C5.58153 6.34873 6.47618 6.26455 7.19844 6.6658L10.5 8.5M13.5 8.5V5C13.5 3.89543 14.3954 3 15.5 3H19C20.1046 3 21 3.89543 21 5V8.5M13.5 8.5C13.5 9.60457 14.3954 10.5 15.5 10.5H19C20.1046 10.5 21 9.60457 21 8.5M13.5 8.5L15.4468 6.87767C16.0815 6.34873 16.9762 6.26455 17.6984 6.6658L21 8.5M3 19V15.5C3 14.3954 3.89543 13.5 5 13.5H8.5C9.60457 13.5 10.5 14.3954 10.5 15.5V19M3 19C3 20.1046 3.89543 21 5 21H8.5C9.60457 21 10.5 20.1046 10.5 19M3 19L4.94679 17.3777C5.58153 16.8487 6.47618 16.7645 7.19844 17.1658L10.5 19M13.5 19V15.5C13.5 14.3954 14.3954 13.5 15.5 13.5H19C20.1046 13.5 21 14.3954 21 15.5V19M13.5 19C13.5 20.1046 14.3954 21 15.5 21H19C20.1046 21 21 20.1046 21 19M13.5 19L15.4468 17.3777C16.0815 16.8487 16.9762 16.7645 17.6984 17.1658L21 19',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
-	'countdown': el(
+	countdown: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -530,9 +529,9 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'modal': el(
+	modal: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'rect', {
@@ -566,9 +565,9 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'slider': el(
+	slider: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 26 24', fill: 'none' },
 		el( 'rect', {
@@ -616,9 +615,9 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'icon': el(
+	icon: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 25', fill: 'none' },
 		el( 'path', {
@@ -634,14 +633,14 @@ const UAGB_Block_Icons = {
 			fill: 'none',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 
 	// ---------------------------------.
 	// Spectra Pro Blocks and Extensions.
 	// ---------------------------------.
 
-	'login': el(
+	login: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -650,16 +649,16 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 			strokeLinecap: 'round',
 			strokeLinejoin: 'round',
-		} ),
+		} )
 	),
-	'register': el(
+	register: el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
 			d: 'M11 19H1C1 15.134 4.13401 12 8 12C9.0736 12 10.0907 12.2417 11 12.6736M14 13V16M14 16V19M14 16H11M14 16H17M12 5C12 7.20914 10.2091 9 8 9C5.79086 9 4 7.20914 4 5C4 2.79086 5.79086 1 8 1C10.2091 1 12 2.79086 12 5Z',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 	'dynamic-content': el(
 		'svg',
@@ -668,9 +667,8 @@ const UAGB_Block_Icons = {
 			d: 'M4 7V17C4 19.2091 7.58172 21 12 21C16.4183 21 20 19.2091 20 17V7M4 7C4 9.20914 7.58172 11 12 11C16.4183 11 20 9.20914 20 7M4 7C4 4.79086 7.58172 3 12 3C16.4183 3 20 4.79086 20 7M20 12C20 14.2091 16.4183 16 12 16C7.58172 16 4 14.2091 4 12',
 			stroke: iconColor,
 			strokeWidth: 1.4,
-		} ),
+		} )
 	),
 };
-
 
 export default UAGB_Block_Icons;

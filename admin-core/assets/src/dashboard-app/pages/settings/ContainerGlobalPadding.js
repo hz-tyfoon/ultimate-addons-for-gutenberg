@@ -4,8 +4,9 @@ import apiFetch from '@wordpress/api-fetch';
 import React, { useEffect } from 'react';
 
 const ContainerGlobalPadding = () => {
-
-	const containerGlobalPadding = useSelector( ( state ) => state.containerGlobalPadding );
+	const containerGlobalPadding = useSelector(
+		( state ) => state.containerGlobalPadding
+	);
 
 	useEffect( () => {
 		if ( 'default' === containerGlobalPadding ) {
@@ -30,7 +31,10 @@ const ContainerGlobalPadding = () => {
 			body: formData,
 		} ).then( () => {
 			if ( showNotice ) {
-				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: 'Successfully saved!' } );
+				dispatch( {
+					type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION',
+					payload: 'Successfully saved!',
+				} );
 			}
 		} );
 	};
@@ -40,24 +44,39 @@ const ContainerGlobalPadding = () => {
 		saveValue( value );
 	};
 
-    return (
-        <section className='block border-b border-solid border-slate-200 px-12 py-8 justify-between'>
-            <div className='mr-16 w-full flex items-center'>
-                <h3 className="p-0 flex-1 justify-right inline-flex text-lg leading-8 font-medium text-gray-900">
-                    {__( 'Container Padding', 'ultimate-addons-for-gutenberg' ) }
-                </h3>
-                <div className='flex spectra-content-width-input-wrap'>
-                    <input className="appearance-none block w-20 h-8 leading-tight transition spectra-admin__input-field" id="grid-zip" value={containerGlobalPadding} onChange={updateContainerGlobalPadding} type="number" placeholder="" min={0} max={100} />
-                    <span className="inline-flex h-8 items-center sm:text-sm transition spectra-admin__input-field--end-display">
-                        { __( 'px', 'ultimate-addons-for-gutenberg' ) }
-                    </span>
-                </div>
-            </div>
-            <p className="mt-2 w-9/12 text-sm text-slate-500">
-                { __( 'This setting will apply default padding in the Container Block.', 'ultimate-addons-for-gutenberg' ) }
-            </p>
-        </section>
-    );
+	return (
+		<section className="block border-b border-solid border-slate-200 px-12 py-8 justify-between">
+			<div className="mr-16 w-full flex items-center">
+				<h3 className="p-0 flex-1 justify-right inline-flex text-lg leading-8 font-medium text-gray-900">
+					{ __(
+						'Container Padding',
+						'ultimate-addons-for-gutenberg'
+					) }
+				</h3>
+				<div className="flex spectra-content-width-input-wrap">
+					<input
+						className="appearance-none block w-20 h-8 leading-tight transition spectra-admin__input-field"
+						id="grid-zip"
+						value={ containerGlobalPadding }
+						onChange={ updateContainerGlobalPadding }
+						type="number"
+						placeholder=""
+						min={ 0 }
+						max={ 100 }
+					/>
+					<span className="inline-flex h-8 items-center sm:text-sm transition spectra-admin__input-field--end-display">
+						{ __( 'px', 'ultimate-addons-for-gutenberg' ) }
+					</span>
+				</div>
+			</div>
+			<p className="mt-2 w-9/12 text-sm text-slate-500">
+				{ __(
+					'This setting will apply default padding in the Container Block.',
+					'ultimate-addons-for-gutenberg'
+				) }
+			</p>
+		</section>
+	);
 };
 
 export default ContainerGlobalPadding;

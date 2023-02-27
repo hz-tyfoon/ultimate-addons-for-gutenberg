@@ -19,19 +19,27 @@ const BlocksSkeleton = () => {
 						<RectSkeleton width="71px" height="35px" />
 					</nav>
 					<span className="z-0 flex shadow-sm rounded-[0.2rem] justify-center">
-						<RectSkeleton width="100px" height="40px" style={{marginRight:'10px'}} />
+						<RectSkeleton
+							width="100px"
+							height="40px"
+							style={ { marginRight: '10px' } }
+						/>
 						<RectSkeleton width="100px" height="40px" />
 					</span>
 				</div>
 			</div>
 			<div className="lg:max-w-[80rem] mx-auto grid grid-cols-2 gap-6 sm:grid-cols-3 p-6 pt-0">
-			{ Array( 36 )
-			.fill()
-			.map( ( i ) => {
-				return (
-					<RectSkeleton key={i} width="400px" height="80px" />
-				);
-			} ) }
+				{ Array( 36 )
+					.fill()
+					.map( ( i ) => {
+						return (
+							<RectSkeleton
+								key={ i }
+								width="400px"
+								height="80px"
+							/>
+						);
+					} ) }
 			</div>
 		</>
 	);

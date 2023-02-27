@@ -5,7 +5,6 @@ import WebfontLoader from '@Components/typography/fontloader';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup } from '@wordpress/components';
 
-
 const Settings = ( props ) => {
 	const { state, inspectorControls, togglePreview } = props;
 
@@ -111,17 +110,14 @@ const Settings = ( props ) => {
 	}
 
 	return (
-			<>
+		<>
 			{ inspectorControls }
-			<BlockControls>
-				{ getBlockControls() }
-			</BlockControls>
+			<BlockControls>{ getBlockControls() }</BlockControls>
 			{ loadTitleGoogleFonts }
 			{ loadMetaGoogleFonts }
 			{ loadExcerptGoogleFonts }
 			{ loadCtaGoogleFonts }
-			</>
-
+		</>
 	);
 };
 

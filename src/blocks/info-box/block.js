@@ -15,7 +15,10 @@ import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType( 'uagb/info-box', {
 	title: __( 'Info Box', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add image/icon, separator and text description using a single block.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add image/icon, separator and text description using a single block.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.info_box,
 	keywords: [
 		__( 'info box', 'ultimate-addons-for-gutenberg' ),
@@ -31,7 +34,7 @@ registerBlockType( 'uagb/info-box', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	deprecated,
 } );

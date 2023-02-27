@@ -29,11 +29,11 @@ registerBlockType( 'uagb/star-rating', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	category: uagb_blocks_info.category,
 	attributes,
 	edit,
 	save,
-	deprecated
+	deprecated,
 } );

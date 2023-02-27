@@ -25,14 +25,11 @@ const defaultProps = {
 	borderWidthLabel: __( 'Width', 'ultimate-addons-for-gutenberg' ),
 	borderRadiusLabel: __( 'Radius', 'ultimate-addons-for-gutenberg' ),
 	borderColorLabel: __( 'Color', 'ultimate-addons-for-gutenberg' ),
-	borderHoverColorLabel:__(
-		'Hover Color',
-		'ultimate-addons-for-gutenberg'
-	)
+	borderHoverColorLabel: __( 'Hover Color', 'ultimate-addons-for-gutenberg' ),
 };
 
 const ResponsiveBorder = ( props ) => {
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	const {
@@ -50,44 +47,41 @@ const ResponsiveBorder = ( props ) => {
 		borderHoverColorLabel,
 		showWidth,
 		label = __( 'Border', 'ultimate-addons-for-gutenberg' ),
-		normalTabLabel = __(
-			'Normal',
-			'ultimate-addons-for-gutenberg'
-		),
-		hoverTabLabel = __(
-			'Hover',
-			'ultimate-addons-for-gutenberg'
-		),
+		normalTabLabel = __( 'Normal', 'ultimate-addons-for-gutenberg' ),
+		hoverTabLabel = __( 'Hover', 'ultimate-addons-for-gutenberg' ),
 		borderRadiusHelp,
 	} = props;
 
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
-
-	const tabsToUse = [ {
-		name: 'normal',
-		title: normalTabLabel,
-	} ];
+	const tabsToUse = [
+		{
+			name: 'normal',
+			title: normalTabLabel,
+		},
+	];
 
 	tabsToUse.push( {
 		name: 'hover',
 		title: hoverTabLabel,
 	} );
 
-	const borderStyle = attributes[prefix + 'BorderStyle'];
+	const borderStyle = attributes[ prefix + 'BorderStyle' ];
 
 	const tabOutputNormal = (
 		<AdvancedPopColorControl
 			label={ borderColorLabel }
 			colorValue={
-				attributes[prefix + 'BorderColor'] ? attributes[prefix + 'BorderColor'] : ''
+				attributes[ prefix + 'BorderColor' ]
+					? attributes[ prefix + 'BorderColor' ]
+					: ''
 			}
 			data={ {
-				value: attributes[prefix + 'BorderColor'],
+				value: attributes[ prefix + 'BorderColor' ],
 				label: prefix + 'BorderColor',
 			} }
 			setAttributes={ setAttributes }
@@ -97,10 +91,12 @@ const ResponsiveBorder = ( props ) => {
 		<AdvancedPopColorControl
 			label={ borderHoverColorLabel }
 			colorValue={
-				attributes[prefix + 'BorderHColor'] ? attributes[prefix + 'BorderHColor'] : ''
+				attributes[ prefix + 'BorderHColor' ]
+					? attributes[ prefix + 'BorderHColor' ]
+					: ''
 			}
 			data={ {
-				value: attributes[prefix + 'BorderHColor'],
+				value: attributes[ prefix + 'BorderHColor' ],
 				label: prefix + 'BorderHColor',
 			} }
 			setAttributes={ setAttributes }
@@ -110,7 +106,7 @@ const ResponsiveBorder = ( props ) => {
 	const advancedControls = (
 		<>
 			{ ! disabledBorderTitle && (
-				<p className='spectra-panel__body-sub-heading'>{ label }</p>
+				<p className="spectra-panel__body-sub-heading">{ label }</p>
 			) }
 			<UAGSelectControl
 				label={ borderStyleLabel }
@@ -122,187 +118,190 @@ const ResponsiveBorder = ( props ) => {
 				options={ [
 					{
 						value: 'default',
-						label: __(
-							'Default',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'none',
-						label: __(
-							'None',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'None', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'solid',
-						label: __(
-							'Solid',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Solid', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'dotted',
-						label: __(
-							'Dotted',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Dotted', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'dashed',
-						label: __(
-							'Dashed',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Dashed', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'double',
-						label: __(
-							'Double',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Double', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'groove',
-						label: __(
-							'Groove',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Groove', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'inset',
-						label: __(
-							'Inset',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Inset', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'outset',
-						label: __(
-							'Outset',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Outset', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'ridge',
-						label: __(
-							'Ridge',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Ridge', 'ultimate-addons-for-gutenberg' ),
 					},
 				] }
 			/>
-			{ 'default' !== borderStyle && 'none' !== borderStyle && (
-				showWidth !== false &&
+			{ 'default' !== borderStyle &&
+				'none' !== borderStyle &&
+				showWidth !== false && (
 					<SpacingControl
-					label={ borderWidthLabel }
-					valueTop={ {
-						value: attributes[prefix + 'BorderTopWidth'],
-						label: prefix + 'BorderTopWidth',
-					} }
-					valueRight={ {
-						value: attributes[prefix + 'BorderRightWidth'],
-						label: prefix + 'BorderRightWidth',
-					}  }
-					valueBottom={ {
-						value: attributes[prefix + 'BorderBottomWidth'],
-						label: prefix + 'BorderBottomWidth',
-					} }
-					valueLeft={  {
-						value: attributes[prefix + 'BorderLeftWidth'],
-						label: prefix + 'BorderLeftWidth',
-					} }
-					valueTopTablet={ {
-						value: attributes[prefix + 'BorderTopWidthTablet'],
-						label: prefix + 'BorderTopWidthTablet',
-					} }
-					valueRightTablet={ {
-						value: attributes[prefix + 'BorderRightWidthTablet'],
-						label: prefix + 'BorderRightWidthTablet',
-					} }
-					valueBottomTablet={ {
-						value: attributes[prefix + 'BorderBottomWidthTablet'],
-						label: prefix + 'BorderBottomWidthTablet',
-					} }
-					valueLeftTablet={ {
-						value: attributes[prefix + 'BorderLeftWidthTablet'],
-						label: prefix + 'BorderLeftWidthTablet',
-					} }
-					valueTopMobile={ {
-						value: attributes[prefix + 'BorderTopWidthMobile'],
-						label: prefix + 'BorderTopWidthMobile',
-					} }
-					valueRightMobile={ {
-						value: attributes[prefix + 'BorderRightWidthMobile'],
-						label: prefix + 'BorderRightWidthMobile',
-					} }
-					valueBottomMobile={ {
-						value: attributes[prefix + 'BorderBottomWidthMobile'],
-						label: prefix + 'BorderBottomWidthMobile',
-					} }
-					valueLeftMobile={ {
-						value: attributes[prefix + 'BorderLeftWidthMobile'],
-						label: prefix + 'BorderLeftWidthMobile',
-					} }
-					disableUnits={true}
-					deviceType={ deviceType }
-					attributes={ attributes }
-					setAttributes={ setAttributes }
-					link={ {
-						value: attributes[prefix + 'BorderLink'],
-						label: prefix + 'BorderLink',
-					} }
-				/>
-			) }
+						label={ borderWidthLabel }
+						valueTop={ {
+							value: attributes[ prefix + 'BorderTopWidth' ],
+							label: prefix + 'BorderTopWidth',
+						} }
+						valueRight={ {
+							value: attributes[ prefix + 'BorderRightWidth' ],
+							label: prefix + 'BorderRightWidth',
+						} }
+						valueBottom={ {
+							value: attributes[ prefix + 'BorderBottomWidth' ],
+							label: prefix + 'BorderBottomWidth',
+						} }
+						valueLeft={ {
+							value: attributes[ prefix + 'BorderLeftWidth' ],
+							label: prefix + 'BorderLeftWidth',
+						} }
+						valueTopTablet={ {
+							value: attributes[
+								prefix + 'BorderTopWidthTablet'
+							],
+							label: prefix + 'BorderTopWidthTablet',
+						} }
+						valueRightTablet={ {
+							value: attributes[
+								prefix + 'BorderRightWidthTablet'
+							],
+							label: prefix + 'BorderRightWidthTablet',
+						} }
+						valueBottomTablet={ {
+							value: attributes[
+								prefix + 'BorderBottomWidthTablet'
+							],
+							label: prefix + 'BorderBottomWidthTablet',
+						} }
+						valueLeftTablet={ {
+							value: attributes[
+								prefix + 'BorderLeftWidthTablet'
+							],
+							label: prefix + 'BorderLeftWidthTablet',
+						} }
+						valueTopMobile={ {
+							value: attributes[
+								prefix + 'BorderTopWidthMobile'
+							],
+							label: prefix + 'BorderTopWidthMobile',
+						} }
+						valueRightMobile={ {
+							value: attributes[
+								prefix + 'BorderRightWidthMobile'
+							],
+							label: prefix + 'BorderRightWidthMobile',
+						} }
+						valueBottomMobile={ {
+							value: attributes[
+								prefix + 'BorderBottomWidthMobile'
+							],
+							label: prefix + 'BorderBottomWidthMobile',
+						} }
+						valueLeftMobile={ {
+							value: attributes[
+								prefix + 'BorderLeftWidthMobile'
+							],
+							label: prefix + 'BorderLeftWidthMobile',
+						} }
+						disableUnits={ true }
+						deviceType={ deviceType }
+						attributes={ attributes }
+						setAttributes={ setAttributes }
+						link={ {
+							value: attributes[ prefix + 'BorderLink' ],
+							label: prefix + 'BorderLink',
+						} }
+					/>
+				) }
 			{ 'default' !== borderStyle && (
 				<SpacingControl
 					label={ borderRadiusLabel }
 					valueTop={ {
-						value: attributes[prefix + 'BorderTopLeftRadius'],
+						value: attributes[ prefix + 'BorderTopLeftRadius' ],
 						label: prefix + 'BorderTopLeftRadius',
 					} }
 					valueRight={ {
-						value: attributes[prefix + 'BorderTopRightRadius'],
+						value: attributes[ prefix + 'BorderTopRightRadius' ],
 						label: prefix + 'BorderTopRightRadius',
 					} }
 					valueBottom={ {
-						value: attributes[prefix + 'BorderBottomRightRadius'],
+						value: attributes[ prefix + 'BorderBottomRightRadius' ],
 						label: prefix + 'BorderBottomRightRadius',
 					} }
 					valueLeft={ {
-						value: attributes[prefix + 'BorderBottomLeftRadius'],
+						value: attributes[ prefix + 'BorderBottomLeftRadius' ],
 						label: prefix + 'BorderBottomLeftRadius',
 					} }
-					valueTopTablet={{
-						value: attributes[prefix + 'BorderTopLeftRadiusTablet'],
+					valueTopTablet={ {
+						value: attributes[
+							prefix + 'BorderTopLeftRadiusTablet'
+						],
 						label: prefix + 'BorderTopLeftRadiusTablet',
 					} }
 					valueRightTablet={ {
-						value: attributes[prefix + 'BorderTopRightRadiusTablet'],
+						value: attributes[
+							prefix + 'BorderTopRightRadiusTablet'
+						],
 						label: prefix + 'BorderTopRightRadiusTablet',
 					} }
-					valueBottomTablet={{
-						value: attributes[prefix + 'BorderBottomRightRadiusTablet'],
+					valueBottomTablet={ {
+						value: attributes[
+							prefix + 'BorderBottomRightRadiusTablet'
+						],
 						label: prefix + 'BorderBottomRightRadiusTablet',
 					} }
 					valueLeftTablet={ {
-						value: attributes[prefix + 'BorderBottomLeftRadiusTablet'],
+						value: attributes[
+							prefix + 'BorderBottomLeftRadiusTablet'
+						],
 						label: prefix + 'BorderBottomLeftRadiusTablet',
 					} }
 					valueTopMobile={ {
-						value: attributes[prefix + 'BorderTopLeftRadiusMobile'],
+						value: attributes[
+							prefix + 'BorderTopLeftRadiusMobile'
+						],
 						label: prefix + 'BorderTopLeftRadiusMobile',
 					} }
 					valueRightMobile={ {
-						value: attributes[prefix + 'BorderTopRightRadiusMobile'],
+						value: attributes[
+							prefix + 'BorderTopRightRadiusMobile'
+						],
 						label: prefix + 'BorderTopRightRadiusMobile',
 					} }
 					valueBottomMobile={ {
-						value: attributes[prefix + 'BorderBottomRightRadiusMobile'],
+						value: attributes[
+							prefix + 'BorderBottomRightRadiusMobile'
+						],
 						label: prefix + 'BorderBottomRightRadiusMobile',
 					} }
 					valueLeftMobile={ {
-						value: attributes[prefix + 'BorderBottomLeftRadiusMobile'],
+						value: attributes[
+							prefix + 'BorderBottomLeftRadiusMobile'
+						],
 						label: prefix + 'BorderBottomLeftRadiusMobile',
 					} }
 					units={ [
@@ -314,30 +313,27 @@ const ResponsiveBorder = ( props ) => {
 							unitValue: 'px',
 						},
 						{
-							name: __(
-								'%',
-								'ultimate-addons-for-gutenberg'
-							),
+							name: __( '%', 'ultimate-addons-for-gutenberg' ),
 							unitValue: '%',
 						},
 					] }
-					unit={{
-						value: attributes[prefix + 'BorderRadiusUnit'],
+					unit={ {
+						value: attributes[ prefix + 'BorderRadiusUnit' ],
 						label: prefix + 'BorderRadiusUnit',
-					}}
-					mUnit={{
-						value: attributes[prefix + 'BorderRadiusUnitMobile'],
+					} }
+					mUnit={ {
+						value: attributes[ prefix + 'BorderRadiusUnitMobile' ],
 						label: prefix + 'BorderRadiusUnitMobile',
-					}}
-					tUnit={{
-						value: attributes[prefix + 'BorderRadiusUnitTablet'],
+					} }
+					tUnit={ {
+						value: attributes[ prefix + 'BorderRadiusUnitTablet' ],
 						label: prefix + 'BorderRadiusUnitTablet',
-					}}
+					} }
 					deviceType={ deviceType }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 					link={ {
-						value: attributes[prefix + 'BorderRadiusLink'],
+						value: attributes[ prefix + 'BorderRadiusLink' ],
 						label: prefix + 'BorderRadiusLink',
 					} }
 					help={ borderRadiusHelp ? borderRadiusHelp : false }
@@ -356,17 +352,22 @@ const ResponsiveBorder = ( props ) => {
 	);
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
-		<div
-			ref={panelRef}
-			
-		>
-			{controlBeforeDomElement}
-			{advancedControls}
-			{controlAfterDomElement}
+		<div ref={ panelRef }>
+			{ controlBeforeDomElement }
+			{ advancedControls }
+			{ controlAfterDomElement }
 		</div>
 	);
 };

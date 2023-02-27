@@ -33,6 +33,6 @@ registerBlockType( 'uagb/modal', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

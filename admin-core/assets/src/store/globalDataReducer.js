@@ -1,168 +1,168 @@
 const globalDataReducer = ( state = {}, action ) => {
-    switch ( action.type ) {
-        case 'UPDATE_INITIAL_STATE':
-            return {
-                ...action.payload,
-            };
-        case 'UPDATE_INITIAL_STATE_FLAG':
-            return {
-                ...state,
-                initialStateSetFlag: action.payload,
-            };
-        case 'UPDATE_BLOCKS_ACTIVE_FILTER_TAB':
-            return {
-                ...state,
-                activeBlocksFilterTab: action.payload
-            };
-        case 'UPDATE_BLOCK_STATUSES':
-            return {
-                ...state,
-                blocksStatuses: action.payload
-            };
-        case 'UPDATE_SETTINGS_ACTIVE_NAVIGATION_TAB':
-            return {
-                ...state,
-                activeSettingsNavigationTab: action.payload
-            };
-        case 'UPDATE_FILE_GENERATION':
-            return {
-                ...state,
-                enableFileGeneration: action.payload,
-            };
-        case 'UPDATE_TEMPLATES_BUTTON':
-            return {
-                ...state,
-                enableTemplates: action.payload,
-            };
+	switch ( action.type ) {
+		case 'UPDATE_INITIAL_STATE':
+			return {
+				...action.payload,
+			};
+		case 'UPDATE_INITIAL_STATE_FLAG':
+			return {
+				...state,
+				initialStateSetFlag: action.payload,
+			};
+		case 'UPDATE_BLOCKS_ACTIVE_FILTER_TAB':
+			return {
+				...state,
+				activeBlocksFilterTab: action.payload,
+			};
+		case 'UPDATE_BLOCK_STATUSES':
+			return {
+				...state,
+				blocksStatuses: action.payload,
+			};
+		case 'UPDATE_SETTINGS_ACTIVE_NAVIGATION_TAB':
+			return {
+				...state,
+				activeSettingsNavigationTab: action.payload,
+			};
+		case 'UPDATE_FILE_GENERATION':
+			return {
+				...state,
+				enableFileGeneration: action.payload,
+			};
+		case 'UPDATE_TEMPLATES_BUTTON':
+			return {
+				...state,
+				enableTemplates: action.payload,
+			};
 		case 'UPDATE_ON_PAGE_CSS_BUTTON':
 			return {
 				...state,
 				enableOnPageCSS: action.payload,
 			};
-        case 'UPDATE_BETA':
-            return {
-                ...state,
-                enableBeta: action.payload,
-            };
+		case 'UPDATE_BETA':
+			return {
+				...state,
+				enableBeta: action.payload,
+			};
 		case 'UPDATE_LEGACY_BLOCKS':
 			return {
 				...state,
 				enableLegacyBlocks: action.payload,
 			};
-        case 'UPDATE_ENABLE_SELECTED_FONT_FAMILIES':
-            return {
-                ...state,
-                enableSelectedFontFamilies: action.payload,
-            };
-        case 'UPDATE_SELECTED_FONT_FAMILIES':
-            return {
-                ...state,
-                selectedFontFamilies: action.payload,
-            };
-        case 'UPDATE_ENABLE_LOAD_FONTS_LOCALLY':
-            return {
-                ...state,
-                enableLoadFontsLocally: action.payload,
-            };
-        case 'UPDATE_ENABLE_PRELOAD_LOCAL_FONTS':
-            return {
-                ...state,
-                enablePreloadLocalFonts: action.payload,
-            };
-        case 'UPDATE_ENABLE_COLLAPSE_PANELS':
-            return {
-                ...state,
-                enableCollapsePanels: action.payload,
-            };
-        case 'UPDATE_ENABLE_COPY_PASTE_STYLES':
-            return {
-                ...state,
-                enableCopyPasteStyles: action.payload,
-            };
-        case 'UPDATE_ENABLE_DISPLAY_CONDITIONS':
-            return {
-                ...state,
-                enableDisplayConditions: action.payload,
-            };
-        case 'UPDATE_ENABLE_MASONRY_EXTENSION':
-            return {
-                ...state,
-                enableMasonryExtension: action.payload,
-            };
-        case 'UPDATE_RECAPTCHA_VERSION':
-            return {
-                ...state,
-                social: {
+		case 'UPDATE_ENABLE_SELECTED_FONT_FAMILIES':
+			return {
+				...state,
+				enableSelectedFontFamilies: action.payload,
+			};
+		case 'UPDATE_SELECTED_FONT_FAMILIES':
+			return {
+				...state,
+				selectedFontFamilies: action.payload,
+			};
+		case 'UPDATE_ENABLE_LOAD_FONTS_LOCALLY':
+			return {
+				...state,
+				enableLoadFontsLocally: action.payload,
+			};
+		case 'UPDATE_ENABLE_PRELOAD_LOCAL_FONTS':
+			return {
+				...state,
+				enablePreloadLocalFonts: action.payload,
+			};
+		case 'UPDATE_ENABLE_COLLAPSE_PANELS':
+			return {
+				...state,
+				enableCollapsePanels: action.payload,
+			};
+		case 'UPDATE_ENABLE_COPY_PASTE_STYLES':
+			return {
+				...state,
+				enableCopyPasteStyles: action.payload,
+			};
+		case 'UPDATE_ENABLE_DISPLAY_CONDITIONS':
+			return {
+				...state,
+				enableDisplayConditions: action.payload,
+			};
+		case 'UPDATE_ENABLE_MASONRY_EXTENSION':
+			return {
+				...state,
+				enableMasonryExtension: action.payload,
+			};
+		case 'UPDATE_RECAPTCHA_VERSION':
+			return {
+				...state,
+				social: {
 					...state.social,
-					recaptchaVersion: action.payload
+					recaptchaVersion: action.payload,
 				},
-            };
-        case 'UPDATE_RECAPTCHA_BADGE':
-            return {
-                ...state,
-                social: {
+			};
+		case 'UPDATE_RECAPTCHA_BADGE':
+			return {
+				...state,
+				social: {
 					...state.social,
-					recaptchaBadgeHide: action.payload
+					recaptchaBadgeHide: action.payload,
 				},
-            };
-        case 'UPDATE_RECAPTCHA_SITE_KEY':
-            return {
-                ...state,
-                social: {
+			};
+		case 'UPDATE_RECAPTCHA_SITE_KEY':
+			return {
+				...state,
+				social: {
 					...state.social,
-					recaptchaSiteKey: action.payload
+					recaptchaSiteKey: action.payload,
 				},
-            };
-        case 'UPDATE_RECAPTCHA_SECRET_KEY':
-            return {
-                ...state,
-                social: {
+			};
+		case 'UPDATE_RECAPTCHA_SECRET_KEY':
+			return {
+				...state,
+				social: {
 					...state.social,
-					recaptchaSecretKey: action.payload
+					recaptchaSecretKey: action.payload,
 				},
-            };
-        case 'UPDATE_SOCIAL_REGISTER':
-            return {
-                ...state,
-                social: {
+			};
+		case 'UPDATE_SOCIAL_REGISTER':
+			return {
+				...state,
+				social: {
 					...state.social,
-					socialRegister: action.payload
+					socialRegister: action.payload,
 				},
-            };
-        case 'UPDATE_GOOGLE_CLIENT_ID':
-            return {
-                ...state,
-                social: {
+			};
+		case 'UPDATE_GOOGLE_CLIENT_ID':
+			return {
+				...state,
+				social: {
 					...state.social,
-					googleClientId: action.payload
+					googleClientId: action.payload,
 				},
-            };
-        case 'UPDATE_FACEBOOK_APP_ID':
-            return {
-                ...state,
-                social: {
+			};
+		case 'UPDATE_FACEBOOK_APP_ID':
+			return {
+				...state,
+				social: {
 					...state.social,
-					facebookAppId: action.payload
+					facebookAppId: action.payload,
 				},
-            };
-        case 'UPDATE_FACEBOOK_APP_SECRET':
-            return {
-                ...state,
-                social: {
+			};
+		case 'UPDATE_FACEBOOK_APP_SECRET':
+			return {
+				...state,
+				social: {
 					...state.social,
-					facebookAppSecret: action.payload
-				}
-			}
-        case 'UPDATE_ENABLE_DYNAMIC_CONTENT_EXTENSION':
-            return {
-                ...state,
-                enableDynamicContentExtension: action.payload,
-            };
-        case 'UPDATE_DYNAMIC_CONTENT_MODE':
-            return {
-                ...state,
-                dynamicContentMode: action.payload,
-            };
+					facebookAppSecret: action.payload,
+				},
+			};
+		case 'UPDATE_ENABLE_DYNAMIC_CONTENT_EXTENSION':
+			return {
+				...state,
+				enableDynamicContentExtension: action.payload,
+			};
+		case 'UPDATE_DYNAMIC_CONTENT_MODE':
+			return {
+				...state,
+				dynamicContentMode: action.payload,
+			};
 		case 'UPDATE_ENABLE_RESPONSIVE_CONDITIONS':
 			return {
 				...state,
@@ -172,12 +172,12 @@ const globalDataReducer = ( state = {}, action ) => {
 			return {
 				...state,
 				contentWidth: action.payload,
-				};
+			};
 		case 'UPDATE_RECAPTCHA_SITE_KEY_V2':
 			return {
-					...state,
-					siteKeyV2: action.payload,
-				};
+				...state,
+				siteKeyV2: action.payload,
+			};
 		case 'UPDATE_RECAPTCHA_SITE_KEY_V3':
 			return {
 				...state,
@@ -212,30 +212,30 @@ const globalDataReducer = ( state = {}, action ) => {
 			return {
 				...state,
 				blocksEditorSpacing: action.payload,
-				};
-        case 'UPDATE_ENABLE_FONT_AWESOME_5':
-            return {
-                ...state,
-                enableFontAwesome5: action.payload,
-            };
-        case 'UPDATE_ENABLE_AUTO_BLOCK_RECOVERY':
-            return {
-                ...state,
-                enableAutoBlockRecovery: action.payload,
-            };
+			};
+		case 'UPDATE_ENABLE_FONT_AWESOME_5':
+			return {
+				...state,
+				enableFontAwesome5: action.payload,
+			};
+		case 'UPDATE_ENABLE_AUTO_BLOCK_RECOVERY':
+			return {
+				...state,
+				enableAutoBlockRecovery: action.payload,
+			};
 		case 'UPDATE_CONTAINER_GLOBAL_PADDING':
 			return {
 				...state,
 				containerGlobalPadding: action.payload,
-				};
+			};
 		case 'UPDATE_CONTAINER_GLOBAL_ELEMENTS_GAP':
 			return {
 				...state,
 				containerGlobalElementsGap: action.payload,
-				};
-        default:
-            return state;
-    }
-}
+			};
+		default:
+			return state;
+	}
+};
 
 export default globalDataReducer;

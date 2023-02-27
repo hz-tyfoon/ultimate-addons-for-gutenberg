@@ -8,18 +8,16 @@ import React, { useEffect } from 'react';
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import {migrateBorderAttributes} from '@Controls/generateAttributes';
+import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import { select } from '@wordpress/data';
 import Settings from './settings';
 import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const FaqComponent = ( props ) => {
-
 	const deviceType = useDeviceType();
 
 	const updatePageSchema = () => {
-
 		const { setAttributes, clientId } = props;
 		const allBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 		let pageURL = '';
@@ -30,24 +28,24 @@ const FaqComponent = ( props ) => {
 			'@context': 'https://schema.org',
 			'@type': 'FAQPage',
 			'@id': pageURL,
-			'mainEntity': [],
+			mainEntity: [],
 		};
 
-		allBlocks.forEach( ( block )=> {
+		allBlocks.forEach( ( block ) => {
 			let faqData = {};
 
 			faqData = {
 				'@type': 'Question',
-				'name': block.attributes.question,
-				'acceptedAnswer': {
+				name: block.attributes.question,
+				acceptedAnswer: {
 					'@type': 'Answer',
-					'text': block.attributes.answer,
+					text: block.attributes.answer,
 				},
 			};
 			jsonData.mainEntity.push( faqData );
 		} );
 
-		setAttributes( {schema: JSON.stringify( jsonData )} );
+		setAttributes( { schema: JSON.stringify( jsonData ) } );
 	};
 
 	useEffect( () => {
@@ -124,43 +122,64 @@ const FaqComponent = ( props ) => {
 			} );
 		}
 
-		const {borderStyle,borderWidth,borderRadius,borderColor,borderHoverColor} = props.attributes
+		const {
+			borderStyle,
+			borderWidth,
+			borderRadius,
+			borderColor,
+			borderHoverColor,
+		} = props.attributes;
 		// border migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'overall', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHoverColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'overall',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				props.setAttributes,
+				props.attributes
 			);
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName(
+			'editor-post-publish-button'
+		)?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
 		}
-		
 	}, [] );
 
 	useEffect( () => {
-
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-faq-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-faq-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		const getChildBlocks = select( 'core/block-editor' ).getBlocks(
 			props.clientId
@@ -174,42 +193,54 @@ const FaqComponent = ( props ) => {
 		// Used when Resetting Preset to Default.
 		if ( props.attributes.vanswerPaddingDesktop ) {
 			if ( '' === props.attributes.answerTopPadding ) {
-				props.setAttributes( { answerTopPadding: props.attributes.vanswerPaddingDesktop } );
+				props.setAttributes( {
+					answerTopPadding: props.attributes.vanswerPaddingDesktop,
+				} );
 			}
 			if ( '' === props.attributes.answerBottomPadding ) {
-				props.setAttributes( { answerBottomPadding: props.attributes.vanswerPaddingDesktop } );
+				props.setAttributes( {
+					answerBottomPadding: props.attributes.vanswerPaddingDesktop,
+				} );
 			}
 		}
 		if ( props.attributes.hanswerPaddingDesktop ) {
 			if ( '' === props.attributes.answerRightPadding ) {
-				props.setAttributes( { answerRightPadding: props.attributes.hanswerPaddingDesktop } );
+				props.setAttributes( {
+					answerRightPadding: props.attributes.hanswerPaddingDesktop,
+				} );
 			}
 			if ( '' === props.attributes.answerLeftPadding ) {
-				props.setAttributes( { answerLeftPadding: props.attributes.hanswerPaddingDesktop } );
+				props.setAttributes( {
+					answerLeftPadding: props.attributes.hanswerPaddingDesktop,
+				} );
 			}
 		}
 
 		if ( props.attributes.vanswerPaddingTablet ) {
 			if ( '' === props.attributes.answerTopPaddingTablet ) {
 				props.setAttributes( {
-					answerTopPaddingTablet: props.attributes.vanswerPaddingTablet,
+					answerTopPaddingTablet:
+						props.attributes.vanswerPaddingTablet,
 				} );
 			}
 			if ( '' === props.attributes.answerBottomPaddingTablet ) {
 				props.setAttributes( {
-					answerBottomPaddingTablet: props.attributes.vanswerPaddingTablet,
+					answerBottomPaddingTablet:
+						props.attributes.vanswerPaddingTablet,
 				} );
 			}
 		}
 		if ( props.attributes.hanswerPaddingTablet ) {
 			if ( '' === props.attributes.answerRightPaddingTablet ) {
 				props.setAttributes( {
-					answerRightPaddingTablet: props.attributes.hanswerPaddingTablet,
+					answerRightPaddingTablet:
+						props.attributes.hanswerPaddingTablet,
 				} );
 			}
 			if ( '' === props.attributes.answerLeftPaddingTablet ) {
 				props.setAttributes( {
-					answerLeftPaddingTablet: props.attributes.hanswerPaddingTablet,
+					answerLeftPaddingTablet:
+						props.attributes.hanswerPaddingTablet,
 				} );
 			}
 		}
@@ -217,61 +248,72 @@ const FaqComponent = ( props ) => {
 		if ( props.attributes.vanswerPaddingMobile ) {
 			if ( '' === props.attributes.answerTopPaddingMobile ) {
 				props.setAttributes( {
-					answerTopPaddingMobile: props.attributes.vanswerPaddingMobile,
+					answerTopPaddingMobile:
+						props.attributes.vanswerPaddingMobile,
 				} );
 			}
 			if ( '' === props.attributes.answerBottomPaddingMobile ) {
 				props.setAttributes( {
-					answerBottomPaddingMobile: props.attributes.vanswerPaddingMobile,
+					answerBottomPaddingMobile:
+						props.attributes.vanswerPaddingMobile,
 				} );
 			}
 		}
 		if ( props.attributes.hanswerPaddingMobile ) {
 			if ( '' === props.attributes.answerRightPaddingMobile ) {
 				props.setAttributes( {
-					answerRightPaddingMobile: props.attributes.hanswerPaddingMobile,
+					answerRightPaddingMobile:
+						props.attributes.hanswerPaddingMobile,
 				} );
 			}
 			if ( '' === props.attributes.answerLeftPaddingMobile ) {
 				props.setAttributes( {
-					answerLeftPaddingMobile: props.attributes.hanswerPaddingMobile,
+					answerLeftPaddingMobile:
+						props.attributes.hanswerPaddingMobile,
 				} );
 			}
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName(
+			'editor-post-publish-button'
+		)?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
-			return () => { postSaveButton?.removeEventListener( 'click', updatePageSchema ); }
+			return () => {
+				postSaveButton?.removeEventListener(
+					'click',
+					updatePageSchema
+				);
+			};
 		}
-		
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-faq-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-faq-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/faq.svg`;
-	return (
-		props.attributes.isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<Settings parentProps={ props } deviceType = { deviceType } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return props.attributes.isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<Settings parentProps={ props } deviceType={ deviceType } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

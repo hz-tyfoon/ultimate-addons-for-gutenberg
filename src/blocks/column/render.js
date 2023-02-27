@@ -27,7 +27,8 @@ const Render = ( props ) => {
 
 	const active = isSelected ? 'active' : 'not-active';
 
-	const alignClass = 'center' === align ? '' : `uagb-column__align-${ align }`;
+	const alignClass =
+		'center' === align ? '' : `uagb-column__align-${ align }`;
 	const alignClassMobile =
 		'' === alignMobile ? '' : `uagb-column__align-mobile-${ alignMobile }`;
 	const alignClassTablet =

@@ -7,20 +7,17 @@
 
 /* ------------------------------------------------------------------------------------------------*/
 
-@import "styles/variables";
+@import 'styles/variables';
 
 /* Gutenberg Reset CSS */
 .block-editor-block-inspector {
-
 	.uagb-inspector-tab {
-
 		.components-notice.is-warning {
 			margin-top: 20px;
 			margin-bottom: 20px;
 		}
 
 		.components-panel__body {
-
 			> div > .components-base-control {
 				margin-bottom: $spectra-control-vertical-gap;
 			}
@@ -62,12 +59,11 @@
 
 			/* Gutenberg DatePicker CSS */
 			.components-datetime {
-
 				.components-datetime__buttons {
 					margin: 10px 0 10px 0;
 
 					/* Unset box-shadow */
-					.components-button:focus:not(:disabled) {
+					.components-button:focus:not( :disabled ) {
 						box-shadow: unset;
 					}
 				}
@@ -88,21 +84,19 @@
 
 /* Gutenberg Editor border hover */
 .edit-post-visual-editor .editor-styles-wrapper > .block-editor-block-list__layout {
-
 	.block-editor-block-list__block:hover::after,
-	.block-editor-block-list__block:not([contenteditable]):focus::after {
+	.block-editor-block-list__block:not( [contenteditable] ):focus::after {
 		box-shadow: 0 0 0 1.5px $spectra-color-primary;
 		border-radius: 2px;
 	}
 
-
-	.block-editor-block-list__block:not([contenteditable]):focus {
+	.block-editor-block-list__block:not( [contenteditable] ):focus {
 		z-index: 1;
 	}
-
 }
 
-.block-editor-block-list__layout .block-editor-block-list__block.is-selected { // Added CSS for better clarity to the users to indicates which block is selected & being edited.
+.block-editor-block-list__layout .block-editor-block-list__block.is-selected {
+	// Added CSS for better clarity to the users to indicates which block is selected & being edited.
 	box-shadow: 0 0 0 1.5px $spectra-color-primary;
 	border-radius: 2px;
 }
@@ -112,7 +106,7 @@
 	margin-top: 10px !important;
 	font-size: 12px;
 	font-style: normal;
-	color: rgb(117, 117, 117);
+	color: rgb( 117, 117, 117 );
 }
 
 /* UAG Control Label CSS*/
@@ -139,7 +133,7 @@
 }
 
 .interface-interface-skeleton__sidebar::-webkit-scrollbar-thumb {
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgba( 0, 0, 0, 0.3 );
 	border-radius: 100px;
 }
 
@@ -148,7 +142,6 @@
 /* Panel Body CSS*/
 .uagb-inspector-tab,
 [data-uagb-tab] {
-
 	.components-panel__body-title .components-button {
 		font-size: $spectra-font-size-button;
 	}
@@ -379,7 +372,7 @@ hr.uagb-editor__separator {
 }
 
 .uagb-size-type-field button.components-button.uagb-size-btn.is-primary,
-.uagb-size-type-field button.components-button.uagb-size-btn.is-primary:focus:not(:disabled):not([aria-disabled="true"]) {
+.uagb-size-type-field button.components-button.uagb-size-btn.is-primary:focus:not( :disabled ):not( [aria-disabled='true'] ) {
 	box-shadow: none;
 	background: transparent;
 	border: none;
@@ -395,7 +388,7 @@ hr.uagb-editor__separator {
 }
 
 .uagb-size-type-field button.components-button.uagb-size-btn:hover,
-.uagb-size-type-field button.components-button.uagb-size-btn:hover:focus:not(:disabled):not([aria-disabled="true"]) {
+.uagb-size-type-field button.components-button.uagb-size-btn:hover:focus:not( :disabled ):not( [aria-disabled='true'] ) {
 	color: $spectra-color-heading;
 	background: transparent;
 	-webkit-box-shadow: none;
@@ -434,7 +427,7 @@ hr.uagb-editor__separator {
 	background-color: transparent;
 }
 
-[class^="fipicon-"] {
+[class^='fipicon-'] {
 	speak: none;
 	font-style: normal;
 	font-weight: 400;
@@ -447,22 +440,22 @@ hr.uagb-editor__separator {
 
 i.fipicon-angle-down::before {
 	font-family: dashicons, serif;
-	content: "\f140";
+	content: '\f140';
 }
 
 i.fipicon-angle-up::before {
 	font-family: dashicons, serif;
-	content: "\f142";
+	content: '\f142';
 }
 
 i.fipicon-angle-right::before {
 	font-family: dashicons, serif;
-	content: "\f345";
+	content: '\f345';
 }
 
 i.fipicon-angle-left::before {
 	font-family: dashicons, serif;
-	content: "\f341";
+	content: '\f341';
 }
 
 label.wp-block-uagb-blockquote__via-label svg {
@@ -508,7 +501,6 @@ label.wp-block-uagb-blockquote__via-label svg {
 }
 
 .uag-typography-range-options + .components-base-control {
-
 	.components-base-control__field .css-unzpkb-Flex-Root {
 		position: inherit;
 	}
@@ -519,7 +511,7 @@ label.wp-block-uagb-blockquote__via-label svg {
 }
 
 /* Common uagb reset CSS start here */
-button.components-button.uagb-reset.is-secondary.is-small:not(:disabled) {
+button.components-button.uagb-reset.is-secondary.is-small:not( :disabled ) {
 	color: $spectra-color-primary;
 }
 
@@ -574,7 +566,7 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	position: unset;
 }
 
-.uag-typography-option-actions .uagb-typography-control-btn.components-button:focus:not(:disabled) {
+.uag-typography-option-actions .uagb-typography-control-btn.components-button:focus:not( :disabled ) {
 	box-shadow: unset;
 	outline: none;
 	color: $spectra-color-secondary;
@@ -592,7 +584,6 @@ button.components-button.uagb-review-select-btn.is-secondary {
 }
 
 .uagb-inspector-tab .components-panel__body > .components-panel__body-title {
-
 	.components-button.components-panel__body-toggle:focus {
 		box-shadow: none;
 	}
@@ -631,7 +622,6 @@ button.components-button.uagb-review-select-btn.is-secondary {
 }
 
 .components-panel__body .components-base-control {
-
 	.uagb-control__header .uagb-range-control-responsive .uagb-responsive-tabs {
 		margin: 0;
 		padding: 4px;
@@ -656,7 +646,7 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	appearance: none;
 }
 
-.uagb-inspector-tab span[CLASS*="-ThumbWrapper"] {
+.uagb-inspector-tab span[CLASS*='-ThumbWrapper'] {
 	left: 0%;
 	height: 17px;
 	width: 17px;
@@ -668,8 +658,7 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	overflow-y: overlay;
 	margin-bottom: 10px;
 
-	.components-panel[data-uagb-tab="advance"] {
-
+	.components-panel[data-uagb-tab='advance'] {
 		.block-editor-block-inspector__advanced.uagb-extention-tab {
 			border: none;
 			border-bottom: 1px solid #e0e0e0;
@@ -688,7 +677,6 @@ button.components-button.uagb-review-select-btn.is-secondary {
 
 /* Block icons white when block is selected in list view. */
 .block-editor-list-view-leaf.is-selected .block-editor-list-view-block-contents svg.uagb-editor-icons {
-
 	path,
 	rect,
 	circle {
@@ -698,7 +686,6 @@ button.components-button.uagb-review-select-btn.is-secondary {
 
 /* Block icons white when toggle is set to select from tools. */
 .block-editor-block-list__block-selection-button .block-editor-block-icon.has-colors svg.uagb-editor-icons {
-
 	path,
 	rect,
 	circle {
@@ -708,7 +695,6 @@ button.components-button.uagb-review-select-btn.is-secondary {
 
 /* Block icons turn to secondary color when they are a parent block. */
 .block-editor-block-parent-selector .block-editor-block-icon svg.uagb-editor-icons {
-
 	path,
 	rect,
 	circle {
@@ -725,7 +711,6 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	circle {
 		stroke: $spectra-color-secondary;
 	}
-
 }
 
 /* Breadcrumbs css */
@@ -734,7 +719,6 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	border-top: 1px solid #e9e9e9;
 
 	.block-editor-block-breadcrumb {
-
 		li {
 			color: $spectra-color-secondary;
 			font-weight: 600;
@@ -754,7 +738,7 @@ button.components-button.uagb-review-select-btn.is-secondary {
 				box-shadow: none;
 			}
 
-			.block-editor-block-breadcrumb__button:active:not(:disabled) {
+			.block-editor-block-breadcrumb__button:active:not( :disabled ) {
 				background: transparent;
 			}
 		}
@@ -763,7 +747,6 @@ button.components-button.uagb-review-select-btn.is-secondary {
 
 /* Gradient Picker CSS */
 .uagb-gradient-picker {
-
 	// This helps to fix alignment of gradient control input fields.
 	.components-flex.components-custom-gradient-picker__ui-line {
 		align-items: baseline;
@@ -781,10 +764,9 @@ button.components-button.uagb-review-select-btn.is-secondary {
 
 /* Toggle Control */
 .uagb-inspector-tab {
-
 	.components-toggle-control .components-base-control__field {
-
-		.components-flex { // WP6.1 compatibility.
+		.components-flex {
+			// WP6.1 compatibility.
 			display: flex;
 			flex-direction: row-reverse;
 			justify-content: space-between;
@@ -830,18 +812,17 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	}
 }
 
-.editor-styles-wrapper .block-editor-block-list__block.wp-block[data-type*="uagb"] {
-
+.editor-styles-wrapper .block-editor-block-list__block.wp-block[data-type*='uagb'] {
 	::selection {
 		color: #fff;
 		background: #2f86dd;
 	}
 }
 
-@import "styles/gutenberg-override";
-@import "styles/control-responsive";
-@import "styles/control-header";
-@import "styles/control-popup";
-@import "styles/control-media-picker";
-@import "styles/spectra-change-indicators";
-@import "styles/spectra-legacy";
+@import 'styles/gutenberg-override';
+@import 'styles/control-responsive';
+@import 'styles/control-header';
+@import 'styles/control-popup';
+@import 'styles/control-media-picker';
+@import 'styles/spectra-change-indicators';
+@import 'styles/spectra-legacy';

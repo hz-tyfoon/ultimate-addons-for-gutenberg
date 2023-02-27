@@ -14,17 +14,17 @@ function SettingsRoute() {
 
 	if ( uag_react.home_slug === page ) {
 		if ( 'getting-started' === currentEvent ) {
-			routePage = <Welcome/>;
+			routePage = <Welcome />;
 		} else {
 			switch ( path ) {
 				case 'blocks':
-					routePage = <Blocks/>;
+					routePage = <Blocks />;
 					break;
 				case 'settings':
-					routePage = <Settings/>;
+					routePage = <Settings />;
 					break;
 				default:
-					routePage = <Welcome/>;
+					routePage = <Welcome />;
 					break;
 			}
 		}

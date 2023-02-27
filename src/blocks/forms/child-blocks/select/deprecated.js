@@ -12,7 +12,8 @@ const deprecated = [
 		save( props ) {
 			const { attributes } = props;
 
-			const { block_id, selectRequired, options, selectName } = attributes;
+			const { block_id, selectRequired, options, selectName } =
+				attributes;
 
 			const isRequired = selectRequired
 				? __( 'required', 'ultimate-addons-for-gutenberg' )
@@ -50,8 +51,8 @@ const deprecated = [
 					</select>
 				</div>
 			);
-		}
-	}
- ];
+		},
+	},
+];
 
- export default deprecated;
+export default deprecated;

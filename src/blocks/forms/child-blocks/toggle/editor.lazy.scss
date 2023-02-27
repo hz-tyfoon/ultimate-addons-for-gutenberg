@@ -7,7 +7,6 @@
 		width: 0;
 		height: 0;
 		opacity: 0;
-
 	}
 
 	/* The slider */
@@ -28,15 +27,15 @@
 		left: 4px;
 		background-color: #fff;
 		transition: 0.4s;
-		content: "";
+		content: '';
 		-webkit-transition: 0.4s;
 	}
 }
 
 .uagb-switch input:checked + .uagb-slider::before {
-	-webkit-transform: translateX(26px);
-	-ms-transform: translateX(26px);
-	transform: translateX(26px);
+	-webkit-transform: translateX( 26px );
+	-ms-transform: translateX( 26px );
+	transform: translateX( 26px );
 }
 
 /* Rounded sliders */

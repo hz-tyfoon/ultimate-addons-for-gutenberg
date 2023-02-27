@@ -10,7 +10,8 @@ import { getFallbackNumber } from '@Controls/getAttributeFallback';
 const Blog = ( props ) => {
 	const blockName = props.name.replace( 'uagb/', '' );
 	const article = useRef();
-	const { attributes, className, latestPosts, block_id, setAttributes } = props;
+	const { attributes, className, latestPosts, block_id, setAttributes } =
+		props;
 	const deviceType = useDeviceType();
 	const {
 		columns,
@@ -22,13 +23,25 @@ const Blog = ( props ) => {
 		paginationMarkup,
 		postPagination,
 		layoutConfig,
-		equalHeightInlineButtons
+		equalHeightInlineButtons,
 	} = attributes;
 
-	const postsToShowFallback = getFallbackNumber( postsToShow, 'postsToShow', blockName );
+	const postsToShowFallback = getFallbackNumber(
+		postsToShow,
+		'postsToShow',
+		blockName
+	);
 	const columnsFallback = getFallbackNumber( columns, 'columns', blockName );
-	const tcolumnsFallback = getFallbackNumber( tcolumns, 'tcolumns', blockName );
-	const mcolumnsFallback = getFallbackNumber( mcolumns, 'mcolumns', blockName );
+	const tcolumnsFallback = getFallbackNumber(
+		tcolumns,
+		'tcolumns',
+		blockName
+	);
+	const mcolumnsFallback = getFallbackNumber(
+		mcolumns,
+		'mcolumns',
+		blockName
+	);
 
 	const equalHeightClass = equalHeight ? 'uagb-post__equal-height' : '';
 	// Removing posts from display should be instant.
@@ -36,8 +49,13 @@ const Blog = ( props ) => {
 		latestPosts.length > postsToShowFallback
 			? latestPosts.slice( 0, postsToShowFallback )
 			: latestPosts;
-	const isImageEnabled = ( attributes.displayPostImage === true ) ? 'uagb-post__image-enabled' : 'uagb-post__image-disabled';
-	const equalHeightInlineReadMoreButtonsClass = equalHeightInlineButtons ? `uagb-equal_height_inline-read-more-buttons-in-editor` : '';
+	const isImageEnabled =
+		attributes.displayPostImage === true
+			? 'uagb-post__image-enabled'
+			: 'uagb-post__image-disabled';
+	const equalHeightInlineReadMoreButtonsClass = equalHeightInlineButtons
+		? `uagb-equal_height_inline-read-more-buttons-in-editor`
+		: '';
 	return (
 		<div
 			className={ classnames(
@@ -61,7 +79,11 @@ const Blog = ( props ) => {
 				parentClassName="uagb-block-grid"
 			>
 				{ displayPosts.map( ( post = {}, i ) => (
-					<article ref={article} key={ i } className="uagb-post__inner-wrap">
+					<article
+						ref={ article }
+						key={ i }
+						className="uagb-post__inner-wrap"
+					>
 						{ renderPostLayout(
 							'uagb/post-grid',
 							post,
@@ -69,7 +91,7 @@ const Blog = ( props ) => {
 							props.attributes,
 							props.categoriesList,
 							setAttributes,
-							article,
+							article
 						) }
 					</article>
 				) ) }

@@ -13,11 +13,9 @@ import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const ReviewComponent = ( props ) => {
-
 	const deviceType = useDeviceType();
 
 	const updatePageSchema = () => {
-
 		const { setAttributes, attributes } = props;
 		const {
 			parts,
@@ -51,21 +49,16 @@ const ReviewComponent = ( props ) => {
 		} = attributes;
 
 		const newAverage =
-			parts
-				.map( ( i ) => i.value )
-				.reduce( ( total, v ) => total + v ) /
+			parts.map( ( i ) => i.value ).reduce( ( total, v ) => total + v ) /
 			parts.length;
 		const newAverageCount = parts.length;
 		let itemtype = '';
 
 		if (
-			[ 'Product', 'SoftwareApplication', 'Book' ].includes(
-				itemType
-			)
+			[ 'Product', 'SoftwareApplication', 'Book' ].includes( itemType )
 		) {
 			itemtype =
-				itemSubtype !== 'None' &&
-				itemSubtype !== ''
+				itemSubtype !== 'None' && itemSubtype !== ''
 					? itemSubtype
 					: itemType;
 		} else {
@@ -75,32 +68,32 @@ const ReviewComponent = ( props ) => {
 		const jsonData = {
 			'@context': 'https://schema.org/',
 			'@type': 'Review',
-			'reviewBody': summaryDescription,
-			'description': rContent,
-			'itemReviewed': [],
-			'reviewRating': {
+			reviewBody: summaryDescription,
+			description: rContent,
+			itemReviewed: [],
+			reviewRating: {
 				'@type': 'Rating',
-				'ratingValue': newAverage,
-				'worstRating': '0',
-				'bestRating': starCount,
+				ratingValue: newAverage,
+				worstRating: '0',
+				bestRating: starCount,
 			},
-			'author': {
+			author: {
 				'@type': 'Person',
-				'name': rAuthor,
+				name: rAuthor,
 			},
-			'publisher': reviewPublisher,
-			'datePublished': datepublish,
-			'url': ctaLink,
+			publisher: reviewPublisher,
+			datePublished: datepublish,
+			url: ctaLink,
 		};
 
 		switch ( itemType ) {
 			case 'Book':
 				jsonData.itemReviewed = {
 					'@type': itemtype,
-					'name': rTitle,
-					'description': rContent,
-					'image': [],
-					'author': rAuthor,
+					name: rTitle,
+					description: rContent,
+					image: [],
+					author: rAuthor,
 					isbn,
 				};
 				break;
@@ -108,9 +101,9 @@ const ReviewComponent = ( props ) => {
 			case 'Course':
 				jsonData.itemReviewed = {
 					'@type': itemType,
-					'name': rTitle,
-					'description': rContent,
-					'image': [],
+					name: rTitle,
+					description: rContent,
+					image: [],
 					provider,
 				};
 				break;
@@ -118,26 +111,26 @@ const ReviewComponent = ( props ) => {
 			case 'Product':
 				jsonData.itemReviewed = {
 					'@type': itemtype,
-					'name': rTitle,
-					'description': rContent,
-					'image': [],
+					name: rTitle,
+					description: rContent,
+					image: [],
 					sku,
-					'brand': {
+					brand: {
 						'@type': 'Brand',
-						'name': brand,
+						name: brand,
 					},
-					'offers': [],
+					offers: [],
 				};
 				break;
 
 			case 'Movie':
 				jsonData.itemReviewed = {
 					'@type': itemType,
-					'name': rTitle,
-					'dateCreated': datecreated,
-					'director': {
+					name: rTitle,
+					dateCreated: datecreated,
+					director: {
 						'@type': 'Person',
-						'name': directorname,
+						name: directorname,
 					},
 				};
 				break;
@@ -145,19 +138,19 @@ const ReviewComponent = ( props ) => {
 			case 'SoftwareApplication':
 				jsonData.itemReviewed = {
 					'@type': itemtype,
-					'name': rTitle,
-					'applicationCategory': appCategory,
+					name: rTitle,
+					applicationCategory: appCategory,
 					operatingSystem,
-					'aggregateRating': {
+					aggregateRating: {
 						'@type': aggregateType,
-						'ratingValue': newAverage,
-						'ratingCount': newAverageCount,
+						ratingValue: newAverage,
+						ratingCount: newAverageCount,
 					},
-					'offers': {
+					offers: {
 						'@type': offerType,
-						'price': offerPrice,
-						'url': ctaLink,
-						'priceCurrency': offerCurrency,
+						price: offerPrice,
+						url: ctaLink,
+						priceCurrency: offerCurrency,
 					},
 				};
 				break;
@@ -171,20 +164,19 @@ const ReviewComponent = ( props ) => {
 		}
 
 		if ( itemType === 'Product' ) {
-			jsonData.itemReviewed[ identifierType ] =
-				identifier;
+			jsonData.itemReviewed[ identifierType ] = identifier;
 			jsonData.itemReviewed.offers = {
 				'@type': offerType,
-				'price': offerPrice,
-				'url': ctaLink,
-				'priceValidUntil': offerExpiry,
-				'priceCurrency': offerCurrency,
-				'availability': offerStatus,
+				price: offerPrice,
+				url: ctaLink,
+				priceValidUntil: offerExpiry,
+				priceCurrency: offerCurrency,
+				availability: offerStatus,
 			};
 		}
 
-		setAttributes( {schema: JSON.stringify( jsonData )} );
-	}
+		setAttributes( { schema: JSON.stringify( jsonData ) } );
+	};
 
 	useEffect( () => {
 		// Assigning block_id in the attribute.
@@ -218,51 +210,63 @@ const ReviewComponent = ( props ) => {
 			}
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName(
+			'editor-post-publish-button'
+		)?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
 		}
-		
 	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-ratings-style-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-ratings-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
-		const ratingLinkWrapper = document.querySelector( '.uagb-rating-link-wrapper' );
-		if( ratingLinkWrapper !== null ){
+		const ratingLinkWrapper = document.querySelector(
+			'.uagb-rating-link-wrapper'
+		);
+		if ( ratingLinkWrapper !== null ) {
 			ratingLinkWrapper.addEventListener( 'click', function ( event ) {
 				event.preventDefault();
 			} );
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName(
+			'editor-post-publish-button'
+		)?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
-			return () => { postSaveButton?.removeEventListener( 'click', updatePageSchema ); }
+			return () => {
+				postSaveButton?.removeEventListener(
+					'click',
+					updatePageSchema
+				);
+			};
 		}
-		
-
 	}, [ props ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-ratings-style-' + props.clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-ratings-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
-	const { UAGHideDesktop, UAGHideTab, UAGHideMob  } = props.attributes;
+	const { UAGHideDesktop, UAGHideTab, UAGHideMob } = props.attributes;
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	// Setup the attributes
@@ -325,44 +329,44 @@ const ReviewComponent = ( props ) => {
 
 	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/review.svg`;
 
-	return (
-		isPreview ? <img width='100%' src={ previewImageData } alt=''/> : (
-			<>
-				<SchemaNotices
-					enableSchema={ enableSchema }
-					itemType={ itemType }
-					rTitle={ rTitle }
-					enableDescription={ enableDescription }
-					rContent={ rContent }
-					enableImage={ enableImage }
-					mainimage={ mainimage }
-					sku={ sku }
-					brand={ brand }
-					starCount={ starCount }
-					showAuthor={ showAuthor }
-					rAuthor={ rAuthor }
-					showfeature={ showFeature }
-					aggregateType={ aggregateType }
-					offerType={ offerType }
-					datepublish={ datepublish }
-					offerCurrency={ offerCurrency }
-					offerPrice={ offerPrice }
-					ctaLink={ ctaLink }
-					offerExpiry={ offerExpiry }
-					identifier={ identifier }
-					isbn={ isbn }
-					bookAuthorName={ bookAuthorName }
-					directorname={ directorname }
-					datecreated={ datecreated }
-					provider={ provider }
-					appCategory={ appCategory }
-					operatingSystem={ operatingSystem }
-					reviewPublisher={ reviewPublisher }
-				/>
-				<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-		)
+	return isPreview ? (
+		<img width="100%" src={ previewImageData } alt="" />
+	) : (
+		<>
+			<SchemaNotices
+				enableSchema={ enableSchema }
+				itemType={ itemType }
+				rTitle={ rTitle }
+				enableDescription={ enableDescription }
+				rContent={ rContent }
+				enableImage={ enableImage }
+				mainimage={ mainimage }
+				sku={ sku }
+				brand={ brand }
+				starCount={ starCount }
+				showAuthor={ showAuthor }
+				rAuthor={ rAuthor }
+				showfeature={ showFeature }
+				aggregateType={ aggregateType }
+				offerType={ offerType }
+				datepublish={ datepublish }
+				offerCurrency={ offerCurrency }
+				offerPrice={ offerPrice }
+				ctaLink={ ctaLink }
+				offerExpiry={ offerExpiry }
+				identifier={ identifier }
+				isbn={ isbn }
+				bookAuthorName={ bookAuthorName }
+				directorname={ directorname }
+				datecreated={ datecreated }
+				provider={ provider }
+				appCategory={ appCategory }
+				operatingSystem={ operatingSystem }
+				reviewPublisher={ reviewPublisher }
+			/>
+			<Settings parentProps={ props } />
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

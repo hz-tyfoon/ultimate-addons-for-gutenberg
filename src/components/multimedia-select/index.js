@@ -5,7 +5,6 @@ import React from 'react';
 import UAGB_Block_Icons from '@Controls/block-icons';
 
 const MultiMediaSelector = ( props ) => {
-
 	const {
 		slug = 'media',
 		label = __( 'Media', 'ultimate-addons-for-gutenberg' ),
@@ -25,12 +24,24 @@ const MultiMediaSelector = ( props ) => {
 
 	switch ( mediaType ) {
 		case 'images':
-			selectorLabel = __( 'Select Images', 'ultimate-addons-for-gutenberg' );
-			replacerLabel = __( 'Replace Images', 'ultimate-addons-for-gutenberg' );
+			selectorLabel = __(
+				'Select Images',
+				'ultimate-addons-for-gutenberg'
+			);
+			replacerLabel = __(
+				'Replace Images',
+				'ultimate-addons-for-gutenberg'
+			);
 			break;
 		default:
-			selectorLabel = __( 'Select Media', 'ultimate-addons-for-gutenberg' );
-			replacerLabel = __( 'Replace Media', 'ultimate-addons-for-gutenberg' );
+			selectorLabel = __(
+				'Select Media',
+				'ultimate-addons-for-gutenberg'
+			);
+			replacerLabel = __(
+				'Replace Media',
+				'ultimate-addons-for-gutenberg'
+			);
 	}
 
 	if ( createGallery ) {
@@ -44,17 +55,19 @@ const MultiMediaSelector = ( props ) => {
 				className={ `spectra-media-control__clickable spectra-media-control__clickable--${ uploadType }` }
 				onClick={ open }
 			>
-				{ ( 'add' === uploadType ) ? (
+				{ 'add' === uploadType ? (
 					renderButton( uploadType )
 				) : (
-					<div className='uag-control-label'>{ replacerLabel }</div>
+					<div className="uag-control-label">{ replacerLabel }</div>
 				) }
 			</button>
-		)
+		);
 	};
 
 	const renderButton = ( buttonType ) => (
-		<div className={ `spectra-media-control__button spectra-media-control__button--${ buttonType }` }>
+		<div
+			className={ `spectra-media-control__button spectra-media-control__button--${ buttonType }` }
+		>
 			{ UAGB_Block_Icons[ buttonType ] }
 		</div>
 	);
@@ -68,22 +81,30 @@ const MultiMediaSelector = ( props ) => {
 		>
 			<div className="spectra-media-control__wrapper">
 				{ mediaGallery[ 0 ]?.url && (
-					<div className={ 'spectra-media-control__icon spectra-media-control__icon--stroke' }>
+					<div
+						className={
+							'spectra-media-control__icon spectra-media-control__icon--stroke'
+						}
+					>
 						{ placeholderIcon }
 					</div>
 				) }
 				<MediaUpload
 					title={ selectorLabel }
 					onSelect={ onSelectMedia }
-					allowedTypes={ allowedTypes ? allowedTypes : [ 'image', 'video', 'audio' ] }
+					allowedTypes={
+						allowedTypes
+							? allowedTypes
+							: [ 'image', 'video', 'audio' ]
+					}
 					multiple={ true }
 					value={ mediaIDs }
 					gallery={ createGallery }
 					render={ ( { open } ) => renderMediaUploader( open ) }
 				/>
-				{ ( onRemoveMedia && mediaGallery[ 0 ]?.url ) && (
+				{ onRemoveMedia && mediaGallery[ 0 ]?.url && (
 					<button
-						className='spectra-media-control__clickable spectra-media-control__clickable--close'
+						className="spectra-media-control__clickable spectra-media-control__clickable--close"
 						onClick={ onRemoveMedia }
 					>
 						{ renderButton( 'close' ) }

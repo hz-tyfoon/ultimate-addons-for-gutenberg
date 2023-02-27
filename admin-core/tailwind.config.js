@@ -1,10 +1,6 @@
 module.exports = {
-	content: [
-		'./assets/src/dashboard-app/**/*.{html,js}',
-	],
-	plugins: [
-		require( '@tailwindcss/forms' ),
-	],
+	content: [ './assets/src/dashboard-app/**/*.{html,js}' ],
+	plugins: [ require( '@tailwindcss/forms' ) ],
 	theme: {
 		extend: {
 			colors: {
@@ -14,16 +10,16 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				inter: ['"Inter"', 'sans-serif'],
+				inter: [ '"Inter"', 'sans-serif' ],
 			},
 			boxShadow: {
 				'overlay-left': '-16px 0px 80px -24px rgba(0, 0, 0, 0.16)',
 				'overlay-right': '16px 0px 80px -24px rgba(0, 0, 0, 0.16)',
-				'hover': '0px 12px 24px -12px rgba(0, 0, 0, 0.12)',
+				hover: '0px 12px 24px -12px rgba(0, 0, 0, 0.12)',
 			},
 		},
 	},
 	variants: {
 		extend: {},
 	},
-}
+};

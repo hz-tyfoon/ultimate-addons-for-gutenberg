@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
- import {
+import {
 	createBlock,
 	createBlocksFromInnerBlocksTemplate,
 } from '@wordpress/blocks';
@@ -9,23 +9,30 @@
 // A function that converts text-based image position values to the
 // new container's object based image position values.
 function getImageBackgroundPosition( oldImagePosition ) {
+	switch ( oldImagePosition ) {
+		case 'left top':
+			return { x: 0, y: 0 };
+		case 'center top':
+			return { x: 0.5, y: 0 };
+		case 'right top':
+			return { x: 1, y: 0 };
 
-	switch( oldImagePosition ) {
+		case 'left center':
+			return { x: 0, y: 0.5 };
+		case 'center center':
+			return { x: 0.5, y: 0.5 };
+		case 'right center':
+			return { x: 1, y: 0.5 };
 
-		case 'left top': return { x: 0, y:0 };
-		case 'center top': return { x: 0.5, y:0 };
-		case 'right top': return { x: 1, y:0 };
+		case 'left bottom':
+			return { x: 0, y: 1 };
+		case 'center bottom':
+			return { x: 0.5, y: 1 };
+		case 'right bottom':
+			return { x: 1, y: 1 };
 
-		case 'left center': return { x: 0, y:0.5 };
-		case 'center center': return { x: 0.5, y:0.5 };
-		case 'right center': return { x: 1, y:0.5 };
-
-		case 'left bottom': return { x: 0, y:1 };
-		case 'center bottom': return { x: 0.5, y:1 };
-		case 'right bottom': return { x: 1, y:1 };
-
-		default: return { x: 0.5, y:0.5 };
-
+		default:
+			return { x: 0.5, y: 0.5 };
 	}
 }
 
@@ -36,17 +43,21 @@ const transforms = {
 			blocks: [ 'core/group' ],
 			priority: 1,
 			transform: ( attributes, innerBlocks ) => {
-				const {
-					align,
-					backgroundColor,
-					style,
-					gradient
-				} = attributes;
+				const { align, backgroundColor, style, gradient } = attributes;
 
-				const contentWidth = align ? `align${align}` : 'default';
-				const bgColor = backgroundColor ? backgroundColor : style?.color?.background ? style?.color?.background : null; // eslint-disable-line no-nested-ternary
+				const contentWidth = align ? `align${ align }` : 'default';
+				const bgColor = backgroundColor
+					? backgroundColor
+					: style?.color?.background
+					? style?.color?.background
+					: null; // eslint-disable-line no-nested-ternary
 
-				const backgroundType = ( gradient || style?.color?.gradient ) ? 'gradient' : ( bgColor || style?.color?.background ) ? 'color' : 'none'; // eslint-disable-line no-nested-ternary
+				const backgroundType =
+					gradient || style?.color?.gradient
+						? 'gradient'
+						: bgColor || style?.color?.background
+						? 'color'
+						: 'none'; // eslint-disable-line no-nested-ternary
 
 				return createBlock(
 					'uagb/container',
@@ -55,12 +66,10 @@ const transforms = {
 						backgroundType,
 						backgroundColor: bgColor,
 						gradientValue: gradient || style?.color?.gradient,
-						variationSelected: true
+						variationSelected: true,
 					},
 					innerBlocks
 				);
-
-
 			},
 		},
 		{
@@ -73,24 +82,45 @@ const transforms = {
 					backgroundColor,
 					style,
 					gradient,
-					isStackedOnMobile
+					isStackedOnMobile,
 				} = attributes;
 
-				const contentWidth = align ? `align${align}` : 'default';
-				const bgColor = backgroundColor ? backgroundColor : style?.color?.background ? style?.color?.background : null; // eslint-disable-line no-nested-ternary
+				const contentWidth = align ? `align${ align }` : 'default';
+				const bgColor = backgroundColor
+					? backgroundColor
+					: style?.color?.background
+					? style?.color?.background
+					: null; // eslint-disable-line no-nested-ternary
 
-				const backgroundType = ( gradient || style?.color?.gradient ) ? 'gradient' : ( bgColor || style?.color?.background ) ? 'color' : 'none'; // eslint-disable-line no-nested-ternary
+				const backgroundType =
+					gradient || style?.color?.gradient
+						? 'gradient'
+						: bgColor || style?.color?.background
+						? 'color'
+						: 'none'; // eslint-disable-line no-nested-ternary
 
 				const innerBlocksTemplate = [];
-				const containerChildWidth = ( 100 / innerBlocks.length );
+				const containerChildWidth = 100 / innerBlocks.length;
 
 				innerBlocks.map( ( child ) => {
+					const bgColorChild = child?.attributes?.backgroundColor
+						? child?.attributes?.backgroundColor
+						: child?.attributes?.style?.color?.background
+						? child?.attributes?.style?.color?.background
+						: null; // eslint-disable-line no-nested-ternary
 
-					const bgColorChild = child?.attributes?.backgroundColor ? child?.attributes?.backgroundColor : child?.attributes?.style?.color?.background ? child?.attributes?.style?.color?.background : null; // eslint-disable-line no-nested-ternary
+					const backgroundTypeChild =
+						child?.attributes?.gradient ||
+						child?.attributes?.style?.color?.gradient
+							? 'gradient'
+							: bgColorChild ||
+							  child?.attributes?.style?.color?.background
+							? 'color'
+							: 'none'; // eslint-disable-line no-nested-ternary
 
-					const backgroundTypeChild = ( child?.attributes?.gradient || child?.attributes?.style?.color?.gradient ) ? 'gradient' : ( bgColorChild || child?.attributes?.style?.color?.background ) ? 'color' : 'none'; // eslint-disable-line no-nested-ternary
-
-					const width = child?.attributes?.width ? child?.attributes?.width : containerChildWidth;
+					const width = child?.attributes?.width
+						? child?.attributes?.width
+						: containerChildWidth;
 
 					innerBlocksTemplate.push( [
 						'uagb/container',
@@ -98,9 +128,9 @@ const transforms = {
 							widthDesktop: width,
 							backgroundTypeChild,
 							backgroundColor: bgColorChild,
-							gradientValue: gradient || style?.color?.gradient
+							gradientValue: gradient || style?.color?.gradient,
 						},
-						child?.innerBlocks
+						child?.innerBlocks,
 					] );
 
 					return child;
@@ -116,12 +146,10 @@ const transforms = {
 						directionDesktop: 'row',
 						directionTablet: 'row',
 						directionMobile: isStackedOnMobile ? 'column' : 'row',
-						variationSelected: true
+						variationSelected: true,
 					},
 					createBlocksFromInnerBlocksTemplate( innerBlocksTemplate )
 				);
-
-
 			},
 		},
 		{
@@ -129,7 +157,6 @@ const transforms = {
 			blocks: [ 'uagb/section' ],
 			priority: 1,
 			transform: ( attributes, innerBlocks ) => {
-
 				const {
 					backgroundType,
 					backgroundColor,
@@ -190,15 +217,17 @@ const transforms = {
 					backgroundPosition,
 				} = attributes;
 
-				const containerWidth = 'full_width' === contentWidth ? 'alignfull' : 'alignwide';
+				const containerWidth =
+					'full_width' === contentWidth ? 'alignfull' : 'alignwide';
 				let innerContainerCustomWidth = null;
 				let innerContentWidth = null;
 
 				if ( 'full_width' === contentWidth ) {
+					innerContainerCustomWidth =
+						'px' === innerWidthType ? innerWidth : 1200;
 
-					innerContainerCustomWidth = 'px' === innerWidthType ? innerWidth : 1200;
-
-					innerContentWidth = 'px' === innerWidthType ? 'alignwide' : 'alignfull';
+					innerContentWidth =
+						'px' === innerWidthType ? 'alignwide' : 'alignfull';
 				}
 
 				return createBlock(
@@ -208,13 +237,18 @@ const transforms = {
 						backgroundType,
 						backgroundColor,
 						gradientValue,
-						innerContentCustomWidthDesktop: innerContainerCustomWidth || 1200,
+						innerContentCustomWidthDesktop:
+							innerContainerCustomWidth || 1200,
 						innerContentWidth: innerContentWidth || 'alignfull',
 						containerBorderStyle: overallBorderStyle,
-						containerBorderTopLeftRadius: overallBorderTopLeftRadius,
-						containerBorderTopRightRadius: overallBorderTopRightRadius,
-						containerBorderBottomLeftRadius: overallBorderBottomLeftRadius,
-						containerBorderBottomRightRadius: overallBorderBottomRightRadius,
+						containerBorderTopLeftRadius:
+							overallBorderTopLeftRadius,
+						containerBorderTopRightRadius:
+							overallBorderTopRightRadius,
+						containerBorderBottomLeftRadius:
+							overallBorderBottomLeftRadius,
+						containerBorderBottomRightRadius:
+							overallBorderBottomRightRadius,
 						containerBorderTopWidth: overallBorderTopWidth,
 						containerBorderRightWidth: overallBorderRightWidth,
 						containerBorderLeftWidth: overallBorderLeftWidth,
@@ -251,17 +285,25 @@ const transforms = {
 						rightPaddingDesktop: rightPadding,
 						topPaddingDesktop: topPadding,
 						bottomPaddingDesktop: bottomPadding,
-						backgroundImageDesktop : backgroundImage,
-						backgroundSizeDesktop : backgroundSize,
-						backgroundRepeatDesktop : backgroundRepeat,
-						backgroundAttachmentDesktop : backgroundAttachment,
-						backgroundVideoColor: backgroundVideoColor || '#00000011',
+						backgroundImageDesktop: backgroundImage,
+						backgroundSizeDesktop: backgroundSize,
+						backgroundRepeatDesktop: backgroundRepeat,
+						backgroundAttachmentDesktop: backgroundAttachment,
+						backgroundVideoColor:
+							backgroundVideoColor || '#00000011',
 						backgroundVideo,
-						overlayType: ( overlayType === 'color' && backgroundImageColor ) ? overlayType : ( overlayType === 'gradient' ) ? 'gradient' : 'none',  // eslint-disable-line no-nested-ternary
-						backgroundImageColor: backgroundImageColor || '#00000000',
+						overlayType:
+							overlayType === 'color' && backgroundImageColor
+								? overlayType
+								: overlayType === 'gradient'
+								? 'gradient'
+								: 'none', // eslint-disable-line no-nested-ternary
+						backgroundImageColor:
+							backgroundImageColor || '#00000000',
 						variationSelected: true,
 						htmlTag: tag,
-						backgroundPositionDesktop: getImageBackgroundPosition( backgroundPosition ),
+						backgroundPositionDesktop:
+							getImageBackgroundPosition( backgroundPosition ),
 					},
 					innerBlocks
 				);
@@ -272,7 +314,6 @@ const transforms = {
 			blocks: [ 'uagb/columns' ],
 			priority: 1,
 			transform: ( attributes, innerBlocks ) => {
-
 				const {
 					backgroundType,
 					backgroundColor,
@@ -361,19 +402,25 @@ const transforms = {
 					reverseTablet,
 				} = attributes;
 
-				const containerWidth = 'full' === align ? 'alignfull' : 'alignwide';
+				const containerWidth =
+					'full' === align ? 'alignfull' : 'alignwide';
 				let innerContainerCustomWidth = null;
 				let innerContentWidth = null;
 
 				if ( 'full' === align ) {
+					innerContainerCustomWidth =
+						'custom' === contentWidth && 'px' === widthType
+							? width
+							: 1200;
 
-					innerContainerCustomWidth = ( 'custom' === contentWidth && 'px' === widthType ) ? width : 1200;
-
-					innerContentWidth = ( 'custom' === contentWidth && 'px' === widthType ) ? 'alignwide' : 'alignfull';
+					innerContentWidth =
+						'custom' === contentWidth && 'px' === widthType
+							? 'alignwide'
+							: 'alignfull';
 				}
 
 				const innerBlocksTemplate = [];
-				const containerChildWidth = ( 100 / columns );
+				const containerChildWidth = 100 / columns;
 				/* eslint-disable no-shadow */
 				innerBlocks.map( ( child ) => {
 					const {
@@ -467,37 +514,60 @@ const transforms = {
 							rightPaddingDesktop: rightPadding,
 							topPaddingDesktop: topPadding,
 							bottomPaddingDesktop: bottomPadding,
-							containerBorderTopLeftRadius: borderRadius || columnBorderTopLeftRadius,
-							containerBorderTopRightRadius: borderRadius || columnBorderTopRightRadius,
-							containerBorderBottomLeftRadius: borderRadius || columnBorderBottomLeftRadius,
-							containerBorderBottomRightRadius: borderRadius || columnBorderBottomRightRadius,
-							containerBorderStyle: borderStyle || columnBorderStyle,
-							containerBorderColor: borderColor || columnBorderColor,
+							containerBorderTopLeftRadius:
+								borderRadius || columnBorderTopLeftRadius,
+							containerBorderTopRightRadius:
+								borderRadius || columnBorderTopRightRadius,
+							containerBorderBottomLeftRadius:
+								borderRadius || columnBorderBottomLeftRadius,
+							containerBorderBottomRightRadius:
+								borderRadius || columnBorderBottomRightRadius,
+							containerBorderStyle:
+								borderStyle || columnBorderStyle,
+							containerBorderColor:
+								borderColor || columnBorderColor,
 							containerBorderHColor: columnBorderHColor,
-							containerBorderTopWidth: borderWidth || columnBorderTopWidth,
-							containerBorderBottomWidth: borderWidth || columnBorderBottomWidth,
-							containerBorderLeftWidth: borderWidth || columnBorderLeftWidth,
-							containerBorderRightWidth: borderWidth || columnBorderRightWidth,
+							containerBorderTopWidth:
+								borderWidth || columnBorderTopWidth,
+							containerBorderBottomWidth:
+								borderWidth || columnBorderBottomWidth,
+							containerBorderLeftWidth:
+								borderWidth || columnBorderLeftWidth,
+							containerBorderRightWidth:
+								borderWidth || columnBorderRightWidth,
 							backgroundImageDesktop: backgroundImage,
-							backgroundPositionDesktop: getImageBackgroundPosition( backgroundPosition ),
+							backgroundPositionDesktop:
+								getImageBackgroundPosition(
+									backgroundPosition
+								),
 							backgroundAttachmentDesktop: backgroundAttachment,
 							backgroundRepeatDesktop: backgroundRepeat,
 							backgroundSizeDesktop: backgroundSize,
 							backgroundImageColor,
-							overlayType: backgroundImageColor ? 'color' : 'none',
+							overlayType: backgroundImageColor
+								? 'color'
+								: 'none',
 							alignItemsDesktop: 'flex-start',
 						},
-						child?.innerBlocks
+						child?.innerBlocks,
 					] );
 
 					return child;
 				} );
 
-				const getReverseColMobile = ( reverseTablet || reverseMobile ? 'column-reverse' : 'column' );
-				const getReverseRowMobile = ( reverseTablet || reverseMobile ? 'row-reverse' : 'row' );
+				const getReverseColMobile =
+					reverseTablet || reverseMobile
+						? 'column-reverse'
+						: 'column';
+				const getReverseRowMobile =
+					reverseTablet || reverseMobile ? 'row-reverse' : 'row';
 
-				const getReverseColTablet = ( reverseTablet ? 'column-reverse' : 'column' );
-				const getReverseRowTablet = ( reverseTablet ? 'row-reverse' : 'row' );
+				const getReverseColTablet = reverseTablet
+					? 'column-reverse'
+					: 'column';
+				const getReverseRowTablet = reverseTablet
+					? 'row-reverse'
+					: 'row';
 
 				return createBlock(
 					'uagb/container',
@@ -506,7 +576,8 @@ const transforms = {
 						backgroundType,
 						backgroundColor,
 						gradientValue,
-						innerContentCustomWidthDesktop: innerContainerCustomWidth || 1200,
+						innerContentCustomWidthDesktop:
+							innerContainerCustomWidth || 1200,
 						innerContentWidth: innerContentWidth || 'alignfull',
 						borderStyle,
 						borderWidth,
@@ -539,35 +610,52 @@ const transforms = {
 						bottomPaddingTablet,
 						leftPaddingTablet,
 						rightPaddingTablet,
-						leftPaddingDesktop : leftPadding,
-						rightPaddingDesktop : rightPadding,
-						topPaddingDesktop : topPadding,
-						bottomPaddingDesktop : bottomPadding,
-						backgroundImageDesktop : backgroundImage,
-						backgroundPositionDesktop: getImageBackgroundPosition( backgroundPosition ),
-						backgroundSizeDesktop : backgroundSize,
-						backgroundRepeatDesktop : backgroundRepeat,
-						backgroundAttachmentDesktop : backgroundAttachment,
-						backgroundVideoColor: backgroundVideoColor || '#00000011',
+						leftPaddingDesktop: leftPadding,
+						rightPaddingDesktop: rightPadding,
+						topPaddingDesktop: topPadding,
+						bottomPaddingDesktop: bottomPadding,
+						backgroundImageDesktop: backgroundImage,
+						backgroundPositionDesktop:
+							getImageBackgroundPosition( backgroundPosition ),
+						backgroundSizeDesktop: backgroundSize,
+						backgroundRepeatDesktop: backgroundRepeat,
+						backgroundAttachmentDesktop: backgroundAttachment,
+						backgroundVideoColor:
+							backgroundVideoColor || '#00000011',
 						backgroundVideo,
 						overlayType: backgroundImageColor ? 'color' : 'none',
-						backgroundImageColor: backgroundImageColor || '#00000000',
+						backgroundImageColor:
+							backgroundImageColor || '#00000000',
 						directionDesktop: 'row',
-						directionTablet: 'tablet' === stack ? getReverseColTablet : getReverseRowTablet,
-						directionMobile: ( 'mobile' === stack ) ? getReverseColMobile : getReverseRowMobile,
+						directionTablet:
+							'tablet' === stack
+								? getReverseColTablet
+								: getReverseRowTablet,
+						directionMobile:
+							'mobile' === stack
+								? getReverseColMobile
+								: getReverseRowMobile,
 						variationSelected: true,
 						columnGapDesktop: 0,
-						containerBorderTopLeftRadius: borderRadius || columnsBorderTopLeftRadius,
-						containerBorderTopRightRadius: borderRadius || columnsBorderTopRightRadius,
-						containerBorderBottomLeftRadius: borderRadius || columnsBorderBottomLeftRadius,
-						containerBorderBottomRightRadius: borderRadius || columnsBorderBottomRightRadius,
+						containerBorderTopLeftRadius:
+							borderRadius || columnsBorderTopLeftRadius,
+						containerBorderTopRightRadius:
+							borderRadius || columnsBorderTopRightRadius,
+						containerBorderBottomLeftRadius:
+							borderRadius || columnsBorderBottomLeftRadius,
+						containerBorderBottomRightRadius:
+							borderRadius || columnsBorderBottomRightRadius,
 						containerBorderStyle: borderStyle || columnsBorderStyle,
 						containerBorderColor: borderColor || columnsBorderColor,
 						containerBorderHColor: columnsBorderHColor,
-						containerBorderTopWidth: borderWidth || columnsBorderTopWidth,
-						containerBorderBottomWidth: borderWidth || columnsBorderBottomWidth,
-						containerBorderLeftWidth: borderWidth || columnsBorderLeftWidth,
-						containerBorderRightWidth: borderWidth || columnsBorderRightWidth,
+						containerBorderTopWidth:
+							borderWidth || columnsBorderTopWidth,
+						containerBorderBottomWidth:
+							borderWidth || columnsBorderBottomWidth,
+						containerBorderLeftWidth:
+							borderWidth || columnsBorderLeftWidth,
+						containerBorderRightWidth:
+							borderWidth || columnsBorderRightWidth,
 						htmlTag: tag,
 						// Shape Divider Top
 						topType,
@@ -592,7 +680,7 @@ const transforms = {
 				);
 			},
 		},
-	]
+	],
 };
 
 export default transforms;

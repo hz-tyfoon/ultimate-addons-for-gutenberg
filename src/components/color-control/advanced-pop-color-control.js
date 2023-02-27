@@ -21,7 +21,7 @@ import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGReset from '../reset';
 
 const AdvancedPopColorControl = ( props ) => {
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	// Add and remove the CSS on the drop and remove of the component.
@@ -36,15 +36,14 @@ const AdvancedPopColorControl = ( props ) => {
 
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
-	const { colors } = useSelect(
-		( select ) => { // eslint-disable-line
-			const settings = select( 'core/block-editor' ).getSettings();
-			return { colors: settings.colors };
-		},
-	);
+	const { colors } = useSelect( ( select ) => {
+		// eslint-disable-line
+		const settings = select( 'core/block-editor' ).getSettings();
+		return { colors: settings.colors };
+	} );
 
 	const {
 		alpha,
@@ -56,7 +55,7 @@ const AdvancedPopColorControl = ( props ) => {
 		setAttributes,
 		onColorChange,
 		label,
-		help
+		help,
 	} = props;
 
 	const [ value, setValue ] = useState( {
@@ -65,18 +64,15 @@ const AdvancedPopColorControl = ( props ) => {
 		classSat: 'first',
 		currentColor: colorValue,
 		inherit: false,
-		currentOpacity:
-			opacityValue !== undefined ? opacityValue : 1,
+		currentOpacity: opacityValue !== undefined ? opacityValue : 1,
 		isPalette:
-			colorValue && colorValue.startsWith( 'palette' )
-				? true
-				: false,
+			colorValue && colorValue.startsWith( 'palette' ) ? true : false,
 		refresh: false,
 	} );
 	const [ visible, setVisible ] = useState( { isVisible: false } );
 
 	useEffect( () => {
-		onChangeComplete( colorValue, '' )
+		onChangeComplete( colorValue, '' );
 	}, [ colorValue ] );
 
 	const onChangeComplete = ( color, palette ) => {
@@ -84,8 +80,7 @@ const AdvancedPopColorControl = ( props ) => {
 		let newColor;
 		if ( palette ) {
 			newColor = color;
-		} else if (	color?.rgb && color?.rgb?.a && 1 !== color?.rgb?.a ) {
-
+		} else if ( color?.rgb && color?.rgb?.a && 1 !== color?.rgb?.a ) {
 			if ( onOpacityChange ) {
 				opacity = color?.rgb?.a;
 			}
@@ -100,7 +95,6 @@ const AdvancedPopColorControl = ( props ) => {
 				',' +
 				color?.rgb?.a +
 				')';
-
 		} else if ( color?.hex ) {
 			newColor = color?.hex;
 		} else {
@@ -120,7 +114,7 @@ const AdvancedPopColorControl = ( props ) => {
 		}
 
 		if ( data && setAttributes ) {
-			setAttributes( { [ data?.label ]: newColor } )
+			setAttributes( { [ data?.label ]: newColor } );
 		}
 		if ( onColorChange ) {
 			onColorChange( newColor );
@@ -129,7 +123,6 @@ const AdvancedPopColorControl = ( props ) => {
 		if ( onOpacityChange ) {
 			onOpacityChange( opacity );
 		}
-
 	};
 
 	const toggleVisible = () => {
@@ -145,46 +138,59 @@ const AdvancedPopColorControl = ( props ) => {
 	const resetValues = ( resetValue ) => {
 		setValue( {
 			...value,
-			currentColor: resetValue[data?.label],
+			currentColor: resetValue[ data?.label ],
 		} );
 	};
 
 	const colorVal = value.currentColor ? value.currentColor : colorValue;
 
 	const pickIconColorBasedOnBgColorAdvanced = ( color ) => {
-		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( color );
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
+			color
+		);
 		const parsedColor = result
-		? {
-				r: parseInt( result[ 1 ], 16 ),
-				g: parseInt( result[ 2 ], 16 ),
-				b: parseInt( result[ 3 ], 16 ),
-		  }
-		: null;
+			? {
+					r: parseInt( result[ 1 ], 16 ),
+					g: parseInt( result[ 2 ], 16 ),
+					b: parseInt( result[ 3 ], 16 ),
+			  }
+			: null;
 		if ( parsedColor ) {
-			const brightness = Math.round( ( ( parsedColor.r * 299 ) +
-						( parsedColor.g * 587 ) +
-						( parsedColor.b * 114 ) ) / 1000 );
-			const textColour = ( brightness > 125 ) ? 'black' : 'white';
+			const brightness = Math.round(
+				( parsedColor.r * 299 +
+					parsedColor.g * 587 +
+					parsedColor.b * 114 ) /
+					1000
+			);
+			const textColour = brightness > 125 ? 'black' : 'white';
 			return textColour;
 		}
 		return 'white';
-	}
-	const globalIconColor = pickIconColorBasedOnBgColorAdvanced( maybeGetColorForVariable( colorVal ) );
+	};
+	const globalIconColor = pickIconColorBasedOnBgColorAdvanced(
+		maybeGetColorForVariable( colorVal )
+	);
 
-	const globalIndicator = ( colorVal && colorVal.includes( 'var' ) ) ? `uag-global-indicator uag-global-icon-${globalIconColor}` : '';
+	const globalIndicator =
+		colorVal && colorVal.includes( 'var' )
+			? `uag-global-indicator uag-global-icon-${ globalIconColor }`
+			: '';
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
-		<div
-			ref={panelRef}
-			className="components-base-control"
-		>
-			{
-				controlBeforeDomElement
-			}
+		<div ref={ panelRef } className="components-base-control">
+			{ controlBeforeDomElement }
 			<div className="uagb-color-popover-container new-uagb-advanced-colors">
 				<div className="uagb-advanced-color-settings-container">
 					{ label && (
@@ -193,10 +199,8 @@ const AdvancedPopColorControl = ( props ) => {
 						</span>
 					) }
 					<UAGReset
-						onReset={resetValues}
-						attributeNames = {[
-							data?.label
-						]}
+						onReset={ resetValues }
+						attributeNames={ [ data?.label ] }
 						setAttributes={ setAttributes }
 					/>
 					<div className="uagb-beside-color-click">
@@ -209,22 +213,25 @@ const AdvancedPopColorControl = ( props ) => {
 								{ value.refresh && (
 									<>
 										<ColorPicker
-											color={ maybeGetColorForVariable( colorVal ) }
+											color={ maybeGetColorForVariable(
+												colorVal
+											) }
 											onChangeComplete={ ( color ) =>
 												onChangeComplete( color, '' )
 											}
 										/>
 									</>
 								) }
-								{ ! value.refresh &&  (
+								{ ! value.refresh && (
 									<>
 										<ColorPicker
-											color={ maybeGetColorForVariable( colorVal ) }
+											color={ maybeGetColorForVariable(
+												colorVal
+											) }
 											onChangeComplete={ ( color ) =>
 												onChangeComplete( color, '' )
 											}
 										/>
-
 									</>
 								) }
 								{ colors && (
@@ -238,7 +245,15 @@ const AdvancedPopColorControl = ( props ) => {
 										disableCustomColors={ true }
 									/>
 								) }
-								<button type="button" onClick = { () => { onChangeComplete( '', true ) } } className="uagb-clear-btn-inside-picker components-button components-circular-option-picker__clear is-secondary is-small">{ __( 'Clear' ) }</button>
+								<button
+									type="button"
+									onClick={ () => {
+										onChangeComplete( '', true );
+									} }
+									className="uagb-clear-btn-inside-picker components-button components-circular-option-picker__clear is-secondary is-small"
+								>
+									{ __( 'Clear' ) }
+								</button>
 							</Popover>
 						) }
 						{ visible.isVisible && (
@@ -248,7 +263,7 @@ const AdvancedPopColorControl = ( props ) => {
 									onClick={ toggleClose }
 								>
 									<ColorIndicator
-										className={`uagb-advanced-color-indicate ${globalIndicator}`}
+										className={ `uagb-advanced-color-indicate ${ globalIndicator }` }
 										colorValue={ colorVal }
 									/>
 									{ '' === colorVal && value.inherit && (
@@ -257,11 +272,11 @@ const AdvancedPopColorControl = ( props ) => {
 										</span>
 									) }
 									{ colorValue &&
-										colorValue.startsWith(
-											'palette'
-										) && (
+										colorValue.startsWith( 'palette' ) && (
 											<span className="color-indicator-icon">
-												{ <Dashicon icon="admin-site" /> }
+												{
+													<Dashicon icon="admin-site" />
+												}
 											</span>
 										) }
 								</Button>
@@ -274,7 +289,7 @@ const AdvancedPopColorControl = ( props ) => {
 									onClick={ toggleVisible }
 								>
 									<ColorIndicator
-										className={`uagb-advanced-color-indicate ${globalIndicator}`}
+										className={ `uagb-advanced-color-indicate ${ globalIndicator }` }
 										colorValue={ colorVal }
 									/>
 									{ '' === colorVal && value.inherit && (
@@ -283,11 +298,11 @@ const AdvancedPopColorControl = ( props ) => {
 										</span>
 									) }
 									{ colorValue &&
-										colorValue.startsWith(
-											'palette'
-										) && (
+										colorValue.startsWith( 'palette' ) && (
 											<span className="color-indicator-icon">
-												{ <Dashicon icon="admin-site" /> }
+												{
+													<Dashicon icon="admin-site" />
+												}
 											</span>
 										) }
 								</Button>
@@ -295,13 +310,9 @@ const AdvancedPopColorControl = ( props ) => {
 						) }
 					</div>
 				</div>
-				{ help && (
-					<p className="uag-control-help-notice">{ help }</p>
-				) }
+				{ help && <p className="uag-control-help-notice">{ help }</p> }
 			</div>
-			{
-				controlAfterDomElement
-			}
+			{ controlAfterDomElement }
 		</div>
 	);
 };

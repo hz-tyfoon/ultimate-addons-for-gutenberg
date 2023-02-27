@@ -496,11 +496,10 @@ const deprecated = [
 	{
 		attributes,
 		save( props ) {
-
 			const blockName = 'how-to';
-		
+
 			const { attributes, className } = props;
-		
+
 			const {
 				block_id,
 				headingTitle,
@@ -528,7 +527,7 @@ const deprecated = [
 				timeInMonths,
 				timeInYears,
 			} = attributes;
-		
+
 			let urlChk = '';
 			let title = '';
 			if (
@@ -539,12 +538,12 @@ const deprecated = [
 				urlChk = attributes.mainimage.url;
 				title = attributes.mainimage.title;
 			}
-		
+
 			let url = '';
 			if ( '' !== urlChk ) {
 				const size = attributes.mainimage.sizes;
 				const imageSize = attributes.imgSize;
-		
+
 				if (
 					'undefined' !== typeof size &&
 					'undefined' !== typeof size[ imageSize ]
@@ -554,9 +553,9 @@ const deprecated = [
 					url = urlChk;
 				}
 			}
-		
+
 			let imageIconHtml = '';
-		
+
 			if ( mainimage && mainimage.url ) {
 				imageIconHtml = (
 					<img
@@ -567,16 +566,34 @@ const deprecated = [
 					/>
 				);
 			}
-		
+
 			//Time Labels
-			const yearlabel = getFallbackNumber( timeInYears, 'timeInYears', blockName ) > 1 ? ' Years ' : ' Year ';
-			const monthlabel = getFallbackNumber( timeInMonths, 'timeInMonths', blockName ) > 1 ? ' Months ' : ' Month ';
-			const daylabel = getFallbackNumber( timeInDays, 'timeInDays', blockName ) > 1 ? ' Days ' : ' Day ';
-			const hourlabel = getFallbackNumber( timeInHours, 'timeInHours', blockName ) > 1 ? 'Hours ' : ' Hour ';
-		
-			const minsValue = getFallbackNumber( timeInMins, 'timeInMins', blockName ) ? getFallbackNumber( timeInMins, 'timeInMins', blockName ) : time;
+			const yearlabel =
+				getFallbackNumber( timeInYears, 'timeInYears', blockName ) > 1
+					? ' Years '
+					: ' Year ';
+			const monthlabel =
+				getFallbackNumber( timeInMonths, 'timeInMonths', blockName ) > 1
+					? ' Months '
+					: ' Month ';
+			const daylabel =
+				getFallbackNumber( timeInDays, 'timeInDays', blockName ) > 1
+					? ' Days '
+					: ' Day ';
+			const hourlabel =
+				getFallbackNumber( timeInHours, 'timeInHours', blockName ) > 1
+					? 'Hours '
+					: ' Hour ';
+
+			const minsValue = getFallbackNumber(
+				timeInMins,
+				'timeInMins',
+				blockName
+			)
+				? getFallbackNumber( timeInMins, 'timeInMins', blockName )
+				: time;
 			const minslabel = minsValue > 1 ? ' Minutes ' : ' Minute ';
-		
+
 			return (
 				<div
 					className={ classnames(
@@ -595,8 +612,8 @@ const deprecated = [
 						value={ headingDesc }
 						tagName="p"
 						className="uagb-howto-desc-text"
-					/>		
-							{ imageIconHtml }
+					/>
+					{ imageIconHtml }
 					{ showTotaltime && (
 						<span className="uagb-howto__time-wrap">
 							<RichText.Content
@@ -605,11 +622,19 @@ const deprecated = [
 								className="uagb-howto-timeNeeded-text"
 							/>
 							<>
-								{ getFallbackNumber( timeInYears, 'timeInYears', blockName ) && (
+								{ getFallbackNumber(
+									timeInYears,
+									'timeInYears',
+									blockName
+								) && (
 									<>
 										<p className="uagb-howto-timeNeeded-value">
 											{ ' ' }
-											{ getFallbackNumber( timeInYears, 'timeInYears', blockName ) }
+											{ getFallbackNumber(
+												timeInYears,
+												'timeInYears',
+												blockName
+											) }
 										</p>
 										<p className="uagb-howto-timeINmin-text">
 											{ ' ' }
@@ -617,30 +642,54 @@ const deprecated = [
 										</p>
 									</>
 								) }
-								{ getFallbackNumber( timeInMonths, 'timeInMonths', blockName ) && (
+								{ getFallbackNumber(
+									timeInMonths,
+									'timeInMonths',
+									blockName
+								) && (
 									<>
 										<p className="uagb-howto-timeNeeded-value">
-											{ getFallbackNumber( timeInMonths, 'timeInMonths', blockName ) }
+											{ getFallbackNumber(
+												timeInMonths,
+												'timeInMonths',
+												blockName
+											) }
 										</p>
 										<p className="uagb-howto-timeINmin-text">
 											{ monthlabel }
 										</p>
 									</>
 								) }
-								{ getFallbackNumber( timeInDays, 'timeInDays', blockName ) && (
+								{ getFallbackNumber(
+									timeInDays,
+									'timeInDays',
+									blockName
+								) && (
 									<>
 										<p className="uagb-howto-timeNeeded-value">
-											{ getFallbackNumber( timeInDays, 'timeInDays', blockName ) }
+											{ getFallbackNumber(
+												timeInDays,
+												'timeInDays',
+												blockName
+											) }
 										</p>
 										<p className="uagb-howto-timeINmin-text">
 											{ daylabel }
 										</p>
 									</>
 								) }
-								{ getFallbackNumber( timeInHours, 'timeInHours', blockName ) && (
+								{ getFallbackNumber(
+									timeInHours,
+									'timeInHours',
+									blockName
+								) && (
 									<>
 										<p className="uagb-howto-timeNeeded-value">
-											{ getFallbackNumber( timeInHours, 'timeInHours', blockName ) }
+											{ getFallbackNumber(
+												timeInHours,
+												'timeInHours',
+												blockName
+											) }
 										</p>
 										<p className="uagb-howto-timeINmin-text">
 											{ hourlabel }
@@ -680,23 +729,22 @@ const deprecated = [
 						</span>
 					) }
 					{ showTools && (
-						
-							<RichText.Content
-								value={ toolsTitle }
-								tagName="h4"
-								className="uagb-howto-req-tools-text"
-							/>
+						<RichText.Content
+							value={ toolsTitle }
+							tagName="h4"
+							className="uagb-howto-req-tools-text"
+						/>
 					) }
 					{ showTools && (
 						<>
 							{ tools.map( ( tool, index ) => {
 								return (
-											<RichText.Content
-												tagName="div"
-												value={ tool.add_required_tools }
-												className={ `uagb-tools__label ${ index }` }
-												key={ index }
-											/>
+									<RichText.Content
+										tagName="div"
+										value={ tool.add_required_tools }
+										className={ `uagb-tools__label ${ index }` }
+										key={ index }
+									/>
 								);
 							} ) }
 						</>
@@ -712,27 +760,27 @@ const deprecated = [
 						<>
 							{ materials.map( ( material, index ) => {
 								return (
-											<RichText.Content
-												tagName="div"
-												value={
-													material.add_required_materials
-												}
-												className={ `uagb-materials__label ${ index }` }
-												key={ index }
-											/>
+									<RichText.Content
+										tagName="div"
+										value={
+											material.add_required_materials
+										}
+										className={ `uagb-materials__label ${ index }` }
+										key={ index }
+									/>
 								);
 							} ) }
 						</>
 					) }
-						<RichText.Content
-							value={ stepsTitle }
-							tagName="h4"
-							className="uagb-howto-req-steps-text"
-						/>
-						<InnerBlocks.Content />
+					<RichText.Content
+						value={ stepsTitle }
+						tagName="h4"
+						className="uagb-howto-req-steps-text"
+					/>
+					<InnerBlocks.Content />
 				</div>
 			);
-		}
+		},
 	},
 ];
 

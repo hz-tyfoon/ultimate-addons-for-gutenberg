@@ -4,12 +4,8 @@ import { Dialog, Transition } from '@headlessui/react';
 import { __ } from '@wordpress/i18n';
 
 const RollBackConfirmPopup = ( props ) => {
-	const {
-		openPopup,
-		setopenPopup,
-		previousVersionSelect,
-		setconfirmPopup
-	} = props;
+	const { openPopup, setopenPopup, previousVersionSelect, setconfirmPopup } =
+		props;
 
 	const [ open, setOpen ] = useState( openPopup );
 
@@ -20,7 +16,7 @@ const RollBackConfirmPopup = ( props ) => {
 	}, [ openPopup ] );
 
 	const onCancelClick = () => {
-		setopenPopup( !openPopup );
+		setopenPopup( ! openPopup );
 	};
 
 	const onContinueClick = () => {
@@ -32,10 +28,15 @@ const RollBackConfirmPopup = ( props ) => {
 		setconfirmPopup( true );
 		window.location.href = rollbackUrl;
 	};
-	
+
 	return (
 		<Transition.Root show={ open } as={ Fragment }>
-			<Dialog as="div" className="uag-rollback__dialog fixed backdrop-blur-sm inset-0 overflow-y-auto" initialFocus={ cancelButtonRef } onClose={ setOpen }>
+			<Dialog
+				as="div"
+				className="uag-rollback__dialog fixed backdrop-blur-sm inset-0 overflow-y-auto"
+				initialFocus={ cancelButtonRef }
+				onClose={ setOpen }
+			>
 				<div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 					<Transition.Child
 						as={ Fragment }
@@ -49,8 +50,11 @@ const RollBackConfirmPopup = ( props ) => {
 						<div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 					</Transition.Child>
 
-					{/* This element is to trick the browser into centering the modal contents. */}
-					<span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+					{ /* This element is to trick the browser into centering the modal contents. */ }
+					<span
+						className="hidden sm:inline-block sm:align-middle sm:h-screen"
+						aria-hidden="true"
+					>
 						&#8203;
 					</span>
 					<Transition.Child
@@ -65,7 +69,12 @@ const RollBackConfirmPopup = ( props ) => {
 						<div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
 							<div className="sm:flex sm:items-start">
 								<div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-50 sm:mx-0 sm:h-16 sm:w-16">
-									<svg className="h-8 w-8 stroke-red-600" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<svg
+										className="h-8 w-8 stroke-red-600"
+										viewBox="0 0 34 33"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
 										<path
 											d="M17 9.83333V16.5M17 23.1667H17.0167M32 16.5C32 24.7843 25.2843 31.5 17 31.5C8.71573 31.5 2 24.7843 2 16.5C2 8.21573 8.71573 1.5 17 1.5C25.2843 1.5 32 8.21573 32 16.5Z"
 											strokeWidth="3"
@@ -75,13 +84,22 @@ const RollBackConfirmPopup = ( props ) => {
 									</svg>
 								</div>
 								<div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-									<Dialog.Title as="h3" className="text-2xl font-semibold text-slate-800">
-									{ __( 'Rollback to Previous Version', 'ultimate-addons-for-gutenberg' ) }
+									<Dialog.Title
+										as="h3"
+										className="text-2xl font-semibold text-slate-800"
+									>
+										{ __(
+											'Rollback to Previous Version',
+											'ultimate-addons-for-gutenberg'
+										) }
 									</Dialog.Title>
 									<p className="mt-2 text-sm text-slate-500">
 										{
 											// eslint-disable-next-line @wordpress/i18n-no-variables
-											__( `Are you sure you want to rollback to Spectra v${ previousVersionSelect }?`, 'ultimate-addons-for-gutenberg' )
+											__(
+												`Are you sure you want to rollback to Spectra v${ previousVersionSelect }?`,
+												'ultimate-addons-for-gutenberg'
+											)
 										}
 									</p>
 								</div>
@@ -92,7 +110,10 @@ const RollBackConfirmPopup = ( props ) => {
 									className="w-full inline-flex justify-center rounded border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white focus:bg-red-700 hover:bg-red-700 focus:outline-none sm:mr-3 sm:w-auto sm:text-sm"
 									onClick={ onContinueClick }
 								>
-									{ __( 'Rollback', 'ultimate-addons-for-gutenberg' ) }
+									{ __(
+										'Rollback',
+										'ultimate-addons-for-gutenberg'
+									) }
 								</button>
 								<button
 									type="button"
@@ -100,7 +121,10 @@ const RollBackConfirmPopup = ( props ) => {
 									onClick={ onCancelClick }
 									ref={ cancelButtonRef }
 								>
-									{ __( 'Cancel', 'ultimate-addons-for-gutenberg' ) }
+									{ __(
+										'Cancel',
+										'ultimate-addons-for-gutenberg'
+									) }
 								</button>
 							</div>
 						</div>
@@ -108,7 +132,7 @@ const RollBackConfirmPopup = ( props ) => {
 				</div>
 			</Dialog>
 		</Transition.Root>
-	)
+	);
 };
 
 export default RollBackConfirmPopup;

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
@@ -90,45 +89,29 @@ const Settings = ( props ) => {
 		fontLetterSpacingTablet,
 		fontLetterSpacingMobile,
 		fontLetterSpacingType,
-
 	} = attributes;
 
 	const buttonSizeOptions = [
 		{
 			value: 'default',
-			label: __(
-				'Default',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'small',
-			label: __(
-				'Small',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Small', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'medium',
-			label: __(
-				'Medium',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Medium', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'large',
-			label: __(
-				'Large',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Large', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'extralarge',
-			label: __(
-				'Extra Large',
-				'ultimate-addons-for-gutenberg'
-			),
-		}
+			label: __( 'Extra Large', 'ultimate-addons-for-gutenberg' ),
+		},
 	];
 
 	let loadBtnGoogleFonts;
@@ -152,7 +135,10 @@ const Settings = ( props ) => {
 			<UAGAdvancedPanelBody initialOpen={ true }>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __( 'Overall Alignment', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Overall Alignment',
+						'ultimate-addons-for-gutenberg'
+					) }
 					data={ {
 						desktop: {
 							value: align,
@@ -218,11 +204,14 @@ const Settings = ( props ) => {
 						},
 					] }
 					showIcons={ true }
-					responsive={true}
+					responsive={ true }
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __( 'Stack Orientation', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Stack Orientation',
+						'ultimate-addons-for-gutenberg'
+					) }
 					data={ {
 						value: stack,
 						label: 'stack',
@@ -287,7 +276,10 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<ResponsiveSelectControl
-					label={ __( 'Button Size', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Button Size',
+						'ultimate-addons-for-gutenberg'
+					) }
 					data={ {
 						desktop: {
 							value: buttonSize,
@@ -319,7 +311,6 @@ const Settings = ( props ) => {
 				title={ __( 'Text', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ true }
 			>
-
 				<TypographyControl
 					label={ __(
 						'Typography',
@@ -548,7 +539,7 @@ const Settings = ( props ) => {
 	};
 
 	return (
-			<>
+		<>
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
@@ -565,7 +556,7 @@ const Settings = ( props ) => {
 				</InspectorTabs>
 			</InspectorControls>
 			{ loadBtnGoogleFonts }
-			</>
+		</>
 	);
 };
 

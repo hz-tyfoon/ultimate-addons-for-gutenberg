@@ -52,12 +52,20 @@ function styling( props ) {
 		mobilePaddingType,
 		tabletPaddingType,
 		desktopPaddingType,
-		columnBorderHColor
+		columnBorderHColor,
 	} = props.attributes;
 
 	const borderCSS = generateBorderCSS( props.attributes, 'column' );
-	const borderCSSTablet = generateBorderCSS( props.attributes, 'column', 'tablet' );
-	const borderCSSMobile = generateBorderCSS( props.attributes, 'column', 'mobile' );
+	const borderCSSTablet = generateBorderCSS(
+		props.attributes,
+		'column',
+		'tablet'
+	);
+	const borderCSSMobile = generateBorderCSS(
+		props.attributes,
+		'column',
+		'mobile'
+	);
 
 	const position = backgroundPosition.replace( '-', ' ' );
 	let tabletSelectors = {};
@@ -72,7 +80,7 @@ function styling( props ) {
 		'margin-bottom': generateCSSUnit( bottomMargin, desktopMarginType ),
 		'margin-left': generateCSSUnit( leftMargin, desktopMarginType ),
 		'margin-right': generateCSSUnit( rightMargin, desktopMarginType ),
-		...borderCSS
+		...borderCSS,
 	};
 
 	if ( 'image' === backgroundType ) {
@@ -125,7 +133,7 @@ function styling( props ) {
 				rightMarginTablet,
 				tabletMarginType
 			),
-			...borderCSSTablet
+			...borderCSSTablet,
 		},
 	};
 
@@ -160,7 +168,7 @@ function styling( props ) {
 				rightMarginMobile,
 				mobileMarginType
 			),
-			...borderCSSMobile
+			...borderCSSMobile,
 		},
 	};
 

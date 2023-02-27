@@ -3,8 +3,7 @@ $border-color: #d6d9dd;
 .components-panel[data-uagb-tab] {
 	z-index: 99;
 
-	&:not([data-uagb-tab="advance"]) {
-
+	&:not( [data-uagb-tab='advance'] ) {
 		.components-panel__body.block-editor-block-inspector__advanced,
 		.components-panel__body.editor-block-inspector__advanced.block-editor-block-inspector__advanced,
 		.block-editor-block-inspector > div > .components-panel__body {
@@ -23,7 +22,7 @@ $border-color: #d6d9dd;
 		overflow: hidden;
 
 		&::before {
-			content: "";
+			content: '';
 			position: absolute;
 			top: 0;
 			left: -16px;
@@ -35,7 +34,6 @@ $border-color: #d6d9dd;
 	}
 
 	.components-panel__body.edit-post-settings-sidebar__panel-block {
-
 		.block-editor-block-card {
 			overflow: unset;
 
@@ -46,7 +44,7 @@ $border-color: #d6d9dd;
 	}
 }
 
-.components-panel[data-uagb-tab="advance"] .block-editor-block-inspector__advanced {
+.components-panel[data-uagb-tab='advance'] .block-editor-block-inspector__advanced {
 	border-color: transparent;
 }
 
@@ -59,7 +57,7 @@ $border-color: #d6d9dd;
 	z-index: 9;
 
 	&::after {
-		content: "";
+		content: '';
 		position: absolute;
 		left: 0;
 		bottom: 0;
@@ -87,7 +85,7 @@ $border-color: #d6d9dd;
 		&::after,
 		&::before {
 			z-index: 1;
-			content: "";
+			content: '';
 			position: absolute;
 			top: 0;
 			left: -0.5px;
@@ -106,7 +104,7 @@ $border-color: #d6d9dd;
 			border-top: none;
 		}
 
-		&:not(.uagb-active)::after {
+		&:not( .uagb-active )::after {
 			background: #fff;
 		}
 
@@ -209,7 +207,6 @@ $border-color: #d6d9dd;
 	}
 
 	&.advance.uagb-inspector-tabs-count-3 {
-
 		button:first-child {
 			border-bottom-right-radius: 0;
 
@@ -242,7 +239,7 @@ $border-color: #d6d9dd;
 	position: sticky;
 	top: -3px;
 	z-index: 9;
-	border-top: calc(0.1em + 1px) solid #f2f4f5;
+	border-top: calc( 0.1em + 1px ) solid #f2f4f5;
 }
 
 .uagb-inspector-tab .components-panel__body:first-child,

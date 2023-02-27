@@ -2,8 +2,7 @@
  * BLOCK: Forms - Upload - Edit
  */
 
-import React, { useEffect,   } from 'react';
-
+import React, { useEffect } from 'react';
 
 import Settings from './settings';
 import Render from './render';
@@ -26,12 +25,10 @@ const UAGBFormsUploadEdit = ( props ) => {
 
 	return (
 		<>
-
-						<>
-			<Settings parentProps={ props } />
+			<>
+				<Settings parentProps={ props } />
 				<Render parentProps={ props } />
 			</>
-
 		</>
 	);
 };

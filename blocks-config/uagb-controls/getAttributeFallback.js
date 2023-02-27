@@ -5,8 +5,12 @@ import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 // key          - The key of the default attribute for that setting.
 // blockName    - The name of the block.
 
-const getAttributeFallback = ( currentValue, key, blockName ) => ( currentValue ? currentValue : blocksAttributes[blockName][key].default );
+const getAttributeFallback = ( currentValue, key, blockName ) =>
+	currentValue ? currentValue : blocksAttributes[ blockName ][ key ].default;
 
-export const getFallbackNumber = ( currentValue, key, blockName ) => ( isNaN( currentValue ) ? blocksAttributes[blockName][key].default : currentValue );
+export const getFallbackNumber = ( currentValue, key, blockName ) =>
+	isNaN( currentValue )
+		? blocksAttributes[ blockName ][ key ].default
+		: currentValue;
 
 export default getAttributeFallback;

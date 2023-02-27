@@ -5,7 +5,6 @@
 /* stylelint-disable at-rule-no-unknown */
 
 .spectra-image-gallery-init {
-
 	&-wrapper {
 		display: flex;
 		flex-direction: column;
@@ -18,7 +17,7 @@
 		& .components-input-control__container {
 			box-sizing: border-box;
 			margin: 0;
-			font-weight: var(--heading-weight-500);
+			font-weight: var( --heading-weight-500 );
 			border: 1px solid #ddd;
 			min-height: 100%;
 			font-size: 13px;
@@ -64,7 +63,6 @@
 // Applies only for the Masonry Layout in the Responsive Gutenberg Editor.
 .uagb-editor-preview-mode-tablet,
 .uagb-editor-preview-mode-mobile {
-
 	.spectra-image-gallery__layout--masonry {
 		height: initial !important;
 		display: grid;
@@ -85,89 +83,84 @@
 }
 
 .uagb-editor-preview-mode-tablet {
-
 	.spectra-image-gallery__layout--masonry-col-tab {
-
 		&-1 {
-			grid-template-columns: repeat(1, minmax(0, 1fr));
+			grid-template-columns: repeat( 1, minmax( 0, 1fr ) );
 		}
 
 		&-2 {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
 		}
 
 		&-3 {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+			grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
 		}
 
 		&-4 {
-			grid-template-columns: repeat(4, minmax(0, 1fr));
+			grid-template-columns: repeat( 4, minmax( 0, 1fr ) );
 		}
 
 		&-5 {
-			grid-template-columns: repeat(5, minmax(0, 1fr));
+			grid-template-columns: repeat( 5, minmax( 0, 1fr ) );
 		}
 
 		&-6 {
-			grid-template-columns: repeat(6, minmax(0, 1fr));
+			grid-template-columns: repeat( 6, minmax( 0, 1fr ) );
 		}
 
 		&-7 {
-			grid-template-columns: repeat(7, minmax(0, 1fr));
+			grid-template-columns: repeat( 7, minmax( 0, 1fr ) );
 		}
 
 		&-8 {
-			grid-template-columns: repeat(8, minmax(0, 1fr));
+			grid-template-columns: repeat( 8, minmax( 0, 1fr ) );
 		}
 	}
 }
 
 .uagb-editor-preview-mode-mobile {
-
 	.spectra-image-gallery__layout--masonry-col-mob {
-
 		&-1 {
-			grid-template-columns: repeat(1, minmax(0, 1fr));
+			grid-template-columns: repeat( 1, minmax( 0, 1fr ) );
 		}
 
 		&-2 {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-columns: repeat( 2, minmax( 0, 1fr ) );
 		}
 
 		&-3 {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+			grid-template-columns: repeat( 3, minmax( 0, 1fr ) );
 		}
 
 		&-4 {
-			grid-template-columns: repeat(4, minmax(0, 1fr));
+			grid-template-columns: repeat( 4, minmax( 0, 1fr ) );
 		}
 
 		&-5 {
-			grid-template-columns: repeat(5, minmax(0, 1fr));
+			grid-template-columns: repeat( 5, minmax( 0, 1fr ) );
 		}
 
 		&-6 {
-			grid-template-columns: repeat(6, minmax(0, 1fr));
+			grid-template-columns: repeat( 6, minmax( 0, 1fr ) );
 		}
 
 		&-7 {
-			grid-template-columns: repeat(7, minmax(0, 1fr));
+			grid-template-columns: repeat( 7, minmax( 0, 1fr ) );
 		}
 
 		&-8 {
-			grid-template-columns: repeat(8, minmax(0, 1fr));
+			grid-template-columns: repeat( 8, minmax( 0, 1fr ) );
 		}
 	}
 }
 
 // Applies only in theme builder 2022.
 .editor-styles-wrapper .is-root-container.edit-site-block-editor__block-list.wp-site-blocks {
-
 	.spectra-image-gallery__layout--masonry {
 		height: initial !important;
 	}
 }
 
-[data-type="uagb/image-gallery"] .slick-arrow {
+[data-type='uagb/image-gallery'] .slick-arrow {
 	border-width: 0;
 }

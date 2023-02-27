@@ -8,7 +8,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -129,22 +128,46 @@ function styling( props ) {
 		separatorSpaceMobile,
 	} = props.attributes;
 
-	const tColumnsDesktopFallback = getFallbackNumber( tColumnsDesktop, 'tColumnsDesktop', blockName );
-	const tColumnsTabletFallback = getFallbackNumber( tColumnsTablet, 'tColumnsTablet', blockName );
-	const tColumnsMobileFallback = getFallbackNumber( tColumnsMobile, 'tColumnsMobile', blockName );
-	const widthDesktopFallback = getFallbackNumber( widthDesktop, 'widthDesktop', blockName );
+	const tColumnsDesktopFallback = getFallbackNumber(
+		tColumnsDesktop,
+		'tColumnsDesktop',
+		blockName
+	);
+	const tColumnsTabletFallback = getFallbackNumber(
+		tColumnsTablet,
+		'tColumnsTablet',
+		blockName
+	);
+	const tColumnsMobileFallback = getFallbackNumber(
+		tColumnsMobile,
+		'tColumnsMobile',
+		blockName
+	);
+	const widthDesktopFallback = getFallbackNumber(
+		widthDesktop,
+		'widthDesktop',
+		blockName
+	);
 
 	let selectors = {};
 	let tablet_selectors = {};
 	let mobile_selectors = {};
 
-	const overallBorderCSS = generateBorderCSS( props.attributes, 'overall' )
-	const overallBorderCSSTablet = generateBorderCSS( props.attributes, 'overall', 'tablet' )
-	const overallBorderCSSMobile = generateBorderCSS( props.attributes, 'overall', 'mobile' )
+	const overallBorderCSS = generateBorderCSS( props.attributes, 'overall' );
+	const overallBorderCSSTablet = generateBorderCSS(
+		props.attributes,
+		'overall',
+		'tablet'
+	);
+	const overallBorderCSSMobile = generateBorderCSS(
+		props.attributes,
+		'overall',
+		'mobile'
+	);
 
 	selectors = {
 		'.wp-block-uagb-table-of-contents': {
-			'text-align' : overallAlign
+			'text-align': overallAlign,
 		},
 		' .uagb-toc__list-wrap ul li': {
 			'font-size': generateCSSUnit( fontSize, fontSizeType ),
@@ -156,20 +179,29 @@ function styling( props ) {
 			'font-size': generateCSSUnit( fontSize, fontSizeType ),
 			'line-height': generateCSSUnit( lineHeight, lineHeightType ),
 			'font-family': fontFamily,
-			'font-style' : fontStyle,
+			'font-style': fontStyle,
 			'text-decoration': fontDecoration,
 			'text-transform': fontTransform,
 			'font-weight': fontWeight,
 			'color': linkColor,
-			'letter-spacing': generateCSSUnit( letterSpacing, letterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				letterSpacing,
+				letterSpacingType
+			),
 		},
 		' .uagb-toc__title-wrap': {
 			'justify-content': align,
-			'margin-bottom': generateCSSUnit( headingBottom, headingBottomType ),
+			'margin-bottom': generateCSSUnit(
+				headingBottom,
+				headingBottomType
+			),
 		},
 		' .uagb-toc__title': {
 			'justify-content': headingAlignment,
-			'margin-bottom': generateCSSUnit( headingBottom, headingBottomType ),
+			'margin-bottom': generateCSSUnit(
+				headingBottom,
+				headingBottomType
+			),
 			'font-size': generateCSSUnit(
 				headingFontSize,
 				headingFontSizeType
@@ -179,12 +211,15 @@ function styling( props ) {
 				headingLineHeightType
 			),
 			'font-family': headingFontFamily,
-			'font-style' : headingFontStyle,
+			'font-style': headingFontStyle,
 			'text-decoration': headingDecoration,
 			'text-transform': headingTransform,
 			'font-weight': headingFontWeight,
 			'color': headingColor,
-			'letter-spacing': generateCSSUnit( headingLetterSpacing, headingLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				headingLetterSpacing,
+				headingLetterSpacingType
+			),
 		},
 		' .uagb-toc__list-wrap ol li a:hover': {
 			'color': linkHoverColor,
@@ -219,7 +254,9 @@ function styling( props ) {
 			'padding-bottom': 0,
 		},
 		' .uagb-toc__list-wrap ol.uagb-toc__list > li': {
-			'list-style-type': disableBullets ? 'none !important' :  markerView + ' !important',
+			'list-style-type': disableBullets
+				? 'none !important'
+				: markerView + ' !important',
 			'padding-top':
 				'calc( ' +
 				generateCSSUnit(
@@ -236,7 +273,9 @@ function styling( props ) {
 				' / 2 )',
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list > li': {
-			'list-style-type': disableBullets ? 'none !important' :  markerView + ' !important',
+			'list-style-type': disableBullets
+				? 'none !important'
+				: markerView + ' !important',
 			'padding-top':
 				'calc( ' +
 				generateCSSUnit(
@@ -278,7 +317,7 @@ function styling( props ) {
 	}
 
 	if ( customWidth && makeCollapsible ) {
-		selectors[ ' .uagb-toc__title']['justify-content'] = 'space-between';
+		selectors[ ' .uagb-toc__title' ][ 'justify-content' ] = 'space-between';
 	}
 
 	if ( disableBullets ) {
@@ -303,7 +342,10 @@ function styling( props ) {
 		' .uagb-toc__list-wrap ol li a': {
 			'font-size': generateCSSUnit( fontSizeTablet, fontSizeType ),
 			'line-height': generateCSSUnit( lineHeightTablet, lineHeightType ),
-			'letter-spacing': generateCSSUnit( letterSpacingTablet, letterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				letterSpacingTablet,
+				letterSpacingType
+			),
 		},
 		' .uagb-toc__title': {
 			'font-size': generateCSSUnit(
@@ -314,8 +356,14 @@ function styling( props ) {
 				headingLineHeightTablet,
 				headingLineHeightType
 			),
-			'margin-bottom': generateCSSUnit( headingBottomTablet, headingBottomType ),
-			'letter-spacing': generateCSSUnit( headingLetterSpacingTablet, headingLetterSpacingType ),
+			'margin-bottom': generateCSSUnit(
+				headingBottomTablet,
+				headingBottomType
+			),
+			'letter-spacing': generateCSSUnit(
+				headingLetterSpacingTablet,
+				headingLetterSpacingType
+			),
 		},
 		' .uagb-toc__wrap': {
 			...overallBorderCSSTablet,
@@ -414,7 +462,10 @@ function styling( props ) {
 		' .uagb-toc__list-wrap ol li a': {
 			'font-size': generateCSSUnit( fontSizeMobile, fontSizeType ),
 			'line-height': generateCSSUnit( lineHeightMobile, lineHeightType ),
-			'letter-spacing': generateCSSUnit( letterSpacingMobile, letterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				letterSpacingMobile,
+				letterSpacingType
+			),
 		},
 		' .uagb-toc__title': {
 			'font-size': generateCSSUnit(
@@ -425,8 +476,14 @@ function styling( props ) {
 				headingLineHeightMobile,
 				headingLineHeightType
 			),
-			'margin-bottom': generateCSSUnit( headingBottomMobile, headingBottomType ),
-			'letter-spacing': generateCSSUnit( headingLetterSpacingMobile, headingLetterSpacingType ),
+			'margin-bottom': generateCSSUnit(
+				headingBottomMobile,
+				headingBottomType
+			),
+			'letter-spacing': generateCSSUnit(
+				headingLetterSpacingMobile,
+				headingLetterSpacingType
+			),
 		},
 		' .uagb-toc__wrap': {
 			...overallBorderCSSMobile,
@@ -516,30 +573,60 @@ function styling( props ) {
 
 	// separator
 	if ( separatorStyle !== 'none' ) {
-
 		// Since we need the separator to ignore the padding and cover the entire width of the parent container,
 		// we use calc and do the following calculations.
 
-		const calcPaddingLeft = generateCSSUnit( leftPadding, paddingTypeDesktop );
-		const calcPaddingRight = generateCSSUnit( rightPadding, paddingTypeDesktop );
+		const calcPaddingLeft = generateCSSUnit(
+			leftPadding,
+			paddingTypeDesktop
+		);
+		const calcPaddingRight = generateCSSUnit(
+			rightPadding,
+			paddingTypeDesktop
+		);
 
-		const tCalcPaddingLeft = generateCSSUnit( leftPaddingTablet, paddingTypeTablet );
-		const tCalcPaddingRight = generateCSSUnit( rightPaddingTablet, paddingTypeTablet );
+		const tCalcPaddingLeft = generateCSSUnit(
+			leftPaddingTablet,
+			paddingTypeTablet
+		);
+		const tCalcPaddingRight = generateCSSUnit(
+			rightPaddingTablet,
+			paddingTypeTablet
+		);
 
-		const mCalcPaddingLeft = generateCSSUnit( leftPaddingMobile, paddingTypeMobile );
-		const mCalcPaddingRight = generateCSSUnit( rightPaddingMobile, paddingTypeMobile );
+		const mCalcPaddingLeft = generateCSSUnit(
+			leftPaddingMobile,
+			paddingTypeMobile
+		);
+		const mCalcPaddingRight = generateCSSUnit(
+			rightPaddingMobile,
+			paddingTypeMobile
+		);
 
 		selectors[ ' .uagb-toc__separator' ] = {
 			'border-top-style': separatorStyle,
 			'border-top-width': generateCSSUnit(
-				getFallbackNumber( separatorHeight, 'separatorHeight', blockName ),
+				getFallbackNumber(
+					separatorHeight,
+					'separatorHeight',
+					blockName
+				),
 				separatorHeightType
 			),
-			'width': 'calc( 100% + ' + calcPaddingLeft + ' + ' + calcPaddingRight +')',
+			'width':
+				'calc( 100% + ' +
+				calcPaddingLeft +
+				' + ' +
+				calcPaddingRight +
+				')',
 			'margin-left': '-' + calcPaddingLeft,
 			'border-color': separatorColor,
 			'margin-bottom': generateCSSUnit(
-				getFallbackNumber( separatorSpace, 'separatorSpace', blockName ),
+				getFallbackNumber(
+					separatorSpace,
+					'separatorSpace',
+					blockName
+				),
 				separatorSpaceType
 			),
 		};
@@ -549,23 +636,40 @@ function styling( props ) {
 		};
 
 		tablet_selectors[ ' .uagb-toc__separator' ] = {
-			'width': 'calc( 100% + ' + tCalcPaddingLeft + ' + ' + tCalcPaddingRight +')',
+			'width':
+				'calc( 100% + ' +
+				tCalcPaddingLeft +
+				' + ' +
+				tCalcPaddingRight +
+				')',
 			'margin-left': '-' + tCalcPaddingLeft,
 			'margin-bottom': generateCSSUnit(
-				getFallbackNumber( separatorSpaceTablet, 'separatorSpaceTablet', blockName ),
+				getFallbackNumber(
+					separatorSpaceTablet,
+					'separatorSpaceTablet',
+					blockName
+				),
 				separatorSpaceType
 			),
 		};
 
 		mobile_selectors[ ' .uagb-toc__separator' ] = {
-			'width': 'calc( 100% + ' + mCalcPaddingLeft + ' + ' + mCalcPaddingRight +')',
+			'width':
+				'calc( 100% + ' +
+				mCalcPaddingLeft +
+				' + ' +
+				mCalcPaddingRight +
+				')',
 			'margin-left': '-' + mCalcPaddingLeft,
 			'margin-bottom': generateCSSUnit(
-				getFallbackNumber( separatorSpaceMobile, 'separatorSpaceMobile', blockName ),
+				getFallbackNumber(
+					separatorSpaceMobile,
+					'separatorSpaceMobile',
+					blockName
+				),
 				separatorSpaceType
 			),
 		};
-
 	}
 
 	const id = `.block-editor-block-list__block .uagb-block-${ props.clientId.substr(
