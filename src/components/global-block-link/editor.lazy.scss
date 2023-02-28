@@ -1,5 +1,7 @@
 .spectra-global-block-style-name-modal {
-
+	> .components-modal__content {
+		max-width: 604px;
+	}
 	.components-modal__header {
 
 		button {
