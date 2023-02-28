@@ -47,7 +47,7 @@ const UAGBTemplateEverything = ( props ) => {
 			'uagb-template-everything-style-' + clientId.substr( 0, 8 ),
 			blockStyling
 		);
-	}, [ props ] );
+	}, [ props.attributes ] );
 
 	useEffect( () => {
 		responsiveConditionPreview( props );

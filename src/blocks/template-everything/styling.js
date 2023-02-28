@@ -102,7 +102,8 @@ function styling( props ) {
 		headingColor,
 		color,
 		linkColor,
-		linkHoverColor
+		linkHoverColor,
+		block_id
 
 	} = attributes;
 
@@ -318,10 +319,7 @@ function styling( props ) {
 		},
 	};
 
-	const id = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
-		0,
-		8
-	) }`;
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 	let styling_css = generateCSS( selectors, id );
 
 

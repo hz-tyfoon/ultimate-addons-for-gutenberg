@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from '@wordpress/element';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
 import InspectorTab, {
@@ -767,4 +767,4 @@ const Settings = ( props ) => {
 		</>
 	);
 };
-export default React.memo( Settings );
+export default memo( Settings );

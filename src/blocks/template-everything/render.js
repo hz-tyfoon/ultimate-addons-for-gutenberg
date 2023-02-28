@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React from 'react';
+import { memo } from '@wordpress/element';
 import { useDeviceType } from '@Controls/getPreviewType';
 
 const ALLOWED_BLOCKS = [
@@ -44,4 +44,4 @@ const Render = ( props ) => {
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );
