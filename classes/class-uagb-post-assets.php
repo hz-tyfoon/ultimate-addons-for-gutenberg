@@ -227,6 +227,7 @@ class UAGB_Post_Assets {
 				}
 			}
 		}
+		
 		$this->load_uag_fonts = apply_filters( 'uagb_enqueue_google_fonts', $this->load_uag_fonts );
 
 		if ( $this->preview ) {
@@ -579,10 +580,10 @@ class UAGB_Post_Assets {
 		echo '<style id="uagb-style-frontend-' . esc_attr( $this->post_id ) . '">' . $this->stylesheet . '</style>'; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		$spectra_global_block_styles = get_option( 'spectra_global_block_styles', array() );
-		
+		// var_dump($spectra_global_block_styles);
 		foreach ( $spectra_global_block_styles as $style ) {
 			
-			if ( !empty($style['value']) && !empty($style['frontendStyles']) && in_array( $this->post_id, $style['post_ids'] ) ) {
+			if ( !empty($style['value']) && !empty($style['frontendStyles']) ) {
 				echo '<style id="uagb-global-block-styles-' . $style['value'] . '">' . $style['frontendStyles'] . '</style>'; //phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 			}
 		}

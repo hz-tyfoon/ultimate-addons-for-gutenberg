@@ -252,7 +252,7 @@ const GlobalBlockStyles = ( props ) => {
                         title={ __( 'Save as a Global Block Style', 'ultimate-addons-for-gutenberg' ) } onRequestClose={ closeModal }
                         className="spectra-global-block-style-name-modal"
                     >
-                    <p> { __( 'You\'ll be able to add this global style to multiple areas on your site.', 'ultimate-addons-for-gutenberg' ) }</p>
+                    <p> { __( 'Enter a word or two — without spaces — to make a unique global block style & you\'ll be able to add this global style to multiple areas on your site.', 'ultimate-addons-for-gutenberg' ) }</p>
                     <div className="button-input-wrap">
                         <UAGTextControl
                             placeholder={ __(
@@ -261,7 +261,7 @@ const GlobalBlockStyles = ( props ) => {
                             ) }
                             value={ tempStyleName }
                             onChange={ ( value ) => {
-                                setTempStyleName(value);
+                                setTempStyleName(value?.toString());
                             } }
                             showHeaderControls={false}
                         />
