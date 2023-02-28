@@ -95,7 +95,7 @@ export default compose(
 			}
 		}
 		return {
-			editorStyles: editorStyles,
+			editorStyles,
 		};	
 	} )
 )( UAGBAdvancedHeading );

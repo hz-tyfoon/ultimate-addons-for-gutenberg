@@ -138,7 +138,7 @@ const GlobalBlockStyles = ( props ) => {
         updateGoogleFontData( attributes );
     
         spectraGlobalStyles.map( ( style ) => {
-            if ( newStyleID && style?.value === String(newStyleID) ) {
+            if ( newStyleID && style?.value === String( newStyleID ) ) {
                 
                 const baseSelector = `.spectra-gbs-${blockNameClass}-${style?.label}`;
                 const asArray = Object.entries( attributes );
@@ -160,20 +160,20 @@ const GlobalBlockStyles = ( props ) => {
                 style.editorStyles = blockStyling;
                 style.props = newProps;
                 
-                let currentPostID = select( 'core/editor' ).getCurrentPostId()
+                const currentPostID = select( 'core/editor' ).getCurrentPostId()
                 
-                if (style?.post_ids) {
-                    style.post_ids.push(currentPostID);
+                if ( style?.post_ids ) {
+                    style.post_ids.push( currentPostID );
                 } else {
                     style.post_ids = [currentPostID];
                 }
-                style.post_ids = [...new Set(style.post_ids)]
+                style.post_ids = [...new Set( style.post_ids )]
             }
             return style
 
         } );
 
-        updateGlobalBlockStyles(spectraGlobalStyles);
+        updateGlobalBlockStyles( spectraGlobalStyles );
         setSaveToDatabase( true );
     };
     const updateGoogleFontData = ( attrs ) => {
@@ -191,7 +191,7 @@ const GlobalBlockStyles = ( props ) => {
             if( !output.includes( item ) )
               output.push( item )
         }
-        updateGlobalBlockStylesFontFamilies(output);
+        updateGlobalBlockStylesFontFamilies( output );
     };
 
     return (
@@ -238,7 +238,7 @@ const GlobalBlockStyles = ( props ) => {
                                         } 
                                         );
                                     
-                                    getBlockStyles(value);
+                                    getBlockStyles( value );
                                 }
                             }
                             layout="stack"
@@ -261,7 +261,7 @@ const GlobalBlockStyles = ( props ) => {
                             ) }
                             value={ tempStyleName }
                             onChange={ ( value ) => {
-                                setTempStyleName(value?.toString());
+                                setTempStyleName( value?.toString() );
                             } }
                             showHeaderControls={false}
                         />
@@ -273,16 +273,16 @@ const GlobalBlockStyles = ( props ) => {
                                         globalBlockStyleId: uniqueID 
                                     } 
                                 )
-                                let spectraGlobalStyles = [
+                                const spectraGlobalStyles = [
                                     ...globalBlockStyles,
                                     {
                                         value: uniqueID,
                                         label: tempStyleName,
                                     }
                                 ]
-                                updateGlobalBlockStyles(spectraGlobalStyles);
+                                updateGlobalBlockStyles( spectraGlobalStyles );
                                 closeModal();
-                                getBlockStyles(uniqueID, spectraGlobalStyles);
+                                getBlockStyles( uniqueID, spectraGlobalStyles );
 
                             } }
                         >
@@ -320,8 +320,8 @@ const GlobalBlockStyles = ( props ) => {
                                             globalBlockStyleName: label 
                                         } 
                                     );
-                                    setUniqueID(value);
-                                    getBlockStyles(value);
+                                    setUniqueID( value );
+                                    getBlockStyles( value );
                                 }
                             }
 							options={ globalBlockStyles }
@@ -332,7 +332,7 @@ const GlobalBlockStyles = ( props ) => {
                             <Button
                                 className="spectra-save-block-styles-button components-base-control"
                                 onClick={ () => {
-                                    getBlockStyles(globalBlockStyleId);
+                                    getBlockStyles( globalBlockStyleId );
                                 } }
                                 variant="primary"
                             >
@@ -348,7 +348,7 @@ const GlobalBlockStyles = ( props ) => {
                                             globalBlockStyleName: '' 
                                         } 
                                     );
-                                    setUniqueID(false);
+                                    setUniqueID( false );
                                 } }
                                 variant="primary"
                         >
@@ -362,11 +362,11 @@ const GlobalBlockStyles = ( props ) => {
 };
 
 export default compose(
-	withSelect( ( select ) => {
+	withSelect( ( spectraGbsSelect ) => {
 
-		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
-		const isOpen = select( storeName ).getGlobalBlockStylesPopupState();
-		const globalBlockStylesFontFamilies = select( storeName ).getGlobalBlockStylesFontFamilies();
+		const globalBlockStyles = spectraGbsSelect( storeName ).getGlobalBlockStyles();
+		const isOpen = spectraGbsSelect( storeName ).getGlobalBlockStylesPopupState();
+		const globalBlockStylesFontFamilies = spectraGbsSelect( storeName ).getGlobalBlockStylesFontFamilies();
         
 		return {
 			globalBlockStyles,
@@ -375,9 +375,9 @@ export default compose(
 		};	
 	} ),
     withDispatch( ( dispatch ) => ( {
-		openModal: () => dispatch( spectraStore ).toggleGlobalBlockStylesPopup('open'),
-		closeModal: () => dispatch( spectraStore ).toggleGlobalBlockStylesPopup('close'),
-        updateGlobalBlockStyles: (value) => dispatch( spectraStore ).updateGlobalBlockStyles(value),
-        updateGlobalBlockStylesFontFamilies: (value) => dispatch( spectraStore ).updateGlobalBlockStylesFontFamilies(value)
+		openModal: () => dispatch( spectraStore ).toggleGlobalBlockStylesPopup( 'open' ),
+		closeModal: () => dispatch( spectraStore ).toggleGlobalBlockStylesPopup( 'close' ),
+        updateGlobalBlockStyles: ( value ) => dispatch( spectraStore ).updateGlobalBlockStyles( value ),
+        updateGlobalBlockStylesFontFamilies: ( value ) => dispatch( spectraStore ).updateGlobalBlockStylesFontFamilies( value )
 	} ) ),
 )( GlobalBlockStyles );

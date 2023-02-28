@@ -208,15 +208,13 @@ class UAGB_Post_Assets {
 	 * @param int $post_id Post ID.
 	 */
 	public function __construct( $post_id ) {
-		// delete_option('spectra_global_block_styles');
-		// delete_option('spectra_gbs_google_fonts');
-
+		
 		$this->post_id = intval( $post_id );
 
 		$this->preview            = isset( $_GET['preview'] ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
 		
-		$families                 = array();
+		$families = array();
 		foreach ( $spectra_gbs_google_fonts as $style ) {
 			if ( is_array( $style ) ) {
 				foreach ( $style as $family ) {
@@ -580,10 +578,10 @@ class UAGB_Post_Assets {
 		echo '<style id="uagb-style-frontend-' . esc_attr( $this->post_id ) . '">' . $this->stylesheet . '</style>'; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		$spectra_global_block_styles = get_option( 'spectra_global_block_styles', array() );
-		// var_dump($spectra_global_block_styles);
+		
 		foreach ( $spectra_global_block_styles as $style ) {
 			
-			if ( !empty($style['value']) && !empty($style['frontendStyles']) ) {
+			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) ) {
 				echo '<style id="uagb-global-block-styles-' . $style['value'] . '">' . $style['frontendStyles'] . '</style>'; //phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 			}
 		}

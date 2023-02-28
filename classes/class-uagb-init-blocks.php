@@ -103,14 +103,14 @@ class UAGB_Init_Blocks {
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
 		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		
-		foreach( $global_block_styles as $key => $style ) {
-			if ($style['value'] === $_POST['globalBlockStyleId']) {
+		foreach ( $global_block_styles as $key => $style ) {
+			if ( ! empty( $_POST['globalBlockStyleId'] ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
 				$block_props = $style['props'];
 				if ( ! $block_props['attributes'] ) {
-					$response_data = array( 'messsage' => __( 'No post dataa found!', 'ultimate-addons-for-gutenberg' ) );
+					$response_data = array( 'messsage' => __( 'No post data found!', 'ultimate-addons-for-gutenberg' ) );
 					wp_send_json_error( $response_data );
 				}
-
+				
 				$block_attr = $block_props['attributes'];
 
 				$_block_slug = str_replace( 'uagb/', '', sanitize_text_field( $_POST['blockName'] ) );
@@ -136,9 +136,15 @@ class UAGB_Init_Blocks {
 					$mob_styling_css .= $mobile;
 					$mob_styling_css .= '}';
 				}
-				$_block_css                  = $desktop . $tab_styling_css . $mob_styling_css;
-				$global_block_styles[$key]['frontendStyles'] = $_block_css;
+				$_block_css                                    = $desktop . $tab_styling_css . $mob_styling_css;
+				$global_block_styles[ $key ]['frontendStyles'] = $_block_css;
 				update_option( 'spectra_global_block_styles', $global_block_styles );
+
+				if ( ! empty( $style['post_ids'] ) && is_array( $style['post_ids'] ) ) {
+					foreach ( $style['post_ids'] as $post_id ) {
+						UAGB_Helper::delete_page_assets( $post_id );
+					}
+				}
 			}
 		}
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
