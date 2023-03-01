@@ -44,7 +44,7 @@ const Render = ( props ) => {
 			{
 				type: 'twitter',
 				image_icon: 'icon',
-				icon: 'fab fa-twitter-square',
+				icon: 'square-twitter',
 				image: '',
 				icon_color: '#55acee',
 				icon_hover_color: '',
@@ -57,7 +57,7 @@ const Render = ( props ) => {
 			{
 				type: 'pinterest',
 				image_icon: 'icon',
-				icon: 'fab fa-pinterest-square',
+				icon: 'square-pinterest',
 				image: '',
 				icon_color: '#bd081c',
 				icon_hover_color: '',
