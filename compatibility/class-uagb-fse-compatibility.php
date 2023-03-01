@@ -60,15 +60,16 @@ class UAGB_FSE_Compatibility {
 
 		$templates = get_block_templates( array( 'slugs__in' => $id['slug__in'][0] ), $template_type );
 		foreach ( $templates as $template_data ) {
-			if ( ! empty( $id['slug__in'][0] ) ) {
+			if ( empty( $id['slug__in'][0] ) ) {
+				continue;
+			}
 
-				foreach ( $id['slug__in'] as $slug ) {
-					if ( $template_data->slug === $slug ) {
-						$id = $template_data->wp_id;
-						if ( ! empty( $id ) ) {
-							$current_post_assets = new UAGB_Post_Assets( $id );
-							$current_post_assets->enqueue_scripts();
-						}
+			foreach ( $id['slug__in'] as $slug ) {
+				if ( $template_data->slug === $slug ) {
+					$id = $template_data->wp_id;
+					if ( ! empty( $id ) ) {
+						$current_post_assets = new UAGB_Post_Assets( $id );
+						$current_post_assets->enqueue_scripts();
 					}
 				}
 			}
@@ -88,47 +89,47 @@ class UAGB_FSE_Compatibility {
 			return;
 		}
 		$final_array_of_template_part_ids = array();
+
 		foreach ( $blocks as $i => $block ) {
 
-			if ( is_array( $block ) ) {
+			if ( is_array( $block ) && ! empty( $block ) ) {
 
-				if ( empty( $block ) ) {
-					return;
+				if ( ! isset( $block['blockName'] ) ) {
+					continue;
 				}
 
-				if ( isset( $block['blockName'] ) ) {
+				$block_name = $block['blockName'];
 
-					$block_name = $block['blockName'];
+				if ( 'core/template-part' === $block_name ) {
+					$slugs = $block['attrs']['slug'];
 
-					if ( 'core/template-part' === $block_name ) {
-						$slugs = $block['attrs']['slug'];
+					$templates_parts = get_block_templates( array( 'slugs__in' => $slugs ), 'wp_template_part' );
+					foreach ( $templates_parts as $templates_part ) {
+						if ( $slugs === $templates_part->slug ) {
+							$ids = array( $templates_part->wp_id );
 
-						$templates_parts = get_block_templates( array( 'slugs__in' => $slugs ), 'wp_template_part' );
-						foreach ( $templates_parts as $templates_part ) {
-							if ( $slugs === $templates_part->slug ) {
-								$ids = array( $templates_part->wp_id );
+							$final_array_of_template_part_ids = array_merge( $final_array_of_template_part_ids, $ids );
 
-								$final_array_of_template_part_ids = array_merge( $final_array_of_template_part_ids, $ids );
-
-							}
 						}
-					} else {
-						if ( isset( $block['innerBlocks'] ) ) {
-							foreach ( $block['innerBlocks'] as $j => $inner_block ) {
-								$inner_block_name = $inner_block['blockName'];
-								if ( 'core/template-part' === $inner_block_name ) {
-									$slugs = $inner_block['attrs']['slug'];
+					}
+				} else {
 
-									$templates_parts = get_block_templates( array( 'slugs__in' => $slugs ), 'wp_template_part' );
+					if ( ! isset( $block['innerBlocks'] ) ) {
+						continue;
+					}
+					foreach ( $block['innerBlocks'] as $j => $inner_block ) {
+						$inner_block_name = $inner_block['blockName'];
+						if ( 'core/template-part' === $inner_block_name ) {
+							$slugs = $inner_block['attrs']['slug'];
 
-									foreach ( $templates_parts as $templates_part ) {
-										if ( $slugs === $templates_part->slug ) {
+							$templates_parts = get_block_templates( array( 'slugs__in' => $slugs ), 'wp_template_part' );
 
-											$ids = array( $templates_part->wp_id );
+							foreach ( $templates_parts as $templates_part ) {
+								if ( $slugs === $templates_part->slug ) {
 
-											$final_array_of_template_part_ids = array_merge( $final_array_of_template_part_ids, $ids );
-										}
-									}
+									$ids = array( $templates_part->wp_id );
+
+									$final_array_of_template_part_ids = array_merge( $final_array_of_template_part_ids, $ids );
 								}
 							}
 						}
