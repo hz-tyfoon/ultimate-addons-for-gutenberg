@@ -74,6 +74,7 @@ import './blocks/post/block.js'; // Carousel, Grid.
 import './blocks/timeline/post-timeline/block.js';
 import './blocks/price-list/block.js';
 import './blocks/price-list-child/block.js'; // Child Block.
+import './blocks/price-table/block.js';
 import './blocks/review/block.js';
 import './blocks/slider/block.js';
 import './blocks/slider-child/block.js'; // Child Block.

@@ -1,0 +1,81 @@
+/**
+ * The following styles gets applied on the frontend
+ *
+ */
+@import url(https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&display=swap);
+
+$myFont: "Gentium Book Plus", serif;
+$topmargin: 32px;
+$bottomMargin: 16px;
+
+.wp-block-uagb-price-table {
+	display: flex;
+	flex-wrap: wrap;
+	text-align: center;
+	border-radius: 15px;
+	max-width: 300px;
+
+	.box {
+		width: 300px;
+		margin: 10px;
+		padding: 10px;
+		color: #fff;
+		border-radius: 15px;
+		background-color: transparent;
+		background-image: linear-gradient(180deg, #18edf3 0%, #01b6bc 100%);
+
+		&__title {
+			font-weight: bold;
+			font-family: $myFont;
+			margin-top: $topmargin;
+		}
+
+		&__description {
+			opacity: 80%;
+			font-family: $myFont;
+			margin-top: 1.5*$topmargin;
+		}
+
+		&-prsec__prc {
+			display: inline-block;
+			font-family: $myFont;
+			margin-left: 10px;
+		}
+
+		.btn {
+			display: block;
+			margin: 0 auto;
+			font-family: $myFont;
+			background-color: #def3f4;
+			color: #000;
+			padding: 1px 20px;
+			border-radius: 30px;
+			font-size: larger;
+		}
+
+		&-list {
+			font-family: $myFont;
+			list-style-type: none;
+			padding: 0 !important;
+
+			li {
+				font-size: medium;
+				font-weight: 800;
+
+				&:first-of-type {
+					margin-top: 2*$topmargin;
+				}
+
+				&:last-of-type {
+					margin-bottom: $bottomMargin;
+				}
+			}
+		}
+
+		.wp-block-button {
+			margin-top: 32px;
+			margin-bottom: 16px;
+		}
+	}
+
+}
