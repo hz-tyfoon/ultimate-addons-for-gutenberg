@@ -233,6 +233,11 @@ const globalDataReducer = ( state = {}, action ) => {
 				...state,
 				containerGlobalElementsGap: action.payload,
 				};
+        case 'UPDATE_BTN_INHERIT_FROM_THEME':
+            return {
+                ...state,
+                btnInheritFromTheme: action.payload,
+                };
         default:
             return state;
     }

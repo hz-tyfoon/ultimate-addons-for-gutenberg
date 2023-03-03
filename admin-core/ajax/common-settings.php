@@ -83,10 +83,48 @@ class Common_Settings extends Ajax_Base {
 			'auto_block_recovery',
 			'enable_legacy_blocks',
 			'pro_activate',
+			'btn_inherit_from_theme'
 		);
 
 		$this->init_ajax_events( $ajax_events );
 	}
+	/**
+	 * Save settings.
+	 *
+	 * @return void
+	 */
+	public function btn_inherit_from_theme() {
+
+		$response_data = array( 'messsage' => $this->get_error_msg( 'permission' ) );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( $response_data );
+		}
+
+		/**
+		 * Nonce verification
+		 */
+		if ( ! check_ajax_referer( 'uag_btn_inherit_from_theme', 'security', false ) ) {
+			$response_data = array( 'messsage' => $this->get_error_msg( 'nonce' ) );
+			wp_send_json_error( $response_data );
+		}
+
+		if ( empty( $_POST ) ) {
+			$response_data = array( 'messsage' => __( 'No post data found!', 'ultimate-addons-for-gutenberg' ) );
+			wp_send_json_error( $response_data );
+		}
+
+		if ( isset( $_POST['value'] ) ) {
+			\UAGB_Admin_Helper::update_admin_settings_option( 'uag_btn_inherit_from_theme', sanitize_text_field( $_POST['value'] ) );
+		}
+
+		$response_data = array(
+			'messsage' => __( 'Successfully saved data!', 'ultimate-addons-for-gutenberg' ),
+		);
+		wp_send_json_success( $response_data );
+
+	}
+
 	/**
 	 * Required Spectra Pro Plugin Activate
 	 *

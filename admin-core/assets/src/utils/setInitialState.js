@@ -34,6 +34,7 @@ const setInitialState = ( store ) => {
 			comingSoonPage: data.coming_soon_page,
 			blocksEditorSpacing: data.uag_blocks_editor_spacing,
 			containerGlobalPadding: data.uag_container_global_padding,
+			btnInheritFromTheme: data.uag_btn_inherit_from_theme,
 			containerGlobalElementsGap: data.uag_container_global_elements_gap,
 			enableFontAwesome5: data.uag_load_font_awesome_5,
 			enableAutoBlockRecovery: data.uag_auto_block_recovery,
