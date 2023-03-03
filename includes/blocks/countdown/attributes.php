@@ -12,6 +12,8 @@ $box_border_attribute = UAGB_Block_Helper::uag_generate_border_attribute( 'box' 
 return array_merge(
 	array(
 		'block_id'                     => '',
+		'timerEndAction'               => 'zero',
+		'redirectURL'                  => '',
 		'endDateTime'                  => '2023-01-01T00:00:00Z',
 		'displayEndDateTime'           => '2023-01-01T00:00:00Z',
 		'showDays'                     => true,

@@ -63,6 +63,9 @@ const UAGBCountdownEdit = ( props ) => {
 			} );
 		}
 
+		// This attribute is used to display innerblocks preview for 'Replace with Content' mode.
+		setAttributes( { editorInnerblocksPreview: false } );
+
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 	}, [] );
@@ -107,11 +110,14 @@ const UAGBCountdownEdit = ( props ) => {
 		deviceType
 	] );
 
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/countdown.svg`;
+	const countdownProToolbar = wp.hooks.applyFilters( 'spectra.countdown.toolbar-hook', '', props.name );	
 
 	return (
-		props.attributes.isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<>
+			{/* Countdown Toolbar options for Pro */}
+			{ ( !!uagb_blocks_info.spectra_pro_status && props.attributes.timerEndAction === 'content' ) &&
+				countdownProToolbar
+			}
 			{ isSelected && <Settings parentProps={ props } /> }
 			<Render countdownRef={ countdownRef } parentProps={ props } />
 		</>

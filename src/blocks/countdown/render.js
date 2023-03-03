@@ -28,6 +28,7 @@ const Render = ( props ) => {
 			labelHours,
 			labelMinutes,
 			labelSeconds,
+			timerEndAction,
 		}
 	} = props;
 
@@ -36,7 +37,18 @@ const Render = ( props ) => {
 		ref: countdownRef
 	} );
 
+	const innerblocks_content = wp.hooks.applyFilters( 'spectra.countdown.render-innerblocks', '', props.name );
+
+	const innerblocks_structure = ( ( !!uagb_blocks_info.spectra_pro_status && timerEndAction === 'content' ) &&
+		<div
+			className={ `uagb-block-countdown-innerblocks-${ block_id } wp-block-uagb-countdown-innerblocks` }
+		>
+			{innerblocks_content}
+		</div>
+	)
+
 	return(
+		<>
 			<div
 				{ ...blockProps }
 			>
@@ -44,7 +56,9 @@ const Render = ( props ) => {
 				<CountdownBox unitType='hours' showLabels={ showLabels } label={ labelHours } />
 				<CountdownBox unitType='minutes' showLabels={ showLabels } label={ labelMinutes } />
 				<CountdownBox unitType='seconds' showLabels={ showLabels } label={ labelSeconds } />
+				{ innerblocks_structure }
 			</div>
+		</>
 	);
 };
 

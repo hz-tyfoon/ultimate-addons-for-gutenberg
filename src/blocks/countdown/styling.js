@@ -216,10 +216,10 @@ export default function styling( props ) {
 	}
 
 
-	const tabletSelectors = {};
-	const mobileSelectors = {};
+	let tabletSelectors = {};
+	let mobileSelectors = {};
 
-	const selectors = {
+    let selectors = {
 
 		'.wp-block-uagb-countdown':{
 			'justify-content': align,
@@ -447,7 +447,11 @@ export default function styling( props ) {
 
 	const baseSelector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
 
-	let styling_css = generateCSS( selectors, baseSelector );
+	selectors = wp.hooks.applyFilters( `spectra.${blockName}.styling`, selectors, props.attributes );
+	tabletSelectors = wp.hooks.applyFilters( `spectra.${blockName}.tabletStyling`, tabletSelectors, props.attributes );
+	mobileSelectors = wp.hooks.applyFilters( `spectra.${blockName}.mobileStyling`, mobileSelectors, props.attributes );
+
+    let styling_css = generateCSS( selectors, baseSelector );
 
 	styling_css += generateCSS(
 		tabletSelectors,
