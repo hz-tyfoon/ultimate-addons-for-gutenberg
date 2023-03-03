@@ -59,11 +59,12 @@ export default function save( props ) {
 	}
 
 	const blockNameClass = spectraBlockName?.split( '/' )?.pop();
+	const styleNameClass = globalBlockStyleName.replace(/\s+/g, '-').toLowerCase();
 	const htmlAttributes = {
 		className: classnames( {
 			[props.className]: true,
 			[`uagb-block-${ block_id }`] : true,
-			[`spectra-gbs-${blockNameClass}-${globalBlockStyleName}`] : true
+			[`spectra-gbs-${blockNameClass}-${styleNameClass}`] : true
 		} ),
 	};
 

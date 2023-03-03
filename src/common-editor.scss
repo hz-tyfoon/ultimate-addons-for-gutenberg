@@ -480,7 +480,9 @@ label.wp-block-uagb-blockquote__via-label svg {
 	text-transform: capitalize;
 	line-height: 30px;
 }
-
+.uagb-inspector-tab .uag-advance-panel-body-global-block-styles .components-select-control .components-input-control__container .components-select-control__input {
+	text-transform: none;
+}
 .components-panel__body.uagb-repeater-panel {
 	max-width: 100%;
 	margin: 0 auto;
