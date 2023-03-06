@@ -21,7 +21,8 @@ $countdown_options = apply_filters(
 		'timerEndAction' => $attr['timerEndAction'],
 		'redirectURL'    => $attr['redirectURL'],
 	),
-	$id
+	$id,
+	$attr
 );
 
 ob_start();

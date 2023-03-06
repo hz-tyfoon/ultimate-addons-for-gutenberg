@@ -232,13 +232,13 @@ export default function styling( props ) {
 			'padding-bottom': generateCSSUnit( blockBottomPadding, blockPaddingUnit ),
 			'padding-left': generateCSSUnit( blockLeftPadding, blockPaddingUnit ),
 		},
-		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box-days':{
+		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box.wp-block-uagb-countdown__box-days':{
 			'display': showDays ? '' : 'none',
 		},
-		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box-hours':{
+		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box.wp-block-uagb-countdown__box-hours':{
 			'display': ( showDays || showHours ) ? '' : 'none',
 		},
-		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box-minutes':{
+		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box.wp-block-uagb-countdown__box-minutes':{
 			'display': ( showDays || showHours || showMinutes ) ? '' : 'none',
 		},
 		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box':{
