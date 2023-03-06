@@ -46,7 +46,7 @@ const variations = [
 			[
 				'uagb/advanced-heading',
 				{
-					headingAlign: 'left',
+					headingAlign: 'left',	
 					headingTitleToggle: true,
 					headingDescToggle: true,
 					headingDesc: 'Design',
@@ -100,11 +100,9 @@ const variations = [
 		name: 'style-2',
 		icon: icons[ 'style-2' ],
 		title: __( 'Style 2', 'ultimate-addons-for-gutenberg' ),
-		attributes: {
-			topPaddingDesktop: 150,
-			bottomPaddingDesktop: 150,
-			leftPaddingDesktop: 150,
-			rightPaddingDesktop: 150,
+		attributes: { 
+			backgroundType: 'color',
+			backgroundColor: '#ffffff'
 		},
 		innerBlocks: [
 			[
@@ -172,6 +170,7 @@ const variations = [
 							rightPadding: 0,
 							bottomPadding: 0,
 							leftPadding: 0,
+							color: '#567BD9'
 						},
 					],
 				],
