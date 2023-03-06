@@ -52,10 +52,12 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 			add_action( 'init', array( $this, 'register_blocks' ) );
 			add_action( 'wp_ajax_uagb_post_pagination', array( $this, 'post_pagination' ) );
 			add_action( 'wp_ajax_nopriv_uagb_post_pagination', array( $this, 'post_pagination' ) );
-			add_action( 'wp_ajax_uagb_get_posts', array( $this, 'masonry_pagination' ) );
-			add_action( 'wp_ajax_nopriv_uagb_get_posts', array( $this, 'masonry_pagination' ) );
+			// add_action( 'wp_ajax_uagb_get_posts', array( $this, 'masonry_pagination' ) );
+			// add_action( 'wp_ajax_nopriv_uagb_get_posts', array( $this, 'masonry_pagination' ) );
 			add_action( 'wp_footer', array( $this, 'add_post_dynamic_script' ), 1000 );
 			add_filter( 'redirect_canonical', array( $this, 'override_canonical' ), 1, 2 );
+			add_action( 'wp_ajax_uagb_grid_get_post', array( $this, 'get_post_data' ) );
+			add_action( 'wp_ajax_nopriv_uagb_grid_get_post', array( $this, 'get_post_data' ) );
 		}
 
 		/**
@@ -181,6 +183,10 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 							'imgEqualHeight'              => array(
 								'type'    => 'boolean',
 								'default' => false,
+							),
+							'paginationType'           => array(
+								'type'    => 'string',
+								'default' => 'normal',
 							),
 						)
 					),
@@ -1484,6 +1490,51 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		}
 
 		/**
+	 * Get Post Data via AJAX call.
+	 *
+	 * @since 1.7.0
+	 * @access public
+	 */
+	public function get_post_data() {
+
+		check_ajax_referer( 'uagb_grid_ajax_nonce', 'nonce' );
+
+		$data = array(
+			'message'    => 'Saved',
+			'ID'         => '',
+			'html' => '',
+			'pagination' => '',
+		);
+
+// var_dump($_POST);
+		$post_attribute_array = array();
+			// $_POST['attr'] is sanitized in later stage.
+			$attr = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+			$attr['paged'] = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
+
+			$post_attribute_array = $this->required_attribute_for_query( $attr );
+
+			$query = UAGB_Helper::get_query( $post_attribute_array, 'grid' );
+
+			$pagination_markup = $this->render_pagination( $query, $attr );
+
+
+			foreach ( $attr as $key => $attribute ) {
+				$attr[ $key ] = ( 'false' === $attribute ) ? false : ( ( 'true' === $attribute ) ? true : $attribute );
+			}
+
+			ob_start();
+			$this->posts_articles_markup( $query, $attr );
+			$html = ob_get_clean();
+			$data['ID'] = $attr['block_id'];
+			$data['pagination'] = $pagination_markup;
+			$data['html'] = $html;
+
+			wp_send_json_success( $data );
+	}
+
+		/**
 		 * Sends the Post pagination markup to edit.js
 		 *
 		 * @since 1.14.9
@@ -1573,7 +1624,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		 * @since 1.18.1
 		 */
 		public function posts_articles_markup( $query, $attributes ) {
-
+// var_dump($query);
 			while ( $query->have_posts() ) {
 
 				$query->the_post();
@@ -1658,6 +1709,18 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		 * @since 0.0.1
 		 */
 		public function add_post_dynamic_script() {
+			if ( isset( self::$settings['grid'] ) && ! empty( self::$settings['grid'] ) ) {
+				foreach ( self::$settings['grid'] as $key => $value ) {
+					?>
+					<script type="text/javascript" id="uagb-post-grid-script-<?php echo esc_html( $key ); ?>">
+						<?php $selector = '.uagb-block-' . $key; ?>
+						window.addEventListener( 'DOMContentLoaded', function() {
+							UAGBPostGrid._init( <?php echo wp_json_encode( $value ); ?>, '<?php echo esc_attr( $selector ); ?>' );
+						});
+					</script>
+					<?php
+				}
+			}
 			if ( isset( self::$settings['masonry'] ) && ! empty( self::$settings['masonry'] ) ) {
 				foreach ( self::$settings['masonry'] as $key => $value ) {
 					?>

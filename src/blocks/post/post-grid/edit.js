@@ -19,6 +19,7 @@ import Render from './render';
 
 import { useSelect, useDispatch } from '@wordpress/data';
 import { Placeholder, Spinner } from '@wordpress/components';
+import { useInstanceId } from '@wordpress/compose';
 
 const PostGridComponent = ( props ) => {
 
@@ -148,7 +149,7 @@ const PostGridComponent = ( props ) => {
 	};
 
 	const { attributes } = props;
-
+	const instanceId = useInstanceId( PostGridComponent );
 	let categoriesList = [];
 	const { latestPosts, taxonomyList, block } = useSelect( // eslint-disable-line no-unused-vars
 		( select ) => {
@@ -162,7 +163,10 @@ const PostGridComponent = ( props ) => {
 				postType,
 				taxonomyType,
 				excludeCurrentPost,
-				allTaxonomyStore
+				allTaxonomyStore,
+				paginationType,
+				paginationMarkup,
+				postPagination
 			} = props.attributes;
 			const { getEntityRecords } = select( 'core' );
 
@@ -177,6 +181,26 @@ const PostGridComponent = ( props ) => {
 			}
 			const allTaxonomy = allTaxonomyStore;
 			const currentTax = allTaxonomy ? allTaxonomy[ postType ] : undefined;
+
+			if ( true === postPagination && 'empty' === paginationMarkup ) {
+				const formData = new window.FormData();
+
+				formData.append( 'action', 'uagb_post_pagination' );
+				formData.append(
+					'nonce',
+					uagb_blocks_info.uagb_ajax_nonce
+				);
+				formData.append( 'attributes', JSON.stringify( props.attributes ) );
+
+				apiFetch( {
+					url: uagb_blocks_info.ajax_url,
+					method: 'POST',
+					body: formData,
+				} ).then( ( data ) => {
+					props.setAttributes( { paginationMarkup: data.data } );
+					props.setAttributes( { paginationType: instanceId } );
+				} );
+			}
 
 			// let categoriesList = [];
 			let rest_base = '';

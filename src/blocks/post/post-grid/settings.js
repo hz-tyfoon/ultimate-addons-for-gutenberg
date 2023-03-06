@@ -267,7 +267,8 @@ const Settings = ( props ) => {
 		enableOffset,
 		equalHeightInlineButtons,
 		imageRatio,
-		imgEqualHeight
+		imgEqualHeight,
+		paginationType
 	} = attributes;
 
 	const setImgEqualheight = ( value ) => {
@@ -277,7 +278,7 @@ const Settings = ( props ) => {
 		} else {
 			setAttributes( { imageRatio: 'inherit' } );
 		}
-	}; 
+	};
 
 	const onSelectPostType = ( value ) => {
 		setAttributes( { postType: value } );
@@ -713,6 +714,31 @@ const Settings = ( props ) => {
 					checked={ postPagination }
 					onChange={ onSelectPagination }
 				/>
+				) }
+				{ postPagination === true && (
+					<MultiButtonsControl
+						setAttributes={ setAttributes }
+						label={ __(
+							'Pagination Type',
+							'ultimate-addons-for-gutenberg'
+						) }
+						data={ {
+							value: paginationType,
+							label: 'paginationType',
+						} }
+						className="uagb-multi-button-alignment-control"
+						options={ [
+							{
+								value: 'normal',
+								label: 'Normal',
+							},
+							{
+								value: 'ajax',
+								label: 'Ajax',
+							},
+						] }
+						showIcons={ false }
+					/>
 				) }
 				{ postPagination === true && (
 					<Range

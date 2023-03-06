@@ -23,4 +23,11 @@ $block_data = array(
 	'dynamic_assets'   => array(
 		'dir' => 'post-grid',
 	),
+	'static_dependencies' => array(
+		'uagb-post-grid-js'      => array(
+			'src'  => UAGB_Scripts_Utils::get_js_url( 'post-grid' ),
+			'dep'  => array(),
+			'type' => 'js',
+		),
+	),
 );

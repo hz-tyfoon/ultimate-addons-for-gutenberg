@@ -78,6 +78,16 @@ final class UAGB_Scripts_Utils {
 			}
 		}
 
+		$uagb_grid_ajax_nonce = wp_create_nonce( 'uagb_grid_ajax_nonce' );
+		wp_localize_script(
+			'uagb-post-grid-js',
+			'uagb_data',
+			array(
+				'ajax_url'                => admin_url( 'admin-ajax.php' ),
+				'uagb_grid_ajax_nonce' => $uagb_grid_ajax_nonce,
+			)
+		);
+
 		$uagb_masonry_ajax_nonce = wp_create_nonce( 'uagb_masonry_ajax_nonce' );
 		wp_localize_script(
 			'uagb-post-js',

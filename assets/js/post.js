@@ -230,6 +230,71 @@ window.UAGBPostMasonry = {
 	}
 };
 
+// window.UAGBPostMasonry = {
+// 	_init( $attr, $selector ) {
+// 		let $scope = document.querySelector( $selector );
+// console.log($scope);
+// 		if( $scope.length > 0 ){
+
+// 		}
+		// $( 'body' ).on( 'click', '.uagb-post-pagination-wrap .page-numbers', function( e ) {
+
+		// 	$scope = $( this ).closest( '.elementor-widget-uael-posts' );
+		// 	var elementSettings = getWidgetSettings( $scope );
+		// 	var found = Object.keys(elementSettings).filter(function(key) {
+		// 	  return elementSettings[key] === 'ajax';
+		// 	});
+		// 	if (!found.length) {
+		// 		   return;
+		// 	}
+
+		// 	var post_grid = $scope.find( '.uael-post-grid' );
+		// 	if ( 'main' == post_grid.data( 'query-type' ) ) {
+		// 		return;
+		// 	}
+
+		// 	e.preventDefault();
+
+		// 	$scope.find( '.uael-post-grid .uael-post-wrapper' ).last().after( '<div class="uael-post-loader"><div class="uael-loader"></div><div class="uael-loader-overlay"></div></div>' );
+
+		// 	var page_number = 1;
+		// 	var curr = parseInt( $scope.find( '.uagb-post-pagination-wrap .page-numbers.current' ).html() );
+		// 	var $this = $( this );
+		// 	if ( $this.hasClass( 'next' ) ) {
+		// 		page_number = curr + 1;
+		// 	} else if ( $this.hasClass( 'prev' ) ) {
+		// 		page_number = curr - 1;
+		// 	} else {
+		// 		page_number = $this.html();
+		// 	}
+
+		// 	$scope.find( '.uael-post-grid .uael-post-wrapper' ).last().after( '<div class="uael-post-loader"><div class="uael-loader"></div><div class="uael-loader-overlay"></div></div>' );
+
+		// 	var $args = {
+		// 		'page_id' : post_grid.data('page'),
+		// 		'widget_id' : $scope.data( 'id' ),
+		// 		'filter' : $scope.find( '.uael-filter__current' ).data( 'filter' ),
+		// 		'skin' : post_grid.data( 'skin' ),
+		// 		'page_number' : page_number
+		// 	};
+
+		// 	var offset_top = post_grid.data( 'offset-top' );
+		// 	if( '' != post_grid.data('filter-default') ){
+		// 		offset_top = $scope.find('.uael-post__header-filters').outerHeight() + parseFloat( $scope.find( '.uael-post__header .uael-post__header-filters-wrap').css( 'marginBottom' ));
+		// 	}
+
+		// 	$('html, body').animate({
+		// 		scrollTop: ( ( $scope.find( '.uael-post__body' ).offset().top ) - offset_top )
+		// 	}, 'slow');
+
+		// 	_callAjax( $scope, $args );
+
+		// } );
+// 	},
+
+
+// }
+
 // Set Carousel Height for Customiser.
 function uagb_carousel_height( id ) { // eslint-disable-line no-unused-vars
 	const wrap = document.querySelector( '#wpwrap .is-carousel.uagb-block-' + id );

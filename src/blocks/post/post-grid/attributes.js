@@ -1264,6 +1264,10 @@ const attributes = {
 		type: 'string',
 		default: 'inherit'
 	},
+	paginationType               : {
+		type    : 'string',
+		default : 'normal',
+	},
 	...btnBorderAttributes,
 	...overallBorderAttributes
 }

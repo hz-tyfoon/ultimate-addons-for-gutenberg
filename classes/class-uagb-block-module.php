@@ -84,7 +84,7 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 
 			return $block_assets;
 		}
-		
+
 		/**
 		 * Get frontend CSS.
 		 *
