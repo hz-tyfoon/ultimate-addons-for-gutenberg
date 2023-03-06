@@ -22,19 +22,21 @@ async function getImageHeightWidth( url, setAttributes, onlyHas = null ) {
 				  )
 				: this?.naturalHeight;
 		setAttributes( {
+			// eslint-disable-next-line no-nested-ternary
 			imgTagHeight: isNaN( imgTagHeight )
 				? onlyHas !== null
 					? onlyHas?.value
 					: imgTagHeight
 				: imgTagHeight,
-		} ); // eslint-disable-line no-nested-ternary
+		} );
 		setAttributes( {
+			// eslint-disable-next-line no-nested-ternary
 			imgTagWidth: isNaN( imgTagWidth )
 				? onlyHas !== null
 					? onlyHas?.value
 					: imgTagWidth
 				: imgTagWidth,
-		} ); // eslint-disable-line no-nested-ternary
+		} );
 	} );
 	img.src = url;
 }

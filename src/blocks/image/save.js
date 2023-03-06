@@ -97,8 +97,8 @@ export default function Save( props ) {
 		<div className="uagb-image-separator"></div>
 	);
 
-	// eslint-disable-next-line
 	const imageOverlayLink = (
+		// eslint-disable-next-line
 		<a
 			className={ `wp-block-uagb-image--layout-overlay-link ${ linkClass }` }
 			href={ href }

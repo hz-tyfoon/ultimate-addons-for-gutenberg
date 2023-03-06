@@ -34,8 +34,8 @@ const UAGBContainer = ( props ) => {
 		isParentOfSelectedBlock,
 		variations,
 		defaultVariation,
+		// eslint-disable-next-line no-shadow
 	} = useSelect( ( select ) => {
-		// eslint-disable-line no-shadow
 		const { getBlocks } = select( 'core/block-editor' );
 		const { getBlockType, getBlockVariations, getDefaultBlockVariation } =
 			select( 'core/blocks' );

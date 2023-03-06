@@ -1,5 +1,5 @@
+// eslint-disable-next-line no-undef
 UAGBTabs = {
-	// eslint-disable-line no-undef
 	init( $selector ) {
 		const tabsWrap = document.querySelector( $selector );
 		if ( ! tabsWrap ) {

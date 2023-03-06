@@ -46,18 +46,20 @@ const transforms = {
 				const { align, backgroundColor, style, gradient } = attributes;
 
 				const contentWidth = align ? `align${ align }` : 'default';
+				// eslint-disable-next-line no-nested-ternary
 				const bgColor = backgroundColor
 					? backgroundColor
 					: style?.color?.background
 					? style?.color?.background
-					: null; // eslint-disable-line no-nested-ternary
+					: null;
 
 				const backgroundType =
+					// eslint-disable-next-line no-nested-ternary
 					gradient || style?.color?.gradient
 						? 'gradient'
 						: bgColor || style?.color?.background
 						? 'color'
-						: 'none'; // eslint-disable-line no-nested-ternary
+						: 'none';
 
 				return createBlock(
 					'uagb/container',
@@ -86,37 +88,41 @@ const transforms = {
 				} = attributes;
 
 				const contentWidth = align ? `align${ align }` : 'default';
+				// eslint-disable-next-line no-nested-ternary
 				const bgColor = backgroundColor
 					? backgroundColor
 					: style?.color?.background
 					? style?.color?.background
-					: null; // eslint-disable-line no-nested-ternary
+					: null;
 
 				const backgroundType =
+					// eslint-disable-next-line no-nested-ternary
 					gradient || style?.color?.gradient
 						? 'gradient'
 						: bgColor || style?.color?.background
 						? 'color'
-						: 'none'; // eslint-disable-line no-nested-ternary
+						: 'none';
 
 				const innerBlocksTemplate = [];
 				const containerChildWidth = 100 / innerBlocks.length;
 
 				innerBlocks.map( ( child ) => {
+					// eslint-disable-next-line no-nested-ternary
 					const bgColorChild = child?.attributes?.backgroundColor
 						? child?.attributes?.backgroundColor
 						: child?.attributes?.style?.color?.background
 						? child?.attributes?.style?.color?.background
-						: null; // eslint-disable-line no-nested-ternary
+						: null;
 
 					const backgroundTypeChild =
+						// eslint-disable-next-line no-nested-ternary
 						child?.attributes?.gradient ||
 						child?.attributes?.style?.color?.gradient
 							? 'gradient'
 							: bgColorChild ||
 							  child?.attributes?.style?.color?.background
 							? 'color'
-							: 'none'; // eslint-disable-line no-nested-ternary
+							: 'none';
 
 					const width = child?.attributes?.width
 						? child?.attributes?.width
@@ -293,11 +299,12 @@ const transforms = {
 							backgroundVideoColor || '#00000011',
 						backgroundVideo,
 						overlayType:
+							// eslint-disable-next-line no-nested-ternary
 							overlayType === 'color' && backgroundImageColor
 								? overlayType
 								: overlayType === 'gradient'
 								? 'gradient'
-								: 'none', // eslint-disable-line no-nested-ternary
+								: 'none',
 						backgroundImageColor:
 							backgroundImageColor || '#00000000',
 						variationSelected: true,

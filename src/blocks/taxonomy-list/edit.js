@@ -18,8 +18,8 @@ const UAGBTaxonomyList = ( props ) => {
 	const deviceType = useDeviceType();
 	let categoriesList = [];
 
+	// eslint-disable-next-line  no-unused-vars
 	const { taxonomyList, termsList } = useSelect( ( select ) => {
-		// eslint-disable-line  no-unused-vars
 		const { postType, taxonomyType, showEmptyTaxonomy, listInJson } =
 			props.attributes;
 

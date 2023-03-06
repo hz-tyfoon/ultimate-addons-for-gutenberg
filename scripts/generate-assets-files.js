@@ -89,8 +89,8 @@ fs.copyFile( src, old_dest, ( error ) => {
 		console.error( error ); // eslint-disable-line
 		return;
 	}
-
+	// eslint-disable-next-line no-console
 	console.log(
 		'\n\nStyle in deprecated file blocks.style.css - Copied Successfully!'
-	); // eslint-disable-line
+	);
 } );

@@ -16,7 +16,7 @@ const SettingsIcons = {
 			/>
 		</svg>
 	),
-	templates: (
+	'templates': (
 		<svg
 			className="flex-shrink-0 mr-4 stroke-inherit"
 			fill="none"
@@ -149,7 +149,7 @@ const SettingsIcons = {
 			/>
 		</svg>
 	),
-	account: (
+	'account': (
 		<svg
 			className="flex-shrink-0 mr-4 stroke-inherit"
 			width="18"

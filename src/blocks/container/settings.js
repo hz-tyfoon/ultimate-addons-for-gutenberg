@@ -637,9 +637,9 @@ const Settings = ( props ) => {
 											} }
 											min={ 0 }
 											limitMax={ {
-												px: 1600,
+												'px': 1600,
 												'%': 100,
-												vw: 100,
+												'vw': 100,
 											} }
 											units={ [
 												{
@@ -714,7 +714,7 @@ const Settings = ( props ) => {
 									value: widthType,
 									label: 'widthType',
 								} }
-								limitMax={ { px: 1600, '%': 100, vw: 100 } }
+								limitMax={ { 'px': 1600, '%': 100, 'vw': 100 } }
 								units={ [
 									{
 										name: __(

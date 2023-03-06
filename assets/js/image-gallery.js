@@ -85,12 +85,13 @@ const UAGBImageGalleryMasonry = {
 		mediaData.append( 'action', 'uag_load_image_gallery_masonry' );
 		mediaData.append(
 			'nonce',
+			// eslint-disable-next-line no-undef
 			uagb_image_gallery.uagb_image_gallery_masonry_ajax_nonce
-		); // eslint-disable-line no-undef
+		);
 		mediaData.append( 'page_number', $obj.page_number );
 		mediaData.append( 'attr', JSON.stringify( $attr ) );
+		// eslint-disable-next-line no-undef
 		fetch( uagb_image_gallery.ajax_url, {
-			// eslint-disable-line no-undef
 			method: 'POST',
 			credentials: 'same-origin',
 			body: mediaData,
@@ -103,8 +104,8 @@ const UAGBImageGalleryMasonry = {
 				if ( ! element ) {
 					element = $scope;
 				}
+				// eslint-disable-next-line no-undef
 				const isotope = new Isotope( element, {
-					// eslint-disable-line no-undef
 					itemSelector:
 						'.spectra-image-gallery__media-wrapper--isotope',
 					stagger: 10,
@@ -112,8 +113,8 @@ const UAGBImageGalleryMasonry = {
 				isotope.insert(
 					UAGBImageGalleryMasonry.createElementFromHTML( data.data )
 				);
+				// eslint-disable-next-line no-undef
 				imagesLoaded( element ).on( 'progress', function () {
-					// eslint-disable-line no-undef
 					isotope.layout();
 				} );
 				spectraImageGalleryLoadStatus = true;
@@ -229,12 +230,13 @@ const UAGBImageGalleryPagedGrid = {
 		mediaData.append( 'action', 'uag_load_image_gallery_grid_pagination' );
 		mediaData.append(
 			'nonce',
+			// eslint-disable-next-line no-undef
 			uagb_image_gallery.uagb_image_gallery_grid_pagination_ajax_nonce
-		); // eslint-disable-line no-undef
+		);
 		mediaData.append( 'page_number', $obj.page_number );
 		mediaData.append( 'attr', JSON.stringify( $attr ) );
+		// eslint-disable-next-line no-undef
 		fetch( uagb_image_gallery.ajax_url, {
-			// eslint-disable-line no-undef
 			method: 'POST',
 			credentials: 'same-origin',
 			body: mediaData,
@@ -253,8 +255,8 @@ const UAGBImageGalleryPagedGrid = {
 				const mediaElements = element.querySelectorAll(
 					'.spectra-image-gallery__media-wrapper--isotope'
 				);
+				// eslint-disable-next-line no-undef
 				const isotope = new Isotope( element, {
-					// eslint-disable-line no-undef
 					itemSelector:
 						'.spectra-image-gallery__media-wrapper--isotope',
 					layoutMode: 'fitRows',
@@ -266,8 +268,8 @@ const UAGBImageGalleryPagedGrid = {
 				isotope.insert(
 					UAGBImageGalleryPagedGrid.createElementFromHTML( data.data )
 				);
+				// eslint-disable-next-line no-undef
 				imagesLoaded( element ).on( 'progress', function () {
-					// eslint-disable-line no-undef
 					isotope.layout();
 				} );
 				if ( parseInt( $obj.page_number ) === 1 ) {

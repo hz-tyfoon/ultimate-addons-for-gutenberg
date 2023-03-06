@@ -777,8 +777,8 @@ const Settings = ( props ) => {
 					} }
 					min={ 0 }
 					max={ 100 }
-					limitMin={ { px: 0, '%': 0 } }
-					limitMax={ { px: 1500, '%': 100 } }
+					limitMin={ { 'px': 0, '%': 0 } }
+					limitMax={ { 'px': 1500, '%': 100 } }
 					units={ [
 						{
 							name: __(

@@ -1187,8 +1187,8 @@ const Settings = ( props ) => {
 	};
 
 	let cnt = 0;
+	// eslint-disable-next-line array-callback-return
 	test_block.map( ( item, thisIndex ) => {
-		// eslint-disable-line array-callback-return
 		const imageArray = test_block[ thisIndex ];
 		if ( imageArray && typeof imageArray !== 'undefined' ) {
 			const image = imageArray.image;

@@ -186,8 +186,8 @@ window.UAGBPostMasonry = {
 		PostData.append( 'page_number', $obj.page_number );
 		PostData.append( 'attr', JSON.stringify( $attr ) );
 
+		// eslint-disable-line no-undef
 		fetch( uagb_data.ajax_url, {
-			// eslint-disable-line no-undef
 			method: 'POST',
 			credentials: 'same-origin',
 			body: PostData,
@@ -200,8 +200,8 @@ window.UAGBPostMasonry = {
 					element = $scope;
 				}
 
+				// eslint-disable-next-line no-undef
 				const isotope = new Isotope( element, {
-					// eslint-disable-line no-undef
 					itemSelector: 'article',
 				} );
 
@@ -249,8 +249,8 @@ window.UAGBPostMasonry = {
 };
 
 // Set Carousel Height for Customiser.
+// eslint-disable-next-line no-unused-vars
 function uagb_carousel_height( id ) {
-	// eslint-disable-line no-unused-vars
 	const wrap = document.querySelector(
 		'#wpwrap .is-carousel.uagb-block-' + id
 	);
@@ -260,8 +260,8 @@ function uagb_carousel_height( id ) {
 }
 
 // Unset Carousel Height for Customiser.
+// eslint-disable-next-line no-unused-vars
 function uagb_carousel_unset_height( id ) {
-	// eslint-disable-line no-unused-vars
 	const wrap = document.querySelector(
 		'#wpwrap .is-carousel.uagb-block-' + id
 	);

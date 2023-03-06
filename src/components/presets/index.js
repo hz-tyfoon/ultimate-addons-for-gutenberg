@@ -199,11 +199,10 @@ const UAGPresets = ( props ) => {
 					onClick={ () => updatePresets( key ) }
 				/>
 
-				<label
+				<label // eslint-disable-line jsx-a11y/label-has-associated-control, jsx-a11y/no-noninteractive-element-interactions
 					htmlFor={ key }
 					className="uag-presets-radio-input-label"
 					dangerouslySetInnerHTML={ {
-						// eslint-disable-line
 						__html: preset.icon,
 					} }
 					onClick={ () => updatePresets( key ) }

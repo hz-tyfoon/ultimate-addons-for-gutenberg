@@ -87,6 +87,7 @@ export default function save( props ) {
 		>
 			{ ctaType === 'all' && (
 				<>
+					{ /* eslint-disable-next-line jsx-a11y/anchor-has-content */ }
 					<a
 						href={ ctaLink }
 						className="uagb-cta__link-to-all"

@@ -78,11 +78,12 @@ const UAGBCountdownEdit = ( props ) => {
 	useEffect( () => {
 		if ( countdownRef ) {
 			setTimeout( () => {
+				// eslint-disable-next-line no-undef
 				UAGBCountdown.editorInit(
 					'.uagb-block-' + props.clientId.substr( 0, 8 ),
 					props.attributes,
 					countdownRef.current
-				); // eslint-disable-line no-undef
+				);
 			} );
 		}
 	}, [ countdownRef ] );
@@ -99,11 +100,12 @@ const UAGBCountdownEdit = ( props ) => {
 
 	useEffect( () => {
 		if ( props.attributes.block_id && timeChanged === 1 ) {
+			// eslint-disable-next-line no-undef
 			UAGBCountdown.changeEndTime(
 				'.uagb-block-' + props.attributes.block_id,
 				props.attributes,
 				countdownRef.current
-			); // eslint-disable-line no-undef
+			);
 		}
 		setTimeChanged( 1 );
 	}, [ endDateTime, showDays, showHours, showMinutes ] );

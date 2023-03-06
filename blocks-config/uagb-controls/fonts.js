@@ -1,11 +1,11 @@
 const fonts = {
-	ABeeZee: {
+	'ABeeZee': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Abel: {
+	'Abel': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -23,25 +23,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Aclonica: {
+	'Aclonica': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Acme: {
+	'Acme': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Actor: {
+	'Actor': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Adamina: {
+	'Adamina': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -59,31 +59,31 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Akronim: {
+	'Akronim': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Aladin: {
+	'Aladin': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Aldrich: {
+	'Aldrich': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Alef: {
+	'Alef': {
 		v: [ 'regular', '700' ],
 		subset: [ 'hebrew', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Alegreya: {
+	'Alegreya': {
 		v: [
 			'regular',
 			'italic',
@@ -203,13 +203,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Alice: {
+	'Alice': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'cyrillic-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Alike: {
+	'Alike': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -221,13 +221,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Allan: {
+	'Allan': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Allerta: {
+	'Allerta': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -239,13 +239,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Allura: {
+	'Allura': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Almendra: {
+	'Almendra': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -263,13 +263,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Amarante: {
+	'Amarante': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Amaranth: {
+	'Amaranth': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -281,43 +281,43 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Amethysta: {
+	'Amethysta': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Amiko: {
+	'Amiko': {
 		v: [ 'regular', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Amiri: {
+	'Amiri': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'arabic', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Amita: {
+	'Amita': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Anaheim: {
+	'Anaheim': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Andada: {
+	'Andada': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Andika: {
+	'Andika': {
 		v: [ 'regular' ],
 		subset: [
 			'cyrillic',
@@ -329,7 +329,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Angkor: {
+	'Angkor': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -347,7 +347,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Antic: {
+	'Antic': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -365,19 +365,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Anton: {
+	'Anton': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Arapey: {
+	'Arapey': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Arbutus: {
+	'Arbutus': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -395,7 +395,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Archivo: {
+	'Archivo': {
 		v: [
 			'regular',
 			'italic',
@@ -453,7 +453,7 @@ const fonts = {
 		],
 		i: [ 'normal' ],
 	},
-	Arimo: {
+	'Arimo': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [
 			'cyrillic',
@@ -468,19 +468,19 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Arizonia: {
+	'Arizonia': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Armata: {
+	'Armata': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Arsenal: {
+	'Arsenal': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [
 			'cyrillic',
@@ -492,25 +492,25 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Artifika: {
+	'Artifika': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Arvo: {
+	'Arvo': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Arya: {
+	'Arya': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Asap: {
+	'Asap': {
 		v: [
 			'regular',
 			'italic',
@@ -540,43 +540,43 @@ const fonts = {
 		weight: [ 'Default', '400', '500', '600', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Asar: {
+	'Asar': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Asset: {
+	'Asset': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Assistant: {
+	'Assistant': {
 		v: [ '200', '300', 'regular', '600', '700', '800' ],
 		subset: [ 'hebrew', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '600', '700', '800' ],
 		i: [ 'normal' ],
 	},
-	Astloch: {
+	'Astloch': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Asul: {
+	'Asul': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Athiti: {
+	'Athiti': {
 		v: [ '200', '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'thai', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Atma: {
+	'Atma': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'bengali', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
@@ -588,13 +588,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Aubrey: {
+	'Aubrey': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Audiowide: {
+	'Audiowide': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -606,7 +606,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Average: {
+	'Average': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -648,13 +648,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Bahiana: {
+	'Bahiana': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Baloo: {
+	'Baloo': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'devanagari', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -714,19 +714,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Balthazar: {
+	'Balthazar': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Bangers: {
+	'Bangers': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Barlow: {
+	'Barlow': {
 		v: [
 			'100',
 			'100italic',
@@ -834,61 +834,61 @@ const fonts = {
 		],
 		i: [ 'normal', 'italic' ],
 	},
-	Barrio: {
+	'Barrio': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Basic: {
+	'Basic': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Battambang: {
+	'Battambang': {
 		v: [ 'regular', '700' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Baumans: {
+	'Baumans': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Bayon: {
+	'Bayon': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Belgrano: {
+	'Belgrano': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Bellefair: {
+	'Bellefair': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'hebrew', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Belleza: {
+	'Belleza': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	BenchNine: {
+	'BenchNine': {
 		v: [ '300', 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '300', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Bentham: {
+	'Bentham': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -900,7 +900,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Bevan: {
+	'Bevan': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -918,7 +918,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Bilbo: {
+	'Bilbo': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -930,7 +930,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	BioRhyme: {
+	'BioRhyme': {
 		v: [ '200', '300', 'regular', '700', '800' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '700', '800' ],
@@ -942,13 +942,13 @@ const fonts = {
 		weight: [ 'Default', '200', '300', '400', '700', '800' ],
 		i: [ 'normal' ],
 	},
-	Biryani: {
+	'Biryani': {
 		v: [ '200', '300', 'regular', '600', '700', '800', '900' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '600', '700', '800', '900' ],
 		i: [ 'normal' ],
 	},
-	Bitter: {
+	'Bitter': {
 		v: [ 'regular', 'italic', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -972,19 +972,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Bokor: {
+	'Bokor': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Bonbon: {
+	'Bonbon': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Boogaloo: {
+	'Boogaloo': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1002,7 +1002,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Brawler: {
+	'Brawler': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1026,19 +1026,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Buda: {
+	'Buda': {
 		v: [ '300' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '300' ],
 		i: [],
 	},
-	Buenard: {
+	'Buenard': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Bungee: {
+	'Bungee': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1068,7 +1068,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Butcherman: {
+	'Butcherman': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1080,7 +1080,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cabin: {
+	'Cabin': {
 		v: [
 			'regular',
 			'italic',
@@ -1113,43 +1113,43 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cagliostro: {
+	'Cagliostro': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cairo: {
+	'Cairo': {
 		v: [ '200', '300', 'regular', '600', '700', '900' ],
 		subset: [ 'latin-ext', 'arabic', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '600', '700', '900' ],
 		i: [ 'normal' ],
 	},
-	Calligraffitti: {
+	'Calligraffitti': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cambay: {
+	'Cambay': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Cambo: {
+	'Cambo': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Candal: {
+	'Candal': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cantarell: {
+	'Cantarell': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -1167,19 +1167,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Capriola: {
+	'Capriola': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cardo: {
+	'Cardo': {
 		v: [ 'regular', 'italic', '700' ],
 		subset: [ 'greek-ext', 'latin-ext', 'greek', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Carme: {
+	'Carme': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1203,7 +1203,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Catamaran: {
+	'Catamaran': {
 		v: [
 			'100',
 			'200',
@@ -1230,13 +1230,13 @@ const fonts = {
 		],
 		i: [ 'normal' ],
 	},
-	Caudex: {
+	'Caudex': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'greek-ext', 'latin-ext', 'greek', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Caveat: {
+	'Caveat': {
 		v: [ 'regular', '700' ],
 		subset: [ 'cyrillic', 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -1260,7 +1260,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Changa: {
+	'Changa': {
 		v: [ '200', '300', 'regular', '500', '600', '700', '800' ],
 		subset: [ 'latin-ext', 'arabic', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700', '800' ],
@@ -1272,13 +1272,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Chango: {
+	'Chango': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Chathura: {
+	'Chathura': {
 		v: [ '100', '300', 'regular', '700', '800' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '100', '300', '400', '700', '800' ],
@@ -1302,7 +1302,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Chenla: {
+	'Chenla': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -1320,19 +1320,19 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Chewy: {
+	'Chewy': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Chicle: {
+	'Chicle': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Chivo: {
+	'Chivo': {
 		v: [
 			'300',
 			'300italic',
@@ -1347,13 +1347,13 @@ const fonts = {
 		weight: [ 'Default', '300', '400', '700', '900' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Chonburi: {
+	'Chonburi': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'thai', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cinzel: {
+	'Cinzel': {
 		v: [ 'regular', '700', '900' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700', '900' ],
@@ -1371,7 +1371,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Coda: {
+	'Coda': {
 		v: [ 'regular', '800' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '800' ],
@@ -1383,25 +1383,25 @@ const fonts = {
 		weight: [ 'Default', '800' ],
 		i: [],
 	},
-	Codystar: {
+	'Codystar': {
 		v: [ '300', 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '300', '400' ],
 		i: [ 'normal' ],
 	},
-	Coiny: {
+	'Coiny': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'tamil', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Combo: {
+	'Combo': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Comfortaa: {
+	'Comfortaa': {
 		v: [ '300', 'regular', '700' ],
 		subset: [
 			'cyrillic',
@@ -1426,13 +1426,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Condiment: {
+	'Condiment': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Content: {
+	'Content': {
 		v: [ 'regular', '700' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400', '700' ],
@@ -1444,31 +1444,31 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Convergence: {
+	'Convergence': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cookie: {
+	'Cookie': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Copse: {
+	'Copse': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Corben: {
+	'Corben': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Cormorant: {
+	'Cormorant': {
 		v: [
 			'300',
 			'300italic',
@@ -1567,13 +1567,13 @@ const fonts = {
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Courgette: {
+	'Courgette': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cousine: {
+	'Cousine': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [
 			'cyrillic',
@@ -1588,7 +1588,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Coustard: {
+	'Coustard': {
 		v: [ 'regular', '900' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '900' ],
@@ -1606,7 +1606,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Creepster: {
+	'Creepster': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1630,13 +1630,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Crushed: {
+	'Crushed': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cuprum: {
+	'Cuprum': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [
 			'cyrillic',
@@ -1654,7 +1654,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Cutive: {
+	'Cutive': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1666,7 +1666,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Damion: {
+	'Damion': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1678,7 +1678,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Dangrek: {
+	'Dangrek': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -1702,13 +1702,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Dekko: {
+	'Dekko': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Delius: {
+	'Delius': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1738,13 +1738,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Devonshire: {
+	'Devonshire': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Dhurjati: {
+	'Dhurjati': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1763,7 +1763,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Diplomata: {
+	'Diplomata': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1781,13 +1781,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Dokdo: {
+	'Dokdo': {
 		v: [ 'regular' ],
 		subset: [ 'korean', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Domine: {
+	'Domine': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -1805,13 +1805,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Dorsa: {
+	'Dorsa': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Dosis: {
+	'Dosis': {
 		v: [ '200', '300', 'regular', '500', '600', '700', '800' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700', '800' ],
@@ -1829,7 +1829,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Dynalight: {
+	'Dynalight': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -1872,19 +1872,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Eater: {
+	'Eater': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Economica: {
+	'Economica': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Eczar: {
+	'Eczar': {
 		v: [ 'regular', '500', '600', '700', '800' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '500', '600', '700', '800' ],
@@ -1896,13 +1896,13 @@ const fonts = {
 		weight: [ 'Default', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Electrolize: {
+	'Electrolize': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Elsie: {
+	'Elsie': {
 		v: [ 'regular', '900' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '900' ],
@@ -2061,19 +2061,19 @@ const fonts = {
 		],
 		i: [ 'normal' ],
 	},
-	Engagement: {
+	'Engagement': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Englebert: {
+	'Englebert': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Enriqueta: {
+	'Enriqueta': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -2085,7 +2085,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Esteban: {
+	'Esteban': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2097,13 +2097,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ewert: {
+	'Ewert': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Exo: {
+	'Exo': {
 		v: [
 			'100',
 			'100italic',
@@ -2196,13 +2196,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Farsan: {
+	'Farsan': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'gujarati', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Fascinate: {
+	'Fascinate': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2220,7 +2220,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Fasthand: {
+	'Fasthand': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -2232,7 +2232,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Faustina: {
+	'Faustina': {
 		v: [
 			'regular',
 			'italic',
@@ -2247,25 +2247,25 @@ const fonts = {
 		weight: [ 'Default', '400', '500', '600', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Federant: {
+	'Federant': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Federo: {
+	'Federo': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Felipa: {
+	'Felipa': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Fenix: {
+	'Fenix': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2434,19 +2434,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Flamenco: {
+	'Flamenco': {
 		v: [ '300', 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '300', '400' ],
 		i: [ 'normal' ],
 	},
-	Flavors: {
+	'Flavors': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Fondamento: {
+	'Fondamento': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2458,7 +2458,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Forum: {
+	'Forum': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'cyrillic-ext', 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2494,25 +2494,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Freehand: {
+	'Freehand': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Fresca: {
+	'Fresca': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Frijole: {
+	'Frijole': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Fruktur: {
+	'Fruktur': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2536,37 +2536,37 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Gabriela: {
+	'Gabriela': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'cyrillic-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Gaegu: {
+	'Gaegu': {
 		v: [ '300', 'regular', '700' ],
 		subset: [ 'korean', 'latin' ],
 		weight: [ 'Default', '300', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Gafata: {
+	'Gafata': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Galada: {
+	'Galada': {
 		v: [ 'regular' ],
 		subset: [ 'bengali', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Galdeano: {
+	'Galdeano': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Galindo: {
+	'Galindo': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2590,13 +2590,13 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Geo: {
+	'Geo': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Geostar: {
+	'Geostar': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2614,7 +2614,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Gidugu: {
+	'Gidugu': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2638,7 +2638,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Glegoo: {
+	'Glegoo': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -2662,7 +2662,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Gorditas: {
+	'Gorditas': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -2701,7 +2701,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Graduate: {
+	'Graduate': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2725,43 +2725,43 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Griffy: {
+	'Griffy': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Gruppo: {
+	'Gruppo': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Gudea: {
+	'Gudea': {
 		v: [ 'regular', 'italic', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Gugi: {
+	'Gugi': {
 		v: [ 'regular' ],
 		subset: [ 'korean', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Gurajada: {
+	'Gurajada': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Habibi: {
+	'Habibi': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Halant: {
+	'Halant': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
@@ -2773,7 +2773,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Hanalei: {
+	'Hanalei': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2785,13 +2785,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Handlee: {
+	'Handlee': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Hanuman: {
+	'Hanuman': {
 		v: [ 'regular', '700' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400', '700' ],
@@ -2803,7 +2803,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Harmattan: {
+	'Harmattan': {
 		v: [ 'regular' ],
 		subset: [ 'arabic', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -2815,7 +2815,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Heebo: {
+	'Heebo': {
 		v: [ '100', '300', 'regular', '500', '700', '800', '900' ],
 		subset: [ 'hebrew', 'latin' ],
 		weight: [ 'Default', '100', '300', '400', '500', '700', '800', '900' ],
@@ -2839,7 +2839,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Hind: {
+	'Hind': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
@@ -2881,7 +2881,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Homenaje: {
+	'Homenaje': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3049,31 +3049,31 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Iceberg: {
+	'Iceberg': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Iceland: {
+	'Iceland': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Imprima: {
+	'Imprima': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Inconsolata: {
+	'Inconsolata': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Inder: {
+	'Inder': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3085,7 +3085,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Inika: {
+	'Inika': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -3109,19 +3109,19 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Italiana: {
+	'Italiana': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Italianno: {
+	'Italianno': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Itim: {
+	'Itim': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'thai', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3139,7 +3139,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Jaldi: {
+	'Jaldi': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -3163,7 +3163,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Jomhuria: {
+	'Jomhuria': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'arabic', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3209,19 +3209,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Jua: {
+	'Jua': {
 		v: [ 'regular' ],
 		subset: [ 'korean', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Judson: {
+	'Judson': {
 		v: [ 'regular', 'italic', '700' ],
 		subset: [ 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Julee: {
+	'Julee': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3233,13 +3233,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Junge: {
+	'Junge': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Jura: {
+	'Jura': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [
 			'cyrillic',
@@ -3265,25 +3265,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Kadwa: {
+	'Kadwa': {
 		v: [ 'regular', '700' ],
 		subset: [ 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Kalam: {
+	'Kalam': {
 		v: [ '300', 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Kameron: {
+	'Kameron': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Kanit: {
+	'Kanit': {
 		v: [
 			'100',
 			'100italic',
@@ -3319,25 +3319,25 @@ const fonts = {
 		],
 		i: [ 'normal', 'italic' ],
 	},
-	Kantumruy: {
+	'Kantumruy': {
 		v: [ '300', 'regular', '700' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '300', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Karla: {
+	'Karla': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Karma: {
+	'Karma': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Katibeh: {
+	'Katibeh': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'arabic', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3349,13 +3349,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Kavivanar: {
+	'Kavivanar': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'tamil', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Kavoon: {
+	'Kavoon': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3379,25 +3379,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Kenia: {
+	'Kenia': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Khand: {
+	'Khand': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Khmer: {
+	'Khmer': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Khula: {
+	'Khula': {
 		v: [ '300', 'regular', '600', '700', '800' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '600', '700', '800' ],
@@ -3415,13 +3415,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Knewave: {
+	'Knewave': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Kosugi: {
+	'Kosugi': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'japanese', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3439,25 +3439,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Koulen: {
+	'Koulen': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Kranky: {
+	'Kranky': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Kreon: {
+	'Kreon': {
 		v: [ '300', 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '300', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Kristi: {
+	'Kristi': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3481,7 +3481,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Kurale: {
+	'Kurale': {
 		v: [ 'regular' ],
 		subset: [
 			'cyrillic',
@@ -3499,7 +3499,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Laila: {
+	'Laila': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
@@ -3511,25 +3511,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Lalezar: {
+	'Lalezar': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'arabic', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Lancelot: {
+	'Lancelot': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Lateef: {
+	'Lateef': {
 		v: [ 'regular' ],
 		subset: [ 'arabic', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Lato: {
+	'Lato': {
 		v: [
 			'100',
 			'100italic',
@@ -3558,25 +3558,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ledger: {
+	'Ledger': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Lekton: {
+	'Lekton': {
 		v: [ 'regular', 'italic', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Lemon: {
+	'Lemon': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Lemonada: {
+	'Lemonada': {
 		v: [ '300', 'regular', '600', '700' ],
 		subset: [ 'latin-ext', 'arabic', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '300', '400', '600', '700' ],
@@ -3678,7 +3678,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Limelight: {
+	'Limelight': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3690,7 +3690,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Lobster: {
+	'Lobster': {
 		v: [ 'regular' ],
 		subset: [
 			'cyrillic',
@@ -3732,7 +3732,7 @@ const fonts = {
 		weight: [ 'Default', '100', '300', '400', '900' ],
 		i: [ 'normal' ],
 	},
-	Lora: {
+	'Lora': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [
 			'cyrillic',
@@ -3768,13 +3768,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Lusitana: {
+	'Lusitana': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Lustria: {
+	'Lustria': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3812,7 +3812,7 @@ const fonts = {
 		weight: [ 'Default', '100', '300', '400', '500', '700', '800', '900' ],
 		i: [ 'normal' ],
 	},
-	Macondo: {
+	'Macondo': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3824,13 +3824,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Mada: {
+	'Mada': {
 		v: [ '200', '300', 'regular', '500', '600', '700', '900' ],
 		subset: [ 'arabic', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700', '900' ],
 		i: [ 'normal' ],
 	},
-	Magra: {
+	'Magra': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -3842,31 +3842,31 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Maitree: {
+	'Maitree': {
 		v: [ '200', '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'thai', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Mako: {
+	'Mako': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Mallanna: {
+	'Mallanna': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Mandali: {
+	'Mandali': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Manuale: {
+	'Manuale': {
 		v: [
 			'regular',
 			'italic',
@@ -3881,7 +3881,7 @@ const fonts = {
 		weight: [ 'Default', '400', '500', '600', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Marcellus: {
+	'Marcellus': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3899,7 +3899,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Margarine: {
+	'Margarine': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3917,13 +3917,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Marmelad: {
+	'Marmelad': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Martel: {
+	'Martel': {
 		v: [ '200', '300', 'regular', '600', '700', '800', '900' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '600', '700', '800', '900' ],
@@ -3935,13 +3935,13 @@ const fonts = {
 		weight: [ 'Default', '200', '300', '400', '600', '700', '800', '900' ],
 		i: [ 'normal' ],
 	},
-	Marvel: {
+	'Marvel': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Mate: {
+	'Mate': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3959,19 +3959,19 @@ const fonts = {
 		weight: [ 'Default', '400', '500', '700', '900' ],
 		i: [ 'normal' ],
 	},
-	McLaren: {
+	'McLaren': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Meddon: {
+	'Meddon': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	MedievalSharp: {
+	'MedievalSharp': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -3989,7 +3989,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Megrim: {
+	'Megrim': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4001,7 +4001,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Merienda: {
+	'Merienda': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -4013,7 +4013,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Merriweather: {
+	'Merriweather': {
 		v: [
 			'300',
 			'300italic',
@@ -4049,7 +4049,7 @@ const fonts = {
 		weight: [ 'Default', '300', '400', '700', '800' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Metal: {
+	'Metal': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -4061,31 +4061,31 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Metamorphous: {
+	'Metamorphous': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Metrophobic: {
+	'Metrophobic': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Michroma: {
+	'Michroma': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Milonga: {
+	'Milonga': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Miltonian: {
+	'Miltonian': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4097,13 +4097,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Mina: {
+	'Mina': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'bengali', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Miniver: {
+	'Miniver': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4115,7 +4115,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Mirza: {
+	'Mirza': {
 		v: [ 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'arabic', 'latin' ],
 		weight: [ 'Default', '400', '500', '600', '700' ],
@@ -4127,13 +4127,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Mitr: {
+	'Mitr': {
 		v: [ '200', '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'thai', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Modak: {
+	'Modak': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4145,37 +4145,37 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Mogra: {
+	'Mogra': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'gujarati', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Molengo: {
+	'Molengo': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Molle: {
+	'Molle': {
 		v: [ 'italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default' ],
 		i: [ 'italic' ],
 	},
-	Monda: {
+	'Monda': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Monofett: {
+	'Monofett': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Monoton: {
+	'Monoton': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4187,19 +4187,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Montaga: {
+	'Montaga': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Montez: {
+	'Montez': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Montserrat: {
+	'Montserrat': {
 		v: [
 			'100',
 			'100italic',
@@ -4289,13 +4289,13 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Moul: {
+	'Moul': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Moulpali: {
+	'Moulpali': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -4343,7 +4343,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Mukta: {
+	'Mukta': {
 		v: [ '200', '300', 'regular', '500', '600', '700', '800' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700', '800' ],
@@ -4367,7 +4367,7 @@ const fonts = {
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700', '800' ],
 		i: [ 'normal' ],
 	},
-	Muli: {
+	'Muli': {
 		v: [
 			'200',
 			'200italic',
@@ -4394,7 +4394,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	NTR: {
+	'NTR': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4430,13 +4430,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Neucha: {
+	'Neucha': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Neuton: {
+	'Neuton': {
 		v: [ '200', '300', 'regular', 'italic', '700', '800' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '700', '800' ],
@@ -4454,7 +4454,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Niconne: {
+	'Niconne': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4466,25 +4466,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Nobile: {
+	'Nobile': {
 		v: [ 'regular', 'italic', '500', '500italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '500', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Nokora: {
+	'Nokora': {
 		v: [ 'regular', '700' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Norican: {
+	'Norican': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Nosifer: {
+	'Nosifer': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4603,13 +4603,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Numans: {
+	'Numans': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Nunito: {
+	'Nunito': {
 		v: [
 			'200',
 			'200italic',
@@ -4657,7 +4657,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Offside: {
+	'Offside': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4675,7 +4675,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Oldenburg: {
+	'Oldenburg': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4732,25 +4732,25 @@ const fonts = {
 		weight: [ 'Default', '300', '700' ],
 		i: [],
 	},
-	Oranienbaum: {
+	'Oranienbaum': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'cyrillic-ext', 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Orbitron: {
+	'Orbitron': {
 		v: [ 'regular', '500', '700', '900' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '500', '700', '900' ],
 		i: [ 'normal' ],
 	},
-	Oregano: {
+	'Oregano': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Orienta: {
+	'Orienta': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4762,7 +4762,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Oswald: {
+	'Oswald': {
 		v: [ '200', '300', 'regular', '500', '600', '700' ],
 		subset: [ 'cyrillic', 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700' ],
@@ -4774,7 +4774,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Overlock: {
+	'Overlock': {
 		v: [ 'regular', 'italic', '700', '700italic', '900', '900italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700', '900' ],
@@ -4786,7 +4786,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Overpass: {
+	'Overpass': {
 		v: [
 			'100',
 			'100italic',
@@ -4825,13 +4825,13 @@ const fonts = {
 		weight: [ 'Default', '300', '400', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Ovo: {
+	'Ovo': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Oxygen: {
+	'Oxygen': {
 		v: [ '300', 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '300', '400', '700' ],
@@ -4879,19 +4879,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Pacifico: {
+	'Pacifico': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Padauk: {
+	'Padauk': {
 		v: [ 'regular', '700' ],
 		subset: [ 'myanmar', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Palanquin: {
+	'Palanquin': {
 		v: [ '100', '200', '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '100', '200', '300', '400', '500', '600', '700' ],
@@ -4903,7 +4903,7 @@ const fonts = {
 		weight: [ 'Default', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Pangolin: {
+	'Pangolin': {
 		v: [ 'regular' ],
 		subset: [
 			'cyrillic',
@@ -4915,13 +4915,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Paprika: {
+	'Paprika': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Parisienne: {
+	'Parisienne': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4957,7 +4957,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Pattaya: {
+	'Pattaya': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'latin-ext', 'thai', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4969,7 +4969,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Pavanam: {
+	'Pavanam': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'tamil', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -4981,13 +4981,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Peddana: {
+	'Peddana': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Peralta: {
+	'Peralta': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5005,19 +5005,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Petrona: {
+	'Petrona': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Philosopher: {
+	'Philosopher': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'cyrillic', 'cyrillic-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Piedra: {
+	'Piedra': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5035,13 +5035,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Plaster: {
+	'Plaster': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Play: {
+	'Play': {
 		v: [ 'regular', '700' ],
 		subset: [
 			'cyrillic',
@@ -5054,7 +5054,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Playball: {
+	'Playball': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5072,7 +5072,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700', '900' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Podkova: {
+	'Podkova': {
 		v: [ 'regular', '500', '600', '700', '800' ],
 		subset: [
 			'cyrillic',
@@ -5096,13 +5096,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Poly: {
+	'Poly': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Pompiere: {
+	'Pompiere': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5120,7 +5120,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Poppins: {
+	'Poppins': {
 		v: [
 			'100',
 			'100italic',
@@ -5174,13 +5174,13 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Prata: {
+	'Prata': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'cyrillic-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Preahvihear: {
+	'Preahvihear': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -5192,7 +5192,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Pridi: {
+	'Pridi': {
 		v: [ '200', '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'thai', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700' ],
@@ -5204,13 +5204,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Prociono: {
+	'Prociono': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Prompt: {
+	'Prompt': {
 		v: [
 			'100',
 			'100italic',
@@ -5269,7 +5269,7 @@ const fonts = {
 		weight: [ 'Default', '400', '500', '600', '700', '800' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Puritan: {
+	'Puritan': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -5281,19 +5281,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Quando: {
+	'Quando': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Quantico: {
+	'Quantico': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Quattrocento: {
+	'Quattrocento': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -5305,25 +5305,25 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Questrial: {
+	'Questrial': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Quicksand: {
+	'Quicksand': {
 		v: [ '300', 'regular', '500', '700' ],
 		subset: [ 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '700' ],
 		i: [ 'normal' ],
 	},
-	Quintessential: {
+	'Quintessential': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Qwigley: {
+	'Qwigley': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5335,25 +5335,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Radley: {
+	'Radley': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Rajdhani: {
+	'Rajdhani': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Rakkas: {
+	'Rakkas': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'arabic', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Raleway: {
+	'Raleway': {
 		v: [
 			'100',
 			'100italic',
@@ -5395,19 +5395,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ramabhadra: {
+	'Ramabhadra': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ramaraja: {
+	'Ramaraja': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Rambla: {
+	'Rambla': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -5419,31 +5419,31 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ranchers: {
+	'Ranchers': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Rancho: {
+	'Rancho': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ranga: {
+	'Ranga': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Rasa: {
+	'Rasa': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'gujarati', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Rationale: {
+	'Rationale': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5455,7 +5455,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Redressed: {
+	'Redressed': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5473,7 +5473,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Revalia: {
+	'Revalia': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5485,7 +5485,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ribeye: {
+	'Ribeye': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5497,19 +5497,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Righteous: {
+	'Righteous': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Risque: {
+	'Risque': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Roboto: {
+	'Roboto': {
 		v: [
 			'100',
 			'100italic',
@@ -5589,7 +5589,7 @@ const fonts = {
 		weight: [ 'Default', '100', '300', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Rochester: {
+	'Rochester': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5601,7 +5601,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Rokkitt: {
+	'Rokkitt': {
 		v: [
 			'100',
 			'200',
@@ -5628,7 +5628,7 @@ const fonts = {
 		],
 		i: [ 'normal' ],
 	},
-	Romanesco: {
+	'Romanesco': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5640,13 +5640,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Rosario: {
+	'Rosario': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Rosarivo: {
+	'Rosarivo': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5664,7 +5664,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Rubik: {
+	'Rubik': {
 		v: [
 			'300',
 			'300italic',
@@ -5687,13 +5687,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ruda: {
+	'Ruda': {
 		v: [ 'regular', '700', '900' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700', '900' ],
 		i: [ 'normal' ],
 	},
-	Rufina: {
+	'Rufina': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -5705,7 +5705,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ruluko: {
+	'Ruluko': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5729,37 +5729,37 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ruthie: {
+	'Ruthie': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Rye: {
+	'Rye': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sacramento: {
+	'Sacramento': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sahitya: {
+	'Sahitya': {
 		v: [ 'regular', '700' ],
 		subset: [ 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Sail: {
+	'Sail': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Saira: {
+	'Saira': {
 		v: [
 			'100',
 			'200',
@@ -5867,25 +5867,25 @@ const fonts = {
 		],
 		i: [ 'normal' ],
 	},
-	Salsa: {
+	'Salsa': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sanchez: {
+	'Sanchez': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Sancreek: {
+	'Sancreek': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sansita: {
+	'Sansita': {
 		v: [
 			'regular',
 			'italic',
@@ -5900,25 +5900,25 @@ const fonts = {
 		weight: [ 'Default', '400', '700', '800', '900' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Sarala: {
+	'Sarala': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Sarina: {
+	'Sarina': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sarpanch: {
+	'Sarpanch': {
 		v: [ 'regular', '500', '600', '700', '800', '900' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '500', '600', '700', '800', '900' ],
 		i: [ 'normal' ],
 	},
-	Satisfy: {
+	'Satisfy': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5936,19 +5936,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Scada: {
+	'Scada': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'cyrillic', 'cyrillic-ext', 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Scheherazade: {
+	'Scheherazade': {
 		v: [ 'regular', '700' ],
 		subset: [ 'arabic', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Schoolbell: {
+	'Schoolbell': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -5984,7 +5984,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sevillana: {
+	'Sevillana': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6008,13 +6008,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Shanti: {
+	'Shanti': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Share: {
+	'Share': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -6032,7 +6032,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Shojumaru: {
+	'Shojumaru': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6044,13 +6044,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Shrikhand: {
+	'Shrikhand': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'gujarati', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Siemreap: {
+	'Siemreap': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -6062,7 +6062,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Signika: {
+	'Signika': {
 		v: [ '300', 'regular', '600', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '300', '400', '600', '700' ],
@@ -6074,13 +6074,13 @@ const fonts = {
 		weight: [ 'Default', '300', '400', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Simonetta: {
+	'Simonetta': {
 		v: [ 'regular', 'italic', '900', '900italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '900' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Sintony: {
+	'Sintony': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -6098,7 +6098,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Skranji: {
+	'Skranji': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
@@ -6116,31 +6116,31 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Slackey: {
+	'Slackey': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Smokum: {
+	'Smokum': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Smythe: {
+	'Smythe': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sniglet: {
+	'Sniglet': {
 		v: [ 'regular', '800' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '800' ],
 		i: [ 'normal' ],
 	},
-	Snippet: {
+	'Snippet': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6158,7 +6158,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sofia: {
+	'Sofia': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6233,7 +6233,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Spectral: {
+	'Spectral': {
 		v: [
 			'200',
 			'200italic',
@@ -6281,13 +6281,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Spinnaker: {
+	'Spinnaker': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Spirax: {
+	'Spirax': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6305,13 +6305,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sriracha: {
+	'Sriracha': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'thai', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Stalemate: {
+	'Stalemate': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6341,19 +6341,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Stoke: {
+	'Stoke': {
 		v: [ '300', 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '300', '400' ],
 		i: [ 'normal' ],
 	},
-	Strait: {
+	'Strait': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Stylish: {
+	'Stylish': {
 		v: [ 'regular' ],
 		subset: [ 'korean', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6371,19 +6371,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sumana: {
+	'Sumana': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Sunflower: {
+	'Sunflower': {
 		v: [ '300', '500', '700' ],
 		subset: [ 'korean', 'latin' ],
 		weight: [ 'Default', '300', '500', '700' ],
 		i: [],
 	},
-	Sunshiney: {
+	'Sunshiney': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6395,25 +6395,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Sura: {
+	'Sura': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Suranna: {
+	'Suranna': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Suravaram: {
+	'Suravaram': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Suwannaphum: {
+	'Suwannaphum': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
@@ -6425,37 +6425,37 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Syncopate: {
+	'Syncopate': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Tajawal: {
+	'Tajawal': {
 		v: [ '200', '300', 'regular', '500', '700', '800', '900' ],
 		subset: [ 'arabic', 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '700', '800', '900' ],
 		i: [ 'normal' ],
 	},
-	Tangerine: {
+	'Tangerine': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Taprom: {
+	'Taprom': {
 		v: [ 'regular' ],
 		subset: [ 'khmer' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Tauri: {
+	'Tauri': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Taviraj: {
+	'Taviraj': {
 		v: [
 			'100',
 			'100italic',
@@ -6491,13 +6491,13 @@ const fonts = {
 		],
 		i: [ 'normal', 'italic' ],
 	},
-	Teko: {
+	'Teko': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Telex: {
+	'Telex': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6527,25 +6527,25 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Tienne: {
+	'Tienne': {
 		v: [ 'regular', '700', '900' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700', '900' ],
 		i: [ 'normal' ],
 	},
-	Tillana: {
+	'Tillana': {
 		v: [ 'regular', '500', '600', '700', '800' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '400', '500', '600', '700', '800' ],
 		i: [ 'normal' ],
 	},
-	Timmana: {
+	'Timmana': {
 		v: [ 'regular' ],
 		subset: [ 'telugu', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Tinos: {
+	'Tinos': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [
 			'cyrillic',
@@ -6590,7 +6590,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Trirong: {
+	'Trirong': {
 		v: [
 			'100',
 			'100italic',
@@ -6626,19 +6626,19 @@ const fonts = {
 		],
 		i: [ 'normal', 'italic' ],
 	},
-	Trocchi: {
+	'Trocchi': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Trochut: {
+	'Trochut': {
 		v: [ 'regular', 'italic', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Trykker: {
+	'Trykker': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6650,7 +6650,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Ubuntu: {
+	'Ubuntu': {
 		v: [
 			'300',
 			'300italic',
@@ -6698,7 +6698,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Ultra: {
+	'Ultra': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6710,7 +6710,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Underdog: {
+	'Underdog': {
 		v: [ 'regular' ],
 		subset: [ 'cyrillic', 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6722,37 +6722,37 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	UnifrakturCook: {
+	'UnifrakturCook': {
 		v: [ '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '700' ],
 		i: [],
 	},
-	UnifrakturMaguntia: {
+	'UnifrakturMaguntia': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Unkempt: {
+	'Unkempt': {
 		v: [ 'regular', '700' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Unlock: {
+	'Unlock': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Unna: {
+	'Unna': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	VT323: {
+	'VT323': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'vietnamese', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6764,7 +6764,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Varela: {
+	'Varela': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6788,37 +6788,37 @@ const fonts = {
 		weight: [ 'Default', '400', '500', '700', '900' ],
 		i: [ 'normal' ],
 	},
-	Vibur: {
+	'Vibur': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Vidaloka: {
+	'Vidaloka': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Viga: {
+	'Viga': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Voces: {
+	'Voces': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Volkhov: {
+	'Volkhov': {
 		v: [ 'regular', 'italic', '700', '700italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Vollkorn: {
+	'Vollkorn': {
 		v: [
 			'regular',
 			'italic',
@@ -6852,7 +6852,7 @@ const fonts = {
 		weight: [ 'Default', '400', '600', '700', '900' ],
 		i: [ 'normal' ],
 	},
-	Voltaire: {
+	'Voltaire': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6864,7 +6864,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Wallpoet: {
+	'Wallpoet': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6876,13 +6876,13 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Warnes: {
+	'Warnes': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Wellfleet: {
+	'Wellfleet': {
 		v: [ 'regular' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6933,7 +6933,7 @@ const fonts = {
 		weight: [ 'Default', '200', '300', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Yantramanav: {
+	'Yantramanav': {
 		v: [ '100', '300', 'regular', '500', '700', '900' ],
 		subset: [ 'latin-ext', 'devanagari', 'latin' ],
 		weight: [ 'Default', '100', '300', '400', '500', '700', '900' ],
@@ -6945,7 +6945,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Yellowtail: {
+	'Yellowtail': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -6969,19 +6969,19 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Yesteryear: {
+	'Yesteryear': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
 		i: [ 'normal' ],
 	},
-	Yrsa: {
+	'Yrsa': {
 		v: [ '300', 'regular', '500', '600', '700' ],
 		subset: [ 'latin-ext', 'latin' ],
 		weight: [ 'Default', '300', '400', '500', '600', '700' ],
 		i: [ 'normal' ],
 	},
-	Zeyada: {
+	'Zeyada': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '400' ],
@@ -7010,7 +7010,7 @@ const fonts = {
 		weight: [ 'Default', '400', '700' ],
 		i: [ 'normal' ],
 	},
-	Sora: {
+	'Sora': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [
@@ -7044,7 +7044,7 @@ const fonts = {
 		weight: [ 'Default', '400' ],
 		i: [ 'normal', 'italic' ],
 	},
-	Inter: {
+	'Inter': {
 		v: [ 'regular' ],
 		subset: [ 'latin' ],
 		weight: [
@@ -7061,7 +7061,7 @@ const fonts = {
 		],
 		i: [ 'normal', 'italic' ],
 	},
-	Jost: {
+	'Jost': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin' ],
 		weight: [
@@ -7078,7 +7078,7 @@ const fonts = {
 		],
 		i: [ 'normal', 'italic' ],
 	},
-	Fahkwang: {
+	'Fahkwang': {
 		v: [ 'regular', 'italic' ],
 		subset: [ 'latin' ],
 		weight: [ 'Default', '200', '300', '400', '500', '600', '700' ],

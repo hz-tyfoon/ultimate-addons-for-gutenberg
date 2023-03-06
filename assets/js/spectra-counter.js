@@ -1,5 +1,5 @@
+// eslint-disable-next-line no-undef
 UAGBCounter = {
-	// eslint-disable-line no-undef
 	elements: {},
 	init( mainSelector, data = {} ) {
 		this.elements = this.getDefaultElements( mainSelector );

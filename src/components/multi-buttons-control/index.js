@@ -44,10 +44,11 @@ const MultiButtonsControl = ( props ) => {
 	} = props;
 
 	const selectedBlock = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
+	// eslint-disable-next-line @wordpress/no-unused-vars-before-return
 	const allBlocksAttributes = wp.hooks.applyFilters(
 		'uagb.blocksAttributes',
 		blocksAttributes
-	); // eslint-disable-line @wordpress/no-unused-vars-before-return
+	);
 	const [ buttonPrimaryStateDesktop, setbuttonPrimaryStateDesktop ] =
 		useState( true );
 	const [ buttonPrimaryStateTablet, setbuttonPrimaryStateTablet ] =

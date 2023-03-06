@@ -141,8 +141,8 @@ UAGBTableOfContents = {
 		const offset = document.querySelector( hash ).offsetTop;
 
 		if ( null !== offset ) {
+			// eslint-disable-next-line no-undef
 			scroll( {
-				// eslint-disable-line no-undef
 				top: offset - scrollOffset,
 				behavior: 'smooth',
 			} );
@@ -176,9 +176,10 @@ UAGBTableOfContents = {
 
 		let hash = e.target.getAttribute( 'href' );
 		if ( hash ) {
+			// eslint-disable-next-line no-undef
 			const node = document.querySelector(
 				'.wp-block-uagb-table-of-contents'
-			); // eslint-disable-line no-undef
+			);
 
 			scrollData = node.getAttribute( 'data-scroll' );
 			scrollOffset = node.getAttribute( 'data-offset' );
@@ -194,15 +195,15 @@ UAGBTableOfContents = {
 			}
 			if ( scrollData ) {
 				if ( null !== offset ) {
+					// eslint-disable-next-line no-undef
 					scroll( {
-						// eslint-disable-line no-undef
 						top: offset - scrollOffset,
 						behavior: 'smooth',
 					} );
 				}
 			} else {
+				// eslint-disable-next-line no-undef
 				scroll( {
-					// eslint-disable-line no-undef
 					top: offset,
 					behavior: 'auto',
 				} );

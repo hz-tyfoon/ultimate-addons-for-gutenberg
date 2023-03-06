@@ -11,7 +11,7 @@ const UAGB_Block_Icons = {
 	// Spectra Blocks and Extensions.
 	// -----------------------------.
 
-	section: el(
+	'section': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -20,7 +20,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 		} )
 	),
-	buttons: el(
+	'buttons': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -122,7 +122,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 		} )
 	),
-	testimonial: el(
+	'testimonial': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -210,7 +210,7 @@ const UAGB_Block_Icons = {
 			strokeLinecap: 'round',
 		} )
 	),
-	team: el(
+	'team': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -221,7 +221,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	tabs: el(
+	'tabs': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -282,7 +282,7 @@ const UAGB_Block_Icons = {
 			strokeLinecap: 'round',
 		} )
 	),
-	blockquote: el(
+	'blockquote': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -293,7 +293,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	columns: el(
+	'columns': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -328,7 +328,7 @@ const UAGB_Block_Icons = {
 			strokeLinecap: 'round',
 		} )
 	),
-	faq: el(
+	'faq': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -339,7 +339,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	forms: el(
+	'forms': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -391,7 +391,7 @@ const UAGB_Block_Icons = {
 			strokeLinecap: 'round',
 		} )
 	),
-	review: el(
+	'review': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -402,7 +402,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	lottie: el(
+	'lottie': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -472,7 +472,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	container: el(
+	'container': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -491,7 +491,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 		} )
 	),
-	image: el(
+	'image': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -500,7 +500,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 		} )
 	),
-	counter: el(
+	'counter': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -520,7 +520,7 @@ const UAGB_Block_Icons = {
 			strokeWidth: 1.4,
 		} )
 	),
-	countdown: el(
+	'countdown': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -531,7 +531,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	modal: el(
+	'modal': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'rect', {
@@ -567,7 +567,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	slider: el(
+	'slider': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 26 24', fill: 'none' },
 		el( 'rect', {
@@ -617,7 +617,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	icon: el(
+	'icon': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 25', fill: 'none' },
 		el( 'path', {
@@ -640,7 +640,7 @@ const UAGB_Block_Icons = {
 	// Spectra Pro Blocks and Extensions.
 	// ---------------------------------.
 
-	login: el(
+	'login': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {
@@ -651,7 +651,7 @@ const UAGB_Block_Icons = {
 			strokeLinejoin: 'round',
 		} )
 	),
-	register: el(
+	'register': el(
 		'svg',
 		{ width: 40, height: 40, viewBox: '0 0 24 24', fill: 'none' },
 		el( 'path', {

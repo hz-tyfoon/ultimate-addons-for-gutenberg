@@ -113,8 +113,8 @@ const UAGBTableOfContentsEdit = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 	const headers = [];
+	// eslint-disable-next-line  no-unused-vars
 	useSelect( ( select ) => {
-		// eslint-disable-line  no-unused-vars
 		const parseTocSlug = ( slug ) => {
 			// If not have the element then return false!
 			if ( ! slug ) {

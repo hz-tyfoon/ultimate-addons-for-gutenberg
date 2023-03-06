@@ -71,7 +71,7 @@ function styling( props ) {
 
 	const selectors = {
 		' .uagb-step-link-text': {
-			color: urlColor,
+			'color': urlColor,
 			'font-family': urlFontFamily,
 			'font-style': urlFontStyle,
 			'text-transform': urlTransform,
@@ -85,7 +85,7 @@ function styling( props ) {
 			),
 		},
 		' .block-editor-rich-text__editable.uagb-how-to-step-name': {
-			color: titleColor,
+			'color': titleColor,
 			'font-family': titleFontFamily,
 			'font-style': titleFontStyle,
 			'text-transform': titleTransform,
@@ -102,7 +102,7 @@ function styling( props ) {
 			),
 		},
 		' .block-editor-rich-text__editable.uagb-how-to-step-description': {
-			color: descriptionColor,
+			'color': descriptionColor,
 			'font-family': descriptionFontFamily,
 			'font-style': descriptionFontStyle,
 			'text-transform': descriptionTransform,

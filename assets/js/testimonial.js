@@ -72,9 +72,9 @@ window.UAGBTestimonialCarousel = {
 	},
 };
 
-// Set Carousel Height for Customiser.
+// Set Carousel Height for Customizer.
+// eslint-disable-next-line no-unused-vars
 function uagb_carousel_height( id ) {
-	// eslint-disable-line no-unused-vars
 	const wrap = document.querySelector(
 		'#wpwrap .uagb-slick-carousel.uagb-block-' + id
 	);
@@ -84,8 +84,8 @@ function uagb_carousel_height( id ) {
 }
 
 // Unset Carousel Height for Customiser.
+// eslint-disable-next-line no-unused-vars
 function uagb_carousel_unset_height( id ) {
-	// eslint-disable-line no-unused-vars
 	const wrap = document.querySelector(
 		'#wpwrap .uagb-slick-carousel.uagb-block-' + id
 	);

@@ -1366,9 +1366,9 @@ const Settings = ( props ) => {
 												} }
 												min={ 0 }
 												limitMax={ {
-													px: 500,
+													'px': 500,
 													'%': 100,
-													em: 100,
+													'em': 100,
 												} } // eslint-disable-line quote-props
 												units={ [
 													{

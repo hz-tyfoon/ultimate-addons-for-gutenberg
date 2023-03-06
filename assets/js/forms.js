@@ -1,5 +1,5 @@
+// eslint-disable-next-line no-undef
 UAGBForms = {
-	// eslint-disable-line no-undef
 	init( attr, id, post_id ) {
 		const scope = document.querySelector( id );
 		if ( ! scope ) {
@@ -200,12 +200,12 @@ UAGBForms = {
 					return false;
 				}
 
+				// eslint-disable-next-line no-undef
 				grecaptcha.ready( function () {
-					// eslint-disable-line no-undef
+					// eslint-disable-next-line no-undef
 					grecaptcha
 						.execute( reCaptchaSiteKeyV3, { action: 'submit' } )
 						.then( function ( token ) {
-							// eslint-disable-line no-undef
 							if ( token ) {
 								if (
 									document.getElementsByClassName(
@@ -345,7 +345,6 @@ UAGBForms = {
 		}
 
 		fetch( uagb_forms_data.ajax_url, {
-			// eslint-disable-line no-undef
 			method: 'POST',
 			headers: new Headers( {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -402,7 +401,7 @@ UAGBForms = {
 		return Array.apply( 0, form.elements )
 			.map( ( x ) =>
 				( ( obj ) =>
-					// eslint-disable-line no-nested-ternary
+					// eslint-disable-next-line no-nested-ternary
 					x.type === 'radio' || x.type === 'checkbox'
 						? x.checked
 							? obj

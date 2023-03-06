@@ -14,8 +14,8 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const UAGBGF = ( props ) => {
 	const deviceType = useDeviceType();
+	// eslint-disable-next-line  no-unused-vars
 	useSelect( ( select ) => {
-		// eslint-disable-line  no-unused-vars
 		const { setAttributes } = props;
 		const { formId, isHtml } = props.attributes;
 		let jsonData = '';

@@ -1,5 +1,5 @@
+// eslint-disable-next-line no-undef
 UAGBInlineNotice = {
-	// eslint-disable-line no-undef
 	init( attr, id ) {
 		const main = document.querySelectorAll( id );
 

@@ -103,9 +103,9 @@ function FontFamilyControl( props ) {
 
 	const customFonts = uagb_blocks_info.spectra_custom_fonts;
 
-	//Push Google Fonts into stytem fonts object
+	//Push Google Fonts into system fonts object
+	// eslint-disable-next-line array-callback-return
 	Object.keys( googleFonts ).map( ( k ) => {
-		// eslint-disable-line array-callback-return
 		fonts.push( { value: k, label: k, weight: googleFonts[ k ].weight } );
 
 		if ( k === props.fontFamily.value ) {
@@ -113,9 +113,9 @@ function FontFamilyControl( props ) {
 		}
 	} );
 
-	//Push custom Fonts into stytem fonts object.
+	//Push custom Fonts into system fonts object.
+	// eslint-disable-next-line array-callback-return
 	Object.keys( customFonts ).map( ( k ) => {
-		// eslint-disable-line array-callback-return
 		fonts.push( { value: k, label: k, weight: customFonts[ k ].weight } );
 		if ( k === props.fontFamily.value ) {
 			fontWeight = customFonts[ k ].weight;
@@ -208,9 +208,8 @@ function FontFamilyControl( props ) {
 	let fontFamilyValue;
 	//Push Google Fonts into stytem fonts object
 	if ( gFonts ) {
+		// eslint-disable-next-line array-callback-return
 		gFonts.map( ( font ) => {
-			// eslint-disable-line array-callback-return
-
 			if (
 				! props.fontFamily.weight &&
 				font.value === props.fontFamily.value

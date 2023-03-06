@@ -3,7 +3,7 @@
  */
 const rowIcons = {
 	//Done
-	100: (
+	'100': (
 		<svg
 			width="114"
 			height="60"

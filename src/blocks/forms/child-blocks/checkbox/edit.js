@@ -9,9 +9,9 @@ import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsCheckboxEdit = ( props ) => {
+	// eslint-disable-next-line no-unused-vars
 	const [ state, setState ] = useState( {
 		optionsstate: [
-			// eslint-disable-line no-unused-vars
 			{
 				optiontitle: __(
 					'Option Name 1',

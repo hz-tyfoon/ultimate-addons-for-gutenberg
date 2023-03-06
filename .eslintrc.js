@@ -3,16 +3,16 @@ module.exports = {
 	extends: [ 'plugin:@wordpress/eslint-plugin/recommended' ],
 	ignorePatterns: [ 'deprecated.js' ],
 	rules: {
-		camelcase: 'off',
+		'camelcase': 'off',
 		'prettier/prettier': 'off',
 		'@wordpress/no-global-event-listener': 'off',
-		quotes: [
+		'quotes': [
 			'error',
 			'single',
 			{ allowTemplateLiterals: true, avoidEscape: true },
 		],
 		'quote-props': [ 'error', 'consistent-as-needed' ],
-		'quote-props': 'off',
+		// 'quote-props': 'off',
 		'space-in-parens': [ 'error', 'always', { exceptions: [ 'empty' ] } ],
 		'jsx-a11y/click-events-have-key-events': 'off',
 		'jsx-a11y/no-static-element-interactions': 'off',
@@ -48,5 +48,8 @@ module.exports = {
 		localStorage: true,
 		uagb_timeline_data: true,
 		UAGBModal: true,
+		CustomEvent: true,
+		fetch: true,
+		Headers: true,
 	},
 };

@@ -19,3 +19,4 @@ node_modules
 *.md
 .distignore
 font-awesome-pollyfiller.js
+.eslintrc.js

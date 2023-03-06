@@ -61,11 +61,13 @@ registerBlockType( '${ blockSlug }', { title: ${ blockTitle } } );`;
 
 fs.writeFile( dest_file, registerBlocks, ( err ) => {
 	if ( err ) {
-		console.log( err ); // eslint-disable-line
+		// eslint-disable-next-line no-console
+		console.log( err );
 		return;
 	}
 
+	// eslint-disable-next-line no-console
 	console.log(
 		`Sucessfully written block registration placeholder ${ dest_file }`
-	); // eslint-disable-line
+	);
 } );

@@ -148,10 +148,11 @@ const autoBlockRecovery = () => {
 					}
 				} );
 				if ( recoveryDone ) {
+					// eslint-disable-next-line no-console
 					console.log(
 						'%cSpectra Auto Recovery Enabled: All Spectra Blocks on this page have been recovered!',
 						'border-radius: 6px; width: 100%; margin: 16px 0; padding: 16px; background-color: #007CBA; color: #fff; font-weight: bold; text-shadow: 2px 2px 2px #0063A1;'
-					); //eslint-disable-line no-console
+					);
 				}
 				destroyRecoveryCSS();
 			}

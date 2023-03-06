@@ -26,22 +26,24 @@ const Render = ( props ) => {
 	).getBlockHierarchyRootClientId( props.clientId );
 	const parentAttributes =
 		select( 'core/block-editor' ).getBlockAttributes( parentClientId );
-
+	// eslint-disable-next-line no-nested-ternary
 	const position = parentAttributes
 		? parentAttributes.imagePosition
 			? parentAttributes.imagePosition
 			: imagePosition
-		: imagePosition; // eslint-disable-line no-nested-ternary
+		: imagePosition;
+	// eslint-disable-next-line no-nested-ternary
 	const align = parentAttributes
 		? parentAttributes.headingAlign
 			? parentAttributes.headingAlign
 			: headingAlign
-		: headingAlign; // eslint-disable-line no-nested-ternary
+		: headingAlign;
+	// eslint-disable-next-line no-nested-ternary
 	const imgAlignment = parentAttributes
 		? parentAttributes.imgAlign
 			? parentAttributes.imgAlign
 			: imgAlign
-		: imgAlign; // eslint-disable-line no-nested-ternary
+		: imgAlign;
 
 	setAttributes( { imagePosition: position } );
 	setAttributes( { headingAlign: align } );

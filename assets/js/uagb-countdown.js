@@ -1,5 +1,5 @@
+// eslint-disable-next-line no-undef
 UAGBCountdown = {
-	// eslint-disable-line no-undef
 	elements: {},
 	countdownInterval: {},
 

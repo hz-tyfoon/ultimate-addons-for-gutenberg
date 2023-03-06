@@ -37,19 +37,19 @@ const HowToComponent = ( props ) => {
 		const jsonData = {
 			'@context': 'https://schema.org',
 			'@type': 'HowTo',
-			name: props.attributes.headingTitle,
-			description: props.attributes.headingDesc,
-			image: {
+			'name': props.attributes.headingTitle,
+			'description': props.attributes.headingDesc,
+			'image': {
 				'@type': 'ImageObject',
-				url: urlChk,
-				height: '406',
-				width: '305',
+				'url': urlChk,
+				'height': '406',
+				'width': '305',
 			},
-			totalTime: '',
-			estimatedCost: [],
-			tool: [],
-			supply: [],
-			step: [],
+			'totalTime': '',
+			'estimatedCost': [],
+			'tool': [],
+			'supply': [],
+			'step': [],
 		};
 
 		const y = props.attributes.timeInYears
@@ -75,8 +75,8 @@ const HowToComponent = ( props ) => {
 		if ( props.attributes.showEstcost ) {
 			jsonData.estimatedCost = {
 				'@type': 'MonetaryAmount',
-				currency: props.attributes.currencyType,
-				value: props.attributes.cost,
+				'currency': props.attributes.currencyType,
+				'value': props.attributes.cost,
 			};
 		}
 
@@ -84,7 +84,7 @@ const HowToComponent = ( props ) => {
 			props.attributes.tools.forEach( ( tools, key ) => {
 				toolsData = {
 					'@type': 'HowToTool',
-					name: tools.add_required_tools,
+					'name': tools.add_required_tools,
 				};
 				jsonData.tool[ key ] = toolsData;
 			} );
@@ -94,7 +94,7 @@ const HowToComponent = ( props ) => {
 			props.attributes.materials.forEach( ( materials, key ) => {
 				materialsData = {
 					'@type': 'HowToSupply',
-					name: materials.add_required_materials,
+					'name': materials.add_required_materials,
 				};
 				jsonData.supply[ key ] = materialsData;
 			} );
@@ -107,12 +107,12 @@ const HowToComponent = ( props ) => {
 		getChildBlocks.forEach( ( steps, key ) => {
 			stepsData = {
 				'@type': 'HowToStep',
-				url: steps.attributes?.ctaLink || steps.attributes?.url,
-				name: steps.attributes?.infoBoxTitle || steps.attributes?.name,
-				text:
+				'url': steps.attributes?.ctaLink || steps.attributes?.url,
+				'name': steps.attributes?.infoBoxTitle || steps.attributes?.name,
+				'text':
 					steps.attributes?.headingDesc ||
 					steps.attributes?.description,
-				image:
+				'image':
 					steps.attributes?.iconImage?.url ||
 					steps.attributes?.image?.url,
 			};

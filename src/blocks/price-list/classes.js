@@ -11,8 +11,8 @@ function PositionClasses( attributes, name = 'uagb/restaurant-menu' ) {
 	const image = attributes.image;
 
 	if ( typeof attributes.rest_menu_item_arr !== 'undefined' ) {
+		// eslint-disable-next-line  array-callback-return
 		attributes.rest_menu_item_arr.map( ( item ) => {
-			// eslint-disable-line  array-callback-return
 			const image_arr = item.image;
 			if ( image_arr && typeof image_arr !== 'undefined' ) {
 				imgeCount++;

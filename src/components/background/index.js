@@ -430,9 +430,9 @@ const Background = ( props ) => {
 											} }
 											min={ 0 }
 											limitMax={ {
-												px: 1600,
+												'px': 1600,
 												'%': 100,
-												em: 574,
+												'em': 574,
 											} }
 											unit={ {
 												value: backgroundCustomSizeType.value,
@@ -544,16 +544,16 @@ const Background = ( props ) => {
 												},
 											} }
 											limitMin={ {
-												px: -800,
+												'px': -800,
 												'%': -100,
-												em: -100,
-												vw: -100,
+												'em': -100,
+												'vw': -100,
 											} }
 											limitMax={ {
-												px: 800,
+												'px': 800,
 												'%': 100,
-												em: 100,
-												vw: 100,
+												'em': 100,
+												'vw': 100,
 											} }
 											units={ [
 												{
@@ -621,16 +621,16 @@ const Background = ( props ) => {
 												},
 											} }
 											limitMin={ {
-												px: -800,
+												'px': -800,
 												'%': -100,
-												em: -100,
-												vh: -100,
+												'em': -100,
+												'vh': -100,
 											} }
 											limitMax={ {
-												px: 800,
+												'px': 800,
 												'%': 100,
-												em: 100,
-												vh: 100,
+												'em': 100,
+												'vh': 100,
 											} }
 											units={ [
 												{
@@ -789,9 +789,9 @@ const Background = ( props ) => {
 											data={ backgroundCustomSize }
 											min={ 0 }
 											limitMax={ {
-												px: 1600,
+												'px': 1600,
 												'%': 100,
-												em: 574,
+												'em': 574,
 											} }
 											unit={ {
 												value: backgroundCustomSizeType.value,

@@ -125,8 +125,8 @@ const UAGBTabsEdit = ( props ) => {
 };
 
 export default compose(
+	// eslint-disable-next-line no-shadow
 	withDispatch( ( dispatch, { clientId }, { select } ) => {
-		// eslint-disable-line no-shadow
 		const { getBlock } = select( 'core/block-editor' );
 		const { updateBlockAttributes, moveBlockToPosition } =
 			dispatch( 'core/block-editor' );
