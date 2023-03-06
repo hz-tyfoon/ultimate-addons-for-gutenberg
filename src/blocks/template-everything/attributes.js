@@ -122,8 +122,7 @@ const attributes = {
 		type: 'string',
 		UAGCopyPaste: {
 			styleType: 'block-bg-color',
-		},
-		default: '#F9F9F9',
+		}
 	},
 	backgroundOpacity: {
 		type: 'number',

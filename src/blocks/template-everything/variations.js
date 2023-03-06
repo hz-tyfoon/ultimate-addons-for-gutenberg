@@ -182,7 +182,18 @@ const variations = [
 		name: 'style-3',
 		icon: icons[ 'style-3' ],
 		title: __( 'Style 3', 'ultimate-addons-for-gutenberg' ),
-		attributes: {},
+		attributes: {
+			blockBorderTopLeftRadius: 8,
+			blockBorderTopRightRadius: 8,
+			blockBorderBottomRightRadius: 8,
+			blockBorderBottomLeftRadius: 8,
+			blockBorderTopWidth: 1,
+			blockBorderBottomWidth: 1,
+			blockBorderLeftWidth: 1,
+			blockBorderRightWidth: 1,
+			blockBorderStyle:'#9599A1',
+			blockBorderStyle: 'solid',
+		},
 		innerBlocks: [
 			[
 				'uagb/container',

@@ -33,7 +33,7 @@ return array_merge(
 		'backgroundAttachmentDesktop' => 'scroll',
 		'backgroundAttachmentTablet'  => '',
 		'backgroundAttachmentMobile'  => '',
-		'backgroundColor'             => '#F9F9F9',
+		'backgroundColor'             => '',
 		'backgroundOpacity'           => '',
 		'backgroundImageColor'        => '#FFFFFF75',
 		'gradientValue'               => 'linear-gradient(90deg, rgba(6, 147, 227, 0.5) 0%, rgba(155, 81, 224, 0.5) 100%)',
