@@ -162,7 +162,6 @@ const variations = [
 						'uagb/buttons-child',
 						{
 							backgroundType: 'transparent',
-							color: '',
 							showIcon: true,
 							iconPosition: 'after',
 							btnBorderStyle: 'none',
@@ -191,7 +190,7 @@ const variations = [
 			blockBorderBottomWidth: 1,
 			blockBorderLeftWidth: 1,
 			blockBorderRightWidth: 1,
-			blockBorderStyle:'#9599A1',
+			blockBorderColor:'#9599A1',
 			blockBorderStyle: 'solid',
 		},
 		innerBlocks: [
@@ -207,6 +206,7 @@ const variations = [
 								'uagb/image',
 								{
 									url: `${ uagb_blocks_info.uagb_url }/admin/assets/images/uag-placeholder.svg`,
+									align: 'center'
 								},
 							],
 						],
@@ -234,12 +234,14 @@ const variations = [
 							[
 								'uagb/star-rating',
 								{
-									starPosition: 'before',
 									title: '(10) Reviews',
 									size: 20,
 									fontWeight: 500,
 									titleColor: '#637381',
 									blockBottomMargin: 24,
+									starPosition: 'before',
+									starPositionTablet: 'before',
+									starPositionMobile: 'before'
 								},
 							],
 							[
@@ -261,7 +263,7 @@ const variations = [
 							],
 							[
 								'uagb/buttons',
-								{ align: 'full', stack: 'desktop' },
+								{ align: 'full', stack: 'desktop', alignTablet:'full', alignMobile: 'full', gapTablet: 10, gapMobile: 10 },
 								[
 									[
 										'uagb/buttons-child',
@@ -287,8 +289,10 @@ const variations = [
 										'uagb/buttons-child',
 										{
 											iconHColor: '#000',
-											hColor: '#000',
+											hColor: '#fff',
 											backgroundType: 'transparent',
+											hoverbackgroundType: 'color',
+											hBackground: '#344054',
 											iconPosition: 'before',
 											showIcon: true,
 											icon: 'heart',
@@ -383,8 +387,9 @@ const variations = [
 									headingDescPosition: 'above-heading',
 									headSpace: 15,
 									subHeadSpace: 12,
-									blockTopPadding: 15,
+									blockTopPadding: 0,
 									blockBottomPadding: 0,
+									separatorSpace: 0
 								},
 							],
 							[
@@ -467,8 +472,9 @@ const variations = [
 									headingDescPosition: 'above-heading',
 									headSpace: 15,
 									subHeadSpace: 12,
-									blockTopPadding: 15,
+									blockTopPadding: 0,
 									blockBottomPadding: 0,
+									separatorSpace: 0
 								},
 							],
 							[
@@ -551,8 +557,9 @@ const variations = [
 									headingDescPosition: 'above-heading',
 									headSpace: 15,
 									subHeadSpace: 12,
-									blockTopPadding: 15,
+									blockTopPadding: 0,
 									blockBottomPadding: 0,
+									separatorSpace: 0
 								},
 							],
 							[
