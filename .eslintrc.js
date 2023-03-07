@@ -43,5 +43,8 @@ module.exports = {
 		localStorage: true,
 		uagb_timeline_data: true,
 		UAGBModal: true,
+		CustomEvent: true,
+		fetch: true,
+		Headers: true,
 	},
 };

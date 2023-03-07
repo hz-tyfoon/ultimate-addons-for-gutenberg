@@ -62,7 +62,8 @@
     "npm-run-all": "^4.1.5",
     "sass-loader": "^6.0.6",
     "style-loader": "^2.0.0",
-    "webpack": "^4.46.0"
+    "webpack": "^4.46.0",
+    "wp-prettier": "^2.6.2"
   },
   "scripts": {
     "start": "wp-scripts start",
@@ -71,9 +72,9 @@
     "build:placeholder": "node scripts/generate-blocks-placeholder.js",
     "build:admin": "cd admin-core && npm run build && grunt minify",
     "build": "wp-scripts build && npm run build:sass && grunt minify && npm run build:placeholder",
-    "format:js": "wp-scripts format-js",
+    "format:js": "wp-scripts format-js", 
     "lint-js": "wp-scripts lint-js",
-    "lint-js:fix": "npm run lint-js -- --fix",
+    "lint-js:fix": "npm run pretty:fix && npm run lint-js -- --fix",
     "lint-css": "wp-scripts lint-style",
     "lint-css:fix": "npm run lint-css -- --fix",
     "admin-lint-js": "wp-scripts lint-js admin-core/assets/src",
@@ -82,6 +83,8 @@
     "check-engines": "wp-scripts check-engines",
     "makepot": "wp i18n make-pot . --skip-audit --exclude='.dev,.github,.wordpress-org,docs,src,node_modules,vendor,wordpress,block-icons.js,blocks-deactivate.js' languages/ultimate-addons-for-gutenberg.pot",
     "package": "rm *.zip && wp dist-archive . ultimate-addons-for-gutenberg",
-    "packages-update": "wp-scripts packages-update"
+    "packages-update": "wp-scripts packages-update",
+    "pretty": "prettier --check .",
+    "pretty:fix": "prettier --write ."
   }
 }
