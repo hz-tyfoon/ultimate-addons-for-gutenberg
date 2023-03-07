@@ -32,7 +32,6 @@
 }
 
 .editor-styles-wrapper {
-
 	.uagb-cta__outer-wrap .uagb-cta__buttons {
 		display: inline-flex;
 	}
@@ -49,14 +48,13 @@
 	}
 
 	// Focus effects for better editing experience.
-	.uagb-cta__title[contenteditable="true"]:focus,
-	.uagb-cta__desc[contenteditable="true"]:focus {
-		border: 2px solid var(--wp-admin-theme-color);
+	.uagb-cta__title[contenteditable='true']:focus,
+	.uagb-cta__desc[contenteditable='true']:focus {
+		border: 2px solid var( --wp-admin-theme-color );
 		border-radius: 8px;
 	}
 
 	.uagb-editor-preview-mode-tablet {
-
 		.uagb-cta__content-stacked-tablet .uagb-cta__left-right-wrap {
 			flex-direction: column;
 			text-align: center;
@@ -73,7 +71,6 @@
 	}
 
 	.uagb-editor-preview-mode-mobile {
-
 		.uagb-cta__content-stacked-mobile .uagb-cta__left-right-wrap {
 			flex-direction: column;
 			text-align: center;

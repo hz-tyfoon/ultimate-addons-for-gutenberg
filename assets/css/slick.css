@@ -33,11 +33,11 @@
 
 .uagb-slick-carousel.slick-slider .slick-list,
 .uagb-slick-carousel.slick-slider .slick-track {
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
-	-ms-transform: translate3d(0, 0, 0);
-	-o-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
+	-webkit-transform: translate3d( 0, 0, 0 );
+	-moz-transform: translate3d( 0, 0, 0 );
+	-ms-transform: translate3d( 0, 0, 0 );
+	-o-transform: translate3d( 0, 0, 0 );
+	transform: translate3d( 0, 0, 0 );
 }
 
 .uagb-slick-carousel .slick-track {
@@ -48,7 +48,7 @@
 .uagb-slick-carousel .slick-track::after,
 .uagb-slick-carousel .slick-track::before {
 	display: table;
-	content: "";
+	content: '';
 }
 
 .uagb-slick-carousel .slick-track::after {
@@ -67,7 +67,7 @@
 	min-height: 1px;
 }
 
-[dir="rtl"] .uagb-slick-carousel .slick-slide {
+[dir='rtl'] .uagb-slick-carousel .slick-slide {
 	float: right;
 }
 
@@ -110,9 +110,9 @@
 	display: block;
 	width: auto;
 	padding: 0;
-	-webkit-transform: translate(0, -50%);
-	-ms-transform: translate(0, -50%);
-	transform: translate(0, -50%);
+	-webkit-transform: translate( 0, -50% );
+	-ms-transform: translate( 0, -50% );
+	transform: translate( 0, -50% );
 	cursor: pointer;
 	color: #aaa;
 	border-color: #aaa;
@@ -131,10 +131,10 @@
 }
 
 .uagb-slick-carousel .slick-prev::before,
-[dir="rtl"] .uagb-slick-carousel .slick-prev::before,
+[dir='rtl'] .uagb-slick-carousel .slick-prev::before,
 .uagb-slick-carousel .slick-next::before,
-[dir="rtl"] .uagb-slick-carousel .slick-next::before {
-	content: "";
+[dir='rtl'] .uagb-slick-carousel .slick-next::before {
+	content: '';
 	font-size: 0;
 	line-height: 0;
 }
@@ -145,7 +145,7 @@
 	border-radius: 0;
 }
 
-[dir="rtl"] .uagb-tm__arrow-outside.uagb-slick-carousel .slick-prev {
+[dir='rtl'] .uagb-tm__arrow-outside.uagb-slick-carousel .slick-prev {
 	left: auto;
 	right: -45px;
 }
@@ -178,9 +178,9 @@
 	left: 0;
 	width: 100%;
 	bottom: 0;
-	-webkit-transform: translateY(100%);
-	-ms-transform: translateY(100%);
-	transform: translateY(100%);
+	-webkit-transform: translateY( 100% );
+	-ms-transform: translateY( 100% );
+	transform: translateY( 100% );
 	text-align: center;
 }
 
@@ -222,7 +222,7 @@
 	left: 0;
 	width: 20px;
 	height: 20px;
-	content: "•";
+	content: '•';
 	text-align: center;
 	opacity: 0.25;
 	color: #000;
@@ -231,7 +231,6 @@
 }
 
 @media only screen and ( max-width: 976px ) {
-
 	.uagb-slick-carousel {
 		padding: 0;
 	}

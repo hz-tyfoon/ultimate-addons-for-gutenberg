@@ -20,3 +20,5 @@ node_modules
 .distignore
 font-awesome-pollyfiller.js
 .eslintrc.js
+*.min.js
+*.min.css
