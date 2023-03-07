@@ -85,6 +85,7 @@
     "package": "rm *.zip && wp dist-archive . ultimate-addons-for-gutenberg",
     "packages-update": "wp-scripts packages-update",
     "pretty": "prettier --check .",
-    "pretty:fix": "prettier --write ."
+    "pretty:fix": "prettier --write .",
+    "lint-js-css-fix":"npm run pretty:fix && npm run lint-js -- --fix && npm run lint-css -- --fix"
   }
 }
