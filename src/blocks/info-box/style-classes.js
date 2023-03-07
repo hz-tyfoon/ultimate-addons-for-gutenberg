@@ -2,7 +2,7 @@
  * Returns Dynamic Generated Classes
  */
 
- function InfoBoxPositionClasses( attributes ) {
+function InfoBoxPositionClasses( attributes ) {
 	const sourceClass = '';
 	let iconimgStyleClass = '';
 	iconimgStyleClass += sourceClass + ' ';

@@ -14,7 +14,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/faq-child', {
 	title: __( 'FAQ Child', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add a frequently asked question/accordion to display information.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add a frequently asked question/accordion to display information.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.faq_child,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/faq' ],
@@ -33,6 +36,6 @@ registerBlockType( 'uagb/faq-child', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

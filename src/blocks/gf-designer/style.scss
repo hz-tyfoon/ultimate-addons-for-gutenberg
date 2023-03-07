@@ -507,7 +507,7 @@ html[dir="rtl"] .uagb-gf-styler__btn-align-left .gform_page .gform_page_footer i
 
 /* Gravity Form ends */
 
-@media only screen and (max-width: 976px) {
+@media only screen and ( max-width: 976px ) {
 
 	.uagb-gf-styler__btn-align-center .gform_page .gform_page_footer {
 		text-align: center;
@@ -553,7 +553,7 @@ html[dir="rtl"] .uagb-gf-styler__btn-align-left .gform_page .gform_page_footer i
 	}
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and ( max-width: 767px ) {
 
 	.uagb-gf-styler__btn-align-center .gform_page .gform_page_footer {
 		text-align: center;
@@ -599,7 +599,7 @@ html[dir="rtl"] .uagb-gf-styler__btn-align-left .gform_page .gform_page_footer i
 	}
 }
 
-@media (min-width: 780px) {
+@media ( min-width: 780px ) {
 
 	.uagb-gf-styler__btn-align-justify .gform_wrapper .gform_footer input[type="submit"],
 	.uagb-gf-styler__btn-align-justify .gform_page .gform_page_footer input[type="button"],
@@ -613,7 +613,7 @@ html[dir="rtl"] .uagb-gf-styler__btn-align-left .gform_page .gform_page_footer i
 	}
 }
 
-@media (max-width: 780px) {
+@media ( max-width: 780px ) {
 
 	.uagb-gf-styler__btn-align-tablet-center .gform_wrapper .gform_footer input[type="submit"],
 	.uagb-gf-styler__btn-align-tablet-center .gform_page .gform_page_footer input[type="button"],
@@ -652,10 +652,10 @@ html[dir="rtl"] .uagb-gf-styler__btn-align-left .gform_page .gform_page_footer i
 		margin-right: 0;
 		margin-left: auto;
 	}
-
 }
 
-@media (min-width: 641px) and (max-width: 780px) { // For tablet size small/medium/large.
+@media ( min-width: 641px ) and ( max-width: 780px ) {
+	// For tablet size small/medium/large.
 
 	.uagb-gf-styler__btn-align-tablet-justify .gform_wrapper .gform_footer input[type="submit"],
 	.uagb-gf-styler__btn-align-tablet-justify .gform_page .gform_page_footer input[type="button"],
@@ -669,7 +669,8 @@ html[dir="rtl"] .uagb-gf-styler__btn-align-left .gform_page .gform_page_footer i
 	}
 }
 
-@media (max-width: 641px) { // For mobile size small/medium/large.
+@media ( max-width: 641px ) {
+	// For mobile size small/medium/large.
 
 	.uagb-gf-styler__btn-align-mobile-center .gform_wrapper .gform_footer input[type="submit"],
 	.uagb-gf-styler__btn-align-mobile-center .gform_page .gform_page_footer input[type="button"],

@@ -5,33 +5,32 @@ import { ButtonGroup, Button, Tooltip } from '@wordpress/components';
 import { useDeviceType } from '@Controls/getPreviewType';
 import { __, sprintf } from '@wordpress/i18n';
 import { useEffect, useState, useRef, useCallback } from '@wordpress/element';
-import { dispatch, select } from '@wordpress/data'
+import { dispatch, select } from '@wordpress/data';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGHelpText from '@Components/help-text';
 
-const ResponsiveToggle = props => {
+const ResponsiveToggle = ( props ) => {
 	const { label, responsive, help = false } = props;
-	const deviceType = useDeviceType()
+	const deviceType = useDeviceType();
 	const [ displayResponsive, toggleResponsive ] = useState( false );
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
-	const customSetPreviewDeviceType = useCallback( device => {
-			if( null !== dispatch( 'core/edit-post' ) ){
-				const {
-					__experimentalSetPreviewDeviceType: setPreviewDeviceType,
-				} = dispatch( 'core/edit-post' )
-				setPreviewDeviceType( device );
-			}
+	const customSetPreviewDeviceType = useCallback( ( device ) => {
+		if ( null !== dispatch( 'core/edit-post' ) ) {
+			const { __experimentalSetPreviewDeviceType: setPreviewDeviceType } =
+				dispatch( 'core/edit-post' );
+			setPreviewDeviceType( device );
+		}
 		toggleResponsive( displayResponsive );
-	}, [] )
+	}, [] );
 
 	const devicesSvgs = {
 		desktop: (
@@ -89,85 +88,92 @@ const ResponsiveToggle = props => {
 
 	// In the Widget editor, the device type is always set to desktop.
 	if ( ! deviceType ) {
-		return null
+		return null;
 	}
 
 	const commonResponsiveHandler = ( e ) => {
+		// This code is to fix the side-effect of the editor responsive click settings panel refresh issue.
+		let eventTriggerElement = e.target;
+		let settingsPopup = null;
 
-	// This code is to fix the side-effect of the editor responsive click settings panel refresh issue.
-	let eventTriggerElement = e.target;
-	let settingsPopup = null;
-
-	if ( 'svg' === eventTriggerElement.tagName ) {
-		eventTriggerElement = eventTriggerElement.closest( '.uag-responsive-common-button' );
-	}
-	if ( eventTriggerElement.closest( '.uag-typography-options.active' ) ) {
-
-		settingsPopup = '.uag-typography-options';
-	}
-	if ( eventTriggerElement.closest( '.uag-box-shadow-options.active' ) ) {
-
-		settingsPopup = '.uag-box-shadow-options';
-	}
-
-	const blockName = getSelectedBlock()?.name;
-	const uagSettingState = getUAGEditorStateLocalStorage( 'uagSettingState' );
-
-	const inspectorTab = eventTriggerElement.closest( '.uagb-inspector-tab' );
-	const panelBody = eventTriggerElement.closest( '.components-panel__body.is-opened' );
-	let panelBodyClass = '';
-
-	if ( panelBody.classList && 0 !== panelBody.classList ) {
-		panelBody.classList.forEach( ( className ) => {
-			if ( className.includes( 'uag-advance-panel-body' ) ) {
-				panelBodyClass = className;
-			}
-		} );
-	}
-
-	let inspectorTabName = 'style';
-	if ( inspectorTab.classList.contains( 'uagb-tab-content-general' ) ) {
-		inspectorTabName = 'general';
-	}
-	if ( inspectorTab.classList.contains( 'uagb-tab-content-advance' ) ) {
-		inspectorTabName = 'advance';
-	}
-
-	const data = {
-		...uagSettingState,
-		[blockName] : {
-			selectedTab : inspectorTabName,
-			selectedPanel : panelBodyClass,
-			selectedSetting : settingsPopup
+		if ( 'svg' === eventTriggerElement.tagName ) {
+			eventTriggerElement = eventTriggerElement.closest(
+				'.uag-responsive-common-button'
+			);
 		}
-	}
+		if ( eventTriggerElement.closest( '.uag-typography-options.active' ) ) {
+			settingsPopup = '.uag-typography-options';
+		}
+		if ( eventTriggerElement.closest( '.uag-box-shadow-options.active' ) ) {
+			settingsPopup = '.uag-box-shadow-options';
+		}
 
-	const uagLocalStorage = getUAGEditorStateLocalStorage();
-	if ( uagLocalStorage ) {
-		uagLocalStorage.setItem( 'uagSettingState', JSON.stringify( data ) );
-	}
+		const blockName = getSelectedBlock()?.name;
+		const uagSettingState =
+			getUAGEditorStateLocalStorage( 'uagSettingState' );
 
-	// Above Section Ends.
-	toggleResponsive( ! displayResponsive );
-};
+		const inspectorTab = eventTriggerElement.closest(
+			'.uagb-inspector-tab'
+		);
+		const panelBody = eventTriggerElement.closest(
+			'.components-panel__body.is-opened'
+		);
+		let panelBodyClass = '';
+
+		if ( panelBody.classList && 0 !== panelBody.classList ) {
+			panelBody.classList.forEach( ( className ) => {
+				if ( className.includes( 'uag-advance-panel-body' ) ) {
+					panelBodyClass = className;
+				}
+			} );
+		}
+
+		let inspectorTabName = 'style';
+		if ( inspectorTab.classList.contains( 'uagb-tab-content-general' ) ) {
+			inspectorTabName = 'general';
+		}
+		if ( inspectorTab.classList.contains( 'uagb-tab-content-advance' ) ) {
+			inspectorTabName = 'advance';
+		}
+
+		const data = {
+			...uagSettingState,
+			[ blockName ]: {
+				selectedTab: inspectorTabName,
+				selectedPanel: panelBodyClass,
+				selectedSetting: settingsPopup,
+			},
+		};
+
+		const uagLocalStorage = getUAGEditorStateLocalStorage();
+		if ( uagLocalStorage ) {
+			uagLocalStorage.setItem(
+				'uagSettingState',
+				JSON.stringify( data )
+			);
+		}
+
+		// Above Section Ends.
+		toggleResponsive( ! displayResponsive );
+	};
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
-
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
 
 	return (
-		<div
-			ref={panelRef}
-			className="uag-responsive-label-wrap"
-		>
-			{
-				controlBeforeDomElement
-			}
+		<div ref={ panelRef } className="uag-responsive-label-wrap">
+			{ controlBeforeDomElement }
 
-			{ label && (
-				<span className="uag-control-label">{ label }</span>
-			) }
+			{ label && <span className="uag-control-label">{ label }</span> }
 			{ ! displayResponsive && responsive && (
 				<Button
 					key="uag-responsive-common-button"
@@ -193,35 +199,31 @@ const ResponsiveToggle = props => {
 									'%s',
 									name
 								) }
-								key={key}
-							>
-							<Button
 								key={ key }
-								className={ `components-button components-tab-panel__tabs-item ${ itemClass }${
-									staticName === deviceType
-										? ' active-tab'
-										: ''
-								}` }
-								aria-pressed={ deviceType === staticName }
-								onClick={ () =>
-									customSetPreviewDeviceType(
-										staticName
-									)
-								}
 							>
-								{ title }
-							</Button>
+								<Button
+									key={ key }
+									className={ `components-button components-tab-panel__tabs-item ${ itemClass }${
+										staticName === deviceType
+											? ' active-tab'
+											: ''
+									}` }
+									aria-pressed={ deviceType === staticName }
+									onClick={ () =>
+										customSetPreviewDeviceType( staticName )
+									}
+								>
+									{ title }
+								</Button>
 							</Tooltip>
 						)
 					) }
 				</ButtonGroup>
 			) }
 			<UAGHelpText text={ help } />
-			{
-				controlAfterDomElement
-			}
+			{ controlAfterDomElement }
 		</div>
-	)
-}
+	);
+};
 
-export default ResponsiveToggle
+export default ResponsiveToggle;

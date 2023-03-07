@@ -1,4 +1,3 @@
-
 /**
  * BLOCK: Post Grid - Edit
  */
@@ -18,7 +17,6 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { Placeholder, Spinner } from '@wordpress/components';
 
 const PostGridComponent = ( props ) => {
-
 	const deviceType = useDeviceType();
 	const {
 		isSelected,
@@ -53,7 +51,7 @@ const PostGridComponent = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
-			postDisplaytext
+			postDisplaytext,
 		},
 		setAttributes,
 	} = props;
@@ -64,8 +62,7 @@ const PostGridComponent = ( props ) => {
 	};
 
 	const [ state, setStateValue ] = useState( initialState );
-	const [ isTaxonomyLoading, setIsTaxonomyLoading] = useState( false );
-
+	const [ isTaxonomyLoading, setIsTaxonomyLoading ] = useState( false );
 
 	useEffect( () => {
 		// Replacement for componentDidMount.
@@ -73,75 +70,71 @@ const PostGridComponent = ( props ) => {
 		setStateValue( { innerBlocks: block } );
 		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 
-		if( borderWidth ){
-			if( undefined === btnBorderTopWidth ) {
+		if ( borderWidth ) {
+			if ( undefined === btnBorderTopWidth ) {
 				setAttributes( {
 					btnBorderTopWidth: borderWidth,
 				} );
 			}
-			if( undefined === btnBorderLeftWidth ) {
-				setAttributes( { btnBorderLeftWidth : borderWidth} );
+			if ( undefined === btnBorderLeftWidth ) {
+				setAttributes( { btnBorderLeftWidth: borderWidth } );
 			}
-			if( undefined === btnBorderRightWidth ) {
-				setAttributes( { btnBorderRightWidth : borderWidth} );
+			if ( undefined === btnBorderRightWidth ) {
+				setAttributes( { btnBorderRightWidth: borderWidth } );
 			}
-			if( undefined === btnBorderBottomWidth ) {
-				setAttributes( { btnBorderBottomWidth : borderWidth} );
-			}
-		}
-
-		if( borderRadius ){
-
-			if( undefined === btnBorderTopLeftRadius ) {
-				setAttributes( { btnBorderTopLeftRadius : borderRadius} );
-			}
-			if( undefined === btnBorderTopRightRadius ) {
-				setAttributes( { btnBorderTopRightRadius : borderRadius} );
-			}
-			if( undefined === btnBorderBottomLeftRadius ) {
-				setAttributes( { btnBorderBottomLeftRadius : borderRadius} );
-			}
-			if( undefined === btnBorderBottomRightRadius ) {
-				setAttributes( { btnBorderBottomRightRadius : borderRadius} );
+			if ( undefined === btnBorderBottomWidth ) {
+				setAttributes( { btnBorderBottomWidth: borderWidth } );
 			}
 		}
 
-		if( borderColor ){
-			if( undefined === btnBorderColor ) {
-				setAttributes( { btnBorderColor : borderColor} );
+		if ( borderRadius ) {
+			if ( undefined === btnBorderTopLeftRadius ) {
+				setAttributes( { btnBorderTopLeftRadius: borderRadius } );
+			}
+			if ( undefined === btnBorderTopRightRadius ) {
+				setAttributes( { btnBorderTopRightRadius: borderRadius } );
+			}
+			if ( undefined === btnBorderBottomLeftRadius ) {
+				setAttributes( { btnBorderBottomLeftRadius: borderRadius } );
+			}
+			if ( undefined === btnBorderBottomRightRadius ) {
+				setAttributes( { btnBorderBottomRightRadius: borderRadius } );
 			}
 		}
 
-		if( borderHColor ){
-			if( undefined === btnBorderHColor ) {
-				setAttributes( { btnBorderHColor : borderHColor} );
+		if ( borderColor ) {
+			if ( undefined === btnBorderColor ) {
+				setAttributes( { btnBorderColor: borderColor } );
 			}
 		}
 
-		if( borderStyle ){
-			if( undefined === btnBorderStyle ) {
-				setAttributes( { btnBorderStyle : borderStyle} );
+		if ( borderHColor ) {
+			if ( undefined === btnBorderHColor ) {
+				setAttributes( { btnBorderHColor: borderHColor } );
 			}
 		}
 
+		if ( borderStyle ) {
+			if ( undefined === btnBorderStyle ) {
+				setAttributes( { btnBorderStyle: borderStyle } );
+			}
+		}
 
-		setAttributes( { allTaxonomyStore : undefined} );
-
+		setAttributes( { allTaxonomyStore: undefined } );
 	}, [] );
 
 	useEffect( () => {
-
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-post-grid-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
+		addBlockEditorDynamicStyles(
+			'uagb-post-grid-style-' + props.clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
@@ -156,7 +149,8 @@ const PostGridComponent = ( props ) => {
 	};
 
 	let categoriesList = [];
-	const { latestPosts, taxonomyList, block } = useSelect( // eslint-disable-line no-unused-vars
+	const { latestPosts, taxonomyList, block } = useSelect(
+		// eslint-disable-line no-unused-vars
 		( select ) => {
 			const { getEntityRecords } = select( 'core' );
 
@@ -170,15 +164,20 @@ const PostGridComponent = ( props ) => {
 				} );
 			}
 			const allTaxonomy = allTaxonomyStore;
-			const currentTax = allTaxonomy ? allTaxonomy[ postType ] : undefined;
+			const currentTax = allTaxonomy
+				? allTaxonomy[ postType ]
+				: undefined;
 
 			// let categoriesList = [];
 			let rest_base = '';
 
 			if ( 'undefined' !== typeof currentTax ) {
-				if ( 'undefined' !== typeof currentTax.taxonomy[ taxonomyType ] ) {
+				if (
+					'undefined' !== typeof currentTax.taxonomy[ taxonomyType ]
+				) {
 					rest_base =
-						currentTax.taxonomy[ taxonomyType ].rest_base === false ||
+						currentTax.taxonomy[ taxonomyType ].rest_base ===
+							false ||
 						currentTax.taxonomy[ taxonomyType ].rest_base === null
 							? currentTax.taxonomy[ taxonomyType ].name
 							: currentTax.taxonomy[ taxonomyType ].rest_base;
@@ -197,14 +196,21 @@ const PostGridComponent = ( props ) => {
 			const latestPostsQuery = {
 				order,
 				orderby: orderBy,
-				per_page: getFallbackNumber( postsToShow, 'postsToShow', blockName ),
-				offset: getFallbackNumber( postsOffset, 'postsOffset', blockName ),
+				per_page: getFallbackNumber(
+					postsToShow,
+					'postsToShow',
+					blockName
+				),
+				offset: getFallbackNumber(
+					postsOffset,
+					'postsOffset',
+					blockName
+				),
 			};
 
 			if ( excludeCurrentPost ) {
-				latestPostsQuery.exclude = select(
-					'core/editor'
-				).getCurrentPostId();
+				latestPostsQuery.exclude =
+					select( 'core/editor' ).getCurrentPostId();
 			}
 
 			const category = [];
@@ -235,10 +241,12 @@ const PostGridComponent = ( props ) => {
 				),
 				categoriesList,
 				taxonomyList:
-					'undefined' !== typeof currentTax ? currentTax.taxonomy : [],
+					'undefined' !== typeof currentTax
+						? currentTax.taxonomy
+						: [],
 				block: getBlocks( props.clientId ),
 			};
-		},
+		}
 	);
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 	const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
@@ -246,16 +254,14 @@ const PostGridComponent = ( props ) => {
 	if ( ! hasPosts ) {
 		return (
 			<>
-
-					<Settings
-						parentProps={ props }
-						state={ state }
-						setStateValue={ setStateValue }
-						latestPosts={ latestPosts }
-						taxonomyList={ taxonomyList }
-						categoriesList={ categoriesList }
-					/>
-
+				<Settings
+					parentProps={ props }
+					state={ state }
+					setStateValue={ setStateValue }
+					latestPosts={ latestPosts }
+					taxonomyList={ taxonomyList }
+					categoriesList={ categoriesList }
+				/>
 
 				<Placeholder
 					icon="admin-post"
@@ -299,4 +305,3 @@ const PostGridComponent = ( props ) => {
 };
 
 export default PostGridComponent;
-

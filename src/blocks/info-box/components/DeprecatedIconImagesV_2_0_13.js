@@ -26,14 +26,11 @@ const DeprecatedIconImagesV_2_0_13 = ( props ) => {
 
 		return (
 			<>
-			{ ( attributes.showIcon ) && (
-			<div className="uagb-ifb-image-content">
-			<img
-				src={ url }
-				alt={ attributes.iconImage.alt }
-			/>
-			</div>
-			)}
+				{ attributes.showIcon && (
+					<div className="uagb-ifb-image-content">
+						<img src={ url } alt={ attributes.iconImage.alt } />
+					</div>
+				) }
 			</>
 		);
 	}

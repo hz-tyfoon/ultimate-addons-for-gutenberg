@@ -16,7 +16,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/tabs', {
 	title: __( 'Tabs', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Display your content under different tabs.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Display your content under different tabs.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.tabs,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -28,16 +31,16 @@ registerBlockType( 'uagb/tabs', {
 	},
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="tabs" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="tabs" />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 	deprecated,
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

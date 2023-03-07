@@ -53,7 +53,9 @@ export default function save( props ) {
 	) {
 		urlChk = attributes.mainimage.url;
 		title = attributes.mainimage.title;
-		defaultedAlt = ( props.attributes.mainimage?.alt ) ? props.attributes.mainimage?.alt : '';
+		defaultedAlt = props.attributes.mainimage?.alt
+			? props.attributes.mainimage?.alt
+			: '';
 	}
 
 	let url = '';
@@ -79,8 +81,8 @@ export default function save( props ) {
 				className="uagb-howto__source-image"
 				src={ url }
 				title={ title }
-				width={ imgTagWidth}
-				height={ imgTagHeight}
+				width={ imgTagWidth }
+				height={ imgTagHeight }
 				loading="lazy"
 				alt={ defaultedAlt }
 			/>
@@ -152,7 +154,10 @@ export default function save( props ) {
 									} }
 								>
 									<Stars
-										id={ `${ block_id.substr( 0, 8 ) }-${ i }` }
+										id={ `${ block_id.substr(
+											0,
+											8
+										) }-${ i }` }
 										key={ i }
 										value={ j.value }
 										limit={ starCount }

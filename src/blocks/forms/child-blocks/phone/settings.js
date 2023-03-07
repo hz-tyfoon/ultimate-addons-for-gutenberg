@@ -8,8 +8,6 @@ import { ToggleControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { memo } from '@wordpress/element';
 
-
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
@@ -33,15 +31,21 @@ const Settings = ( props ) => {
 					} }
 					setAttributes={ setAttributes }
 					options={ [
-						{ label: __( 'Off', 'ultimate-addons-for-gutenberg' ), value: 'off' },
-						{ label: __( 'Phone', 'ultimate-addons-for-gutenberg' ), value: 'tel-national' },
+						{
+							label: __( 'Off', 'ultimate-addons-for-gutenberg' ),
+							value: 'off',
+						},
+						{
+							label: __(
+								'Phone',
+								'ultimate-addons-for-gutenberg'
+							),
+							value: 'tel-national',
+						},
 					] }
 				/>
 				<UAGSelectControl
-					label={ __(
-						'Pattern',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Pattern', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: pattern,
 						label: 'pattern',
@@ -66,7 +70,7 @@ const Settings = ( props ) => {
 						{
 							label: '123 456 7890',
 							value: __(
-								'[0-9]{3}\s?[0-9]{3}\s?[0-9]{4}',
+								'[0-9]{3}s?[0-9]{3}s?[0-9]{4}',
 								'ultimate-addons-for-gutenberg'
 							),
 						},

@@ -14,7 +14,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/inline-notice', {
 	title: __( 'Inline Notice', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Highlight important information using inline notice block.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Highlight important information using inline notice block.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.inline_notice,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -29,14 +32,14 @@ registerBlockType( 'uagb/inline-notice', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	deprecated,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="inline-notice" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="inline-notice" />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 } );

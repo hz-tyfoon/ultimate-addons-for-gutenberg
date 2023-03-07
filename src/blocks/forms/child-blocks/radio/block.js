@@ -13,7 +13,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/forms-radio', {
 	title: __( 'Radio', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add radio select boxes to allow a single choice from options.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add radio select boxes to allow a single choice from options.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.radio,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/forms' ],
@@ -30,7 +33,7 @@ registerBlockType( 'uagb/forms-radio', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	save,
 	deprecated,

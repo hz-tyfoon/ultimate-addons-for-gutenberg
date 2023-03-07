@@ -35,17 +35,17 @@ registerBlockType( 'uagb/image-gallery', {
 	},
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="image-gallery" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="image-gallery" />
+		) : (
+			<Edit { ...props } />
+		),
 	save() {
 		return null;
 	},
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

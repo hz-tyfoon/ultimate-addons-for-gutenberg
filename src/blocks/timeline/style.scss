@@ -306,7 +306,6 @@
 				-ms-transform: translateY(-50%);
 			}
 		}
-
 	}
 
 	/* RESPONSIVE ALIGNMENT OF VERTICAL SEPARATOR. */
@@ -314,7 +313,6 @@
 		right: auto;
 		left: 50%;
 	}
-
 }
 
 .uagb-timeline__right-block {
@@ -339,7 +337,6 @@
 
 	.uagb-timeline__right,
 	.uagb-timeline__left {
-
 		// If the orientation of the timeline is set to right, right-align the text.
 		.uagb-timeline__events-inner-new {
 			text-align: right;
@@ -382,7 +379,6 @@
 		flex-grow: 0;
 		flex-shrink: 0;
 	}
-
 }
 
 .uagb-timeline__left-block {
@@ -620,7 +616,7 @@
 	}
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and ( max-width: 1023px ) {
 
 	.uagb-timeline__center-block.uagb-timeline__responsive-tablet .uagb-timeline-res-right .uagb-timeline__line {
 		position: absolute;
@@ -881,10 +877,9 @@
 	.uagb-timeline__center-block.uagb-timeline__responsive-tablet .uagb-timeline-res-right .uagb-timeline__right .uagb-timeline__date-new {
 		display: none;
 	}
-
 }
 
-@media screen and (max-width: 767px) {
+@media screen and ( max-width: 767px ) {
 
 	.uagb-timeline-responsive-none .uagb-timeline__events-inner-new {
 		padding: 15px;
@@ -1210,7 +1205,7 @@
 	}
 }
 
-@media (max-width: 976px) {
+@media ( max-width: 976px ) {
 
 	.uagb-timeline__center-block.uagb-timeline__responsive-tablet .uagb-timeline-res-right .uagb-timeline__line {
 		position: absolute;
@@ -1465,9 +1460,7 @@
 			p.uagb-timeline-desc-content {
 				margin-bottom: unset; // remove extra spacing.
 			}
-
 		}
-
 	}
 
 	.uagb-timeline__content-wrap {

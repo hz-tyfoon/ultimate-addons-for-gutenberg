@@ -46,5 +46,6 @@ module.exports = {
 		CustomEvent: true,
 		fetch: true,
 		Headers: true,
+		FormData: true,
 	},
 };

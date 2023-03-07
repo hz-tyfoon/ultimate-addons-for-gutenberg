@@ -17,12 +17,8 @@ const deprecated = [
 	{
 		attributes,
 		save( props ) {
-			const {
-				block_id,
-				className,
-				rest_menu_item_arr,
-				imagePosition,
-			} = props.attributes;
+			const { block_id, className, rest_menu_item_arr, imagePosition } =
+				props.attributes;
 
 			return (
 				<>
@@ -140,12 +136,8 @@ const deprecated = [
 	{
 		attributes,
 		save( props ) {
-			const {
-				block_id,
-				className,
-				rest_menu_item_arr,
-				imagePosition,
-			} = props.attributes;
+			const { block_id, className, rest_menu_item_arr, imagePosition } =
+				props.attributes;
 
 			return (
 				<>

@@ -529,7 +529,8 @@ const deprecated = [
 		save: ( props ) => {
 			const { attributes, className } = props;
 
-			const { block_id, icon_layout, hideLabel, iconPosition } = attributes;
+			const { block_id, icon_layout, hideLabel, iconPosition } =
+				attributes;
 
 			const labelClass = hideLabel ? 'uagb-icon-list__no-label' : '';
 
@@ -539,7 +540,9 @@ const deprecated = [
 						className,
 						'uagb-icon-list__outer-wrap',
 						`uagb-icon-list__layout-${ icon_layout }`,
-						iconPosition === 'top' ? 'uagb-icon-list__icon-at-top' : '',
+						iconPosition === 'top'
+							? 'uagb-icon-list__icon-at-top'
+							: '',
 						labelClass,
 						`uagb-block-${ block_id }`
 					) }

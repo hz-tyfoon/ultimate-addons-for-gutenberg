@@ -36,20 +36,21 @@ function SchemaNotices( props ) {
 		if (
 			'uagb/how-to-step' !== step.name &&
 			( '' === step.attributes.ctaLink ||
-			'#' === step.attributes.ctaLink ||
-			'' === step.attributes.infoBoxTitle ||
-			'' === step.attributes.headingDesc ||
-			'' === step.attributes.iconImage?.url )
+				'#' === step.attributes.ctaLink ||
+				'' === step.attributes.infoBoxTitle ||
+				'' === step.attributes.headingDesc ||
+				'' === step.attributes.iconImage?.url )
 		) {
 			steps_empty_item_flag = true;
 		}
 
-		if ( 'uagb/how-to-step' === step.name &&
-		( '' === step.attributes.url ||
-		'#' === step.attributes.url ||
-		'' === step.attributes.name ||
-		'' === step.attributes.description ||
-		'' === step.attributes?.image?.url )
+		if (
+			'uagb/how-to-step' === step.name &&
+			( '' === step.attributes.url ||
+				'#' === step.attributes.url ||
+				'' === step.attributes.name ||
+				'' === step.attributes.description ||
+				'' === step.attributes?.image?.url )
 		) {
 			steps_empty_item_flag = true;
 		}

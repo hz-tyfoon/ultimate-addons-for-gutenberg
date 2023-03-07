@@ -36,7 +36,7 @@ export default function save( props ) {
 					'uagb-container__shape-above-content':
 						topContentAboveShape === true,
 				},
-				{ 'uagb-container__invert' : topInvert === true }
+				{ 'uagb-container__invert': topInvert === true }
 			) }
 		>
 			{ shapes[ topType ] }
@@ -53,7 +53,7 @@ export default function save( props ) {
 					'uagb-container__shape-above-content':
 						bottomContentAboveShape === true,
 				},
-				{ 'uagb-container__invert' : bottomInvert === true },
+				{ 'uagb-container__invert': bottomInvert === true }
 			) }
 			data-negative="false"
 		>
@@ -61,17 +61,17 @@ export default function save( props ) {
 		</div>
 	);
 
-	const CustomTag = `${htmlTag}`;
+	const CustomTag = `${ htmlTag }`;
 	const customTagLinkAttributes = {};
-	if( htmlTag === 'a' ){
-		customTagLinkAttributes.rel = 'noopener'
-		if( htmlTagLink?.url ){
+	if ( htmlTag === 'a' ) {
+		customTagLinkAttributes.rel = 'noopener';
+		if ( htmlTagLink?.url ) {
 			customTagLinkAttributes.href = htmlTagLink?.url;
 		}
-		if( htmlTagLink?.opensInNewTab ){
+		if ( htmlTagLink?.opensInNewTab ) {
 			customTagLinkAttributes.target = '_blank';
 		}
-		if( htmlTagLink?.noFollow ){
+		if ( htmlTagLink?.noFollow ) {
 			customTagLinkAttributes.rel = 'nofollow noopener';
 		}
 	}
@@ -84,9 +84,11 @@ export default function save( props ) {
 			className={ classnames(
 				blockProps.className,
 				`uagb-block-${ block_id }`,
-				isBlockRootParent ?  `${contentWidth} uagb-is-root-container` : '',
+				isBlockRootParent
+					? `${ contentWidth } uagb-is-root-container`
+					: ''
 			) }
-			{...customTagLinkAttributes}
+			{ ...customTagLinkAttributes }
 		>
 			{ topDividerHtml }
 			{ 'video' === backgroundType && (
@@ -101,14 +103,15 @@ export default function save( props ) {
 					) }
 				</div>
 			) }
-			{ isBlockRootParent && 'alignfull' === contentWidth && 'alignwide' === innerContentWidth
-				?  (
-						<div className='uagb-container-inner-blocks-wrap'>
-							<InnerBlocks.Content />
-						</div>
-					)
-					: <InnerBlocks.Content />
-			}
+			{ isBlockRootParent &&
+			'alignfull' === contentWidth &&
+			'alignwide' === innerContentWidth ? (
+				<div className="uagb-container-inner-blocks-wrap">
+					<InnerBlocks.Content />
+				</div>
+			) : (
+				<InnerBlocks.Content />
+			) }
 			{ bottomDividerHtml }
 		</CustomTag>
 	);

@@ -17,12 +17,12 @@ export default function save( props ) {
 		seperatorStyle,
 		headingId,
 		seperatorPosition,
-		headingDescPosition
+		headingDescPosition,
 	} = props.attributes;
 
 	let seprator = '';
 	if ( seperatorStyle !== 'none' ) {
-		seprator = <div className="uagb-separator"></div>
+		seprator = <div className="uagb-separator"></div>;
 	}
 	let headingText = '';
 	if ( headingTitle ) {
@@ -62,9 +62,13 @@ export default function save( props ) {
 				`uagb-block-${ block_id }`
 			) }
 		>
-			{ headingDescToggle && 'above-heading' === headingDescPosition ? descText : '' }
+			{ headingDescToggle && 'above-heading' === headingDescPosition
+				? descText
+				: '' }
 			{ headingTitleToggle && headingText }
-			{ headingDescToggle && 'below-heading' === headingDescPosition ? descText : '' }
+			{ headingDescToggle && 'below-heading' === headingDescPosition
+				? descText
+				: '' }
 			{ ! headingDescToggle && ! headingTitleToggle ? seprator : '' }
 		</div>
 	);

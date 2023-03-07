@@ -7,16 +7,14 @@ import { __ } from '@wordpress/i18n';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
-import { useEffect,useLayoutEffect } from '@wordpress/element';
+import { useEffect, useLayoutEffect } from '@wordpress/element';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import Settings from './settings';
 import Render from './render';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
-import {
-	__experimentalBlockVariationPicker as BlockVariationPicker,
-} from '@wordpress/block-editor';
+import { __experimentalBlockVariationPicker as BlockVariationPicker } from '@wordpress/block-editor';
 import { withNotices } from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks';
 import hexToRGBA from '@Controls/hexToRgba';
@@ -66,35 +64,29 @@ const ColumnsComponent = ( props ) => {
 		blockType, // eslint-disable-line no-unused-vars
 		variations,
 		hasInnerBlocks,
-		defaultVariation
-	} = useSelect(
-		( select ) => {
-			const { getBlocks } = select( 'core/block-editor' );
-				const {
-					getBlockType,
-					getBlockVariations,
-					getDefaultBlockVariation,
-				} = select( 'core/blocks' );
+		defaultVariation,
+	} = useSelect( ( select ) => {
+		const { getBlocks } = select( 'core/block-editor' );
+		const { getBlockType, getBlockVariations, getDefaultBlockVariation } =
+			select( 'core/blocks' );
 
-				return {
-					// Subscribe to changes of the innerBlocks to control the display of the layout selection placeholder.
-					innerBlocks: getBlocks( clientId ),
-					hasInnerBlocks:
-						select( 'core/block-editor' ).getBlocks( clientId ).length >
-						0,
+		return {
+			// Subscribe to changes of the innerBlocks to control the display of the layout selection placeholder.
+			innerBlocks: getBlocks( clientId ),
+			hasInnerBlocks:
+				select( 'core/block-editor' ).getBlocks( clientId ).length > 0,
 
-					blockType: getBlockType( props.name ),
-					defaultVariation:
-						typeof getDefaultBlockVariation === 'undefined'
-							? null
-							: getDefaultBlockVariation( props.name ),
-					variations:
-						typeof getBlockVariations === 'undefined'
-							? null
-							: getBlockVariations( props.name ),
-				};
-		},
-	);
+			blockType: getBlockType( props.name ),
+			defaultVariation:
+				typeof getDefaultBlockVariation === 'undefined'
+					? null
+					: getDefaultBlockVariation( props.name ),
+			variations:
+				typeof getBlockVariations === 'undefined'
+					? null
+					: getBlockVariations( props.name ),
+		};
+	} );
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -109,17 +101,27 @@ const ColumnsComponent = ( props ) => {
 			setAttributes( { vAlign: 'center' } );
 		}
 
-		if ( undefined === align ){
+		if ( undefined === align ) {
 			setAttributes( { align: '' } );
 		}
 
-		if ( undefined === vAlign ){
+		if ( undefined === vAlign ) {
 			setAttributes( { vAlign: '' } );
 		}
 
-		if( 101 !== backgroundOpacity && 'image' === backgroundType && 'gradient' === overlayType ){
-			const color1 = hexToRGBA( maybeGetColorForVariable( gradientOverlayColor1 ), backgroundOpacity );
-			const color2 = hexToRGBA( maybeGetColorForVariable( gradientOverlayColor2 ), backgroundOpacity );
+		if (
+			101 !== backgroundOpacity &&
+			'image' === backgroundType &&
+			'gradient' === overlayType
+		) {
+			const color1 = hexToRGBA(
+				maybeGetColorForVariable( gradientOverlayColor1 ),
+				backgroundOpacity
+			);
+			const color2 = hexToRGBA(
+				maybeGetColorForVariable( gradientOverlayColor2 ),
+				backgroundOpacity
+			);
 			let gradientVal;
 			if ( 'linear' === gradientOverlayType ) {
 				gradientVal = `linear-gradient(${ gradientOverlayAngle }deg, ${ color1 } ${ gradientOverlayLocation1 }%, ${ color2 } ${ gradientOverlayLocation2 }%)`;
@@ -134,7 +136,6 @@ const ColumnsComponent = ( props ) => {
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
 		setAttributes( { classMigrate: true } );
-
 
 		//Margin
 		if ( topMargin ) {
@@ -151,7 +152,10 @@ const ColumnsComponent = ( props ) => {
 
 		if ( 'image' === backgroundType ) {
 			if ( 101 !== backgroundOpacity ) {
-				const color = hexToRGBA( maybeGetColorForVariable( backgroundImageColor ), backgroundOpacity );
+				const color = hexToRGBA(
+					maybeGetColorForVariable( backgroundImageColor ),
+					backgroundOpacity
+				);
 				setAttributes( { backgroundImageColor: color } );
 				setAttributes( { backgroundOpacity: 101 } );
 			}
@@ -159,45 +163,61 @@ const ColumnsComponent = ( props ) => {
 
 		if ( 'video' === backgroundType ) {
 			if ( 101 !== backgroundVideoOpacity ) {
-				const color = hexToRGBA( maybeGetColorForVariable( backgroundVideoColor ), backgroundVideoOpacity );
+				const color = hexToRGBA(
+					maybeGetColorForVariable( backgroundVideoColor ),
+					backgroundVideoOpacity
+				);
 				setAttributes( { backgroundVideoColor: color } );
 			}
 		}
 		// border migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'columns', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			setAttributes,
-			attributes
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHoverColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'columns',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
-			
-
 		}
 	}, [] );
 
 	useEffect( () => {
 		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-columns-style-' + clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-columns-style-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	useEffect( () => {
 		responsiveConditionPreview( props );
@@ -220,7 +240,9 @@ const ColumnsComponent = ( props ) => {
 
 	const createBlocksFromInnerBlocksTemplate = ( innerBlocksTemplate ) => {
 		return innerBlocksTemplate.map(
-			( [ name, attributes, innerBlocks = [] ] ) => // eslint-disable-line no-shadow
+			(
+				[ name, attributes, innerBlocks = [] ] // eslint-disable-line no-shadow
+			) =>
 				createBlock(
 					name,
 					attributes,

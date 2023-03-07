@@ -14,7 +14,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/slider-child', {
 	title: __( 'Slider Child', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add and customize content of this slide.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add and customize content of this slide.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.slider_child,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/slider' ],
@@ -24,15 +27,15 @@ registerBlockType( 'uagb/slider-child', {
 	],
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="slider-child" isChildren={ true } />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="slider-child" isChildren={ true } />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

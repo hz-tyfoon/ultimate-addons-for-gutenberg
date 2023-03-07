@@ -8,18 +8,19 @@ import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsRadioEdit = ( props ) => {
-
 	const { setAttributes, isSelected, clientId } = props;
-	const [ state, setState ] = useState( { optionsstate: [ // eslint-disable-line no-unused-vars
-		{
-			optiontitle: __(
-				'Option Name 1',
-				'ultimate-addons-for-gutenberg'
-			),
-		},
-	], } );
+	// eslint-disable-next-line no-unused-vars
+	const [ state, setState ] = useState( {
+		optionsstate: [
+			{
+				optiontitle: __(
+					'Option Name 1',
+					'ultimate-addons-for-gutenberg'
+				),
+			},
+		],
+	} );
 	useEffect( () => {
-
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
@@ -33,10 +34,10 @@ const UAGBFormsRadioEdit = ( props ) => {
 	}, [] );
 
 	return (
-			<>
+		<>
 			{ isSelected && <Settings parentProps={ props } /> }
-				<Render parentProps={ props } />
-			</>
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

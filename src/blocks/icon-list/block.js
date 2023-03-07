@@ -16,7 +16,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/icon-list', {
 	title: __( 'Icon List', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Create a list highlighted with icons/images.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Create a list highlighted with icons/images.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.icon_list,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -30,15 +33,15 @@ registerBlockType( 'uagb/icon-list', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="icon-list" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="icon-list" />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 	deprecated,
 } );

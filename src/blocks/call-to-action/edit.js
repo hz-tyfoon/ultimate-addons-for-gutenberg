@@ -14,7 +14,6 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 const UAGBCallToAction = ( props ) => {
-
 	const deviceType = useDeviceType();
 	const {
 		isSelected,
@@ -44,64 +43,78 @@ const UAGBCallToAction = ( props ) => {
 
 		setAttributes( { classMigrate: true } );
 
-		if( stack === 'tablet' ) {
-			setAttributes( {stack: 'tablet'} );
-		}else if ( stack === 'mobile' ) {
-			setAttributes( {stack: 'mobile'} )
+		if ( stack === 'tablet' ) {
+			setAttributes( { stack: 'tablet' } );
+		} else if ( stack === 'mobile' ) {
+			setAttributes( { stack: 'mobile' } );
 		} else if ( stack === 'none' && ctaPosition === 'right' ) {
-			setAttributes( {stack: 'none'} )
+			setAttributes( { stack: 'none' } );
 		} else if ( stack === 'none' && 'below-title' === ctaPosition ) {
 			setAttributes( { stack: 'desktop' } );
 		}
 
 		if ( ctaLeftSpace ) {
-			if ( undefined === overallBlockLeftMargin && 'left' === textAlign && 'right' === ctaPosition ) {
+			if (
+				undefined === overallBlockLeftMargin &&
+				'left' === textAlign &&
+				'right' === ctaPosition
+			) {
 				setAttributes( { overallBlockLeftMargin: ctaLeftSpace } );
 			}
 		}
 
 		// border
-		if( ctaBorderWidth || ctaBorderRadius || ctaBorderColor || ctaBorderhoverColor || ctaBorderStyle ){
-			migrateBorderAttributes( 'btn', {
-				label: 'ctaBorderWidth',
-				value: ctaBorderWidth,
-			}, {
-				label: 'ctaBorderRadius',
-				value: ctaBorderRadius
-			}, {
-				label: 'ctaBorderColor',
-				value: ctaBorderColor
-			}, {
-				label: 'ctaBorderhoverColor',
-				value: ctaBorderhoverColor
-			},{
-				label: 'ctaBorderStyle',
-				value: ctaBorderStyle
-			},
-			setAttributes,
-			attributes
+		if (
+			ctaBorderWidth ||
+			ctaBorderRadius ||
+			ctaBorderColor ||
+			ctaBorderhoverColor ||
+			ctaBorderStyle
+		) {
+			migrateBorderAttributes(
+				'btn',
+				{
+					label: 'ctaBorderWidth',
+					value: ctaBorderWidth,
+				},
+				{
+					label: 'ctaBorderRadius',
+					value: ctaBorderRadius,
+				},
+				{
+					label: 'ctaBorderColor',
+					value: ctaBorderColor,
+				},
+				{
+					label: 'ctaBorderhoverColor',
+					value: ctaBorderhoverColor,
+				},
+				{
+					label: 'ctaBorderStyle',
+					value: ctaBorderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
-		
 	}, [] );
 
 	useEffect( () => {
-
 		// Replacement for componentDidUpdate.
 		const blockStyling = CtaStyle( props );
 
-		addBlockEditorDynamicStyles( 'uagb-cta-style-' + clientId.substr( 0, 8 ), blockStyling );
-		
+		addBlockEditorDynamicStyles(
+			'uagb-cta-style-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	return (

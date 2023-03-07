@@ -57,8 +57,12 @@ export default function useDimensionHandler(
 	};
 
 	const updateDimensions = ( nextHeight, nextWidth ) => {
-		setCurrentHeight( nextHeight ? nextHeight : defaultHeight ? defaultHeight : '' );
-		setCurrentHeight( nextWidth ? nextWidth : defaultWidth ? defaultWidth : '' );
+		setCurrentHeight(
+			nextHeight ? nextHeight : defaultHeight ? defaultHeight : ''
+		);
+		setCurrentHeight(
+			nextWidth ? nextWidth : defaultWidth ? defaultWidth : ''
+		);
 		onChange( { height: nextHeight, width: nextWidth } );
 	};
 

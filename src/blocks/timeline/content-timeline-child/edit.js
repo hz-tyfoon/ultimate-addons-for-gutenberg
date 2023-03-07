@@ -18,9 +18,13 @@ const ContentTimelineChildComponent = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		const loadContentTimelineEditor = new CustomEvent( 'UAGTimelineEditor', { // eslint-disable-line no-undef
-			detail: {},
-		} );
+		const loadContentTimelineEditor = new CustomEvent(
+			'UAGTimelineEditor',
+			{
+				// eslint-disable-line no-undef
+				detail: {},
+			}
+		);
 		document.dispatchEvent( loadContentTimelineEditor );
 	}, [ props, deviceType ] );
 

@@ -10,11 +10,19 @@ import links from './links';
 export default function save( props ) {
 	const { className } = props;
 
-	const { type, image_icon, icon, image, block_id, parentSize, imgTagHeight } = props.attributes;
+	const {
+		type,
+		image_icon,
+		icon,
+		image,
+		block_id,
+		parentSize,
+		imgTagHeight,
+	} = props.attributes;
 
 	const url = links[ type ];
 
-	const defaultedAlt = ( image && image?.alt ) ? image?.alt : '';
+	const defaultedAlt = image && image?.alt ? image?.alt : '';
 
 	let imageIconHtml = '';
 
@@ -28,7 +36,14 @@ export default function save( props ) {
 		}
 	} else if ( image && image.url ) {
 		imageIconHtml = (
-			<img className="uagb-ss__source-image" src={ image.url } alt={ defaultedAlt }  width={ parentSize }  height={ imgTagHeight } loading="lazy"/>
+			<img
+				className="uagb-ss__source-image"
+				src={ image.url }
+				alt={ defaultedAlt }
+				width={ parentSize }
+				height={ imgTagHeight }
+				loading="lazy"
+			/>
 		);
 	}
 

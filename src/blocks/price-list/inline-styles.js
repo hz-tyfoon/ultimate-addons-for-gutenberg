@@ -121,32 +121,84 @@ function RestMenuStyle( props ) {
 		imagePosition,
 		imgAlign,
 		imageAlignment,
-		stack
+		stack,
 	} = props.attributes;
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
-	const seperatorThicknessFallback = getFallbackNumber( seperatorThickness, 'seperatorThickness', blockName );
+	const seperatorThicknessFallback = getFallbackNumber(
+		seperatorThickness,
+		'seperatorThickness',
+		blockName
+	);
 
 	const rowGapFallback = getFallbackNumber( rowGap, 'rowGap', blockName );
-	const rowGapTabletFallback = getFallbackNumber( rowGapTablet, 'rowGapTablet', blockName );
-	const rowGapMobileFallback = getFallbackNumber( rowGapMobile, 'rowGapMobile', blockName );
+	const rowGapTabletFallback = getFallbackNumber(
+		rowGapTablet,
+		'rowGapTablet',
+		blockName
+	);
+	const rowGapMobileFallback = getFallbackNumber(
+		rowGapMobile,
+		'rowGapMobile',
+		blockName
+	);
 
-	const columnGapFallback = getFallbackNumber( columnGap, 'columnGap', blockName );
-	const columnGapTabletFallback = isNaN( columnGapTablet ) ? columnGapFallback : columnGapTablet;
-	const columnGapMobileFallback = isNaN( columnGapMobile ) ? columnGapTabletFallback : columnGapMobile;
+	const columnGapFallback = getFallbackNumber(
+		columnGap,
+		'columnGap',
+		blockName
+	);
+	const columnGapTabletFallback = isNaN( columnGapTablet )
+		? columnGapFallback
+		: columnGapTablet;
+	const columnGapMobileFallback = isNaN( columnGapMobile )
+		? columnGapTabletFallback
+		: columnGapMobile;
 
-	const imageWidthFallback = getFallbackNumber( imageWidth, 'imageWidth', blockName );
-	const imageWidthTabletFallback = isNaN( imageWidthTablet ) ? imageWidthFallback : imageWidthTablet;
-	const imageWidthMobileFallback = isNaN( imageWidthMobile ) ? imageWidthTabletFallback : imageWidthMobile;
+	const imageWidthFallback = getFallbackNumber(
+		imageWidth,
+		'imageWidth',
+		blockName
+	);
+	const imageWidthTabletFallback = isNaN( imageWidthTablet )
+		? imageWidthFallback
+		: imageWidthTablet;
+	const imageWidthMobileFallback = isNaN( imageWidthMobile )
+		? imageWidthTabletFallback
+		: imageWidthMobile;
 
-	const seperatorWidthFallback = getFallbackNumber( seperatorWidth, 'seperatorWidth', blockName );
-	const seperatorWidthTabletFallback = getFallbackNumber( seperatorWidthTablet, 'seperatorWidthTablet', blockName );
-	const seperatorWidthMobileFallback = getFallbackNumber( seperatorWidthMobile, 'seperatorWidthMobile', blockName );
+	const seperatorWidthFallback = getFallbackNumber(
+		seperatorWidth,
+		'seperatorWidth',
+		blockName
+	);
+	const seperatorWidthTabletFallback = getFallbackNumber(
+		seperatorWidthTablet,
+		'seperatorWidthTablet',
+		blockName
+	);
+	const seperatorWidthMobileFallback = getFallbackNumber(
+		seperatorWidthMobile,
+		'seperatorWidthMobile',
+		blockName
+	);
 
-	const titleSpaceFallback = getFallbackNumber( titleSpace, 'titleSpace', blockName );
-	const titleSpaceTabletFallback = getFallbackNumber( titleSpaceTablet, 'titleSpaceTablet', blockName );
-	const titleSpaceMobileFallback = getFallbackNumber( titleSpaceMobile, 'titleSpaceMobile', blockName );
+	const titleSpaceFallback = getFallbackNumber(
+		titleSpace,
+		'titleSpace',
+		blockName
+	);
+	const titleSpaceTabletFallback = getFallbackNumber(
+		titleSpaceTablet,
+		'titleSpaceTablet',
+		blockName
+	);
+	const titleSpaceMobileFallback = getFallbackNumber(
+		titleSpaceMobile,
+		'titleSpaceMobile',
+		blockName
+	);
 
 	let tabletSelectors = {};
 	let mobileSelectors = {};
@@ -189,21 +241,31 @@ function RestMenuStyle( props ) {
 			),
 		},
 		// Prefix Style
-		'.wp-block-uagb-restaurant-menu .uagb-rest_menu__wrap .uagb-rm__content .uagb-rm-details .uagb-rm__title': {
-			'font-size': generateCSSUnit( titleFontSize, titleFontSizeType ),
-			'color': titleColor,
-			'margin-bottom': generateCSSUnit( titleSpaceFallback, titleSpaceType ),
-			'font-family': titleFontFamily,
-			'font-style': titleFontStyle,
-			'text-transform': titleTransform,
-			'text-decoration': titleDecoration,
-			'font-weight': titleFontWeight,
-			'line-height': generateCSSUnit(
-				titleLineHeight,
-				titleLineHeightType
-			),
-			'letter-spacing': generateCSSUnit( titleLetterSpacing, titleLetterSpacingType ),
-		},
+		'.wp-block-uagb-restaurant-menu .uagb-rest_menu__wrap .uagb-rm__content .uagb-rm-details .uagb-rm__title':
+			{
+				'font-size': generateCSSUnit(
+					titleFontSize,
+					titleFontSizeType
+				),
+				'color': titleColor,
+				'margin-bottom': generateCSSUnit(
+					titleSpaceFallback,
+					titleSpaceType
+				),
+				'font-family': titleFontFamily,
+				'font-style': titleFontStyle,
+				'text-transform': titleTransform,
+				'text-decoration': titleDecoration,
+				'font-weight': titleFontWeight,
+				'line-height': generateCSSUnit(
+					titleLineHeight,
+					titleLineHeightType
+				),
+				'letter-spacing': generateCSSUnit(
+					titleLetterSpacing,
+					titleLetterSpacingType
+				),
+			},
 		// Title Style
 		' .uagb-rm__price': {
 			'font-size': generateCSSUnit( priceFontSize, priceFontSizeType ),
@@ -217,7 +279,10 @@ function RestMenuStyle( props ) {
 				priceLineHeightType
 			),
 			'color': priceColor,
-			'letter-spacing': generateCSSUnit( priceLetterSpacing, priceLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				priceLetterSpacing,
+				priceLetterSpacingType
+			),
 		},
 		// Description Style
 		' .uagb-rm__desc': {
@@ -233,7 +298,10 @@ function RestMenuStyle( props ) {
 			),
 			'color': descColor,
 			'margin-bottom': generateCSSUnit( descSpace, 'px' ),
-			'letter-spacing': generateCSSUnit( descLetterSpacing, descLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacing,
+				descLetterSpacingType
+			),
 		},
 	};
 
@@ -241,24 +309,37 @@ function RestMenuStyle( props ) {
 		// Image
 		' img': {
 			'width': generateCSSUnit( imageWidthTabletFallback, imageWidthType ),
-			'max-width': generateCSSUnit( imageWidthTabletFallback, imageWidthType ),
+			'max-width': generateCSSUnit(
+				imageWidthTabletFallback,
+				imageWidthType
+			),
 		},
 		'.wp-block-uagb-restaurant-menu': {
-			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapType ),
+			'column-gap': generateCSSUnit(
+				columnGapTabletFallback,
+				columnGapType
+			),
 			'row-gap': generateCSSUnit( rowGapTabletFallback, rowGapType ),
 		},
-		'.wp-block-uagb-restaurant-menu .uagb-rest_menu__wrap .uagb-rm__content .uagb-rm-details .uagb-rm__title': {
-			'font-size': generateCSSUnit(
-				titleFontSizeTablet,
-				titleFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				titleLineHeightTablet,
-				titleLineHeightType
-			),
-			'margin-bottom': generateCSSUnit( titleSpaceTabletFallback, titleSpaceType ),
-			'letter-spacing': generateCSSUnit( titleLetterSpacingTablet, titleLetterSpacingType ),
-		},
+		'.wp-block-uagb-restaurant-menu .uagb-rest_menu__wrap .uagb-rm__content .uagb-rm-details .uagb-rm__title':
+			{
+				'font-size': generateCSSUnit(
+					titleFontSizeTablet,
+					titleFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					titleLineHeightTablet,
+					titleLineHeightType
+				),
+				'margin-bottom': generateCSSUnit(
+					titleSpaceTabletFallback,
+					titleSpaceType
+				),
+				'letter-spacing': generateCSSUnit(
+					titleLetterSpacingTablet,
+					titleLetterSpacingType
+				),
+			},
 		' .uagb-rm__desc': {
 			'font-size': generateCSSUnit(
 				descFontSizeTablet,
@@ -268,7 +349,10 @@ function RestMenuStyle( props ) {
 				descLineHeightTablet,
 				descLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( descLetterSpacingTablet, descLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacingTablet,
+				descLetterSpacingType
+			),
 		},
 		' .uagb-rm__price': {
 			'font-size': generateCSSUnit(
@@ -279,7 +363,10 @@ function RestMenuStyle( props ) {
 				priceLineHeightTablet,
 				priceLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( priceLetterSpacingTablet, priceLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				priceLetterSpacingTablet,
+				priceLetterSpacingType
+			),
 		},
 		" [data-type='uagb/restaurant-menu-child'] img": {
 			'padding-left': generateCSSUnit(
@@ -323,24 +410,37 @@ function RestMenuStyle( props ) {
 		// Image
 		' img': {
 			'width': generateCSSUnit( imageWidthMobileFallback, imageWidthType ),
-			'max-width': generateCSSUnit( imageWidthMobileFallback, imageWidthType ),
+			'max-width': generateCSSUnit(
+				imageWidthMobileFallback,
+				imageWidthType
+			),
 		},
 		'.wp-block-uagb-restaurant-menu': {
-			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapType ),
+			'column-gap': generateCSSUnit(
+				columnGapMobileFallback,
+				columnGapType
+			),
 			'row-gap': generateCSSUnit( rowGapMobileFallback, rowGapType ),
 		},
-		'.wp-block-uagb-restaurant-menu .uagb-rest_menu__wrap .uagb-rm__content .uagb-rm-details .uagb-rm__title': {
-			'font-size': generateCSSUnit(
-				titleFontSizeMobile,
-				titleFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				titleLineHeightMobile,
-				titleLineHeightType
-			),
-			'margin-bottom': generateCSSUnit( titleSpaceMobileFallback, titleSpaceType ),
-			'letter-spacing': generateCSSUnit( titleLetterSpacingMobile, titleLetterSpacingType ),
-		},
+		'.wp-block-uagb-restaurant-menu .uagb-rest_menu__wrap .uagb-rm__content .uagb-rm-details .uagb-rm__title':
+			{
+				'font-size': generateCSSUnit(
+					titleFontSizeMobile,
+					titleFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					titleLineHeightMobile,
+					titleLineHeightType
+				),
+				'margin-bottom': generateCSSUnit(
+					titleSpaceMobileFallback,
+					titleSpaceType
+				),
+				'letter-spacing': generateCSSUnit(
+					titleLetterSpacingMobile,
+					titleLetterSpacingType
+				),
+			},
 		' .uagb-rm__desc': {
 			'font-size': generateCSSUnit(
 				descFontSizeMobile,
@@ -350,7 +450,10 @@ function RestMenuStyle( props ) {
 				descLineHeightMobile,
 				descLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( descLetterSpacingMobile, descLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacingMobile,
+				descLetterSpacingType
+			),
 		},
 		' .uagb-rm__price': {
 			'font-size': generateCSSUnit(
@@ -361,7 +464,10 @@ function RestMenuStyle( props ) {
 				priceLineHeightMobile,
 				priceLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( priceLetterSpacingMobile, priceLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				priceLetterSpacingMobile,
+				priceLetterSpacingType
+			),
 		},
 		" [data-type='uagb/restaurant-menu-child'] img": {
 			'padding-left': generateCSSUnit(
@@ -405,101 +511,136 @@ function RestMenuStyle( props ) {
 		selectors[ ' .uagb-rm__separator' ] = {
 			'border-top-color': seperatorColor,
 			'border-top-style': seperatorStyle,
-			'border-top-width': generateCSSUnit( seperatorThicknessFallback, 'px' ),
-			'width': generateCSSUnit( seperatorWidthFallback, seperatorWidthType ),
+			'border-top-width': generateCSSUnit(
+				seperatorThicknessFallback,
+				'px'
+			),
+			'width': generateCSSUnit(
+				seperatorWidthFallback,
+				seperatorWidthType
+			),
 		};
 		tabletSelectors[ ' .uagb-rm__separator' ] = {
-			'width': generateCSSUnit( seperatorWidthTabletFallback, seperatorWidthType ),
+			'width': generateCSSUnit(
+				seperatorWidthTabletFallback,
+				seperatorWidthType
+			),
 		};
 		mobileSelectors[ ' .uagb-rm__separator' ] = {
-			'width': generateCSSUnit( seperatorWidthMobileFallback, seperatorWidthType ),
+			'width': generateCSSUnit(
+				seperatorWidthMobileFallback,
+				seperatorWidthType
+			),
 		};
 	}
 
-	if( imgAlign === 'side' ) {
-		selectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-			'align-items' : imageAlignment === 'top' ? 'flex-start' : 'center'
-		};
+	if ( imgAlign === 'side' ) {
+		selectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] =
+			{
+				'align-items':
+					imageAlignment === 'top' ? 'flex-start' : 'center',
+			};
 
-		if( stack === 'tablet' ) {
-			if( imagePosition === 'left' ) {
-				tabletSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					'display' : 'block'
+		if ( stack === 'tablet' ) {
+			if ( imagePosition === 'left' ) {
+				tabletSelectors[
+					' .wp-block-uagb-restaurant-menu-child .uagb-rm__content'
+				] = {
+					'display': 'block',
 				};
-				mobileSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					'display' : 'block'
+				mobileSelectors[
+					' .wp-block-uagb-restaurant-menu-child .uagb-rm__content'
+				] = {
+					'display': 'block',
 				};
-			}else {
-				tabletSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					'display' : 'flex',
+			} else {
+				tabletSelectors[
+					' .wp-block-uagb-restaurant-menu-child .uagb-rm__content'
+				] = {
+					'display': 'flex',
 					'flex-direction': 'column-reverse',
-					'align-items': 'flex-end'
+					'align-items': 'flex-end',
 				};
-				mobileSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					'display' : 'flex',
+				mobileSelectors[
+					' .wp-block-uagb-restaurant-menu-child .uagb-rm__content'
+				] = {
+					'display': 'flex',
 					'flex-direction': 'column-reverse',
-					'align-items': 'flex-end'
+					'align-items': 'flex-end',
 				};
 			}
 		} else if ( stack === 'mobile' ) {
-			if( imagePosition === 'left' ) {
-				mobileSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					'display' : 'block'
+			if ( imagePosition === 'left' ) {
+				mobileSelectors[
+					' .wp-block-uagb-restaurant-menu-child .uagb-rm__content'
+				] = {
+					'display': 'block',
 				};
 			} else {
-				mobileSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					'display' : 'flex',
+				mobileSelectors[
+					' .wp-block-uagb-restaurant-menu-child .uagb-rm__content'
+				] = {
+					'display': 'flex',
 					'flex-direction': 'column-reverse',
-					'align-items': 'flex-end'
+					'align-items': 'flex-end',
 				};
 			}
 		}
-		if( imagePosition === 'left' ) {
+		if ( imagePosition === 'left' ) {
 			selectors[ ' .uagb-rm-details' ] = {
-				'text-align' : 'left'
+				'text-align': 'left',
 			};
-		} else if(  imagePosition === 'right' ) {
+		} else if ( imagePosition === 'right' ) {
 			selectors[ ' .uagb-rm-details' ] = {
-				'text-align' : 'right'
+				'text-align': 'right',
 			};
 			selectors[ ' .uagb-rest_menu__wrap .uagb-rm__content' ] = {
-				'text-align' : 'right'
+				'text-align': 'right',
 			};
-			selectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__separator'] = {
-				'margin-left': 'auto'
-			}
+			selectors[
+				' .wp-block-uagb-restaurant-menu-child .uagb-rm__separator'
+			] = {
+				'margin-left': 'auto',
+			};
 		}
 	}
 
-	if( imgAlign === 'top' ) {
+	if ( imgAlign === 'top' ) {
 		selectors[ ' .wp-block-uagb-restaurant-menu-child ' ] = {
-			'text-align' : headingAlign,
-			'display': 'block'
+			'text-align': headingAlign,
+			'display': 'block',
 		};
-		selectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-			'text-align' : headingAlign,
-		};
+		selectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] =
+			{
+				'text-align': headingAlign,
+			};
 
 		if ( 'center' === headingAlign ) {
 			selectors[ ' .uagb-rm__content ' ] = {
-				'display' : 'block'
+				'display': 'block',
 			};
 			selectors[ ' .uagb-rm__content ' ] = {
-				'display' : 'block'
+				'display': 'block',
 			};
-			selectors[ ' .wp-block-uagb-restaurant-menu-child  .uagb-rm__separator'] = {
-				'margin': '0 auto'
-			}
+			selectors[
+				' .wp-block-uagb-restaurant-menu-child  .uagb-rm__separator'
+			] = {
+				'margin': '0 auto',
+			};
 		} else if ( 'right' === headingAlign ) {
-			selectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__separator'] = {
-				'margin-left': 'auto'
-			}
-
+			selectors[
+				' .wp-block-uagb-restaurant-menu-child .uagb-rm__separator'
+			] = {
+				'margin-left': 'auto',
+			};
 		}
 	}
 
 	let stylingCss = '';
-	const id = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
+		0,
+		8
+	) }`;
 
 	stylingCss = generateCSS( selectors, id );
 

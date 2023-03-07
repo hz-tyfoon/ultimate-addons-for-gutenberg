@@ -15,7 +15,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/testimonial', {
 	title: __( 'Testimonials', 'ultimate-addons-for-gutenberg' ), // Block title.
-	description: __( 'Display customer testimonials in customizable layouts.', 'ultimate-addons-for-gutenberg' ), // Block description.
+	description: __(
+		'Display customer testimonials in customizable layouts.',
+		'ultimate-addons-for-gutenberg'
+	), // Block description.
 	icon: UAGB_Block_Icons.testimonial, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	keywords: [
 		__( 'testimonial', 'ultimate-addons-for-gutenberg' ),
@@ -27,16 +30,16 @@ registerBlockType( 'uagb/testimonial', {
 	category: uagb_blocks_info.category,
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="testimonial" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="testimonial" />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	deprecated,
 } );

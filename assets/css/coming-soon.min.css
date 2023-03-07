@@ -1,1 +1,4 @@
-footer.site-footer,header.site-header{display:none}
+footer.site-footer,
+header.site-header {
+	display: none;
+}

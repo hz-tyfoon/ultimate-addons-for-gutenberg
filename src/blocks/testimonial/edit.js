@@ -44,15 +44,25 @@ const UAGBtestimonial = ( props ) => {
 		clientId,
 	} = props;
 
-		useEffect( () => {
+	useEffect( () => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
 		setAttributes( { classMigrate: true } );
 
-		if( 101 !== backgroundOpacity && 'image' === backgroundType && 'gradient' === overlayType ){
-			const color1 = hexToRGBA( maybeGetColorForVariable( gradientColor1 ), backgroundOpacity );
-			const color2 = hexToRGBA( maybeGetColorForVariable( gradientColor2 ), backgroundOpacity );
+		if (
+			101 !== backgroundOpacity &&
+			'image' === backgroundType &&
+			'gradient' === overlayType
+		) {
+			const color1 = hexToRGBA(
+				maybeGetColorForVariable( gradientColor1 ),
+				backgroundOpacity
+			);
+			const color2 = hexToRGBA(
+				maybeGetColorForVariable( gradientColor2 ),
+				backgroundOpacity
+			);
 			let gradientVal;
 			if ( 'linear' === gradientType ) {
 				gradientVal = `linear-gradient(${ gradientAngle }deg, ${ color1 } ${ gradientLocation1 }%, ${ color2 } ${ gradientLocation2 }%)`;
@@ -64,36 +74,49 @@ const UAGBtestimonial = ( props ) => {
 
 		if ( 'image' === backgroundType ) {
 			if ( 101 !== backgroundOpacity ) {
-				const color = hexToRGBA( maybeGetColorForVariable( backgroundImageColor ), backgroundOpacity );
+				const color = hexToRGBA(
+					maybeGetColorForVariable( backgroundImageColor ),
+					backgroundOpacity
+				);
 				setAttributes( { backgroundImageColor: color } );
 				setAttributes( { backgroundOpacity: 101 } );
 			}
 		}
 
 		// Backward Border Migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'overall', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			setAttributes,
-			attributes
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHoverColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'overall',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
-		
-
 	}, [] );
 
 	useEffect( () => {
@@ -105,23 +128,23 @@ const UAGBtestimonial = ( props ) => {
 
 		const blockStyling = TestimonialStyle( props );
 
-		addBlockEditorDynamicStyles( 'uagb-testinomial-style-' + clientId.substr( 0, 8 ), blockStyling );
-		
+		addBlockEditorDynamicStyles(
+			'uagb-testinomial-style-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	return (
 		<>
-		{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } /> }
 			<Render parentProps={ props } />
 		</>
 	);

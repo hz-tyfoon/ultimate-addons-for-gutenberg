@@ -1,4 +1,9 @@
-import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
+import {
+	useLayoutEffect,
+	useEffect,
+	useState,
+	useRef,
+} from '@wordpress/element';
 import { SelectControl } from '@wordpress/components';
 import { select } from '@wordpress/data';
 import styles from './editor.lazy.scss';
@@ -24,8 +29,17 @@ const defaultProps = {
 	onChange: null,
 };
 
-export default function UAGSelectControl( { layout, label, options, data, setAttributes, onChange, help, children } ) {
-	const [panelNameForHook, setPanelNameForHook] = useState( null );
+export default function UAGSelectControl( {
+	layout,
+	label,
+	options,
+	data,
+	setAttributes,
+	onChange,
+	help,
+	children,
+} ) {
+	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 
 	useLayoutEffect( () => {
@@ -38,54 +52,60 @@ export default function UAGSelectControl( { layout, label, options, data, setAtt
 	const { getSelectedBlock } = select( 'core/block-editor' );
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	useEffect( () => {
-		setPanelNameForHook( getPanelIdFromRef( panelRef ) )
-	}, [blockNameForHook] )
+		setPanelNameForHook( getPanelIdFromRef( panelRef ) );
+	}, [ blockNameForHook ] );
 
 	const controlName = getIdFromString( label );
 
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
-	const allOptions = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.options`, options, blockNameForHook );
+	const controlBeforeDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
+		'',
+		blockNameForHook
+	);
+	const controlAfterDomElement = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
+		'',
+		blockNameForHook
+	);
+	const allOptions = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.options`,
+		options,
+		blockNameForHook
+	);
 
 	return (
 		<div
-			ref={panelRef}
+			ref={ panelRef }
 			className={ `uagb-select-control uagb-select-control--layout-${ layout }` }
 		>
-			{
-				controlBeforeDomElement
-			}
-			{
-				children ? (
-					
-						<SelectControl
-							label={ label }
-							value={ data.value }
-							onChange={ ( value ) => (
-								onChange ? onChange( value ) : setAttributes( { [data.label]: value } )
-							) }
-							help={ help }
-						>
-							{ children }
-						</SelectControl>
-					
-				) : (
-					
-						<SelectControl
-							label={ label }
-							value={ data.value }
-							onChange={ ( value ) => (
-								onChange ? onChange( value ) : setAttributes( { [data.label]: value } )
-							) }
-							options={ allOptions }
-							help={ help }
-						/>
-					
-				)
-			}
-			{
-				controlAfterDomElement
-			}
+			{ controlBeforeDomElement }
+			{ children ? (
+				<SelectControl
+					label={ label }
+					value={ data.value }
+					onChange={ ( value ) =>
+						onChange
+							? onChange( value )
+							: setAttributes( { [ data.label ]: value } )
+					}
+					help={ help }
+				>
+					{ children }
+				</SelectControl>
+			) : (
+				<SelectControl
+					label={ label }
+					value={ data.value }
+					onChange={ ( value ) =>
+						onChange
+							? onChange( value )
+							: setAttributes( { [ data.label ]: value } )
+					}
+					options={ allOptions }
+					help={ help }
+				/>
+			) }
+			{ controlAfterDomElement }
 		</div>
 	);
 }

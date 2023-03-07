@@ -39,11 +39,21 @@ const ColumnComponent = ( props ) => {
 		isSelected,
 		clientId,
 	} = props;
-	
+
 	useEffect( () => {
-		if( 101 !== backgroundOpacity && 'image' === backgroundType && 'gradient' === overlayType ){
-			const color1 = hexToRGBA( maybeGetColorForVariable( gradientOverlayColor1 ), backgroundOpacity );
-			const color2 = hexToRGBA( maybeGetColorForVariable( gradientOverlayColor2 ), backgroundOpacity );
+		if (
+			101 !== backgroundOpacity &&
+			'image' === backgroundType &&
+			'gradient' === overlayType
+		) {
+			const color1 = hexToRGBA(
+				maybeGetColorForVariable( gradientOverlayColor1 ),
+				backgroundOpacity
+			);
+			const color2 = hexToRGBA(
+				maybeGetColorForVariable( gradientOverlayColor2 ),
+				backgroundOpacity
+			);
 			let gradientVal;
 			if ( 'linear' === gradientOverlayType ) {
 				gradientVal = `linear-gradient(${ gradientOverlayAngle }deg, ${ color1 } ${ gradientOverlayLocation1 }%, ${ color2 } ${ gradientOverlayLocation2 }%)`;
@@ -60,34 +70,48 @@ const ColumnComponent = ( props ) => {
 
 		if ( 'image' === backgroundType ) {
 			if ( 101 !== backgroundOpacity ) {
-				const color = hexToRGBA( maybeGetColorForVariable( backgroundImageColor ), backgroundOpacity );
+				const color = hexToRGBA(
+					maybeGetColorForVariable( backgroundImageColor ),
+					backgroundOpacity
+				);
 				setAttributes( { backgroundImageColor: color } );
 				setAttributes( { backgroundOpacity: 101 } );
 			}
 		}
 
 		// border migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-
-			migrateBorderAttributes( 'column', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			setAttributes,
-			attributes
-		);
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHoverColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'column',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
+			);
 		}
 	}, [] );
 
@@ -95,7 +119,10 @@ const ColumnComponent = ( props ) => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-        addBlockEditorDynamicStyles( 'uagb-column-style-' + clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-column-style-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {

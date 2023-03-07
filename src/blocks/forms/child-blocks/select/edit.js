@@ -5,13 +5,12 @@
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
 
-
 import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsSelectEdit = ( props ) => {
 	const { setAttributes, isSelected, clientId } = props;
-	
+
 	const [ setState ] = useState( {
 		optionsstate: [
 			{

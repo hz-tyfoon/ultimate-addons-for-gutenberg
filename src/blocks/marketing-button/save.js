@@ -21,22 +21,16 @@ export default function save( props ) {
 		link,
 		linkTarget,
 		titleTag,
-		showDescription
+		showDescription,
 	} = attributes;
 
 	const target = linkTarget ? '_blank' : '';
 
-	const iconHTML = (
-		<>
-			{ '' !== icon && (
-				renderSVG( icon )
-			) }
-		</>
-	);
+	const iconHTML = <>{ '' !== icon && renderSVG( icon ) }</>;
 	const titleHTML = (
 		<>
 			<RichText.Content
-				value={ heading.replace( /(<([^>]+)>)/ig, '' ) }
+				value={ heading.replace( /(<([^>]+)>)/gi, '' ) }
 				tagName={ titleTag }
 				className="uagb-marketing-btn__title"
 			/>
@@ -54,32 +48,32 @@ export default function save( props ) {
 				'wp-block-button'
 			) }
 		>
-				<a
-					href={ link }
-					className="uagb-marketing-btn__link wp-block-button__link"
-					target={ target }
-					rel="noopener noreferrer"
-				>
-						{ 'before' === iconPosition &&
-							<>
-							{ iconHTML }
-							{ titleHTML }
-							</>
-						}
-						{ 'after' === iconPosition &&
-							<>
-							{ titleHTML }
-							{ iconHTML }
-							</>
-						}
-						{ showDescription && (
-						<RichText.Content
-							value={ prefix }
-							tagName="p"
-							className="uagb-marketing-btn__prefix"
-						/>
-						) }
-				</a>
+			<a
+				href={ link }
+				className="uagb-marketing-btn__link wp-block-button__link"
+				target={ target }
+				rel="noopener noreferrer"
+			>
+				{ 'before' === iconPosition && (
+					<>
+						{ iconHTML }
+						{ titleHTML }
+					</>
+				) }
+				{ 'after' === iconPosition && (
+					<>
+						{ titleHTML }
+						{ iconHTML }
+					</>
+				) }
+				{ showDescription && (
+					<RichText.Content
+						value={ prefix }
+						tagName="p"
+						className="uagb-marketing-btn__prefix"
+					/>
+				) }
+			</a>
 		</div>
 	);
 }

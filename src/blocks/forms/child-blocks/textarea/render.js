@@ -5,20 +5,14 @@ import { memo } from '@wordpress/element';
 import { RichText } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
-	
 	props = props.parentProps;
-	
+
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const { attributes, setAttributes } = props;
 
-	const {
-		block_id,
-		textareaRequired,
-		textareaName,
-		rows,
-		placeholder,
-	} = attributes;
+	const { block_id, textareaRequired, textareaName, rows, placeholder } =
+		attributes;
 
 	const isRequired = textareaRequired
 		? __( 'required', 'ultimate-addons-for-gutenberg' )

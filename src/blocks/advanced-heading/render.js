@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { useLayoutEffect,memo } from '@wordpress/element';
+import { useLayoutEffect, memo } from '@wordpress/element';
 
 import { useDeviceType } from '@Controls/getPreviewType';
 import styles from './editor.lazy.scss';
@@ -26,7 +26,7 @@ const Render = ( props ) => {
 			headingTag,
 			seperatorStyle,
 			seperatorPosition,
-			headingDescPosition
+			headingDescPosition,
 		},
 		setAttributes,
 		className,
@@ -42,7 +42,6 @@ const Render = ( props ) => {
 
 	const headingText = (
 		<>
-
 			{ seperatorPosition === 'above-heading' ? separator : '' }
 			<RichText
 				tagName={ headingTag }
@@ -72,7 +71,9 @@ const Render = ( props ) => {
 				) }
 				value={ headingDesc }
 				className="uagb-desc-text"
-				onChange={ ( value ) => setAttributes( { headingDesc: value } ) }
+				onChange={ ( value ) =>
+					setAttributes( { headingDesc: value } )
+				}
 			/>
 			{ seperatorPosition === 'below-sub-heading' ? separator : '' }
 		</>
@@ -86,9 +87,13 @@ const Render = ( props ) => {
 				`uagb-block-${ block_id }`
 			) }
 		>
-			{ headingDescToggle && 'above-heading' === headingDescPosition ? descText : '' }
+			{ headingDescToggle && 'above-heading' === headingDescPosition
+				? descText
+				: '' }
 			{ headingTitleToggle && headingText }
-			{ headingDescToggle && 'below-heading' === headingDescPosition ? descText : '' }
+			{ headingDescToggle && 'below-heading' === headingDescPosition
+				? descText
+				: '' }
 			{ ! headingDescToggle && ! headingTitleToggle ? separator : '' }
 		</div>
 	);

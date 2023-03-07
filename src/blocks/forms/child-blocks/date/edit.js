@@ -4,13 +4,12 @@
 
 import { useEffect } from '@wordpress/element';
 
-
 import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsDateEdit = ( props ) => {
 	const { isSelected, setAttributes, clientId } = props;
-	
+
 	useEffect( () => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
@@ -25,10 +24,10 @@ const UAGBFormsDateEdit = ( props ) => {
 	}, [] );
 
 	return (
-			<>
+		<>
 			{ isSelected && <Settings parentProps={ props } /> }
-				<Render parentProps={ props } />
-			</>
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

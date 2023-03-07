@@ -128,10 +128,10 @@ const Settings = ( props ) => {
 						'ultimate-addons-for-gutenberg'
 					) }
 					value={ placeholder }
-					data={{
+					data={ {
 						value: placeholder,
 						label: 'placeholder',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( {
@@ -202,12 +202,15 @@ const Settings = ( props ) => {
 				{ layout === 'input-button' && 'text' === buttonType && (
 					<>
 						<UAGTextControl
-							label={ __( 'Text', 'ultimate-addons-for-gutenberg' ) }
+							label={ __(
+								'Text',
+								'ultimate-addons-for-gutenberg'
+							) }
 							value={ buttonText }
-							data={{
+							data={ {
 								value: buttonText,
 								label: 'buttonText',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) => {
 								setAttributes( {
@@ -254,15 +257,27 @@ const Settings = ( props ) => {
 				/>
 				<ResponsiveBorder
 					setAttributes={ setAttributes }
-					borderStyleLabel={__( 'Style', 'ultimate-addons-for-gutenberg' )}
-					borderWidthLabel={__( 'Width', 'ultimate-addons-for-gutenberg' )}
-					borderRadiusLabel={__( 'Radius', 'ultimate-addons-for-gutenberg' )}
-					borderColorLabel={__( 'Color', 'ultimate-addons-for-gutenberg' )}
-					borderHoverColorLabel={__(
+					borderStyleLabel={ __(
+						'Style',
+						'ultimate-addons-for-gutenberg'
+					) }
+					borderWidthLabel={ __(
+						'Width',
+						'ultimate-addons-for-gutenberg'
+					) }
+					borderRadiusLabel={ __(
+						'Radius',
+						'ultimate-addons-for-gutenberg'
+					) }
+					borderColorLabel={ __(
+						'Color',
+						'ultimate-addons-for-gutenberg'
+					) }
+					borderHoverColorLabel={ __(
 						'Hover Color',
 						'ultimate-addons-for-gutenberg'
-					)}
-					prefix={'input'}
+					) }
+					prefix={ 'input' }
 					attributes={ attributes }
 					deviceType={ deviceType }
 				/>
@@ -587,73 +602,72 @@ const Settings = ( props ) => {
 					/>
 					{ 'text' === buttonType && (
 						<>
-						<TypographyControl
-							label={ __(
-								'Typography',
-								'ultimate-addons-for-gutenberg'
-							) }
-							attributes={ attributes }
-							setAttributes={ setAttributes }
-							loadGoogleFonts={ {
-								value: buttonloadGoogleFonts,
-								label: 'buttonloadGoogleFonts',
-							} }
-							fontFamily={ {
-								value: buttonFontFamily,
-								label: 'buttonFontFamily',
-							} }
-							fontWeight={ {
-								value: buttonFontWeight,
-								label: 'buttonFontWeight',
-							} }
-							fontStyle={ {
-								value: buttonFontStyle,
-								label: 'buttonFontStyle',
-							} }
-							fontSizeType={ {
-								value: buttonFontSizeType,
-								label: 'buttonFontSizeType',
-							} }
-							fontSize={ {
-								value: buttonFontSize,
-								label: 'buttonFontSize',
-							} }
-							fontSizeMobile={ {
-								value: buttonFontSizeMobile,
-								label: 'buttonFontSizeMobile',
-							} }
-							fontSizeTablet={ {
-								value: buttonFontSizeTablet,
-								label: 'buttonFontSizeTablet',
-							} }
-							lineHeightType={ {
-								value: buttonLineHeightType,
-								label: 'buttonLineHeightType',
-							} }
-							lineHeight={ {
-								value: buttonLineHeight,
-								label: 'buttonLineHeight',
-							} }
-							lineHeightMobile={ {
-								value: buttonLineHeightMobile,
-								label: 'buttonLineHeightMobile',
-							} }
-							lineHeightTablet={ {
-								value: buttonLineHeightTablet,
-								label: 'buttonLineHeightTablet',
-							} }
-							transform={ {
-								value: buttonTransform,
-								label: 'buttonTransform',
-							} }
-							decoration={ {
-								value: buttonDecoration,
-								label: 'buttonDecoration',
-							} }
-						/>
+							<TypographyControl
+								label={ __(
+									'Typography',
+									'ultimate-addons-for-gutenberg'
+								) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								loadGoogleFonts={ {
+									value: buttonloadGoogleFonts,
+									label: 'buttonloadGoogleFonts',
+								} }
+								fontFamily={ {
+									value: buttonFontFamily,
+									label: 'buttonFontFamily',
+								} }
+								fontWeight={ {
+									value: buttonFontWeight,
+									label: 'buttonFontWeight',
+								} }
+								fontStyle={ {
+									value: buttonFontStyle,
+									label: 'buttonFontStyle',
+								} }
+								fontSizeType={ {
+									value: buttonFontSizeType,
+									label: 'buttonFontSizeType',
+								} }
+								fontSize={ {
+									value: buttonFontSize,
+									label: 'buttonFontSize',
+								} }
+								fontSizeMobile={ {
+									value: buttonFontSizeMobile,
+									label: 'buttonFontSizeMobile',
+								} }
+								fontSizeTablet={ {
+									value: buttonFontSizeTablet,
+									label: 'buttonFontSizeTablet',
+								} }
+								lineHeightType={ {
+									value: buttonLineHeightType,
+									label: 'buttonLineHeightType',
+								} }
+								lineHeight={ {
+									value: buttonLineHeight,
+									label: 'buttonLineHeight',
+								} }
+								lineHeightMobile={ {
+									value: buttonLineHeightMobile,
+									label: 'buttonLineHeightMobile',
+								} }
+								lineHeightTablet={ {
+									value: buttonLineHeightTablet,
+									label: 'buttonLineHeightTablet',
+								} }
+								transform={ {
+									value: buttonTransform,
+									label: 'buttonTransform',
+								} }
+								decoration={ {
+									value: buttonDecoration,
+									label: 'buttonDecoration',
+								} }
+							/>
 						</>
-						)
-					}
+					) }
 					{ 'icon' === buttonType && (
 						<>
 							<Range

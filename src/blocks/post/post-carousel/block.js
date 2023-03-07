@@ -19,7 +19,10 @@ import PreviewImage from '@Controls/previewImage';
 // Register the block
 registerBlockType( 'uagb/post-carousel', {
 	title: __( 'Post Carousel', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Display your posts in a sliding carousel layout.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Display your posts in a sliding carousel layout.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.post_carousel,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -28,15 +31,15 @@ registerBlockType( 'uagb/post-carousel', {
 		__( 'uag', 'ultimate-addons-for-gutenberg' ),
 	],
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="post-carousel" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="post-carousel" />
+		) : (
+			<Edit { ...props } />
+		),
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	// Render via PHP
 	save() {

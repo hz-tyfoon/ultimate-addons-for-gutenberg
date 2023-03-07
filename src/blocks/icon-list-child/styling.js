@@ -5,7 +5,6 @@
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 
-
 function styling( props ) {
 	const {
 		icon_color,
@@ -52,10 +51,7 @@ function styling( props ) {
 
 	const selectors = {
 		'.wp-block-uagb-icon-list-child': {
-			'margin-top': generateCSSUnit(
-				childTopMargin,
-				childMarginUnit
-			),
+			'margin-top': generateCSSUnit( childTopMargin, childMarginUnit ),
 			'margin-right': generateCSSUnit(
 				childRightMargin,
 				childMarginUnit
@@ -64,14 +60,8 @@ function styling( props ) {
 				childBottomMargin,
 				childMarginUnit
 			),
-			'margin-left': generateCSSUnit(
-				childLeftMargin,
-				childMarginUnit
-			),
-			'padding-top': generateCSSUnit(
-				childTopPadding,
-				childPaddingUnit
-			),
+			'margin-left': generateCSSUnit( childLeftMargin, childMarginUnit ),
+			'padding-top': generateCSSUnit( childTopPadding, childPaddingUnit ),
 			'padding-right': generateCSSUnit(
 				childRightPadding,
 				childPaddingUnit
@@ -89,10 +79,11 @@ function styling( props ) {
 			'color': icon_color,
 			'fill': icon_color,
 		},
-		'.wp-block-uagb-icon-list-child:hover .uagb-icon-list__source-wrap svg': {
-			'color': icon_hover_color,
-			'fill': icon_hover_color,
-		},
+		'.wp-block-uagb-icon-list-child:hover .uagb-icon-list__source-wrap svg':
+			{
+				'color': icon_hover_color,
+				'fill': icon_hover_color,
+			},
 		'.wp-block-uagb-icon-list-child .uagb-icon-list__label': {
 			'color': label_color,
 		},

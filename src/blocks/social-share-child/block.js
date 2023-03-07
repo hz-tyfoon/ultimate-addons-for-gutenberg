@@ -14,7 +14,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/social-share-child', {
 	title: __( 'Social Share Child', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Share your content on this social media platform .', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Share your content on this social media platform .',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.social_share_child,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/social-share' ],
@@ -25,16 +28,16 @@ registerBlockType( 'uagb/social-share-child', {
 	],
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="social-share-child" isChildren={ true } />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="social-share-child" isChildren={ true } />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 	deprecated,
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

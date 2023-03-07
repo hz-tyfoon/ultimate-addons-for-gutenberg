@@ -7,15 +7,11 @@ import classnames from 'classnames';
 import { InnerBlocks } from '@wordpress/block-editor';
 
 export default function save( { attributes, className } ) {
-	const {
-		block_id,
-		backgroundType,
-		align,
-		alignMobile,
-		alignTablet,
-	} = attributes;
+	const { block_id, backgroundType, align, alignMobile, alignTablet } =
+		attributes;
 
-	const alignClass = 'center' === align ? '' : `uagb-column__align-${ align }`;
+	const alignClass =
+		'center' === align ? '' : `uagb-column__align-${ align }`;
 	const alignClassMobile =
 		'' === alignMobile ? '' : `uagb-column__align-mobile-${ alignMobile }`;
 	const alignClassTablet =

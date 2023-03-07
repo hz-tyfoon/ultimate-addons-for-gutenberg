@@ -29,16 +29,16 @@ registerBlockType( 'uagb/modal', {
 	category: uagb_blocks_info.category,
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="modal" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="modal" />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 	deprecated,
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

@@ -5,21 +5,22 @@
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
 
-
 import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsCheckboxEdit = ( props ) => {
-
 	const { isSelected, setAttributes, clientId } = props;
-    const [ state, setState ] = useState( { optionsstate: [ // eslint-disable-line no-unused-vars
-		{
-			optiontitle: __(
-				'Option Name 1',
-				'ultimate-addons-for-gutenberg'
-			),
-		},
-	], } );
+	// eslint-disable-next-line no-unused-vars
+	const [ state, setState ] = useState( {
+		optionsstate: [
+			{
+				optiontitle: __(
+					'Option Name 1',
+					'ultimate-addons-for-gutenberg'
+				),
+			},
+		],
+	} );
 
 	useEffect( () => {
 		// Assigning block_id in the attribute.
@@ -35,10 +36,10 @@ const UAGBFormsCheckboxEdit = ( props ) => {
 	}, [] );
 
 	return (
-			<>
-				{ isSelected && <Settings parentProps={ props } /> }
-				<Render parentProps={ props } setState={ setState } />
-			</>
+		<>
+			{ isSelected && <Settings parentProps={ props } /> }
+			<Render parentProps={ props } setState={ setState } />
+		</>
 	);
 };
 

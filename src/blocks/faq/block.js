@@ -43,7 +43,10 @@ const withFaq = createHigherOrderComponent( ( BlockEdit ) => {
 
 registerBlockType( 'uagb/faq', {
 	title: __( 'FAQ', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add accordions/FAQ schema to your page.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add accordions/FAQ schema to your page.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.faq,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -55,7 +58,7 @@ registerBlockType( 'uagb/faq', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	attributes,
 	deprecated,

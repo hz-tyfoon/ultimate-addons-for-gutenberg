@@ -24,7 +24,7 @@ export default function save( props ) {
 				`uagb-block-${ block_id }`
 			) }
 		>
-			{ ( displayTitle && title ) && (
+			{ displayTitle && title && (
 				<RichText.Content
 					tagName="p"
 					value={ title }

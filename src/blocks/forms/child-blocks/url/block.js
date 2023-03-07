@@ -13,7 +13,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/forms-url', {
 	title: __( 'URL', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add a URL input field in your form.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add a URL input field in your form.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.url,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/forms' ],
@@ -30,7 +33,7 @@ registerBlockType( 'uagb/forms-url', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	save,
 	deprecated,

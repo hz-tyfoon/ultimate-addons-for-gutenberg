@@ -30,16 +30,16 @@ registerBlockType( 'uagb/star-rating', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	category: uagb_blocks_info.category,
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="star-rating" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="star-rating" />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
-	deprecated
+	deprecated,
 } );

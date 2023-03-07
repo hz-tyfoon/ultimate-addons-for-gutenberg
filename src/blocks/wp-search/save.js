@@ -8,13 +8,8 @@ import renderSVG from '@Controls/renderIcon';
 import { RichText } from '@wordpress/block-editor';
 
 export default function save( props ) {
-	const {
-		block_id,
-		layout,
-		placeholder,
-		buttonType,
-		buttonText,
-	} = props.attributes;
+	const { block_id, layout, placeholder, buttonType, buttonText } =
+		props.attributes;
 
 	const renderClassic = () => {
 		if ( 'input-button' === layout ) {

@@ -17,7 +17,10 @@ import PreviewImage from '@Controls/previewImage';
 // Register the block.
 registerBlockType( 'uagb/post-timeline', {
 	title: __( 'Post Timeline', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Create an attractive timeline to display your posts.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Create an attractive timeline to display your posts.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.post_timeline,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -28,14 +31,14 @@ registerBlockType( 'uagb/post-timeline', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="post-timeline" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="post-timeline" />
+		) : (
+			<Edit { ...props } />
+		),
 	// Render via PHP
 	save: () => null,
 } );

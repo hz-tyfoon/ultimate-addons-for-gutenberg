@@ -13,7 +13,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/forms-phone', {
 	title: __( 'Phone', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add a phone number field in your form.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add a phone number field in your form.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.phone,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/forms' ],
@@ -30,8 +33,8 @@ registerBlockType( 'uagb/forms-phone', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	save,
-	deprecated
+	deprecated,
 } );

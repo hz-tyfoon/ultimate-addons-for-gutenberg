@@ -5,13 +5,10 @@ import InspectorTab, {
 	UAGTabs,
 } from '@Components/inspector-tabs/InspectorTab.js';
 
-import {
-	ToggleControl,
-} from '@wordpress/components';
+import { ToggleControl } from '@wordpress/components';
 
 import { InspectorControls } from '@wordpress/block-editor';
 import UAGTextControl from '@Components/text-control';
-
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
@@ -33,17 +30,20 @@ const Settings = ( props ) => {
 		return (
 			<UAGAdvancedPanelBody initialOpen={ true }>
 				<UAGTextControl
-					variant='textarea'
+					variant="textarea"
 					label={ __(
 						'Acceptance Text',
 						'ultimate-addons-for-gutenberg'
 					) }
-					help={ __( 'Label to display as acceptance message.', 'ultimate-addons-for-gutenberg' ) }
+					help={ __(
+						'Label to display as acceptance message.',
+						'ultimate-addons-for-gutenberg'
+					) }
 					value={ acceptText }
-					data={{
+					data={ {
 						value: acceptText,
 						label: 'acceptText',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( { acceptText: value } )
@@ -73,10 +73,10 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							value={ linkLabel }
-							data={{
+							data={ {
 								value: linkLabel,
 								label: 'linkLabel',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( { linkLabel: value } )
@@ -89,10 +89,10 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							value={ link }
-							data={{
+							data={ {
 								value: link,
 								label: 'link',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( { link: value } )

@@ -40,7 +40,9 @@ export default function save( props ) {
 				id={ block_id }
 			/>
 			<label // eslint-disable-line jsx-a11y/label-has-for
-			className="uagb-switch" id="uag-form">
+				className="uagb-switch"
+				id="uag-form"
+			>
 				<input
 					type="hidden"
 					className="uagb-forms-toggle-input"

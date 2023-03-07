@@ -16,12 +16,9 @@ import renderSVG from '@Controls/renderIcon';
 import UAGTabsControl from '@Components/tabs';
 import UAGSelectControl from '@Components/select-control';
 import GradientSettings from '@Components/gradient-settings';
-import {
-	ToggleControl,
-	Icon,
-} from '@wordpress/components';
+import { ToggleControl, Icon } from '@wordpress/components';
 
-import formsPresets, {buttonsPresets} from './presets';
+import formsPresets, { buttonsPresets } from './presets';
 import UAGPresets from '@Components/presets';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
@@ -198,16 +195,18 @@ const Settings = ( props ) => {
 	} = attributes;
 
 	const presetSettings = () => {
-		return <UAGAdvancedPanelBody
-					title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ true }
-				>
-					<UAGPresets
-						setAttributes = { setAttributes }
-						presets = { formsPresets }
-						presetInputType = 'radioImage'
-					/>
-				</UAGAdvancedPanelBody>
+		return (
+			<UAGAdvancedPanelBody
+				title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ true }
+			>
+				<UAGPresets
+					setAttributes={ setAttributes }
+					presets={ formsPresets }
+					presetInputType="radioImage"
+				/>
+			</UAGAdvancedPanelBody>
+		);
 	};
 	const submitGeneral = () => (
 		<UAGAdvancedPanelBody
@@ -217,7 +216,10 @@ const Settings = ( props ) => {
 		>
 			<MultiButtonsControl
 				setAttributes={ setAttributes }
-				label={ __( 'Button Alignment', 'ultimate-addons-for-gutenberg' ) }
+				label={ __(
+					'Button Alignment',
+					'ultimate-addons-for-gutenberg'
+				) }
 				data={ {
 					desktop: {
 						value: buttonAlign,
@@ -235,22 +237,13 @@ const Settings = ( props ) => {
 				options={ [
 					{
 						value: 'left',
-						icon: (
-							<Icon
-								icon={ renderSVG( 'fa fa-align-left' ) }
-							/>
-						),
-						tooltip: __(
-							'Left',
-							'ultimate-addons-for-gutenberg'
-						),
+						icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+						tooltip: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'center',
 						icon: (
-							<Icon
-								icon={ renderSVG( 'fa fa-align-center' ) }
-							/>
+							<Icon icon={ renderSVG( 'fa fa-align-center' ) } />
 						),
 						tooltip: __(
 							'Center',
@@ -260,23 +253,18 @@ const Settings = ( props ) => {
 					{
 						value: 'right',
 						icon: (
-							<Icon
-								icon={ renderSVG( 'fa fa-align-right' ) }
-							/>
+							<Icon icon={ renderSVG( 'fa fa-align-right' ) } />
 						),
-						tooltip: __(
-							'Right',
-							'ultimate-addons-for-gutenberg'
-						),
+						tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 					},
 				] }
 				showIcons={ true }
-				responsive={true}
+				responsive={ true }
 			/>
 			<UAGPresets
-				setAttributes = { setAttributes }
-				presets = { buttonsPresets }
-				presetInputType = 'radioImage'
+				setAttributes={ setAttributes }
+				presets={ buttonsPresets }
+				presetInputType="radioImage"
 			/>
 		</UAGAdvancedPanelBody>
 	);
@@ -294,7 +282,7 @@ const Settings = ( props ) => {
 					) }
 					checked={ displayLabels }
 					onChange={ () =>
-						setAttributes( { displayLabels : ! displayLabels } )
+						setAttributes( { displayLabels: ! displayLabels } )
 					}
 				/>
 				<UAGTextControl
@@ -303,10 +291,10 @@ const Settings = ( props ) => {
 						'ultimate-addons-for-gutenberg'
 					) }
 					value={ formLabel }
-					data={{
+					data={ {
 						value: formLabel,
 						label: 'formLabel',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( {
@@ -411,9 +399,12 @@ const Settings = ( props ) => {
 				{ 'message' === confirmationType && (
 					<>
 						<UAGTextControl
-							variant='textarea'
+							variant="textarea"
 							setAttributes={ setAttributes }
-							label={ __( 'Success Message Text', 'ultimate-addons-for-gutenberg' ) }
+							label={ __(
+								'Success Message Text',
+								'ultimate-addons-for-gutenberg'
+							) }
 							help={ __(
 								'Enter a message you want to display after successfull form submission',
 								'ultimate-addons-for-gutenberg'
@@ -421,7 +412,7 @@ const Settings = ( props ) => {
 							value={ confirmationMessage }
 							data={ {
 								value: confirmationMessage,
-								label: 'confirmationMessage'
+								label: 'confirmationMessage',
 							} }
 							onChange={ ( value ) =>
 								setAttributes( {
@@ -430,9 +421,12 @@ const Settings = ( props ) => {
 							}
 						/>
 						<UAGTextControl
-							variant='textarea'
+							variant="textarea"
 							setAttributes={ setAttributes }
-							label={ __( 'Error Message Text', 'ultimate-addons-for-gutenberg' )}
+							label={ __(
+								'Error Message Text',
+								'ultimate-addons-for-gutenberg'
+							) }
 							help={ __(
 								'Enter a message you want to display after unsuccessfull form submission',
 								'ultimate-addons-for-gutenberg'
@@ -440,7 +434,7 @@ const Settings = ( props ) => {
 							value={ failedMessage }
 							data={ {
 								value: failedMessage,
-								label: 'failedMessage'
+								label: 'failedMessage',
 							} }
 							onChange={ ( value ) =>
 								setAttributes( {
@@ -461,10 +455,10 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 						value={ confirmationUrl }
-						data={{
+						data={ {
 							value: confirmationUrl,
 							label: 'confirmationUrl',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( {
@@ -476,92 +470,88 @@ const Settings = ( props ) => {
 			</UAGAdvancedPanelBody>
 		);
 	};
-	const successMessageStyle = () => ( 'message' === confirmationType && (
-		<>
-			<AdvancedPopColorControl
-				label={ __(
-					'Text Color',
-					'ultimate-addons-for-gutenberg'
-				) }
-				colorValue={
-					successMessageTextColor
-						? successMessageTextColor
-						: ''
-				}
-				data={ {
-					value: successMessageTextColor,
-					label: 'successMessageTextColor',
-				} }
-				setAttributes={ setAttributes }
-			/>
-			<AdvancedPopColorControl
-				label={ __(
-					'Background Color',
-					'ultimate-addons-for-gutenberg'
-				) }
-				colorValue={
-					successMessageBGColor
-						? successMessageBGColor
-						: ''
-				}
-				data={ {
-					value: successMessageBGColor,
-					label: 'successMessageBGColor',
-				} }
-				setAttributes={ setAttributes }
-			/>
-			<ResponsiveBorder
-				setAttributes={ setAttributes }
-				prefix={'successMsg'}
-				disabledBorderTitle= {false}
-				attributes={ attributes }
-				deviceType={deviceType}
-				disableBottomSeparator={ true }
-			/>
-		</>
-	) );
-	const failedMessageStyle = () => ( 'message' === confirmationType && (
-		<>
-			<AdvancedPopColorControl
-				label={ __(
-					'Text Color',
-					'ultimate-addons-for-gutenberg'
-				) }
-				colorValue={
-					failedMessageTextColor
-						? failedMessageTextColor
-						: ''
-				}
-				data={ {
-					value: failedMessageTextColor,
-					label: 'failedMessageTextColor',
-				} }
-				setAttributes={ setAttributes }
-			/>
-			<AdvancedPopColorControl
-				label={ __(
-					'Background Color',
-					'ultimate-addons-for-gutenberg'
-				) }
-				colorValue={
-					failedMessageBGColor ? failedMessageBGColor : ''
-				}
-				data={ {
-					value: failedMessageBGColor,
-					label: 'failedMessageBGColor',
-				} }
-				setAttributes={ setAttributes }
-			/>
-			<ResponsiveBorder
-				setAttributes={ setAttributes }
-				prefix={'errorMsg'}
-				disabledBorderTitle= {false}
-				attributes={ attributes }
-				deviceType={deviceType}
-				disableBottomSeparator={ true }
-			/>
-		</>
-	) );
+	const successMessageStyle = () =>
+		'message' === confirmationType && (
+			<>
+				<AdvancedPopColorControl
+					label={ __(
+						'Text Color',
+						'ultimate-addons-for-gutenberg'
+					) }
+					colorValue={
+						successMessageTextColor ? successMessageTextColor : ''
+					}
+					data={ {
+						value: successMessageTextColor,
+						label: 'successMessageTextColor',
+					} }
+					setAttributes={ setAttributes }
+				/>
+				<AdvancedPopColorControl
+					label={ __(
+						'Background Color',
+						'ultimate-addons-for-gutenberg'
+					) }
+					colorValue={
+						successMessageBGColor ? successMessageBGColor : ''
+					}
+					data={ {
+						value: successMessageBGColor,
+						label: 'successMessageBGColor',
+					} }
+					setAttributes={ setAttributes }
+				/>
+				<ResponsiveBorder
+					setAttributes={ setAttributes }
+					prefix={ 'successMsg' }
+					disabledBorderTitle={ false }
+					attributes={ attributes }
+					deviceType={ deviceType }
+					disableBottomSeparator={ true }
+				/>
+			</>
+		);
+	const failedMessageStyle = () =>
+		'message' === confirmationType && (
+			<>
+				<AdvancedPopColorControl
+					label={ __(
+						'Text Color',
+						'ultimate-addons-for-gutenberg'
+					) }
+					colorValue={
+						failedMessageTextColor ? failedMessageTextColor : ''
+					}
+					data={ {
+						value: failedMessageTextColor,
+						label: 'failedMessageTextColor',
+					} }
+					setAttributes={ setAttributes }
+				/>
+				<AdvancedPopColorControl
+					label={ __(
+						'Background Color',
+						'ultimate-addons-for-gutenberg'
+					) }
+					colorValue={
+						failedMessageBGColor ? failedMessageBGColor : ''
+					}
+					data={ {
+						value: failedMessageBGColor,
+						label: 'failedMessageBGColor',
+					} }
+					setAttributes={ setAttributes }
+				/>
+				<ResponsiveBorder
+					setAttributes={ setAttributes }
+					prefix={ 'errorMsg' }
+					disabledBorderTitle={ false }
+					attributes={ attributes }
+					deviceType={ deviceType }
+					disableBottomSeparator={ true }
+				/>
+			</>
+		);
 
 	const afterSubmitActions = () => {
 		return (
@@ -580,24 +570,15 @@ const Settings = ( props ) => {
 					tabs={ [
 						{
 							name: 'to',
-							title: __(
-								'To',
-								'ultimate-addons-for-gutenberg'
-							),
+							title: __( 'To', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							name: 'cc',
-							title: __(
-								'CC',
-								'ultimate-addons-for-gutenberg'
-							),
+							title: __( 'CC', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							name: 'bcc',
-							title: __(
-								'BCC',
-								'ultimate-addons-for-gutenberg'
-							),
+							title: __( 'BCC', 'ultimate-addons-for-gutenberg' ),
 						},
 					] }
 					to={
@@ -611,10 +592,10 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							value={ afterSubmitToEmail }
-							data={{
+							data={ {
 								value: afterSubmitToEmail,
 								label: 'afterSubmitToEmail',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( {
@@ -634,10 +615,10 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							value={ afterSubmitCcEmail }
-							data={{
+							data={ {
 								value: afterSubmitCcEmail,
 								label: 'afterSubmitCcEmail',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( {
@@ -657,10 +638,10 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							value={ afterSubmitBccEmail }
-							data={{
+							data={ {
 								value: afterSubmitBccEmail,
 								label: 'afterSubmitBccEmail',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( {
@@ -672,19 +653,16 @@ const Settings = ( props ) => {
 					disableBottomSeparator={ false }
 				/>
 				<UAGTextControl
-					label={ __(
-						'Subject',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Subject', 'ultimate-addons-for-gutenberg' ) }
 					placeholder={ __(
 						'Subject',
 						'ultimate-addons-for-gutenberg'
 					) }
 					value={ afterSubmitEmailSubject }
-					data={{
+					data={ {
 						value: afterSubmitEmailSubject,
 						label: 'afterSubmitEmailSubject',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( {
@@ -702,10 +680,7 @@ const Settings = ( props ) => {
 			initialOpen={ true }
 		>
 			<TypographyControl
-				label={ __(
-					'Typography',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 				loadGoogleFonts={ {
@@ -785,23 +760,20 @@ const Settings = ( props ) => {
 				tabs={ [
 					{
 						name: 'normal',
-						title: __(
-							'Normal',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						name: 'hover',
-						title: __(
-							'Hover',
-							'ultimate-addons-for-gutenberg'
-						),
-					}
+						title: __( 'Hover', 'ultimate-addons-for-gutenberg' ),
+					},
 				] }
 				normal={
 					<>
 						<AdvancedPopColorControl
-							label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
+							label={ __(
+								'Color',
+								'ultimate-addons-for-gutenberg'
+							) }
 							colorValue={ labelColor ? labelColor : '' }
 							data={ {
 								value: labelColor,
@@ -814,8 +786,13 @@ const Settings = ( props ) => {
 				hover={
 					<>
 						<AdvancedPopColorControl
-							label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
-							colorValue={ labelHoverColor ? labelHoverColor : '' }
+							label={ __(
+								'Color',
+								'ultimate-addons-for-gutenberg'
+							) }
+							colorValue={
+								labelHoverColor ? labelHoverColor : ''
+							}
 							data={ {
 								value: labelHoverColor,
 								label: 'labelHoverColor',
@@ -848,24 +825,15 @@ const Settings = ( props ) => {
 				tabs={ [
 					{
 						name: 'normal',
-						title: __(
-							'Normal',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						name: 'hover',
-						title: __(
-							'Hover',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Hover', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						name: 'active',
-						title: __(
-							'Active',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Active', 'ultimate-addons-for-gutenberg' ),
 					},
 				] }
 				normal={
@@ -876,7 +844,9 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							colorValue={
-								inputplaceholderColor ? inputplaceholderColor : ''
+								inputplaceholderColor
+									? inputplaceholderColor
+									: ''
 							}
 							data={ {
 								value: inputplaceholderColor,
@@ -908,7 +878,9 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							colorValue={
-								inputplaceholderHoverColor ? inputplaceholderHoverColor : ''
+								inputplaceholderHoverColor
+									? inputplaceholderHoverColor
+									: ''
 							}
 							data={ {
 								value: inputplaceholderHoverColor,
@@ -940,7 +912,9 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 							colorValue={
-								inputplaceholderActiveColor ? inputplaceholderActiveColor : ''
+								inputplaceholderActiveColor
+									? inputplaceholderActiveColor
+									: ''
 							}
 							data={ {
 								value: inputplaceholderActiveColor,
@@ -954,7 +928,9 @@ const Settings = ( props ) => {
 									'Background Color',
 									'ultimate-addons-for-gutenberg'
 								) }
-								colorValue={ bgActiveColor ? bgActiveColor : '' }
+								colorValue={
+									bgActiveColor ? bgActiveColor : ''
+								}
 								data={ {
 									value: bgActiveColor,
 									label: 'bgActiveColor',
@@ -968,10 +944,10 @@ const Settings = ( props ) => {
 			/>
 			<ResponsiveBorder
 				setAttributes={ setAttributes }
-				prefix={'field'}
-				disabledBorderTitle= {false}
+				prefix={ 'field' }
+				disabledBorderTitle={ false }
 				attributes={ attributes }
-				deviceType={deviceType}
+				deviceType={ deviceType }
 			/>
 			<SpacingControl
 				{ ...props }
@@ -1129,7 +1105,10 @@ const Settings = ( props ) => {
 
 	const elementStyling = () => (
 		<UAGAdvancedPanelBody
-			title={ __( 'Checkbox/Toggle/Radio', 'ultimate-addons-for-gutenberg' ) }
+			title={ __(
+				'Checkbox/Toggle/Radio',
+				'ultimate-addons-for-gutenberg'
+			) }
 			initialOpen={ false }
 			// className="uagb__url-panel-body"
 		>
@@ -1161,10 +1140,7 @@ const Settings = ( props ) => {
 				setAttributes={ setAttributes }
 			/>
 			<ResponsiveSlider
-				label={ __(
-					'Toggle Size',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Toggle Size', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					desktop: {
 						value: toggleWidthSize,
@@ -1185,26 +1161,20 @@ const Settings = ( props ) => {
 				setAttributes={ setAttributes }
 			/>
 			<p className="uagb-form-notice">
-					{ __(
-						'Note: It is required to set border style and border width for toggle. Else you will not able to resize the toggle.',
-						'ultimate-addons-for-gutenberg'
-					) }
-				</p>
+				{ __(
+					'Note: It is required to set border style and border width for toggle. Else you will not able to resize the toggle.',
+					'ultimate-addons-for-gutenberg'
+				) }
+			</p>
 			<UAGTabsControl
 				tabs={ [
 					{
 						name: 'normal',
-						title: __(
-							'Normal',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						name: 'active',
-						title: __(
-							'Active',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Active', 'ultimate-addons-for-gutenberg' ),
 					},
 				] }
 				normal={
@@ -1242,7 +1212,9 @@ const Settings = ( props ) => {
 								'Background Color',
 								'ultimate-addons-for-gutenberg'
 							) }
-							colorValue={ toggleActiveColor ? toggleActiveColor : '' }
+							colorValue={
+								toggleActiveColor ? toggleActiveColor : ''
+							}
 							data={ {
 								value: toggleActiveColor,
 								label: 'toggleActiveColor',
@@ -1254,7 +1226,9 @@ const Settings = ( props ) => {
 								'Element Color',
 								'ultimate-addons-for-gutenberg'
 							) }
-							colorValue={ toggleDotActiveColor ? toggleDotActiveColor : '' }
+							colorValue={
+								toggleDotActiveColor ? toggleDotActiveColor : ''
+							}
 							data={ {
 								value: toggleDotActiveColor,
 								label: 'toggleDotActiveColor',
@@ -1267,12 +1241,18 @@ const Settings = ( props ) => {
 			/>
 			<ResponsiveBorder
 				setAttributes={ setAttributes }
-				prefix={'checkBoxToggle'}
-				disabledBorderTitle= {false}
+				prefix={ 'checkBoxToggle' }
+				disabledBorderTitle={ false }
 				attributes={ attributes }
-				deviceType={deviceType}
-				borderHoverColorLabel={ __( 'Color', 'ultimate-addons-for-gutenberg' )}
-				hoverTabLabel={ __( 'Active', 'ultimate-addons-for-gutenberg' )}
+				deviceType={ deviceType }
+				borderHoverColorLabel={ __(
+					'Color',
+					'ultimate-addons-for-gutenberg'
+				) }
+				hoverTabLabel={ __(
+					'Active',
+					'ultimate-addons-for-gutenberg'
+				) }
 				disableBottomSeparator={ true }
 				borderRadiusHelp={ __(
 					'Border radius will be applied to Radio & Toggle only when the layout for those blocks is set to Square.',
@@ -1289,10 +1269,7 @@ const Settings = ( props ) => {
 			// className="uagb__url-panel-body"
 		>
 			<UAGSelectControl
-				label={ __(
-					'Button Size',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Button Size', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					value: buttonSize,
 					label: 'buttonSize',
@@ -1301,24 +1278,15 @@ const Settings = ( props ) => {
 				options={ [
 					{
 						value: 'small',
-						label: __(
-							'Small',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Small', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'medium',
-						label: __(
-							'Medium',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Medium', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'large',
-						label: __(
-							'Large',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Large', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						value: 'extralarge',
@@ -1329,19 +1297,13 @@ const Settings = ( props ) => {
 					},
 					{
 						value: 'full',
-						label: __(
-							'Full',
-							'ultimate-addons-for-gutenberg'
-						),
+						label: __( 'Full', 'ultimate-addons-for-gutenberg' ),
 					},
 				] }
 			/>
-			
+
 			<TypographyControl
-				label={ __(
-					'Typography',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 				loadGoogleFonts={ {
@@ -1495,17 +1457,11 @@ const Settings = ( props ) => {
 				tabs={ [
 					{
 						name: 'normal',
-						title: __(
-							'Normal',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						name: 'hover',
-						title: __(
-							'Hover',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Hover', 'ultimate-addons-for-gutenberg' ),
 					},
 				] }
 				normal={
@@ -1524,7 +1480,10 @@ const Settings = ( props ) => {
 						/>
 						<MultiButtonsControl
 							setAttributes={ setAttributes }
-							label={ __( 'Background Type', 'ultimate-addons-for-gutenberg' ) }
+							label={ __(
+								'Background Type',
+								'ultimate-addons-for-gutenberg'
+							) }
 							data={ {
 								value: submitBgType,
 								label: 'submitBgType',
@@ -1554,7 +1513,7 @@ const Settings = ( props ) => {
 								},
 							] }
 						/>
-						{ submitBgType === 'color' &&
+						{ submitBgType === 'color' && (
 							<AdvancedPopColorControl
 								label={ __(
 									'Background Color',
@@ -1569,13 +1528,13 @@ const Settings = ( props ) => {
 								} }
 								setAttributes={ setAttributes }
 							/>
-						}
+						) }
 						{ 'gradient' === submitBgType && (
 							<GradientSettings
 								backgroundGradient={ {
 									value: gradientValue,
 									label: 'gradientValue',
-								}}
+								} }
 								setAttributes={ setAttributes }
 							/>
 						) }
@@ -1599,7 +1558,10 @@ const Settings = ( props ) => {
 						/>
 						<MultiButtonsControl
 							setAttributes={ setAttributes }
-							label={ __( 'Background Type', 'ultimate-addons-for-gutenberg' ) }
+							label={ __(
+								'Background Type',
+								'ultimate-addons-for-gutenberg'
+							) }
 							data={ {
 								value: submitBgHoverType,
 								label: 'submitBgHoverType',
@@ -1629,7 +1591,7 @@ const Settings = ( props ) => {
 								},
 							] }
 						/>
-						{ submitBgHoverType === 'color' &&
+						{ submitBgHoverType === 'color' && (
 							<AdvancedPopColorControl
 								label={ __(
 									'Background Color',
@@ -1644,13 +1606,13 @@ const Settings = ( props ) => {
 								} }
 								setAttributes={ setAttributes }
 							/>
-						}
+						) }
 						{ 'gradient' === submitBgHoverType && (
 							<GradientSettings
 								backgroundGradient={ {
 									value: gradientHValue,
 									label: 'gradientHValue',
-								}}
+								} }
 								setAttributes={ setAttributes }
 							/>
 						) }
@@ -1659,11 +1621,11 @@ const Settings = ( props ) => {
 			/>
 			<ResponsiveBorder
 				setAttributes={ setAttributes }
-				prefix={'btn'}
-				disabledBorderTitle= {false}
+				prefix={ 'btn' }
+				disabledBorderTitle={ false }
 				attributes={ attributes }
-				deviceType={deviceType}
-				disableBottomSeparator = { true }
+				deviceType={ deviceType }
+				disableBottomSeparator={ true }
 			/>
 		</UAGAdvancedPanelBody>
 	);
@@ -1678,17 +1640,11 @@ const Settings = ( props ) => {
 				tabs={ [
 					{
 						name: 'success',
-						title: __(
-							'Success',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Success', 'ultimate-addons-for-gutenberg' ),
 					},
 					{
 						name: 'error',
-						title: __(
-							'Error',
-							'ultimate-addons-for-gutenberg'
-						),
+						title: __( 'Error', 'ultimate-addons-for-gutenberg' ),
 					},
 				] }
 				success={ successMessageStyle() }
@@ -1706,10 +1662,7 @@ const Settings = ( props ) => {
 		>
 			<SpacingControl
 				{ ...props }
-				label={ __(
-					'Form Padding',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Form Padding', 'ultimate-addons-for-gutenberg' ) }
 				valueTop={ {
 					value: formPaddingTop,
 					label: 'formPaddingTop',
@@ -1779,10 +1732,7 @@ const Settings = ( props ) => {
 				} }
 			/>
 			<ResponsiveSlider
-				label={ __(
-					'Row Spacing',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Row Spacing', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					desktop: {
 						value: fieldGap,
@@ -1805,24 +1755,15 @@ const Settings = ( props ) => {
 				} }
 				units={ [
 					{
-						name: __(
-							'Pixel',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( 'Pixel', 'ultimate-addons-for-gutenberg' ),
 						unitValue: 'px',
 					},
 					{
-						name: __(
-							'%',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( '%', 'ultimate-addons-for-gutenberg' ),
 						unitValue: '%',
 					},
 					{
-						name: __(
-							'em',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( 'em', 'ultimate-addons-for-gutenberg' ),
 						unitValue: 'em',
 					},
 				] }
@@ -1855,24 +1796,15 @@ const Settings = ( props ) => {
 				} }
 				units={ [
 					{
-						name: __(
-							'Pixel',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( 'Pixel', 'ultimate-addons-for-gutenberg' ),
 						unitValue: 'px',
 					},
 					{
-						name: __(
-							'%',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( '%', 'ultimate-addons-for-gutenberg' ),
 						unitValue: '%',
 					},
 					{
-						name: __(
-							'em',
-							'ultimate-addons-for-gutenberg'
-						),
+						name: __( 'em', 'ultimate-addons-for-gutenberg' ),
 						unitValue: 'em',
 					},
 				] }
@@ -1880,7 +1812,6 @@ const Settings = ( props ) => {
 			/>
 		</UAGAdvancedPanelBody>
 	);
-
 
 	const googleReCaptcha = () => {
 		return (
@@ -1912,7 +1843,15 @@ const Settings = ( props ) => {
 				{ reCaptchaEnable && (
 					<>
 						<p className="uagb-form-notice">
-							Please configure the Google reCAPTCHA Site & Secret key from <a target = "_blank" href={`${uagb_blocks_info.uagb_home_url}/wp-admin/options-general.php?page=spectra&path=settings&settings=block-settings`} rel="noreferrer">here.</a>
+							Please configure the Google reCAPTCHA Site & Secret
+							key from{ ' ' }
+							<a
+								target="_blank"
+								href={ `${ uagb_blocks_info.uagb_home_url }/wp-admin/options-general.php?page=spectra&path=settings&settings=block-settings` }
+								rel="noreferrer"
+							>
+								here.
+							</a>
 						</p>
 						<MultiButtonsControl
 							setAttributes={ setAttributes }
@@ -2026,9 +1965,7 @@ const Settings = ( props ) => {
 						{ googleReCaptcha() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
-						{ displayLabels &&
-							labelStyling()
-						}
+						{ displayLabels && labelStyling() }
 						{ inputStyling() }
 						{ elementStyling() }
 						{ submitStyling() }
@@ -2042,10 +1979,9 @@ const Settings = ( props ) => {
 				</InspectorTabs>
 			</InspectorControls>
 
-				{ loadsubmittextGoogleFonts }
-				{ loadlabelGoogleFonts }
-				{ loadinputGoogleFonts }
-
+			{ loadsubmittextGoogleFonts }
+			{ loadlabelGoogleFonts }
+			{ loadinputGoogleFonts }
 		</>
 	);
 };

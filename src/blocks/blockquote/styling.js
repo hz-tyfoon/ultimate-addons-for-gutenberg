@@ -10,7 +10,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -144,17 +143,17 @@ function styling( props ) {
 		tweetBtnFontStyle,
 		stack,
 		descLetterSpacing,
-descLetterSpacingTablet,
-descLetterSpacingMobile,
-descLetterSpacingType,
-authorLetterSpacing,
-authorLetterSpacingTablet,
-authorLetterSpacingMobile,
-authorLetterSpacingType,
-tweetBtnLetterSpacing,
-tweetBtnLetterSpacingTablet,
-tweetBtnLetterSpacingMobile,
-tweetBtnLetterSpacingType,
+		descLetterSpacingTablet,
+		descLetterSpacingMobile,
+		descLetterSpacingType,
+		authorLetterSpacing,
+		authorLetterSpacingTablet,
+		authorLetterSpacingMobile,
+		authorLetterSpacingType,
+		tweetBtnLetterSpacing,
+		tweetBtnLetterSpacingTablet,
+		tweetBtnLetterSpacingMobile,
+		tweetBtnLetterSpacingType,
 	} = props.attributes;
 
 	let tmpAuthorSpace = authorSpace;
@@ -167,27 +166,111 @@ tweetBtnLetterSpacingType,
 		tmpAuthorSpaceMobile = 0;
 	}
 
-	const descSpaceFallback = getFallbackNumber( descSpace, 'descSpace', blockName );
-	const descSpaceTabletFallback = getFallbackNumber( descSpaceTablet, 'descSpaceTablet', blockName );
-	const descSpaceMobileFallback = getFallbackNumber( descSpaceMobile, 'descSpaceMobile', blockName );
-	const borderWidthFallback = getFallbackNumber( borderWidth, 'borderWidth', blockName );
-	const borderGapFallback = getFallbackNumber( borderGap, 'borderGap', blockName );
-	const borderGapTabletFallback = getFallbackNumber( borderGapTablet, 'borderGapTablet', blockName );
-	const borderGapMobileFallback = getFallbackNumber( borderGapMobile, 'borderGapMobile', blockName );
-	const quoteBorderRadiusFallback = getFallbackNumber( quoteBorderRadius, 'quoteBorderRadius', blockName );
-	const quoteSizeFallback = getFallbackNumber( quoteSize, 'quoteSize', blockName );
-	const quoteSizeTabletFallback = getFallbackNumber( quoteSizeTablet, 'quoteSizeTablet', blockName );
-	const quoteSizeMobileFallback = getFallbackNumber( quoteSizeMobile, 'quoteSizeMobile', blockName );
-	const tmpAuthorSpaceFallback = getFallbackNumber( tmpAuthorSpace, 'authorSpace', blockName );
-	const tmpAuthorSpaceTabletFallback = getFallbackNumber( tmpAuthorSpaceTablet, 'authorSpaceTablet', blockName );
-	const tmpAuthorSpaceMobileFallback = getFallbackNumber( tmpAuthorSpaceMobile, 'authorSpaceMobile', blockName );
-	const authorImageWidthFallback = getFallbackNumber( authorImageWidth, 'authorImageWidth', blockName );
-	const authorImageWidthTabletFallback = getFallbackNumber( authorImageWidthTablet, 'authorImageWidthTablet', blockName );
-	const authorImageWidthMobileFallback = getFallbackNumber( authorImageWidthMobile, 'authorImageWidthMobile', blockName );
-	const authorImageGapFallback = getFallbackNumber( authorImageGap, 'authorImageGap', blockName );
-	const authorImageGapTabletFallback = getFallbackNumber( authorImageGapTablet, 'authorImageGapTablet', blockName );
-	const authorImageGapMobileFallback = getFallbackNumber( authorImageGapMobile, 'authorImageGapMobile', blockName );
-	const tweetIconSpacingFallback = getFallbackNumber( tweetIconSpacing, 'tweetIconSpacing', blockName );
+	const descSpaceFallback = getFallbackNumber(
+		descSpace,
+		'descSpace',
+		blockName
+	);
+	const descSpaceTabletFallback = getFallbackNumber(
+		descSpaceTablet,
+		'descSpaceTablet',
+		blockName
+	);
+	const descSpaceMobileFallback = getFallbackNumber(
+		descSpaceMobile,
+		'descSpaceMobile',
+		blockName
+	);
+	const borderWidthFallback = getFallbackNumber(
+		borderWidth,
+		'borderWidth',
+		blockName
+	);
+	const borderGapFallback = getFallbackNumber(
+		borderGap,
+		'borderGap',
+		blockName
+	);
+	const borderGapTabletFallback = getFallbackNumber(
+		borderGapTablet,
+		'borderGapTablet',
+		blockName
+	);
+	const borderGapMobileFallback = getFallbackNumber(
+		borderGapMobile,
+		'borderGapMobile',
+		blockName
+	);
+	const quoteBorderRadiusFallback = getFallbackNumber(
+		quoteBorderRadius,
+		'quoteBorderRadius',
+		blockName
+	);
+	const quoteSizeFallback = getFallbackNumber(
+		quoteSize,
+		'quoteSize',
+		blockName
+	);
+	const quoteSizeTabletFallback = getFallbackNumber(
+		quoteSizeTablet,
+		'quoteSizeTablet',
+		blockName
+	);
+	const quoteSizeMobileFallback = getFallbackNumber(
+		quoteSizeMobile,
+		'quoteSizeMobile',
+		blockName
+	);
+	const tmpAuthorSpaceFallback = getFallbackNumber(
+		tmpAuthorSpace,
+		'authorSpace',
+		blockName
+	);
+	const tmpAuthorSpaceTabletFallback = getFallbackNumber(
+		tmpAuthorSpaceTablet,
+		'authorSpaceTablet',
+		blockName
+	);
+	const tmpAuthorSpaceMobileFallback = getFallbackNumber(
+		tmpAuthorSpaceMobile,
+		'authorSpaceMobile',
+		blockName
+	);
+	const authorImageWidthFallback = getFallbackNumber(
+		authorImageWidth,
+		'authorImageWidth',
+		blockName
+	);
+	const authorImageWidthTabletFallback = getFallbackNumber(
+		authorImageWidthTablet,
+		'authorImageWidthTablet',
+		blockName
+	);
+	const authorImageWidthMobileFallback = getFallbackNumber(
+		authorImageWidthMobile,
+		'authorImageWidthMobile',
+		blockName
+	);
+	const authorImageGapFallback = getFallbackNumber(
+		authorImageGap,
+		'authorImageGap',
+		blockName
+	);
+	const authorImageGapTabletFallback = getFallbackNumber(
+		authorImageGapTablet,
+		'authorImageGapTablet',
+		blockName
+	);
+	const authorImageGapMobileFallback = getFallbackNumber(
+		authorImageGapMobile,
+		'authorImageGapMobile',
+		blockName
+	);
+	const tweetIconSpacingFallback = getFallbackNumber(
+		tweetIconSpacing,
+		'tweetIconSpacing',
+		blockName
+	);
 	//Set align to left for border style
 	let textAlign = align;
 
@@ -208,9 +291,15 @@ tweetBtnLetterSpacingType,
 			'text-decoration': descDecoration,
 			'text-transform': descTransform,
 			'color': descColor,
-			'margin-bottom': generateCSSUnit( descSpaceFallback, descSpaceUnit ),
+			'margin-bottom': generateCSSUnit(
+				descSpaceFallback,
+				descSpaceUnit
+			),
 			'text-align': textAlign,
-			'letter-spacing': generateCSSUnit( descLetterSpacing, descLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacing,
+				descLetterSpacingType
+			),
 		},
 		' .uagb-blockquote__author.block-editor-rich-text__editable': {
 			'font-size': generateCSSUnit( authorFontSize, authorFontSizeType ),
@@ -225,12 +314,18 @@ tweetBtnLetterSpacingType,
 			'text-transform': authorTransform,
 			'color': authorColor,
 			'text-align': textAlign,
-			'letter-spacing': generateCSSUnit( authorLetterSpacing, authorLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				authorLetterSpacing,
+				authorLetterSpacingType
+			),
 		},
 		'.uagb-blockquote__skin-border blockquote.uagb-blockquote': {
 			'border-color': borderColor,
 			'border-left-style': borderStyle,
-			'border-left-width': generateCSSUnit( borderWidthFallback, borderWidthUnit ),
+			'border-left-width': generateCSSUnit(
+				borderWidthFallback,
+				borderWidthUnit
+			),
 			'padding-left': generateCSSUnit( borderGapFallback, borderGapUnit ),
 			'padding-top': generateCSSUnit(
 				verticalPadding,
@@ -246,7 +341,10 @@ tweetBtnLetterSpacingType,
 		},
 		'.uagb-blockquote__skin-quotation .uagb-blockquote__icon': {
 			'background': quoteBgColor,
-			'border-radius': generateCSSUnit( quoteBorderRadiusFallback, quoteBorderRadiusUnit ),
+			'border-radius': generateCSSUnit(
+				quoteBorderRadiusFallback,
+				quoteBorderRadiusUnit
+			),
 			'margin-top': generateCSSUnit( quoteTopMargin, quoteUnit ),
 			'margin-bottom': generateCSSUnit( quoteBottomMargin, quoteUnit ),
 			'margin-left': generateCSSUnit( quoteLeftMargin, quoteUnit ),
@@ -268,24 +366,42 @@ tweetBtnLetterSpacingType,
 			'text-align': align,
 		},
 		' .uagb-blockquote__author-wrap': {
-			'margin-bottom': generateCSSUnit( tmpAuthorSpaceFallback, authorSpaceUnit ),
+			'margin-bottom': generateCSSUnit(
+				tmpAuthorSpaceFallback,
+				authorSpaceUnit
+			),
 		},
 		' .uagb-blockquote__author-wrap img': {
-			'width': generateCSSUnit( authorImageWidthFallback, authorImageWidthUnit ),
-			'height': generateCSSUnit( authorImageWidthFallback, authorImageWidthUnit ),
+			'width': generateCSSUnit(
+				authorImageWidthFallback,
+				authorImageWidthUnit
+			),
+			'height': generateCSSUnit(
+				authorImageWidthFallback,
+				authorImageWidthUnit
+			),
 			'border-radius': generateCSSUnit(
 				authorImgBorderRadius,
 				authorImgBorderRadiusUnit
 			),
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-right img': {
-			'margin-left': generateCSSUnit( authorImageGapFallback, authorImageGapUnit ),
+			'margin-left': generateCSSUnit(
+				authorImageGapFallback,
+				authorImageGapUnit
+			),
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-top img': {
-			'margin-bottom': generateCSSUnit( authorImageGapFallback, authorImageGapUnit ),
+			'margin-bottom': generateCSSUnit(
+				authorImageGapFallback,
+				authorImageGapUnit
+			),
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-left img': {
-			'margin-right': generateCSSUnit( authorImageGapFallback, authorImageGapUnit ),
+			'margin-right': generateCSSUnit(
+				authorImageGapFallback,
+				authorImageGapUnit
+			),
 		},
 	};
 	if ( enableTweet ) {
@@ -303,7 +419,10 @@ tweetBtnLetterSpacingType,
 			'font-style': tweetBtnFontStyle,
 			'text-decoration': tweetBtnDecoration,
 			'text-transform': tweetBtnTransform,
-			'letter-spacing': generateCSSUnit( tweetBtnLetterSpacing, tweetBtnLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				tweetBtnLetterSpacing,
+				tweetBtnLetterSpacingType
+			),
 		};
 		selectors[
 			'.uagb-blockquote__tweet-style-link a.uagb-blockquote__tweet-button'
@@ -367,7 +486,10 @@ tweetBtnLetterSpacingType,
 		selectors[
 			'.uagb-blockquote__tweet-icon_text a.uagb-blockquote__tweet-button svg'
 		] = {
-			'margin-right': generateCSSUnit( tweetIconSpacingFallback, tweetIconSpacingUnit ),
+			'margin-right': generateCSSUnit(
+				tweetIconSpacingFallback,
+				tweetIconSpacingUnit
+			),
 		};
 
 		// Hover CSS
@@ -446,8 +568,14 @@ tweetBtnLetterSpacingType,
 				descLineHeightTablet,
 				descLineHeightType
 			),
-			'margin-bottom': generateCSSUnit( descSpaceTabletFallback, descSpaceUnit ),
-			'letter-spacing': generateCSSUnit( descLetterSpacingTablet, descLetterSpacingType ),
+			'margin-bottom': generateCSSUnit(
+				descSpaceTabletFallback,
+				descSpaceUnit
+			),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacingTablet,
+				descLetterSpacingType
+			),
 		},
 		' .uagb-blockquote__author.block-editor-rich-text__editable': {
 			'font-size': generateCSSUnit(
@@ -458,7 +586,10 @@ tweetBtnLetterSpacingType,
 				authorLineHeightTablet,
 				authorLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( authorLetterSpacingTablet, authorLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				authorLetterSpacingTablet,
+				authorLetterSpacingType
+			),
 		},
 		' a.uagb-blockquote__tweet-button': {
 			'font-size': generateCSSUnit(
@@ -469,7 +600,10 @@ tweetBtnLetterSpacingType,
 				tweetBtnLineHeightTablet,
 				tweetBtnLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( tweetBtnLetterSpacingTablet, tweetBtnLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				tweetBtnLetterSpacingTablet,
+				tweetBtnLetterSpacingType
+			),
 		},
 		' a.uagb-blockquote__tweet-button svg': {
 			'width': generateCSSUnit(
@@ -485,24 +619,25 @@ tweetBtnLetterSpacingType,
 			'width': generateCSSUnit( quoteSizeTabletFallback, quoteSizeType ),
 			'height': generateCSSUnit( quoteSizeTabletFallback, quoteSizeType ),
 		},
-		'.uagb-blockquote__tweet-style-classic a.uagb-blockquote__tweet-button': {
-			'padding-left': generateCSSUnit(
-				paddingBtnLeftTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-right': generateCSSUnit(
-				paddingBtnRightTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-top': generateCSSUnit(
-				paddingBtnTopTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottomTablet,
-				tabletPaddingBtnUnit
-			),
-		},
+		'.uagb-blockquote__tweet-style-classic a.uagb-blockquote__tweet-button':
+			{
+				'padding-left': generateCSSUnit(
+					paddingBtnLeftTablet,
+					tabletPaddingBtnUnit
+				),
+				'padding-right': generateCSSUnit(
+					paddingBtnRightTablet,
+					tabletPaddingBtnUnit
+				),
+				'padding-top': generateCSSUnit(
+					paddingBtnTopTablet,
+					tabletPaddingBtnUnit
+				),
+				'padding-bottom': generateCSSUnit(
+					paddingBtnBottomTablet,
+					tabletPaddingBtnUnit
+				),
+			},
 		'.uagb-blockquote__skin-border blockquote.uagb-blockquote': {
 			'padding-top': generateCSSUnit(
 				verticalPaddingTablet,
@@ -512,28 +647,46 @@ tweetBtnLetterSpacingType,
 				verticalPaddingTablet,
 				verticalPaddingUnit
 			),
-			'padding-left': generateCSSUnit( borderGapTabletFallback, borderGapUnit ),
+			'padding-left': generateCSSUnit(
+				borderGapTabletFallback,
+				borderGapUnit
+			),
 		},
 		' .uagb-blockquote__author-wrap': {
-			'margin-bottom': generateCSSUnit( tmpAuthorSpaceTabletFallback, authorSpaceUnit ),
+			'margin-bottom': generateCSSUnit(
+				tmpAuthorSpaceTabletFallback,
+				authorSpaceUnit
+			),
 		},
 		' .uagb-blockquote__author-wrap img': {
-			'width': generateCSSUnit( authorImageWidthTabletFallback, authorImageWidthUnit ),
-			'height': generateCSSUnit( authorImageWidthTabletFallback, authorImageWidthUnit ),
+			'width': generateCSSUnit(
+				authorImageWidthTabletFallback,
+				authorImageWidthUnit
+			),
+			'height': generateCSSUnit(
+				authorImageWidthTabletFallback,
+				authorImageWidthUnit
+			),
 			'border-radius': generateCSSUnit(
 				authorImgBorderRadiusTablet,
 				authorImgBorderRadiusUnit
 			),
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-right img': {
-			'margin-left': ( stack === 'tablet' ) ? '0px' : generateCSSUnit(
-				authorImageGapTabletFallback,
-				authorImageGapUnit
-			),
-			'margin-bottom': ( stack === 'tablet' ) ? generateCSSUnit(
-				authorImageGapTabletFallback,
-				authorImageGapUnit
-			) : '0px',
+			'margin-left':
+				stack === 'tablet'
+					? '0px'
+					: generateCSSUnit(
+							authorImageGapTabletFallback,
+							authorImageGapUnit
+					  ),
+			'margin-bottom':
+				stack === 'tablet'
+					? generateCSSUnit(
+							authorImageGapTabletFallback,
+							authorImageGapUnit
+					  )
+					: '0px',
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-top img': {
 			'margin-bottom': generateCSSUnit(
@@ -542,14 +695,20 @@ tweetBtnLetterSpacingType,
 			),
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-left img': {
-			'margin-right': ( stack === 'tablet' ) ? '0px' : generateCSSUnit(
-				authorImageGapTabletFallback,
-				authorImageGapUnit
-			),
-			'margin-bottom': ( stack === 'tablet' ) ? generateCSSUnit(
-				authorImageGapTabletFallback,
-				authorImageGapUnit
-			) : '0px',
+			'margin-right':
+				stack === 'tablet'
+					? '0px'
+					: generateCSSUnit(
+							authorImageGapTabletFallback,
+							authorImageGapUnit
+					  ),
+			'margin-bottom':
+				stack === 'tablet'
+					? generateCSSUnit(
+							authorImageGapTabletFallback,
+							authorImageGapUnit
+					  )
+					: '0px',
 		},
 	};
 	const mobileSelectors = {
@@ -581,8 +740,14 @@ tweetBtnLetterSpacingType,
 				descLineHeightMobile,
 				descLineHeightType
 			),
-			'margin-bottom': generateCSSUnit( descSpaceMobileFallback, descSpaceUnit ),
-			'letter-spacing': generateCSSUnit( descLetterSpacingMobile, descLetterSpacingType ),
+			'margin-bottom': generateCSSUnit(
+				descSpaceMobileFallback,
+				descSpaceUnit
+			),
+			'letter-spacing': generateCSSUnit(
+				descLetterSpacingMobile,
+				descLetterSpacingType
+			),
 		},
 		' .uagb-blockquote__author.block-editor-rich-text__editable': {
 			'font-size': generateCSSUnit(
@@ -593,7 +758,10 @@ tweetBtnLetterSpacingType,
 				authorLineHeightMobile,
 				authorLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( authorLetterSpacingMobile, authorLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				authorLetterSpacingMobile,
+				authorLetterSpacingType
+			),
 		},
 		' a.uagb-blockquote__tweet-button': {
 			'font-size': generateCSSUnit(
@@ -604,7 +772,10 @@ tweetBtnLetterSpacingType,
 				tweetBtnLineHeightMobile,
 				tweetBtnLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( tweetBtnLetterSpacingMobile, tweetBtnLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				tweetBtnLetterSpacingMobile,
+				tweetBtnLetterSpacingType
+			),
 		},
 		' a.uagb-blockquote__tweet-button svg': {
 			'width': generateCSSUnit(
@@ -620,24 +791,25 @@ tweetBtnLetterSpacingType,
 			'width': generateCSSUnit( quoteSizeMobileFallback, quoteSizeType ),
 			'height': generateCSSUnit( quoteSizeMobileFallback, quoteSizeType ),
 		},
-		'.uagb-blockquote__tweet-style-classic a.uagb-blockquote__tweet-button': {
-			'padding-left': generateCSSUnit(
-				paddingBtnLeftMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-right': generateCSSUnit(
-				paddingBtnRightMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-top': generateCSSUnit(
-				paddingBtnTopMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottomMobile,
-				mobilePaddingBtnUnit
-			),
-		},
+		'.uagb-blockquote__tweet-style-classic a.uagb-blockquote__tweet-button':
+			{
+				'padding-left': generateCSSUnit(
+					paddingBtnLeftMobile,
+					mobilePaddingBtnUnit
+				),
+				'padding-right': generateCSSUnit(
+					paddingBtnRightMobile,
+					mobilePaddingBtnUnit
+				),
+				'padding-top': generateCSSUnit(
+					paddingBtnTopMobile,
+					mobilePaddingBtnUnit
+				),
+				'padding-bottom': generateCSSUnit(
+					paddingBtnBottomMobile,
+					mobilePaddingBtnUnit
+				),
+			},
 		'.uagb-blockquote__skin-border blockquote.uagb-blockquote': {
 			'padding-top': generateCSSUnit(
 				verticalPaddingMobile,
@@ -647,28 +819,46 @@ tweetBtnLetterSpacingType,
 				verticalPaddingMobile,
 				verticalPaddingUnit
 			),
-			'padding-left': generateCSSUnit( borderGapMobileFallback, borderGapUnit ),
+			'padding-left': generateCSSUnit(
+				borderGapMobileFallback,
+				borderGapUnit
+			),
 		},
 		' .uagb-blockquote__author-wrap': {
-			'margin-bottom': generateCSSUnit( tmpAuthorSpaceMobileFallback, authorSpaceUnit ),
+			'margin-bottom': generateCSSUnit(
+				tmpAuthorSpaceMobileFallback,
+				authorSpaceUnit
+			),
 		},
 		' .uagb-blockquote__author-wrap img': {
-			'width': generateCSSUnit( authorImageWidthMobileFallback, authorImageWidthUnit ),
-			'height': generateCSSUnit( authorImageWidthMobileFallback, authorImageWidthUnit ),
+			'width': generateCSSUnit(
+				authorImageWidthMobileFallback,
+				authorImageWidthUnit
+			),
+			'height': generateCSSUnit(
+				authorImageWidthMobileFallback,
+				authorImageWidthUnit
+			),
 			'border-radius': generateCSSUnit(
 				authorImgBorderRadiusMobile,
 				authorImgBorderRadiusUnit
 			),
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-right img': {
-			'margin-left': ( stack !== 'none' ) ? '0px' : generateCSSUnit(
-				authorImageGapMobileFallback,
-				authorImageGapUnit
-			),
-			'margin-bottom': ( stack !== 'none' ) ? generateCSSUnit(
-				authorImageGapMobileFallback,
-				authorImageGapUnit
-			) : '0px',
+			'margin-left':
+				stack !== 'none'
+					? '0px'
+					: generateCSSUnit(
+							authorImageGapMobileFallback,
+							authorImageGapUnit
+					  ),
+			'margin-bottom':
+				stack !== 'none'
+					? generateCSSUnit(
+							authorImageGapMobileFallback,
+							authorImageGapUnit
+					  )
+					: '0px',
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-top img': {
 			'margin-bottom': generateCSSUnit(
@@ -677,14 +867,20 @@ tweetBtnLetterSpacingType,
 			),
 		},
 		' .uagb-blockquote__author-wrap.uagb-blockquote__author-at-left img': {
-			'margin-right': ( stack !== 'none' ) ? '0px' : generateCSSUnit(
-				authorImageGapMobileFallback,
-				authorImageGapUnit
-			),
-			'margin-bottom': ( stack !== 'none' ) ? generateCSSUnit(
-				authorImageGapMobileFallback,
-				authorImageGapUnit
-			) : '0px',
+			'margin-right':
+				stack !== 'none'
+					? '0px'
+					: generateCSSUnit(
+							authorImageGapMobileFallback,
+							authorImageGapUnit
+					  ),
+			'margin-bottom':
+				stack !== 'none'
+					? generateCSSUnit(
+							authorImageGapMobileFallback,
+							authorImageGapUnit
+					  )
+					: '0px',
 		},
 	};
 

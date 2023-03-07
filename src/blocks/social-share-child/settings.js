@@ -91,10 +91,7 @@ const Settings = ( props ) => {
 		return (
 			<UAGAdvancedPanelBody initialOpen={ true }>
 				<UAGSelectControl
-					label={ __(
-						'Type',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Type', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: type,
 					} }

@@ -15,7 +15,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/table-of-contents', {
 	title: __( 'Table Of Contents', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add a table of contents to allow page navigation.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add a table of contents to allow page navigation.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.table_of_contents,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -28,17 +31,17 @@ registerBlockType( 'uagb/table-of-contents', {
 	},
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="table-of-content" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="table-of-content" />
+		) : (
+			<Edit { ...props } />
+		),
 	// Render via PHP
-	save: ()=> null,
+	save: () => null,
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	deprecated,
 } );

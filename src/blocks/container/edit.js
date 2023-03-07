@@ -14,14 +14,11 @@ import Render from './render';
 import './style.scss';
 import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch, select } from '@wordpress/data';
-import {
-	__experimentalBlockVariationPicker as BlockVariationPicker,
-} from '@wordpress/block-editor';
+import { __experimentalBlockVariationPicker as BlockVariationPicker } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
 import styles from './editor.lazy.scss';
 
 const UAGBContainer = ( props ) => {
-
 	const deviceType = useDeviceType();
 	const {
 		isSelected,
@@ -35,7 +32,7 @@ const UAGBContainer = ( props ) => {
 			variationSelected,
 			UAGHideDesktop,
 			UAGHideTab,
-			UAGHideMob
+			UAGHideMob,
 		},
 		clientId,
 		setAttributes,
@@ -46,20 +43,17 @@ const UAGBContainer = ( props ) => {
 		blockType, // eslint-disable-line no-unused-vars
 		isParentOfSelectedBlock,
 		variations,
-		defaultVariation
-	} = useSelect(
-		( select ) => { // eslint-disable-line no-shadow
-			const { getBlocks } = select( 'core/block-editor' );
-			const {
-				getBlockType,
-				getBlockVariations,
-				getDefaultBlockVariation,
-			} = select( 'core/blocks' );
+		defaultVariation,
+		// eslint-disable-next-line no-shadow
+	} = useSelect( ( select ) => {
+		const { getBlocks } = select( 'core/block-editor' );
+		const { getBlockType, getBlockVariations, getDefaultBlockVariation } =
+			select( 'core/blocks' );
 
-			return {
-				innerBlocks: getBlocks( clientId ),
-				blockType: getBlockType( props.name ),
-				defaultVariation:
+		return {
+			innerBlocks: getBlocks( clientId ),
+			blockType: getBlockType( props.name ),
+			defaultVariation:
 				typeof getDefaultBlockVariation === 'undefined'
 					? null
 					: getDefaultBlockVariation( props.name ),
@@ -67,10 +61,11 @@ const UAGBContainer = ( props ) => {
 				typeof getBlockVariations === 'undefined'
 					? null
 					: getBlockVariations( props.name ),
-				isParentOfSelectedBlock: select( 'core/block-editor' ).hasSelectedInnerBlock( clientId, true )
-			};
-		},
-	);
+			isParentOfSelectedBlock: select(
+				'core/block-editor'
+			).hasSelectedInnerBlock( clientId, true ),
+		};
+	} );
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -81,18 +76,28 @@ const UAGBContainer = ( props ) => {
 	}, [] );
 
 	if ( isParentOfSelectedBlock ) {
-		const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
+		const emptyBlockInserter = document.querySelector(
+			'.block-editor-block-list__empty-block-inserter'
+		);
 		if ( emptyBlockInserter ) {
 			emptyBlockInserter.style.display = 'none';
 		}
 	}
 
 	useEffect( () => {
-		const isBlockRootParentID = select( 'core/block-editor' ).getBlockParents( clientId );
+		const isBlockRootParentID =
+			select( 'core/block-editor' ).getBlockParents( clientId );
 
-		const parentBlockName = select( 'core/block-editor' ).getBlocksByClientId( isBlockRootParentID );
+		const parentBlockName =
+			select( 'core/block-editor' ).getBlocksByClientId(
+				isBlockRootParentID
+			);
 
-		if ( parentBlockName[0] && 'uagb/container' !== parentBlockName[0].name || undefined === parentBlockName[0] ) {
+		if (
+			( parentBlockName[ 0 ] &&
+				'uagb/container' !== parentBlockName[ 0 ].name ) ||
+			undefined === parentBlockName[ 0 ]
+		) {
 			setAttributes( { isBlockRootParent: true } );
 		}
 
@@ -100,7 +105,7 @@ const UAGBContainer = ( props ) => {
 		const sliderBlocks = [ 'uagb/slider', 'uagb/slider-child' ];
 
 		for ( let index = 0; index < parentBlockName.length; index++ ) {
-			if( sliderBlocks.includes( parentBlockName[index].name ) ) {
+			if ( sliderBlocks.includes( parentBlockName[ index ].name ) ) {
 				hasSliderParent = true;
 				break;
 			}
@@ -111,17 +116,23 @@ const UAGBContainer = ( props ) => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
-		const iframeEl = document.querySelector( `iframe[name='editor-canvas']` );
+		const iframeEl = document.querySelector(
+			`iframe[name='editor-canvas']`
+		);
 		let element;
-		if( iframeEl ){
-			element = iframeEl.contentDocument.getElementById( 'block-' + clientId )
+		if ( iframeEl ) {
+			element = iframeEl.contentDocument.getElementById(
+				'block-' + clientId
+			);
 		} else {
-			element = document.getElementById( 'block-' + clientId )
+			element = document.getElementById( 'block-' + clientId );
 		}
 		// Add Close Button for Variation Selector.
-		const variationPicker = element?.querySelector( '.uagb-container-variation-picker .block-editor-block-variation-picker' );
+		const variationPicker = element?.querySelector(
+			'.uagb-container-variation-picker .block-editor-block-variation-picker'
+		);
 		const closeButton = document.createElement( 'button' );
-		closeButton.onclick = function() {
+		closeButton.onclick = function () {
 			if ( defaultVariation.attributes ) {
 				setAttributes( defaultVariation.attributes );
 			}
@@ -129,42 +140,62 @@ const UAGBContainer = ( props ) => {
 		closeButton.setAttribute( 'class', 'uagb-variation-close' );
 		closeButton.innerHTML = '×';
 		if ( variationPicker ) {
-			const variationPickerLabel = variationPicker.querySelector( '.components-placeholder__label' );
-			variationPicker.insertBefore( closeButton,variationPickerLabel );
+			const variationPickerLabel = variationPicker.querySelector(
+				'.components-placeholder__label'
+			);
+			variationPicker.insertBefore( closeButton, variationPickerLabel );
 		}
 
 		// border
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'container', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			setAttributes,
-			attributes
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHoverColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'container',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
 
-		if( 0 !== select( 'core/block-editor' ).getBlockParents(  clientId ).length ){ // if there is no parent for container when child container moved outside root then do not show variations.
+		if (
+			0 !==
+			select( 'core/block-editor' ).getBlockParents( clientId ).length
+		) {
+			// if there is no parent for container when child container moved outside root then do not show variations.
 			setAttributes( { variationSelected: true } );
 		}
 	}, [] );
 
 	useEffect( () => {
 		const blockStyling = styling( props );
-        addBlockEditorDynamicStyles( 'uagb-container-style-' + clientId.substr( 0, 8 ), blockStyling );
-
+		addBlockEditorDynamicStyles(
+			'uagb-container-style-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
@@ -172,9 +203,7 @@ const UAGBContainer = ( props ) => {
 	}, [ deviceType ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	const blockVariationPickerOnSelect = (
@@ -184,7 +213,10 @@ const UAGBContainer = ( props ) => {
 			setAttributes( nextVariation.attributes );
 		}
 
-		if ( nextVariation.innerBlocks && 'one-column' !== nextVariation.name ) {
+		if (
+			nextVariation.innerBlocks &&
+			'one-column' !== nextVariation.name
+		) {
 			replaceInnerBlocks(
 				clientId,
 				createBlocksFromInnerBlocksTemplate( nextVariation.innerBlocks )
@@ -194,7 +226,9 @@ const UAGBContainer = ( props ) => {
 
 	const createBlocksFromInnerBlocksTemplate = ( innerBlocksTemplate ) => {
 		return innerBlocksTemplate.map(
-			( [ name, attributes, innerBlocks = [] ] ) => // eslint-disable-line no-shadow
+			(
+				[ name, attributes, innerBlocks = [] ] // eslint-disable-line no-shadow
+			) =>
 				createBlock(
 					name,
 					attributes,
@@ -205,9 +239,12 @@ const UAGBContainer = ( props ) => {
 
 	// const { variationSelected } = props.attributes;
 
-	if ( ! variationSelected && 0 === select( 'core/block-editor' ).getBlockParents( clientId ).length ) {
+	if (
+		! variationSelected &&
+		0 === select( 'core/block-editor' ).getBlockParents( clientId ).length
+	) {
 		return (
-			<div className='uagb-container-variation-picker'>
+			<div className="uagb-container-variation-picker">
 				<BlockVariationPicker
 					icon={ '' }
 					label={ __(
@@ -226,7 +263,7 @@ const UAGBContainer = ( props ) => {
 
 	return (
 		<>
-		{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } /> }
 			<Render parentProps={ props } />
 		</>
 	);

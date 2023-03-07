@@ -8,8 +8,6 @@ import InspectorTab, {
 
 import { InspectorControls } from '@wordpress/block-editor';
 
-
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {

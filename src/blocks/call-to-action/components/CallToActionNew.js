@@ -21,12 +21,13 @@ const CTA = ( props ) => {
 	}
 
 	let link = '/';
-	let preventDefaultFunc = ( e ) => {  // Disables click events for link in editor.
+	let preventDefaultFunc = ( e ) => {
+		// Disables click events for link in editor.
 		e.preventDefault();
-	}
+	};
 	if ( setAttributes === 'not_set' ) {
 		link = attributes.ctaLink;
-		preventDefaultFunc = false;  // Ensures click events for links aren't disabled for frontend.
+		preventDefaultFunc = false; // Ensures click events for links aren't disabled for frontend.
 	}
 
 	if ( setAttributes !== 'not_set' ) {
@@ -38,25 +39,32 @@ const CTA = ( props ) => {
 						href={ link }
 						className={ classnames(
 							'uagb-cta__button-link-wrapper',
-							'button' === attributes.ctaType ? 'wp-block-button__link' : ''
+							'button' === attributes.ctaType
+								? 'wp-block-button__link'
+								: ''
 						) }
 						target={ target }
 						rel={ rel }
 						onClick={ preventDefaultFunc }
 					>
-						{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
+						{ attributes.ctaIconPosition === 'before' &&
+							ctaIconOutput }
 						<RichText
-							value={ attributes.ctaText.replace( /(<([^>]+)>)/ig, '' ) }
+							value={ attributes.ctaText.replace(
+								/(<([^>]+)>)/gi,
+								''
+							) }
 							onChange={ ( value ) => {
 								setAttributes( { ctaText: value } );
 							} }
 							allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
 						/>
-						{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
+						{ attributes.ctaIconPosition === 'after' &&
+							ctaIconOutput }
 					</a>
 				) }
 			</>
-		)
+		);
 	}
 
 	return (
@@ -67,7 +75,9 @@ const CTA = ( props ) => {
 					href={ link }
 					className={ classnames(
 						'uagb-cta__button-link-wrapper',
-						'button' === attributes.ctaType ? 'wp-block-button__link' : ''
+						'button' === attributes.ctaType
+							? 'wp-block-button__link'
+							: ''
 					) }
 					target={ target }
 					rel={ rel }
@@ -75,7 +85,10 @@ const CTA = ( props ) => {
 				>
 					{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
 					<RichText.Content
-						value={ attributes.ctaText.replace( /(<([^>]+)>)/ig, '' ) }
+						value={ attributes.ctaText.replace(
+							/(<([^>]+)>)/gi,
+							''
+						) }
 					/>
 					{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
 				</a>

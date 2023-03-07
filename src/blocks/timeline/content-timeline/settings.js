@@ -20,14 +20,9 @@ import UAGSelectControl from '@Components/select-control';
 import { __ } from '@wordpress/i18n';
 
 import { dateI18n } from '@wordpress/date';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 
-import {
-	ToggleControl,
-	Icon,
-} from '@wordpress/components';
+import { ToggleControl, Icon } from '@wordpress/components';
 
 import { select } from '@wordpress/data';
 
@@ -161,7 +156,7 @@ const Settings = ( props ) => {
 			horizontalSpaceMobile,
 			horizontalSpaceUnit,
 			horizontalSpaceUnitTablet,
-			horizontalSpaceUnitMobile
+			horizontalSpaceUnitMobile,
 		},
 	} = props;
 
@@ -215,7 +210,8 @@ const Settings = ( props ) => {
 		);
 
 		getChildBlocks.forEach( ( UAGBcontentTimelineChild ) => {
-			UAGBcontentTimelineChild.attributes.displayPostDate = displayPostDate;
+			UAGBcontentTimelineChild.attributes.displayPostDate =
+				displayPostDate;
 		} );
 		setAttributes( { displayPostDate: ! displayPostDate } );
 	};
@@ -288,11 +284,14 @@ const Settings = ( props ) => {
 						},
 					] }
 					showIcons={ true }
-					responsive={true}
+					responsive={ true }
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __( 'Text Alignment', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Text Alignment',
+						'ultimate-addons-for-gutenberg'
+					) }
 					data={ {
 						desktop: {
 							value: align,
@@ -347,7 +346,7 @@ const Settings = ( props ) => {
 						},
 					] }
 					showIcons={ true }
-					responsive={true}
+					responsive={ true }
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
@@ -582,10 +581,7 @@ const Settings = ( props ) => {
 					limitMax={ { 'px': 50, '%': 100, 'em': 50 } }
 					units={ [
 						{
-							name: __(
-								'PX',
-								'ultimate-addons-for-gutenberg'
-							),
+							name: __( 'PX', 'ultimate-addons-for-gutenberg' ),
 							unitValue: 'px',
 						},
 						{
@@ -634,10 +630,7 @@ const Settings = ( props ) => {
 					limitMax={ { 'px': 100, '%': 100, 'em': 100 } }
 					units={ [
 						{
-							name: __(
-								'PX',
-								'ultimate-addons-for-gutenberg'
-							),
+							name: __( 'PX', 'ultimate-addons-for-gutenberg' ),
 							unitValue: 'px',
 						},
 						{
@@ -817,12 +810,7 @@ const Settings = ( props ) => {
 				title={ __( 'Timeline Item', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ false }
 			>
-				<h2>
-					{ __(
-						'Heading',
-						'ultimate-addons-for-gutenberg'
-					) }
-				</h2>
+				<h2>{ __( 'Heading', 'ultimate-addons-for-gutenberg' ) }</h2>
 				<AdvancedPopColorControl
 					label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ headingColor ? headingColor : '' }
@@ -935,10 +923,7 @@ const Settings = ( props ) => {
 				/>
 				<hr className="uagb-editor__separator" />
 				<h2>
-					{ __(
-						'Description',
-						'ultimate-addons-for-gutenberg'
-					) }
+					{ __( 'Description', 'ultimate-addons-for-gutenberg' ) }
 				</h2>
 				<AdvancedPopColorControl
 					label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
@@ -1030,12 +1015,7 @@ const Settings = ( props ) => {
 					} }
 				/>
 				<hr className="uagb-editor__separator" />
-				<h2>
-					{ __(
-						'Timeline',
-						'ultimate-addons-for-gutenberg'
-					) }
-				</h2>
+				<h2>{ __( 'Timeline', 'ultimate-addons-for-gutenberg' ) }</h2>
 				<ResponsiveSlider
 					label={ __(
 						'Border radius',
@@ -1061,7 +1041,10 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<AdvancedPopColorControl
-					label={ __( 'Background Color', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'Background Color',
+						'ultimate-addons-for-gutenberg'
+					) }
 					colorValue={ backgroundColor ? backgroundColor : '' }
 					data={ {
 						value: backgroundColor,
@@ -1070,8 +1053,8 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 			</UAGAdvancedPanelBody>
-		)
-		};
+		);
+	};
 	const dateColorSettings = () => {
 		return (
 			<UAGAdvancedPanelBody

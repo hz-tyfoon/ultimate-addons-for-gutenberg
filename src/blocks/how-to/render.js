@@ -3,7 +3,7 @@ import './style.scss';
 import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 import { RichText, InnerBlocks } from '@wordpress/block-editor';
-import { useLayoutEffect, memo ,useEffect } from '@wordpress/element';
+import { useLayoutEffect, memo, useEffect } from '@wordpress/element';
 import styles from './editor.lazy.scss';
 import { useDeviceType } from '@Controls/getPreviewType';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
@@ -12,7 +12,6 @@ import getImageHeightWidth from '@Controls/getImageHeightWidth';
 var ALLOWED_BLOCKS = [ 'uagb/how-to-step' ]; // eslint-disable-line no-var
 
 if ( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ) {
-
 	ALLOWED_BLOCKS = [ 'uagb/info-box', 'uagb/how-to-step' ];
 }
 
@@ -145,13 +144,13 @@ const Render = ( props ) => {
 		}
 	}
 
-	const defaultedAlt = ( mainimage && mainimage?.alt ) ? mainimage?.alt : '';
+	const defaultedAlt = mainimage && mainimage?.alt ? mainimage?.alt : '';
 
 	let imageIconHtml = '';
 
 	useEffect( () => {
-		getImageHeightWidth( url, setAttributes )
-	},[ url ] )
+		getImageHeightWidth( url, setAttributes );
+	}, [ url ] );
 
 	if ( mainimage && mainimage.url ) {
 		imageIconHtml = (
@@ -159,37 +158,47 @@ const Render = ( props ) => {
 				className="uagb-howto__source-image"
 				src={ url }
 				title={ title }
-				width={imgTagWidth} height={imgTagHeight}
+				width={ imgTagWidth }
+				height={ imgTagHeight }
 				loading="lazy"
 				alt={ defaultedAlt }
 			/>
 		);
 	}
 
-	const minsValue = getFallbackNumber( timeInMins, 'timeInMins', blockName ) ?
-						getFallbackNumber( timeInMins, 'timeInMins', blockName ) :
-						time;
+	const minsValue = getFallbackNumber( timeInMins, 'timeInMins', blockName )
+		? getFallbackNumber( timeInMins, 'timeInMins', blockName )
+		: time;
 
 	const getStepAsChild = [
 		[
 			'uagb/how-to-step',
 			{
 				name: 'Step 1',
-				description:  __( 'Click here to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'ultimate-addons-for-gutenberg' ),
+				description: __(
+					'Click here to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
+					'ultimate-addons-for-gutenberg'
+				),
 			},
 		],
 		[
 			'uagb/how-to-step',
 			{
 				name: 'Step 2',
-				description:  __( 'Click here to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'ultimate-addons-for-gutenberg' ),
+				description: __(
+					'Click here to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
+					'ultimate-addons-for-gutenberg'
+				),
 			},
 		],
 		[
 			'uagb/how-to-step',
 			{
 				name: 'Step 3',
-				description:  __( 'Click here to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'ultimate-addons-for-gutenberg' ),
+				description: __(
+					'Click here to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
+					'ultimate-addons-for-gutenberg'
+				),
 			},
 		],
 	];
@@ -268,7 +277,7 @@ const Render = ( props ) => {
 				onSplit={ splitBlock }
 				onRemove={ () => onReplace( [] ) }
 			/>
-				{ imageIconHtml }
+			{ imageIconHtml }
 			<span className="uagb-howto__time-wrap">
 				{ showTotaltime && (
 					<RichText
@@ -289,11 +298,19 @@ const Render = ( props ) => {
 				) }
 				{ showTotaltime && (
 					<>
-						{ getFallbackNumber( timeInYears, 'timeInYears', blockName ) && (
+						{ getFallbackNumber(
+							timeInYears,
+							'timeInYears',
+							blockName
+						) && (
 							<>
 								<p className="uagb-howto-timeNeeded-value">
 									{ ' ' }
-									{ getFallbackNumber( timeInYears, 'timeInYears', blockName ) }
+									{ getFallbackNumber(
+										timeInYears,
+										'timeInYears',
+										blockName
+									) }
 								</p>
 								<p className="uagb-howto-timeINmin-text">
 									{ ' ' }
@@ -301,30 +318,54 @@ const Render = ( props ) => {
 								</p>
 							</>
 						) }
-						{ getFallbackNumber( timeInMonths, 'timeInMonths', blockName ) && (
+						{ getFallbackNumber(
+							timeInMonths,
+							'timeInMonths',
+							blockName
+						) && (
 							<>
 								<p className="uagb-howto-timeNeeded-value">
-									{ getFallbackNumber( timeInMonths, 'timeInMonths', blockName ) }
+									{ getFallbackNumber(
+										timeInMonths,
+										'timeInMonths',
+										blockName
+									) }
 								</p>
 								<p className="uagb-howto-timeINmin-text">
 									{ monthLabel }
 								</p>
 							</>
 						) }
-						{ getFallbackNumber( timeInDays, 'timeInDays', blockName ) && (
+						{ getFallbackNumber(
+							timeInDays,
+							'timeInDays',
+							blockName
+						) && (
 							<>
 								<p className="uagb-howto-timeNeeded-value">
-									{ getFallbackNumber( timeInDays, 'timeInDays', blockName ) }
+									{ getFallbackNumber(
+										timeInDays,
+										'timeInDays',
+										blockName
+									) }
 								</p>
 								<p className="uagb-howto-timeINmin-text">
 									{ dayLabel }
 								</p>
 							</>
 						) }
-						{ getFallbackNumber( timeInHours, 'timeInHours', blockName ) && (
+						{ getFallbackNumber(
+							timeInHours,
+							'timeInHours',
+							blockName
+						) && (
 							<>
 								<p className="uagb-howto-timeNeeded-value">
-									{ getFallbackNumber( timeInHours, 'timeInHours', blockName ) }
+									{ getFallbackNumber(
+										timeInHours,
+										'timeInHours',
+										blockName
+									) }
 								</p>
 								<p className="uagb-howto-timeINmin-text">
 									{ hourLabel }
@@ -397,123 +438,121 @@ const Render = ( props ) => {
 					/>
 				) }
 			</span>
-				{ showTools && (
-					<RichText
-						tagName="h4"
-						placeholder={ __(
-							'requirements tools:',
-							'ultimate-addons-for-gutenberg'
-						) }
-						value={ toolsTitle }
-						className="uagb-howto-req-tools-text"
-						onChange={ ( value ) =>
-							setAttributes( { toolsTitle: value } )
-						}
-						onMerge={ mergeBlocks }
-						onSplit={ splitBlock }
-						onRemove={ () => onReplace( [] ) }
-					/>
-				) }
-				{ showTools && (
-						<>{ tools.map( ( tool, index ) => {
-							return (
-										<RichText
-											tagName="div"
-											placeholder={ __(
-												'Requirements Tools:',
-												'ultimate-addons-for-gutenberg'
-											) }
-											value={ tool.add_required_tools }
-											onChange={ ( value ) => {
-												saveTools(
-													{
-														add_required_tools: value,
-													},
-													index
-												);
-											} }
-											className={ `uagb-tools__label ${ index }` }
-											multiline={ false }
-											allowedFormats={ [
-												'core/bold',
-												'core/italic',
-												'core/strikethrough',
-											] }
-											key={ index }
-										/>
-							);
-						} ) }</>
-				) }
-				{ showMaterials && (
-					<RichText
-						tagName="h4"
-						placeholder={ __(
-							'requirements materials:',
-							'ultimate-addons-for-gutenberg'
-						) }
-						value={ materialTitle }
-						className="uagb-howto-req-materials-text"
-						onChange={ ( value ) =>
-							setAttributes( { materialTitle: value } )
-						}
-						onMerge={ mergeBlocks }
-						onSplit={ splitBlock }
-						onRemove={ () => onReplace( [] ) }
-					/>
-				) }
-				{ showMaterials && (
-					<>
-						{ materials.map( ( material, index ) => {
-							return (
-										<RichText
-											tagName="div"
-											placeholder={ __(
-												'Requirements Materials:',
-												'ultimate-addons-for-gutenberg'
-											) }
-											value={
-												material.add_required_materials
-											}
-											onChange={ ( value ) => {
-												saveMaterials(
-													{
-														add_required_materials: value,
-													},
-													index
-												);
-											} }
-											className={ `uagb-materials__label ${ index }` }
-											multiline={ false }
-											allowedFormats={ [
-												'core/bold',
-												'core/italic',
-												'core/strikethrough',
-											] }
-											key={ index }
-										/>
-							);
-						} ) }
-					</>
-				) }
+			{ showTools && (
 				<RichText
 					tagName="h4"
 					placeholder={ __(
-						'requirements Steps:',
+						'requirements tools:',
 						'ultimate-addons-for-gutenberg'
 					) }
-					value={ stepsTitle }
-					className="uagb-howto-req-steps-text"
+					value={ toolsTitle }
+					className="uagb-howto-req-tools-text"
 					onChange={ ( value ) =>
-						setAttributes( { stepsTitle: value } )
+						setAttributes( { toolsTitle: value } )
 					}
 					onMerge={ mergeBlocks }
 					onSplit={ splitBlock }
 					onRemove={ () => onReplace( [] ) }
 				/>
-				<InnerBlocks
-					template={ getStepAsChild }
-					allowedBlocks={ ALLOWED_BLOCKS }
+			) }
+			{ showTools && (
+				<>
+					{ tools.map( ( tool, index ) => {
+						return (
+							<RichText
+								tagName="div"
+								placeholder={ __(
+									'Requirements Tools:',
+									'ultimate-addons-for-gutenberg'
+								) }
+								value={ tool.add_required_tools }
+								onChange={ ( value ) => {
+									saveTools(
+										{
+											add_required_tools: value,
+										},
+										index
+									);
+								} }
+								className={ `uagb-tools__label ${ index }` }
+								multiline={ false }
+								allowedFormats={ [
+									'core/bold',
+									'core/italic',
+									'core/strikethrough',
+								] }
+								key={ index }
+							/>
+						);
+					} ) }
+				</>
+			) }
+			{ showMaterials && (
+				<RichText
+					tagName="h4"
+					placeholder={ __(
+						'requirements materials:',
+						'ultimate-addons-for-gutenberg'
+					) }
+					value={ materialTitle }
+					className="uagb-howto-req-materials-text"
+					onChange={ ( value ) =>
+						setAttributes( { materialTitle: value } )
+					}
+					onMerge={ mergeBlocks }
+					onSplit={ splitBlock }
+					onRemove={ () => onReplace( [] ) }
 				/>
+			) }
+			{ showMaterials && (
+				<>
+					{ materials.map( ( material, index ) => {
+						return (
+							<RichText
+								tagName="div"
+								placeholder={ __(
+									'Requirements Materials:',
+									'ultimate-addons-for-gutenberg'
+								) }
+								value={ material.add_required_materials }
+								onChange={ ( value ) => {
+									saveMaterials(
+										{
+											add_required_materials: value,
+										},
+										index
+									);
+								} }
+								className={ `uagb-materials__label ${ index }` }
+								multiline={ false }
+								allowedFormats={ [
+									'core/bold',
+									'core/italic',
+									'core/strikethrough',
+								] }
+								key={ index }
+							/>
+						);
+					} ) }
+				</>
+			) }
+			<RichText
+				tagName="h4"
+				placeholder={ __(
+					'requirements Steps:',
+					'ultimate-addons-for-gutenberg'
+				) }
+				value={ stepsTitle }
+				className="uagb-howto-req-steps-text"
+				onChange={ ( value ) => setAttributes( { stepsTitle: value } ) }
+				onMerge={ mergeBlocks }
+				onSplit={ splitBlock }
+				onRemove={ () => onReplace( [] ) }
+			/>
+			<InnerBlocks
+				template={ getStepAsChild }
+				allowedBlocks={ ALLOWED_BLOCKS }
+			/>
 		</div>
 	);
 };

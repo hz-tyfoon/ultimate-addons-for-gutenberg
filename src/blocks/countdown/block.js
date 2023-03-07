@@ -10,8 +10,7 @@ import './style.scss';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
- 
- 
+
 registerBlockType( 'uagb/countdown', {
 	apiVersion: 2,
 	title: __( 'Countdown', 'ultimate-addons-for-gutenberg' ),
@@ -42,7 +41,6 @@ registerBlockType( 'uagb/countdown', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );
- 

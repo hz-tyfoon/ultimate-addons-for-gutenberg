@@ -1,97 +1,95 @@
-
 const addBlockEditorDynamicStyles = ( styleTagId, styling ) => {
-
 	setTimeout( () => {
-
 		// Static Editor CSS.
 
-		const editorStaticCSSStylesTag = document.getElementById( 'uagb-editor-styles' );
+		const editorStaticCSSStylesTag =
+			document.getElementById( 'uagb-editor-styles' );
 		let cloneEditorStaticCSSStylesTag = false;
 
 		if ( editorStaticCSSStylesTag ) {
-
-			cloneEditorStaticCSSStylesTag = editorStaticCSSStylesTag.cloneNode( true );
+			cloneEditorStaticCSSStylesTag =
+				editorStaticCSSStylesTag.cloneNode( true );
 		}
 
-		const editorProStaticCSSStylesTag = document.getElementById( 'spectra-pro-editor-styles' );
+		const editorProStaticCSSStylesTag = document.getElementById(
+			'spectra-pro-editor-styles'
+		);
 		let cloneEditorProStaticCSSStylesTag = false;
 
 		if ( editorProStaticCSSStylesTag ) {
-
-			cloneEditorProStaticCSSStylesTag = editorProStaticCSSStylesTag.cloneNode( true );
+			cloneEditorProStaticCSSStylesTag =
+				editorProStaticCSSStylesTag.cloneNode( true );
 		}
 
 		// Dashicons Editor CSS.
 
-		const editorDashiconsCSSStylesTag = document.getElementById( 'dashicons-css' );
+		const editorDashiconsCSSStylesTag =
+			document.getElementById( 'dashicons-css' );
 		let cloneEditorDashiconsCSSStylesTag = false;
 
 		if ( editorDashiconsCSSStylesTag ) {
-
-			cloneEditorDashiconsCSSStylesTag = editorDashiconsCSSStylesTag.cloneNode( true );
+			cloneEditorDashiconsCSSStylesTag =
+				editorDashiconsCSSStylesTag.cloneNode( true );
 		}
 
 		// Dashicons Editor CSS Ends.
 
 		// Static CSS.
 
-		const staticCSSStylesTag = document.getElementById( 'uagb-block-css-css' );
+		const staticCSSStylesTag =
+			document.getElementById( 'uagb-block-css-css' );
 		let cloneStaticCSSStylesTag = false;
 
 		if ( staticCSSStylesTag ) {
-
 			cloneStaticCSSStylesTag = staticCSSStylesTag.cloneNode( true );
 		}
 
 		// Static CSS Ends.
 
-
 		// Slick CSS.
-		const slickStaticCSSStylesTag = document.getElementById( 'uagb-slick-css-css' );
+		const slickStaticCSSStylesTag =
+			document.getElementById( 'uagb-slick-css-css' );
 		let cloneSlickStaticCSSStylesTag = false;
 
 		if ( slickStaticCSSStylesTag ) {
-
-			cloneSlickStaticCSSStylesTag = slickStaticCSSStylesTag.cloneNode( true );
+			cloneSlickStaticCSSStylesTag =
+				slickStaticCSSStylesTag.cloneNode( true );
 		}
 
 		// Slick CSS Ends.
-		
+
 		// swiper CSS.
-		const swiperStaticCSSStylesTag = document.getElementById( 'uagb-swiper-css-css' );
+		const swiperStaticCSSStylesTag = document.getElementById(
+			'uagb-swiper-css-css'
+		);
 		let cloneSwiperStaticCSSStylesTag = false;
 
 		if ( swiperStaticCSSStylesTag ) {
-
-			cloneSwiperStaticCSSStylesTag = swiperStaticCSSStylesTag.cloneNode( true );
+			cloneSwiperStaticCSSStylesTag =
+				swiperStaticCSSStylesTag.cloneNode( true );
 		}
 
 		// swiper CSS Ends.
 
 		// Block Editor Spacing CSS.
-		const blockEditorSpacingCSSStylesTag = document.getElementById( 'uagb-blocks-editor-spacing-style' );
+		const blockEditorSpacingCSSStylesTag = document.getElementById(
+			'uagb-blocks-editor-spacing-style'
+		);
 		let cloneBlockEditorSpacingCSSStylesTag = false;
 
 		if ( blockEditorSpacingCSSStylesTag ) {
-
-			cloneBlockEditorSpacingCSSStylesTag = blockEditorSpacingCSSStylesTag.cloneNode( true );
+			cloneBlockEditorSpacingCSSStylesTag =
+				blockEditorSpacingCSSStylesTag.cloneNode( true );
 		}
 
 		// Block Editor Spacing CSS Ends.
 
 		// Desktop.
-		const element = document.getElementById(
-			styleTagId
-		);
-
+		const element = document.getElementById( styleTagId );
 
 		if ( null === element || undefined === element ) {
-
 			const $style = document.createElement( 'style' );
-			$style.setAttribute(
-				'id',
-				styleTagId
-			);
+			$style.setAttribute( 'id', styleTagId );
 
 			$style.innerHTML = styling;
 			document.head.appendChild( $style );
@@ -103,23 +101,31 @@ const addBlockEditorDynamicStyles = ( styleTagId, styling ) => {
 		// Desktop ends.
 
 		// Tablet / Mobile Starts.
-		const tabletPreview = document.getElementsByClassName( 'is-tablet-preview' );
-		const mobilePreview = document.getElementsByClassName( 'is-mobile-preview' );
-		const twentyTwentyEditorIframe = document.getElementsByClassName( 'edit-site-visual-editor__editor-canvas' );
+		const tabletPreview =
+			document.getElementsByClassName( 'is-tablet-preview' );
+		const mobilePreview =
+			document.getElementsByClassName( 'is-mobile-preview' );
+		const twentyTwentyEditorIframe = document.getElementsByClassName(
+			'edit-site-visual-editor__editor-canvas'
+		);
 
-		if ( 0 !== tabletPreview.length || 0 !== mobilePreview.length || 0 !== twentyTwentyEditorIframe.length ) {
-
-			const preview = tabletPreview[0] || mobilePreview[0];
+		if (
+			0 !== tabletPreview.length ||
+			0 !== mobilePreview.length ||
+			0 !== twentyTwentyEditorIframe.length
+		) {
+			const preview = tabletPreview[ 0 ] || mobilePreview[ 0 ];
 
 			let iframe = false;
 
 			if ( 0 !== twentyTwentyEditorIframe.length ) {
-				iframe = twentyTwentyEditorIframe[0];
+				iframe = twentyTwentyEditorIframe[ 0 ];
 			} else if ( preview ) {
-				iframe = preview.getElementsByTagName( 'iframe' )[0];
+				iframe = preview.getElementsByTagName( 'iframe' )[ 0 ];
 			}
 
-			const iframeDocument = iframe?.contentWindow.document || iframe?.contentDocument;
+			const iframeDocument =
+				iframe?.contentWindow.document || iframe?.contentDocument;
 
 			if ( ! iframe || ! iframeDocument ) {
 				return;
@@ -127,7 +133,8 @@ const addBlockEditorDynamicStyles = ( styleTagId, styling ) => {
 
 			// Static CSS.
 			if ( cloneStaticCSSStylesTag ) {
-				const iframeStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-block-css-css' );
+				const iframeStaticCSSStylesTag =
+					iframeDocument.getElementById( 'uagb-block-css-css' );
 				if ( ! iframeStaticCSSStylesTag ) {
 					iframeDocument.head.appendChild( cloneStaticCSSStylesTag );
 				}
@@ -135,81 +142,99 @@ const addBlockEditorDynamicStyles = ( styleTagId, styling ) => {
 
 			// Static Editor CSS.
 			if ( cloneEditorStaticCSSStylesTag ) {
-				const iframeEditorStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-editor-styles' );
+				const iframeEditorStaticCSSStylesTag =
+					iframeDocument.getElementById( 'uagb-editor-styles' );
 				if ( iframeEditorStaticCSSStylesTag ) {
-					iframeDocument.head.removeChild( iframeEditorStaticCSSStylesTag );
+					iframeDocument.head.removeChild(
+						iframeEditorStaticCSSStylesTag
+					);
 				}
-				iframeDocument.head.appendChild( cloneEditorStaticCSSStylesTag );
+				iframeDocument.head.appendChild(
+					cloneEditorStaticCSSStylesTag
+				);
 			}
 
 			// Static Pro Editor CSS.
 			if ( cloneEditorProStaticCSSStylesTag ) {
-				const iframeEditorProStaticCSSStylesTag = iframeDocument.getElementById( 'spectra-pro-editor-styles' );
+				const iframeEditorProStaticCSSStylesTag =
+					iframeDocument.getElementById(
+						'spectra-pro-editor-styles'
+					);
 				if ( iframeEditorProStaticCSSStylesTag ) {
-					iframeDocument.head.removeChild( iframeEditorProStaticCSSStylesTag );
+					iframeDocument.head.removeChild(
+						iframeEditorProStaticCSSStylesTag
+					);
 				}
-				iframeDocument.head.appendChild( cloneEditorProStaticCSSStylesTag );
+				iframeDocument.head.appendChild(
+					cloneEditorProStaticCSSStylesTag
+				);
 			}
 
 			// Dashicons CSS.
 			if ( cloneEditorDashiconsCSSStylesTag ) {
-				const iframeEditorDashiconsCSSStylesTag = iframeDocument.getElementById( 'dashicons-css' );
+				const iframeEditorDashiconsCSSStylesTag =
+					iframeDocument.getElementById( 'dashicons-css' );
 				if ( iframeEditorDashiconsCSSStylesTag ) {
-					iframeDocument.head.removeChild( iframeEditorDashiconsCSSStylesTag );
+					iframeDocument.head.removeChild(
+						iframeEditorDashiconsCSSStylesTag
+					);
 				}
-				iframeDocument.head.appendChild( cloneEditorDashiconsCSSStylesTag );
+				iframeDocument.head.appendChild(
+					cloneEditorDashiconsCSSStylesTag
+				);
 			}
 
 			// Slick CSS.
 			if ( cloneSlickStaticCSSStylesTag ) {
-				const iframeSlickStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-slick-css-css' );
+				const iframeSlickStaticCSSStylesTag =
+					iframeDocument.getElementById( 'uagb-slick-css-css' );
 				if ( ! iframeSlickStaticCSSStylesTag ) {
-					iframeDocument.head.appendChild( cloneSlickStaticCSSStylesTag );
+					iframeDocument.head.appendChild(
+						cloneSlickStaticCSSStylesTag
+					);
 				}
 			}
 
 			if ( cloneSwiperStaticCSSStylesTag ) {
-				const iframeSwiperStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-swiper-css-css' );
+				const iframeSwiperStaticCSSStylesTag =
+					iframeDocument.getElementById( 'uagb-swiper-css-css' );
 				if ( ! iframeSwiperStaticCSSStylesTag ) {
-					iframeDocument.head.appendChild( cloneSwiperStaticCSSStylesTag );
+					iframeDocument.head.appendChild(
+						cloneSwiperStaticCSSStylesTag
+					);
 				}
 			}
 
 			// Block Editor Spacing  CSS.
 			if ( cloneBlockEditorSpacingCSSStylesTag ) {
-				const iframeBlockEditorSpacingCSSStylesTag = iframeDocument.getElementById( 'uagb-blocks-editor-spacing-style' );
+				const iframeBlockEditorSpacingCSSStylesTag =
+					iframeDocument.getElementById(
+						'uagb-blocks-editor-spacing-style'
+					);
 				if ( ! iframeBlockEditorSpacingCSSStylesTag ) {
-					iframeDocument.head.appendChild( cloneBlockEditorSpacingCSSStylesTag );
+					iframeDocument.head.appendChild(
+						cloneBlockEditorSpacingCSSStylesTag
+					);
 				}
 			}
 
-			let iframeElement = iframeDocument.getElementById(
-				styleTagId
-			);
+			let iframeElement = iframeDocument.getElementById( styleTagId );
 
 			if ( null === iframeElement || undefined === iframeElement ) {
-
 				const $style = document.createElement( 'style' );
-				$style.setAttribute(
-					'id',
-					styleTagId
-				);
+				$style.setAttribute( 'id', styleTagId );
 
 				// Dynamic CSS.
 				iframeDocument.head.appendChild( $style );
-
 			}
 
-			iframeElement = iframeDocument.getElementById(
-				styleTagId
-			);
+			iframeElement = iframeDocument.getElementById( styleTagId );
 
 			if ( null !== iframeElement && undefined !== iframeElement ) {
 				iframeElement.innerHTML = styling;
 			}
 		}
 	} );
-}
+};
 
 export default addBlockEditorDynamicStyles;
-

@@ -26,26 +26,36 @@ const InfoBoxCta = ( props ) => {
 					<a // eslint-disable-line jsx-a11y/anchor-is-valid
 						target={ target }
 						className={ 'uagb-infobox-cta-link' }
-						onClick={ ( '' === attributes.ctaLink || '#' === attributes.ctaLink ) ? 'return false;' : 'return true;'}
+						onClick={
+							'' === attributes.ctaLink ||
+							'#' === attributes.ctaLink
+								? 'return false;'
+								: 'return true;'
+						}
 						rel={ rel }
-						href='/'
+						href="/"
 					>
-						{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
-							<RichText
-								tagName="span"
-								placeholder={ __(
-									'Read More',
-									'ultimate-addons-for-gutenberg'
-								) }
-								value={ attributes.ctaText.replace( /(<([^>]+)>)/ig, '' ) }
-								className="uagb-inline-editing"
-								multiline={ false }
-								onChange={ ( value ) => {
-									setAttributes( { ctaText: value } );
-								} }
-								allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
-							/>
-						{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
+						{ attributes.ctaIconPosition === 'before' &&
+							ctaIconOutput }
+						<RichText
+							tagName="span"
+							placeholder={ __(
+								'Read More',
+								'ultimate-addons-for-gutenberg'
+							) }
+							value={ attributes.ctaText.replace(
+								/(<([^>]+)>)/gi,
+								''
+							) }
+							className="uagb-inline-editing"
+							multiline={ false }
+							onChange={ ( value ) => {
+								setAttributes( { ctaText: value } );
+							} }
+							allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
+						/>
+						{ attributes.ctaIconPosition === 'after' &&
+							ctaIconOutput }
 					</a>
 				) }
 
@@ -57,21 +67,29 @@ const InfoBoxCta = ( props ) => {
 						) }
 					>
 						<a // eslint-disable-line jsx-a11y/anchor-is-valid
-							className={ctaBtnClass }	
+							className={ ctaBtnClass }
 							target={ target }
 							rel={ rel }
-							href = '/'
-							onClick={ ( '' === attributes.ctaLink || '#' === attributes.ctaLink ) ? 'return false;' : 'return true;'}
+							href="/"
+							onClick={
+								'' === attributes.ctaLink ||
+								'#' === attributes.ctaLink
+									? 'return false;'
+									: 'return true;'
+							}
 						>
-
-							{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
+							{ attributes.ctaIconPosition === 'before' &&
+								ctaIconOutput }
 							<RichText
 								tagName="span"
 								placeholder={ __(
 									'Read More',
 									'ultimate-addons-for-gutenberg'
 								) }
-								value={ attributes.ctaText.replace( /(<([^>]+)>)/ig, '' ) }
+								value={ attributes.ctaText.replace(
+									/(<([^>]+)>)/gi,
+									''
+								) }
 								className="uagb-inline-editing"
 								multiline={ false }
 								onChange={ ( value ) => {
@@ -79,7 +97,8 @@ const InfoBoxCta = ( props ) => {
 								} }
 								allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
 							/>
-							{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
+							{ attributes.ctaIconPosition === 'after' &&
+								ctaIconOutput }
 						</a>
 					</div>
 				) }
@@ -87,45 +106,65 @@ const InfoBoxCta = ( props ) => {
 		);
 	}
 	return (
-			<>
-				<div className= 'uagb-ifb-button-wrapper wp-block-button' >
-					{ attributes.ctaType === 'text' && (
-						<a
-							href={ attributes.ctaLink }
-							target={ target }	
-							onClick={ ( '' === attributes.ctaLink || '#' === attributes.ctaLink ) ? 'return false;' : 'return true;'}
-							className={ 'uagb-infobox-cta-link' }
-							rel={ rel }
-							alt=""
-						>
-							{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
-							<RichText.Content
-								tagName="span"
-								value={ attributes.ctaText.replace( /(<([^>]+)>)/ig, '' ) }
-								className="uagb-inline-editing"
-							/>
-							{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
-						</a>
-					) }
-					{ attributes.ctaType === 'button' && (
-						<a
-							href={ attributes.ctaLink }
-							className={ ctaBtnClass }
-							target={ target }
-							rel={ rel }	
-							onClick={ ( '' === attributes.ctaLink || '#' === attributes.ctaLink ) ? 'return false;' : 'return true;'}
-							alt=""
-						>
-							{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
-							<RichText.Content
-								tagName="span"
-								value={ attributes.ctaText.replace( /(<([^>]+)>)/ig, '' ) }
-								className="uagb-inline-editing"
-							/>
-							{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
-						</a>
-					) }
-				</div>
+		<>
+			<div className="uagb-ifb-button-wrapper wp-block-button">
+				{ attributes.ctaType === 'text' && (
+					<a
+						href={ attributes.ctaLink }
+						target={ target }
+						onClick={
+							'' === attributes.ctaLink ||
+							'#' === attributes.ctaLink
+								? 'return false;'
+								: 'return true;'
+						}
+						className={ 'uagb-infobox-cta-link' }
+						rel={ rel }
+						alt=""
+					>
+						{ attributes.ctaIconPosition === 'before' &&
+							ctaIconOutput }
+						<RichText.Content
+							tagName="span"
+							value={ attributes.ctaText.replace(
+								/(<([^>]+)>)/gi,
+								''
+							) }
+							className="uagb-inline-editing"
+						/>
+						{ attributes.ctaIconPosition === 'after' &&
+							ctaIconOutput }
+					</a>
+				) }
+				{ attributes.ctaType === 'button' && (
+					<a
+						href={ attributes.ctaLink }
+						className={ ctaBtnClass }
+						target={ target }
+						rel={ rel }
+						onClick={
+							'' === attributes.ctaLink ||
+							'#' === attributes.ctaLink
+								? 'return false;'
+								: 'return true;'
+						}
+						alt=""
+					>
+						{ attributes.ctaIconPosition === 'before' &&
+							ctaIconOutput }
+						<RichText.Content
+							tagName="span"
+							value={ attributes.ctaText.replace(
+								/(<([^>]+)>)/gi,
+								''
+							) }
+							className="uagb-inline-editing"
+						/>
+						{ attributes.ctaIconPosition === 'after' &&
+							ctaIconOutput }
+					</a>
+				) }
+			</div>
 		</>
 	);
 };

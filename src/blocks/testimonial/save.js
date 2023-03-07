@@ -20,14 +20,17 @@ export default function save( props ) {
 		test_block,
 		imagePosition,
 		equalHeight,
-		test_item_count
+		test_item_count,
 	} = props.attributes;
 	const equalHeightClass = equalHeight
-	? 'uagb-post__carousel_equal-height'
-	: '';
-	const isGridLayout = test_item_count === columns ? 'uagb-post__carousel_notset' : '';
-	const isGridLayoutTablet = test_item_count === tcolumns ? 'uagb-post__carousel_notset-tablet' : '';
-	const isGridLayoutMobile = test_item_count === mcolumns ? 'uagb-post__carousel_notset-mobile' : '';
+		? 'uagb-post__carousel_equal-height'
+		: '';
+	const isGridLayout =
+		test_item_count === columns ? 'uagb-post__carousel_notset' : '';
+	const isGridLayoutTablet =
+		test_item_count === tcolumns ? 'uagb-post__carousel_notset-tablet' : '';
+	const isGridLayoutMobile =
+		test_item_count === mcolumns ? 'uagb-post__carousel_notset-mobile' : '';
 	return (
 		<div
 			className={ classnames(
@@ -43,8 +46,12 @@ export default function save( props ) {
 			<div
 				className={ classnames(
 					'is-carousel',
-					`uagb-tm__columns-${ getFallbackNumber( columns, 'columns', 'testimonial' ) }`,
-					'uagb-tm__items',
+					`uagb-tm__columns-${ getFallbackNumber(
+						columns,
+						'columns',
+						'testimonial'
+					) }`,
+					'uagb-tm__items'
 				) }
 			>
 				{ test_block.map( ( test, index ) => (

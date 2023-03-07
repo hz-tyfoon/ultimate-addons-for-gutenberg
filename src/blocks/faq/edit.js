@@ -7,14 +7,13 @@ import { useEffect } from '@wordpress/element';
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import {migrateBorderAttributes} from '@Controls/generateAttributes';
+import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import { select } from '@wordpress/data';
 import Settings from './settings';
 import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const FaqComponent = ( props ) => {
-
 	const deviceType = useDeviceType();
 	const {
 		isSelected,
@@ -44,9 +43,8 @@ const FaqComponent = ( props ) => {
 		},
 		clientId,
 	} = props;
-	
-	const updatePageSchema = () => {
 
+	const updatePageSchema = () => {
 		const allBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 		let pageURL = '';
 		if ( select( 'core/editor' ) ) {
@@ -59,7 +57,7 @@ const FaqComponent = ( props ) => {
 			'mainEntity': [],
 		};
 
-		allBlocks.forEach( ( block )=> {
+		allBlocks.forEach( ( block ) => {
 			let faqData = {};
 
 			faqData = {
@@ -73,11 +71,10 @@ const FaqComponent = ( props ) => {
 			jsonData.mainEntity.push( faqData );
 		} );
 
-		setAttributes( {schema: JSON.stringify( jsonData )} );
+		setAttributes( { schema: JSON.stringify( jsonData ) } );
 	};
 
 	useEffect( () => {
-
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
@@ -133,45 +130,59 @@ const FaqComponent = ( props ) => {
 		}
 
 		// border migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'overall', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			setAttributes,
-			attributes
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHoverColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'overall',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName(
+			'editor-post-publish-button'
+		)?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
 		}
-		
 	}, [] );
 
 	useEffect( () => {
-
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-faq-' + clientId.substr( 0, 8 ), blockStyling );
-
-		const getChildBlocks = select( 'core/block-editor' ).getBlocks(
-			clientId
+		addBlockEditorDynamicStyles(
+			'uagb-style-faq-' + clientId.substr( 0, 8 ),
+			blockStyling
 		);
+
+		const getChildBlocks =
+			select( 'core/block-editor' ).getBlocks( clientId );
 
 		getChildBlocks.forEach( ( faqChild ) => {
 			faqChild.attributes.headingTag = attributes.headingTag;
@@ -181,18 +192,26 @@ const FaqComponent = ( props ) => {
 		// Used when Resetting Preset to Default.
 		if ( attributes.vanswerPaddingDesktop ) {
 			if ( '' === attributes.answerTopPadding ) {
-				setAttributes( { answerTopPadding: attributes.vanswerPaddingDesktop } );
+				setAttributes( {
+					answerTopPadding: attributes.vanswerPaddingDesktop,
+				} );
 			}
 			if ( '' === attributes.answerBottomPadding ) {
-				setAttributes( { answerBottomPadding: attributes.vanswerPaddingDesktop } );
+				setAttributes( {
+					answerBottomPadding: attributes.vanswerPaddingDesktop,
+				} );
 			}
 		}
 		if ( attributes.hanswerPaddingDesktop ) {
 			if ( '' === attributes.answerRightPadding ) {
-				setAttributes( { answerRightPadding: attributes.hanswerPaddingDesktop } );
+				setAttributes( {
+					answerRightPadding: attributes.hanswerPaddingDesktop,
+				} );
 			}
 			if ( '' === attributes.answerLeftPadding ) {
-				setAttributes( { answerLeftPadding: attributes.hanswerPaddingDesktop } );
+				setAttributes( {
+					answerLeftPadding: attributes.hanswerPaddingDesktop,
+				} );
 			}
 		}
 
@@ -246,28 +265,35 @@ const FaqComponent = ( props ) => {
 			}
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName(
+			'editor-post-publish-button'
+		)?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
-			return () => { postSaveButton?.removeEventListener( 'click', updatePageSchema ); }
+			return () => {
+				postSaveButton?.removeEventListener(
+					'click',
+					updatePageSchema
+				);
+			};
 		}
-		
 	}, [ attributes ] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-faq-' + clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-faq-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	return (

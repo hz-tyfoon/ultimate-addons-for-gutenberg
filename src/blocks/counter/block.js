@@ -11,7 +11,6 @@ import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
 
-
 registerBlockType( 'uagb/counter', {
 	title: __( 'Counter', 'ultimate-addons-for-gutenberg' ),
 	description: __(
@@ -38,6 +37,6 @@ registerBlockType( 'uagb/counter', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 } );

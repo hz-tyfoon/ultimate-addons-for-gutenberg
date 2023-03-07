@@ -4,7 +4,6 @@
 
 import { useEffect } from '@wordpress/element';
 
-
 import Settings from './settings';
 import Render from './render';
 
@@ -25,10 +24,10 @@ const UAGBFormsUrlEdit = ( props ) => {
 	}, [] );
 
 	return (
-			<>
+		<>
 			{ isSelected && <Settings parentProps={ props } /> }
-				<Render parentProps={ props } />
-			</>
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

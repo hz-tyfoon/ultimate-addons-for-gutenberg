@@ -1,14 +1,17 @@
-UAGBTabs = { // eslint-disable-line no-undef
+// eslint-disable-next-line no-undef
+UAGBTabs = {
 	init( $selector ) {
 		const tabsWrap = document.querySelector( $selector );
-		if( ! tabsWrap ){
+		if ( ! tabsWrap ) {
 			return;
 		}
 		const tabActive = tabsWrap.getAttribute( 'data-tab-active' );
 		const tabLi = tabsWrap.querySelectorAll(
 			'.uagb-tabs__panel > li.uagb-tab'
 		);
-		const tabBody = tabsWrap.querySelectorAll( '.uagb-tabs__body-container' );
+		const tabBody = tabsWrap.querySelectorAll(
+			'.uagb-tabs__body-container'
+		);
 
 		// Set initial active class to Tabs body.
 		tabBody[ tabActive ].classList.add( 'uagb-tabs-body__active' );
@@ -123,9 +126,8 @@ UAGBTabs = { // eslint-disable-line no-undef
 					')'
 			);
 			const allLi = selectedLi.querySelectorAll( 'a.uagb-tabs-list' );
-			const selectedAnchor = selectedLi.querySelector(
-				'a.uagb-tabs-list'
-			);
+			const selectedAnchor =
+				selectedLi.querySelector( 'a.uagb-tabs-list' );
 
 			// Remove old li active class.
 			listPanel

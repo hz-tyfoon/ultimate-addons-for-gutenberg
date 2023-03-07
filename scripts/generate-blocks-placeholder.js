@@ -30,10 +30,28 @@ const registerBlocks = glob
 		const blockSlug = getBlockSlug( content );
 		const blockTitle = getBlockTitle( content );
 
-		const excludedBlocks = ['./src/blocks/post/post-button/block.js', './src/blocks/post/post-excerpt/block.js', './src/blocks/post/post-image/block.js', './src/blocks/post/post-masonry/block.js', './src/blocks/post/post-meta/block.js',
-		'./src/blocks/post/post-taxonomy/block.js', './src/blocks/post/post-title/block.js', './src/blocks/wp-search/block.js','./src/blocks/gf-designer/block.js', './src/blocks/cf7-designer/block.js', './src/blocks/columns/block.js', './src/blocks/column/block.js', './src/blocks/section/block.js'];
+		const excludedBlocks = [
+			'./src/blocks/post/post-button/block.js',
+			'./src/blocks/post/post-excerpt/block.js',
+			'./src/blocks/post/post-image/block.js',
+			'./src/blocks/post/post-masonry/block.js',
+			'./src/blocks/post/post-meta/block.js',
+			'./src/blocks/post/post-taxonomy/block.js',
+			'./src/blocks/post/post-title/block.js',
+			'./src/blocks/wp-search/block.js',
+			'./src/blocks/gf-designer/block.js',
+			'./src/blocks/cf7-designer/block.js',
+			'./src/blocks/columns/block.js',
+			'./src/blocks/column/block.js',
+			'./src/blocks/section/block.js',
+		];
 
-		if ( ! blockSlug || ! blockTitle || -1 !== file.indexOf( 'child' ) || excludedBlocks.includes( file ) ) {
+		if (
+			! blockSlug ||
+			! blockTitle ||
+			-1 !== file.indexOf( 'child' ) ||
+			excludedBlocks.includes( file )
+		) {
 			return code;
 		}
 
@@ -43,9 +61,12 @@ registerBlockType( '${ blockSlug }', { title: ${ blockTitle } } );`;
 
 fs.writeFile( dest_file, registerBlocks, ( err ) => {
 	if ( err ) {
-		console.log( err ); // eslint-disable-line
-		return
+		// eslint-disable-next-line no-console
+		console.log( err );
+		return;
 	}
-
-	console.log( `Sucessfully written block registration placeholder ${ dest_file }` ) // eslint-disable-line
+	// eslint-disable-next-line no-console
+	console.log(
+		`Sucessfully written block registration placeholder ${ dest_file }`
+	);
 } );

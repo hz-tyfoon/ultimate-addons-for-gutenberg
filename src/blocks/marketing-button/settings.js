@@ -12,19 +12,14 @@ import InspectorTab, {
 import SpacingControl from '@Components/spacing-control';
 import Range from '@Components/range/Range.js';
 import ResponsiveSlider from '@Components/responsive-slider';
-import ResponsiveBorder from '@Components/responsive-border'
+import ResponsiveBorder from '@Components/responsive-border';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import UAGTabsControl from '@Components/tabs';
 import presets from './presets';
 import UAGPresets from '@Components/presets';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 
-import {
-	Icon,
-	ToggleControl,
-} from '@wordpress/components';
+import { Icon, ToggleControl } from '@wordpress/components';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
@@ -166,10 +161,16 @@ const Settings = ( props ) => {
 	const generalSettings = () => {
 		return (
 			<>
-				<UAGAdvancedPanelBody title={ __( 'Content' ) } initialOpen={ false }>
+				<UAGAdvancedPanelBody
+					title={ __( 'Content' ) }
+					initialOpen={ false }
+				>
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
-						label={ __( 'Button Alignment', 'ultimate-addons-for-gutenberg' ) }
+						label={ __(
+							'Button Alignment',
+							'ultimate-addons-for-gutenberg'
+						) }
 						data={ {
 							value: align,
 							label: 'align',
@@ -192,7 +193,9 @@ const Settings = ( props ) => {
 								value: 'center',
 								icon: (
 									<Icon
-										icon={ renderSVG( 'fa fa-align-center' ) }
+										icon={ renderSVG(
+											'fa fa-align-center'
+										) }
 									/>
 								),
 								tooltip: __(
@@ -204,7 +207,9 @@ const Settings = ( props ) => {
 								value: 'right',
 								icon: (
 									<Icon
-										icon={ renderSVG( 'fa fa-align-right' ) }
+										icon={ renderSVG(
+											'fa fa-align-right'
+										) }
 									/>
 								),
 								tooltip: __(
@@ -216,7 +221,9 @@ const Settings = ( props ) => {
 								value: 'full',
 								icon: (
 									<Icon
-										icon={ renderSVG( 'fa fa-align-justify' ) }
+										icon={ renderSVG(
+											'fa fa-align-justify'
+										) }
 									/>
 								),
 								tooltip: __(
@@ -229,7 +236,10 @@ const Settings = ( props ) => {
 					/>
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
-						label={ __( 'Text Alignment', 'ultimate-addons-for-gutenberg' ) }
+						label={ __(
+							'Text Alignment',
+							'ultimate-addons-for-gutenberg'
+						) }
 						data={ {
 							value: textAlign,
 							label: 'textAlign',
@@ -252,7 +262,9 @@ const Settings = ( props ) => {
 								value: 'center',
 								icon: (
 									<Icon
-										icon={ renderSVG( 'fa fa-align-center' ) }
+										icon={ renderSVG(
+											'fa fa-align-center'
+										) }
 									/>
 								),
 								tooltip: __(
@@ -264,7 +276,9 @@ const Settings = ( props ) => {
 								value: 'right',
 								icon: (
 									<Icon
-										icon={ renderSVG( 'fa fa-align-right' ) }
+										icon={ renderSVG(
+											'fa fa-align-right'
+										) }
 									/>
 								),
 								tooltip: __(
@@ -282,19 +296,18 @@ const Settings = ( props ) => {
 						) }
 						checked={ showDescription }
 						onChange={ () =>
-							setAttributes( { showDescription: ! showDescription } )
+							setAttributes( {
+								showDescription: ! showDescription,
+							} )
 						}
 					/>
 					<UAGTextControl
-						label={ __(
-							'Link',
-							'ultimate-addons-for-gutenberg'
-						) }
+						label={ __( 'Link', 'ultimate-addons-for-gutenberg' ) }
 						value={ link }
-						data={{
+						data={ {
 							value: link,
 							label: 'link',
-						}}
+						} }
 						setAttributes={ setAttributes }
 						onChange={ ( value ) =>
 							setAttributes( { link: value } )
@@ -311,7 +324,10 @@ const Settings = ( props ) => {
 						}
 					/>
 				</UAGAdvancedPanelBody>
-				<UAGAdvancedPanelBody title={ __( 'Heading' ) } initialOpen={ false }>
+				<UAGAdvancedPanelBody
+					title={ __( 'Heading' ) }
+					initialOpen={ false }
+				>
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
 						label={ __( 'Tag', 'ultimate-addons-for-gutenberg' ) }
@@ -322,27 +338,45 @@ const Settings = ( props ) => {
 						options={ [
 							{
 								value: 'h1',
-								label: __( 'H1', 'ultimate-addons-for-gutenberg' ),
+								label: __(
+									'H1',
+									'ultimate-addons-for-gutenberg'
+								),
 							},
 							{
 								value: 'h2',
-								label: __( 'H2', 'ultimate-addons-for-gutenberg' ),
+								label: __(
+									'H2',
+									'ultimate-addons-for-gutenberg'
+								),
 							},
 							{
 								value: 'h3',
-								label: __( 'H3', 'ultimate-addons-for-gutenberg' ),
+								label: __(
+									'H3',
+									'ultimate-addons-for-gutenberg'
+								),
 							},
 							{
 								value: 'h4',
-								label: __( 'H4', 'ultimate-addons-for-gutenberg' ),
+								label: __(
+									'H4',
+									'ultimate-addons-for-gutenberg'
+								),
 							},
 							{
 								value: 'h5',
-								label: __( 'H5', 'ultimate-addons-for-gutenberg' ),
+								label: __(
+									'H5',
+									'ultimate-addons-for-gutenberg'
+								),
 							},
 							{
 								value: 'h6',
-								label: __( 'H6', 'ultimate-addons-for-gutenberg' ),
+								label: __(
+									'H6',
+									'ultimate-addons-for-gutenberg'
+								),
 							},
 							{
 								value: 'span',
@@ -353,7 +387,10 @@ const Settings = ( props ) => {
 							},
 							{
 								value: 'p',
-								label: __( 'P', 'ultimate-addons-for-gutenberg' ),
+								label: __(
+									'P',
+									'ultimate-addons-for-gutenberg'
+								),
 							},
 						] }
 					/>
@@ -463,42 +500,43 @@ const Settings = ( props ) => {
 				initialOpen={ true }
 			>
 				{ showDescription && (
-				<ResponsiveSlider
-					label={ __(
-						'Bottom Spacing',
-						'ultimate-addons-for-gutenberg'
-					) }
-					data={ {
-						desktop: {
-							value: titleSpace,
-							label: 'titleSpace',
-						},
-						tablet: {
-							value: titleSpaceTablet,
-							label: 'titleSpaceTablet',
-						},
-						mobile: {
-							value: titleSpaceMobile,
-							label: 'titleSpaceMobile',
-						},
-					} }
-					min={ 0 }
-					max={ 20 }
-					units={ [
-						{
-							name: __(
-								'Pixel',
-								'ultimate-addons-for-gutenberg'
-							),
-							unitValue: 'px',
-						}
-					] }
-					setAttributes={ setAttributes }
-					unit={ {
-						value: titleSpaceUnit,
-						label: 'titleSpaceUnit',
-					} }
-				/> ) }
+					<ResponsiveSlider
+						label={ __(
+							'Bottom Spacing',
+							'ultimate-addons-for-gutenberg'
+						) }
+						data={ {
+							desktop: {
+								value: titleSpace,
+								label: 'titleSpace',
+							},
+							tablet: {
+								value: titleSpaceTablet,
+								label: 'titleSpaceTablet',
+							},
+							mobile: {
+								value: titleSpaceMobile,
+								label: 'titleSpaceMobile',
+							},
+						} }
+						min={ 0 }
+						max={ 20 }
+						units={ [
+							{
+								name: __(
+									'Pixel',
+									'ultimate-addons-for-gutenberg'
+								),
+								unitValue: 'px',
+							},
+						] }
+						setAttributes={ setAttributes }
+						unit={ {
+							value: titleSpaceUnit,
+							label: 'titleSpaceUnit',
+						} }
+					/>
+				) }
 				<TypographyControl
 					label={ __(
 						'Typography',
@@ -830,7 +868,10 @@ const Settings = ( props ) => {
 
 	const btnPaddingSettings = () => {
 		return (
-			<UAGAdvancedPanelBody title={ __( 'Spacing' ) } initialOpen={ false }>
+			<UAGAdvancedPanelBody
+				title={ __( 'Spacing' ) }
+				initialOpen={ false }
+			>
 				<SpacingControl
 					{ ...props }
 					label={ __(
@@ -923,7 +964,10 @@ const Settings = ( props ) => {
 	};
 	const backgroundSettings = () => {
 		return (
-			<UAGAdvancedPanelBody title={ __( 'Background' ) } initialOpen={ false }>
+			<UAGAdvancedPanelBody
+				title={ __( 'Background' ) }
+				initialOpen={ false }
+			>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
 					label={ __( 'Type', 'ultimate-addons-for-gutenberg' ) }
@@ -1103,7 +1147,7 @@ const Settings = ( props ) => {
 							max={ 100 }
 							displayUnit={ false }
 						/>
-						{ 'linear' === gradientType &&
+						{ 'linear' === gradientType && (
 							<Range
 								label={ __(
 									'Angle',
@@ -1119,7 +1163,7 @@ const Settings = ( props ) => {
 								max={ 360 }
 								displayUnit={ false }
 							/>
-						}
+						) }
 					</>
 				) }
 			</UAGAdvancedPanelBody>
@@ -1134,29 +1178,31 @@ const Settings = ( props ) => {
 			>
 				<ResponsiveBorder
 					setAttributes={ setAttributes }
-					prefix={'btn'}
+					prefix={ 'btn' }
 					attributes={ attributes }
-					deviceType={deviceType}
+					deviceType={ deviceType }
 					disableBottomSeparator={ true }
-					disabledBorderTitle= { true }
+					disabledBorderTitle={ true }
 				/>
 			</UAGAdvancedPanelBody>
 		);
 	};
 	const presetSettings = () => {
-		return <UAGAdvancedPanelBody
-					title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ true }
-				>
-					<UAGPresets
-						setAttributes = { setAttributes }
-						presets = { presets }
-						presetInputType = 'radioImage'
-					/>
-				</UAGAdvancedPanelBody>
+		return (
+			<UAGAdvancedPanelBody
+				title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ true }
+			>
+				<UAGPresets
+					setAttributes={ setAttributes }
+					presets={ presets }
+					presetInputType="radioImage"
+				/>
+			</UAGAdvancedPanelBody>
+		);
 	};
 	return (
-			<>
+		<>
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
@@ -1180,7 +1226,7 @@ const Settings = ( props ) => {
 			</InspectorControls>
 			{ loadTitleGoogleFonts }
 			{ loadPrefixGoogleFonts }
-			</>
+		</>
 	);
 };
 

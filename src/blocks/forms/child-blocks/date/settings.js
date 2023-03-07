@@ -30,8 +30,6 @@ for ( index = 1; index <= 31; index++ ) {
 	dateDefaults.push( { label: twoDigitDate, value: twoDigitDate } );
 }
 
-
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
@@ -102,7 +100,7 @@ const Settings = ( props ) => {
 				/>
 				{ additonalVal && (
 					<>
-						<Separator/>
+						<Separator />
 						<p>
 							{ __( 'From', 'ultimate-addons-for-gutenberg' ) } :
 						</p>
@@ -142,10 +140,8 @@ const Settings = ( props ) => {
 							setAttributes={ setAttributes }
 							options={ dateDefaults }
 						/>
-						<Separator/>
-						<p>
-							{ __( 'To', 'ultimate-addons-for-gutenberg' ) } :
-						</p>
+						<Separator />
+						<p>{ __( 'To', 'ultimate-addons-for-gutenberg' ) } :</p>
 						<UAGSelectControl
 							label={ __(
 								'Year',

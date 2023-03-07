@@ -19,7 +19,6 @@ import { withDispatch, dispatch, select } from '@wordpress/data';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const UAGBTabsEdit = ( props ) => {
-
 	const deviceType = useDeviceType();
 	const {
 		isSelected,
@@ -38,33 +37,44 @@ const UAGBTabsEdit = ( props ) => {
 		},
 		clientId,
 	} = props;
-	
+
 	useEffect( () => {
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
 		// Backward Border Migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'tab', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			setAttributes,
-			attributes
+		if (
+			borderWidth ||
+			borderRadius ||
+			borderColor ||
+			borderHoverColor ||
+			borderStyle
+		) {
+			migrateBorderAttributes(
+				'tab',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
-		
 	}, [] );
 
 	const updateTabTitle = () => {
@@ -83,7 +93,10 @@ const UAGBTabsEdit = ( props ) => {
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
-		addBlockEditorDynamicStyles( 'uagb-style-tab-' + clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-tab-' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 		updateTabTitle();
 		props.resetTabOrder();
 	}, [ deviceType, attributes ] );
@@ -93,9 +106,7 @@ const UAGBTabsEdit = ( props ) => {
 	}, [ deviceType ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	return (
@@ -109,12 +120,11 @@ const UAGBTabsEdit = ( props ) => {
 };
 
 export default compose(
-
-	withDispatch( ( dispatch, { clientId }, { select } ) => { // eslint-disable-line no-shadow
+	// eslint-disable-next-line no-shadow
+	withDispatch( ( dispatch, { clientId }, { select } ) => {
 		const { getBlock } = select( 'core/block-editor' );
-		const { updateBlockAttributes, moveBlockToPosition } = dispatch(
-			'core/block-editor'
-		);
+		const { updateBlockAttributes, moveBlockToPosition } =
+			dispatch( 'core/block-editor' );
 
 		const block = getBlock( clientId );
 

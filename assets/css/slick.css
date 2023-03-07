@@ -230,7 +230,7 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-@media only screen and (max-width: 976px) {
+@media only screen and ( max-width: 976px ) {
 
 	.uagb-slick-carousel {
 		padding: 0;

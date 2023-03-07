@@ -8,7 +8,6 @@ import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
 function styling( props ) {
-
 	const { attributes } = props;
 	let {
 		backgroundType,
@@ -80,146 +79,253 @@ function styling( props ) {
 		yPositionTypeTablet,
 		yPositionTypeMobile,
 		overflow,
-
 	} = attributes;
 
-	const borderCSSTablet = generateBorderCSS( props.attributes, 'container', 'tablet' );
-	const borderCSSMobile = generateBorderCSS( props.attributes, 'container', 'mobile' );
+	const borderCSSTablet = generateBorderCSS(
+		props.attributes,
+		'container',
+		'tablet'
+	);
+	const borderCSSMobile = generateBorderCSS(
+		props.attributes,
+		'container',
+		'mobile'
+	);
 
-	topPaddingTablet = 'undefined' !== typeof topPaddingTablet ? topPaddingTablet : topPaddingDesktop;
-	topPaddingMobile = 'undefined' !== typeof topPaddingMobile ? topPaddingMobile : topPaddingTablet;
+	topPaddingTablet =
+		'undefined' !== typeof topPaddingTablet
+			? topPaddingTablet
+			: topPaddingDesktop;
+	topPaddingMobile =
+		'undefined' !== typeof topPaddingMobile
+			? topPaddingMobile
+			: topPaddingTablet;
 
-	bottomPaddingTablet = 'undefined' !== typeof bottomPaddingTablet ? bottomPaddingTablet : bottomPaddingDesktop;
-	bottomPaddingMobile = 'undefined' !== typeof bottomPaddingMobile ? bottomPaddingMobile : bottomPaddingTablet;
+	bottomPaddingTablet =
+		'undefined' !== typeof bottomPaddingTablet
+			? bottomPaddingTablet
+			: bottomPaddingDesktop;
+	bottomPaddingMobile =
+		'undefined' !== typeof bottomPaddingMobile
+			? bottomPaddingMobile
+			: bottomPaddingTablet;
 
-	leftPaddingTablet = 'undefined' !== typeof leftPaddingTablet ? leftPaddingTablet : leftPaddingDesktop;
-	leftPaddingMobile = 'undefined' !== typeof leftPaddingMobile ? leftPaddingMobile : leftPaddingTablet;
+	leftPaddingTablet =
+		'undefined' !== typeof leftPaddingTablet
+			? leftPaddingTablet
+			: leftPaddingDesktop;
+	leftPaddingMobile =
+		'undefined' !== typeof leftPaddingMobile
+			? leftPaddingMobile
+			: leftPaddingTablet;
 
-	rightPaddingTablet = 'undefined' !== typeof rightPaddingTablet ? rightPaddingTablet : rightPaddingDesktop;
-	rightPaddingMobile = 'undefined' !== typeof rightPaddingMobile ? rightPaddingMobile : rightPaddingTablet;
+	rightPaddingTablet =
+		'undefined' !== typeof rightPaddingTablet
+			? rightPaddingTablet
+			: rightPaddingDesktop;
+	rightPaddingMobile =
+		'undefined' !== typeof rightPaddingMobile
+			? rightPaddingMobile
+			: rightPaddingTablet;
 
-	topMarginTablet = 'undefined' !== typeof topMarginTablet ? topMarginTablet : topMarginDesktop;
-	topMarginMobile = 'undefined' !== typeof topMarginMobile ? topMarginMobile : topMarginTablet;
+	topMarginTablet =
+		'undefined' !== typeof topMarginTablet
+			? topMarginTablet
+			: topMarginDesktop;
+	topMarginMobile =
+		'undefined' !== typeof topMarginMobile
+			? topMarginMobile
+			: topMarginTablet;
 
-	bottomMarginTablet = 'undefined' !== typeof bottomMarginTablet ? bottomMarginTablet : bottomMarginDesktop;
-	bottomMarginMobile = 'undefined' !== typeof bottomMarginMobile ? bottomMarginMobile : bottomMarginTablet;
+	bottomMarginTablet =
+		'undefined' !== typeof bottomMarginTablet
+			? bottomMarginTablet
+			: bottomMarginDesktop;
+	bottomMarginMobile =
+		'undefined' !== typeof bottomMarginMobile
+			? bottomMarginMobile
+			: bottomMarginTablet;
 
-	leftMarginTablet = 'undefined' !== typeof leftMarginTablet ? leftMarginTablet : leftMarginDesktop;
-	leftMarginMobile = 'undefined' !== typeof leftMarginMobile ? leftMarginMobile : leftMarginTablet;
+	leftMarginTablet =
+		'undefined' !== typeof leftMarginTablet
+			? leftMarginTablet
+			: leftMarginDesktop;
+	leftMarginMobile =
+		'undefined' !== typeof leftMarginMobile
+			? leftMarginMobile
+			: leftMarginTablet;
 
-	rightMarginTablet = 'undefined' !== typeof rightMarginTablet ? rightMarginTablet : rightMarginDesktop;
-	rightMarginMobile = 'undefined' !== typeof rightMarginMobile ? rightMarginMobile : rightMarginTablet;
+	rightMarginTablet =
+		'undefined' !== typeof rightMarginTablet
+			? rightMarginTablet
+			: rightMarginDesktop;
+	rightMarginMobile =
+		'undefined' !== typeof rightMarginMobile
+			? rightMarginMobile
+			: rightMarginTablet;
 
 	const selectors = {};
 
 	const backgroundAttributesDesktop = {
-        'backgroundType': backgroundType,
-        'backgroundImage': backgroundImageDesktop,
-        'backgroundColor': backgroundColor,
-        'gradientValue': gradientValue,
-        'backgroundRepeat': backgroundRepeatDesktop,
-        'backgroundPosition': backgroundPositionDesktop,
-        'backgroundSize': backgroundSizeDesktop,
-        'backgroundAttachment': backgroundAttachmentDesktop,
-		'backgroundCustomSize' : backgroundCustomSizeDesktop,
-		'backgroundCustomSizeType' : backgroundCustomSizeType,
-		'backgroundImageColor' : backgroundImageColor,
-		'overlayType' : overlayType,
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageDesktop,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'backgroundRepeat': backgroundRepeatDesktop,
+		'backgroundPosition': backgroundPositionDesktop,
+		'backgroundSize': backgroundSizeDesktop,
+		'backgroundAttachment': backgroundAttachmentDesktop,
+		'backgroundCustomSize': backgroundCustomSizeDesktop,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
 		'customPosition': customPosition,
 		'xPosition': xPositionDesktop,
 		'xPositionType': xPositionType,
 		'yPosition': yPositionDesktop,
 		'yPositionType': yPositionType,
-    };
+	};
 
-	const BackgroundCSSDesktop = generateBackgroundCSS( backgroundAttributesDesktop );
+	const BackgroundCSSDesktop = generateBackgroundCSS(
+		backgroundAttributesDesktop
+	);
 
 	const sliderCSS = {
 		'padding-top': generateCSSUnit( topPaddingDesktop, paddingType ),
 		'padding-bottom': generateCSSUnit( bottomPaddingDesktop, paddingType ),
 		'padding-left': generateCSSUnit( leftPaddingDesktop, paddingType ),
 		'padding-right': generateCSSUnit( rightPaddingDesktop, paddingType ),
-		'margin-top': generateCSSUnit( topMarginDesktop, marginType ) +	' !important',
-		'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType ) + ' !important',
+		'margin-top':
+			generateCSSUnit( topMarginDesktop, marginType ) + ' !important',
+		'margin-bottom':
+			generateCSSUnit( bottomMarginDesktop, marginType ) + ' !important',
 		'margin-left': generateCSSUnit( leftMarginDesktop, marginType ),
 		'margin-right': generateCSSUnit( rightMarginDesktop, marginType ),
 		...BackgroundCSSDesktop,
-		'overflow' : overflow
-	}
+		'overflow': overflow,
+	};
 
-	selectors[' .swiper-content'] = sliderCSS;
+	selectors[ ' .swiper-content' ] = sliderCSS;
 
 	const backgroundAttributesTablet = {
-        'backgroundType': backgroundType,
-        'backgroundImage': backgroundImageTablet,
-        'backgroundColor': backgroundColor,
-        'gradientValue': gradientValue,
-        'backgroundRepeat': backgroundRepeatTablet,
-        'backgroundPosition': backgroundPositionTablet,
-        'backgroundSize': backgroundSizeTablet,
-        'backgroundAttachment': backgroundAttachmentTablet,
-		'backgroundCustomSize' : backgroundCustomSizeTablet,
-		'backgroundCustomSizeType' : backgroundCustomSizeType,
-		'backgroundImageColor' : backgroundImageColor,
-		'overlayType' : overlayType,
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageTablet,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'backgroundRepeat': backgroundRepeatTablet,
+		'backgroundPosition': backgroundPositionTablet,
+		'backgroundSize': backgroundSizeTablet,
+		'backgroundAttachment': backgroundAttachmentTablet,
+		'backgroundCustomSize': backgroundCustomSizeTablet,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
 		'customPosition': customPosition,
 		'xPosition': xPositionTablet,
 		'xPositionType': xPositionTypeTablet,
 		'yPosition': yPositionTablet,
 		'yPositionType': yPositionTypeTablet,
-    };
+	};
 
-	const containerBackgroundCSSTablet = generateBackgroundCSS( backgroundAttributesTablet );
+	const containerBackgroundCSSTablet = generateBackgroundCSS(
+		backgroundAttributesTablet
+	);
 
 	const tablet_selectors = {
-		' .swiper-content' : {
-			'padding-top': generateCSSUnit( topPaddingTablet, paddingTypeTablet ),
-			'padding-bottom': generateCSSUnit( bottomPaddingTablet, paddingTypeTablet ),
-			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
-			'padding-right': generateCSSUnit( rightPaddingTablet, paddingTypeTablet ),
-			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet )  + ' !important',
-			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet )  + ' !important',
-			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet ),
-			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ),
+		' .swiper-content': {
+			'padding-top': generateCSSUnit(
+				topPaddingTablet,
+				paddingTypeTablet
+			),
+			'padding-bottom': generateCSSUnit(
+				bottomPaddingTablet,
+				paddingTypeTablet
+			),
+			'padding-left': generateCSSUnit(
+				leftPaddingTablet,
+				paddingTypeTablet
+			),
+			'padding-right': generateCSSUnit(
+				rightPaddingTablet,
+				paddingTypeTablet
+			),
+			'margin-top':
+				generateCSSUnit( topMarginTablet, marginTypeTablet ) +
+				' !important',
+			'margin-bottom':
+				generateCSSUnit( bottomMarginTablet, marginTypeTablet ) +
+				' !important',
+			'margin-left': generateCSSUnit(
+				leftMarginTablet,
+				marginTypeTablet
+			),
+			'margin-right': generateCSSUnit(
+				rightMarginTablet,
+				marginTypeTablet
+			),
 			...containerBackgroundCSSTablet,
-			...borderCSSTablet
+			...borderCSSTablet,
 		},
 	};
 
 	const backgroundAttributesMobile = {
-        'backgroundType': backgroundType,
-        'backgroundImage': backgroundImageMobile,
-        'backgroundColor': backgroundColor,
-        'gradientValue': gradientValue,
-        'backgroundRepeat': backgroundRepeatMobile,
-        'backgroundPosition': backgroundPositionMobile,
-        'backgroundSize': backgroundSizeMobile,
-        'backgroundAttachment': backgroundAttachmentMobile,
-		'backgroundCustomSize' : backgroundCustomSizeMobile,
-		'backgroundCustomSizeType' : backgroundCustomSizeType,
-		'backgroundImageColor' : backgroundImageColor,
-		'overlayType' : overlayType,
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageMobile,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'backgroundRepeat': backgroundRepeatMobile,
+		'backgroundPosition': backgroundPositionMobile,
+		'backgroundSize': backgroundSizeMobile,
+		'backgroundAttachment': backgroundAttachmentMobile,
+		'backgroundCustomSize': backgroundCustomSizeMobile,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
 		'customPosition': customPosition,
 		'xPosition': xPositionMobile,
 		'xPositionType': xPositionTypeMobile,
 		'yPosition': yPositionMobile,
 		'yPositionType': yPositionTypeMobile,
-    };
+	};
 
-	const containerBackgroundCSSMobile = generateBackgroundCSS( backgroundAttributesMobile );
+	const containerBackgroundCSSMobile = generateBackgroundCSS(
+		backgroundAttributesMobile
+	);
 
 	const mobile_selectors = {
-		' .swiper-content' : {
-			'padding-top': generateCSSUnit( topPaddingMobile, paddingTypeMobile ),
-			'padding-bottom': generateCSSUnit( bottomPaddingMobile, paddingTypeMobile ),
-			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
-			'padding-right': generateCSSUnit( rightPaddingMobile, paddingTypeMobile ),
-			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile )  + ' !important',
-			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile )  + ' !important',
-			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile ),
-			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ),
+		' .swiper-content': {
+			'padding-top': generateCSSUnit(
+				topPaddingMobile,
+				paddingTypeMobile
+			),
+			'padding-bottom': generateCSSUnit(
+				bottomPaddingMobile,
+				paddingTypeMobile
+			),
+			'padding-left': generateCSSUnit(
+				leftPaddingMobile,
+				paddingTypeMobile
+			),
+			'padding-right': generateCSSUnit(
+				rightPaddingMobile,
+				paddingTypeMobile
+			),
+			'margin-top':
+				generateCSSUnit( topMarginMobile, marginTypeMobile ) +
+				' !important',
+			'margin-bottom':
+				generateCSSUnit( bottomMarginMobile, marginTypeMobile ) +
+				' !important',
+			'margin-left': generateCSSUnit(
+				leftMarginMobile,
+				marginTypeMobile
+			),
+			'margin-right': generateCSSUnit(
+				rightMarginMobile,
+				marginTypeMobile
+			),
 			...containerBackgroundCSSMobile,
-			...borderCSSMobile
+			...borderCSSMobile,
 		},
 	};
 

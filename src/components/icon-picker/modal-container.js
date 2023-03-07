@@ -9,7 +9,8 @@ import chunk from './chunks';
 import HeaderContainer from './header-container';
 
 const ModalContainer = ( props ) => {
-	const { value, onChange, closeModal, defaultIcons, iconCategoryList } = props;
+	const { value, onChange, closeModal, defaultIcons, iconCategoryList } =
+		props;
 	const defaultIconsWithKeys = { ...uagb_blocks_info.uagb_svg_icons };
 	const NUMBER_OF_COLUMN = 8;
 
@@ -20,7 +21,8 @@ const ModalContainer = ( props ) => {
 		setIconListWithChunks( defaultIcons )
 	);
 	const [ categoryListName, setCategoryListName ] = useState( 'all' );
-	const [ iconListByCategory, setIconListByCategory ] = useState( defaultIcons );
+	const [ iconListByCategory, setIconListByCategory ] =
+		useState( defaultIcons );
 	const [ insertIcon, setInsertIcon ] = useState( '' );
 	const inputElement = useRef();
 
@@ -50,7 +52,7 @@ const ModalContainer = ( props ) => {
 		);
 		setRowIndexForFirstTime( selectedIconRowIndex );
 	}, [] );
-	
+
 	// Click on category list.
 	const clickToCategoryList = ( category ) => {
 		let findIconsByCategory = [];
@@ -213,7 +215,9 @@ const ModalContainer = ( props ) => {
 			) ) }
 			<div
 				key="no-category"
-				className={ 'no-category' === categoryListName ? 'selected' : null }
+				className={
+					'no-category' === categoryListName ? 'selected' : null
+				}
 				onClick={ () => clickToCategoryList( 'no-category' ) }
 			>
 				{ __( 'Other', 'ultimate-addons-for-gutenberg' ) }

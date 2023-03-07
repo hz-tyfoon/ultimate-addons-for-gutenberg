@@ -40,7 +40,7 @@ const Render = ( props ) => {
 
 	const toStopPlayAnimation = () => {
 		lottieplayer.current.stop();
-	}
+	};
 
 	return (
 		<div // eslint-disable-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -49,7 +49,7 @@ const Render = ( props ) => {
 				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
 				'uagb-lottie__outer-wrap',
 				`uagb-lottie__${ align }`,
-				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
+				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
 			) }
 			onMouseEnter={
 				'hover' === playOn
@@ -67,16 +67,13 @@ const Render = ( props ) => {
 					: toStopPlayAnimation
 			}
 		>
-
-				<Player
-				    autoplay={ true }
-					ref={ lottieplayer }
-					src={ lottieURl }
-        			loop={loop}
-					speed={ getFallbackNumber( speed, 'speed', blockName ) }
-				>
-				</Player>
-
+			<Player
+				autoplay={ true }
+				ref={ lottieplayer }
+				src={ lottieURl }
+				loop={ loop }
+				speed={ getFallbackNumber( speed, 'speed', blockName ) }
+			></Player>
 		</div>
 	);
 };

@@ -9,8 +9,6 @@ import UAGTextControl from '@Components/text-control';
 
 import { InspectorControls } from '@wordpress/block-editor';
 
-
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
@@ -26,10 +24,10 @@ const Settings = ( props ) => {
 				<UAGTextControl
 					label={ __( 'Value', 'ultimate-addons-for-gutenberg' ) }
 					value={ hidden_field_value }
-					data={{
+					data={ {
 						value: hidden_field_value,
 						label: 'hidden_field_value',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( { hidden_field_value: value } )

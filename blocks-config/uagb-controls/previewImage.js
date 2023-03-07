@@ -1,6 +1,10 @@
+import { __ } from '@wordpress/i18n';
 const PreviewImage = ( { image, isChildren = false } ) => {
-	if( !image ){
-		console.error( __( 'Please add preview image.', 'ultimate-addons-for-gutenberg' ) ); // eslint-disable-line 
+	if ( ! image ) {
+		// eslint-disable-next-line no-console
+		console.error(
+			__( 'Please add preview image.', 'ultimate-addons-for-gutenberg' )
+		);
 	}
 
 	let imgUrl = uagb_blocks_info.uagb_url;

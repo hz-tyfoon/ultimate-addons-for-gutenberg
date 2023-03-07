@@ -181,84 +181,92 @@ const Settings = ( props ) => {
 					] }
 					normal={
 						<>
-						{'icon' === image_icon &&
-						'' !== icon &&
-						<>
-							<AdvancedPopColorControl
-								label={ __(
-									'Icon Color',
-									'ultimate-addons-for-gutenberg'
-								) }
-								colorValue={ icon_color ? icon_color : '' }
-								data={ {
-									value: icon_color,
-									label: 'icon_color',
-								} }
-								setAttributes={ setAttributes }
-							/>
-							<AdvancedPopColorControl
-								label={ __(
-									'Background Color',
-									'ultimate-addons-for-gutenberg'
-								) }
-								colorValue={ icon_bg_color ? icon_bg_color : '' }
-								data={ {
-									value: icon_bg_color,
-									label: 'icon_bg_color',
-								} }
-								setAttributes={ setAttributes }
-							/>
-						</> }
-							<AdvancedPopColorControl
-							label={ __(
-								'Border Color',
-								'ultimate-addons-for-gutenberg'
+							{ 'icon' === image_icon && '' !== icon && (
+								<>
+									<AdvancedPopColorControl
+										label={ __(
+											'Icon Color',
+											'ultimate-addons-for-gutenberg'
+										) }
+										colorValue={
+											icon_color ? icon_color : ''
+										}
+										data={ {
+											value: icon_color,
+											label: 'icon_color',
+										} }
+										setAttributes={ setAttributes }
+									/>
+									<AdvancedPopColorControl
+										label={ __(
+											'Background Color',
+											'ultimate-addons-for-gutenberg'
+										) }
+										colorValue={
+											icon_bg_color ? icon_bg_color : ''
+										}
+										data={ {
+											value: icon_bg_color,
+											label: 'icon_bg_color',
+										} }
+										setAttributes={ setAttributes }
+									/>
+								</>
 							) }
-							colorValue={
-								icon_border_color ? icon_border_color : ''
-							}
-							data={ {
-								value: icon_border_color,
-								label: 'icon_border_color',
-							} }
-							setAttributes={ setAttributes }
+							<AdvancedPopColorControl
+								label={ __(
+									'Border Color',
+									'ultimate-addons-for-gutenberg'
+								) }
+								colorValue={
+									icon_border_color ? icon_border_color : ''
+								}
+								data={ {
+									value: icon_border_color,
+									label: 'icon_border_color',
+								} }
+								setAttributes={ setAttributes }
 							/>
 						</>
 					}
 					hover={
 						<>
-						{'icon' === image_icon &&
-						'' !== icon &&
-						<>
-							<AdvancedPopColorControl
-								label={ __(
-									'Icon Color',
-									'ultimate-addons-for-gutenberg'
-								) }
-								colorValue={
-									icon_hover_color ? icon_hover_color : ''
-								}
-								data={ {
-									value: icon_hover_color,
-									label: 'icon_hover_color',
-								} }
-								setAttributes={ setAttributes }
-							/>
-							<AdvancedPopColorControl
-								label={ __(
-									'Background Color',
-									'ultimate-addons-for-gutenberg'
-								) }
-								colorValue={
-									icon_bg_hover_color ? icon_bg_hover_color : ''
-								}
-								data={ {
-									value: icon_bg_hover_color,
-									label: 'icon_bg_hover_color',
-								} }
-								setAttributes={ setAttributes }
-							/>
-							</>}
+							{ 'icon' === image_icon && '' !== icon && (
+								<>
+									<AdvancedPopColorControl
+										label={ __(
+											'Icon Color',
+											'ultimate-addons-for-gutenberg'
+										) }
+										colorValue={
+											icon_hover_color
+												? icon_hover_color
+												: ''
+										}
+										data={ {
+											value: icon_hover_color,
+											label: 'icon_hover_color',
+										} }
+										setAttributes={ setAttributes }
+									/>
+									<AdvancedPopColorControl
+										label={ __(
+											'Background Color',
+											'ultimate-addons-for-gutenberg'
+										) }
+										colorValue={
+											icon_bg_hover_color
+												? icon_bg_hover_color
+												: ''
+										}
+										data={ {
+											value: icon_bg_hover_color,
+											label: 'icon_bg_hover_color',
+										} }
+										setAttributes={ setAttributes }
+									/>
+								</>
+							) }
 							<AdvancedPopColorControl
 								label={ __(
 									'Border Color',
@@ -344,12 +352,15 @@ const Settings = ( props ) => {
 				{ disableLink && (
 					<>
 						<UAGTextControl
-							label={__( 'URL', 'ultimate-addons-for-gutenberg' )}
+							label={ __(
+								'URL',
+								'ultimate-addons-for-gutenberg'
+							) }
 							value={ link }
-							data={{
+							data={ {
 								value: link,
 								label: 'link',
-							}}
+							} }
 							setAttributes={ setAttributes }
 							onChange={ ( value ) =>
 								setAttributes( { link: value } )
@@ -376,16 +387,13 @@ const Settings = ( props ) => {
 	};
 
 	const spacingControls = () => {
-		return(
+		return (
 			<UAGAdvancedPanelBody
 				title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ false }
 			>
 				<SpacingControl
-					label={ __(
-						'Margin',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Margin', 'ultimate-addons-for-gutenberg' ) }
 					valueTop={ {
 						value: childTopMargin,
 						label: 'childTopMargin',
@@ -456,10 +464,7 @@ const Settings = ( props ) => {
 				/>
 
 				<SpacingControl
-					label={ __(
-						'Padding',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Padding', 'ultimate-addons-for-gutenberg' ) }
 					valueTop={ {
 						value: childTopPadding,
 						label: 'childTopPadding',

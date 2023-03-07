@@ -5,4 +5,6 @@ import './condition-block';
 import { registerPlugin } from '@wordpress/plugins';
 import SpectraPageSettingsPopup from './spectra-page-settings-popup';
 
-registerPlugin( 'spectra-page-level-settings', { render: SpectraPageSettingsPopup } );
+registerPlugin( 'spectra-page-level-settings', {
+	render: SpectraPageSettingsPopup,
+} );

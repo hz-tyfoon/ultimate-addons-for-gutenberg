@@ -14,7 +14,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/forms-date', {
 	title: __( 'Datepicker', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add a calendar based date picker in your form.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add a calendar based date picker in your form.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.datepicker,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/forms' ],
@@ -31,7 +34,7 @@ registerBlockType( 'uagb/forms-date', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	save,
 	deprecated,

@@ -17,7 +17,10 @@ import { registerBlockType } from '@wordpress/blocks';
 // Register the block
 registerBlockType( 'uagb/post-title', {
 	title: __( 'Post Title', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Customize your post title.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Customize your post title.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.post_grid,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel' ],

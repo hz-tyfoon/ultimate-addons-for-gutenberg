@@ -17,23 +17,21 @@ const UserConditionOptions = ( props ) => {
 		UAGSystem,
 		UAGBrowser,
 		UAGUserRole,
-		UAGDay
+		UAGDay,
 	} = attributes;
 
 	const handleChange = ( e ) => {
 		// Destructuring
 		const { value, checked } = e.target;
-		
+
 		if ( checked ) {
-			setAttributes( { UAGDay: [...UAGDay, value] } );
-		}
-		
-		else {
+			setAttributes( { UAGDay: [ ...UAGDay, value ] } );
+		} else {
 			setAttributes( { UAGDay: UAGDay.filter( ( i ) => i !== value ) } );
 		}
 	};
 
-	const options =  [
+	const options = [
 		{ value: 'monday', label: __( 'Monday' ) },
 		{ value: 'tuesday', label: __( 'Tuesday' ) },
 		{ value: 'wednesday', label: __( 'Wednesday' ) },
@@ -56,7 +54,7 @@ const UserConditionOptions = ( props ) => {
 					{ value: 'userRole', label: __( 'User Role' ) },
 					{ value: 'browser', label: __( 'Browser' ) },
 					{ value: 'os', label: __( 'Operating System' ) },
-					{ value: 'day', label: __( 'Day' ) }
+					{ value: 'day', label: __( 'Day' ) },
 				] }
 			/>
 			{ UAGDisplayConditions === 'userstate' && (
@@ -139,26 +137,32 @@ const UserConditionOptions = ( props ) => {
 			) }
 			{ UAGDisplayConditions === 'day' && (
 				<>
-				<p>Select days you want to disable.</p>
-					{ options.map( ( o, index ) => {  // eslint-disable-next-line array-callback-return
+					<p>Select days you want to disable.</p>
+					{ options.map( ( o, index ) => {
+						// eslint-disable-next-line array-callback-return
 						return (
-								<label
-									key = { index }
-									className="form-check-label"
-									htmlFor="flexCheckDefault"
-								>
-									<input
-										type="checkbox"
-										className="uagb-forms-checkbox"
-										name={ o.value }
-										value={ o.value } sunday
-										onChange ={ handleChange }
-										checked={ UAGDay.includes( o.value ) ? true : false}
-									/>
-									{ o.label }
-								</label>
+							<label
+								key={ index }
+								className="form-check-label"
+								htmlFor="flexCheckDefault"
+							>
+								<input
+									type="checkbox"
+									className="uagb-forms-checkbox"
+									name={ o.value }
+									value={ o.value }
+									sunday
+									onChange={ handleChange }
+									checked={
+										UAGDay.includes( o.value )
+											? true
+											: false
+									}
+								/>
+								{ o.label }
+							</label>
 						);
-					} )}
+					} ) }
 				</>
 			) }
 		</>
@@ -172,10 +176,7 @@ const zIndexOptions = ( props ) => {
 	return (
 		<>
 			<ResponsiveSlider
-				label={ __(
-					'Z-Index',
-					'ultimate-addons-for-gutenberg'
-				) }
+				label={ __( 'Z-Index', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
 					desktop: {
 						value: zIndex,
@@ -212,54 +213,56 @@ const ResponsiveConditionOptions = ( props ) => {
 		UAGHideMob,
 		UAGHideTab,
 		UAGResponsiveConditions,
-		UAGDisplayConditions
+		UAGDisplayConditions,
 	} = attributes;
 
 	useEffect( () => {
-
-		if ( 'responsiveVisibility' !== UAGDisplayConditions && ! UAGResponsiveConditions ) {
+		if (
+			'responsiveVisibility' !== UAGDisplayConditions &&
+			! UAGResponsiveConditions
+		) {
 			setAttributes( {
 				UAGHideDesktop: false,
 				UAGHideTab: false,
-				UAGHideMob: false
-			} )
+				UAGHideMob: false,
+			} );
 		}
 	}, [] );
 
 	return (
 		<>
-		<>
-			<ToggleControl
-				label={ __( 'Hide on Desktop' ) }
-				checked={ UAGHideDesktop }
-				onChange={ () =>
-					setAttributes( {
-						UAGHideDesktop: ! attributes.UAGHideDesktop,
-						UAGResponsiveConditions: true,
-					} )
-				}
-			/>
-			<ToggleControl
-				label={ __( 'Hide on Tablet' ) }
-				checked={ UAGHideTab }
-				onChange={ () =>
-					setAttributes( {
-						UAGHideTab: ! attributes.UAGHideTab,
-						UAGResponsiveConditions: true,
-					} )
-				}
-			/>
-			<ToggleControl
-				label={ __( 'Hide on Mobile' ) }
-				checked={ UAGHideMob }
-				onChange={ () =>
-					setAttributes( {
-						UAGHideMob: ! attributes.UAGHideMob,
-						UAGResponsiveConditions: true,
-					} )
-				}
-			/>
-		</>
+			<>
+				<ToggleControl
+					label={ __( 'Hide on Desktop' ) }
+					checked={ UAGHideDesktop }
+					onChange={ () =>
+						setAttributes( {
+							UAGHideDesktop: ! attributes.UAGHideDesktop,
+							UAGResponsiveConditions: true,
+						} )
+					}
+				/>
+				<ToggleControl
+					label={ __( 'Hide on Tablet' ) }
+					checked={ UAGHideTab }
+					onChange={ () =>
+						setAttributes( {
+							UAGHideTab: ! attributes.UAGHideTab,
+							UAGResponsiveConditions: true,
+						} )
+					}
+				/>
+				<ToggleControl
+					label={ __( 'Hide on Mobile' ) }
+					checked={ UAGHideMob }
+					onChange={ () =>
+						setAttributes( {
+							UAGHideMob: ! attributes.UAGHideMob,
+							UAGResponsiveConditions: true,
+						} )
+					}
+				/>
+			</>
 		</>
 	);
 };
@@ -273,7 +276,7 @@ function ApplyExtraClass( extraProps, blockType, attributes ) {
 		zIndexTablet,
 		zIndexMobile,
 		UAGDisplayConditions,
-		UAGResponsiveConditions
+		UAGResponsiveConditions,
 	} = attributes;
 
 	//Filter to add responsive condition compatibility for third party blocks.
@@ -283,74 +286,105 @@ function ApplyExtraClass( extraProps, blockType, attributes ) {
 	);
 
 	let isResponsiveCompatibleBlock = false;
-	for( const type of blockTypes ){
-		if( blockType.name.includes( type ) ){
+	for ( const type of blockTypes ) {
+		if ( blockType.name.includes( type ) ) {
 			isResponsiveCompatibleBlock = true;
 			break;
 		}
 	}
 
-	if ( 'responsiveVisibility' === UAGDisplayConditions || UAGResponsiveConditions && isResponsiveCompatibleBlock ) {
-
+	if (
+		'responsiveVisibility' === UAGDisplayConditions ||
+		( UAGResponsiveConditions && isResponsiveCompatibleBlock )
+	) {
 		if ( UAGHideDesktop ) {
-			extraProps.className = classnames( extraProps.className, 'uag-hide-desktop' );
+			extraProps.className = classnames(
+				extraProps.className,
+				'uag-hide-desktop'
+			);
 		}
 
 		if ( UAGHideTab ) {
-			extraProps.className = classnames( extraProps.className, 'uag-hide-tab' );
+			extraProps.className = classnames(
+				extraProps.className,
+				'uag-hide-tab'
+			);
 		}
 
 		if ( UAGHideMob ) {
-			extraProps.className = classnames( extraProps.className, 'uag-hide-mob' );
+			extraProps.className = classnames(
+				extraProps.className,
+				'uag-hide-mob'
+			);
 		}
 	}
 
 	if ( zIndex || zIndexTablet || zIndexMobile ) {
 		//Adding a common selector for blocks where z-index is applied.
-		extraProps.className = classnames( extraProps.className, 'uag-blocks-common-selector' );
-		extraProps.style = {'--z-index-desktop': zIndex + ';', '--z-index-tablet': zIndexTablet + ';', '--z-index-mobile': zIndexMobile + ';'}
+		extraProps.className = classnames(
+			extraProps.className,
+			'uag-blocks-common-selector'
+		);
+		extraProps.style = {
+			'--z-index-desktop': zIndex + ';',
+			'--z-index-tablet': zIndexTablet + ';',
+			'--z-index-mobile': zIndexMobile + ';',
+		};
 	}
 
 	return extraProps;
 }
 
-	//For UAG Blocks.
-	addFilter(
-		'uag_advance_tab_content',
-		'uagb/advanced-display-condition',
-		function ( content, props ) {
-			if ( ! props ) {
-				return content;
-			}
+//For UAG Blocks.
+addFilter(
+	'uag_advance_tab_content',
+	'uagb/advanced-display-condition',
+	function ( content, props ) {
+		if ( ! props ) {
+			return content;
+		}
 
-			const { isSelected, name } = props;
+		const { isSelected, name } = props;
 
-			const excludeBlocks = ['uagb/buttons-child','uagb/faq-child', 'uagb/icon-list-child', 'uagb/social-share-child', 'uagb/restaurant-menu-child', 'uagb/slider-child'];
+		const excludeBlocks = [
+			'uagb/buttons-child',
+			'uagb/faq-child',
+			'uagb/icon-list-child',
+			'uagb/social-share-child',
+			'uagb/restaurant-menu-child',
+			'uagb/slider-child',
+		];
 
-			const excludeDeprecatedBlocks = ['uagb/cf7-styler','uagb/wp-search', 'uagb/gf-styler', 'uagb/columns', 'uagb/section'];
+		const excludeDeprecatedBlocks = [
+			'uagb/cf7-styler',
+			'uagb/wp-search',
+			'uagb/gf-styler',
+			'uagb/columns',
+			'uagb/section',
+		];
 
-			if( isSelected && ! excludeBlocks.includes( name ) ) {
-				return (
-					<>
-					{ 'enabled' === enableConditions &&
-					<UAGAdvancedPanelBody
-						title={ __(
-							'Display Conditions',
-							'ultimate-addons-for-gutenberg'
-						) }
-						initialOpen={ true }
-						className="block-editor-block-inspector__advanced uagb-extention-tab"
-					>
-						{ UserConditionOptions( props ) }
-						<p className="components-base-control__help">
-							{ __(
-								"Above setting will only take effect once you are on the live page, and not while you're editing.",
+		if ( isSelected && ! excludeBlocks.includes( name ) ) {
+			return (
+				<>
+					{ 'enabled' === enableConditions && (
+						<UAGAdvancedPanelBody
+							title={ __(
+								'Display Conditions',
 								'ultimate-addons-for-gutenberg'
 							) }
-						</p>
-					</UAGAdvancedPanelBody>
-					}
-					{ 'enabled' === enableResponsiveConditions &&
+							initialOpen={ true }
+							className="block-editor-block-inspector__advanced uagb-extention-tab"
+						>
+							{ UserConditionOptions( props ) }
+							<p className="components-base-control__help">
+								{ __(
+									"Above setting will only take effect once you are on the live page, and not while you're editing.",
+									'ultimate-addons-for-gutenberg'
+								) }
+							</p>
+						</UAGAdvancedPanelBody>
+					) }
+					{ 'enabled' === enableResponsiveConditions && (
 						<UAGAdvancedPanelBody
 							title={ __(
 								'Responsive Conditions',
@@ -359,7 +393,7 @@ function ApplyExtraClass( extraProps, blockType, attributes ) {
 							initialOpen={ false }
 							className="block-editor-block-inspector__advanced uagb-extention-tab"
 						>
-						{ ResponsiveConditionOptions( props ) }
+							{ ResponsiveConditionOptions( props ) }
 							<p className="components-base-control__help">
 								{ __(
 									"Above setting will only take effect once you are on the live page, and not while you're editing.",
@@ -367,8 +401,8 @@ function ApplyExtraClass( extraProps, blockType, attributes ) {
 								) }
 							</p>
 						</UAGAdvancedPanelBody>
-					}
-					{ ! excludeDeprecatedBlocks.includes( name ) &&
+					) }
+					{ ! excludeDeprecatedBlocks.includes( name ) && (
 						<UAGAdvancedPanelBody
 							title={ __(
 								'Z-Index',
@@ -379,16 +413,15 @@ function ApplyExtraClass( extraProps, blockType, attributes ) {
 						>
 							{ zIndexOptions( props ) }
 						</UAGAdvancedPanelBody>
-					}
-					</>
-				);
-			}
+					) }
+				</>
+			);
 		}
-	);
+	}
+);
 
-	addFilter(
-		'blocks.getSaveContent.extraProps',
-		'uagb/apply-extra-class',
-		ApplyExtraClass
-	);
-
+addFilter(
+	'blocks.getSaveContent.extraProps',
+	'uagb/apply-extra-class',
+	ApplyExtraClass
+);

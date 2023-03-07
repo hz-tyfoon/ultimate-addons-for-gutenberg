@@ -32,7 +32,7 @@ registerBlockType( 'uagb/advanced-heading', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	category: uagb_blocks_info.category,
 	attributes,
@@ -54,7 +54,9 @@ registerBlockType( 'uagb/advanced-heading', {
 						headingTitle: attribute.content,
 						headingAlign: attribute.textAlign,
 						headingColor: colourNameToHex( attribute.textColor ),
-						blockBackground: colourNameToHex( attribute.backgroundColor ),
+						blockBackground: colourNameToHex(
+							attribute.backgroundColor
+						),
 					} );
 				},
 			},
@@ -67,7 +69,9 @@ registerBlockType( 'uagb/advanced-heading', {
 						headingDesc: attribute.citation,
 						headingAlign: attribute.align,
 						headingColor: colourNameToHex( attribute.textColor ),
-						blockBackground: colourNameToHex( attribute.backgroundColor ),
+						blockBackground: colourNameToHex(
+							attribute.backgroundColor
+						),
 					} );
 				},
 			},
@@ -79,7 +83,9 @@ registerBlockType( 'uagb/advanced-heading', {
 						headingTitle: attribute.content,
 						headingAlign: attribute.align,
 						headingColor: colourNameToHex( attribute.textColor ),
-						blockBackground: colourNameToHex( attribute.backgroundColor ),
+						blockBackground: colourNameToHex(
+							attribute.backgroundColor
+						),
 					} );
 				},
 			},
@@ -90,15 +96,19 @@ registerBlockType( 'uagb/advanced-heading', {
 					const newitems = [];
 					childBlocks.forEach( ( item, i ) => {
 						newitems.push( {
-							text: childBlocks[i].attributes.content
-						} )
+							text: childBlocks[ i ].attributes.content,
+						} );
 					} );
 
 					return newitems.map( ( text ) =>
 						createBlock( 'uagb/advanced-heading', {
 							headingTitle: text.text,
-							headingColor: colourNameToHex( _attributes.textColor ),
-							blockBackground: colourNameToHex( _attributes.backgroundColor )
+							headingColor: colourNameToHex(
+								_attributes.textColor
+							),
+							blockBackground: colourNameToHex(
+								_attributes.backgroundColor
+							),
 						} )
 					);
 				},

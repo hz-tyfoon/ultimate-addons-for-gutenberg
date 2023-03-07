@@ -4,7 +4,6 @@
 
 import { useEffect } from '@wordpress/element';
 
-
 import Settings from './settings';
 import Render from './render';
 

@@ -20,7 +20,7 @@ export default function save( props ) {
 				id="hidden"
 				className="uagb-forms-hidden-input"
 				value={ hidden_field_value }
-				name = { hidden_field_name }
+				name={ hidden_field_name }
 			/>
 		</div>
 	);

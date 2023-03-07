@@ -8,7 +8,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -24,9 +23,7 @@ function styling( props ) {
 		boxShadowSpread,
 		boxShadowPosition,
 
-
 		inputBorderHColor,
-
 
 		buttonBgColor,
 		buttonBgHoverColor,
@@ -85,10 +82,26 @@ function styling( props ) {
 		buttonFontStyle,
 	} = props.attributes;
 
-	const inputSizeFallback = getFallbackNumber( inputSize, 'inputSize', blockName );
-	const buttonWidthFallback = getFallbackNumber( buttonWidth, 'buttonWidth', blockName );
-	const buttonIconSizeFallback = getFallbackNumber( buttonIconSize, 'buttonIconSize', blockName );
-	const iconSizeFallback = getFallbackNumber( iconSize, 'iconSize', blockName );
+	const inputSizeFallback = getFallbackNumber(
+		inputSize,
+		'inputSize',
+		blockName
+	);
+	const buttonWidthFallback = getFallbackNumber(
+		buttonWidth,
+		'buttonWidth',
+		blockName
+	);
+	const buttonIconSizeFallback = getFallbackNumber(
+		buttonIconSize,
+		'buttonIconSize',
+		blockName
+	);
+	const iconSizeFallback = getFallbackNumber(
+		iconSize,
+		'iconSize',
+		blockName
+	);
 
 	let boxShadowPositionCSS = boxShadowPosition;
 
@@ -106,9 +119,17 @@ function styling( props ) {
 		buttonIconSizeType
 	);
 
-	const inputBorderCSS = generateBorderCSS( props.attributes, 'input' )
-	const inputBorderCSSTablet = generateBorderCSS( props.attributes, 'input', 'tablet' )
-	const inputBorderCSSMobile = generateBorderCSS( props.attributes, 'input', 'mobile' )
+	const inputBorderCSS = generateBorderCSS( props.attributes, 'input' );
+	const inputBorderCSSTablet = generateBorderCSS(
+		props.attributes,
+		'input',
+		'tablet'
+	);
+	const inputBorderCSSMobile = generateBorderCSS(
+		props.attributes,
+		'input',
+		'mobile'
+	);
 
 	const inputCSS = {
 		'color': textColor,
@@ -116,7 +137,7 @@ function styling( props ) {
 		'font-size': generateCSSUnit( inputFontSize, inputFontSizeType ),
 		'line-height': generateCSSUnit( inputLineHeight, inputLineHeightType ),
 		'font-family': inputFontFamily,
-		'font-style' : inputFontStyle,
+		'font-style': inputFontStyle,
 		'font-weight': inputFontWeight,
 		'text-decoration': inputDecoration,
 		'text-transform': inputTransform,
@@ -165,7 +186,7 @@ function styling( props ) {
 	if ( 'undefined' !== typeof iconColor && '' !== iconColor ) {
 		tmpIconColor = iconColor;
 	}
-	
+
 	boxCSS.width = generateCSSUnit( inputSizeFallback, inputSizeType );
 
 	selectors = {
@@ -178,31 +199,38 @@ function styling( props ) {
 			'color': textColor,
 			'opacity': 0.6,
 		},
-		' .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-icon-wrap svg': {
-			'width': $buttonIconSize,
-			'height': $buttonIconSize,
-			'font-size': $buttonIconSize,
-			'fill': buttonIconColor,
-		},
-		' .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-text': {
-			'font-size': generateCSSUnit( buttonFontSize, buttonFontSizeType ),
-			'line-height': generateCSSUnit(
-				buttonLineHeight,
-				buttonLineHeightType
-			),
-			'font-family': buttonFontFamily,
-			'font-style' : buttonFontStyle,
-			'font-weight': buttonFontWeight,
-			'text-decoration': buttonDecoration,
-			'text-transform': buttonTransform,
-			'color': buttonTextColor,
-		},
-		' .uagb-search-form__container .uagb-search-submit:hover .uagb-wp-search-button-text': {
-			'color': buttonTextHoverColor,
-		},
-		' .uagb-search-form__container .uagb-search-submit:hover .uagb-wp-search-button-icon-wrap svg': {
-			'fill': buttonIconHoverColor,
-		},
+		' .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-icon-wrap svg':
+			{
+				'width': $buttonIconSize,
+				'height': $buttonIconSize,
+				'font-size': $buttonIconSize,
+				'fill': buttonIconColor,
+			},
+		' .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-text':
+			{
+				'font-size': generateCSSUnit(
+					buttonFontSize,
+					buttonFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					buttonLineHeight,
+					buttonLineHeightType
+				),
+				'font-family': buttonFontFamily,
+				'font-style': buttonFontStyle,
+				'font-weight': buttonFontWeight,
+				'text-decoration': buttonDecoration,
+				'text-transform': buttonTransform,
+				'color': buttonTextColor,
+			},
+		' .uagb-search-form__container .uagb-search-submit:hover .uagb-wp-search-button-text':
+			{
+				'color': buttonTextHoverColor,
+			},
+		' .uagb-search-form__container .uagb-search-submit:hover .uagb-wp-search-button-icon-wrap svg':
+			{
+				'fill': buttonIconHoverColor,
+			},
 		'.uagb-layout-input .uagb-wp-search-icon-wrap svg': {
 			'width': $iconSize,
 			'height': $iconSize,
@@ -212,13 +240,11 @@ function styling( props ) {
 	};
 
 	if ( 'input-button' === layout || 'input' === layout ) {
-		selectors[
-			' .uagb-search-form__container .uagb-search-form__input'
-		] = inputCSS;
+		selectors[ ' .uagb-search-form__container .uagb-search-form__input' ] =
+			inputCSS;
 
-		selectors[
-			' .uagb-search-wrapper .uagb-search-form__container'
-		] = boxCSS;
+		selectors[ ' .uagb-search-wrapper .uagb-search-form__container' ] =
+			boxCSS;
 		selectors[
 			' .uagb-search-wrapper .uagb-search-form__container:hover'
 		] = {
@@ -241,23 +267,22 @@ function styling( props ) {
 			};
 		}
 
-		selectors[
-			' .uagb-search-form__container .uagb-wp-search-icon-wrap'
-		] = {
-			'background-color': inputBgColor,
-			'padding-top': generateCSSUnit(
-				paddingInputTop,
-				inputPaddingTypeDesktop
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingInputBottom,
-				inputPaddingTypeDesktop
-			),
-			'padding-left': generateCSSUnit(
-				paddingInputLeft,
-				inputPaddingTypeDesktop
-			),
-		};
+		selectors[ ' .uagb-search-form__container .uagb-wp-search-icon-wrap' ] =
+			{
+				'background-color': inputBgColor,
+				'padding-top': generateCSSUnit(
+					paddingInputTop,
+					inputPaddingTypeDesktop
+				),
+				'padding-bottom': generateCSSUnit(
+					paddingInputBottom,
+					inputPaddingTypeDesktop
+				),
+				'padding-left': generateCSSUnit(
+					paddingInputLeft,
+					inputPaddingTypeDesktop
+				),
+			};
 	}
 
 	selectors[
@@ -272,33 +297,35 @@ function styling( props ) {
 	};
 
 	mobileSelectors = {
-		' .uagb-search-wrapper .uagb-search-form__container': inputBorderCSSMobile,
-		' .uagb-search-wrapper .uagb-search-form__container .uagb-search-form__input': {
-			'font-size': generateCSSUnit(
-				inputFontSizeMobile,
-				inputFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				inputLineHeightMobile,
-				inputLineHeightType
-			),
-			'padding-top': generateCSSUnit(
-				paddingInputTopMobile,
-				mobilePaddingInputUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingInputBottomMobile,
-				mobilePaddingInputUnit
-			),
-			'padding-right': generateCSSUnit(
-				paddingInputRightMobile,
-				mobilePaddingInputUnit
-			),
-			'padding-left': generateCSSUnit(
-				paddingInputLeftMobile,
-				mobilePaddingInputUnit
-			),
-		},
+		' .uagb-search-wrapper .uagb-search-form__container':
+			inputBorderCSSMobile,
+		' .uagb-search-wrapper .uagb-search-form__container .uagb-search-form__input':
+			{
+				'font-size': generateCSSUnit(
+					inputFontSizeMobile,
+					inputFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					inputLineHeightMobile,
+					inputLineHeightType
+				),
+				'padding-top': generateCSSUnit(
+					paddingInputTopMobile,
+					mobilePaddingInputUnit
+				),
+				'padding-bottom': generateCSSUnit(
+					paddingInputBottomMobile,
+					mobilePaddingInputUnit
+				),
+				'padding-right': generateCSSUnit(
+					paddingInputRightMobile,
+					mobilePaddingInputUnit
+				),
+				'padding-left': generateCSSUnit(
+					paddingInputLeftMobile,
+					mobilePaddingInputUnit
+				),
+			},
 		' .uagb-search-form__container .uagb-wp-search-icon-wrap': {
 			'padding-top': generateCSSUnit(
 				paddingInputTopMobile,
@@ -313,46 +340,49 @@ function styling( props ) {
 				mobilePaddingInputUnit
 			),
 		},
-		' .uagb-search-wrapper .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-text': {
-			'font-size': generateCSSUnit(
-				buttonFontSizeMobile,
-				buttonFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				buttonLineHeightMobile,
-				buttonLineHeightType
-			),
-		},
+		' .uagb-search-wrapper .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-text':
+			{
+				'font-size': generateCSSUnit(
+					buttonFontSizeMobile,
+					buttonFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					buttonLineHeightMobile,
+					buttonLineHeightType
+				),
+			},
 	};
 
 	tabletSelectors = {
-		' .uagb-search-wrapper .uagb-search-form__container': inputBorderCSSTablet,
-		' .uagb-search-wrapper .uagb-search-form__container .uagb-search-form__input': {
-			'font-size': generateCSSUnit(
-				inputFontSizeTablet,
-				inputFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				inputLineHeightTablet,
-				inputLineHeightType
-			),
-			'padding-top': generateCSSUnit(
-				paddingInputTopTablet,
-				tabletPaddingInputUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingInputBottomTablet,
-				tabletPaddingInputUnit
-			),
-			'padding-right': generateCSSUnit(
-				paddingInputRightTablet,
-				tabletPaddingInputUnit
-			),
-			'padding-left': generateCSSUnit(
-				paddingInputLeftTablet,
-				tabletPaddingInputUnit
-			),
-		},
+		' .uagb-search-wrapper .uagb-search-form__container':
+			inputBorderCSSTablet,
+		' .uagb-search-wrapper .uagb-search-form__container .uagb-search-form__input':
+			{
+				'font-size': generateCSSUnit(
+					inputFontSizeTablet,
+					inputFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					inputLineHeightTablet,
+					inputLineHeightType
+				),
+				'padding-top': generateCSSUnit(
+					paddingInputTopTablet,
+					tabletPaddingInputUnit
+				),
+				'padding-bottom': generateCSSUnit(
+					paddingInputBottomTablet,
+					tabletPaddingInputUnit
+				),
+				'padding-right': generateCSSUnit(
+					paddingInputRightTablet,
+					tabletPaddingInputUnit
+				),
+				'padding-left': generateCSSUnit(
+					paddingInputLeftTablet,
+					tabletPaddingInputUnit
+				),
+			},
 		' .uagb-search-form__container .uagb-wp-search-icon-wrap': {
 			'padding-top': generateCSSUnit(
 				paddingInputTopTablet,
@@ -367,16 +397,17 @@ function styling( props ) {
 				tabletPaddingInputUnit
 			),
 		},
-		' .uagb-search-wrapper .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-text': {
-			'font-size': generateCSSUnit(
-				buttonFontSizeTablet,
-				buttonFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				buttonLineHeightTablet,
-				buttonLineHeightType
-			),
-		},
+		' .uagb-search-wrapper .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-text':
+			{
+				'font-size': generateCSSUnit(
+					buttonFontSizeTablet,
+					buttonFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					buttonLineHeightTablet,
+					buttonLineHeightType
+				),
+			},
 	};
 	let stylingCss = '';
 	const id = `.uagb-block-${ block_id }`;

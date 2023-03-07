@@ -36,7 +36,7 @@ const Render = ( props ) => {
 	let imageIconHtml = '';
 
 	if ( noticeDismiss ) {
-		imageIconHtml = ( renderSVG( icon, setAttributes ) );
+		imageIconHtml = renderSVG( icon, setAttributes );
 	}
 
 	return (

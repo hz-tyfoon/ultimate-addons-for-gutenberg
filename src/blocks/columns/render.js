@@ -4,14 +4,13 @@
 
 import classnames from 'classnames';
 import shapes from './shapes';
-import { useMemo,memo } from '@wordpress/element';
+import { useMemo, memo } from '@wordpress/element';
 
 import { useDeviceType } from '@Controls/getPreviewType';
 const ALLOWED_BLOCKS = [ 'uagb/column' ];
 import { InnerBlocks } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
-
 	const { attributes, isSelected, className } = props.parentProps;
 	const deviceType = useDeviceType();
 	const {
@@ -89,11 +88,15 @@ const Render = ( props ) => {
 
 	const active = isSelected ? 'active' : 'not-active';
 
-	const bgType = ( undefined !== backgroundType ) ? `uagb-columns__background-${ backgroundType }` : '';
+	const bgType =
+		undefined !== backgroundType
+			? `uagb-columns__background-${ backgroundType }`
+			: '';
 
-	const verticalAlign = ( undefined !== vAlign ) ? `uagb-columns__valign-${ vAlign }` : '';
+	const verticalAlign =
+		undefined !== vAlign ? `uagb-columns__valign-${ vAlign }` : '';
 
-	const alignType = ( undefined !== align ) ? `align${ align }` : '';
+	const alignType = undefined !== align ? `align${ align }` : '';
 
 	return (
 		<CustomTag
@@ -110,7 +113,7 @@ const Render = ( props ) => {
 				reverseTabletClass,
 				reverseMobileClass,
 				`uagb-block-${ props.parentProps.clientId.substr( 0, 8 ) }`,
-				`uagb-columns__max_width-${ contentWidth }`,
+				`uagb-columns__max_width-${ contentWidth }`
 			) }
 		>
 			<div className="uagb-columns__overlay"></div>

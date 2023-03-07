@@ -19,7 +19,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/call-to-action', {
 	title: __( 'Call To Action', 'ultimate-addons-for-gutenberg' ),
-	description:__( 'Add a button along with heading and description.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add a button along with heading and description.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.call_to_action,
 	keywords: [
 		__( 'cta', 'ultimate-addons-for-gutenberg' ),
@@ -41,7 +44,7 @@ registerBlockType( 'uagb/call-to-action', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	deprecated,
 } );

@@ -24,7 +24,15 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	const { state, setState, togglePreview, categoriesList, latestPosts, replaceInnerBlocks, block } = props;
+	const {
+		state,
+		setState,
+		togglePreview,
+		categoriesList,
+		latestPosts,
+		replaceInnerBlocks,
+		block,
+	} = props;
 
 	props = props.parentProps;
 
@@ -47,7 +55,8 @@ const Render = ( props ) => {
 
 		const onReset = () => {
 			const newBlocks = [];
-			DEFAULT_POST_LIST_LAYOUT.map( ( [ name, attribute ] ) => { // eslint-disable-line no-shadow
+			// eslint-disable-next-line no-shadow
+			DEFAULT_POST_LIST_LAYOUT.map( ( [ name, attribute ] ) => {
 				newBlocks.push( createBlock( name, attribute ) );
 				return true;
 			} );
@@ -117,9 +126,8 @@ const Render = ( props ) => {
 			categoriesList={ categoriesList }
 			deviceType={ deviceType }
 			name={ name }
-			setAttributes = { setAttributes }
+			setAttributes={ setAttributes }
 		/>
-
 	);
 
 	return <>{ state.isEditing ? renderEditMode() : renderViewMode }</>;

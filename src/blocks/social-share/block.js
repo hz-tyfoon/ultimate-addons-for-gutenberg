@@ -15,7 +15,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/social-share', {
 	title: __( 'Social Share', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Share your content on different social media platforms .', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Share your content on different social media platforms .',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.social_share,
 	category: uagb_blocks_info.category,
 	keywords: [
@@ -29,15 +32,15 @@ registerBlockType( 'uagb/social-share', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	attributes,
 	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="social-share" />
-			) : (
-				<Edit { ...props } />
-			),
+		props.attributes.isPreview ? (
+			<PreviewImage image="social-share" />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 	transform,
 	deprecated,

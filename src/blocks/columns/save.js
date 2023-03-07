@@ -28,7 +28,7 @@ export default function save( props ) {
 		reverseMobile,
 		topContentAboveShape,
 		bottomContentAboveShape,
-		contentWidth
+		contentWidth,
 	} = attributes;
 
 	const CustomTag = `${ tag }`;
@@ -74,11 +74,15 @@ export default function save( props ) {
 		? 'uagb-columns__reverse-mobile'
 		: '';
 
-	const bgType = ( undefined !== backgroundType ) ? `uagb-columns__background-${ backgroundType }` : '';
+	const bgType =
+		undefined !== backgroundType
+			? `uagb-columns__background-${ backgroundType }`
+			: '';
 
-	const verticalAlign = ( undefined !== vAlign ) ? `uagb-columns__valign-${ vAlign }` : '';
+	const verticalAlign =
+		undefined !== vAlign ? `uagb-columns__valign-${ vAlign }` : '';
 
-	const alignType = ( undefined !== align ) ? `align${ align }` : '';
+	const alignType = undefined !== align ? `align${ align }` : '';
 
 	return (
 		<CustomTag
@@ -94,7 +98,7 @@ export default function save( props ) {
 				reverseMobileClass,
 				`uagb-block-${ block_id }`,
 				`uagb-columns__columns-${ columns }`,
-				`uagb-columns__max_width-${ contentWidth }`,
+				`uagb-columns__max_width-${ contentWidth }`
 			) }
 		>
 			<div className="uagb-columns__overlay"></div>

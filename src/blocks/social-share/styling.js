@@ -7,7 +7,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -38,7 +37,9 @@ function styling( props ) {
 	const gapFallback = getFallbackNumber( gap, 'gap', blockName );
 
 	const gapTabletFallback = isNaN( gapTablet ) ? gapFallback : gapTablet;
-	const gapMobileTabletFallback = isNaN( gapMobile ) ? gapTabletFallback : gapMobile;
+	const gapMobileTabletFallback = isNaN( gapMobile )
+		? gapTabletFallback
+		: gapMobile;
 
 	const selectors = {
 		' a.uagb-ss__link': {
@@ -69,16 +70,18 @@ function styling( props ) {
 		'margin-right': 0,
 		'margin-bottom': generateCSSUnit( gapFallback, 'px' ),
 	};
-	tabletSelectors[ '.uagb-social-share__layout-vertical .uagb-ss__wrapper' ] = {
-		'margin-left': 0,
-		'margin-right': 0,
-		'margin-bottom': generateCSSUnit( gapTablet, 'px' ),
-	};
-	mobileSelectors[ '.uagb-social-share__layout-vertical .uagb-ss__wrapper' ] = {
-		'margin-left': 0,
-		'margin-right': 0,
-		'margin-bottom': generateCSSUnit( gapMobile, 'px' ),
-	};
+	tabletSelectors[ '.uagb-social-share__layout-vertical .uagb-ss__wrapper' ] =
+		{
+			'margin-left': 0,
+			'margin-right': 0,
+			'margin-bottom': generateCSSUnit( gapTablet, 'px' ),
+		};
+	mobileSelectors[ '.uagb-social-share__layout-vertical .uagb-ss__wrapper' ] =
+		{
+			'margin-left': 0,
+			'margin-right': 0,
+			'margin-bottom': generateCSSUnit( gapMobile, 'px' ),
+		};
 
 	selectors[
 		'.uagb-social-share__layout-vertical.uagb-social-share__outer-wrap'
@@ -92,11 +95,15 @@ function styling( props ) {
 		'margin-right': generateCSSUnit( gapFallback / 2, 'px' ),
 	};
 
-	tabletSelectors[ '.uagb-social-share__layout-horizontal .uagb-ss__wrapper' ] = {
+	tabletSelectors[
+		'.uagb-social-share__layout-horizontal .uagb-ss__wrapper'
+	] = {
 		'margin-left': generateCSSUnit( gapTabletFallback / 2, 'px' ),
 		'margin-right': generateCSSUnit( gapTabletFallback / 2, 'px' ),
 	};
-	mobileSelectors[ '.uagb-social-share__layout-horizontal .uagb-ss__wrapper' ] = {
+	mobileSelectors[
+		'.uagb-social-share__layout-horizontal .uagb-ss__wrapper'
+	] = {
 		'margin-left': generateCSSUnit( gapMobileTabletFallback / 2, 'px' ),
 		'margin-right': generateCSSUnit( gapMobileTabletFallback / 2, 'px' ),
 	};
@@ -131,9 +138,9 @@ function styling( props ) {
 	};
 
 	function getFlexAlignment( textalign ) {
-		if ( textalign === 'left' ){
+		if ( textalign === 'left' ) {
 			return 'flex-start';
-		} else if( textalign === 'right' ){
+		} else if ( textalign === 'right' ) {
 			return 'flex-end';
 		}
 		return 'center';
@@ -146,7 +153,9 @@ function styling( props ) {
 	selectors[ '.uagb-social-share__outer-wrap .block-editor-inner-blocks' ] = {
 		'text-align': align,
 	};
-	selectors[ '.uagb-social-share__outer-wrap .block-editor-inner-blocks .block-editor-block-list__layout' ] = {
+	selectors[
+		'.uagb-social-share__outer-wrap .block-editor-inner-blocks .block-editor-block-list__layout'
+	] = {
 		'justify-content': alignment,
 		'-webkit-box-pack': alignment,
 		'-ms-flex-pack': alignment,
@@ -154,7 +163,9 @@ function styling( props ) {
 		'-ms-flex-align': alignment,
 		'align-items': alignment,
 	};
-	tabletSelectors[ '.uagb-social-share__outer-wrap .block-editor-inner-blocks .block-editor-block-list__layout' ] = {
+	tabletSelectors[
+		'.uagb-social-share__outer-wrap .block-editor-inner-blocks .block-editor-block-list__layout'
+	] = {
 		'justify-content': alignmentTablet,
 		'-webkit-box-pack': alignmentTablet,
 		'-ms-flex-pack': alignmentTablet,
@@ -162,7 +173,9 @@ function styling( props ) {
 		'-ms-flex-align': alignmentTablet,
 		'align-items': alignmentTablet,
 	};
-	mobileSelectors[ '.uagb-social-share__outer-wrap .block-editor-inner-blocks .block-editor-block-list__layout' ] = {
+	mobileSelectors[
+		'.uagb-social-share__outer-wrap .block-editor-inner-blocks .block-editor-block-list__layout'
+	] = {
 		'justify-content': alignmentMobile,
 		'-webkit-box-pack': alignmentMobile,
 		'-ms-flex-pack': alignmentMobile,
@@ -171,9 +184,7 @@ function styling( props ) {
 		'align-items': alignmentMobile,
 	};
 
-	selectors[
-		'.uagb-social-share__outer-wrap'
-	] = {
+	selectors[ '.uagb-social-share__outer-wrap' ] = {
 		'justify-content': alignment,
 		'-webkit-box-pack': alignment,
 		'-ms-flex-pack': alignment,
@@ -182,9 +193,7 @@ function styling( props ) {
 		'align-items': alignment,
 	};
 
-	tabletSelectors[
-		'.uagb-social-share__outer-wrap'
-	] = {
+	tabletSelectors[ '.uagb-social-share__outer-wrap' ] = {
 		'justify-content': alignmentTablet,
 		'-webkit-box-pack': alignmentTablet,
 		'-ms-flex-pack': alignmentTablet,
@@ -193,9 +202,7 @@ function styling( props ) {
 		'align-items': alignmentTablet,
 	};
 
-	mobileSelectors[
-		'.uagb-social-share__outer-wrap'
-	] = {
+	mobileSelectors[ '.uagb-social-share__outer-wrap' ] = {
 		'justify-content': alignmentMobile,
 		'-webkit-box-pack': alignmentMobile,
 		'-ms-flex-pack': alignmentMobile,
@@ -217,21 +224,18 @@ function styling( props ) {
 				'margin-right': 0,
 				'margin-bottom': generateCSSUnit( gapFallback, 'px' ),
 				'background': iconBgColor,
-
 			};
 			tabletSelectors[ ' .uagb-ss__wrapper' ] = {
 				'margin-left': 0,
 				'margin-right': 0,
 				'margin-bottom': generateCSSUnit( gapTablet, 'px' ),
 				'background': iconBgColor,
-
 			};
 			mobileSelectors[ ' .uagb-ss__wrapper' ] = {
 				'margin-left': 0,
 				'margin-right': 0,
 				'margin-bottom': generateCSSUnit( gapMobile, 'px' ),
 				'background': iconBgColor,
-
 			};
 
 			selectors[ '.uagb-social-share__outer-wrap' ] = {
@@ -322,7 +326,6 @@ function styling( props ) {
 				'margin-right': 0,
 				'margin-bottom': generateCSSUnit( gapMobile, 'px' ),
 				'background': iconBgColor,
-
 			};
 
 			mobileSelectors[

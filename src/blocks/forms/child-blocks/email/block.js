@@ -13,7 +13,10 @@ import PreviewImage from '@Controls/previewImage';
 
 registerBlockType( 'uagb/forms-email', {
 	title: __( 'Email', 'ultimate-addons-for-gutenberg' ),
-	description: __( 'Add an email address field in your form.', 'ultimate-addons-for-gutenberg' ),
+	description: __(
+		'Add an email address field in your form.',
+		'ultimate-addons-for-gutenberg'
+	),
 	icon: UAGB_Block_Icons.email,
 	category: uagb_blocks_info.category,
 	parent: [ 'uagb/forms' ],
@@ -30,7 +33,7 @@ registerBlockType( 'uagb/forms-email', {
 	example: {
 		attributes: {
 			isPreview: true,
-		}
+		},
 	},
 	save,
 	deprecated,

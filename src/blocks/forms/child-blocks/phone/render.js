@@ -21,7 +21,14 @@ const Render = ( props ) => {
 
 	const { attributes, setAttributes } = props;
 
-	const { block_id, phoneRequired, phoneName, pattern, selectPhoneCode, autocomplete } = attributes;
+	const {
+		block_id,
+		phoneRequired,
+		phoneName,
+		pattern,
+		selectPhoneCode,
+		autocomplete,
+	} = attributes;
 
 	let phone_html = '';
 
@@ -30,7 +37,7 @@ const Render = ( props ) => {
 		placeholder = __( '123-45-678', 'ultimate-addons-for-gutenberg' );
 	} else if ( pattern === '[0-9]{3}-?[0-9]{3}-?[0-9]{4}' ) {
 		placeholder = __( '123-456-7890', 'ultimate-addons-for-gutenberg' );
-	} else if ( pattern === '[0-9]{3}\s?[0-9]{3}\s?[0-9]{4}' ) {
+	} else if ( pattern === '[0-9]{3}s?[0-9]{3}s?[0-9]{4}' ) {
 		placeholder = __( '123 456 7890', 'ultimate-addons-for-gutenberg' );
 	}
 
@@ -59,9 +66,13 @@ const Render = ( props ) => {
 	}
 	const contryCode = [];
 
-	countryOptions.map( ( o, index ) => ( // eslint-disable-line no-unused-vars
-		contryCode.push( { value:  o.props.value, label:  o.props.children } )
-	) )
+	countryOptions.map(
+		(
+			o,
+			index // eslint-disable-line no-unused-vars
+		) =>
+			contryCode.push( { value: o.props.value, label: o.props.children } )
+	);
 
 	const isRequired = phoneRequired
 		? __( 'required', 'ultimate-addons-for-gutenberg' )
@@ -92,7 +103,9 @@ const Render = ( props ) => {
 				/>
 				<div className="uagb-forms-phone-flex">
 					<SelectControl
-						className= { 'uagb-forms-input uagb-form-phone-country uagb-form-phone-country-editor' }
+						className={
+							'uagb-forms-input uagb-form-phone-country uagb-form-phone-country-editor'
+						}
 						options={ contryCode }
 						value={ selectPhoneCode }
 						onChange={ ( value ) =>

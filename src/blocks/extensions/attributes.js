@@ -1,11 +1,9 @@
 const { enableMasonryGallery } = uagb_blocks_info;
 
 function addAttributes( settings ) {
-
 	const excludeBlock = uagb_blocks_info.uagb_exclude_blocks_from_extension;
 
 	if ( ! excludeBlock.includes( settings.name ) ) {
-
 		if ( settings.attributes ) {
 			settings.attributes = Object.assign( settings.attributes, {
 				UAGUserRole: {
@@ -42,7 +40,7 @@ function addAttributes( settings ) {
 				},
 				UAGDay: {
 					type: 'array',
-					default: []
+					default: [],
 				},
 				zIndex: {
 					type: 'number',

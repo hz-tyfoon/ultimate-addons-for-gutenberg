@@ -53,8 +53,8 @@ const deprecated = [
 					</div>
 				</div>
 			);
-		}
-	}
+		},
+	},
 ];
 
 export default deprecated;

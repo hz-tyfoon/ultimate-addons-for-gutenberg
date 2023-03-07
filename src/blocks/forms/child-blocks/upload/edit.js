@@ -4,14 +4,13 @@
 
 import { useEffect } from '@wordpress/element';
 
-
 import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsUploadEdit = ( props ) => {
-		const { setAttributes, isSelected, clientId } = props;
+	const { setAttributes, isSelected, clientId } = props;
 
-		useEffect( () => {
+	useEffect( () => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 

@@ -1,5 +1,5 @@
 import { applyFilters } from '@wordpress/hooks';
-import { useRef, useEffect  } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 import { select } from '@wordpress/data';
 
@@ -18,45 +18,66 @@ const InspectorTab = ( props ) => {
 	};
 
 	useEffect( () => {
-
-
-		const uagSettingState = getUAGEditorStateLocalStorage( 'uagSettingState' );
+		const uagSettingState =
+			getUAGEditorStateLocalStorage( 'uagSettingState' );
 
 		if ( uagSettingState ) {
-			const inspectorTabName = uagSettingState[blockName]?.selectedTab;
-			const panelBodyClass = uagSettingState[blockName]?.selectedPanel;
-			const settingsPopup = uagSettingState[blockName]?.selectedSetting;
-			const selectedInnerTab = uagSettingState[blockName]?.selectedInnerTab;
+			const inspectorTabName = uagSettingState[ blockName ]?.selectedTab;
+			const panelBodyClass = uagSettingState[ blockName ]?.selectedPanel;
+			const settingsPopup = uagSettingState[ blockName ]?.selectedSetting;
+			const selectedInnerTab =
+				uagSettingState[ blockName ]?.selectedInnerTab;
 
 			// This code is to fix the side-effect of the editor responsive click settings panel refresh issue AND aldo for preserving state for better block editor experinence.
 			if ( inspectorTabName && type === inspectorTabName ) {
-				let panelToActivate = false
+				let panelToActivate = false;
 				if ( panelBodyClass ) {
-					panelToActivate = tabRef.current.querySelector( `.${panelBodyClass}` );
+					panelToActivate = tabRef.current.querySelector(
+						`.${ panelBodyClass }`
+					);
 				} else {
-					panelToActivate = tabRef.current.querySelector( '.is-opened' );
+					panelToActivate =
+						tabRef.current.querySelector( '.is-opened' );
 				}
 
 				if ( panelToActivate ) {
 					if ( ! panelToActivate.classList.contains( 'is-opened' ) ) {
-						panelToActivate.querySelector( '.components-button' ).click();
+						panelToActivate
+							.querySelector( '.components-button' )
+							.click();
 					}
 					if ( selectedInnerTab ) {
 						// Need a delay to open the popup as the makup load just after the above click function called.
-						setTimeout( function() {
-							const selectedInnerTabToActivate = panelToActivate.querySelector( selectedInnerTab );
-							if ( selectedInnerTabToActivate && ! selectedInnerTabToActivate.classList.contains( 'active-tab' ) ) {
+						setTimeout( function () {
+							const selectedInnerTabToActivate =
+								panelToActivate.querySelector(
+									selectedInnerTab
+								);
+							if (
+								selectedInnerTabToActivate &&
+								! selectedInnerTabToActivate.classList.contains(
+									'active-tab'
+								)
+							) {
 								selectedInnerTabToActivate.click();
 							}
 						}, 100 );
 					}
 					if ( settingsPopup ) {
 						// Need a delay to open the popup as the makup load just after the above click function called.
-						setTimeout( function() {
-							const settingsPopupToActivate = panelToActivate.querySelector( settingsPopup );
+						setTimeout( function () {
+							const settingsPopupToActivate =
+								panelToActivate.querySelector( settingsPopup );
 
-							if ( settingsPopupToActivate && ! settingsPopupToActivate.classList.contains( 'active' ) ) {
-								settingsPopupToActivate.querySelector( '.components-button' ).click();
+							if (
+								settingsPopupToActivate &&
+								! settingsPopupToActivate.classList.contains(
+									'active'
+								)
+							) {
+								settingsPopupToActivate
+									.querySelector( '.components-button' )
+									.click();
 							}
 						}, 100 );
 					}
@@ -66,8 +87,16 @@ const InspectorTab = ( props ) => {
 	}, [] );
 
 	const blockNameForHook = blockName.split( '/' ).pop();
-	const inspectorTabBefore = wp.hooks.applyFilters( `spectra.${blockNameForHook}.tab_${type}.before`, '', blockName );
-	const inspectorTabAfter = wp.hooks.applyFilters( `spectra.${blockNameForHook}.tab_${type}`, '', blockName );
+	const inspectorTabBefore = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.tab_${ type }.before`,
+		'',
+		blockName
+	);
+	const inspectorTabAfter = wp.hooks.applyFilters(
+		`spectra.${ blockNameForHook }.tab_${ type }`,
+		'',
+		blockName
+	);
 
 	return (
 		<div
@@ -75,16 +104,14 @@ const InspectorTab = ( props ) => {
 				display: isActive ? 'block' : 'none',
 			} }
 			className={ `uagb-inspector-tab uagb-tab-content-${ type }` }
-			ref={tabRef}
+			ref={ tabRef }
 		>
-			{inspectorTabBefore}
+			{ inspectorTabBefore }
 			{ Array.isArray( children )
 				? children.map( ( item ) => item )
 				: children }
 			{ tabContent() }
-			{
-				inspectorTabAfter
-			}
+			{ inspectorTabAfter }
 		</div>
 	);
 };
@@ -104,4 +131,4 @@ export const UAGTabs = {
 		key: 'advance',
 		type: 'advance',
 	},
-}
+};

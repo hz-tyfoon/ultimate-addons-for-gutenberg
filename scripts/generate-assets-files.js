@@ -29,9 +29,7 @@ sass.render(
 
 //Generate individual block's css files
 fs.readdir( paths.pluginSrc + '/blocks', function ( readError, items ) {
-
 	for ( const item of items ) {
-
 		sass.render(
 			{
 				file: paths.pluginSrc + '/blocks/' + item + '/style.scss',
@@ -40,9 +38,7 @@ fs.readdir( paths.pluginSrc + '/blocks', function ( readError, items ) {
 				sourceMap: false,
 			},
 			function ( error, result ) {
-
 				if ( result && ! error ) {
-
 					let file_name = item;
 
 					switch ( item ) {
@@ -90,9 +86,12 @@ const old_dest = paths.pluginDist + '/blocks.style.css';
 fs.copyFile( src, old_dest, ( error ) => {
 	// incase of any error
 	if ( error ) {
-		console.error( error ); // eslint-disable-line
+		// eslint-disable-next-line no-console
+		console.error( error );
 		return;
 	}
-
-	console.log( '\n\nStyle in deprecated file blocks.style.css - Copied Successfully!' ); // eslint-disable-line
+	// eslint-disable-next-line no-console
+	console.log(
+		'\n\nStyle in deprecated file blocks.style.css - Copied Successfully!'
+	);
 } );

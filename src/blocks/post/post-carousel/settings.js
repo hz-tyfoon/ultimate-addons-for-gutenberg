@@ -5,7 +5,6 @@ import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup } from '@wordpress/components';
 import { memo } from '@wordpress/element';
 
-
 const Settings = ( props ) => {
 	const { state, inspectorControls, togglePreview } = props;
 
@@ -111,17 +110,14 @@ const Settings = ( props ) => {
 	}
 
 	return (
-			<>
+		<>
 			{ inspectorControls }
-			<BlockControls>
-				{ getBlockControls() }
-			</BlockControls>
+			<BlockControls>{ getBlockControls() }</BlockControls>
 			{ loadTitleGoogleFonts }
 			{ loadMetaGoogleFonts }
 			{ loadExcerptGoogleFonts }
 			{ loadCtaGoogleFonts }
-			</>
-
+		</>
 	);
 };
 

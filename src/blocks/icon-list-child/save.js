@@ -9,7 +9,7 @@ import renderSVG from '@Controls/renderIcon';
 import { RichText } from '@wordpress/block-editor';
 
 export default function save( props ) {
-	const { attributes , className } = props;
+	const { attributes, className } = props;
 
 	const {
 		label,
@@ -23,24 +23,26 @@ export default function save( props ) {
 		hideLabel,
 		fromParentIcon,
 		imageSizeChild,
-		imgTagHeight
+		imgTagHeight,
 	} = attributes;
 
-	const defaultedAlt = ( image && image?.alt ) ? image?.alt : '';
+	const defaultedAlt = image && image?.alt ? image?.alt : '';
 
 	let imageIconHtml = '';
 
 	if ( image_icon === 'icon' ) {
-		if( icon || fromParentIcon ){
-			imageIconHtml = icon ? renderSVG( icon ) : renderSVG( fromParentIcon );
+		if ( icon || fromParentIcon ) {
+			imageIconHtml = icon
+				? renderSVG( icon )
+				: renderSVG( fromParentIcon );
 		}
 	} else if ( image && image.url && image_icon !== 'none' ) {
 		imageIconHtml = (
 			<img
 				className="uagb-icon-list__source-image"
 				src={ image.url }
-				width={imageSizeChild}
-				height={imgTagHeight}
+				width={ imageSizeChild }
+				height={ imgTagHeight }
 				loading="lazy"
 				alt={ defaultedAlt }
 			/>
@@ -51,29 +53,22 @@ export default function save( props ) {
 	const linkUrl = disableLink ? link : '/';
 
 	return (
-		<div
-			className={ classnames(
-				className,
-				`uagb-block-${ block_id }`
-			) }
-		>
+		<div className={ classnames( className, `uagb-block-${ block_id }` ) }>
 			{ disableLink && (
 				<a
 					target={ targetVal }
-					aria-label={ label.replace( /(<([^>]+)>)/ig, '' ) }
+					aria-label={ label.replace( /(<([^>]+)>)/gi, '' ) }
 					rel="noopener noreferrer"
 					href={ linkUrl }
 				>
 					{ ' ' }
 				</a>
 			) }
-			{
-				imageIconHtml && (
-					<span className="uagb-icon-list__source-wrap">
-						{ imageIconHtml }
-					</span>
-				)
-			}
+			{ imageIconHtml && (
+				<span className="uagb-icon-list__source-wrap">
+					{ imageIconHtml }
+				</span>
+			) }
 			{ ! hideLabel && '' !== label && (
 				<RichText.Content
 					tagName="span"

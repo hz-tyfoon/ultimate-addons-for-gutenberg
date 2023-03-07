@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { useLayoutEffect,memo } from '@wordpress/element';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
 import { SelectControl, Placeholder, Spinner } from '@wordpress/components';

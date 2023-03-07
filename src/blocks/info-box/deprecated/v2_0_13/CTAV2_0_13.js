@@ -28,21 +28,23 @@ const CTAV2_0_13 = ( props ) => {
 						className="uagb-infobox-cta-link"
 						rel={ rel }
 					>
-						{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
-							<RichText
-								tagName="span"
-								placeholder={ __(
-									'Read More',
-									'ultimate-addons-for-gutenberg'
-								) }
-								value={ attributes.ctaText }
-								className="uagb-inline-editing"
-								multiline={ false }
-								onChange={ ( value ) => {
-									setAttributes( { ctaText: value } );
-								} }
-							/>
-						{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
+						{ attributes.ctaIconPosition === 'before' &&
+							ctaIconOutput }
+						<RichText
+							tagName="span"
+							placeholder={ __(
+								'Read More',
+								'ultimate-addons-for-gutenberg'
+							) }
+							value={ attributes.ctaText }
+							className="uagb-inline-editing"
+							multiline={ false }
+							onChange={ ( value ) => {
+								setAttributes( { ctaText: value } );
+							} }
+						/>
+						{ attributes.ctaIconPosition === 'after' &&
+							ctaIconOutput }
 					</a>
 				) }
 
@@ -58,8 +60,8 @@ const CTAV2_0_13 = ( props ) => {
 							target={ target }
 							rel={ rel }
 						>
-
-							{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
+							{ attributes.ctaIconPosition === 'before' &&
+								ctaIconOutput }
 							<RichText
 								tagName="span"
 								placeholder={ __(
@@ -73,7 +75,8 @@ const CTAV2_0_13 = ( props ) => {
 									setAttributes( { ctaText: value } );
 								} }
 							/>
-							{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
+							{ attributes.ctaIconPosition === 'after' &&
+								ctaIconOutput }
 						</a>
 					</div>
 				) }
@@ -81,43 +84,47 @@ const CTAV2_0_13 = ( props ) => {
 		);
 	}
 	return (
-			<>
-				<div className= 'uagb-ifb-button-wrapper wp-block-button' >
-					{ attributes.ctaType === 'text' && (
-						<a
-							href={ attributes.ctaLink }
-							target={ target }
-							className="uagb-infobox-cta-link"
-							rel={ rel }
-							alt=""
-						>
-							{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
-							<RichText.Content
-								tagName="span"
-								value={ attributes.ctaText }
-								className="uagb-inline-editing"
-							/>
-							{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
-						</a>
-					) }
-					{ attributes.ctaType === 'button' && (
-						<a
-							href={ attributes.ctaLink }
-							className={ ctaBtnClass }
-							target={ target }
-							rel={ rel }
-							alt=""
-						>
-							{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
-							<RichText.Content
-								tagName="span"
-								value={ attributes.ctaText }
-								className="uagb-inline-editing"
-							/>
-							{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
-						</a>
-					) }
-				</div>
+		<>
+			<div className="uagb-ifb-button-wrapper wp-block-button">
+				{ attributes.ctaType === 'text' && (
+					<a
+						href={ attributes.ctaLink }
+						target={ target }
+						className="uagb-infobox-cta-link"
+						rel={ rel }
+						alt=""
+					>
+						{ attributes.ctaIconPosition === 'before' &&
+							ctaIconOutput }
+						<RichText.Content
+							tagName="span"
+							value={ attributes.ctaText }
+							className="uagb-inline-editing"
+						/>
+						{ attributes.ctaIconPosition === 'after' &&
+							ctaIconOutput }
+					</a>
+				) }
+				{ attributes.ctaType === 'button' && (
+					<a
+						href={ attributes.ctaLink }
+						className={ ctaBtnClass }
+						target={ target }
+						rel={ rel }
+						alt=""
+					>
+						{ attributes.ctaIconPosition === 'before' &&
+							ctaIconOutput }
+						<RichText.Content
+							tagName="span"
+							value={ attributes.ctaText }
+							className="uagb-inline-editing"
+						/>
+						{ attributes.ctaIconPosition === 'after' &&
+							ctaIconOutput }
+					</a>
+				) }
+			</div>
 		</>
 	);
 };

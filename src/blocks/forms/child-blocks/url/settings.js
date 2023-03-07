@@ -10,7 +10,6 @@ import { InspectorControls } from '@wordpress/block-editor';
 import UAGTextControl from '@Components/text-control';
 import { memo } from '@wordpress/element';
 
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
@@ -34,8 +33,14 @@ const Settings = ( props ) => {
 					} }
 					setAttributes={ setAttributes }
 					options={ [
-						{ label: __( 'Off', 'ultimate-addons-for-gutenberg' ), value: 'off' },
-						{ label: __( 'URL', 'ultimate-addons-for-gutenberg' ), value: 'url' },
+						{
+							label: __( 'Off', 'ultimate-addons-for-gutenberg' ),
+							value: 'off',
+						},
+						{
+							label: __( 'URL', 'ultimate-addons-for-gutenberg' ),
+							value: 'url',
+						},
 					] }
 				/>
 				<UAGTextControl
@@ -44,10 +49,10 @@ const Settings = ( props ) => {
 						'ultimate-addons-for-gutenberg'
 					) }
 					value={ placeholder }
-					data={{
+					data={ {
 						value: placeholder,
 						label: 'placeholder',
-					}}
+					} }
 					setAttributes={ setAttributes }
 					onChange={ ( value ) =>
 						setAttributes( { placeholder: value } )

@@ -73,13 +73,16 @@ export const renderPostLayout = (
 		}
 
 		return (
-			<Suspense key={ key } fallback={ <div className="wc-block-placeholder" /> }>
+			<Suspense
+				key={ key }
+				fallback={ <div className="wc-block-placeholder" /> }
+			>
 				<LayoutComponent
 					{ ...props }
 					post={ post }
 					attributes={ attributes }
 					categoriesList={ categoriesList }
-					setAttributes = { setAttributes }
+					setAttributes={ setAttributes }
 				/>
 			</Suspense>
 		);

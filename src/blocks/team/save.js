@@ -46,7 +46,7 @@ export default function save( props ) {
 		socialTarget,
 		socialEnable,
 		stack,
-		imgWidth
+		imgWidth,
 	} = props.attributes;
 
 	let size = '';
@@ -65,14 +65,14 @@ export default function save( props ) {
 
 	if ( '' !== img_url ) {
 		image_html = (
-				<img
-					className={`uagb-team__image-crop-${ imgStyle }`}
-					src={ img_url }
-					alt={ image.alt ? image.alt : '' }
-					height={imgWidth}
-					width={imgWidth}
-					loading="lazy"
-				/>
+			<img
+				className={ `uagb-team__image-crop-${ imgStyle }` }
+				src={ img_url }
+				alt={ image.alt ? image.alt : '' }
+				height={ imgWidth }
+				width={ imgWidth }
+				loading="lazy"
+			/>
 		);
 	}
 
@@ -86,56 +86,48 @@ export default function save( props ) {
 				`uagb-block-${ block_id }`
 			) }
 		>
-				{ imgPosition === 'left' && image_html }
+			{ imgPosition === 'left' && image_html }
 
-				<div className="uagb-team__content">
-					{ imgPosition === 'above' && image_html }
-						<RichText.Content
-							tagName={ tag }
-							value={ title }
-							className="uagb-team__title"
-						/>
-						<RichText.Content
-							tagName="span"
-							value={ prefix }
-							className="uagb-team__prefix"
-						/>
-						<RichText.Content
-							tagName="p"
-							value={ description_text }
-							className="uagb-team__desc"
-						/>
-					{ socialEnable && (
-							<ul className="uagb-team__social-list">
-								{ '' !== twitterIcon &&
-									social_html(
-										twitterIcon,
-										twitterLink,
-										socialTarget
-									) }
-								{ '' !== fbIcon &&
-									social_html(
-										fbIcon,
-										fbLink,
-										socialTarget
-									) }
-								{ '' !== linkedinIcon &&
-									social_html(
-										linkedinIcon,
-										linkedinLink,
-										socialTarget
-									) }
-								{ '' !== pinIcon &&
-									social_html(
-										pinIcon,
-										pinLink,
-										socialTarget
-									) }
-							</ul>
-					) }
-				</div>
+			<div className="uagb-team__content">
+				{ imgPosition === 'above' && image_html }
+				<RichText.Content
+					tagName={ tag }
+					value={ title }
+					className="uagb-team__title"
+				/>
+				<RichText.Content
+					tagName="span"
+					value={ prefix }
+					className="uagb-team__prefix"
+				/>
+				<RichText.Content
+					tagName="p"
+					value={ description_text }
+					className="uagb-team__desc"
+				/>
+				{ socialEnable && (
+					<ul className="uagb-team__social-list">
+						{ '' !== twitterIcon &&
+							social_html(
+								twitterIcon,
+								twitterLink,
+								socialTarget
+							) }
+						{ '' !== fbIcon &&
+							social_html( fbIcon, fbLink, socialTarget ) }
+						{ '' !== linkedinIcon &&
+							social_html(
+								linkedinIcon,
+								linkedinLink,
+								socialTarget
+							) }
+						{ '' !== pinIcon &&
+							social_html( pinIcon, pinLink, socialTarget ) }
+					</ul>
+				) }
+			</div>
 
-				{ imgPosition === 'right' && image_html }
+			{ imgPosition === 'right' && image_html }
 		</div>
 	);
 }

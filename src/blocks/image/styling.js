@@ -8,7 +8,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 export default function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -158,22 +157,58 @@ export default function styling( props ) {
 		captionLetterSpacingType,
 		customHeightSetDesktop,
 		customHeightSetTablet,
-		customHeightSetMobile
+		customHeightSetMobile,
 	} = props.attributes;
 
-	const seperatorWidthFallback = getFallbackNumber( seperatorWidth, 'seperatorWidth', blockName );
-	const overlayPositionFromEdgeFallback = getFallbackNumber( overlayPositionFromEdge, 'overlayPositionFromEdge', blockName );
-	const seperatorThicknessFallback = getFallbackNumber( seperatorThickness, 'seperatorThickness', blockName );
+	const seperatorWidthFallback = getFallbackNumber(
+		seperatorWidth,
+		'seperatorWidth',
+		blockName
+	);
+	const overlayPositionFromEdgeFallback = getFallbackNumber(
+		overlayPositionFromEdge,
+		'overlayPositionFromEdge',
+		blockName
+	);
+	const seperatorThicknessFallback = getFallbackNumber(
+		seperatorThickness,
+		'seperatorThickness',
+		blockName
+	);
 
-	const overlayOpacityFallback = getFallbackNumber( overlayOpacity, 'overlayOpacity', blockName );
-	const overlayHoverOpacityFallback = getFallbackNumber( overlayHoverOpacity, 'overlayHoverOpacity', blockName );
+	const overlayOpacityFallback = getFallbackNumber(
+		overlayOpacity,
+		'overlayOpacity',
+		blockName
+	);
+	const overlayHoverOpacityFallback = getFallbackNumber(
+		overlayHoverOpacity,
+		'overlayHoverOpacity',
+		blockName
+	);
 
-	const overlayBorderCSS = generateBorderCSS( props.attributes, 'overlay' )
-	const overlayBorderCSSTablet = generateBorderCSS( props.attributes, 'overlay', 'tablet' )
-	const overlayBorderCSSMobile = generateBorderCSS( props.attributes, 'overlay', 'mobile' )
-	const imageBorderCSS = generateBorderCSS( props.attributes, 'image' )
-	const imageBorderCSSTablet = generateBorderCSS( props.attributes, 'image', 'tablet' )
-	const imageBorderCSSMobile = generateBorderCSS( props.attributes, 'image', 'mobile' )
+	const overlayBorderCSS = generateBorderCSS( props.attributes, 'overlay' );
+	const overlayBorderCSSTablet = generateBorderCSS(
+		props.attributes,
+		'overlay',
+		'tablet'
+	);
+	const overlayBorderCSSMobile = generateBorderCSS(
+		props.attributes,
+		'overlay',
+		'mobile'
+	);
+	const imageBorderCSS = generateBorderCSS( props.attributes, 'image' );
+	const imageBorderCSSTablet = generateBorderCSS(
+		props.attributes,
+		'image',
+		'tablet'
+	);
+	const imageBorderCSSMobile = generateBorderCSS(
+		props.attributes,
+		'image',
+		'mobile'
+	);
 
 	const tabletWidth = '' !== widthTablet ? widthTablet : width;
 	const mobileWidth = '' !== widthMobile ? widthMobile : tabletWidth;
@@ -181,14 +216,12 @@ export default function styling( props ) {
 	const tabletHeight = '' !== heightTablet ? heightTablet : height;
 	const mobileHeight = '' !== heightMobile ? heightMobile : tabletHeight;
 
-	const getImageShadowPosition = imageBoxShadowPosition !== 'outset' ? imageBoxShadowPosition : '';
+	const getImageShadowPosition =
+		imageBoxShadowPosition !== 'outset' ? imageBoxShadowPosition : '';
 
 	const selectors = {
-		'.wp-block-uagb-image':{
-			'margin-top': generateCSSUnit(
-				imageTopMargin,
-				imageMarginUnit
-			),
+		'.wp-block-uagb-image': {
+			'margin-top': generateCSSUnit( imageTopMargin, imageMarginUnit ),
 			'margin-right': generateCSSUnit(
 				imageRightMargin,
 				imageMarginUnit
@@ -197,24 +230,32 @@ export default function styling( props ) {
 				imageBottomMargin,
 				imageMarginUnit
 			),
-			'margin-left': generateCSSUnit(
-				imageLeftMargin,
-				imageMarginUnit
-			),
-			'text-align': align
+			'margin-left': generateCSSUnit( imageLeftMargin, imageMarginUnit ),
+			'text-align': align,
 		},
-		'.wp-block-uagb-image--layout-default figure img':{
+		'.wp-block-uagb-image--layout-default figure img': {
 			'width': 'inherit',
 			'height': 'inherit',
-			'box-shadow': generateCSSUnit( imageBoxShadowHOffset, 'px' ) + ' ' + generateCSSUnit( imageBoxShadowVOffset, 'px' ) +	' ' + generateCSSUnit( imageBoxShadowBlur, 'px' ) + ' ' +	generateCSSUnit( imageBoxShadowSpread, 'px' ) + ' ' + imageBoxShadowColor + ' ' + getImageShadowPosition,
-			...imageBorderCSS
+			'box-shadow':
+				generateCSSUnit( imageBoxShadowHOffset, 'px' ) +
+				' ' +
+				generateCSSUnit( imageBoxShadowVOffset, 'px' ) +
+				' ' +
+				generateCSSUnit( imageBoxShadowBlur, 'px' ) +
+				' ' +
+				generateCSSUnit( imageBoxShadowSpread, 'px' ) +
+				' ' +
+				imageBoxShadowColor +
+				' ' +
+				getImageShadowPosition,
+			...imageBorderCSS,
 		},
-		'.wp-block-uagb-image .wp-block-uagb-image__figure img:hover':{
-			'border-color': imageBorderHColor
+		'.wp-block-uagb-image .wp-block-uagb-image__figure img:hover': {
+			'border-color': imageBorderHColor,
 		},
 		'.wp-block-uagb-image .wp-block-uagb-image__figure figcaption': {
 			'font-family': captionFontFamily,
-			'font-style' : captionFontStyle,
+			'font-style': captionFontStyle,
 			'text-decoration': captionDecoration,
 			'text-transform': captionTransform,
 			'font-weight': captionFontWeight,
@@ -226,7 +267,10 @@ export default function styling( props ) {
 				captionLineHeight,
 				captionLineHeightType
 			),
-			'letter-spacing': generateCSSUnit( captionLetterSpacing, captionLetterSpacingType ),
+			'letter-spacing': generateCSSUnit(
+				captionLetterSpacing,
+				captionLetterSpacingType
+			),
 			'color': captionColor,
 			'margin-top': generateCSSUnit(
 				captionTopMargin,
@@ -244,140 +288,199 @@ export default function styling( props ) {
 				captionLeftMargin,
 				captionMarginUnit
 			),
-			'text-align': captionAlign
+			'text-align': captionAlign,
 		},
 		'.wp-block-uagb-image .wp-block-uagb-image__figure figcaption a': {
 			'color': captionColor,
 		},
 		// overlay
-		'.wp-block-uagb-image--layout-overlay figure img':{
+		'.wp-block-uagb-image--layout-overlay figure img': {
 			'width': 'inherit',
 			'height': 'inherit',
-			'box-shadow': generateCSSUnit( imageBoxShadowHOffset, 'px' ) + ' ' + generateCSSUnit( imageBoxShadowVOffset, 'px' ) +	' ' + generateCSSUnit( imageBoxShadowBlur, 'px' ) + ' ' +	generateCSSUnit( imageBoxShadowSpread, 'px' ) + ' ' + imageBoxShadowColor + ' ' + getImageShadowPosition,
-			...imageBorderCSS
+			'box-shadow':
+				generateCSSUnit( imageBoxShadowHOffset, 'px' ) +
+				' ' +
+				generateCSSUnit( imageBoxShadowVOffset, 'px' ) +
+				' ' +
+				generateCSSUnit( imageBoxShadowBlur, 'px' ) +
+				' ' +
+				generateCSSUnit( imageBoxShadowSpread, 'px' ) +
+				' ' +
+				imageBoxShadowColor +
+				' ' +
+				getImageShadowPosition,
+			...imageBorderCSS,
 		},
-		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__color-wrapper': {
-			'background': overlayBackground,
-			'opacity': overlayOpacityFallback,
-			...imageBorderCSS
-		},
-		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__color-wrapper:hover': {
-			'border-color': imageBorderHColor,
-		},
-		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner': {
-			'left': generateCSSUnit( overlayPositionFromEdgeFallback, overlayPositionFromEdgeUnit ),
-			'right': generateCSSUnit( overlayPositionFromEdgeFallback, overlayPositionFromEdgeUnit ),
-			'top': generateCSSUnit( overlayPositionFromEdgeFallback, overlayPositionFromEdgeUnit ),
-			'bottom': generateCSSUnit( overlayPositionFromEdgeFallback, overlayPositionFromEdgeUnit ),
-			...overlayBorderCSS
-		},
-		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading': {
-			'font-family': headingFontFamily,
-			'font-style' : headingFontStyle,
-			'text-decoration': headingDecoration,
-			'text-transform': headingTransform,
-			'font-weight': headingFontWeight,
-			'font-size': generateCSSUnit(
-				headingFontSize,
-				headingFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				headingLineHeight,
-				headingLineHeightType
-			),
-			'letter-spacing': generateCSSUnit( headingLetterSpacing, headingLetterSpacingType ),
-			'color': headingColor,
-			'margin-top': generateCSSUnit(
-				headingTopMargin,
-				headingMarginUnit
-			),
-			'margin-right': generateCSSUnit(
-				headingRightMargin,
-				headingMarginUnit
-			),
-			'margin-bottom': generateCSSUnit(
-				headingBottomMargin,
-				headingMarginUnit
-			),
-			'margin-left': generateCSSUnit(
-				headingLeftMargin,
-				headingMarginUnit
-			),
-			'opacity': headingShowOn === 'always' ? 1 : 0
-		},
-		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading a': {
-			'color': headingColor,
-		},
-		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner .uagb-image-caption': {
-			'opacity': captionShowOn === 'always' ? 1 : 0
-		},
-		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__inner': {
-			'border-color': overlayBorderHColor,
-		},
-		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__color-wrapper': {
-			'opacity': overlayHoverOpacityFallback,
-		},
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__color-wrapper':
+			{
+				'background': overlayBackground,
+				'opacity': overlayOpacityFallback,
+				...imageBorderCSS,
+			},
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__color-wrapper:hover':
+			{
+				'border-color': imageBorderHColor,
+			},
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner':
+			{
+				'left': generateCSSUnit(
+					overlayPositionFromEdgeFallback,
+					overlayPositionFromEdgeUnit
+				),
+				'right': generateCSSUnit(
+					overlayPositionFromEdgeFallback,
+					overlayPositionFromEdgeUnit
+				),
+				'top': generateCSSUnit(
+					overlayPositionFromEdgeFallback,
+					overlayPositionFromEdgeUnit
+				),
+				'bottom': generateCSSUnit(
+					overlayPositionFromEdgeFallback,
+					overlayPositionFromEdgeUnit
+				),
+				...overlayBorderCSS,
+			},
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading':
+			{
+				'font-family': headingFontFamily,
+				'font-style': headingFontStyle,
+				'text-decoration': headingDecoration,
+				'text-transform': headingTransform,
+				'font-weight': headingFontWeight,
+				'font-size': generateCSSUnit(
+					headingFontSize,
+					headingFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					headingLineHeight,
+					headingLineHeightType
+				),
+				'letter-spacing': generateCSSUnit(
+					headingLetterSpacing,
+					headingLetterSpacingType
+				),
+				'color': headingColor,
+				'margin-top': generateCSSUnit(
+					headingTopMargin,
+					headingMarginUnit
+				),
+				'margin-right': generateCSSUnit(
+					headingRightMargin,
+					headingMarginUnit
+				),
+				'margin-bottom': generateCSSUnit(
+					headingBottomMargin,
+					headingMarginUnit
+				),
+				'margin-left': generateCSSUnit(
+					headingLeftMargin,
+					headingMarginUnit
+				),
+				'opacity': headingShowOn === 'always' ? 1 : 0,
+			},
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading a':
+			{
+				'color': headingColor,
+			},
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner .uagb-image-caption':
+			{
+				'opacity': captionShowOn === 'always' ? 1 : 0,
+			},
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__inner':
+			{
+				'border-color': overlayBorderHColor,
+			},
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__color-wrapper':
+			{
+				'opacity': overlayHoverOpacityFallback,
+			},
 		// Seperator
-		'.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-separator': {
-			'width': generateCSSUnit( seperatorWidthFallback, separatorWidthType ),
-			'border-top-width': generateCSSUnit(
-				seperatorThicknessFallback,
-				seperatorThicknessUnit
-			),
-			'border-top-color': seperatorColor,
-			'border-top-style': seperatorStyle,
-			'margin-bottom': generateCSSUnit( seperatorBottomMargin, seperatorMarginUnit ),
-			'margin-top': generateCSSUnit( seperatorTopMargin, seperatorMarginUnit ),
-			'margin-left': generateCSSUnit( seperatorLeftMargin, seperatorMarginUnit ),
-			'margin-right': generateCSSUnit( seperatorRightMargin, seperatorMarginUnit ),
-			'opacity': seperatorShowOn === 'always' ? 1 : 0
-		}
-	}
+		'.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-separator':
+			{
+				'width': generateCSSUnit(
+					seperatorWidthFallback,
+					separatorWidthType
+				),
+				'border-top-width': generateCSSUnit(
+					seperatorThicknessFallback,
+					seperatorThicknessUnit
+				),
+				'border-top-color': seperatorColor,
+				'border-top-style': seperatorStyle,
+				'margin-bottom': generateCSSUnit(
+					seperatorBottomMargin,
+					seperatorMarginUnit
+				),
+				'margin-top': generateCSSUnit(
+					seperatorTopMargin,
+					seperatorMarginUnit
+				),
+				'margin-left': generateCSSUnit(
+					seperatorLeftMargin,
+					seperatorMarginUnit
+				),
+				'margin-right': generateCSSUnit(
+					seperatorRightMargin,
+					seperatorMarginUnit
+				),
+				'opacity': seperatorShowOn === 'always' ? 1 : 0,
+			},
+	};
 
-	selectors['.wp-block-uagb-image .wp-block-uagb-image__figure img'] = {
+	selectors[ '.wp-block-uagb-image .wp-block-uagb-image__figure img' ] = {
 		'object-fit': objectFit,
-		'width'     : width + 'px',
-		'height'    : 'auto'
-	}
+		'width': width + 'px',
+		'height': 'auto',
+	};
 
 	if ( customHeightSetDesktop ) {
-		selectors['.wp-block-uagb-image .wp-block-uagb-image__figure img'].height = height + 'px';
+		selectors[
+			'.wp-block-uagb-image .wp-block-uagb-image__figure img'
+		].height = height + 'px';
 	}
-	if( headingShowOn === 'hover' ){
-		selectors['.wp-block-uagb-image .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading'] = {
-			'opacity': 1
-		}
+	if ( headingShowOn === 'hover' ) {
+		selectors[
+			'.wp-block-uagb-image .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading'
+		] = {
+			'opacity': 1,
+		};
 	}
-	if( captionShowOn === 'hover' ){
-		selectors['.wp-block-uagb-image .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__inner .uagb-image-caption'] = {
-			'opacity': 1
-		}
+	if ( captionShowOn === 'hover' ) {
+		selectors[
+			'.wp-block-uagb-image .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__inner .uagb-image-caption'
+		] = {
+			'opacity': 1,
+		};
 	}
-	if( seperatorShowOn === 'hover' ){
-		selectors['.wp-block-uagb-image .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__inner .uagb-image-separator'] = {
-			'opacity': 1
-		}
+	if ( seperatorShowOn === 'hover' ) {
+		selectors[
+			'.wp-block-uagb-image .wp-block-uagb-image__figure:hover .wp-block-uagb-image--layout-overlay__inner .uagb-image-separator'
+		] = {
+			'opacity': 1,
+		};
 	}
 
-	if( maskShape !== 'none' ){
-		let imagePath =  `${window?.uagb_blocks_info?.uagb_url}assets/images/masks/${maskShape}.svg`;
-		if( maskShape === 'custom' ){
-			imagePath = `${maskCustomShape?.url}`
+	if ( maskShape !== 'none' ) {
+		let imagePath = `${ window?.uagb_blocks_info?.uagb_url }assets/images/masks/${ maskShape }.svg`;
+		if ( maskShape === 'custom' ) {
+			imagePath = `${ maskCustomShape?.url }`;
 		}
-		if( typeof imagePath !== 'undefined' && imagePath ){
-			selectors['.wp-block-uagb-image .wp-block-uagb-image__figure img'] = {
-				'mask-image': `url(${imagePath})`,
-				'-webkit-mask-image': `url(${imagePath})`,
+		if ( typeof imagePath !== 'undefined' && imagePath ) {
+			selectors[
+				'.wp-block-uagb-image .wp-block-uagb-image__figure img'
+			] = {
+				'mask-image': `url(${ imagePath })`,
+				'-webkit-mask-image': `url(${ imagePath })`,
 				'mask-size': maskSize,
 				'-webkit-mask-size': maskSize,
 				'mask-repeat': maskRepeat,
 				'-webkit-mask-repeat': maskRepeat,
 				'mask-position': maskPosition,
-				'-webkit-mask-position': maskPosition
-			}
+				'-webkit-mask-position': maskPosition,
+			};
 		}
 	}
-
 
 	const base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
 		0,
@@ -387,22 +490,19 @@ export default function styling( props ) {
 	const tablet_selectors = {};
 	const mobile_selectors = {};
 
+	tablet_selectors[
+		'.wp-block-uagb-image .components-resizable-box__container'
+	] = {
+		'width': generateCSSUnit( widthTablet, 'px' ),
+		'height': generateCSSUnit( heightTablet, 'px' ),
+	};
 
-	tablet_selectors['.wp-block-uagb-image .components-resizable-box__container'] = {
-		'width': generateCSSUnit(
-			widthTablet,
-			'px'
-		),
-		'height': generateCSSUnit(
-			heightTablet,
-			'px'
-		),
-	}
+	tablet_selectors[ '.wp-block-uagb-image--layout-default figure' ] =
+		imageBorderCSSTablet;
+	tablet_selectors[ '.wp-block-uagb-image--layout-overlay figure' ] =
+		imageBorderCSSTablet;
 
-	tablet_selectors['.wp-block-uagb-image--layout-default figure'] = imageBorderCSSTablet;
-	tablet_selectors['.wp-block-uagb-image--layout-overlay figure'] = imageBorderCSSTablet;
-
-	tablet_selectors['.wp-block-uagb-image'] = {
+	tablet_selectors[ '.wp-block-uagb-image' ] = {
 		'margin-top': generateCSSUnit(
 			imageTopMarginTablet,
 			imageMarginUnitTablet
@@ -420,17 +520,22 @@ export default function styling( props ) {
 			imageMarginUnitTablet
 		),
 		'text-align': alignTablet,
-	}
-	tablet_selectors['.wp-block-uagb-image .wp-block-uagb-image__figure figcaption'] = {
-        'font-size': generateCSSUnit(
-            captionFontSizeTablet,
-            captionFontSizeType
-        ),
-        'line-height': generateCSSUnit(
-            captionLineHeightTablet,
-            captionLineHeightType
-        ),
-		'letter-spacing': generateCSSUnit( captionLetterSpacingTablet, captionLetterSpacingType ),
+	};
+	tablet_selectors[
+		'.wp-block-uagb-image .wp-block-uagb-image__figure figcaption'
+	] = {
+		'font-size': generateCSSUnit(
+			captionFontSizeTablet,
+			captionFontSizeType
+		),
+		'line-height': generateCSSUnit(
+			captionLineHeightTablet,
+			captionLineHeightType
+		),
+		'letter-spacing': generateCSSUnit(
+			captionLetterSpacingTablet,
+			captionLetterSpacingType
+		),
 		'margin-top': generateCSSUnit(
 			captionTopMarginTablet,
 			captionMarginUnitTablet
@@ -447,20 +552,27 @@ export default function styling( props ) {
 			captionLeftMarginTablet,
 			captionMarginUnitTablet
 		),
-    }
+	};
 
-	tablet_selectors['.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner'] = overlayBorderCSSTablet
+	tablet_selectors[
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner'
+	] = overlayBorderCSSTablet;
 
-	tablet_selectors['.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading'] = {
-        'font-size': generateCSSUnit(
-            headingFontSizeTablet,
-            headingFontSizeType
-        ),
-        'line-height': generateCSSUnit(
-            headingLineHeightTablet,
-            headingLineHeightType
-        ),
-		'letter-spacing': generateCSSUnit( headingLetterSpacingTablet, headingLetterSpacingType ),
+	tablet_selectors[
+		'.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading'
+	] = {
+		'font-size': generateCSSUnit(
+			headingFontSizeTablet,
+			headingFontSizeType
+		),
+		'line-height': generateCSSUnit(
+			headingLineHeightTablet,
+			headingLineHeightType
+		),
+		'letter-spacing': generateCSSUnit(
+			headingLetterSpacingTablet,
+			headingLetterSpacingType
+		),
 		'margin-top': generateCSSUnit(
 			headingTopMarginTablet,
 			headingMarginUnitTablet
@@ -477,41 +589,57 @@ export default function styling( props ) {
 			headingLeftMarginTablet,
 			headingMarginUnitTablet
 		),
-    }
+	};
 	// separator
-	tablet_selectors['.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-separator'] = {
-		'margin-bottom': generateCSSUnit( seperatorBottomMarginTablet, seperatorMarginUnitTablet ),
-		'margin-top': generateCSSUnit( seperatorTopMarginTablet, seperatorMarginUnitTablet ),
-		'margin-left': generateCSSUnit( seperatorLeftMarginTablet, seperatorMarginUnitTablet ),
-		'margin-right': generateCSSUnit( seperatorRightMarginTablet, seperatorMarginUnitTablet ),
-	}
+	tablet_selectors[
+		'.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-separator'
+	] = {
+		'margin-bottom': generateCSSUnit(
+			seperatorBottomMarginTablet,
+			seperatorMarginUnitTablet
+		),
+		'margin-top': generateCSSUnit(
+			seperatorTopMarginTablet,
+			seperatorMarginUnitTablet
+		),
+		'margin-left': generateCSSUnit(
+			seperatorLeftMarginTablet,
+			seperatorMarginUnitTablet
+		),
+		'margin-right': generateCSSUnit(
+			seperatorRightMarginTablet,
+			seperatorMarginUnitTablet
+		),
+	};
 
-	tablet_selectors['.wp-block-uagb-image .wp-block-uagb-image__figure img'] = {
+	tablet_selectors[
+		'.wp-block-uagb-image .wp-block-uagb-image__figure img'
+	] = {
 		'object-fit': objectFitTablet,
-		'width'     : tabletWidth + 'px',
-		'height'    : 'auto'
-	}
+		'width': tabletWidth + 'px',
+		'height': 'auto',
+	};
 
 	if ( customHeightSetTablet ) {
-		tablet_selectors['.wp-block-uagb-image .wp-block-uagb-image__figure img'].height = tabletHeight + 'px';
+		tablet_selectors[
+			'.wp-block-uagb-image .wp-block-uagb-image__figure img'
+		].height = tabletHeight + 'px';
 	}
 
 	// Mobile
-	mobile_selectors['.wp-block-uagb-image .components-resizable-box__container'] = {
-		'width': generateCSSUnit(
-			widthMobile,
-			'px'
-		),
-		'height': generateCSSUnit(
-			heightMobile,
-			'px'
-		),
-	}
+	mobile_selectors[
+		'.wp-block-uagb-image .components-resizable-box__container'
+	] = {
+		'width': generateCSSUnit( widthMobile, 'px' ),
+		'height': generateCSSUnit( heightMobile, 'px' ),
+	};
 
-	mobile_selectors['.wp-block-uagb-image--layout-default figure'] = imageBorderCSSMobile;
-	mobile_selectors['.wp-block-uagb-image--layout-overlay figure'] = imageBorderCSSMobile;
+	mobile_selectors[ '.wp-block-uagb-image--layout-default figure' ] =
+		imageBorderCSSMobile;
+	mobile_selectors[ '.wp-block-uagb-image--layout-overlay figure' ] =
+		imageBorderCSSMobile;
 
-	mobile_selectors['.wp-block-uagb-image'] = {
+	mobile_selectors[ '.wp-block-uagb-image' ] = {
 		'margin-top': generateCSSUnit(
 			imageTopMarginMobile,
 			imageMarginUnitMobile
@@ -529,18 +657,23 @@ export default function styling( props ) {
 			imageMarginUnitMobile
 		),
 		'text-align': alignMobile,
-	}
+	};
 
-	mobile_selectors['.wp-block-uagb-image .wp-block-uagb-image__figure figcaption'] = {
-        'font-size': generateCSSUnit(
-            captionFontSizeMobile,
-            captionFontSizeType
-        ),
-        'line-height': generateCSSUnit(
-            captionLineHeightMobile,
-            captionLineHeightType
-        ),
-		'letter-spacing': generateCSSUnit( captionLetterSpacingMobile, captionLetterSpacingType ),
+	mobile_selectors[
+		'.wp-block-uagb-image .wp-block-uagb-image__figure figcaption'
+	] = {
+		'font-size': generateCSSUnit(
+			captionFontSizeMobile,
+			captionFontSizeType
+		),
+		'line-height': generateCSSUnit(
+			captionLineHeightMobile,
+			captionLineHeightType
+		),
+		'letter-spacing': generateCSSUnit(
+			captionLetterSpacingMobile,
+			captionLetterSpacingType
+		),
 		'margin-top': generateCSSUnit(
 			captionTopMarginMobile,
 			captionMarginUnitMobile
@@ -557,20 +690,27 @@ export default function styling( props ) {
 			captionLeftMarginMobile,
 			captionMarginUnitMobile
 		),
-    }
+	};
 
-	mobile_selectors['.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner'] = overlayBorderCSSMobile
+	mobile_selectors[
+		'.wp-block-uagb-image--layout-overlay .wp-block-uagb-image--layout-overlay__inner'
+	] = overlayBorderCSSMobile;
 
-	mobile_selectors['.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading'] = {
-        'font-size': generateCSSUnit(
-            headingFontSizeMobile,
-            headingFontSizeType
-        ),
-        'line-height': generateCSSUnit(
-            headingLineHeightMobile,
-            headingLineHeightType
-        ),
-		'letter-spacing': generateCSSUnit( headingLetterSpacingMobile, headingLetterSpacingType ),
+	mobile_selectors[
+		'.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-heading'
+	] = {
+		'font-size': generateCSSUnit(
+			headingFontSizeMobile,
+			headingFontSizeType
+		),
+		'line-height': generateCSSUnit(
+			headingLineHeightMobile,
+			headingLineHeightType
+		),
+		'letter-spacing': generateCSSUnit(
+			headingLetterSpacingMobile,
+			headingLetterSpacingType
+		),
 		'margin-top': generateCSSUnit(
 			headingTopMarginMobile,
 			headingMarginUnitMobile
@@ -587,41 +727,58 @@ export default function styling( props ) {
 			headingLeftMarginMobile,
 			headingMarginUnitMobile
 		),
-    }
+	};
 
-	mobile_selectors['.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-separator'] = {
-		'margin-bottom': generateCSSUnit( seperatorBottomMarginMobile, seperatorMarginUnitMobile ),
-		'margin-top': generateCSSUnit( seperatorTopMarginMobile, seperatorMarginUnitMobile ),
-		'margin-left': generateCSSUnit( seperatorLeftMarginMobile, seperatorMarginUnitMobile ),
-		'margin-right': generateCSSUnit( seperatorRightMarginMobile, seperatorMarginUnitMobile ),
-	}
+	mobile_selectors[
+		'.wp-block-uagb-image .wp-block-uagb-image--layout-overlay__inner .uagb-image-separator'
+	] = {
+		'margin-bottom': generateCSSUnit(
+			seperatorBottomMarginMobile,
+			seperatorMarginUnitMobile
+		),
+		'margin-top': generateCSSUnit(
+			seperatorTopMarginMobile,
+			seperatorMarginUnitMobile
+		),
+		'margin-left': generateCSSUnit(
+			seperatorLeftMarginMobile,
+			seperatorMarginUnitMobile
+		),
+		'margin-right': generateCSSUnit(
+			seperatorRightMarginMobile,
+			seperatorMarginUnitMobile
+		),
+	};
 
-	mobile_selectors['.wp-block-uagb-image .wp-block-uagb-image__figure img'] = {
+	mobile_selectors[
+		'.wp-block-uagb-image .wp-block-uagb-image__figure img'
+	] = {
 		'object-fit': objectFitMobile,
-		'width'     : mobileWidth + 'px',
-		'height'    : 'auto'
-	}
+		'width': mobileWidth + 'px',
+		'height': 'auto',
+	};
 
 	if ( customHeightSetMobile ) {
-		mobile_selectors['.wp-block-uagb-image .wp-block-uagb-image__figure img'].height = mobileHeight + 'px';
+		mobile_selectors[
+			'.wp-block-uagb-image .wp-block-uagb-image__figure img'
+		].height = mobileHeight + 'px';
 	}
 
 	let styling_css = generateCSS( selectors, base_selector );
 
 	styling_css += generateCSS(
-        tablet_selectors,
-        `${ base_selector }.uagb-editor-preview-mode-tablet`,
-        true,
-        'tablet'
-    );
+		tablet_selectors,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
+		true,
+		'tablet'
+	);
 
-
-    styling_css += generateCSS(
-        mobile_selectors,
-        `${ base_selector }.uagb-editor-preview-mode-mobile`,
-        true,
-        'mobile'
-    );
+	styling_css += generateCSS(
+		mobile_selectors,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
+		true,
+		'mobile'
+	);
 
 	return styling_css;
 }

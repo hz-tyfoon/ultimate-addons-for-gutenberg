@@ -39,13 +39,7 @@ const Render = ( props ) => {
 		showDescription,
 	} = attributes;
 
-	const iconHTML = (
-		<>
-			{ '' !== icon && (
-				renderSVG( icon, setAttributes )
-			) }
-		</>
-	);
+	const iconHTML = <>{ '' !== icon && renderSVG( icon, setAttributes ) }</>;
 	const titleHTML = (
 		<>
 			<RichText
@@ -53,12 +47,10 @@ const Render = ( props ) => {
 					'Add Button Title…',
 					'ultimate-addons-for-gutenberg'
 				) }
-				value={ heading.replace( /(<([^>]+)>)/ig, '' ) }
+				value={ heading.replace( /(<([^>]+)>)/gi, '' ) }
 				allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
 				tagName={ titleTag }
-				onChange={ ( value ) =>
-					setAttributes( { heading: value } )
-				}
+				onChange={ ( value ) => setAttributes( { heading: value } ) }
 				className="uagb-marketing-btn__title"
 				onRemove={ () => onReplace( [] ) }
 				multiline={ false }
@@ -94,53 +86,54 @@ const Render = ( props ) => {
 				'wp-block-button'
 			) }
 		>
-				<a // eslint-disable-line jsx-a11y/anchor-is-valid
-				 className="uagb-marketing-btn__link wp-block-button__link">
-						{ 'before' === iconPosition &&
-							<>
-							{ iconHTML }
-							{ titleHTML }
-							</>
-						}
-						{ 'after' === iconPosition &&
-							<>
-							{ titleHTML }
-							{ iconHTML }
-							</>
-						}
-						{ showDescription && (
-						<RichText
-							placeholder={ __(
-								'Add Button Description…',
-								'ultimate-addons-for-gutenberg'
-							) }
-							value={ prefix }
-							tagName="p"
-							onChange={ ( value ) =>
-								setAttributes( { prefix: value } )
-							}
-							className="uagb-marketing-btn__prefix"
-							onRemove={ () => onReplace( [] ) }
-							multiline={ false }
-							onMerge={ mergeBlocks }
-							onSplit={
-								insertBlocksAfter
-									? ( before, after, ...blocks ) => {
-											setAttributes( {
-												content: before,
-											} );
-											insertBlocksAfter( [
-												...blocks,
-												createBlock( 'core/paragraph', {
-													content: after,
-												} ),
-											] );
-									  }
-									: undefined
-							}
-						/>
+			<a // eslint-disable-line jsx-a11y/anchor-is-valid
+				className="uagb-marketing-btn__link wp-block-button__link"
+			>
+				{ 'before' === iconPosition && (
+					<>
+						{ iconHTML }
+						{ titleHTML }
+					</>
+				) }
+				{ 'after' === iconPosition && (
+					<>
+						{ titleHTML }
+						{ iconHTML }
+					</>
+				) }
+				{ showDescription && (
+					<RichText
+						placeholder={ __(
+							'Add Button Description…',
+							'ultimate-addons-for-gutenberg'
 						) }
-				</a>
+						value={ prefix }
+						tagName="p"
+						onChange={ ( value ) =>
+							setAttributes( { prefix: value } )
+						}
+						className="uagb-marketing-btn__prefix"
+						onRemove={ () => onReplace( [] ) }
+						multiline={ false }
+						onMerge={ mergeBlocks }
+						onSplit={
+							insertBlocksAfter
+								? ( before, after, ...blocks ) => {
+										setAttributes( {
+											content: before,
+										} );
+										insertBlocksAfter( [
+											...blocks,
+											createBlock( 'core/paragraph', {
+												content: after,
+											} ),
+										] );
+								  }
+								: undefined
+						}
+					/>
+				) }
+			</a>
 		</div>
 	);
 };

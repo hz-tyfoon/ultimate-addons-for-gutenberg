@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { memo, useCallback} from '@wordpress/element';
+import { memo, useCallback } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { useDeviceType } from '@Controls/getPreviewType';
 
@@ -21,7 +21,6 @@ const ALLOWED_BLOCKS = [
 import { InnerBlocks, RichText } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
-
 	props = props.parentProps;
 
 	const deviceType = useDeviceType();
@@ -33,7 +32,7 @@ const Render = ( props ) => {
 		formLabel,
 		buttonSize,
 		reCaptchaEnable,
-		reCaptchaType
+		reCaptchaType,
 	} = attributes;
 
 	const onSubmitClick = useCallback( ( e ) => {
@@ -52,7 +51,7 @@ const Render = ( props ) => {
 						'Submit',
 						'ultimate-addons-for-gutenberg'
 					) }
-					value={ submitButtonText.replace( /(<([^>]+)>)/ig, '' ) }
+					value={ submitButtonText.replace( /(<([^>]+)>)/gi, '' ) }
 					onChange={ ( value ) =>
 						setAttributes( {
 							submitButtonText: value,
@@ -65,7 +64,6 @@ const Render = ( props ) => {
 			</button>
 		);
 	};
-
 
 	return (
 		<>
@@ -102,18 +100,17 @@ const Render = ( props ) => {
 						/>
 					</div>
 
-					{ reCaptchaEnable &&
-						'v2' === reCaptchaType && (
-							<>
-								<div
-									className="g-recaptcha uagb-forms-field-set"
-									data-sitekey= ''
-								></div>
-							</>
-						) }
-						<div
-							className={ `uagb-form-reacaptcha-error-${ block_id }` }
-						></div>
+					{ reCaptchaEnable && 'v2' === reCaptchaType && (
+						<>
+							<div
+								className="g-recaptcha uagb-forms-field-set"
+								data-sitekey=""
+							></div>
+						</>
+					) }
+					<div
+						className={ `uagb-form-reacaptcha-error-${ block_id }` }
+					></div>
 					<div className="uagb-forms-main-submit-button-wrap wp-block-button">
 						{ renderButtonHtml() }
 					</div>

@@ -9,8 +9,6 @@ import { ToggleControl, FormTokenField } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { memo } from '@wordpress/element';
 
-
-
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {

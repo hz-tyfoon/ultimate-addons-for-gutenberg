@@ -18,11 +18,7 @@ import {
 	MediaReplaceFlow,
 } from '@wordpress/block-editor';
 
-import {
-	ToggleControl,
-	ToolbarGroup,
-	Icon,
-} from '@wordpress/components';
+import { ToggleControl, ToolbarGroup, Icon } from '@wordpress/components';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
@@ -60,7 +56,11 @@ const Settings = ( props ) => {
 			return;
 		}
 
-		setAttributes( { jsonLottie: media, lottieURl: media.url, lottieSource: 'library' } );
+		setAttributes( {
+			jsonLottie: media,
+			lottieURl: media.url,
+			lottieSource: 'library',
+		} );
 	};
 
 	const onSelectLottieURL = ( mediaURL ) => {
@@ -75,7 +75,10 @@ const Settings = ( props ) => {
 			>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __( 'File Source', 'ultimate-addons-for-gutenberg' ) }
+					label={ __(
+						'File Source',
+						'ultimate-addons-for-gutenberg'
+					) }
 					data={ {
 						value: lottieSource,
 						label: 'lottieSource',
@@ -90,10 +93,7 @@ const Settings = ( props ) => {
 						},
 						{
 							value: 'url',
-							label: __(
-								'URL',
-								'ultimate-addons-for-gutenberg'
-							),
+							label: __( 'URL', 'ultimate-addons-for-gutenberg' ),
 						},
 					] }
 				/>
@@ -102,7 +102,10 @@ const Settings = ( props ) => {
 						backgroundImage={ jsonLottie }
 						onSelectImage={ onSelectLottieJSON }
 						slug={ 'lottie' }
-						label={ __( 'Lottie Animation', 'ultimate-addons-for-gutenberg' ) }
+						label={ __(
+							'Lottie Animation',
+							'ultimate-addons-for-gutenberg'
+						) }
 						allow={ [ 'application/json' ] }
 						disableRemove={ true }
 					/>
@@ -112,7 +115,10 @@ const Settings = ( props ) => {
 						backgroundImage={ jsonLottie }
 						onSelectImage={ onSelectLottieJSON }
 						slug={ 'lottie' }
-						label={ __( 'Lottie Animation', 'ultimate-addons-for-gutenberg' ) }
+						label={ __(
+							'Lottie Animation',
+							'ultimate-addons-for-gutenberg'
+						) }
 						allow={ [ 'application/json' ] }
 						disableRemove={ true }
 					/>
@@ -124,12 +130,14 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 						value={ lottieURl }
-						data={{
+						data={ {
 							value: lottieURl,
 							label: 'lottieURl',
-						}}
+						} }
 						setAttributes={ setAttributes }
-						onChange={ ( value ) => setAttributes( { lottieURl: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { lottieURl: value } )
+						}
 					/>
 				) }
 			</UAGAdvancedPanelBody>
@@ -148,15 +156,24 @@ const Settings = ( props ) => {
 					options={ [
 						{
 							value: 'none',
-							label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
+							label: __(
+								'Default',
+								'ultimate-addons-for-gutenberg'
+							),
 						},
 						{
 							value: 'hover',
-							label: __( 'Hover', 'ultimate-addons-for-gutenberg' ),
+							label: __(
+								'Hover',
+								'ultimate-addons-for-gutenberg'
+							),
 						},
 						{
 							value: 'click',
-							label: __( 'Click', 'ultimate-addons-for-gutenberg' ),
+							label: __(
+								'Click',
+								'ultimate-addons-for-gutenberg'
+							),
 						},
 						{
 							value: 'scroll',
@@ -167,11 +184,11 @@ const Settings = ( props ) => {
 						},
 					] }
 					help={
-						( 'scroll' === playOn || 'none' === playOn )
+						'scroll' === playOn || 'none' === playOn
 							? __(
 									"This setting will only take effect once you are on the live page, and not while you're editing.",
 									'ultimate-addons-for-gutenberg'
-							)
+							  )
 							: ''
 					}
 				/>
@@ -186,13 +203,22 @@ const Settings = ( props ) => {
 					options={ [
 						{
 							value: 'left',
-							icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
-							tooltip: __( 'Left', 'ultimate-addons-for-gutenberg' ),
+							icon: (
+								<Icon
+									icon={ renderSVG( 'fa fa-align-left' ) }
+								/>
+							),
+							tooltip: __(
+								'Left',
+								'ultimate-addons-for-gutenberg'
+							),
 						},
 						{
 							value: 'center',
 							icon: (
-								<Icon icon={ renderSVG( 'fa fa-align-center' ) } />
+								<Icon
+									icon={ renderSVG( 'fa fa-align-center' ) }
+								/>
 							),
 							tooltip: __(
 								'Center',
@@ -202,9 +228,14 @@ const Settings = ( props ) => {
 						{
 							value: 'right',
 							icon: (
-								<Icon icon={ renderSVG( 'fa fa-align-right' ) } />
+								<Icon
+									icon={ renderSVG( 'fa fa-align-right' ) }
+								/>
 							),
-							tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
+							tooltip: __(
+								'Right',
+								'ultimate-addons-for-gutenberg'
+							),
 						},
 					] }
 					showIcons={ true }
@@ -236,7 +267,10 @@ const Settings = ( props ) => {
 				/>
 				{ loop && (
 					<ToggleControl
-						label={ __( 'Reverse', 'ultimate-addons-for-gutenberg' ) }
+						label={ __(
+							'Reverse',
+							'ultimate-addons-for-gutenberg'
+						) }
 						checked={ reverse }
 						onChange={ reverseDirection }
 						help={ __(
@@ -309,7 +343,10 @@ const Settings = ( props ) => {
 				] }
 				normal={
 					<AdvancedPopColorControl
-						label={ __( 'Background Color', 'ultimate-addons-for-gutenberg' ) }
+						label={ __(
+							'Background Color',
+							'ultimate-addons-for-gutenberg'
+						) }
 						colorValue={ backgroundColor ? backgroundColor : '' }
 						data={ {
 							value: backgroundColor,
@@ -320,7 +357,10 @@ const Settings = ( props ) => {
 				}
 				hover={
 					<AdvancedPopColorControl
-						label={ __( 'Background Color', 'ultimate-addons-for-gutenberg' ) }
+						label={ __(
+							'Background Color',
+							'ultimate-addons-for-gutenberg'
+						) }
 						colorValue={ backgroundHColor ? backgroundHColor : '' }
 						data={ {
 							value: backgroundHColor,
@@ -368,7 +408,11 @@ const Settings = ( props ) => {
 					'Allows you to add fancy animation i.e Lottie to your website. You can see sample Lottie animations',
 					'ultimate-addons-for-gutenberg'
 				) }
-				<a className="uagb-lottie-instructions__lottie-url" href="https://lottiefiles.com/" target="__blank">
+				<a
+					className="uagb-lottie-instructions__lottie-url"
+					href="https://lottiefiles.com/"
+					target="__blank"
+				>
 					{ ' ' }
 					{ __( 'here on this' ) }{ ' ' }
 				</a>

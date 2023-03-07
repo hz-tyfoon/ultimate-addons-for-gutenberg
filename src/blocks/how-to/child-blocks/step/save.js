@@ -25,11 +25,7 @@ export default function save( props ) {
 	} = attributes;
 
 	let urlCheck = '';
-	if (
-		typeof image !== 'undefined' &&
-		image !== null &&
-		image !== ''
-	) {
+	if ( typeof image !== 'undefined' && image !== null && image !== '' ) {
 		urlCheck = image.url;
 	}
 
@@ -57,7 +53,8 @@ export default function save( props ) {
 			className="uagb-how-to-step-image"
 			src={ imageUrl }
 			alt={ image.alt }
-			width={imgTagWidth} height={imgTagHeight}
+			width={ imgTagWidth }
+			height={ imgTagHeight }
 			loading="lazy"
 		/>
 	);
@@ -73,26 +70,24 @@ export default function save( props ) {
 				className="uagb-how-to-step-description"
 				value={ description }
 			/>
-			{'text' === urlType && (
+			{ 'text' === urlType && (
 				<>
-					{ '' !== url?
+					{ '' !== url ? (
 						<a
-							href={url}
-							target={target}
+							href={ url }
+							target={ target }
 							className="uagb-step-link"
 							rel="noopener noreferrer"
 						>
 							<span className="uagb-step-link-text">
-							{urlText}
+								{ urlText }
 							</span>
 						</a>
-						:
-						<span className="uagb-step-link-text">
-							{urlText}
-						</span>
-					}
+					) : (
+						<span className="uagb-step-link-text">{ urlText }</span>
+					) }
 				</>
-			)}
+			) }
 		</div>
 	);
 	return (
@@ -103,29 +98,31 @@ export default function save( props ) {
 			) }
 		>
 			{ ( 'all' === urlType || 'none' === urlType ) && (
-					<>
-						{ ( '' !== url && 'all' === urlType )  &&
-							<a // eslint-disable-line jsx-a11y/anchor-has-content
-							href={url}
-							target={target}
+				<>
+					{ '' !== url && 'all' === urlType && (
+						<a // eslint-disable-line jsx-a11y/anchor-has-content
+							href={ url }
+							target={ target }
 							className="uagb-step-link-all"
 							rel="noopener noreferrer"
-							></a>
-						}
-						<div className={`uagb-step-image-content-wrap uag-image-position-${imgPosition}`}>
-							{ imageUrl && imageMarkup }
-							{ contentMarkup }
-						</div>
-					</>
-				)
-			}
-			{'text' === urlType && (
-					<div className={`uagb-step-image-content-wrap uag-image-position-${imgPosition}`}>
+						></a>
+					) }
+					<div
+						className={ `uagb-step-image-content-wrap uag-image-position-${ imgPosition }` }
+					>
 						{ imageUrl && imageMarkup }
 						{ contentMarkup }
 					</div>
-				)
-			}
+				</>
+			) }
+			{ 'text' === urlType && (
+				<div
+					className={ `uagb-step-image-content-wrap uag-image-position-${ imgPosition }` }
+				>
+					{ imageUrl && imageMarkup }
+					{ contentMarkup }
+				</div>
+			) }
 		</div>
 	);
 }

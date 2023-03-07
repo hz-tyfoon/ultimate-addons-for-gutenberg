@@ -17,14 +17,8 @@ const Render = ( props ) => {
 	props = props.parentProps;
 
 	const { attributes, setAttributes } = props;
-	const {
-		question,
-		answer,
-		icon,
-		iconActive,
-		layout,
-		headingTag,
-	} = attributes;
+	const { question, answer, icon, iconActive, layout, headingTag } =
+		attributes;
 
 	const faqRenderIcon = () => {
 		return (
@@ -65,9 +59,7 @@ const Render = ( props ) => {
 					tagName="p"
 					placeholder={ __( 'Answer' ) }
 					value={ answer }
-					onChange={ ( value ) =>
-						setAttributes( { answer: value } )
-					}
+					onChange={ ( value ) => setAttributes( { answer: value } ) }
 					multiline={ false }
 					allowedFormats={ [
 						'core/bold',

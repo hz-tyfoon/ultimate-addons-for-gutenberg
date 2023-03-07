@@ -8,10 +8,7 @@ import { useDeviceType } from '@Controls/getPreviewType';
 const Render = ( props ) => {
 	const deviceType = useDeviceType();
 	props = props.parentProps;
-	const {
-		attributes,
-		clientId
-	} = props;
+	const { attributes, clientId } = props;
 
 	const {
 		block_id,
@@ -30,7 +27,7 @@ const Render = ( props ) => {
 		isBlockRootParent,
 		contentWidth,
 		innerContentWidth,
-		hasSliderParent
+		hasSliderParent,
 	} = attributes;
 
 	const direction = attributes[ 'direction' + deviceType ];
@@ -47,7 +44,7 @@ const Render = ( props ) => {
 					'uagb-container__shape-above-content':
 						topContentAboveShape === true,
 				},
-				{ 'uagb-container__invert' : topInvert === true }
+				{ 'uagb-container__invert': topInvert === true }
 			) }
 		>
 			{ shapes[ topType ] }
@@ -64,7 +61,7 @@ const Render = ( props ) => {
 					'uagb-container__shape-above-content':
 						bottomContentAboveShape === true,
 				},
-				{ 'uagb-container__invert' : bottomInvert === true },
+				{ 'uagb-container__invert': bottomInvert === true }
 			) }
 		>
 			{ shapes[ bottomType ] }
@@ -75,41 +72,51 @@ const Render = ( props ) => {
 
 	const hasChildBlocks = getBlockOrder( clientId ).length > 0;
 
-	const CustomTag = `${htmlTag}`;
+	const CustomTag = `${ htmlTag }`;
 	const customTagLinkAttributes = {};
-	if( htmlTag === 'a' ){
-		customTagLinkAttributes.rel = 'noopener'
-		customTagLinkAttributes.onClick = ( e ) => e.preventDefault()
-		if( htmlTagLink?.url ){
+	if ( htmlTag === 'a' ) {
+		customTagLinkAttributes.rel = 'noopener';
+		customTagLinkAttributes.onClick = ( e ) => e.preventDefault();
+		if ( htmlTagLink?.url ) {
 			customTagLinkAttributes.href = htmlTagLink?.url;
 		}
-		if( htmlTagLink?.opensInNewTab ){
+		if ( htmlTagLink?.opensInNewTab ) {
 			customTagLinkAttributes.target = '_blank';
 		}
-		if( htmlTagLink?.noFollow ){
+		if ( htmlTagLink?.noFollow ) {
 			customTagLinkAttributes.rel = 'nofollow noopener';
 		}
 	}
 
-	const hasChildren = 0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
+	const hasChildren =
+		0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
 	const hasChildrenClass = hasChildren ? 'uagb-container-has-children' : '';
-	const isRootContainerClass = isBlockRootParent ? `${contentWidth} uagb-is-root-container` : '';
+	const isRootContainerClass = isBlockRootParent
+		? `${ contentWidth } uagb-is-root-container`
+		: '';
 	const blockProps = useBlockProps( {
-		className: `uagb-block-${ block_id } ${hasChildrenClass} uagb-editor-preview-mode-${ deviceType.toLowerCase() } ${isRootContainerClass}`,
+		className: `uagb-block-${ block_id } ${ hasChildrenClass } uagb-editor-preview-mode-${ deviceType.toLowerCase() } ${ isRootContainerClass }`,
 	} );
 
 	const innerBlocksParams = {
-		__experimentalMoverDirection : { moverDirection },
-		renderAppender : hasChildBlocks ? undefined : InnerBlocks.ButtonBlockAppender
-	}
+		__experimentalMoverDirection: { moverDirection },
+		renderAppender: hasChildBlocks
+			? undefined
+			: InnerBlocks.ButtonBlockAppender,
+	};
 
-	if( hasSliderParent ) {
+	if ( hasSliderParent ) {
+		const parentBlocks = wp.blocks
+			.getBlockTypes()
+			.filter( function ( item ) {
+				return ! item.parent;
+			} );
 
-		const parentBlocks = wp.blocks.getBlockTypes().filter( function( item ) { 
-			return ! item.parent
-		} );
-
-		const ALLOWED_BLOCKS = parentBlocks.map( block => block.name ).filter( blockName => [ 'uagb/slider' ].indexOf( blockName ) === -1 );
+		const ALLOWED_BLOCKS = parentBlocks
+			.map( ( block ) => block.name )
+			.filter(
+				( blockName ) => [ 'uagb/slider' ].indexOf( blockName ) === -1
+			);
 
 		innerBlocksParams.allowedBlocks = ALLOWED_BLOCKS;
 	}
@@ -118,8 +125,8 @@ const Render = ( props ) => {
 		<>
 			<CustomTag
 				{ ...blockProps }
-				key = { block_id }
-				{...customTagLinkAttributes}
+				key={ block_id }
+				{ ...customTagLinkAttributes }
 			>
 				{ topDividerHtml }
 				{ 'video' === backgroundType && (
@@ -134,18 +141,15 @@ const Render = ( props ) => {
 						) }
 					</div>
 				) }
-				{ isBlockRootParent && 'alignfull' === contentWidth && 'alignwide' === innerContentWidth
-				?  (
-					<div className='uagb-container-inner-blocks-wrap'>
-						<InnerBlocks
-							{ ...innerBlocksParams }
-						/>
+				{ isBlockRootParent &&
+				'alignfull' === contentWidth &&
+				'alignwide' === innerContentWidth ? (
+					<div className="uagb-container-inner-blocks-wrap">
+						<InnerBlocks { ...innerBlocksParams } />
 					</div>
-				)
-				: <InnerBlocks
-					{ ...innerBlocksParams }
-					/>
-				}
+				) : (
+					<InnerBlocks { ...innerBlocksParams } />
+				) }
 				{ bottomDividerHtml }
 			</CustomTag>
 		</>

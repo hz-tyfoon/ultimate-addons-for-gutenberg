@@ -24,11 +24,7 @@ const Render = ( props ) => {
 	}, [] );
 
 	props = props.parentProps;
-	const {
-		attributes,
-		setAttributes,
-		clientId,
-	} = props;
+	const { attributes, setAttributes, clientId } = props;
 	const {
 		tabsStyleD,
 		tabsStyleM,
@@ -38,10 +34,10 @@ const Render = ( props ) => {
 		tabAlign,
 		showIcon,
 		icon,
-		iconPosition
+		iconPosition,
 	} = attributes;
 
-	const deviceType = useDeviceType()
+	const deviceType = useDeviceType();
 
 	const onMoveForward = ( oldIndex, realTabsCount ) => {
 		return () => {
@@ -130,7 +126,6 @@ const Render = ( props ) => {
 		);
 	};
 
-
 	return (
 		<>
 			<div
@@ -164,7 +159,7 @@ const Render = ( props ) => {
 											) }
 										>
 											<span // eslint-disable-line jsx-a11y/click-events-have-key-events
-												role='button'
+												role="button"
 												className="uagb-tab-item__move-back"
 												onClick={
 													index === 0
@@ -181,11 +176,27 @@ const Render = ( props ) => {
 													index === tabHeaders.length
 												}
 											>
-												{ ( tabsStyleD.includes( 'vstyle' ) && deviceType === 'Desktop' ) || ( tabsStyleT.includes( 'vstyle' ) && deviceType === 'Tablet' ) || ( ( tabsStyleM.includes( 'vstyle' ) || tabsStyleM.includes( 'stack' ) ) && deviceType === 'Mobile' ) ? (
+												{ ( tabsStyleD.includes(
+													'vstyle'
+												) &&
+													deviceType ===
+														'Desktop' ) ||
+												( tabsStyleT.includes(
+													'vstyle'
+												) &&
+													deviceType === 'Tablet' ) ||
+												( ( tabsStyleM.includes(
+													'vstyle'
+												) ||
+													tabsStyleM.includes(
+														'stack'
+													) ) &&
+													deviceType ===
+														'Mobile' ) ? (
 													<Dashicon icon="arrow-up" />
-												) :
+												) : (
 													<Dashicon icon="arrow-left" />
-												}
+												) }
 											</span>
 										</Tooltip>
 									) }
@@ -197,7 +208,7 @@ const Render = ( props ) => {
 											) }
 										>
 											<span // eslint-disable-line jsx-a11y/click-events-have-key-events
-												role='button'
+												role="button"
 												className="uagb-tab-item__move-forward"
 												onClick={
 													index === tabHeaders.length
@@ -214,11 +225,27 @@ const Render = ( props ) => {
 													index === tabHeaders.length
 												}
 											>
-												{ ( tabsStyleD.includes( 'vstyle' ) && deviceType === 'Desktop' ) || ( tabsStyleT.includes( 'vstyle' ) && deviceType === 'Tablet' ) || ( ( tabsStyleM.includes( 'vstyle' ) || tabsStyleM.includes( 'stack' ) ) && deviceType === 'Mobile' ) ? (
+												{ ( tabsStyleD.includes(
+													'vstyle'
+												) &&
+													deviceType ===
+														'Desktop' ) ||
+												( tabsStyleT.includes(
+													'vstyle'
+												) &&
+													deviceType === 'Tablet' ) ||
+												( ( tabsStyleM.includes(
+													'vstyle'
+												) ||
+													tabsStyleM.includes(
+														'stack'
+													) ) &&
+													deviceType ===
+														'Mobile' ) ? (
 													<Dashicon icon="arrow-down" />
-												) :
+												) : (
 													<Dashicon icon="arrow-right" />
-												}
+												) }
 											</span>
 										</Tooltip>
 									) }
@@ -229,7 +256,7 @@ const Render = ( props ) => {
 										) }
 									>
 										<span // eslint-disable-line jsx-a11y/click-events-have-key-events
-											role='button'
+											role="button"
 											tabIndex={ index }
 											className="uagb-tabs__remove"
 											onClick={ () => removeTab( index ) }
@@ -240,7 +267,7 @@ const Render = ( props ) => {
 								</div>
 							) }
 							<a // eslint-disable-line jsx-a11y/anchor-is-valid, jsx-a11y/click-events-have-key-events
-								role='button'
+								role="button"
 								tabIndex={ index }
 								className={ `uagb-tabs__icon-position-${ iconPosition } uagb-tabs-list` }
 								onClick={ () => {
@@ -267,7 +294,10 @@ const Render = ( props ) => {
 										'Title…',
 										'ultimate-addons-for-gutenberg'
 									) }
-									allowedFormats={ [ 'core/bold', 'core/italic' ] }
+									allowedFormats={ [
+										'core/bold',
+										'core/italic',
+									] }
 								/>
 								{ showIcon &&
 									icon &&
@@ -280,19 +310,21 @@ const Render = ( props ) => {
 							</a>
 						</li>
 					) ) }
-					<li className="uagb-tab uagb-tabs__add-tab" // eslint-disable-line jsx-a11y/click-events-have-key-events
-						role='presentation'
-						tabIndex='0'
-						onClick={ () => addTab() }>
+					<li
+						className="uagb-tab uagb-tabs__add-tab" // eslint-disable-line jsx-a11y/click-events-have-key-events
+						role="presentation"
+						tabIndex="0"
+						onClick={ () => addTab() }
+					>
 						<Tooltip
 							text={ __(
 								'Add tab',
 								'ultimate-addons-for-gutenberg'
 							) }
 						>
-								<Dashicon icon="plus" />
+							<Dashicon icon="plus" />
 						</Tooltip>
-						</li>
+					</li>
 				</ul>
 				<div className="uagb-tabs__body-wrap">
 					<InnerBlocks

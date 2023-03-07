@@ -14,21 +14,22 @@ import Render from './render';
 let hideLabel;
 
 const UAGBIconListChild = ( props ) => {
-
 	const deviceType = useDeviceType();
 	const { isSelected, setAttributes, clientId, attributes } = props;
-	
-	useEffect( ()=>{
+
+	useEffect( () => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
-	}, [] )
+	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
 
-		addBlockEditorDynamicStyles( 'uagb-style-icon-list-child' + clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles(
+			'uagb-style-icon-list-child' + clientId.substr( 0, 8 ),
+			blockStyling
+		);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
@@ -36,10 +37,12 @@ const UAGBIconListChild = ( props ) => {
 	}, [ deviceType ] );
 
 	return (
-			<>
-				{ isSelected && <Settings parentProps={ props } hideLabel={ hideLabel } /> }
-				<Render parentProps={ props } />
-			</>
+		<>
+			{ isSelected && (
+				<Settings parentProps={ props } hideLabel={ hideLabel } />
+			) }
+			<Render parentProps={ props } />
+		</>
 	);
 };
 

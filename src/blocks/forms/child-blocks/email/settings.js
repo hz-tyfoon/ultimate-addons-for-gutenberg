@@ -31,8 +31,17 @@ const Settings = ( props ) => {
 					} }
 					setAttributes={ setAttributes }
 					options={ [
-						{ label: __( 'Off', 'ultimate-addons-for-gutenberg' ), value: 'off' },
-						{ label: __( 'email', 'ultimate-addons-for-gutenberg' ), value: 'email' },
+						{
+							label: __( 'Off', 'ultimate-addons-for-gutenberg' ),
+							value: 'off',
+						},
+						{
+							label: __(
+								'email',
+								'ultimate-addons-for-gutenberg'
+							),
+							value: 'email',
+						},
 					] }
 				/>
 				<UAGTextControl
