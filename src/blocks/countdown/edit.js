@@ -17,8 +17,10 @@ const UAGBCountdownEdit = ( props ) => {
 		isSelected,
 		attributes,
 		attributes: {
+			timerType,
 			timeModified,
 			endDateTime,
+			endDateTimeCopy,
 			showDays,
 			showHours,
 			showMinutes,
@@ -58,6 +60,7 @@ const UAGBCountdownEdit = ( props ) => {
 	
 			setAttributes( {
 				endDateTime: actualTime,
+				endDateTimeCopy: actualTime,
 				displayEndDateTime: displayTime,
 				timeModified: true,
 			} );
@@ -98,6 +101,14 @@ const UAGBCountdownEdit = ( props ) => {
 		showHours,
 		showMinutes,
 	] )
+
+	useEffect( () => {
+
+		if( timerType === 'date' && timeModified ) {
+			setAttributes( { endDateTime: endDateTimeCopy } )
+		}
+
+	}, [ timerType ] );
 
 	useEffect( () => {
 
