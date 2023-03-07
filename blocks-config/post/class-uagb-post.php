@@ -1507,31 +1507,57 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		);
 
 // var_dump($_POST);
+		// $post_attribute_array = array();
+		// 	// $_POST['attr'] is sanitized in later stage.
+		// 	$attr = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		// 	$attr['paged'] = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
+
+		// 	$post_attribute_array = $this->required_attribute_for_query( $attr );
+
+		// 	$query = UAGB_Helper::get_query( $post_attribute_array, 'grid' );
+
+		// 	$pagination_markup = $this->render_pagination( $query, $attr );
+
+
+		// 	// foreach ( $attr as $key => $attribute ) {
+		// 	// 	$attr[ $key ] = ( 'false' === $attribute ) ? false : ( ( 'true' === $attribute ) ? true : $attribute );
+		// 	// }
+
+		// 	ob_start();
+		// 	$this->posts_articles_markup( $query, $attr );
+		// 	$html = ob_get_clean();
+
+
 		$post_attribute_array = array();
-			// $_POST['attr'] is sanitized in later stage.
-			$attr = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
-			$attr['paged'] = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
+			if ( isset( $_POST['attr'] ) ) {
 
-			$post_attribute_array = $this->required_attribute_for_query( $attr );
+				// $_POST['attr'] is sanitized in later stage.
+				$attr = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
-			$query = UAGB_Helper::get_query( $post_attribute_array, 'grid' );
+				$post_attribute_array = $this->required_attribute_for_query( $attr );
 
-			$pagination_markup = $this->render_pagination( $query, $attr );
+				$query = UAGB_Helper::get_query( $post_attribute_array, 'grid' );
 
+				$pagination_markup = $this->render_pagination( $query, $attr );
 
-			foreach ( $attr as $key => $attribute ) {
-				$attr[ $key ] = ( 'false' === $attribute ) ? false : ( ( 'true' === $attribute ) ? true : $attribute );
+// 				ob_start();
+
+// 				$html = ob_get_clean();
+// echo '<pre>';
+// 			var_dump($html);
+// 			echo '</pre>';
+				$data['ID'] = $attr['block_id'];
+				$data['pagination'] = $pagination_markup;
+				// $data['html'] = $html;
+				wp_send_json_success( $data );
 			}
+			// $data['ID'] = $attr['block_id'];
+			// // $data['pagination'] = $pagination_markup;
+			// $data['html'] = $html;
 
-			ob_start();
-			$this->posts_articles_markup( $query, $attr );
-			$html = ob_get_clean();
-			$data['ID'] = $attr['block_id'];
-			$data['pagination'] = $pagination_markup;
-			$data['html'] = $html;
-
-			wp_send_json_success( $data );
+			// wp_send_json_success( $data );
 	}
 
 		/**
@@ -1624,7 +1650,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		 * @since 1.18.1
 		 */
 		public function posts_articles_markup( $query, $attributes ) {
-// var_dump($query);
+
 			while ( $query->have_posts() ) {
 
 				$query->the_post();
