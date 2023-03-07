@@ -84,6 +84,7 @@
 	}
 
 	&.uagb-team__image-position-above {
+
 		&.uagb-team__align-center {
 			text-align: center;
 
@@ -120,6 +121,7 @@
 	}
 
 	&.uagb-team__image-position-left {
+
 		ul.uagb-team__social-list {
 			display: flex;
 			list-style: none;
@@ -143,6 +145,7 @@
 	}
 
 	&.uagb-team__image-position-right {
+
 		ul.uagb-team__social-list {
 			display: flex;
 			list-style: none;
@@ -189,7 +192,9 @@
 }
 
 @media only screen and ( max-width: 976px ) {
+
 	.wp-block-uagb-team {
+
 		&.uagb-team__image-position-left ul.uagb-team__social-list {
 			justify-content: center;
 		}
@@ -224,7 +229,9 @@
 }
 
 @media screen and ( max-width: 767px ) {
+
 	.wp-block-uagb-team {
+
 		&.uagb-team__image-position-left ul.uagb-team__social-list {
 			justify-content: center;
 		}

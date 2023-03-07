@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .uagb-text-control {
 	position: relative;
@@ -26,7 +26,9 @@
 	}
 
 	.uagb-control__header {
+
 		.uagb-number-control__actions {
+
 			.uagb-reset {
 				height: fit-content;
 			}
@@ -34,6 +36,7 @@
 	}
 
 	&__controls {
+
 		> .components-button {
 			position: absolute;
 			right: 0;
@@ -51,6 +54,7 @@
 		}
 
 		&-inline {
+
 			.components-base-control__field {
 				display: flex;
 				align-items: center;

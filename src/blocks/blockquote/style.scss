@@ -24,6 +24,7 @@
 
 	/* for backward */
 	.uagb-blockquote__skin-quotation {
+
 		blockquote.uagb-blockquote {
 			margin: 0;
 			padding: 0;
@@ -52,6 +53,7 @@
 		}
 
 		&.uagb-blockquote__style-style_2 {
+
 			.uagb-blockquote__icon-wrap {
 				display: inline-block;
 				float: left;
@@ -61,6 +63,7 @@
 
 	.uagb-blockquote__tweet-style-classic,
 	.uagb-blockquote__tweet-style-bubble {
+
 		a.uagb-blockquote__tweet-button {
 			background-color: #1da1f2;
 			border-radius: 100em;
@@ -97,6 +100,7 @@
 	}
 
 	.uagb-blockquote__with-tweet {
+
 		.uagb-blockquote footer {
 			display: -webkit-box;
 			display: -webkit-flex;
@@ -120,11 +124,11 @@
 		left: -0.8em;
 		border: solid 0.5em transparent;
 		border-right-color: #1da1f2;
-		transform: translateY( -50% ) scale( 1, 0.65 );
+		transform: translateY(-50%) scale(1, 0.65);
 		transition: 0.2s;
-		content: '';
-		-webkit-transform: translateY( -50% ) scale( 1, 0.65 );
-		-ms-transform: translateY( -50% ) scale( 1, 0.65 );
+		content: "";
+		-webkit-transform: translateY(-50%) scale(1, 0.65);
+		-ms-transform: translateY(-50%) scale(1, 0.65);
 		-webkit-transition: 0.2s;
 		-o-transition: 0.2s;
 	}
@@ -132,6 +136,7 @@
 	/* end backward */
 
 	&.uagb-blockquote__skin-quotation {
+
 		blockquote.uagb-blockquote {
 			vertical-align: baseline;
 			padding: 0;
@@ -161,6 +166,7 @@
 		}
 
 		&.uagb-blockquote__style-style_2 {
+
 			&.uagb-blockquote__align-right .uagb-blockquote__icon {
 				display: inline-block;
 				float: right;
@@ -285,11 +291,11 @@
 		left: -0.8em;
 		border: solid 0.5em transparent;
 		border-right-color: #1da1f2;
-		transform: translateY( -50% ) scale( 1, 0.65 );
+		transform: translateY(-50%) scale(1, 0.65);
 		transition: 0.2s;
-		content: '';
-		-webkit-transform: translateY( -50% ) scale( 1, 0.65 );
-		-ms-transform: translateY( -50% ) scale( 1, 0.65 );
+		content: "";
+		-webkit-transform: translateY(-50%) scale(1, 0.65);
+		-ms-transform: translateY(-50%) scale(1, 0.65);
 		-webkit-transition: 0.2s;
 		-o-transition: 0.2s;
 	}
@@ -297,18 +303,18 @@
 	&.uagb-blockquote__align-right.uagb-blockquote__tweet-style-bubble a.uagb-blockquote__tweet-button::before {
 		right: -0.8em;
 		left: auto;
-		transform: translateY( -50% ) scale( 1, 0.65 ) rotate( 180deg );
-		-webkit-transform: translateY( -50% ) scale( 1, 0.65 ) rotate( 180deg );
-		-ms-transform: translateY( -50% ) scale( 1, 0.65 ) rotate( 180deg );
+		transform: translateY(-50%) scale(1, 0.65) rotate(180deg);
+		-webkit-transform: translateY(-50%) scale(1, 0.65) rotate(180deg);
+		-ms-transform: translateY(-50%) scale(1, 0.65) rotate(180deg);
 	}
 
 	&.uagb-blockquote__align-center.uagb-blockquote__tweet-style-bubble a.uagb-blockquote__tweet-button::before {
 		top: -0.8em;
 		right: auto;
 		left: 50%;
-		transform: translate( -50%, 10% ) scale( 1, 0.85 ) rotate( 90deg );
-		-webkit-transform: translateX( -50% ) scale( 1, 0.85 ) rotate( 90deg );
-		-ms-transform: translateX( -50% ) scale( 1, 0.85 ) rotate( 90deg );
+		transform: translate(-50%, 10%) scale(1, 0.85) rotate(90deg);
+		-webkit-transform: translateX(-50%) scale(1, 0.85) rotate(90deg);
+		-ms-transform: translateX(-50%) scale(1, 0.85) rotate(90deg);
 	}
 
 	&.uagb-blockquote__with-tweet.uagb-blockquote__align-center .uagb-blockquote footer,
@@ -431,8 +437,11 @@
 }
 
 @media only screen and ( max-width: 976px ) {
+
 	.wp-block-uagb-blockquote {
+
 		&.uagb-blockquote__stack-img-tablet {
+
 			.uagb-blockquote__author {
 				width: 100%;
 			}
@@ -473,9 +482,9 @@
 				top: -0.8em;
 				right: auto;
 				left: 50%;
-				transform: translate( -50%, 10% ) scale( 1, 0.85 ) rotate( 90deg );
-				-webkit-transform: translateX( -50% ) scale( 1, 0.85 ) rotate( 90deg );
-				-ms-transform: translateX( -50% ) scale( 1, 0.85 ) rotate( 90deg );
+				transform: translate(-50%, 10%) scale(1, 0.85) rotate(90deg);
+				-webkit-transform: translateX(-50%) scale(1, 0.85) rotate(90deg);
+				-ms-transform: translateX(-50%) scale(1, 0.85) rotate(90deg);
 			}
 		}
 
@@ -493,8 +502,11 @@
 }
 
 @media screen and ( max-width: 767px ) {
+
 	.wp-block-uagb-blockquote {
+
 		&.uagb-blockquote__stack-img-mobile {
+
 			.uagb-blockquote__author {
 				width: 100%;
 			}
@@ -535,9 +547,9 @@
 				top: -0.8em;
 				right: auto;
 				left: 50%;
-				transform: translate( -50%, 10% ) scale( 1, 0.85 ) rotate( 90deg );
-				-webkit-transform: translateX( -50% ) scale( 1, 0.85 ) rotate( 90deg );
-				-ms-transform: translateX( -50% ) scale( 1, 0.85 ) rotate( 90deg );
+				transform: translate(-50%, 10%) scale(1, 0.85) rotate(90deg);
+				-webkit-transform: translateX(-50%) scale(1, 0.85) rotate(90deg);
+				-ms-transform: translateX(-50%) scale(1, 0.85) rotate(90deg);
 			}
 		}
 

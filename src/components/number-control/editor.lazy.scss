@@ -1,6 +1,7 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .uag-number-control {
+
 	.uagb-number-control__mobile-controls {
 		// Full-width Control.
 		&.uag-number-control__full-width {
@@ -19,7 +20,7 @@
 		&.uag-number-control__inline {
 			align-items: center;
 			display: grid;
-			grid-template-columns: repeat( 3, 1fr );
+			grid-template-columns: repeat(3, 1fr);
 			color: $spectra-color-body;
 
 			.uag-control-label {

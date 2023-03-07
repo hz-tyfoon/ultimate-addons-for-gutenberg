@@ -1,4 +1,5 @@
 .uagb-slider-editor-wrap {
+
 	&.uagb-editor-preview-mode-tablet,
 	&.uagb-editor-preview-mode-mobile {
 		box-sizing: border-box;
@@ -7,6 +8,7 @@
 	}
 
 	&.uagb-list-view-enabled {
+
 		.swiper-button-prev,
 		.swiper-button-next,
 		.swiper-pagination {
@@ -34,7 +36,9 @@
 }
 
 .block-editor-block-list__layout {
+
 	.uagb-slider-editor-wrap {
+
 		.block-editor-block-list__block {
 			margin: 1px;
 		}

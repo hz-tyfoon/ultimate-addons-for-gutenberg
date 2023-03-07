@@ -11,6 +11,7 @@
 }
 
 .uagb-faq-layout-grid.uagb-faq-equal-height.uagb-faq__wrap {
+
 	.uagb-faq-child__outer-wrap,
 	.uagb-faq-item {
 		height: 100%;
@@ -18,7 +19,8 @@
 }
 
 // These fixes are specific to the Astra theme.
-body[class*='astra'] {
+body[class*="astra"] {
+
 	.uagb-faq-questions {
 		line-height: normal;
 	}

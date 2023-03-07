@@ -1,4 +1,5 @@
 .wp-block-uagb-counter {
+
 	.wp-block-uagb-counter__icon,
 	.wp-block-uagb-counter__image-wrap {
 		display: inline-block;
@@ -6,6 +7,7 @@
 	}
 
 	&--number {
+
 		.wp-block-uagb-counter__number {
 			font-size: 52px;
 			color: #3a3a3a;
@@ -61,6 +63,7 @@
 	}
 
 	&--circle {
+
 		.wp-block-uagb-counter-circle-container {
 			position: relative;
 			display: inline-block;
@@ -75,7 +78,7 @@
 			}
 
 			& > svg {
-				transform: rotate( -90deg );
+				transform: rotate(-90deg);
 				width: 100%;
 				height: 100%;
 
@@ -130,7 +133,8 @@
 
 // These fixes are specific to the Astra theme.
 // Astra theme adds line-height on frontend which interferes with the WYSIWYG experience.
-body[class*='astra'] {
+body[class*="astra"] {
+
 	.wp-block-uagb-counter__title,
 	.wp-block-uagb-counter__number {
 		line-height: normal;

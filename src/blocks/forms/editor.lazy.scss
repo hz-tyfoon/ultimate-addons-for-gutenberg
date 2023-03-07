@@ -2,6 +2,7 @@
 	padding: 25px;
 
 	.uagb-forms-main-form {
+
 		.uagb-forms-form-hidden-data {
 			display: none;
 		}
@@ -10,7 +11,9 @@
 			float: right;
 
 			.components-toggle-control {
+
 				.components-base-control__field {
+
 					.components-form-toggle {
 						margin-left: 5px;
 						margin-top: 4px;
@@ -23,8 +26,8 @@
 			}
 		}
 
-		input[type='checkbox'],
-		input[type='radio'] {
+		input[type="checkbox"],
+		input[type="radio"] {
 			margin-top: 5px;
 			margin-bottom: 5px;
 		}
@@ -60,10 +63,11 @@ select.uagb-forms-select-box.uagb-forms-input {
 }
 
 .uagb-forms-variations {
+
 	.components-button,
 	.components-button.is-secondary,
 	.components-button.is-tertiary,
-	.components-button:hover:not( :disabled ) {
+	.components-button:hover:not(:disabled) {
 		box-shadow: none;
 		outline: none;
 	}
@@ -79,12 +83,13 @@ select.uagb-forms-select-box.uagb-forms-input {
 }
 
 .uagb-forms-phone-wrap {
+
 	& .uagb-forms-phone-flex {
 		display: flex;
 		width: 100%;
 
 		& .components-base-control__field {
-			height: calc( 100% - 8px );
+			height: calc(100% - 8px);
 		}
 
 		& .uagb-form-phone-country {
