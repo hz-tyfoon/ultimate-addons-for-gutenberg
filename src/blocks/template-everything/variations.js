@@ -288,8 +288,8 @@ const variations = [
 									[
 										'uagb/buttons-child',
 										{
-											iconHColor: '#000',
-											hColor: '#fff',
+											iconHColor: '#FFFFFFA3',
+											hColor: '#FFFFFFA3',
 											backgroundType: 'transparent',
 											hoverbackgroundType: 'color',
 											hBackground: '#344054',
@@ -366,6 +366,14 @@ const variations = [
 							bottomPaddingDesktop: 32,
 							leftPaddingDesktop: 32,
 							rightPaddingDesktop: 32,
+							topPaddingTablet: 32,
+							bottomPaddingTablet: 32,
+							leftPaddingTablet: 32,
+							rightPaddingTablet: 32,
+							topPaddingMobile: 32,
+							bottomPaddingMobile: 32,
+							leftPaddingMobile: 32,
+							rightPaddingMobile: 32,
 						},
 						[
 							[
@@ -451,6 +459,14 @@ const variations = [
 							bottomPaddingDesktop: 32,
 							leftPaddingDesktop: 32,
 							rightPaddingDesktop: 32,
+							topPaddingTablet: 32,
+							bottomPaddingTablet: 32,
+							leftPaddingTablet: 32,
+							rightPaddingTablet: 32,
+							topPaddingMobile: 32,
+							bottomPaddingMobile: 32,
+							leftPaddingMobile: 32,
+							rightPaddingMobile: 32,
 						},
 						[
 							[
@@ -536,6 +552,14 @@ const variations = [
 							bottomPaddingDesktop: 32,
 							leftPaddingDesktop: 32,
 							rightPaddingDesktop: 32,
+							topPaddingTablet: 32,
+							bottomPaddingTablet: 32,
+							leftPaddingTablet: 32,
+							rightPaddingTablet: 32,
+							topPaddingMobile: 32,
+							bottomPaddingMobile: 32,
+							leftPaddingMobile: 32,
+							rightPaddingMobile: 32,
 						},
 						[
 							[
@@ -625,6 +649,7 @@ const variations = [
 							[
 								'uagb/image',
 								{
+									align: 'center',
 									url: `${ uagb_blocks_info.uagb_url }/admin/assets/images/uag-placeholder.svg`,
 								},
 							],
