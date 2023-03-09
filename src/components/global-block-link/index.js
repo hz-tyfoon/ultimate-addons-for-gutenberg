@@ -13,6 +13,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { store as spectraStore } from '@Store';
 import { STORE_NAME as storeName } from '@Store/constants';
 import { compose } from '@wordpress/compose';
+import Select from 'react-select';
 
 const GlobalBlockStyles = ( props ) => {
    // Add and remove the CSS on the drop and remove of the component.
@@ -42,6 +43,9 @@ const GlobalBlockStyles = ( props ) => {
     } = props;
 
     const [ uniqueID, setUniqueID ] = useState( false );
+    const [ bulkEdit, setBulkEdit ] = useState( false );
+    const [ multiSelected, setMultiSelected ] = useState( [] );
+
     const [ tempStyleName, setTempStyleName ] = useState( '' );
     const [ saveToDatabase, setSaveToDatabase ] = useState( false );
     const [currentAttributesState, setCurrentAttributesState] = useState( attributes );
@@ -84,13 +88,7 @@ const GlobalBlockStyles = ( props ) => {
         }
 	}, [saveToDatabase] );
 
-    useEffect( () => {
-        if ( saveToDatabase ) {
-            saveStylesToDatabase();
-        }
-	}, [saveToDatabase] );
-
-    const saveStylesToDatabase = () => {
+    const saveStylesToDatabase = ( bulkUpdateStyles = false ) => {
 
         let styleProps = {};
 
@@ -109,8 +107,11 @@ const GlobalBlockStyles = ( props ) => {
         formData.append( 'blockName', name );
         formData.append( 'postId', select( 'core/editor' ).getCurrentPostId() );
         formData.append( 'globalBlockStyleId', globalBlockStyleId );
+        formData.append( 'bulkUpdateStyles', bulkUpdateStyles );
 
-        
+        if ( bulkUpdateStyles ) {
+            formData.append( 'multiSelected', multiSelected );
+        }
 
         apiFetch( {
             url: uagb_blocks_info.ajax_url,
@@ -193,7 +194,7 @@ const GlobalBlockStyles = ( props ) => {
         }
         updateGlobalBlockStylesFontFamilies( output );
     };
-
+console.log(globalBlockStyleId);
     return (
         <UAGAdvancedPanelBody
             title={ __( 'Global Block Styles', 'ultimate-addons-for-gutenberg' ) }
@@ -203,7 +204,7 @@ const GlobalBlockStyles = ( props ) => {
                 ( ! globalBlockStyleName || '' === globalBlockStyleName ) && (
                     <>
                         <Button
-                            className="spectra-save-block-styles-button components-base-control"
+                            className="spectra-gbs-button components-base-control"
                             onClick={ () => {
                                 openModal();
                                 setUniqueID( new Date().getTime().toString() );
@@ -212,8 +213,9 @@ const GlobalBlockStyles = ( props ) => {
                         >
                             { __( 'Save as a New Global Block Style', 'ultimate-addons-for-gutenberg' ) }
                         </Button>
-                        <UAGSelectControl
-                            label={ __(
+                        <label>{__('Link to Existing Style','ultimate-addons-for-gutenberg')}</label>
+                        <Select
+                            name={ __(
                                 'Link to Existing Style',
                                 'ultimate-addons-for-gutenberg'
                             ) }
@@ -221,28 +223,36 @@ const GlobalBlockStyles = ( props ) => {
                                 value: globalBlockStyleId,
                                 label: 'globalBlockStyleId',
                             } }
+                            defaultValue={! bulkEdit ? globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) : multiSelected }
                             onChange = {
                                 ( value ) => {
-                                    
+                                    console.log(value);
+                                    if ( bulkEdit ) {
+                                        setMultiSelected(value);
+                                        return;
+                                    }
                                     let label = '';
+                                    let selectedValue = value?.value;
                                     for ( let i = 0; i < globalBlockStyles.length; i++ ) {
-                                        if ( globalBlockStyles[i]?.value === value ) {
+                                        if ( globalBlockStyles[i]?.value === selectedValue ) {
                                             label = globalBlockStyles[i]?.label;
                                             break;
                                         }
                                     }
                                     setAttributes( 
                                         { 
-                                            globalBlockStyleId: value,
+                                            globalBlockStyleId: selectedValue,
                                             globalBlockStyleName: label 
                                         } 
                                         );
                                     
-                                    getBlockStyles( value );
+                                    getBlockStyles( selectedValue );
                                 }
                             }
-                            layout="stack"
+                            classNamePrefix={'spectra-multi-select'}
+                            className={'spectra-multi-select components-base-control'}
                             options={ globalBlockStyles }
+                            isMulti={bulkEdit}
                         />
                     </>
                 )
@@ -294,8 +304,9 @@ const GlobalBlockStyles = ( props ) => {
             {
                 ( globalBlockStyleName && '' !== globalBlockStyleName ) && (
                     <>
-                        <UAGSelectControl
-							label={ __(
+                        <label>{__('Linked Style','ultimate-addons-for-gutenberg')}</label>
+                        <Select
+							name={ __(
 								'Linked Style',
 								'ultimate-addons-for-gutenberg'
 							) }
@@ -303,12 +314,18 @@ const GlobalBlockStyles = ( props ) => {
 								value: globalBlockStyleId,
 								label: 'globalBlockStyleId',
 							} }
+                            defaultValue={! bulkEdit ? globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) : multiSelected }
                             onChange = {
-                                ( value ) => {
-                                    
+                                ( value ) => {    
+                                    console.log(value);
+                                    if ( bulkEdit ) {
+                                        setMultiSelected(value);
+                                        return;
+                                    }
                                     let label = '';
+                                    let selectedValue = value?.value;
                                     for ( let i = 0; i < globalBlockStyles.length; i++ ) {
-                                        if ( globalBlockStyles[i]?.value === value ) {
+                                        if ( globalBlockStyles[i]?.value === selectedValue ) {
                                             label = globalBlockStyles[i]?.label;
                                             break;
                                         }
@@ -316,21 +333,45 @@ const GlobalBlockStyles = ( props ) => {
                                     
                                     setAttributes( 
                                         { 
-                                            globalBlockStyleId: value,
+                                            globalBlockStyleId: selectedValue,
                                             globalBlockStyleName: label 
                                         } 
                                     );
-                                    setUniqueID( value );
-                                    getBlockStyles( value );
+                                    setUniqueID( selectedValue );
+                                    getBlockStyles( selectedValue );
                                 }
                             }
 							options={ globalBlockStyles }
-                            layout="stack"
+                            classNamePrefix={'spectra-multi-select'}
+                            className={'spectra-multi-select components-base-control'}
+                            isMulti={bulkEdit}
 						/>
+                        <Button
+                            className="spectra-gbs-button components-base-control"
+                            onClick={ () => {
+                                setBulkEdit(true);
+                            } }
+                            variant="primary"
+                        >
+                            { __( 'Bulk Edit', 'ultimate-addons-for-gutenberg' ) }
+                        </Button>
+                        { bulkEdit &&
+                            <Button
+                                className="spectra-gbs-button delete components-base-control"
+                                onClick={ () => {
+                                    setBulkEdit(false);
+                                    console.log(multiSelected);
+                                    saveStylesToDatabase('bulkUpdateStyles');
+                                } }
+                                variant="primary"
+                            >
+                                { __( 'Delete Selected Styles', 'ultimate-addons-for-gutenberg' ) }
+                            </Button>
+                        }
                         {
                             attributesChanged &&
                             <Button
-                                className="spectra-save-block-styles-button components-base-control"
+                                className="spectra-gbs-button components-base-control"
                                 onClick={ () => {
                                     getBlockStyles( globalBlockStyleId );
                                 } }
@@ -340,7 +381,7 @@ const GlobalBlockStyles = ( props ) => {
                             </Button>
                         }
                         <Button
-                                className="spectra-save-block-styles-button components-base-control"
+                                className="spectra-gbs-button components-base-control"
                                 onClick={ () => {
                                     setAttributes( 
                                         { 

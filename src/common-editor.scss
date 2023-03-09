@@ -126,6 +126,7 @@
 	margin-bottom: $spectra-control-label-bottom-margin;
 	text-transform: $spectra-text-transform-label !important;
 	font-weight: $spectra-font-weight-label !important;
+	display: inline-block;
 }
 
 .uagb-inspector-tab label.components-toggle-control__label {

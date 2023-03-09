@@ -79,6 +79,9 @@ class UAGB_Init_Blocks {
 		}
 	}
 
+	public function bulk_update_global_block_styles($post) {
+		$multi_selected = $post['multiSelected'];
+	}
 	/**
 	 * Function to save Spectra Global Block Styles data.
 	 *
@@ -98,7 +101,10 @@ class UAGB_Init_Blocks {
 			$response_data = array( 'messsage' => __( 'Noo post data found!', 'ultimate-addons-for-gutenberg' ) );
 			wp_send_json_error( $response_data );
 		}
-		
+		if ( $_POST['bulkUpdateStyles'] ) {
+			$this->bulk_update_global_block_styles($_POST);
+
+		}
 		$post_id = sanitize_text_field( $_POST['postId'] );
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
 		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
