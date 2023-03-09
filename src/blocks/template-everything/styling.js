@@ -142,7 +142,7 @@ function styling( props ) {
 		' .wp-block': {
 			'color': color,
 		},
-		' span': {
+		' span:not(.uagb-button__icon)': {
 			'color': color,
 		},
 		' p': {

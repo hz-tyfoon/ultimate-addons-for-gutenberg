@@ -293,6 +293,7 @@ const variations = [
 											backgroundType: 'transparent',
 											hoverbackgroundType: 'color',
 											hBackground: '#344054',
+											iconColor: '#000',
 											iconPosition: 'before',
 											showIcon: true,
 											icon: 'heart',
