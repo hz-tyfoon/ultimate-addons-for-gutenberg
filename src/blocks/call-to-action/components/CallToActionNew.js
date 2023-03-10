@@ -50,7 +50,10 @@ const CTA = ( props ) => {
 						{ attributes.ctaIconPosition === 'before' &&
 							ctaIconOutput }
 						<RichText
-							value={ attributes.ctaText.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+							value={ attributes.ctaText.replace(
+								/<(?!br\s*V?)[^>]+>/g,
+								''
+							) }
 							onChange={ ( value ) => {
 								setAttributes( { ctaText: value } );
 							} }
@@ -82,7 +85,10 @@ const CTA = ( props ) => {
 				>
 					{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
 					<RichText.Content
-						value={ attributes.ctaText.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+						value={ attributes.ctaText.replace(
+							/<(?!br\s*V?)[^>]+>/g,
+							''
+						) }
 					/>
 					{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
 				</a>

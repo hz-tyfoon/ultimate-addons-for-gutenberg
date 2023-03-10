@@ -49,7 +49,10 @@ const SecondCTAButton = ( props ) => {
 					{ attributes.secondCtaIconPosition === 'before' &&
 						secondCtaIconOutput }
 					<RichText
-						value={ attributes.secondCtaLabel.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+						value={ attributes.secondCtaLabel.replace(
+							/<(?!br\s*V?)[^>]+>/g,
+							''
+						) }
 						onChange={ ( value ) => {
 							setAttributes( { secondCtaLabel: value } );
 						} }
@@ -77,7 +80,10 @@ const SecondCTAButton = ( props ) => {
 				{ attributes.secondCtaIconPosition === 'before' &&
 					secondCtaIconOutput }
 				<RichText.Content
-					value={ attributes.secondCtaLabel.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+					value={ attributes.secondCtaLabel.replace(
+						/<(?!br\s*V?)[^>]+>/g,
+						''
+					) }
 				/>
 				{ /* { attributes.secondCtaLabel } */ }
 				{ attributes.secondCtaIconPosition === 'after' &&
