@@ -340,9 +340,9 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 
 			$theme_folder = get_template();
 
-			if ( ( function_exists( 'get_block_templates' ) && function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && current_theme_supports( 'block-templates' ) ) ) {
-				require_once UAGB_DIR . 'compatibility/class-uagb-fse-compatibility.php';
-			}
+			// if ( ( function_exists( 'get_block_templates' ) && function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && current_theme_supports( 'block-templates' ) ) ) {
+			// 	require_once UAGB_DIR . 'compatibility/class-uagb-fse-compatibility.php';
+			// }
 
 			if ( 'astra' === $theme_folder ) {
 				require_once UAGB_DIR . 'compatibility/class-uagb-astra-compatibility.php';

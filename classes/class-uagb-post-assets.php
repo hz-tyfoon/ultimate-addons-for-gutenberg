@@ -234,6 +234,17 @@ class UAGB_Post_Assets {
 			$content = get_option( 'widget_block' );
 			$this->prepare_widget_area_assets( $content );
 		}
+		global $_wp_current_template_content;
+		if ( ( function_exists( 'get_block_templates' ) && function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && current_theme_supports( 'block-templates' ) ) ) {
+			if( ! $_wp_current_template_content ){
+				require_once UAGB_DIR . 'compatibility/class-uagb-fse-compatibility.php';
+			} else{
+		$this->common_function_for_assets_preparation( $_wp_current_template_content );
+			}
+		}
+		// if ( ( function_exists( 'get_block_templates' ) && function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && current_theme_supports( 'block-templates' ) ) ) {
+		// 	require_once UAGB_DIR . 'compatibility/class-uagb-fse-compatibility.php';
+		// }
 	}
 
 	/**
@@ -343,7 +354,9 @@ class UAGB_Post_Assets {
 	 * @since 1.23.0
 	 */
 	public function enqueue_scripts() {
-
+		// var_dump($this->uag_flag);
+		// $this->uag_flag = true;
+		// var_dump($this->post_id);
 		// Global Required assets.
 		if ( has_blocks( $this->post_id ) ) {
 			/* Print conditional css for all blocks */
@@ -776,6 +789,10 @@ class UAGB_Post_Assets {
 			$css                       += UAGB_Block_Helper::get_gallery_css( $blockattr, $block_id );
 		}
 
+		if ( 'core/template-part' === $name ) {
+			$this->uag_flag             = true;
+		}
+
 		if ( strpos( $name, 'uagb/' ) !== false ) {
 			$this->uag_flag = true;
 		}
@@ -808,42 +825,68 @@ class UAGB_Post_Assets {
 
 		if ( isset( $block['innerBlocks'] ) ) {
 			foreach ( $block['innerBlocks'] as $j => $inner_block ) {
-				if ( 'core/block' === $inner_block['blockName'] ) {
-					$id = ( isset( $inner_block['attrs']['ref'] ) ) ? $inner_block['attrs']['ref'] : 0;
 
-					if ( $id ) {
-						$content = get_post_field( 'post_content', $id );
+				if ( 'core/template-part' === $inner_block['blockName'] ) {
+					$slugs = $inner_block['attrs']['slug'];
+					$templates_parts = get_block_templates( array( 'slugs__in' => $slugs ), 'wp_template_part' );
+					foreach ( $templates_parts as $templates_part ) {
+						if ( $slugs === $templates_part->slug ) {
+							$id = $templates_part->wp_id;
+							// echo '<pre>';
+							// var_dump($id);
+							// var_dump($inner_block['blockName']);
+							// var_dump($templates_part->slug);
+							// echo '</pre>';
+							if ( $id ) {
 
-						$reusable_blocks = $this->parse_blocks( $content );
-
-						$assets = $this->get_blocks_assets( $reusable_blocks );
-
-						$this->stylesheet .= $assets['css'];
-						$this->script     .= $assets['js'];
-					}
-				} else {
-					// Get CSS for the Block.
-					$inner_assets    = $this->get_block_css_and_js( $inner_block );
-					$inner_block_css = $inner_assets['css'];
-
-					$css_desktop = ( isset( $css['desktop'] ) ? $css['desktop'] : '' );
-					$css_tablet  = ( isset( $css['tablet'] ) ? $css['tablet'] : '' );
-					$css_mobile  = ( isset( $css['mobile'] ) ? $css['mobile'] : '' );
-
-					if ( 'enabled' === $this->file_generation ) { // Get common CSS for the block when file generation is enabled.
-						$css_common = ( isset( $css['common'] ) ? $css['common'] : '' );
-						if ( isset( $inner_block_css['common'] ) ) {
-							$css['common'] = $css_common . $inner_block_css['common'];
+								$content = get_post_field( 'post_content', $id );
+								$reusable_blocks = $this->parse_blocks( $content );
+								$assets = $this->get_blocks_assets( $reusable_blocks );
+								$this->stylesheet .= $assets['css'];
+								$this->script     .= $assets['js'];
+								// $this->update_page_assets();
+								// var_dump($this->stylesheet);
+							}
 						}
 					}
+				} else {
+					if ( 'core/block' === $inner_block['blockName'] ) {
+						$id = ( isset( $inner_block['attrs']['ref'] ) ) ? $inner_block['attrs']['ref'] : 0;
 
-					if ( isset( $inner_block_css['desktop'] ) ) {
-						$css['desktop'] = $css_desktop . $inner_block_css['desktop'];
-						$css['tablet']  = $css_tablet . $inner_block_css['tablet'];
-						$css['mobile']  = $css_mobile . $inner_block_css['mobile'];
+						if ( $id ) {
+							$content = get_post_field( 'post_content', $id );
+
+							$reusable_blocks = $this->parse_blocks( $content );
+
+							$assets = $this->get_blocks_assets( $reusable_blocks );
+
+							$this->stylesheet .= $assets['css'];
+							$this->script     .= $assets['js'];
+						}
+					} else {
+						// Get CSS for the Block.
+						$inner_assets    = $this->get_block_css_and_js( $inner_block );
+						$inner_block_css = $inner_assets['css'];
+
+						$css_desktop = ( isset( $css['desktop'] ) ? $css['desktop'] : '' );
+						$css_tablet  = ( isset( $css['tablet'] ) ? $css['tablet'] : '' );
+						$css_mobile  = ( isset( $css['mobile'] ) ? $css['mobile'] : '' );
+
+						if ( 'enabled' === $this->file_generation ) { // Get common CSS for the block when file generation is enabled.
+							$css_common = ( isset( $css['common'] ) ? $css['common'] : '' );
+							if ( isset( $inner_block_css['common'] ) ) {
+								$css['common'] = $css_common . $inner_block_css['common'];
+							}
+						}
+
+						if ( isset( $inner_block_css['desktop'] ) ) {
+							$css['desktop'] = $css_desktop . $inner_block_css['desktop'];
+							$css['tablet']  = $css_tablet . $inner_block_css['tablet'];
+							$css['mobile']  = $css_mobile . $inner_block_css['mobile'];
+						}
+
+						$js .= $inner_assets['js'];
 					}
-
-					$js .= $inner_assets['js'];
 				}
 			}
 		}
@@ -973,36 +1016,70 @@ class UAGB_Post_Assets {
 					continue;
 				}
 
-				if ( 'core/block' === $block['blockName'] ) {
-					$id = ( isset( $block['attrs']['ref'] ) ) ? $block['attrs']['ref'] : 0;
+				if ( 'core/template-part' === $block['blockName'] ) {
+					$slugs = $block['attrs']['slug'];
+					$templates_parts = get_block_templates( array( 'slugs__in' => $slugs ), 'wp_template_part' );
+					// $this->uag_flag = true;
+					foreach ( $templates_parts as $templates_part ) {
 
-					if ( $id ) {
-						$content = get_post_field( 'post_content', $id );
+						if ( $slugs === $templates_part->slug ) {
+							$id = $templates_part->wp_id;
 
-						$reusable_blocks = $this->parse_blocks( $content );
+							if ( $id ) {
+								// echo '<pre>';
+							// var_dump(( $slugs === $templates_part->slug ));
+							// var_dump($slugs);
+							// var_dump($templates_part->slug);
+							// var_dump($id);
+							// echo '</pre>';
 
-						$assets = $this->get_blocks_assets( $reusable_blocks );
+								$content = get_post_field( 'post_content', $id );
 
-						$this->stylesheet .= $assets['css'];
-						$this->script     .= $assets['js'];
+								$reusable_blocks = $this->parse_blocks( $content );
 
+								$assets = $this->get_blocks_assets( $reusable_blocks );
+								// if( ! empty( $assets['css'] ) ){
+
+
+								// }
+								$this->stylesheet .= $assets['css'];
+								$this->script     .= $assets['js'];
+								// $this->update_page_assets();
+								// var_dump( $this->stylesheet );
+							}
+						}
 					}
 				} else {
-					// Add your block specif css here.
-					$block_assets = $this->get_block_css_and_js( $block );
-					// Get CSS for the Block.
-					$css = $block_assets['css'];
+					if ( 'core/block' === $block['blockName'] ) {
+						$id = ( isset( $block['attrs']['ref'] ) ) ? $block['attrs']['ref'] : 0;
 
-					if ( ! empty( $css['common'] ) ) {
-						$desktop .= $css['common'];
-					}
+						if ( $id ) {
+							$content = get_post_field( 'post_content', $id );
 
-					if ( isset( $css['desktop'] ) ) {
-						$desktop .= $css['desktop'];
-						$tablet  .= $css['tablet'];
-						$mobile  .= $css['mobile'];
+							$reusable_blocks = $this->parse_blocks( $content );
+
+							$assets = $this->get_blocks_assets( $reusable_blocks );
+
+							$this->stylesheet .= $assets['css'];
+							$this->script     .= $assets['js'];
+						}
+					} else {
+						// Add your block specif css here.
+						$block_assets = $this->get_block_css_and_js( $block );
+						// Get CSS for the Block.
+						$css = $block_assets['css'];
+
+						if ( ! empty( $css['common'] ) ) {
+							$desktop .= $css['common'];
+						}
+
+						if ( isset( $css['desktop'] ) ) {
+							$desktop .= $css['desktop'];
+							$tablet  .= $css['tablet'];
+							$mobile  .= $css['mobile'];
+						}
+						$js .= $block_assets['js'];
 					}
-					$js .= $block_assets['js'];
 				}
 			}
 		}
