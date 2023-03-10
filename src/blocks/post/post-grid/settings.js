@@ -267,7 +267,8 @@ const Settings = ( props ) => {
 		enableOffset,
 		equalHeightInlineButtons,
 		imageRatio,
-		imgEqualHeight
+		imgEqualHeight,
+		inheritFromTheme
 	} = attributes;
 
 	const setImgEqualheight = ( value ) => {
@@ -1289,6 +1290,16 @@ const Settings = ( props ) => {
 					onChange={ () =>
 						setAttributes( { displayPostLink: ! displayPostLink } )
 					}
+				/>
+				<ToggleControl
+					checked={ inheritFromTheme }
+					onChange={ () =>
+						setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+					}
+					label={ __(
+						'Inherit From Theme',
+						'ultimate-addons-for-gutenberg'
+					) }
 				/>
 				{ displayPostLink && (
 					<>

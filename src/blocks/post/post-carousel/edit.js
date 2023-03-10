@@ -433,6 +433,7 @@ let categoriesList = [];
 		imgSize,
 		imgPosition,
 		displayPostLink,
+		inheritFromTheme,
 		newTab,
 		ctaText,
 		columns,
@@ -1377,6 +1378,16 @@ let categoriesList = [];
 				/>
 				{ displayPostLink && (
 					<>
+						<ToggleControl
+							checked={ inheritFromTheme }
+							onChange={ () =>
+								setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+							}
+							label={ __(
+								'Inherit From Theme',
+								'ultimate-addons-for-gutenberg'
+							) }
+						/>
 						<ToggleControl
 							label={ __(
 								'Open Links in New Tab',

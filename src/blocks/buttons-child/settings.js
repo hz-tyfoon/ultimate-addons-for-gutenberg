@@ -127,6 +127,7 @@ const Settings = ( props ) => {
 		letterSpacingType,
 
 		showIcon,
+		inheritFromTheme
 
 	} = attributes;
 
@@ -149,6 +150,16 @@ const Settings = ( props ) => {
 				title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ false }
 			>
+				<ToggleControl
+					checked={ inheritFromTheme }
+					onChange={ () =>
+						setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+					}
+					label={ __(
+						'Inherit From Theme',
+						'ultimate-addons-for-gutenberg'
+					) }
+				/>
 				<ToggleControl
 					label={ __(
 						'Enable Icon',

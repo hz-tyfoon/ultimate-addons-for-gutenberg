@@ -189,6 +189,7 @@ const Settings = ( props ) => {
 		tweetBtnLetterSpacingTablet,
 		tweetBtnLetterSpacingMobile,
 		tweetBtnLetterSpacingType,
+		inheritFromTheme
 	} = attributes;
 	let loadDescGoogleFonts;
 	let loadAuthorGoogleFonts;
@@ -811,6 +812,16 @@ const Settings = ( props ) => {
 			title={ __( 'Twitter Icon', 'ultimate-addons-for-gutenberg' ) }
 			initialOpen={ false }
 		>
+			<ToggleControl
+				checked={ inheritFromTheme }
+				onChange={ () =>
+					setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+				}
+				label={ __(
+					'Inherit From Theme',
+					'ultimate-addons-for-gutenberg'
+				) }
+			/>
 			<ToggleControl
 				label={ __( 'Enable Icon', 'ultimate-addons-for-gutenberg' ) }
 				checked={ enableTweet }

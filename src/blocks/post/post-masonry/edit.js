@@ -488,6 +488,7 @@ const UAGBPostMasonry = ( props ) => {
 		imgSize,
 		imgPosition,
 		displayPostLink,
+		inheritFromTheme,
 		newTab,
 		ctaText,
 		columns,
@@ -1673,6 +1674,16 @@ const UAGBPostMasonry = ( props ) => {
 				/>
 				{ displayPostLink && (
 					<>
+						<ToggleControl
+							checked={ inheritFromTheme }
+							onChange={ () =>
+								setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+							}
+							label={ __(
+								'Inherit From Theme',
+								'ultimate-addons-for-gutenberg'
+							) }
+						/>
 						<ToggleControl
 							label={ __(
 								'Open Links in New Tab',

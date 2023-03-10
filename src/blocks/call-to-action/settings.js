@@ -223,6 +223,8 @@ const Settings = ( props ) => {
 		btncontentWidthTablet,
 		btncontentWidthMobile,
 		btncontentWidthType,
+		inheritFromTheme,
+		secondInheritFromTheme
 	} = attributes;
 
 	let loadCtaGoogleFonts;
@@ -295,6 +297,16 @@ const Settings = ( props ) => {
 				title={ __( 'Additional Button', 'ultimate-addons-for-gutenberg' ) }
 				initialOpen={ false }
 			>
+				<ToggleControl
+					checked={ secondInheritFromTheme }
+					onChange={ () =>
+						setAttributes( { secondInheritFromTheme: ! secondInheritFromTheme } )
+					}
+					label={ __(
+						'Inherit From Theme',
+						'ultimate-addons-for-gutenberg'
+					) }
+				/>
 				<ToggleControl
 					label={ __(
 						'Enable Additional Button',
@@ -831,11 +843,23 @@ const Settings = ( props ) => {
 					showIcons={ false }
 				/>
 				{ 'button' === ctaType &&
-					<UAGPresets
-						setAttributes = { setAttributes }
-						presets = { buttonsPresetsCTA }
-						presetInputType = 'radioImage'
-					/>
+					<>
+						<UAGPresets
+							setAttributes = { setAttributes }
+							presets = { buttonsPresetsCTA }
+							presetInputType = 'radioImage'
+						/>
+						<ToggleControl
+							checked={ inheritFromTheme }
+							onChange={ () =>
+								setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+							}
+							label={ __(
+								'Inherit From Theme',
+								'ultimate-addons-for-gutenberg'
+							) }
+						/>
+					</>
 				}
 				{ stack !== 'desktop' && ctaType !== 'all' && ctaType !== 'none' && (
 

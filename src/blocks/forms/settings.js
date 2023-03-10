@@ -52,6 +52,7 @@ const Settings = ( props ) => {
 		buttonAlign,
 		buttonAlignTablet,
 		buttonAlignMobile,
+		inheritFromTheme,
 		buttonSize,
 		confirmationType,
 		confirmationMessage,
@@ -216,6 +217,16 @@ const Settings = ( props ) => {
 			initialOpen={ false }
 			// className="uagb__url-panel-body"
 		>
+			<ToggleControl
+				checked={ inheritFromTheme }
+				onChange={ () =>
+					setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+				}
+				label={ __(
+					'Inherit From Theme',
+					'ultimate-addons-for-gutenberg'
+				) }
+			/>
 			<MultiButtonsControl
 				setAttributes={ setAttributes }
 				label={ __( 'Button Alignment', 'ultimate-addons-for-gutenberg' ) }

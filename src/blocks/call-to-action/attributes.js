@@ -10,7 +10,11 @@ const secondCtaBorderAttribute = getBorderAttributes( 'secondCta' );
 const attributes = {
 	inheritFromTheme: {
 		type: 'boolean',
-		default: false,
+		default: 'disabled' === uagb_blocks_info.btn_inherit_from_theme ? false : true,
+	},
+	secondInheritFromTheme: {
+		type: 'boolean',
+		default: 'disabled' === uagb_blocks_info.btn_inherit_from_theme ? false : true,
 	},
 	ctaTitle: {
 		source: 'html',

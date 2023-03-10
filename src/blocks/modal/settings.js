@@ -158,6 +158,7 @@ export default function Settings( props ) {
 		btnBgColor,
 		closeIcon,
 		showBtnIcon,
+		inheritFromTheme,
 		modalBoxHeight,
 		maxHeight,
 		maxHeightTablet,
@@ -445,6 +446,16 @@ export default function Settings( props ) {
 							setAttributes = { setAttributes }
 							presets = { buttonsPresets }
 							presetInputType = 'radioImage'
+						/>
+						<ToggleControl
+							checked={ inheritFromTheme }
+							onChange={ () =>
+								setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+							}
+							label={ __(
+								'Inherit From Theme',
+								'ultimate-addons-for-gutenberg'
+							) }
 						/>
 						<ToggleControl
 							label={ __(

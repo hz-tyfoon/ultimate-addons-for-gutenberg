@@ -303,6 +303,7 @@ const Settings = ( props ) => {
 		blockPaddingUnitTablet,
 		blockPaddingUnitMobile,
 		blockPaddingLink,
+		inheritFromTheme
 	} = attributes;
 
 	/*
@@ -911,11 +912,23 @@ const Settings = ( props ) => {
 					] }
 				/>
 				{ 'button' === ctaType &&
-					<UAGPresets
-						setAttributes = { setAttributes }
-						presets = { buttonsPresets }
-						presetInputType = 'radioImage'
-					/>
+					<>
+						<UAGPresets
+							setAttributes = { setAttributes }
+							presets = { buttonsPresets }
+							presetInputType = 'radioImage'
+						/>
+						<ToggleControl
+							checked={ inheritFromTheme }
+							onChange={ () =>
+								setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+							}
+							label={ __(
+								'Inherit From Theme',
+								'ultimate-addons-for-gutenberg'
+							) }
+						/>
+					</>
 				}
 				{ ctaType !== 'none' && (
 					<>

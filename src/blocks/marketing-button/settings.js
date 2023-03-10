@@ -37,6 +37,7 @@ const Settings = ( props ) => {
 	const { attributes, setAttributes, deviceType } = props;
 
 	const {
+		inheritFromTheme,
 		align,
 		textAlign,
 		link,
@@ -168,6 +169,16 @@ const Settings = ( props ) => {
 		return (
 			<>
 				<UAGAdvancedPanelBody title={ __( 'Content' ) } initialOpen={ false }>
+					<ToggleControl
+						checked={ inheritFromTheme }
+						onChange={ () =>
+							setAttributes( { inheritFromTheme: ! inheritFromTheme } )
+						}
+						label={ __(
+							'Inherit From Theme',
+							'ultimate-addons-for-gutenberg'
+						) }
+					/>
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
 						label={ __( 'Button Alignment', 'ultimate-addons-for-gutenberg' ) }
