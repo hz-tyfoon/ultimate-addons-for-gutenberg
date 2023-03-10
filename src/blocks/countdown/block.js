@@ -9,8 +9,8 @@ import save from './save';
 import './style.scss';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-
-const previewImageData = `${ uagb_blocks_info.uagb_url }/assets/images/block-previews/countdown.svg`;
+import PreviewImage from '@Controls/previewImage';
+ 
  
 registerBlockType( 'uagb/countdown', {
 	apiVersion: 2,
@@ -32,11 +32,12 @@ registerBlockType( 'uagb/countdown', {
 	},
 	category: uagb_blocks_info.category,
 	attributes,
-	edit: ( props ) => props.attributes.isPreview ? (
-		<img width='100%' src={previewImageData} alt=''/>
-	) : (
-		<Edit { ...props } />
-	),
+	edit: ( props ) =>
+		props.attributes.isPreview ? (
+			<PreviewImage image="countdown" />
+		) : (
+			<Edit { ...props } />
+		),
 	save,
 	example: {
 		attributes: {
