@@ -5,7 +5,7 @@ import { useState } from '@wordpress/element';
 import styles from './editor.lazy.scss';
 const { getSelectedBlock } = select( 'core/block-editor' );
 import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
-import { select, withSelect, withDispatch } from '@wordpress/data';
+import { select, withSelect, withDispatch, dispatch } from '@wordpress/data';
 import { Button, Modal  } from '@wordpress/components';
 import UAGTextControl from '@Components/text-control';
 import UAGSelectControl from '@Components/select-control';
@@ -88,11 +88,11 @@ const GlobalBlockStyles = ( props ) => {
         }
 	}, [saveToDatabase] );
 
-    const saveStylesToDatabase = ( bulkUpdateStyles = false ) => {
+    const saveStylesToDatabase = ( bulkUpdateStyles = false, spectraGlobalStyles = globalBlockStyles ) => {
 
         let styleProps = {};
-
-        globalBlockStyles.map( ( style ) => {
+console.log(globalBlockStyles);
+        spectraGlobalStyles.map( ( style ) => {
             if ( ( style?.value === uniqueID ) || ( style?.value === globalBlockStyleId ) ) {
                 styleProps = style?.props;
             }
@@ -103,14 +103,14 @@ const GlobalBlockStyles = ( props ) => {
         formData.append( 'action', 'uag_global_block_styles' );
         formData.append( 'security', uagb_blocks_info.uagb_ajax_nonce );
         formData.append( 'props', JSON.stringify( styleProps ) );
-        formData.append( 'spectraGlobalStyles', JSON.stringify( globalBlockStyles ) ); 
+        formData.append( 'spectraGlobalStyles', JSON.stringify( spectraGlobalStyles ) ); 
         formData.append( 'blockName', name );
         formData.append( 'postId', select( 'core/editor' ).getCurrentPostId() );
         formData.append( 'globalBlockStyleId', globalBlockStyleId );
         formData.append( 'bulkUpdateStyles', bulkUpdateStyles );
 
         if ( bulkUpdateStyles ) {
-            formData.append( 'multiSelected', multiSelected );
+            formData.append( 'multiSelected', JSON.stringify(multiSelected) );
         }
 
         apiFetch( {
@@ -360,8 +360,23 @@ console.log(globalBlockStyleId);
                                 className="spectra-gbs-button delete components-base-control"
                                 onClick={ () => {
                                     setBulkEdit(false);
-                                    console.log(multiSelected);
-                                    saveStylesToDatabase('bulkUpdateStyles');
+                                    let toBeDeletedIDs = [];
+                                    for( let style in multiSelected ) {
+                                        toBeDeletedIDs.push(multiSelected[style]?.value);
+                                    }
+                                    let filterGBS = globalBlockStyles.filter((style) => {
+                                        if ( style?.value && ! toBeDeletedIDs.includes(style?.value)) {
+                                            dispatch( 'core/block-editor' ).updateBlockAttributes( style?.props?.clientId, { 
+                                                globalBlockStyleId: '',
+                                                globalBlockStyleName: '' 
+                                            } );
+                                            return true;
+                                        }
+                                    });
+
+                                    updateGlobalBlockStyles(filterGBS);
+                                    saveStylesToDatabase('bulkUpdateStyles', filterGBS);
+                                    setUniqueID( false );
                                 } }
                                 variant="primary"
                             >

@@ -80,7 +80,9 @@ class UAGB_Init_Blocks {
 	}
 
 	public function bulk_update_global_block_styles($post) {
-		$multi_selected = $post['multiSelected'];
+		$spectra_gbs = json_decode( stripslashes( $post['spectraGlobalStyles'] ), true );
+		update_option( 'spectra_global_block_styles', $spectra_gbs );
+		wp_send_json_success();
 	}
 	/**
 	 * Function to save Spectra Global Block Styles data.
