@@ -26,14 +26,12 @@ export default function save( props ) {
 	} = attributes;
 
 	const btnText = () => {
-		if ( ! removeText ) {
-			return (
-				<RichText.Content
-					value={ label.replace( /(<([^>]+)>)/gi, '' ) }
-					tagName="div"
-					className="uagb-button__link"
-				/>
-			);
+		if( ! removeText ){
+			return <RichText.Content
+						value={ label.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+						tagName="div"
+						className="uagb-button__link"
+					/>
 		}
 		return '';
 	};

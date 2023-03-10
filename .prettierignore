@@ -23,3 +23,4 @@ font-awesome-pollyfiller.js
 *.min.js
 *.min.css
 *.css
+blocks-config/uagb-controls/fonts.js

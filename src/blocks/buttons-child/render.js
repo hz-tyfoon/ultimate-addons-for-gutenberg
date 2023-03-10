@@ -48,21 +48,19 @@ const Render = ( props ) => {
 		return null;
 	};
 	const btnText = () => {
-		if ( ! removeText ) {
-			return (
-				<RichText
-					placeholder={ __( 'Add text…' ) }
-					value={ label.replace( /(<([^>]+)>)/gi, '' ) }
-					tagName="div"
-					onChange={ ( value ) => {
-						setAttributes( { label: value } );
-					} }
-					className="uagb-button__link"
-					rel={ noFollow ? 'nofollow noopener' : 'follow noopener' }
-					keepPlaceholderOnFocus
-					allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
-				/>
-			);
+		if( ! removeText ){
+			return <RichText
+						placeholder={ __( 'Add text…' ) }
+						value={ label.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+						tagName="div"
+						onChange={ ( value ) => {
+							setAttributes( { label: value } );
+						} }
+						className="uagb-button__link"
+						rel= { noFollow ? 'nofollow noopener' : 'follow noopener' }
+						keepPlaceholderOnFocus
+						allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
+					/>
 		}
 		return '';
 	};
