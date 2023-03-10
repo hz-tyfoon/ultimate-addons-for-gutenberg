@@ -44,6 +44,7 @@ registerBlockType( 'uagb/advanced-heading', {
 		),
 	save,
 	deprecated,
+	"usesContext": [ "postId", "postType" ],
 	transforms: {
 		from: [
 			{

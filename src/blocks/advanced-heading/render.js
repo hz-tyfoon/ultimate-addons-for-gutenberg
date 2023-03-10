@@ -5,6 +5,7 @@ import { useLayoutEffect,memo } from '@wordpress/element';
 
 import { useDeviceType } from '@Controls/getPreviewType';
 import styles from './editor.lazy.scss';
+import Renderer from './renderer';
 
 const Render = ( props ) => {
 	props = props.parentProps;
@@ -17,6 +18,7 @@ const Render = ( props ) => {
 	}, [] );
 
 	const {
+		attributes,
 		attributes: {
 			block_id,
 			headingTitleToggle,
@@ -30,6 +32,7 @@ const Render = ( props ) => {
 		},
 		setAttributes,
 		className,
+		context
 	} = props;
 
 	const deviceType = useDeviceType();
@@ -42,21 +45,8 @@ const Render = ( props ) => {
 
 	const headingText = (
 		<>
-
 			{ seperatorPosition === 'above-heading' ? separator : '' }
-			<RichText
-				tagName={ headingTag }
-				placeholder={ __(
-					'Write a Heading',
-					'ultimate-addons-for-gutenberg'
-				) }
-				value={ headingTitle }
-				className="uagb-heading-text"
-				multiline={ false }
-				onChange={ ( value ) => {
-					setAttributes( { headingTitle: value } );
-				} }
-			/>
+			<Renderer {...{setAttributes, attributes, context}} />
 			{ seperatorPosition === 'below-heading' ? separator : '' }
 		</>
 	);

@@ -7,6 +7,10 @@ const headingAlignmentDefault = ( 'yes' === uagb_blocks_info.uagb_old_user_less_
 const headingDescToggleDefault = ( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ) ? true : false;
 
 const attributes = {
+	// For loop data.
+	loopData:{
+		type:"object",
+	},
 	block_id: {
 		type: 'string',
 	},
