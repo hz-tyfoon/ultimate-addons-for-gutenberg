@@ -1220,7 +1220,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 			$attr                       = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$attr['gridPageNumber']     = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
 			$media_atts                 = $this->required_atts( $attr );
-			$media_atts['mediaGallery'] = json_decode( $media_atts['mediaGallery'] );
+			$media_atts['mediaGallery'] = json_decode( $media_atts['mediaGallery'], true );
 			$media                      = $this->get_gallery_images( $media_atts, 'paginated' );
 			if ( ! $media ) {
 				wp_send_json_error();
@@ -1244,7 +1244,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 			$attr                       = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$attr['gridPageNumber']     = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
 			$media_atts                 = $this->required_atts( $attr );
-			$media_atts['mediaGallery'] = json_decode( $media_atts['mediaGallery'] );
+			$media_atts['mediaGallery'] = json_decode( $media_atts['mediaGallery'], true );
 			$media                      = $this->get_gallery_images( $media_atts, 'paginated' );
 			if ( ! $media ) {
 				wp_send_json_error();
@@ -1590,7 +1590,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 						counter.innerHTML = parseInt( curPage ) + 1;
 					};
 
-					const enableLightbox = ( goTo, blockScope ) => {
+					const enableLightbox = ( goTo ) => {
 						if ( ! lightboxSwiper ) {
 							return;
 						}
@@ -1609,7 +1609,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 					const images = blockScope.querySelectorAll( '.spectra-image-gallery__media-wrapper' );
 					for ( let i = 0; i < images.length; i++ ) {
 						images[ i ].style.cursor = 'pointer';
-						images[ i ].addEventListener( 'click', () => enableLightbox( i, blockScope ) );
+						images[ i ].addEventListener( 'click', () => enableLightbox( i ) );
 					}
 					<?php // First set the Thumbnail Swiper if needed. This will be used in the Lightbox Swiper. ?>
 					let lightboxSettings = <?php echo $lightbox_settings; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
