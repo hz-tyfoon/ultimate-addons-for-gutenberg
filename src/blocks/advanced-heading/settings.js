@@ -180,6 +180,7 @@ const Settings = ( props ) => {
 		highLightPaddingUnitTablet,
 		highLightPaddingUnitMobile,
 		highLightPaddingLink,
+		loopData,
 	} = attributes;
 
 	let loadHeadingGoogleFonts;
@@ -575,6 +576,58 @@ const Settings = ( props ) => {
 				}
 			</UAGAdvancedPanelBody>
 		);
+	}
+	const dynamicDataPanel = () => {
+		return(
+			loopData && loopData?.isInLoop && (
+				<UAGAdvancedPanelBody
+				title={ __( 'Dynamic data', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ false }
+				>
+					<ToggleControl
+						label={ __(
+							'Enable dynamic data',
+							'ultimate-addons-for-gutenberg'
+						) }
+						checked={ loopData.enable }
+						onChange={ () =>
+							setAttributes( { loopData : { ...loopData, enable : ! loopData.enable } } )
+						}
+					/>
+					{ loopData?.enable && (
+						<UAGSelectControl
+							label={ __(
+								'Data source',
+								'ultimate-addons-for-gutenberg'
+							) }
+							data={ {
+								value: loopData.type,
+								label: 'headingDescPosition',
+							} }
+							onChange={ ( value ) =>
+								setAttributes( { loopData : { ...loopData, type : value } } )
+							}
+							options={ [
+								{
+									value: 'title',
+									label: __(
+										'Title',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+								{
+									value: 'excerpt',
+									label: __(
+										'Excerpt',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+							] }
+						/>
+					)}
+				</UAGAdvancedPanelBody>
+			)
+		)
 	}
 	const headingStylePanel = () => {
 		return (
@@ -1465,6 +1518,7 @@ const Settings = ( props ) => {
 						{ generalPanel() }
 						{ subHeadingPanel() }
 						{ separatorPanel() }
+						{ dynamicDataPanel() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
 						{ headingTitleToggle && headingStylePanel() }

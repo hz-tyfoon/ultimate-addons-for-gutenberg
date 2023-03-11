@@ -11,7 +11,7 @@ const Renderer = (props) => {
 	} = props;
 
 	// Check if heading block is children block of loop builder.
-	if (loopData && loopData?.isInLoop) {
+	if (loopData && loopData?.isInLoop && loopData?.enable ) {
 		const { postId, postType } = context;
 		const getEntityData = useEntityProp(
 			'postType',
