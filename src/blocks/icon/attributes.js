@@ -396,7 +396,7 @@ const attributes = {
 		type: 'string',
 		default: 'default',
 		UAGCopyPaste: {
-			styleType: 'icon-border-style'
+			styleType: 'icon-border-style',
 		},
 	},
 	iconShadowColor: {
