@@ -392,6 +392,13 @@ const attributes = {
 		default: false,
 	},
 	...borderAttributes,
+	iconBorderStyle: {
+		type: 'string',
+		default: 'default',
+		UAGCopyPaste: {
+			styleType: 'icon-border-style'
+		},
+	},
 	iconShadowColor: {
 		type: 'string',
 		default: '#00000070',

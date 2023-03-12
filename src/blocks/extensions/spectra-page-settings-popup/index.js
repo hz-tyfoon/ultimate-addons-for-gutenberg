@@ -8,8 +8,12 @@ import { __ } from '@wordpress/i18n';
 import SettingsIcons from './icons.js';
 import PageCustomCSS from '../custom-page-css';
 import { PanelBody } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 
-const SpectraPageSettingsPopup = () => {
+const SpectraPageSettingsPopup = ( props ) => {
+	const pluginSidebarBefore = applyFilters( `spectra.page-sidebar.before`, '', props );
+	const pluginSidebarAfter = applyFilters( `spectra.page-sidebar.after`, '', props );
+
 	return (
 		<>
 			{ 'yes' === uagb_blocks_info.enable_on_page_css_button && (
@@ -22,24 +26,26 @@ const SpectraPageSettingsPopup = () => {
 						{ __( 'Spectra Page Settings' ) }
 					</PluginSidebarMoreMenuItem>
 
-					{ /* Page Settings Area. */ }
-					<PluginSidebar
-						isPinnable={ true }
-						icon={ SettingsIcons.logo }
-						name="spectra-page-settings-panel"
-						title={ __( 'Spectra Page Settings' ) }
-						className={ 'spectra-sidebar' }
-					>
-						<PanelBody
-							title={ __( 'Custom CSS' ) }
-							initialOpen={ true }
-							className={ 'spectra-custom-css-panel' }
-						>
-							<PageCustomCSS />
-						</PanelBody>
-					</PluginSidebar>
-				</>
-			) }
+			{/* Page Settings Area. */}
+			<PluginSidebar
+				isPinnable={ true }
+				icon={ SettingsIcons.logo }
+				name="spectra-page-settings-panel"
+				title={ __( 'Spectra Page Settings' ) }
+				className={'spectra-sidebar'}
+			>
+				{ pluginSidebarBefore }
+				<PanelBody
+					title={ __( 'Custom CSS' ) }
+					initialOpen={ true }
+					className={'spectra-custom-css-panel'}
+				>
+					<PageCustomCSS/>
+				</PanelBody>
+				{ pluginSidebarAfter }
+			</PluginSidebar>
+			</>
+		)}
 		</>
 	);
 };
