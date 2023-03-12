@@ -91,9 +91,9 @@ const UAGAdvancedPanelBody = ( props ) => {
 
 	const panelTitle = props?.title ? props?.title.toLowerCase().replace( /[^a-zA-Z ]/g, '' ).replace( /\s+/g, '-' ) : '';
 
-	const blockNameForHook = blockName.split( '/' ).pop();
-	const tabBodyBefore = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${panelTitle}.before`, '', blockName );
-	const tabBodyAfter = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${panelTitle}`, '', blockName );
+	const blockNameForHook = blockName ?  blockName.split( '/' ).pop():null;
+	const tabBodyBefore = blockNameForHook ? wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${panelTitle}.before`, '', blockName ):null;
+	const tabBodyAfter = blockNameForHook ? wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${panelTitle}`, '', blockName ):null;
 
     return (
         <PanelBody
