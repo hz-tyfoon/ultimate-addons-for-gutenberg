@@ -1,9 +1,8 @@
 import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { useEntityProp } from '@wordpress/core-data';
+import { applyFilters } from '@wordpress/hooks';
 
 const Renderer = (props) => {
-	console.log('Renderer props', props);
 	const {
 		setAttributes,
 		attributes: { headingTag, headingTitle, loopData },
@@ -12,40 +11,10 @@ const Renderer = (props) => {
 
 	// Check if heading block is children block of loop builder.
 	if (loopData && loopData?.isInLoop && loopData?.enable ) {
-		const { postId, postType } = context;
-		const getEntityData = useEntityProp(
-			'postType',
-			postType,
-			loopData.type,
-			postId
-		);
-		console.log('getEntityData', getEntityData);
-		const [rawTitle = '', fullTitle] = getEntityData;
-
-		return (
-			<RichText.Content
-				tagName={headingTag}
-				placeholder={__(
-					'Write a Heading',
-					'ultimate-addons-for-gutenberg'
-				)}
-				value={rawTitle}
-				className="uagb-heading-text"
-				multiline={false}
-			/>
-		);
-		// return (
-		// 	<RichText.Content
-		// 		tagName={headingTag}
-		// 		placeholder={__(
-		// 			'Write a Heading',
-		// 			'ultimate-addons-for-gutenberg'
-		// 		)}
-		// 		value={rawTitle}
-		// 		className="uagb-heading-text"
-		// 		multiline={false}
-		// 	/>
-		// );
+		const renderedMarkup = applyFilters( `uag_render_loop_data`, '', context, props.attributes );
+		if( renderedMarkup !== '' ) {
+			return renderedMarkup;
+		}
 	}
 
 	return (

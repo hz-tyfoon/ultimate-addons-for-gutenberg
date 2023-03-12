@@ -4,6 +4,7 @@ import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStora
 import { select } from '@wordpress/data';
 
 const InspectorTab = ( props ) => {
+	console.log( props );
 	const { children, isActive, type } = props;
 	const tabRef = useRef( null );
 	const { getSelectedBlock } = select( 'core/block-editor' );
@@ -65,7 +66,7 @@ const InspectorTab = ( props ) => {
 		}
 	}, [] );
 
-	const blockNameForHook = blockName.split( '/' ).pop();
+	const blockNameForHook = blockName?.split( '/' ).pop();
 	const inspectorTabBefore = wp.hooks.applyFilters( `spectra.${blockNameForHook}.tab_${type}.before`, '', blockName );
 	const inspectorTabAfter = wp.hooks.applyFilters( `spectra.${blockNameForHook}.tab_${type}`, '', blockName );
 

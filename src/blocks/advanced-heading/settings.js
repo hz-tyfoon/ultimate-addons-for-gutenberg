@@ -622,6 +622,13 @@ const Settings = ( props ) => {
 										'ultimate-addons-for-gutenberg'
 									),
 								},
+								{
+									value: 'date',
+									label: __(
+										'Date',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
 							] }
 						/>
 					)}
