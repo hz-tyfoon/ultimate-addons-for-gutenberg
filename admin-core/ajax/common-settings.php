@@ -83,7 +83,7 @@ class Common_Settings extends Ajax_Base {
 			'auto_block_recovery',
 			'enable_legacy_blocks',
 			'pro_activate',
-			'btn_inherit_from_theme'
+			'btn_inherit_from_theme',
 		);
 
 		$this->init_ajax_events( $ajax_events );

@@ -13,9 +13,12 @@ $input_border_attribute           = UAGB_Block_Helper::uag_generate_border_attri
 $toggle_border_attribute          = UAGB_Block_Helper::uag_generate_border_attribute( 'checkBoxToggle' );
 $submit_border_attribute          = UAGB_Block_Helper::uag_generate_border_attribute( 'btn' );
 
+$inherit_from_theme = UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' );
+
 return array_merge(
 	array(
 		'block_id'                       => '',
+		'inheritFromTheme'               => 'disabled' === $inherit_from_theme ? false : true,
 		'formPaddingTop'                 => 25,
 		'formPaddingRight'               => 25,
 		'formPaddingBottom'              => 25,

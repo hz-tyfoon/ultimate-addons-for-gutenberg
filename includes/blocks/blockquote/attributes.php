@@ -7,7 +7,10 @@
  * @package uagb
  */
 
+$inherit_from_theme = UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' );
+
 return array(
+	'inheritFromTheme'            => 'disabled' === $inherit_from_theme ? false : true,
 	'classMigrate'                => false,
 	'block_id '                   => '',
 	'skinStyle'                   => 'border',

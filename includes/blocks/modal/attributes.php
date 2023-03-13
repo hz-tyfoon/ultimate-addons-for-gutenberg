@@ -27,6 +27,8 @@ $content_border_attributes = UAGB_Block_Helper::uag_generate_border_attribute(
 	)
 );
 
+$inherit_from_theme = UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' );
+
 $additional_attributes = apply_filters(
 	'spectra_modal_attributes',
 	array()
@@ -34,6 +36,8 @@ $additional_attributes = apply_filters(
 
 return array_merge(
 	array(
+		
+		'inheritFromTheme'            => 'disabled' === $inherit_from_theme ? false : true,
 		'modalTrigger'                => 'button',
 		'buttonIconSpace'             => '5',
 		'buttonIconSpaceTablet'       => '',
