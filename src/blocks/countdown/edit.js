@@ -64,6 +64,7 @@ const UAGBCountdownEdit = ( props ) => {
 
 			setAttributes( {
 				endDateTime: actualTime,
+				endDateTimeCopy: actualTime,
 				displayEndDateTime: displayTime,
 				timeModified: true,
 			} );

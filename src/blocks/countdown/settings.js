@@ -346,6 +346,7 @@ function Settings( props ) {
 
 							setAttributes( {
 								endDateTime: d,
+								endDateTimeCopy: d,
 								displayEndDateTime: value,
 							} );
 						} }
