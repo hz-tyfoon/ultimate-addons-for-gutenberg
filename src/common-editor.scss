@@ -832,6 +832,17 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	}
 }
 
+.edit-site-style-book__example-preview {
+	.block-editor-block-preview__container {
+		.block-editor-block-preview__content {
+			iframe{
+				width: 240px !important;
+				height: 218px !important;
+			}
+		}
+	}
+}
+
 @import "styles/gutenberg-override";
 @import "styles/control-responsive";
 @import "styles/control-header";

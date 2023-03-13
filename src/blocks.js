@@ -113,14 +113,7 @@ if( uagb_blocks_info.uagb_svg_icons?.uagb_category_list ){
 
 wp.UAGBSvgIcons = Object.keys( uagb_blocks_info.uagb_svg_icons );
 
-import UAGB_Block_Icons from '@Controls/block-icons';
 import autoBlockRecovery from '@Controls/autoBlockRecovery';
-
-import { updateCategory } from '@wordpress/blocks';
-
-updateCategory( 'uagb', {
-	icon: UAGB_Block_Icons.logo,
-} );
 
 export const initAutoBlockRecovery = () => {
 	if ( window._wpLoadBlockEditor ) {

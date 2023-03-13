@@ -109,7 +109,7 @@ class UAGB_Front_Assets {
 	public function enqueue_asset_files() {
 
 		global $_wp_current_template_content;
-		
+
 		if ( $this->post_assets ) {
 			if ( $_wp_current_template_content ) {
 				$this->post_assets->common_function_for_assets_preparation( $_wp_current_template_content );
@@ -123,7 +123,7 @@ class UAGB_Front_Assets {
 			global $wp_query;
 			$current_object_id = $wp_query->get_queried_object_id();
 			$cached_wp_query   = $wp_query->posts;
-			if ( 0 !== $current_object_id && null !== $current_object_id ) {
+			if ( 0 !== $current_object_id && null !== $current_object_id || current_theme_supports( 'block-templates' ) ) { // Create an style tag with id 0 when is_home is true and theme support block templates.
 				$current_post_assets = new UAGB_Post_Assets( $current_object_id );
 				$current_post_assets->enqueue_scripts();
 			} else {
