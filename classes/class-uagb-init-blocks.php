@@ -103,9 +103,9 @@ class UAGB_Init_Blocks {
 			$response_data = array( 'messsage' => __( 'Noo post data found!', 'ultimate-addons-for-gutenberg' ) );
 			wp_send_json_error( $response_data );
 		}
-		if ( $_POST['bulkUpdateStyles'] ) {
+	
+		if ( 'no' !== $_POST['bulkUpdateStyles'] ) {
 			$this->bulk_update_global_block_styles($_POST);
-
 		}
 		$post_id = sanitize_text_field( $_POST['postId'] );
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
@@ -155,6 +155,7 @@ class UAGB_Init_Blocks {
 				}
 			}
 		}
+		
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
 		
 		// Global Font Families.
@@ -169,7 +170,11 @@ class UAGB_Init_Blocks {
 		if ( isset( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) && is_array( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) ) {
 			$spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] = array_unique( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] );
 		}
+		$spectra_gbs_google_fonts_editor = json_decode( stripslashes( $_POST['globalBlockStylesFontFamilies'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
 		update_option( 'spectra_gbs_google_fonts', $spectra_gbs_google_fonts );
+		update_option( 'spectra_gbs_google_fonts_editor', $spectra_gbs_google_fonts_editor );
+		
 		wp_send_json_success();
 	}
 

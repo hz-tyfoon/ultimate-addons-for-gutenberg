@@ -88,7 +88,7 @@ const GlobalBlockStyles = ( props ) => {
         }
 	}, [saveToDatabase] );
 
-    const saveStylesToDatabase = ( bulkUpdateStyles = false, spectraGlobalStyles = globalBlockStyles ) => {
+    const saveStylesToDatabase = ( bulkUpdateStyles = 'no', spectraGlobalStyles = globalBlockStyles ) => {
 
         let styleProps = {};
 
@@ -104,6 +104,7 @@ const GlobalBlockStyles = ( props ) => {
         formData.append( 'security', uagb_blocks_info.uagb_ajax_nonce );
         formData.append( 'props', JSON.stringify( styleProps ) );
         formData.append( 'spectraGlobalStyles', JSON.stringify( spectraGlobalStyles ) ); 
+        formData.append( 'globalBlockStylesFontFamilies', JSON.stringify( globalBlockStylesFontFamilies ) ); 
         formData.append( 'blockName', name );
         formData.append( 'postId', select( 'core/editor' ).getCurrentPostId() );
         formData.append( 'globalBlockStyleId', globalBlockStyleId );
@@ -194,7 +195,7 @@ const GlobalBlockStyles = ( props ) => {
         }
         updateGlobalBlockStylesFontFamilies( output );
     };
-console.log(globalBlockStyles);
+
     const selectLabel = ( ! globalBlockStyleName || '' === globalBlockStyleName ) ? __( 'Link to Existing Style',
         'ultimate-addons-for-gutenberg' ) : __( 'Linked Style',
         'ultimate-addons-for-gutenberg' )

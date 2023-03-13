@@ -1,13 +1,14 @@
 import WebfontLoader from '@Components/typography/fontloader';
 import { STORE_NAME as storeName } from '@Store/constants';
-import { useSelect } from '@wordpress/data';
+import { useSelect, withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
-const SpectraLoadGlobaGoogleFonts = () => {
+const SpectraLoadGlobaGoogleFonts = (props) => {
 
-    const globalBlockStylesFontFamilies = useSelect( ( spectraStoreSelect ) => {
-        return spectraStoreSelect( storeName ).getGlobalBlockStylesFontFamilies();
-    } );
-
+    const {
+        globalBlockStylesFontFamilies
+    } = props;
+    
     const renderFonts = globalBlockStylesFontFamilies.map( ( family ) => {
         const hconfig = {
             google: {
@@ -31,4 +32,13 @@ const SpectraLoadGlobaGoogleFonts = () => {
     );
 };
 
-export default SpectraLoadGlobaGoogleFonts;
+export default compose(
+	withSelect( ( spectraGbsSelect ) => {
+
+		const globalBlockStylesFontFamilies = spectraGbsSelect( storeName ).getGlobalBlockStylesFontFamilies();
+        
+		return {
+            globalBlockStylesFontFamilies
+		};	
+	} )
+)( SpectraLoadGlobaGoogleFonts );

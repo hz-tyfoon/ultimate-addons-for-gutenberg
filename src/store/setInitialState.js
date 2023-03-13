@@ -6,10 +6,11 @@ const setInitialState = () => {
     apiFetch( {
         path: '/spectra/v1/editor',
     } ).then( ( data ) => {
+        console.log(data);
         const initialState = {
             initialStateSetFlag : true,
             globalBlockStyles: data.spectra_global_block_styles,
-            globalBlockStylesFontFamilies: []
+            globalBlockStylesFontFamilies: data.spectra_gbs_google_fonts_editor
         };
         dispatch( spectraStore ).updateInitialState( initialState );
     } );
