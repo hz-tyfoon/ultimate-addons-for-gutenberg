@@ -2107,10 +2107,10 @@ const Settings = ( props ) => {
 					<InspectorTab { ...UAGTabs.style }>
 						{ headingSettings() }
 						{ descriptionSettings() }
-						{ ctaType !== 'all' &&
+						{ ! inheritFromTheme && ctaType !== 'all' &&
 						  ctaType !== 'none' &&
 						  ctaStyleSettings() }
-						{ ( 'button' === ctaType && enabledSecondCtaButton ) && secButtonStyleSettings() }
+						{ ( 'button' === ctaType && enabledSecondCtaButton ) && ! secondInheritFromTheme && secButtonStyleSettings() }
 						{ marginSettings() }
 					</InspectorTab>
 					<InspectorTab

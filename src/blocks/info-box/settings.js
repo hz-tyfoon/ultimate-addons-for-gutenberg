@@ -2190,7 +2190,7 @@ const Settings = ( props ) => {
 						</>
 					</UAGAdvancedPanelBody>
 				) }
-				{
+				{ ! inheritFromTheme &&
 					'none' !== ctaType &&
 					'all' !== ctaType && (
 						<UAGAdvancedPanelBody title="Call to Action" initialOpen={ false }>

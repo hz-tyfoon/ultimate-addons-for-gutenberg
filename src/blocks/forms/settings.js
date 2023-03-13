@@ -2043,7 +2043,7 @@ const Settings = ( props ) => {
 						}
 						{ inputStyling() }
 						{ elementStyling() }
-						{ submitStyling() }
+						{ ! inheritFromTheme && submitStyling() }
 						{ messageStyling() }
 						{ spaceStyling() }
 					</InspectorTab>

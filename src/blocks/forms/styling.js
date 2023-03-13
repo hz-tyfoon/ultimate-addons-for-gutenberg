@@ -31,6 +31,7 @@ function styling( props ) {
 		buttonAlign,
 		buttonAlignTablet,
 		buttonAlignMobile,
+		inheritFromTheme,
 		submitColor,
 		submitColorHover,
 		submitBgType,
@@ -339,67 +340,6 @@ function styling( props ) {
 				generateCSSUnit( paddingFieldBottom, paddingFieldUnit )
 			})`,
 		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap': {
-			'text-align': buttonAlign,
-		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button': {
-			'color': submitColor,
-			'font-size': generateCSSUnit(
-				submitTextFontSize,
-				submitTextFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				submitTextLineHeight,
-				submitTextLineHeightType
-			),
-			'font-family': submitTextFontFamily,
-			'font-style': submitTextFontStyle,
-			'text-transform': submitTextTransform,
-			'text-decoration': submitTextDecoration,
-			'font-weight': submitTextFontWeight,
-			...submitBorder,
-			'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottom,
-				paddingBtnUnit
-			),
-			'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
-			'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
-			'letter-spacing': generateCSSUnit( submitTextLetterSpacing, submitTextLetterSpacingType ),
-		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background)': {
-			'color': submitColor,
-			'font-size': generateCSSUnit(
-				submitTextFontSize,
-				submitTextFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				submitTextLineHeight,
-				submitTextLineHeightType
-			),
-			'font-family': submitTextFontFamily,
-			'font-style': submitTextFontStyle,
-			'text-transform': submitTextTransform,
-			'text-decoration': submitTextDecoration,
-			'font-weight': submitTextFontWeight,
-			'background-color': submitBgColor,
-			...submitBorder,
-			'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottom,
-				paddingBtnUnit
-			),
-			'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
-			'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
-		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background):hover': {
-			'color': submitColorHover,
-			'border-color': btnBorderHColor,
-		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button:hover': {
-			'color': submitColorHover,
-			'border-color': btnBorderHColor,
-		},
 		' .uagb-switch': {
 			// 20 is the min size of the toggle.
 			// Space around the toggle dot is calculated as 1/6th the size of the toggle dot.
@@ -500,7 +440,136 @@ function styling( props ) {
 			'color': inputplaceholderHoverColor,
 		},
 	};
-
+	if ( inheritFromTheme ) {
+		selectors = { 
+			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap': {
+				'text-align': buttonAlign,
+			},
+			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button': {
+				'color': submitColor,
+				'font-size': generateCSSUnit(
+					submitTextFontSize,
+					submitTextFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					submitTextLineHeight,
+					submitTextLineHeightType
+				),
+				'font-family': submitTextFontFamily,
+				'font-style': submitTextFontStyle,
+				'text-transform': submitTextTransform,
+				'text-decoration': submitTextDecoration,
+				'font-weight': submitTextFontWeight,
+				...submitBorder,
+				'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
+				'padding-bottom': generateCSSUnit(
+					paddingBtnBottom,
+					paddingBtnUnit
+				),
+				'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
+				'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
+				'letter-spacing': generateCSSUnit( submitTextLetterSpacing, submitTextLetterSpacingType ),
+			},
+			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background)': {
+				'color': submitColor,
+				'font-size': generateCSSUnit(
+					submitTextFontSize,
+					submitTextFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					submitTextLineHeight,
+					submitTextLineHeightType
+				),
+				'font-family': submitTextFontFamily,
+				'font-style': submitTextFontStyle,
+				'text-transform': submitTextTransform,
+				'text-decoration': submitTextDecoration,
+				'font-weight': submitTextFontWeight,
+				'background-color': submitBgColor,
+				...submitBorder,
+				'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
+				'padding-bottom': generateCSSUnit(
+					paddingBtnBottom,
+					paddingBtnUnit
+				),
+				'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
+				'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
+			},
+			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background):hover': {
+				'color': submitColorHover,
+				'border-color': btnBorderHColor,
+			},
+			' .uagb-forms-main-form .uagb-forms-main-submit-button:hover': {
+				'color': submitColorHover,
+				'border-color': btnBorderHColor,
+			},
+		};
+		tabletSelectors = {
+			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button': {
+				'padding-top': generateCSSUnit(
+					paddingBtnTopTablet,
+					tabletPaddingBtnUnit
+				),
+				'padding-bottom': generateCSSUnit(
+					paddingBtnBottomTablet,
+					tabletPaddingBtnUnit
+				),
+				'padding-left': generateCSSUnit(
+					paddingBtnLeftTablet,
+					tabletPaddingBtnUnit
+				),
+				'padding-right': generateCSSUnit(
+					paddingBtnRightTablet,
+					tabletPaddingBtnUnit
+				),
+				'font-size': generateCSSUnit(
+					submitTextFontSizeTablet,
+					submitTextFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					submitTextLineHeightTablet,
+					submitTextLineHeightType
+				),
+				'letter-spacing': generateCSSUnit(
+					submitTextLetterSpacingTablet,
+					submitTextLetterSpacingType
+				),
+				...submitBorderTablet
+			},
+			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background)': submitBorderTablet,
+		};
+		mobileSelectors = {
+			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button': { // eslint-disable-line no-dupe-keys
+				'padding-top': generateCSSUnit(
+					paddingBtnTopMobile,
+					mobilePaddingBtnUnit
+				),
+				'padding-bottom': generateCSSUnit(
+					paddingBtnBottomMobile,
+					mobilePaddingBtnUnit
+				),
+				'padding-left': generateCSSUnit(
+					paddingBtnLeftMobile,
+					mobilePaddingBtnUnit
+				),
+				'padding-right': generateCSSUnit(
+					paddingBtnRightMobile,
+					mobilePaddingBtnUnit
+				),
+				'font-size': generateCSSUnit(
+					submitTextFontSizeMobile,
+					submitTextFontSizeType
+				),
+				'line-height': generateCSSUnit(
+					submitTextLineHeightMobile,
+					submitTextLineHeightType
+				),
+				...submitBorderMobile,
+				'letter-spacing': generateCSSUnit( submitTextLetterSpacingMobile, submitTextLetterSpacingType ),
+			},
+			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background)': submitBorderMobile,
+		};
+	}
 	tabletSelectors = {
 		'.uagb-forms__outer-wrap': {
 			'padding-top': generateCSSUnit( formPaddingTopTab, formPaddingUnitTab ),
@@ -560,37 +629,6 @@ function styling( props ) {
 				'px'
 			) })`,
 		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button': {
-			'padding-top': generateCSSUnit(
-				paddingBtnTopTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottomTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-left': generateCSSUnit(
-				paddingBtnLeftTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-right': generateCSSUnit(
-				paddingBtnRightTablet,
-				tabletPaddingBtnUnit
-			),
-			'font-size': generateCSSUnit(
-				submitTextFontSizeTablet,
-				submitTextFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				submitTextLineHeightTablet,
-				submitTextLineHeightType
-			),
-			'letter-spacing': generateCSSUnit(
-				submitTextLetterSpacingTablet,
-				submitTextLetterSpacingType
-			),
-			...submitBorderTablet
-		},
 		' .uagb-forms-main-form .uagb-forms-input-label': {
 			'font-size': generateCSSUnit(
 				labelFontSizeTablet,
@@ -617,7 +655,6 @@ function styling( props ) {
 		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap': {
 			'text-align': buttonAlignTablet,
 		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background)': submitBorderTablet,
 	};
 
 	mobileSelectors = {
@@ -679,34 +716,6 @@ function styling( props ) {
 				'px'
 			) })`,
 		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button': { // eslint-disable-line no-dupe-keys
-			'padding-top': generateCSSUnit(
-				paddingBtnTopMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottomMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-left': generateCSSUnit(
-				paddingBtnLeftMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-right': generateCSSUnit(
-				paddingBtnRightMobile,
-				mobilePaddingBtnUnit
-			),
-			'font-size': generateCSSUnit(
-				submitTextFontSizeMobile,
-				submitTextFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				submitTextLineHeightMobile,
-				submitTextLineHeightType
-			),
-			...submitBorderMobile,
-			'letter-spacing': generateCSSUnit( submitTextLetterSpacingMobile, submitTextLetterSpacingType ),
-		},
 		' .uagb-forms-main-form .uagb-forms-input-label': {
 			'font-size': generateCSSUnit(
 				labelFontSizeMobile,
@@ -733,7 +742,6 @@ function styling( props ) {
 		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap': {
 			'text-align': buttonAlignMobile,
 		},
-		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background)': submitBorderMobile,
 	};
 
 	if ( 'color' === submitBgType ) {

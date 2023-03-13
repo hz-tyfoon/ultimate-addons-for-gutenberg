@@ -1050,7 +1050,7 @@ export default function Settings( props ) {
 				</p>
 			) }
 
-			{ modalTrigger === 'button' && (
+			{  ! inheritFromTheme && modalTrigger === 'button' && (
 				<>
 				{ showBtnIcon && '' !== buttonIcon && (
 					<ResponsiveSlider
