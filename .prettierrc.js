@@ -6,7 +6,7 @@ config.overrides = [
 	{
 		files: [ '*.scss', '*.css' ],
 		options: {
-			printWidth: 500,
+			printWidth: 800,
 			singleQuote: true,
 		},
 	},
