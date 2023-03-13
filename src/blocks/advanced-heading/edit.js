@@ -19,6 +19,7 @@ import './style.scss';
 const UAGBAdvancedHeading = ( props ) => {
 	const deviceType = useDeviceType();
 	const {
+		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		isSelected,
 		setAttributes,
