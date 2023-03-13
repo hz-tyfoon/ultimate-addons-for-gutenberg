@@ -91,7 +91,7 @@ const GlobalBlockStyles = ( props ) => {
     const saveStylesToDatabase = ( bulkUpdateStyles = false, spectraGlobalStyles = globalBlockStyles ) => {
 
         let styleProps = {};
-console.log(globalBlockStyles);
+
         spectraGlobalStyles.map( ( style ) => {
             if ( ( style?.value === uniqueID ) || ( style?.value === globalBlockStyleId ) ) {
                 styleProps = style?.props;
@@ -173,7 +173,7 @@ console.log(globalBlockStyles);
             return style
 
         } );
-
+        
         updateGlobalBlockStyles( spectraGlobalStyles );
         setSaveToDatabase( true );
     };
@@ -194,7 +194,10 @@ console.log(globalBlockStyles);
         }
         updateGlobalBlockStylesFontFamilies( output );
     };
-console.log(globalBlockStyleId);
+console.log(globalBlockStyles);
+    const selectLabel = ( ! globalBlockStyleName || '' === globalBlockStyleName ) ? __( 'Link to Existing Style',
+        'ultimate-addons-for-gutenberg' ) : __( 'Linked Style',
+        'ultimate-addons-for-gutenberg' )
     return (
         <UAGAdvancedPanelBody
             title={ __( 'Global Block Styles', 'ultimate-addons-for-gutenberg' ) }
@@ -202,59 +205,16 @@ console.log(globalBlockStyleId);
         >
             {
                 ( ! globalBlockStyleName || '' === globalBlockStyleName ) && (
-                    <>
-                        <Button
-                            className="spectra-gbs-button components-base-control"
-                            onClick={ () => {
-                                openModal();
-                                setUniqueID( new Date().getTime().toString() );
-                            } }
-                            variant="primary"
-                        >
-                            { __( 'Save as a New Global Block Style', 'ultimate-addons-for-gutenberg' ) }
-                        </Button>
-                        <label>{__('Link to Existing Style','ultimate-addons-for-gutenberg')}</label>
-                        <Select
-                            name={ __(
-                                'Link to Existing Style',
-                                'ultimate-addons-for-gutenberg'
-                            ) }
-                            data={ {
-                                value: globalBlockStyleId,
-                                label: 'globalBlockStyleId',
-                            } }
-                            defaultValue={! bulkEdit ? globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) : multiSelected }
-                            onChange = {
-                                ( value ) => {
-                                    console.log(value);
-                                    if ( bulkEdit ) {
-                                        setMultiSelected(value);
-                                        return;
-                                    }
-                                    let label = '';
-                                    let selectedValue = value?.value;
-                                    for ( let i = 0; i < globalBlockStyles.length; i++ ) {
-                                        if ( globalBlockStyles[i]?.value === selectedValue ) {
-                                            label = globalBlockStyles[i]?.label;
-                                            break;
-                                        }
-                                    }
-                                    setAttributes( 
-                                        { 
-                                            globalBlockStyleId: selectedValue,
-                                            globalBlockStyleName: label 
-                                        } 
-                                        );
-                                    
-                                    getBlockStyles( selectedValue );
-                                }
-                            }
-                            classNamePrefix={'spectra-multi-select'}
-                            className={'spectra-multi-select components-base-control'}
-                            options={ globalBlockStyles }
-                            isMulti={bulkEdit}
-                        />
-                    </>
+                    <Button
+                        className="spectra-gbs-button components-base-control"
+                        onClick={ () => {
+                            openModal();
+                            setUniqueID( new Date().getTime().toString() );
+                        } }
+                        variant="primary"
+                    >
+                        { __( 'Save as a New Global Block Style', 'ultimate-addons-for-gutenberg' ) }
+                    </Button>
                 )
             }
             { 'open' === isOpen && (
@@ -301,51 +261,47 @@ console.log(globalBlockStyleId);
                     </div>
 				</Modal>
 			) }
+            <label>{selectLabel}</label>
+            <Select
+                data={ {
+                    value: globalBlockStyleId,
+                    label: 'globalBlockStyleId',
+                } }
+                defaultValue={! bulkEdit ? globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) : multiSelected }
+                onChange = {
+                    ( value ) => {    
+                        
+                        if ( bulkEdit ) {
+                            setMultiSelected(value);
+                            return;
+                        }
+                        let label = '';
+                        let selectedValue = value?.value;
+                        for ( let i = 0; i < globalBlockStyles.length; i++ ) {
+                            if ( globalBlockStyles[i]?.value === selectedValue ) {
+                                label = globalBlockStyles[i]?.label;
+                                break;
+                            }
+                        }
+                        
+                        setAttributes( 
+                            { 
+                                globalBlockStyleId: selectedValue,
+                                globalBlockStyleName: label 
+                            } 
+                        );
+                        setUniqueID( selectedValue );
+                        getBlockStyles( selectedValue );
+                    }
+                }
+                options={ globalBlockStyles }
+                classNamePrefix={'spectra-multi-select'}
+                className={'spectra-multi-select components-base-control'}
+                isMulti={bulkEdit}
+            />
             {
                 ( globalBlockStyleName && '' !== globalBlockStyleName ) && (
                     <>
-                        <label>{__('Linked Style','ultimate-addons-for-gutenberg')}</label>
-                        <Select
-							name={ __(
-								'Linked Style',
-								'ultimate-addons-for-gutenberg'
-							) }
-							data={ {
-								value: globalBlockStyleId,
-								label: 'globalBlockStyleId',
-							} }
-                            defaultValue={! bulkEdit ? globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) : multiSelected }
-                            onChange = {
-                                ( value ) => {    
-                                    console.log(value);
-                                    if ( bulkEdit ) {
-                                        setMultiSelected(value);
-                                        return;
-                                    }
-                                    let label = '';
-                                    let selectedValue = value?.value;
-                                    for ( let i = 0; i < globalBlockStyles.length; i++ ) {
-                                        if ( globalBlockStyles[i]?.value === selectedValue ) {
-                                            label = globalBlockStyles[i]?.label;
-                                            break;
-                                        }
-                                    }
-                                    
-                                    setAttributes( 
-                                        { 
-                                            globalBlockStyleId: selectedValue,
-                                            globalBlockStyleName: label 
-                                        } 
-                                    );
-                                    setUniqueID( selectedValue );
-                                    getBlockStyles( selectedValue );
-                                }
-                            }
-							options={ globalBlockStyles }
-                            classNamePrefix={'spectra-multi-select'}
-                            className={'spectra-multi-select components-base-control'}
-                            isMulti={bulkEdit}
-						/>
                         <Button
                             className="spectra-gbs-button components-base-control"
                             onClick={ () => {
