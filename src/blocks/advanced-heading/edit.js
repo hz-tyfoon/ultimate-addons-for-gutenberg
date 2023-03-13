@@ -20,7 +20,8 @@ const UAGBAdvancedHeading = ( props ) => {
 	const deviceType = useDeviceType();
 	const {
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		editorStyles,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, globalBlockStyleId },
 		isSelected,
 		setAttributes,
 		clientId
@@ -51,6 +52,10 @@ const UAGBAdvancedHeading = ( props ) => {
 	useEffect( () => {
 		scrollBlockToView();
 	}, [ deviceType ] );
+
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
 
 	return (
 			<>
