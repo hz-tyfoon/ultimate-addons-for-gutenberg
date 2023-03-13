@@ -4,7 +4,6 @@ import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStora
 import { select } from '@wordpress/data';
 
 const InspectorTab = ( props ) => {
-	console.log( props );
 	const { children, isActive, type } = props;
 	const tabRef = useRef( null );
 	const { getSelectedBlock } = select( 'core/block-editor' );
