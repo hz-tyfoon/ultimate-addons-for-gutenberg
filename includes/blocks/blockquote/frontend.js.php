@@ -36,7 +36,7 @@ if ( selector.length > 0 ) {
 
 	if ( blockquote__tweet.length > 0 ) {
 
-		blockquote__tweet[0].addEventListener("click",function(){	
+		blockquote__tweet[0].addEventListener("click",function(){
 			var request_url = "https://twitter.com/share?url="+ encodeURIComponent("<?php echo esc_url( $url ); ?>")+"&text="+(<?php echo wp_json_encode( $attr['descriptionText'] ); ?>)+"&via="+("<?php echo esc_html( $via ); ?>");
 			window.open( request_url );
 		});

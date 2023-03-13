@@ -77,7 +77,7 @@ window.UAGBModal = {
 						}
 					);
 
-					innerModal.addEventListener(
+					innerModal?.addEventListener(
 						'click',
 						function ( e ) {
 							const closeOverlayClick = modalWrapper.dataset.overlayclick;
