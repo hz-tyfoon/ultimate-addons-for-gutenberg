@@ -8,7 +8,6 @@ import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 import { select, withSelect, withDispatch, dispatch } from '@wordpress/data';
 import { Button, Modal  } from '@wordpress/components';
 import UAGTextControl from '@Components/text-control';
-import UAGSelectControl from '@Components/select-control';
 import apiFetch from '@wordpress/api-fetch';
 import { store as spectraStore } from '@Store';
 import { STORE_NAME as storeName } from '@Store/constants';
@@ -111,7 +110,7 @@ const GlobalBlockStyles = ( props ) => {
         formData.append( 'bulkUpdateStyles', bulkUpdateStyles );
 
         if ( bulkUpdateStyles ) {
-            formData.append( 'multiSelected', JSON.stringify(multiSelected) );
+            formData.append( 'multiSelected', JSON.stringify( multiSelected ) );
         }
 
         apiFetch( {
@@ -263,7 +262,7 @@ const GlobalBlockStyles = ( props ) => {
                     </div>
 				</Modal>
 			) }
-            <label>{selectLabel}</label>
+            <label htmlFor="select-label">{selectLabel}</label>
             <Select
                 data={ {
                     value: globalBlockStyleId,
@@ -273,11 +272,11 @@ const GlobalBlockStyles = ( props ) => {
                 onChange = {
                     ( value ) => {    
                         if ( bulkEdit ) {
-                            setMultiSelected(value);
+                            setMultiSelected( value );
                             return;
                         }
                         let label = '';
-                        let selectedValue = value?.value;
+                        const selectedValue = value?.value;
                         for ( let i = 0; i < globalBlockStyles.length; i++ ) {
                             if ( globalBlockStyles[i]?.value === selectedValue ) {
                                 label = globalBlockStyles[i]?.label;
@@ -306,8 +305,8 @@ const GlobalBlockStyles = ( props ) => {
                         <Button
                             className="spectra-gbs-button components-base-control"
                             onClick={ () => {
-                                setBulkEdit(true);
-                                setMultiSelected(globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ));
+                                setBulkEdit( true );
+                                setMultiSelected( globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) );
                             } }
                             variant="primary"
                         >
@@ -317,23 +316,24 @@ const GlobalBlockStyles = ( props ) => {
                             <Button
                                 className="spectra-gbs-button delete components-base-control"
                                 onClick={ () => {
-                                    setBulkEdit(false);
-                                    let toBeDeletedIDs = [];
-                                    for( let style in multiSelected ) {
-                                        toBeDeletedIDs.push(multiSelected[style]?.value);
+                                    setBulkEdit( false );
+                                    const toBeDeletedIDs = [];
+                                    for( const style in multiSelected ) {
+                                        toBeDeletedIDs.push( multiSelected[style]?.value );
                                     }
-                                    let filterGBS = globalBlockStyles.filter((style) => {
-                                        if ( style?.value && ! toBeDeletedIDs.includes(style?.value)) {
+                                    const filterGBS = globalBlockStyles.filter( ( style ) => {
+                                        if ( style?.value && ! toBeDeletedIDs.includes( style?.value ) ) {
                                             dispatch( 'core/block-editor' ).updateBlockAttributes( style?.props?.clientId, { 
                                                 globalBlockStyleId: '',
                                                 globalBlockStyleName: '' 
                                             } );
                                             return true;
                                         }
-                                    });
+                                        return false;
+                                    } );
 
-                                    updateGlobalBlockStyles(filterGBS);
-                                    saveStylesToDatabase('bulkUpdateStyles', filterGBS);
+                                    updateGlobalBlockStyles( filterGBS );
+                                    saveStylesToDatabase( 'bulkUpdateStyles', filterGBS );
                                     setUniqueID( false );
                                 } }
                                 variant="primary"
@@ -388,10 +388,10 @@ export default compose(
             globalBlockStylesFontFamilies
 		};	
 	} ),
-    withDispatch( ( dispatch ) => ( {
-		openModal: () => dispatch( spectraStore ).toggleGlobalBlockStylesPopup( 'open' ),
-		closeModal: () => dispatch( spectraStore ).toggleGlobalBlockStylesPopup( 'close' ),
-        updateGlobalBlockStyles: ( value ) => dispatch( spectraStore ).updateGlobalBlockStyles( value ),
-        updateGlobalBlockStylesFontFamilies: ( value ) => dispatch( spectraStore ).updateGlobalBlockStylesFontFamilies( value )
+    withDispatch( ( spectraGbsDispatch ) => ( {
+		openModal: () => spectraGbsDispatch( spectraStore ).toggleGlobalBlockStylesPopup( 'open' ),
+		closeModal: () => spectraGbsDispatch( spectraStore ).toggleGlobalBlockStylesPopup( 'close' ),
+        updateGlobalBlockStyles: ( value ) => spectraGbsDispatch( spectraStore ).updateGlobalBlockStyles( value ),
+        updateGlobalBlockStylesFontFamilies: ( value ) => spectraGbsDispatch( spectraStore ).updateGlobalBlockStylesFontFamilies( value )
 	} ) ),
 )( GlobalBlockStyles );

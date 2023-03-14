@@ -100,7 +100,7 @@ class UAGB_Init_Blocks {
 		}
 	
 		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		if ( 'no' !== $_POST['bulkUpdateStyles'] ) {
+		if ( ! empty( $_POST['bulkUpdateStyles'] ) && 'no' !== $_POST['bulkUpdateStyles'] ) {
 			update_option( 'spectra_global_block_styles', $global_block_styles );
 			wp_send_json_success();
 		}
@@ -166,10 +166,13 @@ class UAGB_Init_Blocks {
 		if ( isset( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) && is_array( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) ) {
 			$spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] = array_unique( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] );
 		}
-		$spectra_gbs_google_fonts_editor = json_decode( stripslashes( $_POST['globalBlockStylesFontFamilies'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
+		
 		update_option( 'spectra_gbs_google_fonts', $spectra_gbs_google_fonts );
-		update_option( 'spectra_gbs_google_fonts_editor', $spectra_gbs_google_fonts_editor );
+
+		if ( ! empty( $_POST['globalBlockStylesFontFamilies'] ) ) {
+			$spectra_gbs_google_fonts_editor = json_decode( stripslashes( $_POST['globalBlockStylesFontFamilies'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			update_option( 'spectra_gbs_google_fonts_editor', $spectra_gbs_google_fonts_editor );
+		}
 		
 		wp_send_json_success();
 	}

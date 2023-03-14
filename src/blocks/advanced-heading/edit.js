@@ -75,7 +75,7 @@ export default compose(
 			globalBlockStyleName
 		} = props.attributes;
 		
-		const editorStyles = getGBSEditorStyles(globalBlockStyles,globalBlockStyleId,globalBlockStyleName);
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
 		
 		return {
 			editorStyles,

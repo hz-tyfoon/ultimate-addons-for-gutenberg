@@ -194,7 +194,7 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 		 */
 		public function get_editor_store_initial_state() {
 
-			$spectra_global_block_styles = get_option(
+			$spectra_global_block_styles     = get_option(
 				'spectra_global_block_styles',
 				array(
 					array(
@@ -209,7 +209,7 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 			);
 			
 			$inital_state = array(
-				'spectra_global_block_styles' => $spectra_global_block_styles,
+				'spectra_global_block_styles'     => $spectra_global_block_styles,
 				'spectra_gbs_google_fonts_editor' => $spectra_gbs_google_fonts_editor,
 			);
 

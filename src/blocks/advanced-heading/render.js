@@ -81,7 +81,7 @@ const Render = ( props ) => {
 	);
 	
 	const blockNameClass = spectraBlockName?.split( '/' )?.pop();
-	const styleNameClass = globalBlockStyleName.replace(/\s+/g, '-').toLowerCase();
+	const styleNameClass = globalBlockStyleName.replace( /\s+/g, '-' ).toLowerCase();
 	const htmlAttributes = {
 		className: classnames( {
 			[className]: true,

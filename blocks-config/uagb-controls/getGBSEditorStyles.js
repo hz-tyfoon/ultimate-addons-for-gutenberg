@@ -1,4 +1,4 @@
-const getGBSEditorStyles = (globalBlockStyles, globalBlockStyleId, globalBlockStyleName) => {
+const getGBSEditorStyles = ( globalBlockStyles, globalBlockStyleId, globalBlockStyleName ) => {
     let editorStyles = '';
     for ( const style of globalBlockStyles ) {
         if ( style?.value === globalBlockStyleId && style?.label === globalBlockStyleName ) {

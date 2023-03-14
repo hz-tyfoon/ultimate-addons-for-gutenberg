@@ -6,7 +6,6 @@ const setInitialState = () => {
     apiFetch( {
         path: '/spectra/v1/editor',
     } ).then( ( data ) => {
-        console.log(data);
         const initialState = {
             initialStateSetFlag : true,
             globalBlockStyles: data.spectra_global_block_styles,

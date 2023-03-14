@@ -3,7 +3,7 @@ import { STORE_NAME as storeName } from '@Store/constants';
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
-const SpectraLoadGlobalGoogleFonts = (props) => {
+const SpectraLoadGlobalGoogleFonts = ( props ) => {
 
     const {
         globalBlockStylesFontFamilies
