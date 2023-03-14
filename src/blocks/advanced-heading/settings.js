@@ -607,30 +607,52 @@ const Settings = ( props ) => {
 							onChange={ ( value ) =>
 								setAttributes( { loopData : { ...loopData, type : value } } )
 							}
-							options={ [
-								{
-									value: 'title',
-									label: __(
-										'Title',
+						>
+							<option value="title">
+								{ __(
+									'Post Title',
+									'ultimate-addons-for-gutenberg'
+								) }
+							</option>
+							<option value="excerpt">
+								{ __(
+									'Post Excerpt',
+									'ultimate-addons-for-gutenberg'
+								) }
+							</option>
+							<option value="date">
+								{ __(
+									'Post Date',
+									'ultimate-addons-for-gutenberg'
+								) }
+							</option>
+							{/* <optgroup label="Author">
+								<option value="title">
+									{ __(
+										'First Name',
 										'ultimate-addons-for-gutenberg'
-									),
-								},
-								{
-									value: 'excerpt',
-									label: __(
-										'Excerpt',
+									) }
+								</option>
+								<option value="excerpt">
+									{ __(
+										'Last Name',
 										'ultimate-addons-for-gutenberg'
-									),
-								},
-								{
-									value: 'date',
-									label: __(
-										'Date',
+									) }
+								</option>
+								<option value="display_name">
+									{ __(
+										'Full Name',
 										'ultimate-addons-for-gutenberg'
-									),
-								},
-							] }
-						/>
+									) }
+								</option>
+								<option value="date">
+									{ __(
+										'Username',
+										'ultimate-addons-for-gutenberg'
+									) }
+								</option>
+							</optgroup> */}
+						</UAGSelectControl>
 					)}
 				</UAGAdvancedPanelBody>
 			)

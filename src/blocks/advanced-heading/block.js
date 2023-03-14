@@ -13,6 +13,7 @@ import { registerBlockType, createBlock } from '@wordpress/blocks';
 import './format';
 import colourNameToHex from '@Controls/changeColorNameToHex';
 import PreviewImage from '@Controls/previewImage';
+import { applyFilters } from '@wordpress/hooks';
 
 registerBlockType( 'uagb/advanced-heading', {
 	title: __( 'Heading', 'ultimate-addons-for-gutenberg' ),
@@ -43,6 +44,9 @@ registerBlockType( 'uagb/advanced-heading', {
 			<Edit { ...props } />
 		),
 	save,
+	__experimentalLabel: ( atts ) => (
+		applyFilters( 'uag_loop_data_source_label', __( 'Heading', 'ultimate-addons-for-gutenberg' ), atts )
+	),
 	deprecated,
 	"usesContext": [ "postId", "postType" ],
 	transforms: {
