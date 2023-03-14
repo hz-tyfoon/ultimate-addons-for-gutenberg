@@ -40,7 +40,7 @@ const variations = [
 				{
 					align: '',
 					url: `${ uagb_blocks_info.uagb_url }/admin/assets/images/uag-placeholder.svg`,
-					bottomMarginDesktop: 32,
+					bottomMarginDesktop: 24,
 				},
 			],
 			[
@@ -49,10 +49,9 @@ const variations = [
 					headingAlign: 'left',	
 					headingTitleToggle: true,
 					headingDescToggle: true,
-					headingDesc: 'Design',
-					subHeadingColor: '#6941C6',
+					headingDesc: 'Tag Name',
+					subHeadingColor: '#007CBA',
 					headingTag: 'h3',
-					headingTitle: 'UX Review Presentation',
 					headingDescPosition: 'above-heading',
 					headSpace: 12,
 					subHeadSpace: 12,
@@ -81,7 +80,7 @@ const variations = [
 					headingTitleToggle: true,
 					headingDescToggle: true,
 					headingTag: 'h6',
-					headingTitle: 'Olivia Rhye',
+					headingTitle: 'Name',
 					blockTopPadding: 0,
 					blockBottomPadding: 0,
 					headingDesc: '20 Jan 2022',
@@ -102,7 +101,13 @@ const variations = [
 		title: __( 'Style 2', 'ultimate-addons-for-gutenberg' ),
 		attributes: { 
 			backgroundType: 'color',
-			backgroundColor: '#ffffff'
+			backgroundColor: '#ffffff',
+			boxShadowColor: '',
+			boxShadowHOffset: 0,
+			boxShadowVOffset: 0,
+			boxShadowBlur: 0,
+			boxShadowSpread: 0,
+			boxShadowPosition: '',
 		},
 		innerBlocks: [
 			[
@@ -111,7 +116,7 @@ const variations = [
 					headingAlign: 'center',
 					headingTitleToggle: true,
 					headingDescToggle: true,
-					headingDesc: 'Check out the team dashboard',
+					headingDesc: 'Title Tag',
 					headingTag: 'h1',
 					headingDescPosition: 'above-heading',
 					headSpace: 24,
@@ -119,7 +124,7 @@ const variations = [
 					blockTopPadding: 0,
 					blockBottomPadding: 0,
 					headFontWeight: 500,
-					subHeadingColor: '#7F56D9',
+					subHeadingColor: '#007CBA',
 					subHeadFontWeight: 500,
 				},
 			],
@@ -169,7 +174,10 @@ const variations = [
 							rightPadding: 0,
 							bottomPadding: 0,
 							leftPadding: 0,
-							color: '#567BD9'
+							color: '#344054',
+							iconHColor: '#007CBA',
+							hColor: '#007CBA',
+							iconColor: '#344054',
 						},
 					],
 				],
@@ -192,15 +200,33 @@ const variations = [
 			blockBorderRightWidth: 1,
 			blockBorderColor:'#9599A1',
 			blockBorderStyle: 'solid',
+			boxShadowColor: '',
+			boxShadowHOffset: 0,
+			boxShadowVOffset: 0,
+			boxShadowBlur: 0,
+			boxShadowSpread: 0,
+			boxShadowPosition: '',
 		},
 		innerBlocks: [
 			[
 				'uagb/container',
-				{ directionDesktop: 'row' },
+				{   directionDesktop: 'row',
+					topPaddingDesktop: 0,
+					bottomPaddingDesktop: 0,
+					leftPaddingDesktop: 0,
+					rightPaddingDesktop: 0,
+					rowGapDesktop: 0
+				},
 				[
 					[
 						'uagb/container',
-						{},
+						{
+							topPaddingDesktop: 0,
+							bottomPaddingDesktop: 0,
+							leftPaddingDesktop: 0,
+							rightPaddingDesktop: 0,
+							rowGapDesktop: 0,
+						},
 						[
 							[
 								'uagb/image',
@@ -213,7 +239,13 @@ const variations = [
 					],
 					[
 						'uagb/container',
-						{ alignItemsDesktop: 'left' },
+						{   alignItemsDesktop: 'left',
+							topPaddingDesktop: 0,
+							bottomPaddingDesktop: 0,
+							leftPaddingDesktop: 0,
+							rightPaddingDesktop: 0,
+							rowGapDesktop: 0, 
+						},
 						[
 							[
 								'uagb/advanced-heading',
@@ -226,7 +258,7 @@ const variations = [
 									headingTag: 'h3',
 									headingDescPosition: 'below-heading',
 									headSpace: 5,
-									subHeadSpace: 20,
+									subHeadSpace: 16,
 									blockTopPadding: 0,
 									blockBottomPadding: 0,
 								},
@@ -234,7 +266,7 @@ const variations = [
 							[
 								'uagb/star-rating',
 								{
-									title: '(10) Reviews',
+									title: '(32) Reviews',
 									size: 20,
 									fontWeight: 500,
 									titleColor: '#637381',
@@ -257,13 +289,13 @@ const variations = [
 									blockTopPadding: 0,
 									blockBottomPadding: 24,
 									headFontWeight: 600,
-									subHeadingColor: '#7F56D9',
+									subHeadingColor: '#007CBA',
 									headFontSize: 32,
 								},
 							],
 							[
 								'uagb/buttons',
-								{ align: 'full', stack: 'desktop', alignTablet:'full', alignMobile: 'full', gapTablet: 10, gapMobile: 10 },
+								{ align: 'full', stack: 'desktop', alignTablet:'full', alignMobile: 'full', gap: 16, gapTablet: 16, gapMobile: 16 },
 								[
 									[
 										'uagb/buttons-child',
@@ -332,22 +364,28 @@ const variations = [
 		attributes: {
 			backgroundType: 'color',
 			backgroundColor: '#ffffff',
-			boxShadowColor: '#00000021',
-			boxShadowHOffset: 0,
-			boxShadowVOffset: 12,
-			boxShadowBlur: 16,
-			boxShadowSpread: -4,
-			boxShadowPosition: 'outset',
 			topPaddingDesktop: 24,
 			bottomPaddingDesktop: 24,
 			leftPaddingDesktop: 24,
 			rightPaddingDesktop: 24,
 			blockBorderStyle: 'default',
+			boxShadowColor: '',
+			boxShadowHOffset: 0,
+			boxShadowVOffset: 0,
+			boxShadowBlur: 0,
+			boxShadowSpread: 0,
+			boxShadowPosition: '',
 		},
 		innerBlocks: [
 			[
 				'uagb/container',
-				{ directionDesktop: 'row' },
+				{ 	directionDesktop: 'row',
+					topPaddingDesktop: 0,
+					bottomPaddingDesktop: 0,
+					leftPaddingDesktop: 0,
+					rightPaddingDesktop: 0,
+					rowGapDesktop: 0 
+				},
 				[
 					[
 						'uagb/container',
@@ -375,6 +413,7 @@ const variations = [
 							bottomPaddingMobile: 32,
 							leftPaddingMobile: 32,
 							rightPaddingMobile: 32,
+							rowGapDesktop: 0
 						},
 						[
 							[
@@ -407,7 +446,6 @@ const variations = [
 									icon_count: 6,
 									blockTopPadding: 32,
 									blockBottomPadding: 32,
-									label: 'Lorem Ipsum dolor',
 									icon: 'check-square',
 									align: 'left',
 									iconColor: '#0B63E5',
@@ -468,6 +506,7 @@ const variations = [
 							bottomPaddingMobile: 32,
 							leftPaddingMobile: 32,
 							rightPaddingMobile: 32,
+							rowGapDesktop: 0
 						},
 						[
 							[
@@ -500,7 +539,6 @@ const variations = [
 									icon_count: 6,
 									blockTopPadding: 32,
 									blockBottomPadding: 32,
-									label: 'Lorem Ipsum dolor',
 									icon: 'check-square',
 									align: 'left',
 									iconColor: '#0B63E5',
@@ -561,6 +599,7 @@ const variations = [
 							bottomPaddingMobile: 32,
 							leftPaddingMobile: 32,
 							rightPaddingMobile: 32,
+							rowGapDesktop: 0
 						},
 						[
 							[
@@ -593,7 +632,6 @@ const variations = [
 									icon_count: 6,
 									blockTopPadding: 32,
 									blockBottomPadding: 32,
-									label: 'Lorem Ipsum dolor',
 									icon: 'check-square',
 									align: 'left',
 									iconColor: '#0B63E5',
@@ -637,7 +675,14 @@ const variations = [
 		name: 'style-5',
 		icon: icons[ 'style-5' ],
 		title: __( 'Style 5', 'ultimate-addons-for-gutenberg' ),
-		attributes: {},
+		attributes: {
+			boxShadowColor: '',
+			boxShadowHOffset: 0,
+			boxShadowVOffset: 0,
+			boxShadowBlur: 0,
+			boxShadowSpread: 0,
+			boxShadowPosition: '',
+		},
 		innerBlocks: [
 			[
 				'uagb/container',
@@ -645,7 +690,13 @@ const variations = [
 				[
 					[
 						'uagb/container',
-						{},
+						{
+							topPaddingDesktop: 0,
+							bottomPaddingDesktop: 0,
+							leftPaddingDesktop: 0,
+							rightPaddingDesktop: 0,
+							rowGapDesktop: 0
+						},
 						[
 							[
 								'uagb/image',
@@ -658,7 +709,13 @@ const variations = [
 					],
 					[
 						'uagb/container',
-						{ alignItemsDesktop: 'left' },
+						{ 	alignItemsDesktop: 'left',
+							topPaddingDesktop: 0,
+							bottomPaddingDesktop: 0,
+							leftPaddingDesktop: 0,
+							rightPaddingDesktop: 0,
+							rowGapDesktop: 0
+						},
 						[
 							[
 								'uagb/blockquote',
@@ -670,13 +727,13 @@ const variations = [
 									quoteSize: 50,
 									quotePadding: 0,
 									quoteBorderRadius: 100,
-									quoteColor: '#7F56D9',
+									quoteColor: '#007CBA',
 									quoteBgColor: '',
 									descFontWeight: 600,
 									descFontStyle: 'default',
 									displayTitle: false,
 									size: 20,
-									quoteBottomMargin: 45,
+									quoteBottomMargin: 32,
 									descSpace: 0,
 									descriptionText:
 										'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
@@ -687,18 +744,18 @@ const variations = [
 								{
 									subHeadFontWeight: 400,
 									subHeadFontSize: 12,
-									headFontWeight: 800,
+									headFontWeight: 500,
 									headingAlign: 'left',
 									headingTitleToggle: true,
 									headingDescToggle: true,
-									headingDesc: 'Senior Research Manager',
+									headingDesc: 'Designation',
 									headingTag: 'h5',
 									headingTitle: 'Name',
 									headingDescPosition: 'below-heading',
 									headSpace: 5,
 									subHeadSpace: 0,
-									blockTopPadding: 16,
-									blockBottomPadding: 0,
+									blockTopPadding: 24,
+									blockBottomPadding: 24,
 								},
 							],
 							[
