@@ -46,6 +46,7 @@ registerBlockType( 'uagb/image', {
 				<Edit { ...props } />
 			),
 	save,
+	"usesContext": [ "postId", "postType" ],
 	deprecated,
 	transforms: {
 		from: [

@@ -626,7 +626,7 @@ const Settings = ( props ) => {
 									'ultimate-addons-for-gutenberg'
 								) }
 							</option>
-							{/* <optgroup label="Author">
+							<optgroup label="Author">
 								<option value="title">
 									{ __(
 										'First Name',
@@ -651,7 +651,7 @@ const Settings = ( props ) => {
 										'ultimate-addons-for-gutenberg'
 									) }
 								</option>
-							</optgroup> */}
+							</optgroup>
 						</UAGSelectControl>
 					)}
 				</UAGAdvancedPanelBody>

@@ -24,7 +24,7 @@ import styles from './editor.lazy.scss';
  * Internal dependencies
  */
 import {pickRelevantMediaFiles, isTemporaryImage, isExternalImage, hasDefaultSize, isMediaDestroyed} from './utils'
-
+import getLoopImage from './getLoopImage';
 
 /**
  * Module constants
@@ -42,8 +42,8 @@ const propTypes = {};
 const defaultProps = {};
 
 const Render = ( props ) => {
+	let { attributes } = props.parentProps;
 	const {
-		attributes,
 		setAttributes,
 		className,
 		isSelected,
@@ -52,6 +52,8 @@ const Render = ( props ) => {
 		context,
 		clientId
 	} = props.parentProps;
+	
+	attributes = { ...attributes, ...getLoopImage( context, attributes ) };
 
 	const {
 		block_id,
@@ -68,6 +70,8 @@ const Render = ( props ) => {
 		href,
 		linkDestination,
 	} = attributes
+	console.log('props Image',props);
+
 
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
