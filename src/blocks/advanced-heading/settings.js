@@ -627,25 +627,25 @@ const Settings = ( props ) => {
 								) }
 							</option>
 							<optgroup label="Author">
-								<option value="title">
+								<option value="author_fname">
 									{ __(
 										'First Name',
 										'ultimate-addons-for-gutenberg'
 									) }
 								</option>
-								<option value="excerpt">
+								<option value="author_lname">
 									{ __(
 										'Last Name',
 										'ultimate-addons-for-gutenberg'
 									) }
 								</option>
-								<option value="display_name">
+								<option value="author_full_name">
 									{ __(
 										'Full Name',
 										'ultimate-addons-for-gutenberg'
 									) }
 								</option>
-								<option value="date">
+								<option value="author_user_name">
 									{ __(
 										'Username',
 										'ultimate-addons-for-gutenberg'

@@ -70,8 +70,6 @@ const Render = ( props ) => {
 		href,
 		linkDestination,
 	} = attributes
-	console.log('props Image',props);
-
 
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
