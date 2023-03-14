@@ -14,6 +14,7 @@ import { useDeviceType } from '@Controls/getPreviewType';
 import styles from './editor.lazy.scss';
 import { SwiperSlide } from 'swiper/react';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import { addFilter } from '@wordpress/hooks';
 
 const UAGBSlider = ( props ) => {
 	const deviceType = useDeviceType();
@@ -133,8 +134,4 @@ const uagbSlideClass = createHigherOrderComponent( ( BlockListBlock ) => {
 	};
 }, 'uagbSlideClass' );
 
-wp.hooks.addFilter(
-	'editor.BlockListBlock',
-	'uagb/slider-child',
-	uagbSlideClass
-);
+addFilter( 'editor.BlockListBlock', 'uagb/slider-child', uagbSlideClass );

@@ -7,7 +7,7 @@ import {
 	useState,
 	useRef,
 } from '@wordpress/element';
-
+import { applyFilters } from '@wordpress/hooks';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import { Button, ButtonGroup } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
@@ -53,7 +53,7 @@ const MultiButtonsControl = ( props ) => {
 
 	const selectedBlock = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
 	// eslint-disable-next-line @wordpress/no-unused-vars-before-return
-	const allBlocksAttributes = wp.hooks.applyFilters(
+	const allBlocksAttributes = applyFilters(
 		'uagb.blocksAttributes',
 		blocksAttributes
 	);
@@ -257,17 +257,17 @@ const MultiButtonsControl = ( props ) => {
 		} );
 	};
 	const controlName = getIdFromString( label );
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ selectedBlock }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		selectedBlock
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ selectedBlock }.${ panelNameForHook }.${ controlName }`,
 		'',
 		selectedBlock
 	);
-	const allOptions = wp.hooks.applyFilters(
+	const allOptions = applyFilters(
 		`spectra.${ selectedBlock }.${ panelNameForHook }.${ controlName }.options`,
 		options,
 		selectedBlock

@@ -14,6 +14,7 @@ import classnames from 'classnames';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGReset from '../reset';
 import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const UAGTextControl = ( props ) => {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
@@ -37,7 +38,7 @@ const UAGTextControl = ( props ) => {
 
 	const registerTextExtender =
 		props.enableDynamicContent && props.name
-			? wp.hooks.applyFilters(
+			? applyFilters(
 					'uagb.registerTextExtender',
 					'',
 					selectedBlock?.name,
@@ -95,12 +96,12 @@ const UAGTextControl = ( props ) => {
 	};
 
 	const controlName = getIdFromString( props.label ); // there is no label props that's why keep hard coded label
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

@@ -27,6 +27,7 @@ import AdvancedPopColorControl from '@Components/color-control/advanced-pop-colo
 import { boxShadowPresets, boxShadowHoverPresets } from './presets';
 import UAGPresets from '@Components/presets';
 import { createBlock } from '@wordpress/blocks';
+import { applyFilters } from '@wordpress/hooks';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -220,17 +221,17 @@ const Settings = ( props ) => {
 			setAttributes( { displayDots: ! displayDots } );
 		};
 
-		const afterNavigationOptions = wp.hooks.applyFilters(
+		const afterNavigationOptions = applyFilters(
 			'spectra.slider.tab_general.displayDots.after',
 			'',
 			props
 		);
-		const afterAutoPlayOptions = wp.hooks.applyFilters(
+		const afterAutoPlayOptions = applyFilters(
 			'spectra.slider.tab_general.autoplay.after',
 			'',
 			props
 		);
-		const afterTransitionOptions = wp.hooks.applyFilters(
+		const afterTransitionOptions = applyFilters(
 			'spectra.slider.tab_general.transitionSpeed.after',
 			'',
 			props
@@ -1114,12 +1115,47 @@ const Settings = ( props ) => {
 							disableBottomSeparator={ true }
 						/>
 					) }
+					{ displayDots && (
+						<ResponsiveSlider
+							label={ __(
+								'Top Margin for Dots',
+								'ultimate-addons-for-gutenberg'
+							) }
+							data={ {
+								desktop: {
+									value: dotsMarginTop,
+									label: 'dotsMarginTop',
+								},
+								tablet: {
+									value: dotsMarginTopTablet,
+									label: 'dotsMarginTopTablet',
+								},
+								mobile: {
+									value: dotsMarginTopMobile,
+									label: 'dotsMarginTopMobile',
+								},
+							} }
+							min={ -100 }
+							max={ 100 }
+							displayUnit={ false }
+							setAttributes={ setAttributes }
+						/>
+					) }
+					{ displayArrows && (
+						<ResponsiveBorder
+							setAttributes={ setAttributes }
+							prefix={ 'slider-arrow' }
+							attributes={ attributes }
+							deviceType={ deviceType }
+							disableBottomSeparator={ true }
+						/>
+					) }
 				</UAGAdvancedPanelBody>
 			</>
 		);
 	};
 
-	const afterNavigationStyleOptions = wp.hooks.applyFilters(
+	const afterNavigationStyleOptions = applyFilters(
 		'spectra.slider.tab_style.NavigationStyle.after',
 		'',
 		props

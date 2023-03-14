@@ -7,6 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
+import { applyFilters } from '@wordpress/hooks';
 
 export default function styling( props ) {
 	const {
@@ -709,17 +710,17 @@ export default function styling( props ) {
 		8
 	) }`;
 
-	selectors = wp.hooks.applyFilters(
+	selectors = applyFilters(
 		`spectra.${ blockName }.styling`,
 		selectors,
 		props.attributes
 	);
-	tabletSelectors = wp.hooks.applyFilters(
+	tabletSelectors = applyFilters(
 		`spectra.${ blockName }.tabletStyling`,
 		tabletSelectors,
 		props.attributes
 	);
-	mobileSelectors = wp.hooks.applyFilters(
+	mobileSelectors = applyFilters(
 		`spectra.${ blockName }.mobileStyling`,
 		mobileSelectors,
 		props.attributes

@@ -5,6 +5,7 @@ import getMatrixAlignment from '@Controls/getMatrixAlignment';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateSpacing from '@Controls/generateSpacing';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
+import { applyFilters } from '@wordpress/hooks';
 
 function styling( props ) {
 	const { name, clientId, attributes } = props;
@@ -1340,33 +1341,33 @@ function styling( props ) {
 		8
 	) }`;
 
-	selectors = wp.hooks.applyFilters(
+	selectors = applyFilters(
 		`spectra.image-gallery.styling`,
 		selectors,
 		attributes
 	);
-	tabletSelectors = wp.hooks.applyFilters(
+	tabletSelectors = applyFilters(
 		`spectra.image-gallery.tabletStyling`,
 		tabletSelectors,
 		attributes
 	);
-	mobileSelectors = wp.hooks.applyFilters(
+	mobileSelectors = applyFilters(
 		`spectra.image-gallery.mobileStyling`,
 		mobileSelectors,
 		attributes
 	);
 
-	selectors = wp.hooks.applyFilters(
+	selectors = applyFilters(
 		`spectra.image-gallery.styling`,
 		selectors,
 		props.attributes
 	);
-	tabletSelectors = wp.hooks.applyFilters(
+	tabletSelectors = applyFilters(
 		`spectra.image-gallery.tabletStyling`,
 		tabletSelectors,
 		props.attributes
 	);
-	mobileSelectors = wp.hooks.applyFilters(
+	mobileSelectors = applyFilters(
 		`spectra.image-gallery.mobileStyling`,
 		mobileSelectors,
 		props.attributes

@@ -9,6 +9,7 @@ import apiFetch from '@wordpress/api-fetch';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 import UAGConfirmPopup from '../popup-confirm';
 import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const UAGMediaPicker = ( props ) => {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
@@ -92,7 +93,7 @@ const UAGMediaPicker = ( props ) => {
 
 	const registerImageExtender = disableDynamicContent
 		? null
-		: wp.hooks.applyFilters(
+		: applyFilters(
 				'uagb.registerImageExtender',
 				'',
 				selectedBlock?.name,
@@ -100,7 +101,7 @@ const UAGMediaPicker = ( props ) => {
 		  );
 	const registerImageLinkExtender = disableDynamicContent
 		? null
-		: wp.hooks.applyFilters(
+		: applyFilters(
 				'uagb.registerImageLinkExtender',
 				'',
 				selectedBlock?.name,
@@ -238,12 +239,12 @@ const UAGMediaPicker = ( props ) => {
 	};
 
 	const controlName = getIdFromString( props?.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

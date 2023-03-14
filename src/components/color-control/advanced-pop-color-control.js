@@ -24,6 +24,7 @@ import {
 } from '@wordpress/element';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGReset from '../reset';
+import { applyFilters } from '@wordpress/hooks';
 
 const AdvancedPopColorControl = ( props ) => {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
@@ -181,12 +182,12 @@ const AdvancedPopColorControl = ( props ) => {
 			: '';
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

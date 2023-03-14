@@ -11,6 +11,7 @@ import Separator from '@Components/separator';
 import { select } from '@wordpress/data';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const UAGTabsControl = ( props ) => {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
@@ -43,12 +44,12 @@ const UAGTabsControl = ( props ) => {
 	} );
 
 	const controlName = 'tabs'; // there is no label props that's why keep hard coded label
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

@@ -11,6 +11,7 @@ import {
 import { getPanelIdFromRef } from '@Utils/Helpers';
 import { select } from '@wordpress/data';
 import PropTypes from 'prop-types';
+import { applyFilters } from '@wordpress/hooks';
 
 const propTypes = {
 	disabledTopSpace: PropTypes.bool,
@@ -37,12 +38,12 @@ export default function Separator( { disabledTopSpace } ) {
 	}, [ blockNameForHook ] );
 
 	const controlName = 'separator'; // there is no label props that's why keep hard coded label
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

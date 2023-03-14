@@ -19,6 +19,7 @@ import { select } from '@wordpress/data';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGReset from '../reset';
 import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const UAGNumberControl = ( props ) => {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
@@ -160,12 +161,12 @@ const UAGNumberControl = ( props ) => {
 	const variant = props.inlineControl ? 'inline' : 'full-width';
 
 	const controlName = getIdFromString( props?.label ); //
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

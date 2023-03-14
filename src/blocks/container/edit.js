@@ -237,8 +237,6 @@ const UAGBContainer = ( props ) => {
 		);
 	};
 
-	// const { variationSelected } = props.attributes;
-
 	if (
 		! variationSelected &&
 		0 === select( 'core/block-editor' ).getBlockParents( clientId ).length

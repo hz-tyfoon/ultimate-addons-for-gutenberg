@@ -5,6 +5,7 @@ import { limitMax, limitMin } from '@Controls/unitWiseMinMaxOption';
 import { select } from '@wordpress/data';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const ResponsiveSlider = ( props ) => {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
@@ -121,12 +122,12 @@ const ResponsiveSlider = ( props ) => {
 	);
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

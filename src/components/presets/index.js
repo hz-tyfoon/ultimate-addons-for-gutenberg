@@ -8,7 +8,7 @@ import {
 	useRef,
 	memo,
 } from '@wordpress/element';
-
+import { applyFilters } from '@wordpress/hooks';
 import { select, dispatch } from '@wordpress/data';
 import classnames from 'classnames';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
@@ -245,12 +245,12 @@ const UAGPresets = ( props ) => {
 	);
 
 	const controlName = getIdFromString( label );
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

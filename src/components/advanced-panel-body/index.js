@@ -2,6 +2,7 @@ import { PanelBody } from '@wordpress/components';
 import { useRef, memo, useState, useEffect } from '@wordpress/element';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 import { select } from '@wordpress/data';
+import { applyFilters } from '@wordpress/hooks';
 
 const UAGAdvancedPanelBody = ( props ) => {
 	const { children } = props;
@@ -112,12 +113,12 @@ const UAGAdvancedPanelBody = ( props ) => {
 		: '';
 
 	const blockNameForHook = blockName.split( '/' ).pop();
-	const tabBodyBefore = wp.hooks.applyFilters(
+	const tabBodyBefore = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ panelTitle }.before`,
 		'',
 		blockName
 	);
-	const tabBodyAfter = wp.hooks.applyFilters(
+	const tabBodyAfter = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ panelTitle }`,
 		'',
 		blockName

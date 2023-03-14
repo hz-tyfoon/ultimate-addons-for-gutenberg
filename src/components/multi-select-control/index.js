@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { select } from '@wordpress/data';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import PropTypes from 'prop-types';
+import { applyFilters } from '@wordpress/hooks';
 
 const propTypes = {
 	label: PropTypes.string,
@@ -36,17 +37,17 @@ export default function UAGMultiSelectControl( {
 	}, [ selectedBlock ] );
 
 	const controlName = getIdFromString( label );
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ selectedBlock }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		selectedBlock
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ selectedBlock }.${ panelNameForHook }.${ controlName }`,
 		'',
 		selectedBlock
 	);
-	const allOptions = wp.hooks.applyFilters(
+	const allOptions = applyFilters(
 		`spectra.${ selectedBlock }.${ panelNameForHook }.${ controlName }.options`,
 		options,
 		selectedBlock

@@ -11,6 +11,7 @@ import {
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import { select } from '@wordpress/data';
 import styles from './editor.lazy.scss';
+import { applyFilters } from '@wordpress/hooks';
 
 export default function ColorSwitchControl( {
 	label,
@@ -37,12 +38,12 @@ export default function ColorSwitchControl( {
 	}, [ blockNameForHook ] );
 
 	const controlName = getIdFromString( label );
-	const controlBeforeDomElement = wp.hooks.applyFilters(
+	const controlBeforeDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }.before`,
 		'',
 		blockNameForHook
 	);
-	const controlAfterDomElement = wp.hooks.applyFilters(
+	const controlAfterDomElement = applyFilters(
 		`spectra.${ blockNameForHook }.${ panelNameForHook }.${ controlName }`,
 		'',
 		blockNameForHook

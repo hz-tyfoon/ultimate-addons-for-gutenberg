@@ -19,6 +19,7 @@ import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import styles from './editor.lazy.scss';
+import { addFilter } from '@wordpress/hooks';
 
 const UAGBFormsEdit = ( props ) => {
 	const deviceType = useDeviceType();
@@ -394,6 +395,6 @@ const addAdvancedClasses = createHigherOrderComponent( ( BlockListBlock ) => {
 	};
 }, 'addAdvancedClasses' );
 
-wp.hooks.addFilter( 'editor.BlockListBlock', 'uagb/forms', addAdvancedClasses );
+addFilter( 'editor.BlockListBlock', 'uagb/forms', addAdvancedClasses );
 
 export default compose( withNotices, addAdvancedClasses )( UAGBFormsEdit );

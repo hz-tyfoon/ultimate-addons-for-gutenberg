@@ -17,7 +17,7 @@ import {
 } from '@wordpress/components';
 import { useState, useEffect, useLayoutEffect } from '@wordpress/element';
 import editorStyles from './../editor.lazy.scss';
-import { addFilter } from '@wordpress/hooks';
+import { addFilter, applyFilters } from '@wordpress/hooks';
 import SettingsIcons from './icons.js';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 
@@ -25,7 +25,7 @@ const UAGCopyPasteStyles = () => {
 	// Registering the shortcuts
 	const { registerShortcut } = useDispatch( keyboardShortcutsStore );
 
-	const allBlocksAttributes = wp.hooks.applyFilters(
+	const allBlocksAttributes = applyFilters(
 		'uagb.blocksAttributes',
 		blocksAttributes
 	);

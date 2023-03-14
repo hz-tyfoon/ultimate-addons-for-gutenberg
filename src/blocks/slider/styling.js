@@ -6,6 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import generateBorderCSS from '@Controls/generateBorderCSS';
+import { applyFilters } from '@wordpress/hooks';
 
 function styling( props ) {
 	const { attributes } = props;
@@ -585,17 +586,13 @@ function styling( props ) {
 
 	const base_selector = `.editor-styles-wrapper #block-${ props.clientId }`;
 
-	selectors = wp.hooks.applyFilters(
-		`spectra.slider.styling`,
-		selectors,
-		attributes
-	);
-	tablet_selectors = wp.hooks.applyFilters(
+	selectors = applyFilters( `spectra.slider.styling`, selectors, attributes );
+	tablet_selectors = applyFilters(
 		`spectra.slider.tabletStyling`,
 		tablet_selectors,
 		attributes
 	);
-	mobile_selectors = wp.hooks.applyFilters(
+	mobile_selectors = applyFilters(
 		`spectra.slider.mobileStyling`,
 		mobile_selectors,
 		attributes
