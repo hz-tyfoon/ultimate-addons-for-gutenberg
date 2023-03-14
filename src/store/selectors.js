@@ -3,25 +3,6 @@
  *
  * @param {Object} state Viewport state object.
  *
- * @example
- *
- * ```js
- * import { store as viewportStore } from '@wordpress/viewport';
- * import { useSelect } from '@wordpress/data';
- * import { __ } from '@wordpress/i18n';
- * const ExampleComponent = () => {
- *     const isMobile = useSelect(
- *         ( select ) => select( viewportStore ).isViewportMatch( '< small' ),
- *         []
- *     );
- *
- *     return isMobile ? (
- *         <div>{ __( 'Mobile' ) }</div>
- *     ) : (
- *         <div>{ __( 'Not Mobile' ) }</div>
- *     );
- * };
- * ```
  *
  * @return {boolean} Whether viewport matches query.
  */

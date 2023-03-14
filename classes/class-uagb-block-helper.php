@@ -1832,5 +1832,17 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 			preg_match( '/^-?\d+(?:\.\d{0,2})?/', strval( 100 / $divisions ), $matches );
 			return floatval( $matches[0] ) . '%';
 		}
+		/**
+		 * Get the Global block styles CSS selector.
+		 *
+		 * @param string $block_name Block Name.
+		 * @param string $style_name Style Name.
+		 * 
+		 * @since x.x.x
+		 * @return string $selector Styles Selector.
+		 */
+		public static function get_gbs_selector( $block_name, $style_name ) {
+			return '.spectra-gbs-' . $block_name . '-' . $style_name;
+		}
 	}
 }

@@ -8,13 +8,10 @@
  * All blocks should be included here since this is the file that
  * Webpack is compiling as the input file.
  */
-import './store';
+
+import './store'; // Spectra Redux store initialized.
 import domReady from '@wordpress/dom-ready';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
-import { registerPlugin } from '@wordpress/plugins';
-import SpectraLoadGlobaGoogleFonts from './components/global-block-link/google-fonts';
-
-registerPlugin( 'spectra-global-blocks-fonts', { render: SpectraLoadGlobaGoogleFonts } );
 
 // Delete the local storage on every refresh.
 const uagLocalStorage = getUAGEditorStateLocalStorage();
