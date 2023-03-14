@@ -198,7 +198,8 @@ const GlobalBlockStyles = ( props ) => {
 
     const selectLabel = ( ! globalBlockStyleName || '' === globalBlockStyleName ) ? __( 'Link to Existing Style',
         'ultimate-addons-for-gutenberg' ) : __( 'Linked Style',
-        'ultimate-addons-for-gutenberg' )
+        'ultimate-addons-for-gutenberg' );
+    
     return (
         <UAGAdvancedPanelBody
             title={ __( 'Global Block Styles', 'ultimate-addons-for-gutenberg' ) }
@@ -271,7 +272,6 @@ const GlobalBlockStyles = ( props ) => {
                 defaultValue={! bulkEdit ? globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) : multiSelected }
                 onChange = {
                     ( value ) => {    
-                        
                         if ( bulkEdit ) {
                             setMultiSelected(value);
                             return;
@@ -307,6 +307,7 @@ const GlobalBlockStyles = ( props ) => {
                             className="spectra-gbs-button components-base-control"
                             onClick={ () => {
                                 setBulkEdit(true);
+                                setMultiSelected(globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ));
                             } }
                             variant="primary"
                         >
