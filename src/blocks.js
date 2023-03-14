@@ -8,8 +8,13 @@
  * All blocks should be included here since this is the file that
  * Webpack is compiling as the input file.
  */
-
 import './store'; // Spectra Redux store initialized.
+
+import { registerPlugin } from '@wordpress/plugins';
+import SpectraLoadGlobalGoogleFonts from '@Components/global-block-link/load-google-fonts';
+
+registerPlugin( 'spectra-global-blocks-fonts', { render: SpectraLoadGlobalGoogleFonts } ); // Spectra Global Block Styles Font Loading.
+
 import domReady from '@wordpress/dom-ready';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 

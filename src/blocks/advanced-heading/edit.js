@@ -7,6 +7,7 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
 import Settings from './settings';
 import Render from './render';
 import { STORE_NAME as storeName } from '@Store/constants';
@@ -74,13 +75,8 @@ export default compose(
 			globalBlockStyleName
 		} = props.attributes;
 		
-		let editorStyles = '';
-		for ( const style of globalBlockStyles ) {
-			if ( style?.value === globalBlockStyleId && style?.label === globalBlockStyleName ) {
-				editorStyles = style?.editorStyles
-				break;
-			}
-		}
+		const editorStyles = getGBSEditorStyles(globalBlockStyles,globalBlockStyleId,globalBlockStyleName);
+		
 		return {
 			editorStyles,
 		};	

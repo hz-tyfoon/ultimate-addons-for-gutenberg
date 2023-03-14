@@ -2,7 +2,6 @@ import WebfontLoader from '@Components/typography/fontloader';
 import { STORE_NAME as storeName } from '@Store/constants';
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
-import { registerPlugin } from '@wordpress/plugins';
 
 const SpectraLoadGlobalGoogleFonts = (props) => {
 
@@ -43,5 +42,3 @@ export default compose(
 		};	
 	} )
 )( SpectraLoadGlobalGoogleFonts );
-
-registerPlugin( 'spectra-global-blocks-fonts', { render: SpectraLoadGlobalGoogleFonts } );
