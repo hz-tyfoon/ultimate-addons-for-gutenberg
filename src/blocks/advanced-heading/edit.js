@@ -13,7 +13,6 @@ import Render from './render';
 import './style.scss';
 
 const UAGBAdvancedHeading = ( props ) => {
-	// console.log('heading props',props);
 	const deviceType = useDeviceType();
 	const {
 		attributes,

@@ -1,4 +1,5 @@
 import {getBorderAttributes} from '@Controls/generateAttributes';
+import queryLoopData from '@Controls/queryLoopData';
 
 const overlayBorderAttributes = getBorderAttributes( 'overlay' );
 const imageBorderAttributes = getBorderAttributes( 'image' );
@@ -1097,7 +1098,9 @@ const attributes = {
 		default: false
 	},
 	...imageBorderAttributes,
-	...overlayBorderAttributes
+	...overlayBorderAttributes,
+	// For query loop data.
+	...queryLoopData(),
 };
 
 export default attributes;
