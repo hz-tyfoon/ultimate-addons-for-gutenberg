@@ -306,6 +306,11 @@
 				width: 100%;
 				height: 100%;
 			}
+
+			picture {
+				width: 100%;
+				height: 100%;
+			}
 		}
 
 		&-sizer {
@@ -653,6 +658,15 @@
 				align-items: center;
 				justify-content: center;
 				text-align: center;
+			}
+
+			&--editor-link {
+				-webkit-transition-property: color;
+				-moz-transition-property: color;
+				-o-transition-property: color;
+				transition-property: color;
+
+				@include transitionSpeeds();
 			}
 
 			&--thumbnails {

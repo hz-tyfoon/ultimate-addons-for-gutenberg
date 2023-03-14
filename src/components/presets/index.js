@@ -1,11 +1,13 @@
 import { SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
-import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
+import { useLayoutEffect, useEffect, useState, useRef,memo } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks';
 import { select, dispatch } from '@wordpress/data';
 import classnames from 'classnames';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGReset from '../reset';
+import UAGHelpText from '@Components/help-text';
 
 const UAGPresets = ( props ) => {
 	const [panelNameForHook, setPanelNameForHook] = useState( null );
@@ -32,7 +34,8 @@ const UAGPresets = ( props ) => {
         presets,
         presetInputType,
         label,
-		className
+		className,
+		help = false
     } = props;
 
 	const resetAttributes = [];
@@ -194,8 +197,8 @@ const UAGPresets = ( props ) => {
     );
 
 	const controlName = getIdFromString( label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
     return (
 		<div
@@ -219,6 +222,7 @@ const UAGPresets = ( props ) => {
 				</div>
 				{ 'dropdown' === presetInputType && presetDropdown }
 				{ 'radioImage' === presetInputType && presetRadioImage }
+				<UAGHelpText text={ help } />
 			</div>
 			{
 				controlAfterDomElement
@@ -232,4 +236,4 @@ UAGPresets.defaultProps = {
     label: __( 'Select Preset', 'ultimate-addons-for-gutenberg' )
 };
 
-export default React.memo( UAGPresets );
+export default memo( UAGPresets );

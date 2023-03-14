@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef } from 'react';
+import { useEffect, useState,useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { BaseControl } from '@wordpress/components';
 import { MediaUpload } from '@wordpress/block-editor';
@@ -8,6 +8,8 @@ import UAGB_Block_Icons from '@Controls/block-icons';
 import apiFetch from '@wordpress/api-fetch';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 import UAGConfirmPopup from '../popup-confirm';
+import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const UAGMediaPicker = ( props ) => {
 	const [panelNameForHook, setPanelNameForHook] = useState( null );
@@ -35,7 +37,8 @@ const UAGMediaPicker = ( props ) => {
 		disableLabel = false,
 		disableRemove = false,
 		allow = [ 'image' ],
-		disableDynamicContent = false
+		disableDynamicContent = false,
+		help = false
 	} = props;
 
 	// This is used to render an icon in place of the background image when needed.
@@ -88,8 +91,8 @@ const UAGMediaPicker = ( props ) => {
 			);
 	}
 
-	const registerImageExtender = disableDynamicContent ? null : wp.hooks.applyFilters( 'uagb.registerImageExtender', '', selectedBlock?.name, onSelectImage )
-	const registerImageLinkExtender = disableDynamicContent ? null : wp.hooks.applyFilters( 'uagb.registerImageLinkExtender', '', selectedBlock?.name, 'bgImageLink', 'url' )
+	const registerImageExtender = disableDynamicContent ? null : applyFilters( 'uagb.registerImageExtender', '', selectedBlock?.name, onSelectImage )
+	const registerImageLinkExtender = disableDynamicContent ? null : applyFilters( 'uagb.registerImageLinkExtender', '', selectedBlock?.name, 'bgImageLink', 'url' )
 
 	const isShowImageUploader = () => {
 		if( disableDynamicContent ){
@@ -204,8 +207,8 @@ const UAGMediaPicker = ( props ) => {
 	}
 
 	const controlName = getIdFromString( props?.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 	return (
 		<div
@@ -257,9 +260,7 @@ const UAGMediaPicker = ( props ) => {
 									</button>
 								) }
 							</div>
-							{ props.help && (
-								<p className="uag-control-help-notice">{ props.help }</p>
-							) }
+							<UAGHelpText text={ help } />
 						</>
 					) : (
 						registerImageExtender

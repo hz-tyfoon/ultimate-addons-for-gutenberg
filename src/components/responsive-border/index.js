@@ -7,10 +7,13 @@ import AdvancedPopColorControl from '@Components/color-control/advanced-pop-colo
 import UAGSelectControl from '@Components/select-control';
 import UAGTabsControl from '@Components/tabs';
 import SpacingControl from '@Components/spacing-control';
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from '@wordpress/element';
 import { select } from '@wordpress/data';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import PropTypes from 'prop-types';
+import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
+import Separator from '@Components/separator';
 
 const propTypes = {
 	prefix: PropTypes.string,
@@ -59,6 +62,7 @@ const ResponsiveBorder = ( props ) => {
 			'ultimate-addons-for-gutenberg'
 		),
 		borderRadiusHelp,
+		help = false
 	} = props;
 
 	const { getSelectedBlock } = select( 'core/block-editor' );
@@ -349,20 +353,24 @@ const ResponsiveBorder = ( props ) => {
 					normal={ tabOutputNormal }
 					hover={ tabOutputHover }
 					active={ '' }
-					disableBottomSeparator={ disableBottomSeparator }
+					disableBottomSeparator={ true }
 				/>
 			) }
+			{ ! disableBottomSeparator && (
+				<Separator/>
+			)}
+			<UAGHelpText text={ help } />
 		</>
 	);
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 	return (
 		<div
 			ref={panelRef}
-			
+
 		>
 			{controlBeforeDomElement}
 			{advancedControls}
