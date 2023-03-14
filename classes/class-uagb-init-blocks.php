@@ -79,11 +79,6 @@ class UAGB_Init_Blocks {
 		}
 	}
 
-	public function bulk_update_global_block_styles($post) {
-		$spectra_gbs = json_decode( stripslashes( $post['spectraGlobalStyles'] ), true );
-		update_option( 'spectra_global_block_styles', $spectra_gbs );
-		wp_send_json_success();
-	}
 	/**
 	 * Function to save Spectra Global Block Styles data.
 	 *
@@ -104,12 +99,13 @@ class UAGB_Init_Blocks {
 			wp_send_json_error( $response_data );
 		}
 	
+		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		if ( 'no' !== $_POST['bulkUpdateStyles'] ) {
-			$this->bulk_update_global_block_styles($_POST);
+			update_option( 'spectra_global_block_styles', $global_block_styles );
+			wp_send_json_success();
 		}
 		$post_id = sanitize_text_field( $_POST['postId'] );
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
-		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		
 		foreach ( $global_block_styles as $key => $style ) {
 			if ( ! empty( $_POST['globalBlockStyleId'] ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
