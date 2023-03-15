@@ -24,6 +24,8 @@ import AttributesNewVer from './attributes';
 import InfoBoxSeparatorNewVer from './components/Separator';
 import IconNewVer from './components/Icons';
 import InfoBoxPositionClassesNewVer from './style-classes';
+import newAttributesV2_0_0 from './deprecated/v2_0_0/attributes';
+import newSaveV2_0_0 from './deprecated/v2_0_0/save';
 
 const borderAttributes = getBorderAttributes( 'btn' );
 
@@ -2206,6 +2208,10 @@ const deprecated = [
 	{
 		attributes: AttributesNewVer,
 		save : newSaveV2_4,
+	},
+	{
+		attributes: newAttributesV2_0_0,
+		save : newSaveV2_0_0,
 	},
 ];
 
