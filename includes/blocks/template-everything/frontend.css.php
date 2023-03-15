@@ -123,7 +123,7 @@ $selectors    = array(
 	' p'                                               => array(
 		'color' => $attr['color'],
 	),
-	' span:not(.uagb-button__icon)'                                            => array(
+	' span:not(.uagb-button__icon)'                    => array(
 		'color' => $attr['color'],
 	),
 	' blockquote'                                      => array(
