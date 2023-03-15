@@ -595,64 +595,104 @@ const Settings = ( props ) => {
 						}
 					/>
 					{ loopData?.enable && (
-						<UAGSelectControl
-							label={ __(
-								'Data source',
-								'ultimate-addons-for-gutenberg'
-							) }
-							data={ {
-								value: loopData.type,
-								label: 'headingDescPosition',
-							} }
-							onChange={ ( value ) =>
-								setAttributes( { loopData : { ...loopData, type : value } } )
-							}
-						>
-							<option value="title">
-								{ __(
-									'Post Title',
+						<>
+							<UAGSelectControl
+								label={ __(
+									'Data source',
 									'ultimate-addons-for-gutenberg'
 								) }
-							</option>
-							<option value="excerpt">
-								{ __(
-									'Post Excerpt',
+								data={ {
+									value: loopData.type,
+									label: 'headingDescPosition',
+								} }
+								onChange={ ( value ) =>
+									setAttributes( { loopData : { ...loopData, type : value } } )
+								}
+							>
+								<option value="title">
+									{ __(
+										'Post Title',
+										'ultimate-addons-for-gutenberg'
+									) }
+								</option>
+								<option value="excerpt">
+									{ __(
+										'Post Excerpt',
+										'ultimate-addons-for-gutenberg'
+									) }
+								</option>
+								<option value="date">
+									{ __(
+										'Post Date',
+										'ultimate-addons-for-gutenberg'
+									) }
+								</option>
+								<optgroup label="Author">
+									<option value="author_fname">
+										{ __(
+											'First Name',
+											'ultimate-addons-for-gutenberg'
+										) }
+									</option>
+									<option value="author_lname">
+										{ __(
+											'Last Name',
+											'ultimate-addons-for-gutenberg'
+										) }
+									</option>
+									<option value="author_full_name">
+										{ __(
+											'Display Name',
+											'ultimate-addons-for-gutenberg'
+										) }
+									</option>
+									<option value="author_user_name">
+										{ __(
+											'Username',
+											'ultimate-addons-for-gutenberg'
+										) }
+									</option>
+								</optgroup>
+							</UAGSelectControl>
+							<ToggleControl
+								label={ __(
+									'Enable link',
 									'ultimate-addons-for-gutenberg'
 								) }
-							</option>
-							<option value="date">
-								{ __(
-									'Post Date',
-									'ultimate-addons-for-gutenberg'
-								) }
-							</option>
-							<optgroup label="Author">
-								<option value="author_fname">
-									{ __(
-										'First Name',
+								checked={ loopData?.enableLink }
+								onChange={ () =>
+									setAttributes( { loopData : { ...loopData, enableLink : ! loopData.enableLink } } )
+								}
+							/>
+							{ loopData?.enableLink && (
+								<UAGSelectControl
+									label={ __(
+										'Link source',
 										'ultimate-addons-for-gutenberg'
 									) }
-								</option>
-								<option value="author_lname">
-									{ __(
-										'Last Name',
-										'ultimate-addons-for-gutenberg'
-									) }
-								</option>
-								<option value="author_full_name">
-									{ __(
-										'Full Name',
-										'ultimate-addons-for-gutenberg'
-									) }
-								</option>
-								<option value="author_user_name">
-									{ __(
-										'Username',
-										'ultimate-addons-for-gutenberg'
-									) }
-								</option>
-							</optgroup>
-						</UAGSelectControl>
+									data={ {
+										value: loopData.link,
+										label: 'headingDescPosition',
+									} }
+									onChange={ ( value ) =>
+										setAttributes( { loopData : { ...loopData, link : value } } )
+									}
+								>
+									<option value="post">
+										{ __(
+											'Post',
+											'ultimate-addons-for-gutenberg'
+										) }
+									</option>
+									<option value="author">
+										{ __(
+											'Author',
+											'ultimate-addons-for-gutenberg'
+										) }
+									</option>
+								</UAGSelectControl>
+							)}
+						</>
 					)}
 				</UAGAdvancedPanelBody>
 			)
