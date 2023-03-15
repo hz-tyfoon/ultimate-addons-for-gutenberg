@@ -1,5 +1,5 @@
 /**
- * BLOCK: Column - Save Block
+ * BLOCK: Info-Box - Save Block
  */
 
 // Import block dependencies and components.
