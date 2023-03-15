@@ -40,11 +40,6 @@ const getLoopImage = (context, attributes) => {
 		};
 	}
 
-	return {
-		url:
-			uagb_blocks_info.uagb_url +
-			'/assets/images/block-previews/image.svg',
-		alt: __('Post featured image', 'ultimate-addons-for-gutenberg'),
-	};
+	return {};
 };
 export default getLoopImage;
