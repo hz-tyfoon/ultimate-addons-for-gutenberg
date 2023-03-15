@@ -187,6 +187,9 @@ return array_merge(
 		'boxShadowSpreadHover'         => '',
 		'boxShadowPositionHover'       => '',
 	),
+	$additional_attributes,
 	$box_border_attribute,
-	$additional_attributes
+	array(
+		'boxBorderStyle' => 'default',
+	)
 );
