@@ -206,6 +206,7 @@ export default function Settings( props ) {
 		captionLetterSpacingTablet,
 		captionLetterSpacingMobile,
 		captionLetterSpacingType,
+		loopData,
 	} = attributes;
 
 
@@ -1178,6 +1179,96 @@ export default function Settings( props ) {
 			</UAGAdvancedPanelBody>
 	);
 
+	const dynamicDataPanel = () => {
+		return(
+			loopData && loopData?.isInLoop && (
+				<UAGAdvancedPanelBody
+				title={ __( 'Dynamic data', 'ultimate-addons-for-gutenberg' ) }
+				initialOpen={ false }
+				>
+					<ToggleControl
+						label={ __(
+							'Enable dynamic data',
+							'ultimate-addons-for-gutenberg'
+						) }
+						checked={ loopData.enable }
+						onChange={ () =>
+							setAttributes( { loopData : { ...loopData, enable : ! loopData.enable } } )
+						}
+					/>
+					{ loopData?.enable && (
+						<>
+							<UAGSelectControl
+								label={ __(
+									'Data source',
+									'ultimate-addons-for-gutenberg'
+								) }
+								data={ {
+									value: loopData.type,
+									label: 'headingDescPosition',
+								} }
+								onChange={ ( value ) =>
+									setAttributes( { loopData : { ...loopData, type : value } } )
+								}
+							>
+								<option value="featured_media">
+									{ __(
+										'Featured Image',
+										'ultimate-addons-for-gutenberg'
+									) }
+								</option>
+								<option value="author">
+									{ __(
+										'Author\'s Image',
+										'ultimate-addons-for-gutenberg'
+									) }
+								</option>
+							</UAGSelectControl>
+							<ToggleControl
+								label={ __(
+									'Enable link',
+									'ultimate-addons-for-gutenberg'
+								) }
+								checked={ loopData?.enableLink }
+								onChange={ () =>
+									setAttributes( { loopData : { ...loopData, enableLink : ! loopData.enableLink } } )
+								}
+							/>
+							{ loopData?.enableLink && (
+								<UAGSelectControl
+									label={ __(
+										'Link source',
+										'ultimate-addons-for-gutenberg'
+									) }
+									data={ {
+										value: loopData.link,
+										label: 'headingDescPosition',
+									} }
+									onChange={ ( value ) =>
+										setAttributes( { loopData : { ...loopData, link : value } } )
+									}
+								>
+									<option value="post">
+										{ __(
+											'Post',
+											'ultimate-addons-for-gutenberg'
+										) }
+									</option>
+									<option value="author">
+										{ __(
+											'Author',
+											'ultimate-addons-for-gutenberg'
+										) }
+									</option>
+								</UAGSelectControl>
+							)}
+						</>
+					)}
+				</UAGAdvancedPanelBody>
+			)
+		)
+	}
+
 	const headingGeneralPanel = (
 		<UAGAdvancedPanelBody
 			title={ __( 'Heading', 'ultimate-addons-for-gutenberg' ) }
@@ -2003,6 +2094,7 @@ export default function Settings( props ) {
 								</>
 							)
 						}
+						{ dynamicDataPanel() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
 						{ImageStylePanel}

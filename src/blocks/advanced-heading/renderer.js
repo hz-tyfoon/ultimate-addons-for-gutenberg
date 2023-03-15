@@ -11,7 +11,7 @@ const Renderer = (props) => {
 
 	// Check if heading block is children block of loop builder.
 	if (loopData && loopData?.isInLoop && loopData?.enable ) {
-		const renderedMarkup = applyFilters( `uag_render_loop_data`, '', context, props.attributes );
+		const renderedMarkup = applyFilters( `uag_render_text_loop_data`, '', context, props.attributes );
 		if( renderedMarkup !== '' ) {
 			return renderedMarkup;
 		}

@@ -4,15 +4,25 @@ import { __ } from '@wordpress/i18n';
 
 const getLoopImage = (context, attributes) => {
 	// Check if not in loop.
-	if (!attributes?.loopData?.enable || !context?.postId) {
-		return {};
+	if (! attributes?.loopData?.enable || ! context?.postId) {
+		return {
+			url: undefined,
+			id: undefined
+		};
+	}
+
+	if ( attributes?.loopData?.type !== 'featured_media' ) {
+		return {
+			url: undefined,
+			id: undefined
+		};
 	}
 
 	// Get featured image.
 	const [featuredImage] = useEntityProp(
 		'postType',
 		context.postType,
-		'featured_media',
+		attributes?.loopData?.type,
 		context.postId
 	);
 
