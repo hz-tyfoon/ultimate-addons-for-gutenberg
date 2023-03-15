@@ -3,26 +3,19 @@ import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 const getLoopImage = (context, attributes) => {
+	console.log('context', context);
+	console.log('attributes', attributes);
 	// Check if not in loop.
-	if (! attributes?.loopData?.enable || ! context?.postId) {
-		return {
-			url: undefined,
-			id: undefined
-		};
+	if (!attributes?.loopData?.enable || !context?.postId) {
+		return {};
 	}
 
-	if ( attributes?.loopData?.type !== 'featured_media' ) {
-		return {
-			url: undefined,
-			id: undefined
-		};
-	}
 
 	// Get featured image.
 	const [featuredImage] = useEntityProp(
 		'postType',
 		context.postType,
-		attributes?.loopData?.type,
+		'featured_media',
 		context.postId
 	);
 
@@ -40,6 +33,18 @@ const getLoopImage = (context, attributes) => {
 		[featuredImage, context.postType]
 	);
 
+
+	if (attributes?.loopData?.type === 'author') {
+		return {
+			url:
+				spectra_pro_blocks_info.spectra_pro_url +
+				'assets/images/placeholder.png',
+			alt: __('Author avatar', 'ultimate-addons-for-gutenberg'),
+			width: 100,
+		};
+	}
+
+	// console.log('mediaData', mediaData);
 	// Set post featured image.
 	if (mediaData.media?.source_url) {
 		return {
