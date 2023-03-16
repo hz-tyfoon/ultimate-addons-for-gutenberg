@@ -72,11 +72,39 @@ class UAGB_Init_Blocks {
 
 		if ( ! is_admin() ) {
 			add_action( 'render_block', array( $this, 'render_block' ), 5, 2 );
+			add_filter( 'render_block', array( $this, 'add_gbs_class' ), 10, 2 );
 		}
 
 		if ( current_user_can( 'edit_posts' ) ) {
 			add_action( 'wp_ajax_uagb_svg_confirmation', array( $this, 'confirm_svg_upload' ) );
 		}
+	}
+
+	/**
+	 * Add Global Block Styles Class.
+	 *
+	 * @param mixed $block_content The block content.
+	 * @param array $block The block data.
+	 * @since x.x.x
+	 * @return mixed Returns the new block content.
+	 */
+	public function add_gbs_class( $block_content, $block ) {
+
+		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs'] ) || empty( $block['attrs']['globalBlockStyleName'] ) ) {
+			return $block_content;
+		}
+		
+		$block_name = $block['blockName'];
+		$style_name = str_replace(' ', '-', strtolower($block['attrs']['globalBlockStyleName']));
+		$style_class_name = 'spectra-gbs-' . explode( '/',  $block['blockName'] )[1] . '-' .$style_name;
+		$wp_block_class_name = str_replace('/', '-', $block_name);
+		
+		$html = str_replace(
+			'<div class="wp-block-' . $wp_block_class_name,
+			'<div class="wp-block-' . $wp_block_class_name . ' ' . $style_class_name . ' ',
+			$block_content
+		);
+		return $html;
 	}
 
 	/**
