@@ -627,7 +627,7 @@ const Settings = ( props ) => {
 										'ultimate-addons-for-gutenberg'
 									) }
 								</option>
-								<optgroup label="Author">
+								<optgroup label={ __( "Author", 'ultimate-addons-for-gutenberg' ) }>
 									<option value="author_fname">
 										{ __(
 											'First Name',

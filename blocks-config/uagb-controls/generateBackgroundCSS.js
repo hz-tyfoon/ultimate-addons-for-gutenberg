@@ -38,7 +38,6 @@ function generateBackgroundCSS ( backgroundAttributes ) {
                 bgCSS['background-color'] = backgroundColor;
             }
         } else if ( 'image' === backgroundType ) {
-
             if ( 'color' === overlayType && '' !== backgroundImage && '' !== backgroundImageColor && undefined !== backgroundImageColor && 'unset' !== backgroundImageColor && backgroundImage?.url ) {
 
                 bgCSS['background-image'] = 'linear-gradient(to right, ' + backgroundImageColor + ', ' + backgroundImageColor + '), url(' + backgroundImage?.url + ');';
@@ -78,7 +77,7 @@ function generateBackgroundCSS ( backgroundAttributes ) {
                 bgCSS['background-position'] = `${ backgroundPosition?.x * 100 }% ${ backgroundPosition?.y * 100 }%`;
 
             } else if ( 'custom' === customPosition ) {
-                
+
 				bgCSS['background-position'] = `${ xPositionValue }${ xPositionTypeValue } ${ yPositionValue }${ yPositionTypeValue }`;
 			}
 

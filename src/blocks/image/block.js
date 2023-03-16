@@ -11,6 +11,7 @@ import './style.scss';
 import { registerBlockType, createBlock } from '@wordpress/blocks';
 import deprecated from './deprecated';
 import PreviewImage from '@Controls/previewImage';
+import { applyFilters } from '@wordpress/hooks';
 
 
 registerBlockType( 'uagb/image', {
@@ -46,6 +47,9 @@ registerBlockType( 'uagb/image', {
 				<Edit { ...props } />
 			),
 	save,
+	__experimentalLabel: ( atts ) => (
+		applyFilters( 'uag_loop_data_source_label', __( 'Image', 'ultimate-addons-for-gutenberg' ), atts )
+	),
 	"usesContext": [ "postId", "postType" ],
 	deprecated,
 	transforms: {

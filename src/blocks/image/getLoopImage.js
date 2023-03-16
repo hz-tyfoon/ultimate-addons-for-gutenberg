@@ -34,7 +34,7 @@ const getLoopImage = (context, attributes) => {
 	);
 
 
-	if (attributes?.loopData?.type === 'author') {
+	if (attributes?.loopData?.type === 'author_avatar') {
 		return {
 			url:
 				spectra_pro_blocks_info.spectra_pro_url +
