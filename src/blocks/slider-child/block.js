@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 
 import { registerBlockType } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
+import deprecated from './deprecated';
 
 registerBlockType( 'uagb/slider-child', {
 	title: __( 'Slider Child', 'ultimate-addons-for-gutenberg' ),
@@ -33,6 +34,7 @@ registerBlockType( 'uagb/slider-child', {
 			<Edit { ...props } />
 		),
 	save,
+	deprecated,
 	example: {
 		attributes: {
 			isPreview: true,

@@ -336,7 +336,7 @@ function styling( props ) {
 		// Need This for All
 		' .uagb-iconbox-icon-wrap': {
 			'margin': 'auto',
-			'display': 'flex',
+			'display': 'inline-flex',
 			'align-items': 'center',
 			'justify-content': 'center',
 			'box-sizing': 'content-box',
@@ -521,6 +521,26 @@ function styling( props ) {
 			'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
 			'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
 		},
+		'.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link':
+			{
+				'color': ctaBtnLinkColor,
+				'background-color':
+					ctaBgType === 'color' ? ctaBgColor : 'transparent', // Since the only other case we currently have is 'transparent'.
+				'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
+				'padding-bottom': generateCSSUnit(
+					paddingBtnBottom,
+					paddingBtnUnit
+				),
+				'padding-left': generateCSSUnit(
+					paddingBtnLeft,
+					paddingBtnUnit
+				),
+				'padding-right': generateCSSUnit(
+					paddingBtnRight,
+					paddingBtnUnit
+				),
+			},
+		// eslint-disable-next-line no-dupe-keys
 		'.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link':
 			{
 				'color': ctaBtnLinkColor,
