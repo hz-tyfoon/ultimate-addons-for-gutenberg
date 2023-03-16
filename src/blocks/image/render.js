@@ -24,7 +24,6 @@ import styles from './editor.lazy.scss';
  * Internal dependencies
  */
 import {pickRelevantMediaFiles, isTemporaryImage, isExternalImage, hasDefaultSize, isMediaDestroyed} from './utils'
-import getLoopImage from './getLoopImage';
 
 /**
  * Module constants
@@ -41,8 +40,9 @@ const propTypes = {};
 
 const defaultProps = {};
 
-const Render = ( props ) => {
-	let { attributes } = props.parentProps;
+const Render = ( parentProps ) => {
+	const { parentProps : props } = parentProps;
+	let { attributes } = props;
 	const {
 		setAttributes,
 		className,
@@ -51,9 +51,17 @@ const Render = ( props ) => {
 		onReplace,
 		context,
 		clientId
-	} = props.parentProps;
+	} = props;
 	
-	attributes = { ...attributes, ...getLoopImage( context, attributes ) };
+	if (props?.loopUrl) {
+		attributes = { ...attributes, url: props.loopUrl };
+	}
+	if (props?.loopAlt) {
+		attributes = { ...attributes, alt: props.loopAlt };
+	}
+	if (props?.loopWidth) {
+		attributes = { ...attributes, width: props.loopWidth };
+	}
 
 	const {
 		block_id,
@@ -101,7 +109,6 @@ const Render = ( props ) => {
 		const {imageDefaultSize, mediaUpload} = getSettings();
 		return {imageDefaultSize, mediaUpload}
 	}, [] );
-
 
 	const { image } = useSelect(
 		( select ) => {

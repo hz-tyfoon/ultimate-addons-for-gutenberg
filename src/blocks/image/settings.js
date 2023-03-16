@@ -1217,12 +1217,12 @@ export default function Settings( props ) {
 										'ultimate-addons-for-gutenberg'
 									) }
 								</option>
-								<option value="author">
-									{ __(
-										'Author\'s Image',
-										'ultimate-addons-for-gutenberg'
-									) }
-								</option>
+								<option value="author_avatar">
+                                    { __(
+                                        'Author Avatar',
+                                        'ultimate-addons-for-gutenberg'
+                                    ) }
+                                </option>
 							</UAGSelectControl>
 							<ToggleControl
 								label={ __(
@@ -1254,12 +1254,12 @@ export default function Settings( props ) {
 											'ultimate-addons-for-gutenberg'
 										) }
 									</option>
-									<option value="author">
-										{ __(
-											'Author',
-											'ultimate-addons-for-gutenberg'
-										) }
-									</option>
+									<option value="author_avatar">
+                                    { __(
+                                        'Author Avatar',
+                                        'ultimate-addons-for-gutenberg'
+                                    ) }
+                                </option>
 								</UAGSelectControl>
 							)}
 						</>
