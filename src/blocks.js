@@ -15,6 +15,8 @@ import SpectraLoadGlobalGoogleFonts from '@Components/global-block-link/load-goo
 
 registerPlugin( 'spectra-global-blocks-fonts', { render: SpectraLoadGlobalGoogleFonts } ); // Spectra Global Block Styles Font Loading.
 
+import './components/global-block-link/filters'; // Spectra Global Block Styles Filters.
+
 import domReady from '@wordpress/dom-ready';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 

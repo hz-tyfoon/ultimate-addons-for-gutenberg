@@ -80,20 +80,24 @@ const Render = ( props ) => {
 		</>
 	);
 	
-	const blockNameClass = spectraBlockName?.split( '/' )?.pop();
-	const styleNameClass = globalBlockStyleName.replace( /\s+/g, '-' ).toLowerCase();
-	const htmlAttributes = {
-		className: classnames( {
-			[className]: true,
-			[`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`] : true,
-			[`uagb-block-${ block_id }`] : true,
-			[`spectra-gbs-${blockNameClass}-${styleNameClass}`] : true
-		} ),
-	};
+	// const blockNameClass = spectraBlockName?.split( '/' )?.pop();
+	// const styleNameClass = globalBlockStyleName.replace( /\s+/g, '-' ).toLowerCase();
+	// const htmlAttributes = {
+	// 	className: classnames( {
+	// 		[className]: true,
+	// 		[`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`] : true,
+	// 		[`uagb-block-${ block_id }`] : true,
+	// 		[`spectra-gbs-${blockNameClass}-${styleNameClass}`] : true
+	// 	} ),
+	// };
 	
 	return (
 		<div
-			{...htmlAttributes}
+			className={ classnames(
+				className,
+				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
+				`uagb-block-${ block_id }`
+			) }
 		>
 			{ headingDescToggle && 'above-heading' === headingDescPosition ? descText : '' }
 			{ headingTitleToggle && headingText }

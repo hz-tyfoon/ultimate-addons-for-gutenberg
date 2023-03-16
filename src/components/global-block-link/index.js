@@ -315,7 +315,6 @@ const GlobalBlockStyles = ( props ) => {
                                     for( const style in multiSelected ) {
                                         toBeDeletedIDs.push( multiSelected[style]?.value );
                                     }
-                                    console.log(toBeDeletedIDs);
                                     const filterGBS = globalBlockStyles.filter( ( style ) => {
                                         if ( style?.value && ! toBeDeletedIDs.includes( style?.value ) ) {
                                             dispatch( 'core/block-editor' ).updateBlockAttributes( style?.props?.clientId, { 
