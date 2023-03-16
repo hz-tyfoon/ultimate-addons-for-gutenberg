@@ -3,7 +3,6 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import styles from './editor.lazy.scss';
-const { getSelectedBlock } = select( 'core/block-editor' );
 import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 import { select, withSelect, withDispatch, dispatch } from '@wordpress/data';
 import { Button, Modal  } from '@wordpress/components';
@@ -30,14 +29,20 @@ const GlobalBlockStyles = ( props ) => {
         openModal,
         closeModal,
         updateGlobalBlockStyles,
-        updateGlobalBlockStylesFontFamilies
+        updateGlobalBlockStylesFontFamilies,
+        attributes,
+        attributes : {
+            globalBlockStyleName,
+            globalBlockStyleId
+        },
+        blockName,
+        clientId
     } = props;
 
     const styling = props.styling;
 	props = props.parentProps;
 
     const {
-        attributes,
         setAttributes,
     } = props;
 
@@ -50,24 +55,14 @@ const GlobalBlockStyles = ( props ) => {
     const [currentAttributesState, setCurrentAttributesState] = useState( attributes );
     const [ attributesChanged, setAttributesChanged ] = useState( false );
 
-    const {
-        globalBlockStyleName,
-        globalBlockStyleId
-    } = attributes;
-
-    const selectedBlockData = getSelectedBlock();
-    const {
-        name,
-    } = selectedBlockData;
-
-    const blockName = name.replace( 'uagb/', '' );
+    const blockNameStripped = blockName.replace( 'uagb/', '' );
 
 	const allBlocksAttributes = wp.hooks.applyFilters( 'uagb.blocksAttributes', blocksAttributes )
-    const currentBlockDefaultAttributes = allBlocksAttributes[blockName]
+    const currentBlockDefaultAttributes = allBlocksAttributes[blockNameStripped]
 
     useEffect( () => {
 		// Assigning block_id in the attribute.
-		setAttributes( { spectraBlockName: name } );
+		setAttributes( { spectraBlockName: blockName } );
 	}, [] );
 
     useEffect( () => {
@@ -104,7 +99,7 @@ const GlobalBlockStyles = ( props ) => {
         formData.append( 'props', JSON.stringify( styleProps ) );
         formData.append( 'spectraGlobalStyles', JSON.stringify( spectraGlobalStyles ) ); 
         formData.append( 'globalBlockStylesFontFamilies', JSON.stringify( globalBlockStylesFontFamilies ) ); 
-        formData.append( 'blockName', name );
+        formData.append( 'blockName', blockName );
         formData.append( 'postId', select( 'core/editor' ).getCurrentPostId() );
         formData.append( 'globalBlockStyleId', globalBlockStyleId );
         formData.append( 'bulkUpdateStyles', bulkUpdateStyles );
@@ -133,9 +128,9 @@ const GlobalBlockStyles = ( props ) => {
         } );
     };
 
-    const blockNameClass = name?.split( '/' )?.pop();
+    const blockNameClass = blockName?.split( '/' )?.pop();
 
-    const getBlockStyles = ( newStyleID = false, spectraGlobalStyles = globalBlockStyles ) => {
+    const generateBlockStyles = ( newStyleID = false, spectraGlobalStyles = globalBlockStyles ) => {
         updateGoogleFontData( attributes );
     
         spectraGlobalStyles.map( ( style ) => {
@@ -251,9 +246,8 @@ const GlobalBlockStyles = ( props ) => {
                                         label: tempStyleName,
                                     }
                                 ]
-                                updateGlobalBlockStyles( spectraGlobalStyles );
                                 closeModal();
-                                getBlockStyles( uniqueID, spectraGlobalStyles );
+                                generateBlockStyles( uniqueID, spectraGlobalStyles );
 
                             } }
                         >
@@ -291,7 +285,7 @@ const GlobalBlockStyles = ( props ) => {
                             } 
                         );
                         setUniqueID( selectedValue );
-                        getBlockStyles( selectedValue );
+                        generateBlockStyles( selectedValue );
                     }
                 }
                 options={ globalBlockStyles }
@@ -321,6 +315,7 @@ const GlobalBlockStyles = ( props ) => {
                                     for( const style in multiSelected ) {
                                         toBeDeletedIDs.push( multiSelected[style]?.value );
                                     }
+                                    console.log(toBeDeletedIDs);
                                     const filterGBS = globalBlockStyles.filter( ( style ) => {
                                         if ( style?.value && ! toBeDeletedIDs.includes( style?.value ) ) {
                                             dispatch( 'core/block-editor' ).updateBlockAttributes( style?.props?.clientId, { 
@@ -346,7 +341,7 @@ const GlobalBlockStyles = ( props ) => {
                             <Button
                                 className="spectra-gbs-button components-base-control"
                                 onClick={ () => {
-                                    getBlockStyles( globalBlockStyleId );
+                                    generateBlockStyles( globalBlockStyleId );
                                 } }
                                 variant="primary"
                             >
@@ -381,11 +376,22 @@ export default compose(
 		const globalBlockStyles = spectraGbsSelect( storeName ).getGlobalBlockStyles();
 		const isOpen = spectraGbsSelect( storeName ).getGlobalBlockStylesPopupState();
 		const globalBlockStylesFontFamilies = spectraGbsSelect( storeName ).getGlobalBlockStylesFontFamilies();
+        const { getSelectedBlock } = spectraGbsSelect( 'core/block-editor' );
+        const selectedBlockData = getSelectedBlock();
         
+        const {
+            attributes,
+            name,
+            clientId
+        } = selectedBlockData;
+
 		return {
 			globalBlockStyles,
             isOpen,
-            globalBlockStylesFontFamilies
+            globalBlockStylesFontFamilies,
+            attributes,
+            blockName : name,
+            clientId
 		};	
 	} ),
     withDispatch( ( spectraGbsDispatch ) => ( {
