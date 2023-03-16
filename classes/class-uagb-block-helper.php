@@ -1842,6 +1842,7 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 		 * @return string $selector Styles Selector.
 		 */
 		public static function get_gbs_selector( $block_name, $style_name ) {
+			$style_name = str_replace(' ', '-', strtolower($style_name));
 			return '.spectra-gbs-' . $block_name . '-' . $style_name;
 		}
 	}
