@@ -170,6 +170,11 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 
 == Changelog ==
 
+= x.x.x =
+* Fix: Inline Notice - Content color is not working in the backend.
+* Fix: Inline Notice - Content typography is not working.
+* Fix: Taxonomy block - Translation missing for Select string in PHP file.
+
 = 2.4.0 =
 * New: Introducing the Countdown block that will help you generate hype and create a sense of urgency among your audience, during product sales or releases!
 * New: Introducing the Icon block that allows you to add FontAwesome 6 icons on your website with tonnes of styling options.
