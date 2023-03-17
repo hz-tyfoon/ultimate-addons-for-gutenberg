@@ -32,6 +32,7 @@ const variations = [
 			bottomPaddingDesktop: 24,
 			leftPaddingDesktop: 24,
 			rightPaddingDesktop: 24,
+			blockBorderStyle: 'none',
 		},
 		isDefault: true,
 		innerBlocks: [
@@ -108,6 +109,11 @@ const variations = [
 			boxShadowBlur: 0,
 			boxShadowSpread: 0,
 			boxShadowPosition: '',
+			blockBorderStyle: 'none',
+			topPaddingDesktop: 24,
+			bottomPaddingDesktop: 24,
+			leftPaddingDesktop: 24,
+			rightPaddingDesktop: 24,
 		},
 		innerBlocks: [
 			[
@@ -206,6 +212,10 @@ const variations = [
 			boxShadowBlur: 0,
 			boxShadowSpread: 0,
 			boxShadowPosition: '',
+			topPaddingDesktop: 0,
+			bottomPaddingDesktop: 0,
+			leftPaddingDesktop: 0,
+			rightPaddingDesktop: 0,
 		},
 		innerBlocks: [
 			[
@@ -240,10 +250,10 @@ const variations = [
 					[
 						'uagb/container',
 						{   alignItemsDesktop: 'left',
-							topPaddingDesktop: 0,
-							bottomPaddingDesktop: 0,
-							leftPaddingDesktop: 0,
-							rightPaddingDesktop: 0,
+							topPaddingDesktop: 24,
+							bottomPaddingDesktop: 24,
+							leftPaddingDesktop: 24,
+							rightPaddingDesktop: 24,
 							rowGapDesktop: 0, 
 						},
 						[
@@ -257,7 +267,7 @@ const variations = [
 										'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
 									headingTag: 'h3',
 									headingDescPosition: 'below-heading',
-									headSpace: 5,
+									headSpace: 12,
 									subHeadSpace: 16,
 									blockTopPadding: 0,
 									blockBottomPadding: 0,
@@ -368,7 +378,7 @@ const variations = [
 			bottomPaddingDesktop: 24,
 			leftPaddingDesktop: 24,
 			rightPaddingDesktop: 24,
-			blockBorderStyle: 'default',
+			blockBorderStyle: 'none',
 			boxShadowColor: '',
 			boxShadowHOffset: 0,
 			boxShadowVOffset: 0,
@@ -449,6 +459,9 @@ const variations = [
 									parentIcon: 'check',
 									align: 'left',
 									iconColor: '#0B63E5',
+									gap: 20,
+									gapTablet: 20,
+									gapMobile: 20
 								},
 							],
 							[
@@ -542,6 +555,9 @@ const variations = [
 									parentIcon: 'check',
 									align: 'left',
 									iconColor: '#0B63E5',
+									gap: 20,
+									gapTablet: 20,
+									gapMobile: 20
 								},
 							],
 							[
@@ -635,6 +651,9 @@ const variations = [
 									parentIcon: 'check',
 									align: 'left',
 									iconColor: '#0B63E5',
+									gap: 20,
+									gapTablet: 20,
+									gapMobile: 20
 								},
 							],
 							[
@@ -682,6 +701,7 @@ const variations = [
 			boxShadowBlur: 0,
 			boxShadowSpread: 0,
 			boxShadowPosition: '',
+			blockBorderStyle: 'none',
 		},
 		innerBlocks: [
 			[
