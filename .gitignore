@@ -37,3 +37,6 @@ auth.json
 
 # nvmrc
 .nvmrc
+
+# VScode
+.vscode
