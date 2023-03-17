@@ -8,22 +8,25 @@
 	.block-editor-block-variation-picker__variation-label {
 		display: none;
 	}
+
 	.components-placeholder__label {
 		justify-content: center;
 		width: 100%;
 		font-weight: 600;
 		font-size: 25px;
 	}
+
 	.components-placeholder__fieldset {
 		text-align: center;
 		max-width: 100%;
 	}
+
 	.block-editor-block-variation-picker__variations {
 
 		justify-content: center;
 
 		.block-editor-block-variation-picker__variation.components-button {
-			border: 1px solid #000000;
+			border: 1px solid #000;
 			box-shadow: none;
 			padding: 20px;
 		}
