@@ -11,6 +11,10 @@ import { useDeviceType } from '@Controls/getPreviewType';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 import hexToRGBA from '@Controls/hexToRgba';
@@ -22,6 +26,7 @@ const UAGBSectionEdit = ( props ) => {
 	const {
 		isSelected,
 		attributes,
+		editorStyles,
 		attributes: {
 			borderStyle,
 			borderWidth,
@@ -44,6 +49,7 @@ const UAGBSectionEdit = ( props ) => {
 			gradientOverlayType,
 			backgroundVideoOpacity,
 			backgroundVideoColor,
+			globalBlockStyleId
 		},
 		setAttributes,
 	} = props;
@@ -126,12 +132,32 @@ const UAGBSectionEdit = ( props ) => {
 
 	}, [] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 			<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 				<Render parentProps={ props } />
 			</>
 	);
 };
 
-export default UAGBSectionEdit;
+
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBSectionEdit );

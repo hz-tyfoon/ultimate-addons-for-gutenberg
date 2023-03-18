@@ -315,5 +315,10 @@ $combined_selectors = array(
 
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, '', ' .uag-star-rating__title', $combined_selectors );
 
+$base_selector = ' .uagb-block-' . substr( $attr['block_id'], 0, 8 );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, ' .uagb-block-' . substr( $attr['block_id'], 0, 8 ) );
+if ( '' !== $attr['globalBlockStyleName'] && '' !== $attr['globalBlockStyleId'] ) {
+	$base_selector = UAGB_Block_Helper::get_gbs_selector( $block_name, $attr['globalBlockStyleName'] );
+}
+
+return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector );

@@ -7,7 +7,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-export default function styling( props ) {
+export default function styling( props, baseSelector = false ) {
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
@@ -378,12 +378,6 @@ export default function styling( props ) {
 		}
 	}
 
-
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
-		0,
-		8
-	) }`;
-
 	const tablet_selectors = {};
 	const mobile_selectors = {};
 
@@ -604,6 +598,16 @@ export default function styling( props ) {
 
 	if ( customHeightSetMobile ) {
 		mobile_selectors['.wp-block-uagb-image .wp-block-uagb-image__figure img'].height = mobileHeight + 'px';
+	}
+
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
+		0,
+		8
+	) }`;
+
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
 	}
 
 	let styling_css = generateCSS( selectors, base_selector );

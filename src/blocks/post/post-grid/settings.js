@@ -24,6 +24,7 @@ import { decodeEntities } from '@wordpress/html-entities';
 import UAGNumberControl from '@Components/number-control';
 import UAGTextControl from '@Components/text-control';
 import { memo } from '@wordpress/element';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const MAX_POSTS_COLUMNS = 8;
 
@@ -42,6 +43,7 @@ import {
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	const { categoriesList, latestPosts, taxonomyList } = props;
 	// Caching all Props
 	const {
@@ -2565,6 +2567,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>	
 						{ generalSettings() }
 						{ paginationSettings() }
 						{ imageSettings() }

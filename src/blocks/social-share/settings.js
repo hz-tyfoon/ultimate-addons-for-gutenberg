@@ -21,7 +21,10 @@ import AdvancedPopColorControl from '@Components/color-control/advanced-pop-colo
 import presets from './presets';
 import UAGPresets from '@Components/presets';
 import { memo } from '@wordpress/element';
+import GlobalBlockStyles from '@Components/global-block-link';
+
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 
 	const { attributes, setAttributes } = props;
@@ -405,6 +408,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ presetSettings() }
 						{ generalSettings() }
 					</InspectorTab>

@@ -10,6 +10,10 @@ import { useDeviceType } from '@Controls/getPreviewType';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 import hexToRGBA from '@Controls/hexToRgba';
 import maybeGetColorForVariable from '@Controls/maybeGetColorForVariable';
 
@@ -35,9 +39,11 @@ const ColumnComponent = ( props ) => {
 			borderRadius,
 			borderColor,
 			borderHoverColor,
+			globalBlockStyleId
 		},
 		isSelected,
 		clientId,
+		editorStyles
 	} = props;
 	
 	useEffect( () => {
@@ -102,14 +108,33 @@ const ColumnComponent = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
 			{ isSelected && (
-				<Settings parentProps={ props } deviceType={ deviceType } />
+				<Settings parentProps={ props } deviceType={ deviceType } styling={styling} />
 			) }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default ColumnComponent;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( ColumnComponent );

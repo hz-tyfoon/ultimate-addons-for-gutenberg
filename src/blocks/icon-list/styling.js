@@ -6,7 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
@@ -527,20 +527,25 @@ function styling( props ) {
 	};
 
 	let stylingCss = '';
-	const id = `.uagb-block-${ props.clientId.substr( 0, 8 ) }`;
+	let base_selector = `.uagb-block-${ props.clientId.substr( 0, 8 ) }`;
 
-	stylingCss = generateCSS( selectors, id );
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+
+	stylingCss = generateCSS( selectors, base_selector );
 
 	stylingCss += generateCSS(
 		tabletSelectors,
-		`${ id }.uagb-editor-preview-mode-tablet`,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
 		true,
 		'tablet'
 	);
 
 	stylingCss += generateCSS(
 		mobileSelectors,
-		`${ id }.uagb-editor-preview-mode-mobile`,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
 		true,
 		'mobile'
 	);

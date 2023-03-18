@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const { attributes } = props;
 	let {
@@ -223,7 +223,12 @@ function styling( props ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper #block-${ props.clientId }`;
+	let base_selector = `.editor-styles-wrapper #block-${ props.clientId }`;
+
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
 
 	let styling_css = generateCSS( selectors, base_selector );
 

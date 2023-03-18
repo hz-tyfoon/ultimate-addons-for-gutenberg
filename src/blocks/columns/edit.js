@@ -12,7 +12,9 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import Settings from './settings';
 import Render from './render';
-import { useSelect, useDispatch } from '@wordpress/data';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { useSelect, useDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import {
 	__experimentalBlockVariationPicker as BlockVariationPicker,
@@ -55,10 +57,12 @@ const ColumnsComponent = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
 		setAttributes,
 		isSelected,
 		clientId,
+		editorStyles
 	} = props;
 
 	const {
@@ -203,6 +207,10 @@ const ColumnsComponent = ( props ) => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	const blockVariationPickerOnSelect = (
 		nextVariation = defaultVariation
 	) => {
@@ -254,11 +262,27 @@ const ColumnsComponent = ( props ) => {
 	return (
 		<>
 			{ isSelected && (
-				<Settings parentProps={ props } deviceType={ deviceType } />
+				<Settings parentProps={ props } deviceType={ deviceType } styling={styling} />
 			) }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default compose( withNotices )( ColumnsComponent );
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} ),
+	withNotices
+)( ColumnsComponent );

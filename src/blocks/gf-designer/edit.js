@@ -9,7 +9,10 @@ import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
-import { useSelect } from '@wordpress/data';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
+import { useSelect, withSelect } from '@wordpress/data';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 
@@ -43,7 +46,9 @@ const UAGBGF = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
+		editorStyles
 	} = props;
 
 	useSelect(
@@ -167,6 +172,10 @@ const UAGBGF = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	/*
 	 * Event to set Image as while adding.
 	 */
@@ -200,10 +209,25 @@ const UAGBGF = ( props ) => {
 	
 	return (
 			<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 			<Render parentProps={ props } />
 			</>
 	);
 };
 
-export default UAGBGF;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBGF );

@@ -27,8 +27,10 @@ import {
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
 import { memo } from '@wordpress/element';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	const { loopLottie, reverseDirection } = props;
 
 	props = props.parentProps;
@@ -414,6 +416,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs tabs={ [ 'general', 'style', 'advance' ] }>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ controlsSettings }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>

@@ -963,4 +963,11 @@ $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'radioCheck', ' .u
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'input', ' .chosen-container-single span', $combined_selectors );
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'radioCheck', ' .uagb-gf-styler__check-style-enabled form .gfield_radio label', $combined_selectors );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, '.uagb-block-' . $id );
+
+$base_selector = '.uagb-block-' . $id;
+
+if ( '' !== $attr['globalBlockStyleName'] && '' !== $attr['globalBlockStyleId'] ) {
+	$base_selector = UAGB_Block_Helper::get_gbs_selector( $block_name, $attr['globalBlockStyleName'] );
+}
+
+return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector );

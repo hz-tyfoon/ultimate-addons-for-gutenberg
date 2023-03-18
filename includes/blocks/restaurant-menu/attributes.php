@@ -134,4 +134,6 @@ return array(
 	'titleLetterSpacingType'     => 'px',
 	'imgAlign'                   => 'side',
 	'stack'                      => 'tablet',
+	'globalBlockStyleName'       => '',
+	'globalBlockStyleId'         => '',
 );

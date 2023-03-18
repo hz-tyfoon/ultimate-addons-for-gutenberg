@@ -10,7 +10,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 	const {
 		blockName,
 		btnBorderHColor,
@@ -1230,30 +1230,32 @@ function styling( props ) {
 			'right': generateCSSUnit( paddingRightMobile, mobilePaddingUnit ),
 		}
 	}
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
+		0,
+		8
+	) }`;
 
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
 	let stylingCss = '';
 
 	stylingCss = generateCSS(
 		selectors,
-		`.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`
+		base_selector
 	);
 
 	stylingCss += generateCSS(
 		tabletSelectors,
-		`.uagb-block-${ props.clientId.substr(
-			0,
-			8
-		) }.uagb-editor-preview-mode-tablet`,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
 		true,
 		'tablet'
 	);
 
 	stylingCss += generateCSS(
 		mobileSelectors,
-		`.uagb-block-${ props.clientId.substr(
-			0,
-			8
-		) }.uagb-editor-preview-mode-mobile`,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
 		true,
 		'mobile'
 	);

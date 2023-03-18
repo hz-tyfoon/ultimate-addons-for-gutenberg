@@ -124,4 +124,6 @@ return array(
 	'contentLetterSpacingTablet' => '',
 	'contentLetterSpacingMobile' => '',
 	'contentLetterSpacingType'   => 'px',
+	'globalBlockStyleName'       => '',
+	'globalBlockStyleId'         => '',
 );

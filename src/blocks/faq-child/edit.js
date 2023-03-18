@@ -7,7 +7,6 @@ import { useEffect, useState} from '@wordpress/element';
 
 import Settings from './settings';
 import Render from './render';
-
 let prevState;
 
 const FaqChildComponent = ( props ) => {

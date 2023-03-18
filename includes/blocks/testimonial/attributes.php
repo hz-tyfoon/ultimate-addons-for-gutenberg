@@ -159,6 +159,8 @@ return array_merge(
 		'borderWidth'                => 1,
 		'borderRadius'               => '',
 		'borderColor'                => '',
+		'globalBlockStyleName'       => '',
+		'globalBlockStyleId'         => '',
 	),
 	$border_attribute
 );

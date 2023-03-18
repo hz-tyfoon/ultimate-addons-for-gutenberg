@@ -9,6 +9,10 @@ import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 let prevState;
@@ -19,9 +23,10 @@ const ButtonsComponent = ( props ) => {
 	const {
 		isSelected,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, globalBlockStyleId },
 		setAttributes,
-		clientId
+		clientId,
+		editorStyles
 	} = props;
 
 	const initialState = {
@@ -69,12 +74,31 @@ const ButtonsComponent = ( props ) => {
 
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default ButtonsComponent;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( ButtonsComponent );

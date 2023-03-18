@@ -105,6 +105,8 @@ return array_merge(
 		'borderStyle'            => 'solid',
 		'borderColor'            => '#000',
 		'borderHColor'           => '',
+		'globalBlockStyleName'   => '',
+		'globalBlockStyleId'     => '',
 	),
 	$border_attribute
 );

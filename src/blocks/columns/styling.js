@@ -9,7 +9,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit'
 import maybeGetColorForVariable from '@Controls/maybeGetColorForVariable';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const {
 		backgroundType,
@@ -192,13 +192,16 @@ function styling( props ) {
 	}
 
 	let styling_css = ''
-	const id = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+	styling_css = generateCSS( selectors, base_selector )
 
-	styling_css = generateCSS( selectors, id )
+	styling_css += generateCSS( tablet_selectors, `${base_selector}.uagb-editor-preview-mode-tablet`, true, 'tablet' )
 
-	styling_css += generateCSS( tablet_selectors, `${id}.uagb-editor-preview-mode-tablet`, true, 'tablet' )
-
-	styling_css += generateCSS( mobile_selectors, `${id}.uagb-editor-preview-mode-mobile`, true, 'mobile' )
+	styling_css += generateCSS( mobile_selectors, `${base_selector}.uagb-editor-preview-mode-mobile`, true, 'mobile' )
 
 	return styling_css
 }

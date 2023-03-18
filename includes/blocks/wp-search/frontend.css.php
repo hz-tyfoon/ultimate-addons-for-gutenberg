@@ -185,4 +185,10 @@ $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'input', ' .uagb-s
 
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'button', ' .uagb-search-wrapper .uagb-search-form__container .uagb-search-submit .uagb-wp-search-button-text', $combined_selectors );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, '.uagb-block-' . $id );
+$base_selector = '.uagb-block-' . $id;
+
+if ( '' !== $attr['globalBlockStyleName'] && '' !== $attr['globalBlockStyleId'] ) {
+	$base_selector = UAGB_Block_Helper::get_gbs_selector( $block_name, $attr['globalBlockStyleName'] );
+}
+
+return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector );

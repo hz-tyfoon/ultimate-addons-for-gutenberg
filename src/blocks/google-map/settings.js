@@ -11,8 +11,10 @@ import ResponsiveSlider from '@Components/responsive-slider';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
 import { memo } from '@wordpress/element';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 
 	const {
@@ -31,6 +33,10 @@ const Settings = ( props ) => {
 		<InspectorControls>
 			<InspectorTabs tabs={ [ 'general', 'advance' ] }>
 				<InspectorTab { ...UAGTabs.general }>
+					<GlobalBlockStyles
+						parentProps={props}
+						styling={styling}
+					/>
 					<UAGAdvancedPanelBody initialOpen={ true }>
 						<p className="uagb-settings-notice">
 							{ __(

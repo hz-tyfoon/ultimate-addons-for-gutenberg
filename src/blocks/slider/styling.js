@@ -8,7 +8,7 @@ import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const { attributes } = props;
 	let {
@@ -392,7 +392,12 @@ function styling( props ) {
 		}
 	};
 
-	const base_selector = `.editor-styles-wrapper #block-${ props.clientId }`;
+	let base_selector = `.editor-styles-wrapper #block-${ props.clientId }`;
+
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
 
 	selectors = applyFilters( `spectra.slider.styling`, selectors, attributes );
 	tablet_selectors = applyFilters( `spectra.slider.tabletStyling`, tablet_selectors, attributes );

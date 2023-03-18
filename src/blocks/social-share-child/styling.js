@@ -4,7 +4,7 @@
 
 import generateCSS from '@Controls/generateCSS';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 	const {
 		icon_color,
 		icon_hover_color,
@@ -34,9 +34,14 @@ function styling( props ) {
 	};
 
 	let stylingCss = '';
-	const id = `.uagb-block-${ props.clientId.substr( 0, 8 ) }`;
+	let base_selector = `.uagb-block-${ props.clientId.substr( 0, 8 ) }`;
 
-	stylingCss = generateCSS( selectors, id );
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+	
+	stylingCss = generateCSS( selectors, base_selector );
 
 	return stylingCss;
 }

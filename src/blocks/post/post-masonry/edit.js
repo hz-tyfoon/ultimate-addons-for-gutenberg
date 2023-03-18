@@ -33,6 +33,10 @@ import UAGTextControl from '@Components/text-control';
 
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const MAX_POSTS_COLUMNS = 8;
 
@@ -46,13 +50,14 @@ import {
 
 import { InspectorControls } from '@wordpress/block-editor';
 
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch, withSelect } from '@wordpress/data';
 
 const UAGBPostMasonry = ( props ) => {
 	const {
 		isSelected,
 		setAttributes,
 		attributes,
+		editorStyles,
 		attributes: {
 			btnVPadding,
 			btnHPadding,
@@ -291,7 +296,8 @@ const UAGBPostMasonry = ( props ) => {
 			enableOffset,
 			UAGHideDesktop,
 			UAGHideTab,
-			UAGHideMob
+			UAGHideMob,
+			globalBlockStyleId
 		},
 		deviceType,
 	} = props;
@@ -303,6 +309,10 @@ const UAGBPostMasonry = ( props ) => {
 	} );
 
 	const [ isTaxonomyLoading, setIsTaxonomyLoading] = useState( false );
+
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
 
 	useEffect( () => {
 		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
@@ -2612,6 +2622,9 @@ const UAGBPostMasonry = ( props ) => {
 		<InspectorControls>
 			<InspectorTabs>
 				<InspectorTab { ...UAGTabs.general }>
+					<GlobalBlockStyles
+						parentProps={props}
+					/>
 					{ generalSettings() }
 					{ imageSettings() }
 					{ contentSettings() }
@@ -2666,6 +2679,7 @@ const UAGBPostMasonry = ( props ) => {
 					togglePreview={ togglePreview }
 					taxonomyList={ taxonomyList }
 					categoriesList={ categoriesList }
+					styling={styling}
 				/>
 			) }
 			<Render
@@ -2682,4 +2696,19 @@ const UAGBPostMasonry = ( props ) => {
 	);
 };
 
-export default UAGBPostMasonry;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBPostMasonry );

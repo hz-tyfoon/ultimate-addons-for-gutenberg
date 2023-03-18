@@ -13,8 +13,11 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
 
-import { useSelect } from '@wordpress/data';
+import { useSelect, withSelect } from '@wordpress/data';
 
 const UAGBTableOfContentsEdit = ( props ) => {
 
@@ -33,7 +36,9 @@ const UAGBTableOfContentsEdit = ( props ) => {
 			borderRadius,
 			borderColor,
 			borderHoverColor,
+			globalBlockStyleId
 		},
+		editorStyles
 	} = props;
 
 	useEffect( () => {
@@ -222,12 +227,31 @@ const UAGBTableOfContentsEdit = ( props ) => {
 	}
 	/* eslint-enable no-undef */
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 			<Render parentProps={ props } headers={ headers } />
 		</>
 	);
 };
 
-export default UAGBTableOfContentsEdit;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBTableOfContentsEdit );

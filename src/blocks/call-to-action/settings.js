@@ -24,8 +24,10 @@ import { ToggleControl, Icon } from '@wordpress/components';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import ResponsiveSlider from '@Components/responsive-slider';
 import { useDeviceType } from '@Controls/getPreviewType';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 	const { setAttributes, attributes } = props;
 	const deviceType = useDeviceType();
@@ -2075,6 +2077,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ presetSettings() }
 						{ layouts() }
 						{ ctaSettings() }

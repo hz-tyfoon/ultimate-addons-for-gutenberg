@@ -204,6 +204,8 @@ return array_merge(
 		'tcolumns'                    => 2,
 		'mcolumns'                    => 1,
 		'imgEqualheight'              => false,
+		'globalBlockStyleName'        => '',
+		'globalBlockStyleId'          => '',
 	),
 	$btn_border_attribute,
 	$overall_border_attribute

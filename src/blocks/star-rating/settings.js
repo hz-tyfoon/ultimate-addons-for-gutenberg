@@ -18,8 +18,10 @@ import SpacingControl from '@Components/spacing-control';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { useDeviceType } from '@Controls/getPreviewType';
 import { memo } from '@wordpress/element';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 	// Setup the attributes
 	const {
@@ -658,6 +660,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs tabs={ [ 'general', 'style', 'advance' ] }>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ generalSettings }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>

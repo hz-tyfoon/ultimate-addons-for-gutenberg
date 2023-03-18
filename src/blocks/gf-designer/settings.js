@@ -24,11 +24,12 @@ import {
 	Icon,
 } from '@wordpress/components';
 import { memo } from '@wordpress/element';
-
+import GlobalBlockStyles from '@Components/global-block-link';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 	const { setAttributes, attributes } = props;
 
@@ -2510,6 +2511,10 @@ successMsgLetterSpacingType,
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ fieldSettings() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>

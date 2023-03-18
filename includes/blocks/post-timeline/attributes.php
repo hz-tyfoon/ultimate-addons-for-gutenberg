@@ -186,4 +186,6 @@ return array(
 	'authorLetterSpacingTablet'  => '',
 	'authorLetterSpacingMobile'  => '',
 	'authorLetterSpacingType'    => 'px',
+	'globalBlockStyleName'       => '',
+	'globalBlockStyleId'         => '',
 );

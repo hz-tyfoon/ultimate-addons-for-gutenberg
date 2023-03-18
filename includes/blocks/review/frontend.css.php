@@ -79,4 +79,10 @@ $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'head', ' .uagb-ra
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'subHead', ' .uagb-rating-desc, .uagb-rating-author', $combined_selectors );
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'content', ' .uagb_review_summary, .uagb_review_block .uagb_review_summary_title', $combined_selectors );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, ' .uagb-block-' . substr( $attr['block_id'], 0, 8 ) );
+$base_selector = ' .uagb-block-' . substr( $attr['block_id'], 0, 8 );
+
+if ( '' !== $attr['globalBlockStyleName'] && '' !== $attr['globalBlockStyleId'] ) {
+	$base_selector = UAGB_Block_Helper::get_gbs_selector( $block_name, $attr['globalBlockStyleName'] );
+}
+
+return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector );

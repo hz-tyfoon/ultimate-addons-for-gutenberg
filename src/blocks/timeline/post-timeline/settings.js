@@ -28,8 +28,10 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { useDeviceType } from '@Controls/getPreviewType';
 import UAGTextControl from '@Components/text-control';
 import { memo } from '@wordpress/element';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	const { categoriesList, taxonomyList } = props;
 	props = props.parentProps;
 
@@ -1982,6 +1984,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ querySettings() }
 						{ layoutSettings() }
 						{ ImageSetting() }

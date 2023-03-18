@@ -19,8 +19,6 @@ export default function save( props ) {
 		headingId,
 		seperatorPosition,
 		headingDescPosition,
-		globalBlockStyleName,
-		spectraBlockName
 	} = props.attributes;
 
 	let seprator = '';

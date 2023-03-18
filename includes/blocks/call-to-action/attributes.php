@@ -217,6 +217,8 @@ return array_merge(
 		'btncontentWidthMobile'           => '',
 		'btncontentWidthType'             => '%',
 		'enabledSecondCtaButton'          => false,
+		'globalBlockStyleName'            => '',
+		'globalBlockStyleId'              => '',
 	),
 	$second_cta_border_attribute,
 	$cta_border_attribute

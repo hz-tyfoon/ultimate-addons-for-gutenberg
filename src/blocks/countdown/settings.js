@@ -30,9 +30,10 @@ import {
 import Separator from '@Components/separator';
 import { getSettings as getDateSettings } from '@wordpress/date';
 import { memo } from '@wordpress/element';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 function Settings( props ) {
-
+	const styling = props.styling;
 	props = props.parentProps;
 	const {
 		setAttributes,
@@ -1484,6 +1485,10 @@ function Settings( props ) {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ presetsPanel }
 						{ generalPanel }
 						{ labelGeneralPanel }

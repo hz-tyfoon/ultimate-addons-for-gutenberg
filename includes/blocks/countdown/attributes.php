@@ -178,6 +178,8 @@ return array_merge(
 		'boxShadowBlurHover'           => '',
 		'boxShadowSpreadHover'         => '',
 		'boxShadowPositionHover'       => '',
+		'globalBlockStyleName'         => '',
+		'globalBlockStyleId'           => '',
 	),
 	$box_border_attribute,
 	array(

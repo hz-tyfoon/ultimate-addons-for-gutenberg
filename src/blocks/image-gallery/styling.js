@@ -7,7 +7,7 @@ import generateSpacing from '@Controls/generateSpacing';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 	const {
 		name,
 		clientId,
@@ -1047,8 +1047,13 @@ function styling( props ) {
 		};
 	}
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+	
 	selectors = applyFilters( `spectra.image-gallery.styling`, selectors, attributes );
 	tabletSelectors = applyFilters( `spectra.image-gallery.tabletStyling`, tabletSelectors, attributes );
 	mobileSelectors = applyFilters( `spectra.image-gallery.mobileStyling`, mobileSelectors, attributes );
@@ -1057,18 +1062,18 @@ function styling( props ) {
 	tabletSelectors = applyFilters( `spectra.image-gallery.tabletStyling`, tabletSelectors, props.attributes );
 	mobileSelectors = applyFilters( `spectra.image-gallery.mobileStyling`, mobileSelectors, props.attributes );
 
-	let stylingCss = generateCSS( selectors, baseSelector );
+	let stylingCss = generateCSS( selectors, base_selector );
 
 	stylingCss += generateCSS(
 		tabletSelectors,
-		`${ baseSelector }.uagb-editor-preview-mode-tablet`,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
 		true,
 		'tablet'
 	);
 
 	stylingCss += generateCSS(
 		mobileSelectors,
-		`${ baseSelector }.uagb-editor-preview-mode-mobile`,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
 		true,
 		'mobile'
 	);

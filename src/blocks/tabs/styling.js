@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
@@ -839,10 +839,15 @@ function styling( props ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
 		0,
 		8
 	) }`;
+
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
 
 	let stylingCss = generateCSS( selectors, base_selector );
 

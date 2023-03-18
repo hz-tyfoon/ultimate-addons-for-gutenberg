@@ -249,4 +249,6 @@ return array(
 	'successMsgLetterSpacingTablet'    => '',
 	'successMsgLetterSpacingMobile'    => '',
 	'successMsgLetterSpacingType'      => 'px',
+	'globalBlockStyleName'             => '',
+	'globalBlockStyleId'               => '',
 );

@@ -354,4 +354,10 @@ $combined_selectors = array(
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'question', ' .uagb-faq-questions-button .uagb-question', $combined_selectors );
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'answer', ' .uagb-faq-item .uagb-faq-content', $combined_selectors );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, '.uagb-block-' . $id );
+$base_selector = '.uagb-block-' . $id;
+
+if ( '' !== $attr['globalBlockStyleName'] && '' !== $attr['globalBlockStyleId'] ) {
+	$base_selector = UAGB_Block_Helper::get_gbs_selector( $block_name, $attr['globalBlockStyleName'] );
+}
+
+return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector );

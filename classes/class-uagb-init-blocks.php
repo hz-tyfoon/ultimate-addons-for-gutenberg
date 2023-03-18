@@ -94,10 +94,10 @@ class UAGB_Init_Blocks {
 			return $block_content;
 		}
 		
-		$block_name = $block['blockName'];
-		$style_name = str_replace(' ', '-', strtolower($block['attrs']['globalBlockStyleName']));
-		$style_class_name = 'spectra-gbs-' . explode( '/',  $block['blockName'] )[1] . '-' .$style_name;
-		$wp_block_class_name = str_replace('/', '-', $block_name);
+		$block_name          = $block['blockName'];
+		$style_name          = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
+		$style_class_name    = 'spectra-gbs-' . explode( '/', $block['blockName'] )[1] . '-' . $style_name;
+		$wp_block_class_name = str_replace( '/', '-', $block_name );
 		
 		$html = str_replace(
 			'<div class="wp-block-' . $wp_block_class_name,

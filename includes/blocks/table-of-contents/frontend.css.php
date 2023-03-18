@@ -328,11 +328,17 @@ $combined_selectors = UAGB_Helper::get_typography_css( $attr, '', ' .uagb-toc__l
 
 $base_selector = ( $attr['classMigrate'] ) ? '.uagb-block-' : '#uagb-toc-';
 
-$desktop = UAGB_Helper::generate_css( $combined_selectors['desktop'], $base_selector . $id );
+$base_selector = $base_selector . $id;
 
-$tablet = UAGB_Helper::generate_css( $combined_selectors['tablet'], $base_selector . $id );
+if ( '' !== $attr['globalBlockStyleName'] && '' !== $attr['globalBlockStyleId'] ) {
+	$base_selector = UAGB_Block_Helper::get_gbs_selector( $block_name, $attr['globalBlockStyleName'] );
+}
 
-$mobile = UAGB_Helper::generate_css( $combined_selectors['mobile'], $base_selector . $id );
+$desktop = UAGB_Helper::generate_css( $combined_selectors['desktop'], $base_selector );
+
+$tablet = UAGB_Helper::generate_css( $combined_selectors['tablet'], $base_selector );
+
+$mobile = UAGB_Helper::generate_css( $combined_selectors['mobile'], $base_selector );
 
 if ( '' !== $attr['scrollToTopColor'] ) {
 	$desktop .= '.uagb-toc__scroll-top { color: ' . $attr['scrollToTopColor'] . '; }';

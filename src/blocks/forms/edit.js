@@ -9,8 +9,10 @@ import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch, withSelect } from '@wordpress/data';
 import { compose, createHigherOrderComponent } from '@wordpress/compose';
 import { createBlock } from '@wordpress/blocks';
 import { __experimentalBlockVariationPicker } from '@wordpress/block-editor';
@@ -47,8 +49,10 @@ const UAGBFormsEdit = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
 		setAttributes,
+		editorStyles,
 		clientId,
 	} = props;
 
@@ -225,6 +229,10 @@ const UAGBFormsEdit = ( props ) => {
 
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	const blockVariationPickerOnSelect = useCallback(
 		( nextVariation = defaultVariation ) => {
 			if ( nextVariation.attributes ) {
@@ -344,7 +352,7 @@ const UAGBFormsEdit = ( props ) => {
 
 	return (
 			<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 				<Render parentProps={ props } />
 			</>
 	);
@@ -364,6 +372,20 @@ const addAdvancedClasses = createHigherOrderComponent( ( BlockListBlock ) => {
 addFilter( 'editor.BlockListBlock', 'uagb/forms', addAdvancedClasses );
 
 export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} ),
 	withNotices,
 	addAdvancedClasses
 )( UAGBFormsEdit );

@@ -38,8 +38,10 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { boxShadowPresets, boxShadowHoverPresets } from './presets';
 
 const MAX_IMAGE_COLUMNS = 8;
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	const deviceType = useDeviceType();
 	const {
 		lightboxPreview,
@@ -2336,6 +2338,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ ! readyToRender && initialSettings() }
 						{ readyToRender && layoutSettings() }
 						{ ( readyToRender && 'tiled' !== feedLayout ) && layoutSpecificSettings() }

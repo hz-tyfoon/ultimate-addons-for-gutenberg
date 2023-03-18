@@ -22,6 +22,7 @@ import BoxShadowControl from '@Components/box-shadow';
 import WebfontLoader from '@Components/typography/fontloader';
 import ResponsiveSlider from '@Components/responsive-slider';
 import GradientSettings from '@Components/gradient-settings';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 import {
 	InspectorControls
@@ -37,7 +38,7 @@ import boxShadowPresets, { buttonsPresets } from './presets';
 import UAGPresets from '@Components/presets';
 
 const Settings = ( props ) => {
-
+	const styling = props.styling;
 	props = props.parentProps;
 
 	const { attributes, setAttributes, deviceType } = props;
@@ -901,6 +902,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ presetSettings() }
 						{ buttonSettings() }
 					</InspectorTab>

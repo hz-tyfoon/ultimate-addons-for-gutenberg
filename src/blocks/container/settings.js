@@ -25,9 +25,10 @@ import AdvancedPopColorControl from '@Components/color-control/advanced-pop-colo
 import Range from '@Components/range/Range';
 import innerContainerPresets, { boxShadowPresets, boxShadowHoverPresets } from './presets';
 import UAGPresets from '@Components/presets';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
-
+	const styling = props.styling;
 	props = props.parentProps;
 	const { attributes, setAttributes, deviceType } = props;
 	const {
@@ -2092,6 +2093,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ isBlockRootParent && presetSettings() }
 						{ generalSettings() }
 					</InspectorTab>

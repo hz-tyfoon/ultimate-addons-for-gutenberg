@@ -85,5 +85,7 @@ return array_merge(
 		'iconBoxShadowPosition'            => '',
 		// Border.
 		'iconBorderStyle'                  => 'default',
+		'globalBlockStyleName'             => '',
+		'globalBlockStyleId'               => '',
 	)
 );

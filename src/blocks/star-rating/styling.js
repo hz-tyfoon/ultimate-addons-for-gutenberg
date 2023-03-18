@@ -6,7 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
@@ -438,20 +438,25 @@ function styling( props ) {
 		indexMobile
 	] = generateCSSUnit( titleGapMobile, 'px' );
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
 
-	let stylingCss = generateCSS( selectors, baseSelector );
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+	
+	let stylingCss = generateCSS( selectors, base_selector );
 
 	stylingCss += generateCSS(
 		tabletSelectors,
-		`${ baseSelector }.uagb-editor-preview-mode-tablet`,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
 		true,
 		'tablet'
 	);
 
 	stylingCss += generateCSS(
 		mobileSelectors,
-		`${ baseSelector }.uagb-editor-preview-mode-mobile`,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
 		true,
 		'mobile'
 	);

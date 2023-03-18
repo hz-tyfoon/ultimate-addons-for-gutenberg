@@ -7,7 +7,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 	const {
 		colWidth,
 		colWidthTablet,
@@ -184,20 +184,25 @@ function styling( props ) {
 
 	let stylingCss = '';
 
-	const id = `#block-${ props.clientId }`;
+	let base_selector = `#block-${ props.clientId }`;
 
-	stylingCss = generateCSS( selectors, id );
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+
+	stylingCss = generateCSS( selectors, base_selector );
 
 	stylingCss += generateCSS(
 		tabletSelectors,
-		`.uagb-editor-preview-mode-tablet ${ id }`,
+		`.uagb-editor-preview-mode-tablet ${ base_selector }`,
 		true,
 		'tablet'
 	);
 
 	stylingCss += generateCSS(
 		mobileSelectors,
-		`.uagb-editor-preview-mode-mobile ${ id }`,
+		`.uagb-editor-preview-mode-mobile ${ base_selector }`,
 		true,
 		'mobile'
 	);

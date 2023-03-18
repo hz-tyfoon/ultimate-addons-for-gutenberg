@@ -22,6 +22,8 @@ import {
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import ResponsiveSlider from '@Components/responsive-slider';
 import UAGSelectControl from '@Components/select-control';
+import GlobalBlockStyles from '@Components/global-block-link';
+
 let imageSizeOptions = [
 	{
 		value: 'thumbnail',
@@ -37,6 +39,7 @@ import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 
 	// Setup the attributes
@@ -1002,6 +1005,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ titleSettings() }
 						{ imageSettings() }
 						{ timeSettings() }

@@ -3,13 +3,16 @@
  */
 
 import RestMenuStyle from './inline-styles';
-import { select, dispatch } from '@wordpress/data';
+import { select, dispatch, withSelect } from '@wordpress/data';
 import { useEffect } from '@wordpress/element';
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const UAGBRestaurantMenu = ( props ) => {
@@ -25,9 +28,11 @@ const UAGBRestaurantMenu = ( props ) => {
 			UAGHideTab,
 			UAGHideMob,
 			showImage,
+			globalBlockStyleId
 		},
 		setAttributes,
 		clientId,
+		editorStyles
 	} = props;
 	
 	useEffect( () => {
@@ -94,11 +99,31 @@ const UAGBRestaurantMenu = ( props ) => {
             } );
 	}, [ showImage ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 			<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={RestMenuStyle} /> }
 				<Render parentProps={ props } />
 			</>
 	);
 };
-export default UAGBRestaurantMenu;
+
+export default compose(
+	withSelect( ( gbsSelect, props ) => {
+
+		const globalBlockStyles = gbsSelect( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBRestaurantMenu );

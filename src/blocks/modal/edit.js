@@ -3,6 +3,10 @@ import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import styling from './styling';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 import { useDeviceType } from '@Controls/getPreviewType';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { applyFilters } from '@wordpress/hooks';
@@ -13,8 +17,9 @@ const UAGBModalEdit = ( props ) => {
 		isSelected,
 		setAttributes,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
-		clientId
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, globalBlockStyleId },
+		clientId,
+		editorStyles
 	} = props;
 
 	useEffect( () => {
@@ -51,12 +56,31 @@ const UAGBModalEdit = ( props ) => {
 
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 			<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 				<Render parentProps={ props } />
 			</>
 	);
 }
 
-export default UAGBModalEdit;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBModalEdit );

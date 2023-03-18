@@ -10,13 +10,17 @@ import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
 let hideLabel;
 
 const UAGBIconListChild = ( props ) => {
 
 	const deviceType = useDeviceType();
-	const { isSelected, setAttributes, clientId, attributes } = props;
+	const { isSelected, setAttributes, clientId, attributes, attributes : { globalBlockStyleId }, editorStyles } = props;
 	
 	useEffect( ()=>{
 		// Assigning block_id in the attribute.
@@ -35,12 +39,31 @@ const UAGBIconListChild = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 			<>
-				{ isSelected && <Settings parentProps={ props } hideLabel={ hideLabel } /> }
+				{ isSelected && <Settings parentProps={ props } hideLabel={ hideLabel } styling={styling} /> }
 				<Render parentProps={ props } />
 			</>
 	);
 };
 
-export default UAGBIconListChild;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBIconListChild );

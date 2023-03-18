@@ -14,7 +14,10 @@ import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import Settings from './settings';
 import Render from './render';
-import { useSelect, useDispatch } from '@wordpress/data';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
+import { useSelect, useDispatch, withSelect } from '@wordpress/data';
 import { Placeholder, Spinner } from '@wordpress/components';
 
 const PostGridComponent = ( props ) => {
@@ -23,6 +26,7 @@ const PostGridComponent = ( props ) => {
 	const {
 		isSelected,
 		attributes,
+		editorStyles,
 		attributes: {
 			borderStyle,
 			borderWidth,
@@ -53,7 +57,8 @@ const PostGridComponent = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
-			postDisplaytext
+			postDisplaytext,
+			globalBlockStyleId
 		},
 		setAttributes,
 	} = props;
@@ -66,7 +71,7 @@ const PostGridComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 	const [ isTaxonomyLoading, setIsTaxonomyLoading] = useState( false );
 
-
+	
 	useEffect( () => {
 		// Replacement for componentDidMount.
 		const { block } = props;
@@ -147,6 +152,10 @@ const PostGridComponent = ( props ) => {
 	useEffect( () => {
 		scrollBlockToView();
 	}, [ deviceType ] );
+
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
 
 	const togglePreview = () => {
 		setStateValue( { isEditing: ! state.isEditing } );
@@ -282,6 +291,7 @@ const PostGridComponent = ( props ) => {
 					latestPosts={ latestPosts }
 					taxonomyList={ taxonomyList }
 					categoriesList={ categoriesList }
+					styling={styling}
 				/>
 			) }
 			<Render
@@ -298,5 +308,20 @@ const PostGridComponent = ( props ) => {
 	);
 };
 
-export default PostGridComponent;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( PostGridComponent );
 

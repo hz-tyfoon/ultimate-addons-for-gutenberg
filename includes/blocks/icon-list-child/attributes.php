@@ -55,4 +55,6 @@ return array(
 	'childPaddingUnitTablet'   => 'px',
 	'childPaddingUnitMobile'   => 'px',
 	'childPaddingLink'         => '',
+	'globalBlockStyleName'     => '',
+	'globalBlockStyleId'       => '',
 );

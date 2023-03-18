@@ -67,4 +67,6 @@ return array(
 	'urlLetterSpacingTablet'         => '',
 	'urlLetterSpacingMobile'         => '',
 	'urlLetterSpacingType'           => 'px',
+	'globalBlockStyleName'           => '',
+	'globalBlockStyleId'             => '',
 );

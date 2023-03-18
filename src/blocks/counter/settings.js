@@ -28,7 +28,7 @@ import UAGPresets from '@Components/presets';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import defaultAttributes from './attributes';
 import WebfontLoader from '@Components/typography/fontloader';
-
+import GlobalBlockStyles from '@Components/global-block-link';
 let imageSizeOptions = [
 	{
 		value: 'thumbnail',
@@ -39,7 +39,7 @@ let imageSizeOptions = [
 ];
 
 export default function Settings( props ) {
-
+	const styling = props.styling;
 	props = props.parentProps;
 	const { setAttributes, attributes, deviceType } = props;
 
@@ -1923,6 +1923,10 @@ export default function Settings( props ) {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{generalPanel}
 						{/* No icons necessary for bar layout */}
 						{layout !== 'bars' && iconImagePanel}

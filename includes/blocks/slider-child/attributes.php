@@ -83,4 +83,6 @@ return array(
 	'marginType'                  => 'px',
 	'marginTypeTablet'            => 'px',
 	'marginTypeMobile'            => 'px',
+	'globalBlockStyleName'        => '',
+	'globalBlockStyleId'          => '',
 );

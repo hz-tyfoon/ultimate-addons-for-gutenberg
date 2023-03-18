@@ -26,8 +26,10 @@ import { Icon, ToggleControl } from '@wordpress/components';
 
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 	const { setAttributes, attributes, deviceType } = props;
 
@@ -1262,6 +1264,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ presetSettings() }
 						<UAGAdvancedPanelBody
 							title={ __( 'General' ) }

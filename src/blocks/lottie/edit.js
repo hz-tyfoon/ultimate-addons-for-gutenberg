@@ -9,14 +9,19 @@ import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const UAGBLottie = ( props ) => {
 	const deviceType = useDeviceType();
 	const {
 		setAttributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, loop, reverse },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, loop, reverse, globalBlockStyleId },
 		clientId,
+		editorStyles
 	} = props;
 	const lottieplayer = useRef();
 	const [ state, setState ] = useState( { direction: 1, loopState: true } );
@@ -57,6 +62,10 @@ const UAGBLottie = ( props ) => {
 		setState( { direction: direction * -1 } );
 	};
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
 			<Render lottieplayer={ lottieplayer } parentProps={ props } />
@@ -64,9 +73,25 @@ const UAGBLottie = ( props ) => {
 				parentProps={ props }
 				loopLottie={ loopLottie }
 				reverseDirection={ reverseDirection }
+				styling={styling}
 			/>
 		</>
 	);
 };
 
-export default UAGBLottie;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBLottie );

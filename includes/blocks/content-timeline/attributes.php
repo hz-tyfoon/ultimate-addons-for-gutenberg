@@ -142,4 +142,6 @@ return array(
 	'dateLetterSpacingTablet'    => '',
 	'dateLetterSpacingMobile'    => '',
 	'dateLetterSpacingType'      => 'px',
+	'globalBlockStyleName'       => '',
+	'globalBlockStyleId'         => '',
 );

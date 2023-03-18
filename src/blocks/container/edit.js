@@ -10,10 +10,13 @@ import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
 //  Import CSS.
 import './style.scss';
 import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch, select } from '@wordpress/data';
+import { useSelect, useDispatch, select, withSelect } from '@wordpress/data';
 import {
 	__experimentalBlockVariationPicker as BlockVariationPicker,
 } from '@wordpress/block-editor';
@@ -35,10 +38,12 @@ const UAGBContainer = ( props ) => {
 			variationSelected,
 			UAGHideDesktop,
 			UAGHideTab,
-			UAGHideMob
+			UAGHideMob,
+			globalBlockStyleId
 		},
 		clientId,
 		setAttributes,
+		editorStyles
 	} = props;
 
 	const {
@@ -177,6 +182,10 @@ const UAGBContainer = ( props ) => {
 
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	const blockVariationPickerOnSelect = (
 		nextVariation = defaultVariation
 	) => {
@@ -224,10 +233,25 @@ const UAGBContainer = ( props ) => {
 
 	return (
 		<>
-		{ isSelected && <Settings parentProps={ props } /> }
+		{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default UAGBContainer;
+export default compose(
+	withSelect( ( gbsSelect, props ) => {
+
+		const globalBlockStyles = gbsSelect( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBContainer );

@@ -161,6 +161,8 @@ return array_merge(
 		'customHeightSetDesktop'      => false,
 		'customHeightSetTablet'       => false,
 		'customHeightSetMobile'       => false,
+		'globalBlockStyleName'        => '',
+		'globalBlockStyleId'          => '',
 	),
 	$image_attribute,
 	$overlay_attribute

@@ -71,6 +71,8 @@ return array_merge(
 		'gradientOverlayLocation2' => '100',
 		'gradientOverlayAngle'     => '0',
 		'gradientValue'            => '',
+		'globalBlockStyleName'     => '',
+		'globalBlockStyleId'       => '',
 	),
 	$border_attribute
 );

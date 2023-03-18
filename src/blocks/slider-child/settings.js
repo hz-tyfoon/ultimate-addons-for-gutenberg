@@ -11,9 +11,10 @@ import {
 import SpacingControl from '@Components/spacing-control';
 import Background from '@Components/background';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
-
+	const styling = props.styling;
 	props = props.parentProps;
 	const { attributes, setAttributes } = props;
 	const {
@@ -450,12 +451,12 @@ const Settings = ( props ) => {
 				defaultTab={defaultTab}
 				tabs={tabs}
 				>
-					{ isPro && 
-						( 
-						<InspectorTab { ...UAGTabs.general }>
-						</InspectorTab>
-						)
-					}
+					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
+					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
 						{ backgroundSettings() }
 						{ spacingSettings() }

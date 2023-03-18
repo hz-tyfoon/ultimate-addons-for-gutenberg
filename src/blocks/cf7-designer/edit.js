@@ -9,8 +9,10 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 import Settings from './settings';
 import Render from './render';
-
-import { useSelect } from '@wordpress/data';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect, useSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
 const UAGBCF7 = ( props ) => {
 
@@ -78,7 +80,9 @@ const UAGBCF7 = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
+		editorStyles
 	} = props;
 
 	useSelect(
@@ -300,13 +304,33 @@ const UAGBCF7 = ( props ) => {
 
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
 			{ isSelected && (
-				<Settings parentProps={ props } deviceType={ deviceType } />
+				<Settings parentProps={ props } deviceType={ deviceType } styling={styling} />
 			) }
 			<Render parentProps={ props } />
 		</>
 	);
 };
-export default UAGBCF7;
+
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBCF7 );

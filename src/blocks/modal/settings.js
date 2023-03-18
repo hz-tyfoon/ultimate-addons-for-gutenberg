@@ -23,6 +23,7 @@ import ResponsiveBorder from '@Components/responsive-border';
 import Background from '@Components/background';
 import  { buttonsPresets } from './presets';
 import UAGPresets from '@Components/presets';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 let imageSizeOptions = [
 	{
@@ -34,6 +35,7 @@ let imageSizeOptions = [
 ];
 
 export default function Settings( props ) {
+	const styling = props.styling;
 	props = props.parentProps;
 	const { attributes, setAttributes, deviceType } = props;
 	const {
@@ -1759,6 +1761,10 @@ export default function Settings( props ) {
 				<InspectorTabs>
 
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{modalTriggerPanel}
 						{modalContentPanel}
 						{modalClosePanel}

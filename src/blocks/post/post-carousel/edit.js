@@ -30,11 +30,14 @@ import UAGNumberControl from '@Components/number-control';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import apiFetch from '@wordpress/api-fetch';
 import UAGTextControl from '@Components/text-control';
-
+import GlobalBlockStyles from '@Components/global-block-link';
 const MAX_POSTS_COLUMNS = 8;
 
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
 
 import {
 	Placeholder,
@@ -45,12 +48,13 @@ import {
 
 import { InspectorControls } from '@wordpress/block-editor';
 
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch, withSelect } from '@wordpress/data';
 
 const UAGBPostCarousel = ( props ) => {
 	const {
 		isSelected,
 		attributes,
+		editorStyles,
 		attributes: {
 			align,
 			displayPostTitle,
@@ -278,7 +282,8 @@ const UAGBPostCarousel = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
-			equalHeight
+			equalHeight,
+			globalBlockStyleId
 		},
 		setAttributes,
 		deviceType,
@@ -470,6 +475,10 @@ const UAGBPostCarousel = ( props ) => {
 
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+	
 	const onSelectPostType = ( value ) => {
 		setAttributes( { postType: value } );
 		setAttributes( { categories: '' } );
@@ -2413,6 +2422,10 @@ let categoriesList = [];
 		<InspectorControls>
 			<InspectorTabs>
 				<InspectorTab { ...UAGTabs.general }>
+					<GlobalBlockStyles
+						parentProps={props}
+						styling={styling}
+					/>
 					{ presetSettings() }
 					{ getGeneralPanelBody() }
 					{ getCarouselPanelBody() }
@@ -2482,4 +2495,19 @@ let categoriesList = [];
 	);
 };
 
-export default UAGBPostCarousel
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBPostCarousel );

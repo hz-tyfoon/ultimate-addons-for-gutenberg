@@ -12,10 +12,11 @@ import { migrateBorderAttributes } from '@Controls/generateAttributes';
 
 import Settings from './settings';
 import Render from './render';
-
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
 import { compose } from '@wordpress/compose';
 
-import { withDispatch, dispatch, select } from '@wordpress/data';
+import { withDispatch, dispatch, select, withSelect } from '@wordpress/data';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const UAGBTabsEdit = ( props ) => {
@@ -35,8 +36,10 @@ const UAGBTabsEdit = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
 		clientId,
+		editorStyles
 	} = props;
 	
 	useEffect( () => {
@@ -98,10 +101,14 @@ const UAGBTabsEdit = ( props ) => {
 
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
 			{ isSelected && (
-				<Settings parentProps={ props } deviceType={ deviceType } />
+				<Settings parentProps={ props } deviceType={ deviceType } styling={styling} />
 			) }
 			<Render parentProps={ props } />
 		</>
@@ -146,5 +153,19 @@ export default compose(
 				);
 			},
 		};
+	} ),
+	withSelect( ( gbsSelect, props ) => {
+
+		const globalBlockStyles = gbsSelect( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
 	} )
 )( UAGBTabsEdit );

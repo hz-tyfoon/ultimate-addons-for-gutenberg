@@ -11,6 +11,10 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import styling from './styling';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
 const UAGBIcon = ( props ) => {
 
@@ -18,8 +22,9 @@ const UAGBIcon = ( props ) => {
 	const {
 		clientId,
 		attributes,
-		attributes:{ UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes:{ UAGHideDesktop, UAGHideTab, UAGHideMob, globalBlockStyleId },
 		isSelected,
+		editorStyles
 	} = props;
 	const blockId = clientId.substr( 0, 8 );
 
@@ -45,13 +50,31 @@ const UAGBIcon = ( props ) => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
 
 	return (
 		<>
-			{ isSelected && <Settings { ...props } /> }
+			{ isSelected && <Settings { ...props } styling={styling} /> }
 			<Render { ...props } />
 		</>
 	);
 };
 
-export default UAGBIcon;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBIcon );

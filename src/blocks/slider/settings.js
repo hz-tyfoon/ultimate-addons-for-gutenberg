@@ -31,9 +31,10 @@ import { boxShadowPresets, boxShadowHoverPresets } from './presets';
 import UAGPresets from '@Components/presets';
 import { createBlock } from '@wordpress/blocks';
 import { applyFilters } from '@wordpress/hooks';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
-
+	const styling = props.styling;
 	props = props.parentProps;
 	const { attributes, setAttributes, deviceType, insertBlock, block } = props;
 	const {
@@ -1089,6 +1090,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ generalSettings() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>

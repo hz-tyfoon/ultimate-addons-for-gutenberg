@@ -30,7 +30,11 @@ import UAGPresets from '@Components/presets';
 import UAGTextControl from '@Components/text-control';
 
 import apiFetch from '@wordpress/api-fetch';
+import GlobalBlockStyles from '@Components/global-block-link';
+
 const Settings = ( props ) => {
+	const styling = props.styling;
+
 	const { taxonomyList, termsList } = props;
 	props = props.parentProps;
 
@@ -1335,6 +1339,10 @@ const Settings = ( props ) => {
 		<InspectorControls>
 			<InspectorTabs>
 				<InspectorTab { ...UAGTabs.general }>
+					<GlobalBlockStyles
+						parentProps={props}
+						styling={styling}
+					/>
 					{ postQueryPanel() }
 					{ generalPanel() }
 				</InspectorTab>

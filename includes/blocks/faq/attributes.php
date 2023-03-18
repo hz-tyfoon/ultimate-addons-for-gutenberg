@@ -146,6 +146,8 @@ return array_merge(
 		'iconBgSizeMobile'             => '',
 		'iconBgSizeType'               => 'px',
 		'iconBgColor'                  => '',
+		'globalBlockStyleName'         => '',
+		'globalBlockStyleId'           => '',
 	),
 	$border_attribute,
 	$icon_border_attribute

@@ -175,6 +175,8 @@ return array_merge(
 		'widthTypeMobile'                   => '%',
 		'overflow'                          => 'visible',
 		'equalHeight'                       => false,
+		'globalBlockStyleName'              => '',
+		'globalBlockStyleId'                => '',
 	),
 	$border_attribute
 );

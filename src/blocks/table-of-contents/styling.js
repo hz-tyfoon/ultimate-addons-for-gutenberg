@@ -7,7 +7,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
@@ -568,23 +568,28 @@ function styling( props ) {
 
 	}
 
-	const id = `.block-editor-block-list__block .uagb-block-${ props.clientId.substr(
+	let base_selector = `.block-editor-block-list__block .uagb-block-${ props.clientId.substr(
 		0,
 		8
 	) }`;
-
-	let styling_css = generateCSS( selectors, id );
+	
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+	
+	let styling_css = generateCSS( selectors, base_selector );
 
 	styling_css += generateCSS(
 		tablet_selectors,
-		`${ id }.uagb-editor-preview-mode-tablet`,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
 		true,
 		'tablet'
 	);
 
 	styling_css += generateCSS(
 		mobile_selectors,
-		`${ id }.uagb-editor-preview-mode-mobile`,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
 		true,
 		'mobile'
 	);

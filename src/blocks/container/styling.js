@@ -8,7 +8,7 @@ import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
@@ -597,7 +597,12 @@ function styling( props ) {
 		mobile_selectors['.block-editor-block-list__block']['max-width'] = generateCSSUnit( widthMobile, widthTypeMobile );
 	}
 
-	const base_selector = `.editor-styles-wrapper #block-${ props.clientId }`;
+	let base_selector = `.editor-styles-wrapper #block-${ props.clientId }`;
+
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
 
 	let styling_css = generateCSS( selectors, base_selector );
 

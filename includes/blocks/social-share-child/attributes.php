@@ -8,12 +8,14 @@
  */
 
 return array(
-	'type'                => 'facebook',
-	'image_icon'          => 'icon',
-	'icon'                => 'facebook',
-	'image'               => '',
-	'icon_color'          => '',
-	'icon_hover_color'    => '',
-	'icon_bg_color'       => '',
-	'icon_bg_hover_color' => '',
+	'type'                 => 'facebook',
+	'image_icon'           => 'icon',
+	'icon'                 => 'facebook',
+	'image'                => '',
+	'icon_color'           => '',
+	'icon_hover_color'     => '',
+	'icon_bg_color'        => '',
+	'icon_bg_hover_color'  => '',
+	'globalBlockStyleName' => '',
+	'globalBlockStyleId'   => '',
 );

@@ -4,12 +4,15 @@
 
 import contentTimelineStyle from './styling';
 import { useEffect } from '@wordpress/element';
-import { dispatch, select } from '@wordpress/data';
+import { dispatch, select, withSelect } from '@wordpress/data';
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const ContentTimelineComponent = ( props ) => {
@@ -25,7 +28,9 @@ const ContentTimelineComponent = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+            globalBlockStyleId
 		},
+        editorStyles,
 		isSelected,
 	} = props;
 
@@ -151,12 +156,31 @@ const ContentTimelineComponent = ( props ) => {
 		scrollBlockToView();
 	}, [deviceType] );
 
+    useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
     return (
 		<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={contentTimelineStyle} /> }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default ContentTimelineComponent;
+export default compose(
+	withSelect( ( gbsSelect, props ) => {
+
+		const globalBlockStyles = gbsSelect( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( ContentTimelineComponent );

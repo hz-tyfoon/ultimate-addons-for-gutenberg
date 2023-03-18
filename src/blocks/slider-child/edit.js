@@ -4,6 +4,8 @@
 
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
 import styling from './styling';
 import { useEffect } from '@wordpress/element';
 
@@ -12,7 +14,7 @@ import { compose } from '@wordpress/compose';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 
 const UAGBSlide = ( props ) => {
-	const { isSelected, setAttributes, attributes, deviceType } = props;
+	const { isSelected, setAttributes, attributes, attributes : { globalBlockStyleId }, deviceType, editorStyles } = props;
 	
 	useEffect( () => {
 		// Assigning block_id in the attribute.
@@ -27,9 +29,13 @@ const UAGBSlide = ( props ) => {
 
 	}, [ attributes, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 			<Render parentProps={ props } />
 		</>
 	);
@@ -50,7 +56,13 @@ const applyWithSelect = withSelect( ( select, props ) => { // eslint-disable-lin
 	const innerBlocks = getBlocks( props.clientId );
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 	const slideIndex = getBlockIndex( props.clientId ); 
+	const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+	const { 
+		globalBlockStyleId,
+		globalBlockStyleName
+	} = props.attributes;
 
+	const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
 	return {
 		// Subscribe to changes of the innerBlocks to control the display of the layout selection placeholder.
 		innerBlocks,
@@ -59,7 +71,8 @@ const applyWithSelect = withSelect( ( select, props ) => { // eslint-disable-lin
 		replaceInnerBlocks,
 		deviceType,
 		isParentOfSelectedBlock: select( 'core/block-editor' ).hasSelectedInnerBlock( props.clientId, true ),
-		slideIndex
+		slideIndex,
+		editorStyles
 	};
 } );
 export default compose( applyWithSelect )( UAGBSlide );

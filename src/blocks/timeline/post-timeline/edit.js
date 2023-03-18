@@ -14,15 +14,19 @@ import apiFetch from '@wordpress/api-fetch';
 import contentTimelineStyle from '.././inline-styles';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
-import { useSelect } from '@wordpress/data';
+import { useSelect, withSelect } from '@wordpress/data';
 
 const PostTimelineComponent = ( props ) => {
 	const deviceType = useDeviceType();
 	const {
 		isSelected,
 		setAttributes,
+		editorStyles,
 		attributes: {
 			categories,
 			postsToShow,
@@ -39,6 +43,7 @@ const PostTimelineComponent = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
 	} = props;
 		
@@ -92,6 +97,10 @@ const PostTimelineComponent = ( props ) => {
 	useEffect( () => {
 		scrollBlockToView();
 	}, [deviceType] );
+
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
 
 	let categoriesList = [];
 
@@ -173,10 +182,27 @@ const PostTimelineComponent = ( props ) => {
 					parentProps={ props }
 					taxonomyList={ taxonomyList }
 					categoriesList={ categoriesList }
+					styling={contentTimelineStyle}
 				/>
 			) }
 			<Render parentProps={ props } latestPosts={ latestPosts } />
 		</>
 	);
 };
-export default PostTimelineComponent
+
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( PostTimelineComponent );

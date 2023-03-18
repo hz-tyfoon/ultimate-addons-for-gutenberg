@@ -8,7 +8,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
@@ -1477,10 +1477,15 @@ successMsgLetterSpacingType,
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper .wp-block-uagb-gf-styler.uagb-block-${ props.clientId.substr(
+	let base_selector = `.editor-styles-wrapper .wp-block-uagb-gf-styler.uagb-block-${ props.clientId.substr(
 		0,
 		8
 	) }`;
+	
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
 
 	let stylingCss = generateCSS(
 		selectors,

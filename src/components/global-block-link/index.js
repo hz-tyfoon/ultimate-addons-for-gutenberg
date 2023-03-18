@@ -35,8 +35,7 @@ const GlobalBlockStyles = ( props ) => {
             globalBlockStyleName,
             globalBlockStyleId
         },
-        blockName,
-        clientId
+        blockName
     } = props;
 
     const styling = props.styling;

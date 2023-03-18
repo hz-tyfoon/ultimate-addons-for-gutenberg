@@ -5,7 +5,7 @@
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 	const {
 		block_id,
 		starColor,
@@ -302,20 +302,25 @@ function styling( props ) {
 		},
 	};
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id.substr( 0 , 8 ) }`;
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ block_id.substr( 0 , 8 ) }`;
 
-	let stylingCss = generateCSS( selectors, baseSelector );
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+
+	let stylingCss = generateCSS( selectors, base_selector );
 
 	stylingCss += generateCSS(
 		tabletSelectors,
-		`${ baseSelector }.uagb-editor-preview-mode-tablet`,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
 		true,
 		'tablet'
 	);
 
 	stylingCss += generateCSS(
 		mobileSelectors,
-		`${ baseSelector }.uagb-editor-preview-mode-mobile`,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
 		true,
 		'mobile'
 	);

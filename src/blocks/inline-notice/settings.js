@@ -20,8 +20,10 @@ import renderSVG from '@Controls/renderIcon';
 import { ToggleControl, Icon } from '@wordpress/components';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { memo } from '@wordpress/element';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 	const { attributes, setAttributes } = props;
 	const {
@@ -786,6 +788,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs tabs={ [ 'general', 'style', 'advance' ] }>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ inlineGeneralSettings() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>

@@ -9,7 +9,13 @@
 
 $selectors = UAGB_Block_Helper::get_social_share_child_selectors( $attr, $id, true );
 
-$desktop = UAGB_Helper::generate_css( $selectors, '.uagb-block-' . $id );
+$base_selector = '.uagb-block-' . $id;
+
+if ( '' !== $attr['globalBlockStyleName'] && '' !== $attr['globalBlockStyleId'] ) {
+	$base_selector = UAGB_Block_Helper::get_gbs_selector( $block_name, $attr['globalBlockStyleName'] );
+}
+
+$desktop = UAGB_Helper::generate_css( $selectors, $base_selector );
 
 $generated_css = array(
 	'desktop' => $desktop,

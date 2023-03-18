@@ -35,8 +35,10 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import boxShadowPresets from './presets';
 import UAGPresets from '@Components/presets';
 import {pickRelevantMediaFiles } from './utils'
+import GlobalBlockStyles from '@Components/global-block-link';
 
 export default function Settings( props ) {
+	const styling = props.styling;
 	const deviceType = useDeviceType();
 	props = props.parentProps;
 	const { attributes, setAttributes, context, isSelected, clientId } = props;
@@ -1992,6 +1994,10 @@ export default function Settings( props ) {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{generalPanel}
 						{shapeGeneralPanel}
 						{

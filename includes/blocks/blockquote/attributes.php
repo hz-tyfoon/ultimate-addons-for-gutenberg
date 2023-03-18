@@ -160,4 +160,6 @@ return array(
 	'tweetBtnLetterSpacingTablet' => '',
 	'tweetBtnLetterSpacingMobile' => '',
 	'tweetBtnLetterSpacingType'   => 'px',
+	'globalBlockStyleName'        => '',
+	'globalBlockStyleId'          => '',
 );

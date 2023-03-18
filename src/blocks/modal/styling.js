@@ -9,7 +9,7 @@ import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import { applyFilters } from '@wordpress/hooks';
 
-export default function styling( props ) {
+export default function styling( props, baseSelector = false ) {
 	const {
 		modalTrigger,
 		buttonIconPosition,
@@ -616,14 +616,20 @@ export default function styling( props ) {
 		};
 	}
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
-		0,
-		8
-	) }`;
-
+	
 	selectors = applyFilters( `spectra.${blockName}.styling`, selectors, props.attributes );
 	tabletSelectors = applyFilters( `spectra.${blockName}.tabletStyling`, tabletSelectors, props.attributes );
 	mobileSelectors = applyFilters( `spectra.${blockName}.mobileStyling`, mobileSelectors, props.attributes );
+
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
+		0,
+		8
+	) }`;
+	
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
 
 	let styling_css = generateCSS( selectors, base_selector );
 

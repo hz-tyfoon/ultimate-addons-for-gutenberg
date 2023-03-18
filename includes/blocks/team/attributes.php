@@ -117,4 +117,6 @@ return array(
 	'descLetterSpacingTablet'   => '',
 	'descLetterSpacingMobile'   => '',
 	'descLetterSpacingType'     => 'px',
+	'globalBlockStyleName'      => '',
+	'globalBlockStyleId'        => '',
 );

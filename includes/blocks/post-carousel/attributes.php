@@ -204,6 +204,8 @@ return array_merge(
 		'dotsMarginTopTablet'        => '',
 		'dotsMarginTopMobile'        => '',
 		'dotsMarginTopUnit'          => 'px',
+		'globalBlockStyleName'       => '',
+		'globalBlockStyleId'         => '',
 	),
 	$btn_border_attribute,
 	$overall_border_attribute

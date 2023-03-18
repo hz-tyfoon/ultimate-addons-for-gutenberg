@@ -6,6 +6,10 @@ import { useEffect } from '@wordpress/element';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
@@ -18,6 +22,7 @@ const UAGBtestimonial = ( props ) => {
 	const {
 		setAttributes,
 		attributes,
+		editorStyles,
 		attributes: {
 			backgroundOpacity,
 			backgroundImageColor,
@@ -39,6 +44,7 @@ const UAGBtestimonial = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
 		isSelected,
 		clientId,
@@ -119,12 +125,31 @@ const UAGBtestimonial = ( props ) => {
 		scrollBlockToView();
 	}, [deviceType] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
-		{ isSelected && <Settings parentProps={ props } /> }
+		{ isSelected && <Settings parentProps={ props } styling={TestimonialStyle} /> }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default UAGBtestimonial;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBtestimonial );

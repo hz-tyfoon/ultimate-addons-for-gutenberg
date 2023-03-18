@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-export default function styling( props ) {
+export default function styling( props, baseSelector = false ) {
 
 	const {
 		'attributes': {
@@ -445,13 +445,18 @@ export default function styling( props ) {
 
 	}
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
 
-	let styling_css = generateCSS( selectors, baseSelector );
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
+
+	let styling_css = generateCSS( selectors, base_selector );
 
 	styling_css += generateCSS(
 		tabletSelectors,
-		`${ baseSelector }.uagb-editor-preview-mode-tablet`,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
 		true,
 		'tablet'
 	);
@@ -459,7 +464,7 @@ export default function styling( props ) {
 
 	styling_css += generateCSS(
 		mobileSelectors,
-		`${ baseSelector }.uagb-editor-preview-mode-mobile`,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
 		true,
 		'mobile'
 	);

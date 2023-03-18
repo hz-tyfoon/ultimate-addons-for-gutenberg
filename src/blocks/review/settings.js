@@ -40,8 +40,10 @@ export const removeFromArray = ( arr, removedElems ) =>
 
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 	// Setup the attributes
 	const { attributes, setAttributes } = props;
@@ -1502,6 +1504,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ generalSettings() }
 						{ enableImage === true && imageSettings() }
 						{ schemaSettings() }

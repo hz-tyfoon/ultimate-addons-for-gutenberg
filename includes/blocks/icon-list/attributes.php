@@ -125,4 +125,6 @@ return array(
 	'blockPaddingUnitTablet'   => 'px',
 	'blockPaddingUnitMobile'   => 'px',
 	'blockPaddingLink'         => '',
+	'globalBlockStyleName'     => '',
+	'globalBlockStyleId'       => '',
 );

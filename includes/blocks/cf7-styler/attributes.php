@@ -223,6 +223,8 @@ return array_merge(
 		'buttonBorderRadius'               => 0,
 		'buttonBorderColor'                => '#333',
 		'buttonBorderHoverColor'           => '#333',
+		'globalBlockStyleName'             => '',
+		'globalBlockStyleId'               => '',
 	),
 	$field_border_attribute,
 	$button_border_attribute

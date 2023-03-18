@@ -217,4 +217,10 @@ $combined_selectors = array(
 
 $base_selector = ( $attr['classMigrate'] ) ? '.uagb-block-' : '#uagb-section-';
 
-return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector . $id );
+$base_selector = $base_selector . $id;
+
+if ( '' !== $attr['globalBlockStyleName'] && '' !== $attr['globalBlockStyleId'] ) {
+	$base_selector = UAGB_Block_Helper::get_gbs_selector( $block_name, $attr['globalBlockStyleName'] );
+}
+
+return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector );

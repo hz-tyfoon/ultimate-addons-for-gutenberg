@@ -4,7 +4,7 @@
 
 import generateCSS from '@Controls/generateCSS';
 
-function styling( props ) {
+function styling( props, baseSelector = false ) {
 
 	const {
 		width,
@@ -59,10 +59,15 @@ function styling( props ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
 		0,
 		8
 	) }`;
+
+	// For Global Styles.
+	if ( baseSelector ) {
+		base_selector = `.editor-styles-wrapper ${baseSelector}`;
+	}
 
 	let styling_css = generateCSS( selectors, base_selector );
 

@@ -6,10 +6,12 @@ import { withSelect, useDispatch } from '@wordpress/data';
 import styling from './styling';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 //  Import CSS.
 import './style.scss';
-import { compose } from '@wordpress/compose';
 import { useDeviceType } from '@Controls/getPreviewType';
 import styles from './editor.lazy.scss';
 import { SwiperSlide } from 'swiper/react';
@@ -22,7 +24,8 @@ const UAGBSlider = ( props ) => {
 		isSelected,
 		setAttributes,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		editorStyles,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, globalBlockStyleId },
 	} = props;
 
 	// Add and remove the CSS on the drop and remove of the component.
@@ -51,9 +54,13 @@ const UAGBSlider = ( props ) => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 			<Render parentProps={ props } />
 		</>
 	);
@@ -66,13 +73,19 @@ const applyWithSelect = withSelect( ( select, props ) => { // eslint-disable-lin
 	const selectedBlock = getSelectedBlock();
 	const parentBlockIds = getBlockParents( selectedBlock?.clientId );
 	const blockParents = select( 'core/block-editor' ).getBlocksByClientId( parentBlockIds );
-
+	const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+	const { 
+		globalBlockStyleId,
+		globalBlockStyleName
+	} = props.attributes;
+	const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
 	return {
 		insertBlock,
 		block: ( select( 'core/block-editor' ) || select( 'core/editor' ) ).getBlock(
 			props.clientId
 		),
-		blockParents
+		blockParents,
+		editorStyles
 	};
 } );
 export default compose( applyWithSelect )( UAGBSlider );

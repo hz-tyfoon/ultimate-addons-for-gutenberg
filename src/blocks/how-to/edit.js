@@ -5,14 +5,16 @@
 import SchemaNotices from './schema-notices';
 import styling from './styling';
 import './style.scss';
-import { useSelect } from '@wordpress/data';
-
 import { useState, useEffect } from '@wordpress/element';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect, useSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
@@ -43,7 +45,9 @@ const HowToComponent = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
+		editorStyles
 	} = props;
 	
 	const [ prevState, setPrevState ] = useState( '' );
@@ -197,6 +201,9 @@ const HowToComponent = ( props ) => {
 
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
 	
 	const minsValue = timeInMins ? timeInMins : time;
 
@@ -221,10 +228,25 @@ const HowToComponent = ( props ) => {
 				materials={ materials }
 				clientId={ props.clientId }
 			/>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default HowToComponent;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( HowToComponent );

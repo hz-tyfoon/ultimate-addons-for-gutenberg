@@ -9,9 +9,12 @@ import apiFetch from '@wordpress/api-fetch';
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useSelect } from '@wordpress/data';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { withSelect, useSelect } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 const UAGBTaxonomyList = ( props ) => {
@@ -43,9 +46,11 @@ const UAGBTaxonomyList = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId
 		},
 		setAttributes,
 		clientId,
+		editorStyles
 	} = props;
 	
 	let categoriesList = [];
@@ -171,6 +176,10 @@ const UAGBTaxonomyList = ( props ) => {
 		scrollBlockToView();
 	}, [deviceType] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
 			{ isSelected && (
@@ -178,6 +187,7 @@ const UAGBTaxonomyList = ( props ) => {
 					parentProps={ props }
 					taxonomyList={ taxonomyList }
 					termsList={ termsList }
+					styling={styling}
 				/>
 			) }
 			<Render parentProps={ props } categoriesList={ categoriesList } />
@@ -185,4 +195,19 @@ const UAGBTaxonomyList = ( props ) => {
 	);
 };
 
-export default UAGBTaxonomyList;
+export default compose(
+	withSelect( ( select, props ) => {
+
+		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( UAGBTaxonomyList );

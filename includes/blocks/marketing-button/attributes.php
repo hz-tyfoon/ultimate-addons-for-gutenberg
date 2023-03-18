@@ -101,6 +101,8 @@ return array_merge(
 		'borderRadius'              => 2,
 		'borderColor'               => '',
 		'borderHoverColor'          => '',
+		'globalBlockStyleName'      => '',
+		'globalBlockStyleId'        => '',
 	),
 	$button_attribute
 );

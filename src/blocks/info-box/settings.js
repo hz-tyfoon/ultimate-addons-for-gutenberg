@@ -28,6 +28,8 @@ import {
 } from '@wordpress/components';
 import UAGTextControl from '@Components/text-control';
 import renderSVG from '@Controls/renderIcon';
+import GlobalBlockStyles from '@Components/global-block-link';
+
 let imageSizeOptions = [
 	{
 		value: 'thumbnail',
@@ -42,6 +44,7 @@ let imageSizeOptions = [
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 	const { setAttributes, attributes, deviceType } = props;
 
@@ -2651,6 +2654,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ presetSettings() }
 						{ imageIconPanel() }
 						{ typographySettings() }

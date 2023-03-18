@@ -27,8 +27,6 @@ const Render = ( props ) => {
 			seperatorStyle,
 			seperatorPosition,
 			headingDescPosition,
-			globalBlockStyleName,
-			spectraBlockName
 		},
 		setAttributes,
 		className,

@@ -9,13 +9,16 @@ import { useEffect } from '@wordpress/element';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
-import { select } from '@wordpress/data';
+import { select, withSelect } from '@wordpress/data';
 import Settings from './settings';
 import Render from './render';
+import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import { STORE_NAME as storeName } from '@Store/constants';
+import { compose } from '@wordpress/compose';
 
 const SocialShareChildComponent = ( props ) => {
 	const deviceType = useDeviceType();
-	const { isSelected, setAttributes, attributes, clientId } = props;
+	const { isSelected, setAttributes, attributes, attributes : { globalBlockStyleId }, clientId, editorStyles } = props;
 	
 	useEffect( () => {
 		// Replacement for componentDidMount.
@@ -42,12 +45,31 @@ const SocialShareChildComponent = ( props ) => {
 		scrollBlockToView();
 	}, [deviceType] );
 
+	useEffect( () => {
+		addBlockEditorDynamicStyles( 'uagb-global-block-style-' + globalBlockStyleId, editorStyles );
+	}, [editorStyles, deviceType] );
+
 	return (
 		<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ isSelected && <Settings parentProps={ props } styling={styling} /> }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default SocialShareChildComponent;
+export default compose(
+	withSelect( ( gbsSelect, props ) => {
+
+		const globalBlockStyles = gbsSelect( storeName ).getGlobalBlockStyles();
+		const { 
+			globalBlockStyleId,
+			globalBlockStyleName
+		} = props.attributes;
+
+		const editorStyles = getGBSEditorStyles( globalBlockStyles,globalBlockStyleId,globalBlockStyleName );
+
+		return {
+			editorStyles,
+		};	
+	} )
+)( SocialShareChildComponent );

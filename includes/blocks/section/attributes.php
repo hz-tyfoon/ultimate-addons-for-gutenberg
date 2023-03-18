@@ -88,6 +88,8 @@ return array_merge(
 		'borderWidth'              => 1,
 		'borderRadius'             => '',
 		'borderColor'              => '',
+		'globalBlockStyleName'     => '',
+		'globalBlockStyleId'       => '',
 	),
 	$overall_border_attributes
 );

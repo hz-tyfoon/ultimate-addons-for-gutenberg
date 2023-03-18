@@ -21,9 +21,10 @@ import UAGTabsControl from '@Components/tabs';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import UAGIconPicker from '@Components/icon-picker';
 import { memo } from '@wordpress/element';
-
+import GlobalBlockStyles from '@Components/global-block-link';
 
 const Settings = ( props ) => {
+	const styling = props.styling;
 	props = props.parentProps;
 	const { attributes, deviceType, setAttributes, clientId } = props;
 
@@ -1004,6 +1005,10 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						<GlobalBlockStyles
+							parentProps={props}
+							styling={styling}
+						/>
 						{ presetSettings() }
 						{ iconSettings() }
 						{ generalSetting() }
