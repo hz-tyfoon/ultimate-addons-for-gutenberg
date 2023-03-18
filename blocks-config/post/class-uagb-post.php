@@ -424,14 +424,16 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 				$overall_border_attribute = UAGB_Block_Helper::uag_generate_php_border_attribute( 'overall' );
 
 			}
-
+			
+			$inheritFromTheme      = UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' );
+			
 			return array_merge(
 				$btn_border_attribute,
 				$overall_border_attribute,
 				array(
 					'inheritFromTheme'              => array(
 						'type'    => 'boolean',
-						'default' => true,
+						'default' => 'disabled' === $inheritFromTheme ? false : true,
 					),
 					'block_id'                      => array(
 						'type'    => 'string',

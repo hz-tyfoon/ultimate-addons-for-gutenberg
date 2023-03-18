@@ -7,6 +7,7 @@ import AssetsGeneration from '@DashboardApp/pages/settings/AssetsGeneration';
 import RegenerateAssets from '@DashboardApp/pages/settings/RegenerateAssets';
 import TemplatesButton from '@DashboardApp/pages/settings/TemplatesButton';
 import OnPageCSS from '@DashboardApp/pages/settings/OnPageCSS';
+import inheritFromTheme from '@DashboardApp/pages/settings/inheritFromTheme';
 import RollBack from '@DashboardApp/pages/settings/RollBack';
 import BetaUpdates from '@DashboardApp/pages/settings/BetaUpdates';
 import LegacyBlocks from '@DashboardApp/pages/settings/LegacyBlocks';
@@ -121,6 +122,7 @@ const Settings = () => {
 								}
                                 <BlocksEditorSpacing/>
 								<OnPageCSS/>
+                                <inheritFromTheme/>
                                 <CollapsePanels/>
                                 <CopyPasteStyles/>
                                 <AutoBlockRecovery/>

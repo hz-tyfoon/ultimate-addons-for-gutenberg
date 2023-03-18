@@ -475,171 +475,176 @@ const Settings = ( props ) => {
 				initialOpen={ true }
 			>
 				{ showDescription && (
-				<ResponsiveSlider
-					label={ __(
-						'Bottom Spacing',
-						'ultimate-addons-for-gutenberg'
-					) }
-					data={ {
-						desktop: {
-							value: titleSpace,
-							label: 'titleSpace',
-						},
-						tablet: {
-							value: titleSpaceTablet,
-							label: 'titleSpaceTablet',
-						},
-						mobile: {
-							value: titleSpaceMobile,
-							label: 'titleSpaceMobile',
-						},
-					} }
-					min={ 0 }
-					max={ 20 }
-					units={ [
-						{
-							name: __(
-								'Pixel',
-								'ultimate-addons-for-gutenberg'
-							),
-							unitValue: 'px',
-						}
-					] }
-					setAttributes={ setAttributes }
-					unit={ {
-						value: titleSpaceUnit,
-						label: 'titleSpaceUnit',
-					} }
-				/> ) }
-				<TypographyControl
-					label={ __(
-						'Typography',
-						'ultimate-addons-for-gutenberg'
-					) }
-					attributes={ attributes }
-					setAttributes={ setAttributes }
-					loadGoogleFonts={ {
-						value: titleLoadGoogleFonts,
-						label: 'titleLoadGoogleFonts',
-					} }
-					fontFamily={ {
-						value: titleFontFamily,
-						label: 'titleFontFamily',
-					} }
-					fontWeight={ {
-						value: titleFontWeight,
-						label: 'titleFontWeight',
-					} }
-					fontStyle={ {
-						value: titleFontStyle,
-						label: 'titleFontStyle',
-					} }
-					fontSizeType={ {
-						value: titleFontSizeType,
-						label: 'titleFontSizeType',
-					} }
-					fontSize={ {
-						value: titleFontSize,
-						label: 'titleFontSize',
-					} }
-					fontSizeMobile={ {
-						value: titleFontSizeMobile,
-						label: 'titleFontSizeMobile',
-					} }
-					fontSizeTablet={ {
-						value: titleFontSizeTablet,
-						label: 'titleFontSizeTablet',
-					} }
-					lineHeightType={ {
-						value: titleLineHeightType,
-						label: 'titleLineHeightType',
-					} }
-					lineHeight={ {
-						value: titleLineHeight,
-						label: 'titleLineHeight',
-					} }
-					lineHeightMobile={ {
-						value: titleLineHeightMobile,
-						label: 'titleLineHeightMobile',
-					} }
-					lineHeightTablet={ {
-						value: titleLineHeightTablet,
-						label: 'titleLineHeightTablet',
-					} }
-					transform={ {
-						value: titleTransform,
-						label: 'titleTransform',
-					} }
-					decoration={ {
-						value: titleDecoration,
-						label: 'titleDecoration',
-					} }
-					letterSpacing={ {
-						value: titleLetterSpacing,
-						label: 'titleLetterSpacing',
-					} }
-					letterSpacingTablet={ {
-						value: titleLetterSpacingTablet,
-						label: 'titleLetterSpacingTablet',
-					} }
-					letterSpacingMobile={ {
-						value: titleLetterSpacingMobile,
-						label: 'titleLetterSpacingMobile',
-					} }
-					letterSpacingType={ {
-						value: titleLetterSpacingType,
-						label: 'titleLetterSpacingType',
-					} }
-				/>
-				<UAGTabsControl
-					tabs={ [
-						{
-							name: 'normal',
-							title: __(
-								'Normal',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-						{
-							name: 'hover',
-							title: __(
-								'Hover',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-					] }
-					normal={
-						<AdvancedPopColorControl
-							label={ __(
-								'Color',
-								'ultimate-addons-for-gutenberg'
-							) }
-							colorValue={ titleColor ? titleColor : '' }
-							data={ {
-								value: titleColor,
-								label: 'titleColor',
-							} }
-							setAttributes={ setAttributes }
-						/>
-					}
-					hover={
-						<AdvancedPopColorControl
-							label={ __(
-								'Color',
-								'ultimate-addons-for-gutenberg'
-							) }
-							colorValue={
-								titleHoverColor ? titleHoverColor : ''
+					<ResponsiveSlider
+						label={ __(
+							'Bottom Spacing',
+							'ultimate-addons-for-gutenberg'
+						) }
+						data={ {
+							desktop: {
+								value: titleSpace,
+								label: 'titleSpace',
+							},
+							tablet: {
+								value: titleSpaceTablet,
+								label: 'titleSpaceTablet',
+							},
+							mobile: {
+								value: titleSpaceMobile,
+								label: 'titleSpaceMobile',
+							},
+						} }
+						min={ 0 }
+						max={ 20 }
+						units={ [
+							{
+								name: __(
+									'Pixel',
+									'ultimate-addons-for-gutenberg'
+								),
+								unitValue: 'px',
 							}
-							data={ {
-								value: titleHoverColor,
-								label: 'titleHoverColor',
-							} }
+						] }
+						setAttributes={ setAttributes }
+						unit={ {
+							value: titleSpaceUnit,
+							label: 'titleSpaceUnit',
+						} }
+					/> 
+				) }
+				{ ! inheritFromTheme &&
+					<>
+						<TypographyControl
+							label={ __(
+								'Typography',
+								'ultimate-addons-for-gutenberg'
+							) }
+							attributes={ attributes }
 							setAttributes={ setAttributes }
+							loadGoogleFonts={ {
+								value: titleLoadGoogleFonts,
+								label: 'titleLoadGoogleFonts',
+							} }
+							fontFamily={ {
+								value: titleFontFamily,
+								label: 'titleFontFamily',
+							} }
+							fontWeight={ {
+								value: titleFontWeight,
+								label: 'titleFontWeight',
+							} }
+							fontStyle={ {
+								value: titleFontStyle,
+								label: 'titleFontStyle',
+							} }
+							fontSizeType={ {
+								value: titleFontSizeType,
+								label: 'titleFontSizeType',
+							} }
+							fontSize={ {
+								value: titleFontSize,
+								label: 'titleFontSize',
+							} }
+							fontSizeMobile={ {
+								value: titleFontSizeMobile,
+								label: 'titleFontSizeMobile',
+							} }
+							fontSizeTablet={ {
+								value: titleFontSizeTablet,
+								label: 'titleFontSizeTablet',
+							} }
+							lineHeightType={ {
+								value: titleLineHeightType,
+								label: 'titleLineHeightType',
+							} }
+							lineHeight={ {
+								value: titleLineHeight,
+								label: 'titleLineHeight',
+							} }
+							lineHeightMobile={ {
+								value: titleLineHeightMobile,
+								label: 'titleLineHeightMobile',
+							} }
+							lineHeightTablet={ {
+								value: titleLineHeightTablet,
+								label: 'titleLineHeightTablet',
+							} }
+							transform={ {
+								value: titleTransform,
+								label: 'titleTransform',
+							} }
+							decoration={ {
+								value: titleDecoration,
+								label: 'titleDecoration',
+							} }
+							letterSpacing={ {
+								value: titleLetterSpacing,
+								label: 'titleLetterSpacing',
+							} }
+							letterSpacingTablet={ {
+								value: titleLetterSpacingTablet,
+								label: 'titleLetterSpacingTablet',
+							} }
+							letterSpacingMobile={ {
+								value: titleLetterSpacingMobile,
+								label: 'titleLetterSpacingMobile',
+							} }
+							letterSpacingType={ {
+								value: titleLetterSpacingType,
+								label: 'titleLetterSpacingType',
+							} }
 						/>
-					}
-					disableBottomSeparator={ true }
-				/>
+						<UAGTabsControl
+							tabs={ [
+								{
+									name: 'normal',
+									title: __(
+										'Normal',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+								{
+									name: 'hover',
+									title: __(
+										'Hover',
+										'ultimate-addons-for-gutenberg'
+									),
+								},
+							] }
+							normal={
+								<AdvancedPopColorControl
+									label={ __(
+										'Color',
+										'ultimate-addons-for-gutenberg'
+									) }
+									colorValue={ titleColor ? titleColor : '' }
+									data={ {
+										value: titleColor,
+										label: 'titleColor',
+									} }
+									setAttributes={ setAttributes }
+								/>
+							}
+							hover={
+								<AdvancedPopColorControl
+									label={ __(
+										'Color',
+										'ultimate-addons-for-gutenberg'
+									) }
+									colorValue={
+										titleHoverColor ? titleHoverColor : ''
+									}
+									data={ {
+										value: titleHoverColor,
+										label: 'titleHoverColor',
+									} }
+									setAttributes={ setAttributes }
+								/>
+							}
+							disableBottomSeparator={ true }
+						/>
+					</>
+				}
 			</UAGAdvancedPanelBody>
 		);
 	};
@@ -1178,11 +1183,15 @@ const Settings = ( props ) => {
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
 						{ titleSettings() }
-						{ showDescription && descriptionSettings() }
+						{ showDescription && ! inheritFromTheme && descriptionSettings() }
 						{ '' !== icon && iconSettings() }
-						{ backgroundSettings() }
-						{ borderSettings() }
-						{ btnPaddingSettings() }
+						{ ! inheritFromTheme && 
+							<>
+								{ backgroundSettings() }
+								{ borderSettings() }
+								{ btnPaddingSettings() }
+							</>
+						}
 					</InspectorTab>
 					<InspectorTab
 						{ ...UAGTabs.advance }
