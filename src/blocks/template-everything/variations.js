@@ -748,6 +748,7 @@ const variations = [
 									quotePadding: 0,
 									quoteBorderRadius: 100,
 									quoteColor: '#007CBA',
+									descColor: '#667085',
 									quoteBgColor: '',
 									descFontWeight: 600,
 									descFontStyle: 'default',
@@ -776,6 +777,7 @@ const variations = [
 									subHeadSpace: 0,
 									blockTopPadding: 24,
 									blockBottomPadding: 24,
+									subHeadingColor: '#667085'
 								},
 							],
 							[
