@@ -234,6 +234,55 @@ class UAGB_Post_Assets {
 			$content = get_option( 'widget_block' );
 			$this->prepare_widget_area_assets( $content );
 		}
+
+		if ( current_theme_supports( 'block-templates' ) ) {
+			$template_types = array_keys( get_default_block_template_types() );
+
+			foreach ( $template_types as $template_type ) {
+				// Skip 'embed' for now because it is not a regular template type.
+				if ( 'embed' === $template_type ) {
+					continue;
+				}
+
+				if ( 'home' === $template_type || 'frontpage' === $template_type ) {
+					global $_wp_current_template_content;
+					global $wp_embed;
+					$content = $wp_embed->run_shortcode( $_wp_current_template_content );
+					$this->common_function_for_assets_preparation( $content );
+				}
+
+				add_filter( str_replace( '-', '', $template_type ) . '_template', array( $this, 'uagb_locate_block_template' ), 20, 3 );
+			}
+		}
+
+	}
+
+	/**
+	 * Finds a block template with equal or higher specificity than a given PHP template file.
+	 *
+	 * Internally, this communicates the block content that needs to be used by the template canvas through a global variable.
+	 *
+	 * @since x.x.x
+	 *
+	 * @global string $_wp_current_template_content
+	 *
+	 * @param string   $template  Path to the template. See locate_template().
+	 * @param string   $type      Sanitized filename without extension.
+	 * @param string[] $templates A list of template candidates, in descending order of priority.
+	 * @return string The path to the Site Editor template canvas file, or the fallback PHP template.
+	 */
+	public function uagb_locate_block_template( $template, $type, array $templates ) {
+		global $_wp_current_template_content;
+
+		$block_template = resolve_block_template( $type, $templates, $template );
+
+		if ( ! empty( $block_template->content ) ) {
+			$_wp_current_template_content = $block_template->content;
+		}
+
+		$this->common_function_for_assets_preparation( $_wp_current_template_content );
+		return $template;
+
 	}
 
 	/**
@@ -821,6 +870,18 @@ class UAGB_Post_Assets {
 						$this->stylesheet .= $assets['css'];
 						$this->script     .= $assets['js'];
 					}
+				} elseif ( 'core/template-part' === $inner_block['blockName'] ) {
+					$id = $this->get_fse_template_part( $inner_block );
+					if ( $id ) {
+						$content = get_post_field( 'post_content', $id );
+
+						$reusable_blocks = $this->parse_blocks( $content );
+
+						$assets = $this->get_blocks_assets( $reusable_blocks );
+
+						$this->stylesheet .= $assets['css'];
+						$this->script     .= $assets['js'];
+					}
 				} else {
 					// Get CSS for the Block.
 					$inner_assets    = $this->get_block_css_and_js( $inner_block );
@@ -870,7 +931,7 @@ class UAGB_Post_Assets {
 		$this->stylesheet = str_replace( '#CONTENT_WIDTH#', $content_width . 'px', $this->stylesheet );
 
 		if ( '' !== $this->script ) {
-			$this->script = 'document.addEventListener("DOMContentLoaded", function(){ ' . $this->script . ' })';
+			$this->script = 'document.addEventListener("DOMContentLoaded", function(){ ' . $this->script . ' });';
 		}
 
 		/* Update page assets */
@@ -949,6 +1010,23 @@ class UAGB_Post_Assets {
 	}
 
 	/**
+	 * Generates ids for all wp template part.
+	 *
+	 * @param array $block the content array.
+	 * @since x.x.x
+	 */
+	public function get_fse_template_part( $block ) {
+		$slug            = $block['attrs']['slug'];
+		$templates_parts = get_block_templates( array( 'slugs__in' => $slug ), 'wp_template_part' );
+		foreach ( $templates_parts as $templates_part ) {
+			if ( $slug === $templates_part->slug ) {
+				$id = $templates_part->wp_id;
+				return $id;
+			}
+		}
+	}
+
+	/**
 	 * Generates assets for all blocks including reusable blocks.
 	 *
 	 * @param array $blocks Blocks array.
@@ -972,7 +1050,6 @@ class UAGB_Post_Assets {
 				if ( '' === $block['blockName'] || ! isset( $block['attrs'] ) ) {
 					continue;
 				}
-
 				if ( 'core/block' === $block['blockName'] ) {
 					$id = ( isset( $block['attrs']['ref'] ) ) ? $block['attrs']['ref'] : 0;
 
@@ -986,6 +1063,18 @@ class UAGB_Post_Assets {
 						$this->stylesheet .= $assets['css'];
 						$this->script     .= $assets['js'];
 
+					}
+				} elseif ( 'core/template-part' === $block['blockName'] ) {
+					$id = $this->get_fse_template_part( $block );
+					if ( $id ) {
+						$content = get_post_field( 'post_content', $id );
+
+						$reusable_blocks = $this->parse_blocks( $content );
+
+						$assets = $this->get_blocks_assets( $reusable_blocks );
+
+						$this->stylesheet .= $assets['css'];
+						$this->script     .= $assets['js'];
 					}
 				} else {
 					// Add your block specif css here.
