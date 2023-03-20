@@ -1049,7 +1049,6 @@ class UAGB_Post_Assets {
 
 		$tab_styling_css = '';
 		$mob_styling_css = '';
-		$css             = '';
 		$js              = '';
 
 		foreach ( $blocks as $i => $block ) {
