@@ -16,6 +16,7 @@ return array_merge(
 	array(
 		'classMigrate'                    => false,
 		'inheritFromTheme'                => 'disabled' === $inherit_from_theme ? false : true,
+		'secondInheritFromTheme'          => 'disabled' === $inherit_from_theme ? false : true,
 		'textAlign'                       => 'left',
 		'titleColor'                      => '',
 		'descColor'                       => '',

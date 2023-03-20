@@ -425,7 +425,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 
 			}
 			
-			$inheritFromTheme      = UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' );
+			$inheritFromTheme = UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' );
 			
 			return array_merge(
 				$btn_border_attribute,
