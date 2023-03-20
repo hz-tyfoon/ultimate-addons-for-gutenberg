@@ -135,7 +135,7 @@ const GlobalBlockStyles = ( props ) => {
     const generateBlockStyles = ( newStyleID = false ) => {
         updateGoogleFontData( attributes );
     
-        spectraGlobalStyles.map( ( style ) => {
+        globalBlockStyles.map( ( style ) => {
             if ( newStyleID && style?.value === String( newStyleID ) ) {
                 const styleNameClass = style?.label?.replace( /\s+/g, '-' )?.toLowerCase();
                 const baseSelector = `.spectra-gbs-${blockNameClass}-${styleNameClass}`;
@@ -171,7 +171,7 @@ const GlobalBlockStyles = ( props ) => {
 
         } );
         
-        updateGlobalBlockStyles( spectraGlobalStyles );
+        updateGlobalBlockStyles( globalBlockStyles );
         setSaveToDatabase( true );
     };
     const updateGoogleFontData = ( attrs ) => {
@@ -241,13 +241,6 @@ const GlobalBlockStyles = ( props ) => {
                                         globalBlockStyleId: uniqueID 
                                     } 
                                 )
-                                const spectraGlobalStyles = [
-                                    ...globalBlockStyles,
-                                    {
-                                        value: uniqueID,
-                                        label: tempStyleName,
-                                    }
-                                ]
                                 closeModal();
                                 generateBlockStyles( uniqueID );
 
@@ -262,10 +255,7 @@ const GlobalBlockStyles = ( props ) => {
                 ! bulkEdit &&
 
                 <UAGSelectControl
-                    label={ __(
-                        'Linked Style',
-                        'ultimate-addons-for-gutenberg'
-                    ) }
+                    label={ selectLabel }
                     data={ {
                         value: globalBlockStyleId,
                         label: 'globalBlockStyleId',
@@ -288,7 +278,7 @@ const GlobalBlockStyles = ( props ) => {
                                 } 
                             );
                             setUniqueID( value );
-                            getBlockStyles( value );
+                            generateBlockStyles( value );
                         }
                     }
                     options={ globalBlockStyles }
@@ -308,7 +298,6 @@ const GlobalBlockStyles = ( props ) => {
                             ( value ) => {    
                                 if ( bulkEdit ) {
                                     setMultiSelected( value );
-                                    return;
                                 }
                             }
                         }
