@@ -172,6 +172,7 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 
 ### x.x.x ###
 * Feature: Image Gallery - Added Lightbox.
+* Global - Inherit From Theme - Added global and block wise option to inherit theme stylings.
 
 ### 2.4.0 ###
 * New: Introducing the Countdown block that will help you generate hype and create a sense of urgency among your audience, during product sales or releases!
