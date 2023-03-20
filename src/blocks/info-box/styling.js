@@ -271,7 +271,7 @@ function styling( props ) {
 	 const boxSizingImageTablet = ( '%' === imageWidthUnitTablet ) ? 'border-box' : 'content-box'
 	 const boxSizingImageMobile = ( '%' === imageWidthUnitMobile ) ? 'border-box' : 'content-box'
 
-	 let selectors = {
+	 const selectors = {
 		 // Icon css
 		 ' .uagb-ifb-content .uagb-ifb-icon-wrap svg': {
 			 'font-size': generateCSSUnit( iconSizeFallback, iconSizeType ),
@@ -946,9 +946,9 @@ function styling( props ) {
 		 };
 	 }
 	 if( ! inheritFromTheme ) {
-		selectors = {
+		
 			 // CTA style
-			 ' div.uagb-ifb-cta a.uagb-infobox-cta-link': {
+			selectors[ ' div.uagb-ifb-cta a.uagb-infobox-cta-link' ] = {
 				'font-size': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
 				'font-family': ctaFontFamily,
 				'font-weight': ctaFontWeight,
@@ -961,11 +961,11 @@ function styling( props ) {
 				   ctaLineHeightType
 				),
 				'color': ctaLinkColor
-			},
-			' div.uagb-ifb-cta a.uagb-infobox-cta-link:hover': {
+			};
+			selectors[ ' div.uagb-ifb-cta a.uagb-infobox-cta-link:hover'] = {
 				'color': ctaLinkHoverColor,
-			},
-			' div.uagb-ifb-button-wrapper a.uagb-infobox-cta-link': {
+			};
+			selectors[' div.uagb-ifb-button-wrapper a.uagb-infobox-cta-link'] = {
 				'color': ctaBtnLinkColor,
 				'background-color': ( ctaBgType === 'color' ) ? ctaBgColor : 'transparent', // Since the only other case we currently have is 'transparent'.
 				'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
@@ -975,8 +975,8 @@ function styling( props ) {
 				),
 				'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
 				'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
-			},
-			'.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link': {
+			};
+			selectors[ '.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link'] = {
 			   'color': ctaBtnLinkColor,
 			   'background-color': ctaBgColor,
 			   'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
@@ -986,24 +986,24 @@ function styling( props ) {
 			   ),
 			   'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
 			   'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
-		   },
-		   '.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link:hover': {
+		   };
+		   selectors[ '.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link:hover'] = {
 			   'color': ctaLinkHoverColor,
 			   'background-color': ( ctaBgHoverType === 'color' ) ? ctaBgHoverColor : 'transparent',
 			   'border-color': btnBorderHColor,
-		   },
-			' .uagb-ifb-button-wrapper .uagb-infobox-cta-link:hover': {
+		   };
+		   selectors[ ' .uagb-ifb-button-wrapper .uagb-infobox-cta-link:hover' ] = {
 				'color': ctaLinkHoverColor,
 				'background-color': ( ctaBgHoverType === 'color' ) ? ctaBgHoverColor : 'transparent',
 				'border-color': btnBorderHColor,
-			},
-			' .uagb-ifb-button-wrapper .uagb-infobox-cta-link svg': {
+			};
+			selectors[' .uagb-ifb-button-wrapper .uagb-infobox-cta-link svg' ] = {
 				'fill': ctaBtnLinkColor,
-			},
-			' .uagb-ifb-button-wrapper .uagb-infobox-cta-link:hover svg': {
+			};
+			selectors[' .uagb-ifb-button-wrapper .uagb-infobox-cta-link:hover svg' ] = {
 				'fill': ctaLinkHoverColor,
-			},
-		};
+			};
+		
 		selectors[' .uagb-infobox-cta-link.wp-block-button__link'] = ctaBorderCSS;
 		mobileSelectors[' .uagb-infobox-cta-link.wp-block-button__link'] = ctaBorderCSSMobile;
 		tabletSelectors[' .uagb-infobox-cta-link.wp-block-button__link'] = ctaBorderCSSTablet;
