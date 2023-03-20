@@ -22,6 +22,5 @@ registerBlockType( 'uagb/post-button', {
 	parent: [ 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel' ],
 	keywords: [ __( 'post' ), __( 'button' ), __( 'uag' ) ],
 	PostButton,
-	example: {},
 	save,
 } );

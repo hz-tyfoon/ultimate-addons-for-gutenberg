@@ -22,6 +22,5 @@ registerBlockType( 'uagb/post-meta', {
 	parent: [ 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel' ],
 	keywords: [ __( 'post' ), __( 'meta' ), __( 'uag' ) ],
 	PostMeta,
-	example: {},
 	save,
 } );

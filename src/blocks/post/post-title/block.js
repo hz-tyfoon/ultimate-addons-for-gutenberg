@@ -23,6 +23,5 @@ registerBlockType( 'uagb/post-title', {
 	parent: [ 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel' ],
 	keywords: [ __( 'post' ), __( 'title' ), __( 'uag' ) ],
 	PostTitle,
-	example: {},
 	save,
 } );

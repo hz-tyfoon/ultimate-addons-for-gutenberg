@@ -22,6 +22,5 @@ registerBlockType( 'uagb/post-excerpt', {
 	parent: [ 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel' ],
 	keywords: [ __( 'post' ), __( 'excerpt' ), __( 'uag' ) ],
 	PostExcerpt,
-	example: {},
 	save,
 } );

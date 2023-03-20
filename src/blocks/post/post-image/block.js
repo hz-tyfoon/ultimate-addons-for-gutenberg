@@ -22,6 +22,5 @@ registerBlockType( 'uagb/post-image', {
 	parent: [ 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel' ],
 	keywords: [ __( 'post' ), __( 'image' ), __( 'uag' ) ],
 	PostImage,
-	example: {},
 	save,
 } );

@@ -22,6 +22,5 @@ registerBlockType( 'uagb/post-taxonomy', {
 	parent: [ 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel' ],
 	keywords: [ __( 'tags' ), __( 'taxonomy' ), __( 'uag' ) ],
 	PostTaxonomy,
-	example: {},
 	save,
 } );
