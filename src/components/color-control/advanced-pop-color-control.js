@@ -16,9 +16,10 @@ import {
 } from '@wordpress/components';
 import { useSelect, select } from '@wordpress/data';
 import styles from './editor.lazy.scss';
-import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
+import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGReset from '../reset';
+import { applyFilters } from '@wordpress/hooks';
 
 const AdvancedPopColorControl = ( props ) => {
 	const [panelNameForHook, setPanelNameForHook] = useState( null );
@@ -174,8 +175,8 @@ const AdvancedPopColorControl = ( props ) => {
 	const globalIndicator = ( colorVal && colorVal.includes( 'var' ) ) ? `uag-global-indicator uag-global-icon-${globalIconColor}` : '';
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 	return (
 		<div
@@ -296,7 +297,7 @@ const AdvancedPopColorControl = ( props ) => {
 					</div>
 				</div>
 				{ help && (
-					<p className="uag-control-help-notice">{ help }</p>
+					<p className="components-base-control__help">{ help }</p>
 				) }
 			</div>
 			{

@@ -104,11 +104,9 @@ class UAGB_Init_Blocks {
 				case 'os':
 					$block_content = $this->os_visibility( $block['attrs'], $block_content );
 					break;
-
 				case 'day':
 					$block_content = $this->day_visibility( $block['attrs'], $block_content );
 					break;
-
 				default:
 					// code...
 					break;
@@ -218,14 +216,14 @@ class UAGB_Init_Blocks {
 	 */
 	public function day_visibility( $block_attributes, $block_content ) {
 
-			// If not set restriction.
+		// If not set restriction. 
 		if ( empty( $block_attributes['UAGDay'] ) ) {
 			return $block_content;
 		}
-
-			$current_day = strtolower( current_datetime()->format( 'l' ) );
-			// Check in restricted day.
-			return ! in_array( $current_day, $block_attributes['UAGDay'] ) ? $block_content : '';
+	
+		$current_day = strtolower( current_datetime()->format( 'l' ) );
+		// Check in restricted day.
+		return ! in_array( $current_day, $block_attributes['UAGDay'] ) ? $block_content : '';
 
 	}
 
@@ -633,7 +631,8 @@ class UAGB_Init_Blocks {
 				'spectra_pro_status'                 => is_plugin_active( 'spectra-pro/spectra-pro.php' ),
 				'spectra_custom_css_example'         => __(
 					'Use custom class added in block\'s advanced settings to target your desired block. Examples:
-				.my-class {text-align: center;} // my-class is a custom selector'
+				.my-class {text-align: center;} // my-class is a custom selector',
+					'ultimate-addons-for-gutenberg'
 				),
 				'is_rtl'                             => is_rtl(),
 			)
@@ -749,7 +748,7 @@ class UAGB_Init_Blocks {
 	 * Ajax call to confirm add users confirmation option in database
 	 *
 	 * @return void
-	 * @since x.x.x
+	 * @since 2.4.0
 	 */
 	public function confirm_svg_upload() {
 		check_ajax_referer( 'uagb_confirm_svg_nonce', 'svg_nonce' );

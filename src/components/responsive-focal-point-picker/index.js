@@ -1,7 +1,8 @@
 /**
  * External dependencies
  */
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from '@wordpress/element';
+
 import { getPanelIdFromRef } from '@Utils/Helpers';
 import { useDeviceType } from '@Controls/getPreviewType';
 import ResponsiveToggle from '../responsive-toggle';
@@ -9,6 +10,8 @@ import { __ } from '@wordpress/i18n';
 import { FocalPointPicker } from '@wordpress/components';
 import { select } from '@wordpress/data';
 import styles from './editor.lazy.scss';
+import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const ResponsiveUAGFocalPointPicker = ( props ) => {
 
@@ -68,14 +71,14 @@ const ResponsiveUAGFocalPointPicker = ( props ) => {
 	);
 
 	const controlName = 'position'; // There is no label props that's why keep hard coded label
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 	return (
 		<div
 			ref={panelRef}
 			className="components-base-control"
-			
+
 		>
 			{controlBeforeDomElement}
 			<div className="uagb-responsive-select-control">
@@ -88,9 +91,7 @@ const ResponsiveUAGFocalPointPicker = ( props ) => {
 					</div>
 					{ output[ deviceType ] ? output[ deviceType ] : output.Desktop }
 				</div>
-				{ props.help && (
-					<p className="uag-control-help-notice">{ props.help }</p>
-				) }
+				<UAGHelpText text={ props.help } />
 			</div>
 			{controlAfterDomElement}
 		</div>

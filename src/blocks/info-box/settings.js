@@ -1,7 +1,6 @@
 import UAGIconPicker from '@Components/icon-picker';
+import { memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
-
 import TypographyControl from '@Components/typography';
 import WebfontLoader from '@Components/typography/fontloader';
 import ResponsiveBorder from '@Components/responsive-border';
@@ -2690,4 +2689,4 @@ const Settings = ( props ) => {
 		</>
 	);
 };
-export default React.memo( Settings );
+export default memo( Settings );

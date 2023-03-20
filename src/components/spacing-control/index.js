@@ -2,7 +2,7 @@
  * External dependencies
  */
 import styles from './editor.lazy.scss';
-import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
+import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import { ButtonGroup, Button, Tooltip } from '@wordpress/components';
 import { useDeviceType } from '@Controls/getPreviewType';
@@ -10,6 +10,8 @@ import ResponsiveToggle from '../responsive-toggle';
 import { select } from '@wordpress/data';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import UAGReset from '../reset';
+import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const SpacingControl = ( props ) => {
 	const [panelNameForHook, setPanelNameForHook] = useState( null );
@@ -52,6 +54,7 @@ const SpacingControl = ( props ) => {
 		valueTopMobile,
 		link,
 		setAttributes,
+		help = false
 	} = props;
 
 	const onChangeUnits = ( value ) => {
@@ -473,8 +476,8 @@ const SpacingControl = ( props ) => {
 	};
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 	return (
 		<div
@@ -540,9 +543,7 @@ const SpacingControl = ( props ) => {
 						<span className="uagb-spacing-control__number-label uagb-spacing-control__link-label"></span>
 					</div>
 				</div>
-				{ props.help && (
-					<p className="uag-control-help-notice">{ props.help }</p>
-				) }
+				<UAGHelpText text={ help } />
 			</div>
 			{
 				controlAfterDomElement

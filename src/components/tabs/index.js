@@ -1,10 +1,12 @@
 import { TabPanel } from '@wordpress/components';
 import styles from './editor.lazy.scss';
-import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
+import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
 import { getPanelIdFromRef } from '@Utils/Helpers';
 import Separator from '@Components/separator';
 import { select } from '@wordpress/data';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
+import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const UAGTabsControl = ( props ) => {
 	const [panelNameForHook, setPanelNameForHook] = useState( null );
@@ -16,6 +18,7 @@ const UAGTabsControl = ( props ) => {
 			styles.unuse();
 		};
 	}, [] );
+
 
 	const { getSelectedBlock } = select( 'core/block-editor' );
 
@@ -37,14 +40,14 @@ const UAGTabsControl = ( props ) => {
 	} );
 
 	const controlName = 'tabs'; // there is no label props that's why keep hard coded label
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 
 	return (
 		<div
 			ref={panelRef}
-			
+
 		>
 			{
 				controlBeforeDomElement
@@ -92,6 +95,7 @@ const UAGTabsControl = ( props ) => {
 				} }
 			</TabPanel>
 			{ ! props?.disableBottomSeparator && <Separator/> }
+			<UAGHelpText text={ props.help } />
 			{
 				controlAfterDomElement
 			}

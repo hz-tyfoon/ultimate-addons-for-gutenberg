@@ -1,18 +1,20 @@
 /**
  * External dependencies
  */
-import React, {useEffect, useState, useRef } from 'react';
+import { useEffect, useState,useRef } from '@wordpress/element';
 import { getPanelIdFromRef } from '@Utils/Helpers';
  import { useDeviceType } from '@Controls/getPreviewType';
  import ResponsiveToggle from '../responsive-toggle';
  import UAGMediaPicker from '@Components/image';
  import { select } from '@wordpress/data';
  import { __ } from '@wordpress/i18n';
+ import UAGHelpText from '@Components/help-text';
+ import { applyFilters } from '@wordpress/hooks';
 
- const ResponsiveUAGImage = ( props ) => {
+const ResponsiveUAGImage = ( props ) => {
 	const [panelNameForHook, setPanelNameForHook] = useState( null );
 	const panelRef = useRef( null );
-	const { backgroundImage, setAttributes } = props;
+	const { backgroundImage, setAttributes, help = false } = props;
 	const { getSelectedBlock } = select( 'core/block-editor' );
 
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
@@ -77,8 +79,8 @@ import { getPanelIdFromRef } from '@Utils/Helpers';
 
 
 	 const controlName = 'image'; // there is no label props that's why keep hard coded label
-	 const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	 const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	 const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	 const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 	 return (
 		<div
@@ -98,9 +100,7 @@ import { getPanelIdFromRef } from '@Utils/Helpers';
 					</div>
 					{ output[ deviceType ] ? output[ deviceType ] : output.Desktop }
 				</div>
-				{ props.help && (
-					<p className="uag-control-help-notice">{ props.help }</p>
-				) }
+				<UAGHelpText text={ help } />
 			</div>
 			{
 				controlAfterDomElement

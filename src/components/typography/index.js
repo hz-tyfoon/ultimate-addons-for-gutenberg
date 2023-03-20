@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { Button, Dashicon } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
@@ -12,11 +13,13 @@ import FontFamilyControl from './font-typography';
 import RangeTypographyControl from './range-typography';
 import TypographyStyles from './inline-styles';
 import styles from './editor.lazy.scss';
-import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
+import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
+
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import { select } from '@wordpress/data';
 import getUAGEditorStateLocalStorage from '@Controls/getUAGEditorStateLocalStorage';
 import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
+import UAGHelpText from '@Components/help-text';
 
 // Export for ease of importing in individual blocks.
 export { TypographyStyles };
@@ -26,7 +29,7 @@ const TypographyControl = ( props ) => {
 	const panelRef = useRef( null );
 
 	const [ showAdvancedControls, toggleAdvancedControls ] = useState( false );
-	const allBlocksAttributes = wp.hooks.applyFilters( 'uagb.blocksAttributes', blocksAttributes ); // eslint-disable-line @wordpress/no-unused-vars-before-return
+	const allBlocksAttributes = applyFilters( 'uagb.blocksAttributes', blocksAttributes ); // eslint-disable-line @wordpress/no-unused-vars-before-return
 
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -80,6 +83,7 @@ const TypographyControl = ( props ) => {
 		disableTransform,
 		disableDecoration,
 		disableAdvancedOptions = false,
+		help = false
 	} = props;
 
 	if ( true !== disableFontFamily ) {
@@ -428,8 +432,8 @@ const TypographyControl = ( props ) => {
 	}
 
 	const controlName = getIdFromString( props.label );
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 
 	return (
@@ -449,6 +453,7 @@ const TypographyControl = ( props ) => {
 						{ showAdvancedFontControls }
 					</>
 				) }
+				<UAGHelpText text={ help } />
 			</div>
 			{
 				controlAfterDomElement

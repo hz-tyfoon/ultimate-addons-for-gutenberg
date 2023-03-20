@@ -1,10 +1,9 @@
 import { __ } from '@wordpress/i18n';
-import { useRef } from '@wordpress/element';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import { SelectControl } from '@wordpress/components';
 import styles from './editor.lazy.scss';
 import GradientSettings from '@Components/gradient-settings';
-import React, { useLayoutEffect, useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from '@wordpress/element';
 import UAGMediaPicker from '@Components/image';
 import ResponsiveSlider from '@Components/responsive-slider';
 import ResponsiveSelectControl from '@Components/responsive-select';
@@ -15,6 +14,8 @@ import MultiButtonsControl from '@Components/multi-buttons-control';
 import UAGB_Block_Icons from '@Controls/block-icons';
 import {getPanelIdFromRef} from '@Utils/Helpers';
 import { select } from '@wordpress/data';
+import UAGHelpText from '@Components/help-text';
+import { applyFilters } from '@wordpress/hooks';
 
 const Background = ( props ) => {
 	const { getSelectedBlock } = select( 'core/block-editor' );
@@ -63,7 +64,8 @@ const Background = ( props ) => {
 		yPositionType,
 		yPositionTypeTablet,
 		yPositionTypeMobile,
-		backgroundVideoOpacity
+		backgroundVideoOpacity,
+		help = false
 	} = props;
 
 	const blockNameForHook = getSelectedBlock()?.name.split( '/' ).pop(); // eslint-disable-line @wordpress/no-unused-vars-before-return
@@ -909,8 +911,8 @@ const Background = ( props ) => {
 	);
 
 	const controlName = 'background'; // there is no label props that's why keep hard coded label
-	const controlBeforeDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
-	const controlAfterDomElement = wp.hooks.applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
+	const controlBeforeDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}.before`, '', blockNameForHook );
+	const controlAfterDomElement = applyFilters( `spectra.${blockNameForHook}.${panelNameForHook}.${controlName}`, '', blockNameForHook );
 
 	return (
 		<div
@@ -922,6 +924,7 @@ const Background = ( props ) => {
 			}
 			<div className="uag-bg-select-control">
 				{ advancedControls }
+				<UAGHelpText text={ help } />
 			</div>
 			{
 				controlAfterDomElement
