@@ -861,11 +861,7 @@ class UAGB_Post_Assets {
 					$id = ( isset( $inner_block['attrs']['ref'] ) ) ? $inner_block['attrs']['ref'] : 0;
 
 					if ( $id ) {
-						$content = get_post_field( 'post_content', $id );
-
-						$reusable_blocks = $this->parse_blocks( $content );
-
-						$assets = $this->get_blocks_assets( $reusable_blocks );
+						$assets = $this->get_assets_using_post_content( $id );
 
 						$this->stylesheet .= $assets['css'];
 						$this->script     .= $assets['js'];
@@ -873,14 +869,10 @@ class UAGB_Post_Assets {
 				} elseif ( 'core/template-part' === $inner_block['blockName'] ) {
 					$id = $this->get_fse_template_part( $inner_block );
 					if ( $id ) {
-						$content = get_post_field( 'post_content', $id );
-
-						$reusable_blocks = $this->parse_blocks( $content );
-
-						$assets = $this->get_blocks_assets( $reusable_blocks );
+						$assets = $this->get_assets_using_post_content( $id );
 
 						$this->stylesheet .= $assets['css'];
-						$this->script     .= $assets['js'];
+						$this->script      = $assets['js'];
 					}
 				} else {
 					// Get CSS for the Block.
@@ -1027,6 +1019,23 @@ class UAGB_Post_Assets {
 	}
 
 	/**
+	 * Generates parse content for all blocks including reusable blocks.
+	 *
+	 * @param int $id of blocks.
+	 * @since x.x.x
+	 */
+	public function get_assets_using_post_content( $id ) {
+
+		$content = get_post_field( 'post_content', $id );
+
+		$reusable_blocks = $this->parse_blocks( $content );
+
+		$assets = $this->get_blocks_assets( $reusable_blocks );
+
+		return $assets;
+	}
+
+	/**
 	 * Generates assets for all blocks including reusable blocks.
 	 *
 	 * @param array $blocks Blocks array.
@@ -1040,8 +1049,8 @@ class UAGB_Post_Assets {
 
 		$tab_styling_css = '';
 		$mob_styling_css = '';
-
-		$js = '';
+		$css             = '';
+		$js              = '';
 
 		foreach ( $blocks as $i => $block ) {
 
@@ -1054,11 +1063,7 @@ class UAGB_Post_Assets {
 					$id = ( isset( $block['attrs']['ref'] ) ) ? $block['attrs']['ref'] : 0;
 
 					if ( $id ) {
-						$content = get_post_field( 'post_content', $id );
-
-						$reusable_blocks = $this->parse_blocks( $content );
-
-						$assets = $this->get_blocks_assets( $reusable_blocks );
+						$assets = $this->get_assets_using_post_content( $id );
 
 						$this->stylesheet .= $assets['css'];
 						$this->script     .= $assets['js'];
@@ -1067,14 +1072,10 @@ class UAGB_Post_Assets {
 				} elseif ( 'core/template-part' === $block['blockName'] ) {
 					$id = $this->get_fse_template_part( $block );
 					if ( $id ) {
-						$content = get_post_field( 'post_content', $id );
-
-						$reusable_blocks = $this->parse_blocks( $content );
-
-						$assets = $this->get_blocks_assets( $reusable_blocks );
+						$assets = $this->get_assets_using_post_content( $id );
 
 						$this->stylesheet .= $assets['css'];
-						$this->script     .= $assets['js'];
+						$this->script      = $assets['js'];
 					}
 				} else {
 					// Add your block specif css here.
