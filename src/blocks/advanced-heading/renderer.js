@@ -8,9 +8,12 @@ const Renderer = (props) => {
 		attributes: { headingTag, headingTitle, loopData },
 		context,
 	} = props;
+	// console.log('props->',props);
+	// console.log('headingTitle->',headingTitle);
 
 	// Check if heading block is children block of loop builder.
-	if (loopData && loopData?.isInLoop && loopData?.enable ) {
+	if ( -1 !== headingTitle.indexOf('<span data-spectra-pro-dc-field="') ) {
+	// if ( loopData && loopData?.isInLoop && loopData?.enable ) {
 		const renderedMarkup = applyFilters( `uag_render_text_loop_data`, '', context, props.attributes );
 		if( renderedMarkup !== '' ) {
 			return renderedMarkup;
