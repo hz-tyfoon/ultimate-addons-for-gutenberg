@@ -2568,7 +2568,7 @@ const Settings = ( props ) => {
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
 						<GlobalBlockStyles
-							parentProps={props}
+							parentProps={props.parentProps}
 							styling={styling}
 						/>	
 						{ generalSettings() }
