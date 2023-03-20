@@ -132,7 +132,7 @@ const GlobalBlockStyles = ( props ) => {
 
     const blockNameClass = blockName?.split( '/' )?.pop();
 
-    const generateBlockStyles = ( newStyleID = false, spectraGlobalStyles = globalBlockStyles ) => {
+    const generateBlockStyles = ( newStyleID = false ) => {
         updateGoogleFontData( attributes );
     
         spectraGlobalStyles.map( ( style ) => {
@@ -249,7 +249,7 @@ const GlobalBlockStyles = ( props ) => {
                                     }
                                 ]
                                 closeModal();
-                                generateBlockStyles( uniqueID, spectraGlobalStyles );
+                                generateBlockStyles( uniqueID );
 
                             } }
                         >
