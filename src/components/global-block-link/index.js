@@ -48,7 +48,7 @@ const GlobalBlockStyles = ( props ) => {
     const [ uniqueID, setUniqueID ] = useState( false );
     const [ bulkEdit, setBulkEdit ] = useState( false );
     const [ multiSelected, setMultiSelected ] = useState( [] );
-    const [ updateLoader, setUpdateLoader ] = useState(false);
+    const [ updateLoader, setUpdateLoader ] = useState( false );
 
     const [ tempStyleName, setTempStyleName ] = useState( '' );
     const [ saveToDatabase, setSaveToDatabase ] = useState( false );
@@ -124,7 +124,7 @@ const GlobalBlockStyles = ( props ) => {
                 }
                 return attribute;
             } );
-            setUpdateLoader(false);
+            setUpdateLoader( false );
             setSaveToDatabase( false );
         } );
     };
@@ -341,7 +341,7 @@ const GlobalBlockStyles = ( props ) => {
                             <Button
                                 className={`spectra-gbs-button ${updateLoader ? 'loading' : ''} components-base-control`}
                                 onClick={ () => {
-                                    setUpdateLoader(true);
+                                    setUpdateLoader( true );
                                     generateBlockStyles( globalBlockStyleId );
                                 } }
                                 variant="primary"
