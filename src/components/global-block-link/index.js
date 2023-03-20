@@ -12,6 +12,7 @@ import { store as spectraStore } from '@Store';
 import { STORE_NAME as storeName } from '@Store/constants';
 import { compose } from '@wordpress/compose';
 import Select from 'react-select';
+import UAGSelectControl from '@Components/select-control';
 
 const GlobalBlockStyles = ( props ) => {
    // Add and remove the CSS on the drop and remove of the component.
@@ -257,43 +258,68 @@ const GlobalBlockStyles = ( props ) => {
                     </div>
 				</Modal>
 			) }
-            <label htmlFor="select-label">{selectLabel}</label>
-            <Select
-                data={ {
-                    value: globalBlockStyleId,
-                    label: 'globalBlockStyleId',
-                } }
-                defaultValue={! bulkEdit ? globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) : multiSelected }
-                onChange = {
-                    ( value ) => {    
-                        if ( bulkEdit ) {
-                            setMultiSelected( value );
-                            return;
+            {
+                ! bulkEdit &&
+
+                <UAGSelectControl
+                    label={ __(
+                        'Linked Style',
+                        'ultimate-addons-for-gutenberg'
+                    ) }
+                    data={ {
+                        value: globalBlockStyleId,
+                        label: 'globalBlockStyleId',
+                    } }
+                    onChange = {
+                        ( value ) => {
+
+                            let label = '';
+                            for ( let i = 0; i < globalBlockStyles.length; i++ ) {
+                                if ( globalBlockStyles[i]?.value === value ) {
+                                    label = globalBlockStyles[i]?.label;
+                                    break;
+                                }
+                            }
+
+                            setAttributes( 
+                                { 
+                                    globalBlockStyleId: value,
+                                    globalBlockStyleName: label 
+                                } 
+                            );
+                            setUniqueID( value );
+                            getBlockStyles( value );
                         }
-                        let label = '';
-                        const selectedValue = value?.value;
-                        for ( let i = 0; i < globalBlockStyles.length; i++ ) {
-                            if ( globalBlockStyles[i]?.value === selectedValue ) {
-                                label = globalBlockStyles[i]?.label;
-                                break;
+                    }
+                    options={ globalBlockStyles }
+                    layout="stack"
+                />
+            }
+            { bulkEdit && (
+                <>
+                    <label htmlFor="select-label">{selectLabel}</label>
+                    <Select
+                        data={ {
+                            value: globalBlockStyleId,
+                            label: 'globalBlockStyleId',
+                        } }
+                        defaultValue={multiSelected}
+                        onChange = {
+                            ( value ) => {    
+                                if ( bulkEdit ) {
+                                    setMultiSelected( value );
+                                    return;
+                                }
                             }
                         }
-                        
-                        setAttributes( 
-                            { 
-                                globalBlockStyleId: selectedValue,
-                                globalBlockStyleName: label 
-                            } 
-                        );
-                        setUniqueID( selectedValue );
-                        generateBlockStyles( selectedValue );
-                    }
-                }
-                options={ globalBlockStyles }
-                classNamePrefix={'spectra-multi-select'}
-                className={'spectra-multi-select components-base-control'}
-                isMulti={bulkEdit}
-            />
+                        options={ globalBlockStyles }
+                        classNamePrefix={'spectra-multi-select'}
+                        className={'spectra-multi-select components-base-control'}
+                        isMulti={true}
+                    />
+                </>
+            )
+            }
             {
                 ( globalBlockStyleName && '' !== globalBlockStyleName ) && (
                     <>
