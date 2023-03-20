@@ -132,10 +132,10 @@ const GlobalBlockStyles = ( props ) => {
 
     const blockNameClass = blockName?.split( '/' )?.pop();
 
-    const generateBlockStyles = ( newStyleID = false ) => {
+    const generateBlockStyles = ( newStyleID = false, spectraGlobalStyles = globalBlockStyles ) => {
         updateGoogleFontData( attributes );
-    
-        globalBlockStyles.map( ( style ) => {
+
+        spectraGlobalStyles.map( ( style ) => {
             if ( newStyleID && style?.value === String( newStyleID ) ) {
                 const styleNameClass = style?.label?.replace( /\s+/g, '-' )?.toLowerCase();
                 const baseSelector = `.spectra-gbs-${blockNameClass}-${styleNameClass}`;
@@ -171,7 +171,7 @@ const GlobalBlockStyles = ( props ) => {
 
         } );
         
-        updateGlobalBlockStyles( globalBlockStyles );
+        updateGlobalBlockStyles( spectraGlobalStyles );
         setSaveToDatabase( true );
     };
     const updateGoogleFontData = ( attrs ) => {
@@ -241,8 +241,15 @@ const GlobalBlockStyles = ( props ) => {
                                         globalBlockStyleId: uniqueID 
                                     } 
                                 )
+                                const spectraGlobalStyles = [
+                                    ...globalBlockStyles,
+                                    {
+                                        value: uniqueID,
+                                        label: tempStyleName,
+                                    }
+                                ]
                                 closeModal();
-                                generateBlockStyles( uniqueID );
+                                generateBlockStyles( uniqueID, spectraGlobalStyles );
 
                             } }
                         >
