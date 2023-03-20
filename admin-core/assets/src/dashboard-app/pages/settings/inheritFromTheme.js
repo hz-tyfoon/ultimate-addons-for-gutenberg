@@ -9,8 +9,9 @@ function classNames( ...classes ) {
 
 const inheritFromThemeRender = () => {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const dispatch = useDispatch();
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const inheritFromTheme = useSelector( ( state ) => state.btnInheritFromTheme );
     const enableInheritTheme = 'disabled' === inheritFromTheme ? false : true;
 
