@@ -230,7 +230,7 @@ $combined_selectors = array(
 );
 
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'title', ' .uagb-notice-title', $combined_selectors );
-$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'desc', ' .uagb-notice-text p', $combined_selectors );
+$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'desc', ' .uagb-notice-text', $combined_selectors );
 
 $base_selector = ' .uagb-block-' . $id;
 
