@@ -49,6 +49,37 @@
 	}
 }
 
-.spectra-gbs-button.delete {
-	margin-left: 5px;
+.spectra-gbs-button {
+	&.delete {
+		margin-left: 5px;
+	}
+	&.loading::after {
+		content: "";
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		top: 0;
+		right: 4%;
+		bottom: 0;
+		margin: auto;
+		border: 4px dotted transparent;
+		border-top-color: #fff;
+    	border-right-color: #fff;
+		border-radius: 50%;
+		animation: button-loading-spinner 1s ease infinite;
+	}
+	&.loading {
+		position: relative;
+		padding-right: 30px;
+	}
+}
+
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
 }
