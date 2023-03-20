@@ -912,11 +912,6 @@ const Settings = ( props ) => {
 				/>
 				{ 'button' === ctaType &&
 					<>
-						<UAGPresets
-							setAttributes = { setAttributes }
-							presets = { buttonsPresets }
-							presetInputType = 'radioImage'
-						/>
 						<ToggleControl
 							checked={ inheritFromTheme }
 							onChange={ () =>
@@ -927,6 +922,13 @@ const Settings = ( props ) => {
 								'ultimate-addons-for-gutenberg'
 							) }
 						/>
+						{ ! inheritFromTheme &&
+							<UAGPresets
+								setAttributes = { setAttributes }
+								presets = { buttonsPresets }
+								presetInputType = 'radioImage'
+							/>
+						}
 					</>
 				}
 				{ ctaType !== 'none' && (

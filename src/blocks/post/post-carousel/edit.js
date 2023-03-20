@@ -2440,7 +2440,7 @@ let categoriesList = [];
 						displayPostTaxonomy ) &&
 						metaStyle() }
 					{ displayPostExcerpt && excerptStyle() }
-					{ displayPostLink && readMoreLinkStyleSettings() }
+					{ displayPostLink && ! inheritFromTheme && readMoreLinkStyleSettings() }
 					{ displayPostImage  && imageStyle() }
 					{ carouselStyle() }
 				</InspectorTab>

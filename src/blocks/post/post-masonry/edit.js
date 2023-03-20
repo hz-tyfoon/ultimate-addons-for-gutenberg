@@ -2637,7 +2637,7 @@ const UAGBPostMasonry = ( props ) => {
 						displayPostTaxonomy ) &&
 						metaStyle() }
 					{ displayPostExcerpt && excerptStyle() }
-					{ displayPostLink && readMoreLinkStyleSettings() }
+					{ displayPostLink && ! inheritFromTheme && readMoreLinkStyleSettings() }
 					{ paginationSettings() }
 					{ displayPostImage === true &&
 						imageStyle() }

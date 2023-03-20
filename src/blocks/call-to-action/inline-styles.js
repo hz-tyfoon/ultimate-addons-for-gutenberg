@@ -734,7 +734,7 @@ function CtaStyle( props ) {
 		};
 	}
 	
-	if ( inheritFromTheme ) {
+	if ( ! inheritFromTheme ) {
 		// CTA style.
 		selectors['.uagb-cta__outer-wrap a.uagb-cta__button-link-wrapper'] = {
 			'font-size': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
@@ -795,7 +795,7 @@ function CtaStyle( props ) {
 
 	}
 
-	if ( secondInheritFromTheme ) {
+	if ( ! secondInheritFromTheme ) {
 		selectors['.uagb-cta__outer-wrap a.uagb-cta-second__button'] = {
 			'font-size': generateCSSUnit( secondCtaFontSize, secondCtaFontSizeType ),
 			'font-family': secondCtaFontFamily,

@@ -2591,7 +2591,7 @@ const Settings = ( props ) => {
 							displayPostTaxonomy ) &&
 							metaStyle() }
 						{ displayPostExcerpt && excerptStyle() }
-						{ displayPostLink &&
+						{ displayPostLink && ! inheritFromTheme &&
 							readMoreLinkStyleSettings() }
 						{ postPagination && paginationStyle() }
 						{ displayPostImage === true &&

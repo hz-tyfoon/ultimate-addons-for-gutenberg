@@ -914,7 +914,7 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
-						{ presetSettings() }
+						{ ! inheritFromTheme && presetSettings() }
 						{ buttonSettings() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>

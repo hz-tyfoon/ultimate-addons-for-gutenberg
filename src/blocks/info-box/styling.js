@@ -471,6 +471,16 @@ function styling( props ) {
 		 '.uagb-infobox__content-wrap .uagb-ifb-content svg': {
 			 'box-sizing' : `${boxSizingIcon}`,
 		 },
+		 ' .uagb-infobox-cta-link svg': {
+			'font-size': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
+			'height': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
+			'width': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
+			'line-height': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
+			'fill': ctaLinkColor,
+		},
+		' .uagb-infobox-cta-link:hover svg': {
+			'fill': ctaLinkHoverColor,
+		},
 	 };
 
 	if( 'Stacked' === iconView ) {
@@ -622,9 +632,27 @@ function styling( props ) {
 		'height': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 		'line-height': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 	},
+	' .uagb-infobox-cta-link svg': {
+		'font-size': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
+		'height': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
+		'line-height': generateCSSUnit(
+			ctaFontSizeTablet,
+			ctaFontSizeType
+		),
+		'width': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
+	},
 	};
 
 	let mobileSelectors = {
+		' .uagb-infobox-cta-link svg': {
+			'font-size': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
+			'height': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
+			'line-height': generateCSSUnit(
+				ctaFontSizeMobile,
+				ctaFontSizeType
+			),
+			'width': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
+		},
 	' .uagb-iconbox-icon-wrap': {
 		'padding-top': generateCSSUnit( iconMarginTopMobile, iconMobileMarginUnit ),
 		'padding-right': generateCSSUnit( iconMarginRightMobile, iconMobileMarginUnit ),
@@ -748,15 +776,6 @@ function styling( props ) {
 	'.uagb-infobox__content-wrap .uagb-ifb-separator': {
 		'width': generateCSSUnit( seperatorWidthFallbackMobile, separatorWidthType ),
 	},
-	' .uagb-infobox-cta-link svg': {
-		'font-size': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
-		'height': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
-		'line-height': generateCSSUnit(
-			ctaFontSizeMobile,
-			ctaFontSizeType
-		),
-		'width': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
-	},
 	' .uagb-ifb-content .uagb-ifb-icon-wrap svg': {
 		'font-size': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 		'line-height': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
@@ -777,6 +796,7 @@ function styling( props ) {
 		'height': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 		'line-height': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 	},
+	
 	};
 
 	if (
@@ -925,7 +945,7 @@ function styling( props ) {
 			 'margin-right': generateCSSUnit( ctaIconSpaceFallbackMobile, ctaIconSpaceType ),
 		 };
 	 }
-	 if( inheritFromTheme ) {
+	 if( ! inheritFromTheme ) {
 		selectors = {
 			 // CTA style
 			 ' div.uagb-ifb-cta a.uagb-infobox-cta-link': {
@@ -944,16 +964,6 @@ function styling( props ) {
 			},
 			' div.uagb-ifb-cta a.uagb-infobox-cta-link:hover': {
 				'color': ctaLinkHoverColor,
-			},
-			' .uagb-infobox-cta-link svg': {
-				'font-size': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
-				'height': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
-				'width': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
-				'line-height': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
-				'fill': ctaLinkColor,
-			},
-			' .uagb-infobox-cta-link:hover svg': {
-				'fill': ctaLinkHoverColor,
 			},
 			' div.uagb-ifb-button-wrapper a.uagb-infobox-cta-link': {
 				'color': ctaBtnLinkColor,
@@ -1024,15 +1034,6 @@ function styling( props ) {
 				ctaLineHeightType
 				),
 			},
-			' .uagb-infobox-cta-link svg': {
-				'font-size': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
-				'height': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
-				'line-height': generateCSSUnit(
-					ctaFontSizeTablet,
-					ctaFontSizeType
-				),
-				'width': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
-			},
 		}
 		mobileSelectors = {
 			'.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link': {
@@ -1060,15 +1061,6 @@ function styling( props ) {
 				ctaLineHeightMobile,
 				ctaLineHeightType
 				),
-			},
-			' .uagb-infobox-cta-link svg': {
-				'font-size': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
-				'height': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
-				'line-height': generateCSSUnit(
-					ctaFontSizeMobile,
-					ctaFontSizeType
-				),
-				'width': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
 			},
 		}
 	}

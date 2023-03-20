@@ -440,7 +440,7 @@ function styling( props ) {
 			'color': inputplaceholderHoverColor,
 		},
 	};
-	if ( inheritFromTheme ) {
+	if ( ! inheritFromTheme ) {
 		selectors = { 
 			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap': {
 				'text-align': buttonAlign,

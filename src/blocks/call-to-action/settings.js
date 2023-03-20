@@ -298,16 +298,6 @@ const Settings = ( props ) => {
 				initialOpen={ false }
 			>
 				<ToggleControl
-					checked={ secondInheritFromTheme }
-					onChange={ () =>
-						setAttributes( { secondInheritFromTheme: ! secondInheritFromTheme } )
-					}
-					label={ __(
-						'Inherit From Theme',
-						'ultimate-addons-for-gutenberg'
-					) }
-				/>
-				<ToggleControl
 					label={ __(
 						'Enable Additional Button',
 						'ultimate-addons-for-gutenberg'
@@ -319,13 +309,23 @@ const Settings = ( props ) => {
 				/>
 				{ enabledSecondCtaButton && (
 				<>
-
-				<UAGPresets
-					setAttributes = { setAttributes }
-					presets = { buttonsPresetsAdditionalButton }
-					presetInputType = 'radioImage'
+				<ToggleControl
+					checked={ secondInheritFromTheme }
+					onChange={ () =>
+						setAttributes( { secondInheritFromTheme: ! secondInheritFromTheme } )
+					}
+					label={ __(
+						'Inherit From Theme',
+						'ultimate-addons-for-gutenberg'
+					) }
 				/>
-
+				{ ! inheritFromTheme &&
+					<UAGPresets
+						setAttributes = { setAttributes }
+						presets = { buttonsPresetsAdditionalButton }
+						presetInputType = 'radioImage'
+					/>
+				}
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
 					label={ __( 'Stack Orientation', 'ultimate-addons-for-gutenberg' ) }
