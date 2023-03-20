@@ -45,7 +45,7 @@ window.UAGBModal = {
 
                 const innerModal = modalWrapper.querySelector( '.uagb-modal-popup' );
 
-				if( null === innerModal){
+				if( null === innerModal ){
 					return;
 				}
 
