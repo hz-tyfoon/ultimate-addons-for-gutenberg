@@ -6,6 +6,7 @@ import Render from './render';
 import { getSettings as getDateSettings } from '@wordpress/date';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { useDeviceType } from '@Controls/getPreviewType';
+import { applyFilters } from '@wordpress/hooks';
 
 //  Import CSS.
 import './style.scss';
@@ -114,13 +115,11 @@ const UAGBCountdownEdit = ( props ) => {
 		deviceType
 	] );
 
-	const countdownProToolbar = wp.hooks.applyFilters( 'spectra.countdown.toolbar-hook', '', props.name );	
-
 	return (
 		<>
-			{/* Countdown Toolbar options for Pro */}
-			{ ( !!uagb_blocks_info.spectra_pro_status && props.attributes.timerEndAction === 'content' ) &&
-				countdownProToolbar
+			{/* Countdown Toolbar options for Pro (Replace feature) */}
+			{ ( props.attributes.timerEndAction === 'content' ) &&
+				applyFilters( 'spectra.countdown.toolbar-hook', '', props.name )
 			}
 			{ isSelected && <Settings parentProps={ props } /> }
 			<Render countdownRef={ countdownRef } parentProps={ props } />
