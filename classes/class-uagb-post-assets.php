@@ -530,6 +530,9 @@ class UAGB_Post_Assets {
 				'site_name_slug' => sanitize_title( get_bloginfo( 'name' ) ),
 			)
 		);
+
+		do_action( 'spectra_localize_pro_block_ajax' );
+
 	}
 
 	/**
