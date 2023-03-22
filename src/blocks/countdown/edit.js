@@ -66,11 +66,12 @@ const UAGBCountdownEdit = ( props ) => {
 			} );
 		}
 
-		// This attribute is used to display innerblocks preview for 'Replace with Content' mode.
-		setAttributes( { editorInnerblocksPreview: false } );
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
+		// editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
+		// block_id: Assigning block_id in the attribute.
+		setAttributes( {
+			editorInnerblocksPreview: false,
+			block_id: clientId.substr( 0, 8 ),
+		} );
 	}, [] );
 
 	const countdownRef = useRef( null );
