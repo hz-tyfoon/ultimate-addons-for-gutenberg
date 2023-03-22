@@ -1847,7 +1847,7 @@ const Settings = ( props ) => {
 							key from{ ' ' }
 							<a
 								target="_blank"
-								href={ `${ uagb_blocks_info.uagb_home_url }/wp-admin/options-general.php?page=spectra&path=settings&settings=block-settings` }
+								href={ `${ uagb_blocks_info.uagb_home_url }/wp-admin/admin.php?page=spectra&path=settings&settings=block-settings` }
 								rel="noreferrer"
 							>
 								here.
