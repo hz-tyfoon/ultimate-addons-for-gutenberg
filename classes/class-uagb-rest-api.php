@@ -207,7 +207,15 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 				'spectra_gbs_google_fonts_editor',
 				array() 
 			);
-			
+
+			if ( empty( $spectra_global_block_styles ) ) {
+				$spectra_global_block_styles = array(
+					array(
+						'value' => '',
+						'label' => 'None',
+					),
+				);
+			}
 			$inital_state = array(
 				'spectra_global_block_styles'     => $spectra_global_block_styles,
 				'spectra_gbs_google_fonts_editor' => $spectra_gbs_google_fonts_editor,

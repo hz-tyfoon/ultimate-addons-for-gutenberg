@@ -130,14 +130,14 @@ class UAGB_Init_Blocks {
 		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		if ( ! empty( $_POST['bulkUpdateStyles'] ) && 'no' !== $_POST['bulkUpdateStyles'] ) {
 			update_option( 'spectra_global_block_styles', $global_block_styles );
-			wp_send_json_success();
+			wp_send_json_success( $global_block_styles );
 		}
 		$post_id = sanitize_text_field( $_POST['postId'] );
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
-		
 		foreach ( $global_block_styles as $key => $style ) {
 			if ( ! empty( $_POST['globalBlockStyleId'] ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
 				$block_props = $style['props'];
+				
 				if ( ! $block_props['attributes'] ) {
 					$response_data = array( 'messsage' => __( 'No post data found!', 'ultimate-addons-for-gutenberg' ) );
 					wp_send_json_error( $response_data );
@@ -202,7 +202,7 @@ class UAGB_Init_Blocks {
 			update_option( 'spectra_gbs_google_fonts_editor', $spectra_gbs_google_fonts_editor );
 		}
 		
-		wp_send_json_success();
+		wp_send_json_success( $global_block_styles );
 	}
 
 	/**

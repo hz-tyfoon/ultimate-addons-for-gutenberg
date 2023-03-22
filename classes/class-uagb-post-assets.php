@@ -361,7 +361,6 @@ class UAGB_Post_Assets {
 			$spectra_global_block_styles = get_option( 'spectra_global_block_styles', array() );
 			
 			foreach ( $spectra_global_block_styles as $style ) {
-				
 				if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) ) {
 					$this->stylesheet = $this->stylesheet . $style['frontendStyles'];
 				}

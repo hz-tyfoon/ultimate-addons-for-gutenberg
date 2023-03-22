@@ -83,6 +83,10 @@ const GlobalBlockStyles = ( props ) => {
         }
 	}, [saveToDatabase] );
 
+    useEffect( () => {
+        generateBlockStyles();
+	}, [globalBlockStyleId, globalBlockStyles] );
+
     const saveStylesToDatabase = ( bulkUpdateStyles = 'no', spectraGlobalStyles = globalBlockStyles ) => {
 
         let styleProps = {};
@@ -113,18 +117,21 @@ const GlobalBlockStyles = ( props ) => {
             url: uagb_blocks_info.ajax_url,
             method: 'POST',
             body: formData,
-        } ).then( () => {
-            
-            Object.keys( currentBlockDefaultAttributes ).map( ( attribute ) => {
+        } ).then( ( data ) => {
+            if ( data?.success ) {
+    
+                updateGlobalBlockStyles( data?.data );
+                Object.keys( currentBlockDefaultAttributes ).map( ( attribute ) => {
 
-                if ( currentBlockDefaultAttributes[attribute]?.UAGCopyPaste ) {
-                    setAttributes( {
-                        [attribute] : currentBlockDefaultAttributes[attribute]?.default || undefined
-                    } );
-                    
-                }
-                return attribute;
-            } );
+                    if ( currentBlockDefaultAttributes[attribute]?.UAGCopyPaste ) {
+                        setAttributes( {
+                            [attribute] : currentBlockDefaultAttributes[attribute]?.default || undefined
+                        } );
+                        
+                    }
+                    return attribute;
+                } );
+            }
             setUpdateLoader( false );
             setSaveToDatabase( false );
         } );
@@ -132,11 +139,16 @@ const GlobalBlockStyles = ( props ) => {
 
     const blockNameClass = blockName?.split( '/' )?.pop();
 
-    const generateBlockStyles = ( newStyleID = false, spectraGlobalStyles = globalBlockStyles ) => {
+    const generateBlockStyles = ( newStyleID = globalBlockStyleId ) => {
         updateGoogleFontData( attributes );
 
-        spectraGlobalStyles.map( ( style ) => {
+        if ( ! newStyleID ) {
+            return;
+        }
+
+        globalBlockStyles.map( ( style ) => {
             if ( newStyleID && style?.value === String( newStyleID ) ) {
+    
                 const styleNameClass = style?.label?.replace( /\s+/g, '-' )?.toLowerCase();
                 const baseSelector = `.spectra-gbs-${blockNameClass}-${styleNameClass}`;
                 const asArray = Object.entries( attributes );
@@ -147,6 +159,8 @@ const GlobalBlockStyles = ( props ) => {
                 } );
 
                 const justStrings = Object.fromEntries( filtered );
+    
+    
                 const newProps = {...props};
                 if ( style?.props ) {
                     newProps.attributes = {
@@ -154,6 +168,7 @@ const GlobalBlockStyles = ( props ) => {
                         ...justStrings
                     }
                 }
+    
                 const blockStyling = styling( newProps, baseSelector );
                 style.editorStyles = blockStyling;
                 style.props = newProps;
@@ -171,7 +186,7 @@ const GlobalBlockStyles = ( props ) => {
 
         } );
         
-        updateGlobalBlockStyles( spectraGlobalStyles );
+        updateGlobalBlockStyles( globalBlockStyles );
         setSaveToDatabase( true );
     };
     const updateGoogleFontData = ( attrs ) => {
@@ -249,8 +264,7 @@ const GlobalBlockStyles = ( props ) => {
                                     }
                                 ]
                                 closeModal();
-                                generateBlockStyles( uniqueID, spectraGlobalStyles );
-
+                                updateGlobalBlockStyles( spectraGlobalStyles );
                             } }
                         >
                             <p> { __( 'Save', 'ultimate-addons-for-gutenberg' ) }</p>
@@ -284,8 +298,8 @@ const GlobalBlockStyles = ( props ) => {
                                     globalBlockStyleName: label 
                                 } 
                             );
+
                             setUniqueID( value );
-                            generateBlockStyles( value );
                         }
                     }
                     options={ globalBlockStyles }
@@ -316,55 +330,67 @@ const GlobalBlockStyles = ( props ) => {
                 </>
             )
             }
-            {
-                ( globalBlockStyleName && '' !== globalBlockStyleName ) && (
+            <Button
+                className="spectra-gbs-button components-base-control"
+                onClick={ () => {
+                    setBulkEdit( true );
+                    setMultiSelected( globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) );
+                } }
+                variant="primary"
+            >
+                { __( 'Bulk Edit', 'ultimate-addons-for-gutenberg' ) }
+            </Button>
+            { bulkEdit &&
+                (
                     <>
                         <Button
-                            className="spectra-gbs-button components-base-control"
+                            className="spectra-gbs-button delete components-base-control"
                             onClick={ () => {
-                                setBulkEdit( true );
-                                setMultiSelected( globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) );
+                                setMultiSelected( globalBlockStyles );
                             } }
                             variant="primary"
                         >
-                            { __( 'Bulk Edit', 'ultimate-addons-for-gutenberg' ) }
+                            { __( 'Select All', 'ultimate-addons-for-gutenberg' ) }
                         </Button>
-                        { bulkEdit &&
-                            <Button
-                                className="spectra-gbs-button delete components-base-control"
-                                onClick={ () => {
-                                    setBulkEdit( false );
-                                    const toBeDeletedIDs = [];
-                                    for( const style in multiSelected ) {
-                                        toBeDeletedIDs.push( multiSelected[style]?.value );
-                                    }
-                                    const filterGBS = globalBlockStyles.filter( ( style ) => {
-                                        if ( style?.value && ! toBeDeletedIDs.includes( style?.value ) ) {
-                                            dispatch( 'core/block-editor' ).updateBlockAttributes( style?.props?.clientId, { 
-                                                globalBlockStyleId: '',
-                                                globalBlockStyleName: '' 
-                                            } );
-                                            return true;
-                                        }
+                        <Button
+                            className="spectra-gbs-button delete components-base-control"
+                            onClick={ () => {
+                                setBulkEdit( false );
+                                const toBeDeletedIDs = [];
+                                for( const style in multiSelected ) {
+                                    toBeDeletedIDs.push( multiSelected[style]?.value );
+                                }
+                                const filterGBS = globalBlockStyles.filter( ( style ) => {
+                                    if ( style?.value && toBeDeletedIDs.includes( style?.value ) && 'None' !== style?.label ) {
+                                        dispatch( 'core/block-editor' ).updateBlockAttributes( style?.props?.clientId, { 
+                                            globalBlockStyleId: '',
+                                            globalBlockStyleName: '' 
+                                        } );
                                         return false;
-                                    } );
-
-                                    updateGlobalBlockStyles( filterGBS );
-                                    saveStylesToDatabase( 'bulkUpdateStyles', filterGBS );
-                                    setUniqueID( false );
-                                } }
-                                variant="primary"
-                            >
-                                { __( 'Delete Selected Styles', 'ultimate-addons-for-gutenberg' ) }
-                            </Button>
-                        }
+                                    }
+                                    return true;
+                                } );
+                                updateGlobalBlockStyles( filterGBS );
+                                saveStylesToDatabase( 'bulkUpdateStyles', filterGBS );
+                                setUniqueID( false );
+                            } }
+                            variant="primary"
+                        >
+                            { __( 'Delete Selected Styles', 'ultimate-addons-for-gutenberg' ) }
+                        </Button>
+                    </>
+                )
+            }
+            {
+                ( globalBlockStyleName && '' !== globalBlockStyleName ) && (
+                    <>
                         {
                             attributesChanged &&
                             <Button
                                 className={`spectra-gbs-button ${updateLoader ? 'loading' : ''} components-base-control`}
                                 onClick={ () => {
                                     setUpdateLoader( true );
-                                    generateBlockStyles( globalBlockStyleId );
+                                    generateBlockStyles();
                                 } }
                                 variant="primary"
                             >

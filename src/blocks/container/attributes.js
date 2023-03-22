@@ -57,19 +57,31 @@ const attributes = {
 	},
 	innerContentCustomWidthDesktop: {
 		type: 'number',
-		default: uagb_blocks_info.content_width
+		default: uagb_blocks_info.content_width,
+		UAGCopyPaste: {
+			styleType: 'inner-container-custom-width-desktop'
+		},
 	},
 	innerContentCustomWidthTablet: {
 		type: 'number',
-		default: 1024
+		default: 1024,
+		UAGCopyPaste: {
+			styleType: 'inner-container-custom-width-tablet'
+		},
 	},
 	innerContentCustomWidthMobile: {
 		type: 'number',
-		default: 767
+		default: 767,
+		UAGCopyPaste: {
+			styleType: 'inner-container-custom-width-mobile'
+		},
 	},
 	innerContentCustomWidthType: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'inner-container-custom-width-type'
+		},
 	},
 	minHeightDesktop: {
 		type: 'number',
@@ -908,14 +920,23 @@ const attributes = {
 	xPositionType: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'background-image-x-position-type-desktop'
+		},
 	},
 	xPositionTypeTablet: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'background-image-x-position-type-tablet'
+		},
 	},
 	xPositionTypeMobile: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'background-image-x-position-type-mobile'
+		},
 	},
 
 	yPositionDesktop: {
@@ -940,14 +961,23 @@ const attributes = {
 	yPositionType: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'background-image-y-position-type-desktop'
+		},
 	},
 	yPositionTypeTablet: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'background-image-y-position-type-tablet'
+		},
 	},
 	yPositionTypeMobile: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'background-image-y-position-type-mobile'
+		},
 	},
 
 	backgroundVideoColor: {
@@ -993,27 +1023,45 @@ const attributes = {
 	innerContentCustomWidthTypeTablet: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'inner-content-custom-width-type-tablet'
+		},
 	},
 	innerContentCustomWidthTypeMobile: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'inner-content-custom-width-type-mobile'
+		},
 	},
 
 	widthTypeTablet: {
 		type: 'string',
 		default: '%',
+		UAGCopyPaste: {
+			styleType: 'width-type-tablet'
+		},
 	},
 	widthTypeMobile: {
 		type: 'string',
 		default: '%',
+		UAGCopyPaste: {
+			styleType: 'width-type-mobile'
+		},
 	},
 	minHeightTypeTablet: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'min-height-type-tablet'
+		},
 	},
 	minHeightTypeMobile: {
 		type: 'string',
 		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'min-height-type-mobile'
+		},
 	},
 	// correct formating
 	topHeightType: {
@@ -1063,6 +1111,10 @@ const attributes = {
 	equalHeight: {
 		type: 'boolean',
 		default: false,
+		UAGCopyPaste: {
+			styleType: 'equal-height'
+		},
+		
 	},
 	...inputBorderAttributes
 };
