@@ -71,13 +71,14 @@ UAGBCountdown = { // eslint-disable-line no-undef
 					// Setting enddate as per cookie timestamp.
 					data.endDateTime = totalDate.toISOString().replace( /\.\d{3}Z$/, 'Z' );
 				} else {
-					data.endDateTime = this.getEvergreenEndDate( data.evergreenHrs, data.evergreenMinutes );
+					data.endDateTime = this.getEvergreenEndDate( data.evergreenDays, data.evergreenHrs, data.evergreenMinutes );
 
 					/**
 					 * Setting timestamp and cookie after initial load.
 					 * We are getting values of Hrs. and Minutes. and adding to the current timestamp to get endtime.
 					 */
 					const newDate = new Date;
+					newDate.setTime( newDate.getTime() + ( Math.floor( data.evergreenDays )*24*60*60*1000 ) );
 					newDate.setTime( newDate.getTime() + ( Math.floor( data.evergreenHrs )*60*60*1000 ) );
 					newDate.setTime( newDate.getTime() + ( Math.floor( data.evergreenMinutes )*60*1000 ) );
 
@@ -228,9 +229,9 @@ UAGBCountdown = { // eslint-disable-line no-undef
 
     },
 
-	getEvergreenEndDate( hours, minutes ) {
+	getEvergreenEndDate( days, hours, minutes ) {
         const now = new Date();
-        const newDate = new Date( now.getTime() + ( hours * 60 + minutes ) * 60 * 1000 );
+        const newDate = new Date( now.getTime() + ( days * 24 * 60 + hours * 60 + minutes ) * 60 * 1000 );
         return newDate.toISOString().replace( /\.\d{3}Z$/, 'Z' );
     }
 
