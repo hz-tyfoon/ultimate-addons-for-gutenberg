@@ -1,4 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
+import { applyFilters } from '@wordpress/hooks';
 
 import CountdownBox from './components/CountdownBox';
 
@@ -20,13 +21,11 @@ export default function Save( props ) {
 		className: `uagb-block-${ block_id } wp-block-uagb-countdown`
 	} );
 
-	const innerblocks_content = wp.hooks.applyFilters( 'spectra.countdown.save-innerblocks', '', props.name );
-
 	const innerblocks_structure = ( ( !!uagb_blocks_info.spectra_pro_status && timerEndAction === 'content' ) &&
 		<div
 			className={ `uagb-block-countdown-innerblocks-${ block_id } wp-block-uagb-countdown-innerblocks` }
 		>
-			{innerblocks_content}
+			{ applyFilters( 'spectra.countdown.save-innerblocks', '', props.name ) }
 		</div>
 	)
 

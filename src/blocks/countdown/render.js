@@ -2,6 +2,7 @@ import { useLayoutEffect, memo } from '@wordpress/element';
 import { useDeviceType } from '@Controls/getPreviewType';
 import styles from './editor.lazy.scss';
 import { useBlockProps } from '@wordpress/block-editor';
+import { applyFilters } from '@wordpress/hooks';
 
 import CountdownBox from './components/CountdownBox';
 
@@ -37,13 +38,11 @@ const Render = ( props ) => {
 		ref: countdownRef
 	} );
 
-	const innerblocks_content = wp.hooks.applyFilters( 'spectra.countdown.render-innerblocks', '', props.name );
-
 	const innerblocks_structure = ( ( !!uagb_blocks_info.spectra_pro_status && timerEndAction === 'content' ) &&
 		<div
 			className={ `uagb-block-countdown-innerblocks-${ block_id } wp-block-uagb-countdown-innerblocks` }
 		>
-			{innerblocks_content}
+			{ applyFilters( 'spectra.countdown.render-innerblocks', '', props.name ) }
 		</div>
 	)
 
