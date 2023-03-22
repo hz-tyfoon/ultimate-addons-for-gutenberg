@@ -1,5 +1,5 @@
 const getGBSEditorStyles = ( globalBlockStyles, globalBlockStyleId, globalBlockStyleName ) => {
-    if ( ! globalBlockStyles || ! globalBlockStyleId || globalBlockStyles[Symbol.iterator] !== 'function' ) {
+    if ( ! globalBlockStyles || ! globalBlockStyleId ) {
         return '';
     }
     let editorStyles = '';
