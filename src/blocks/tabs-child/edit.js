@@ -17,7 +17,7 @@ const UAGBTabsChildEdit = ( props ) => {
 		const rootBlockId = getBlockRootClientId( clientId );
 		const rootBlockAttrs = getBlockAttributes( rootBlockId );
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-		setAttributes( { tabActive: rootBlockAttrs.tabActiveFrontend } );
+		setAttributes( { tabActive: rootBlockAttrs?.tabActiveFrontend } );
 
 		// Apply parent style if newly inserted
 		if ( rootBlockAttrs !== null && rootBlockAttrs.needUpdate !== false ) {
