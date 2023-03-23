@@ -203,6 +203,14 @@ class UAGB_Post_Assets {
 	public static $custom_css_appended = false;
 
 	/**
+	 * Flag to check if Motion Effects are enqueued.
+	 *
+	 * @since x.x.x
+	 * @var boolean
+	 */
+	public $motion_effects_enqueued_flag = false;
+
+	/**
 	 * Constructor
 	 *
 	 * @param int $post_id Post ID.
@@ -775,6 +783,17 @@ class UAGB_Post_Assets {
 		// If motion effects are enabled, explicitly load the extension (and it's assets) on frontend.
 		if ( 'enabled' === \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_motion_effects_extension', 'enabled' ) ) {
 			$this->current_block_list[] = 'uagb/motion-effects-extension';
+
+			// Check if dynamic assets for motion effects are enqueued, if not enqueue them.
+			if ( ! $this->motion_effects_enqueued_flag ) {
+				$_block_js = UAGB_Block_Module::get_frontend_js( 'motion-effects-extension', $blockattr, $block_id, 'js' );
+
+				if ( ! empty( $_block_js ) ) {
+					$js .= $_block_js;
+				}
+
+				$this->motion_effects_enqueued_flag = true;
+			}
 		}
 
 		if ( 'core/gallery' === $name && isset( $block['attrs']['masonry'] ) && true === $block['attrs']['masonry'] ) {
