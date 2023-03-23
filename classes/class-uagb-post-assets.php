@@ -772,6 +772,11 @@ class UAGB_Post_Assets {
 
 		$this->current_block_list[] = $name;
 
+		// If motion effects are enabled, explicitly load the extension (and it's assets) on frontend.
+		if ( 'enabled' === \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_motion_effects_extension', 'enabled' ) ) {
+			$this->current_block_list[] = 'uagb/motion-effects-extension';
+		}
+
 		if ( 'core/gallery' === $name && isset( $block['attrs']['masonry'] ) && true === $block['attrs']['masonry'] ) {
 			$this->current_block_list[] = 'uagb/masonry-gallery';
 			$this->uag_flag             = true;
