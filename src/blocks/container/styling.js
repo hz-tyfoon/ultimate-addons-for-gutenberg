@@ -336,22 +336,24 @@ function styling( props, baseSelector = false ) {
 		'align-content' : alignContentDesktop,
 	}
 
+	let widthSelector = baseSelector ? baseSelector : `#block-${ props.clientId }`;
+
 	const widthSelectorsDesktop = {
-		[`.is-root-container > .block-editor-block-list__block .block-editor-block-list__block#block-${ props.clientId } `] : {
+		[`.is-root-container > .block-editor-block-list__block .block-editor-block-list__block${widthSelector} `] : {
 			'max-width' : generateCSSUnit( widthDesktopFallback, widthType ),
 			'width' :'100%'
 		}
 	};
 
 	const widthSelectorsTablet = {
-		[`.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-tablet.block-editor-block-list__block#block-${ props.clientId } `] : {
+		[`.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-tablet.block-editor-block-list__block${ widthSelector } `] : {
 			'max-width' : generateCSSUnit( widthTablet, widthTypeTablet ),
 			'width' :'100%'
 		},
 	};
 
 	const widthSelectorsMobile = {
-		[`.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-mobile.block-editor-block-list__block#block-${ props.clientId } `] : {
+		[`.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-mobile.block-editor-block-list__block${ widthSelector } `] : {
 			'max-width' : generateCSSUnit( widthMobile, widthTypeMobile ),
 			'width' :'100%'
 		},

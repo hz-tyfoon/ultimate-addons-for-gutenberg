@@ -20,6 +20,10 @@ import { addFilter } from '@wordpress/hooks';
 			spectraBlockName: {
 				type: 'string',
 				default: '',
+			},
+			loadOnlyDefaultStyles: {
+				type: 'boolean',
+				default: false
 			}
 		} );
 	}

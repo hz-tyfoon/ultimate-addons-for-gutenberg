@@ -4,6 +4,7 @@
 import styling from './styling';
 import { useEffect, useLayoutEffect } from '@wordpress/element';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import loadBlockEditorStyles from '@Controls/loadBlockEditorStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
@@ -22,6 +23,7 @@ import {
 } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
 import styles from './editor.lazy.scss';
+import defaultAttributes from './attributes';
 
 const UAGBContainer = ( props ) => {
 
@@ -167,9 +169,7 @@ const UAGBContainer = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		const blockStyling = styling( props );
-        addBlockEditorDynamicStyles( 'uagb-container-style-' + clientId.substr( 0, 8 ), blockStyling );
-
+		loadBlockEditorStyles( props, styling );
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {

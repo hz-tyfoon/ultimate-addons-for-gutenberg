@@ -127,9 +127,15 @@ const GlobalBlockStyles = ( props ) => {
                         setAttributes( {
                             [attribute] : currentBlockDefaultAttributes[attribute]?.default || undefined
                         } );
+                        setAttributes( {
+                            [attribute] : ''
+                        } );
                         
                     }
                     return attribute;
+                } );
+                setAttributes( {
+                    loadOnlyDefaultStyles : true
                 } );
             }
             setUpdateLoader( false );
