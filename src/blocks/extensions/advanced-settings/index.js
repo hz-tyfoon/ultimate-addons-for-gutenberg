@@ -380,6 +380,7 @@ function ApplyExtraClass( extraProps, blockType, attributes ) {
 							{ zIndexOptions( props ) }
 						</UAGAdvancedPanelBody>
 					}
+					{ applyFilters( 'spectra.motion-effects-extension.panel', '', name ) }
 					</>
 				);
 			}
