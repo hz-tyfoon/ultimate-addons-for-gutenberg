@@ -89,19 +89,20 @@ class UAGB_Init_Blocks {
 	 * @return mixed Returns the new block content.
 	 */
 	public function add_gbs_class( $block_content, $block ) {
-
-		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs'] ) || empty( $block['attrs']['globalBlockStyleName'] ) ) {
+		
+		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs'] ) || empty( $block['attrs']['globalBlockStyleName'] ) || empty( $block['attrs']['block_id'] ) ) {
 			return $block_content;
 		}
 		
+		$block_id = $block['attrs']['block_id'];
 		$block_name          = $block['blockName'];
 		$style_name          = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
 		$style_class_name    = 'spectra-gbs-' . explode( '/', $block['blockName'] )[1] . '-' . $style_name;
 		$wp_block_class_name = str_replace( '/', '-', $block_name );
 		
 		$html = str_replace(
-			'<div class="wp-block-' . $wp_block_class_name,
-			'<div class="wp-block-' . $wp_block_class_name . ' ' . $style_class_name . ' ',
+			'<div class="wp-block-' . $wp_block_class_name . ' uagb-block-' . $block_id,
+			'<div class="wp-block-' . $wp_block_class_name . ' uagb-block-' . $block_id . ' ' . $style_class_name . ' ',
 			$block_content
 		);
 		return $html;

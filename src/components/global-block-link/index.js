@@ -50,14 +50,15 @@ const GlobalBlockStyles = ( props ) => {
     const [ bulkEdit, setBulkEdit ] = useState( false );
     const [ multiSelected, setMultiSelected ] = useState( [] );
     const [ updateLoader, setUpdateLoader ] = useState( false );
-
+    const [ panelLoader, setPanelLoader ] = useState( false );
     const [ tempStyleName, setTempStyleName ] = useState( '' );
     const [ saveToDatabase, setSaveToDatabase ] = useState( false );
     const [currentAttributesState, setCurrentAttributesState] = useState( attributes );
     const [ attributesChanged, setAttributesChanged ] = useState( false );
+    const [ generate, setGenerate ] = useState( false );
 
     const blockNameStripped = blockName.replace( 'uagb/', '' );
-
+    const currentPostID = select( 'core/editor' ).getCurrentPostId()
 	const allBlocksAttributes = wp.hooks.applyFilters( 'uagb.blocksAttributes', blocksAttributes )
     const currentBlockDefaultAttributes = allBlocksAttributes[blockNameStripped]
 
@@ -84,9 +85,24 @@ const GlobalBlockStyles = ( props ) => {
 	}, [saveToDatabase] );
 
     useEffect( () => {
-        generateBlockStyles();
+        if ( generate ) {
+            generateBlockStyles();
+        } 
 	}, [globalBlockStyleId, globalBlockStyles] );
 
+    const clearCurrentAttributes = () => {
+
+        Object.keys( currentBlockDefaultAttributes ).map( ( attribute ) => {
+
+            if ( currentBlockDefaultAttributes[attribute]?.isGBSAttribute ) {
+                setAttributes( {
+                    [attribute] : currentBlockDefaultAttributes[attribute]?.default || undefined
+                } );
+
+            }
+            return attribute;
+        } );
+    }
     const saveStylesToDatabase = ( bulkUpdateStyles = 'no', spectraGlobalStyles = globalBlockStyles ) => {
 
         let styleProps = {};
@@ -105,13 +121,9 @@ const GlobalBlockStyles = ( props ) => {
         formData.append( 'spectraGlobalStyles', JSON.stringify( spectraGlobalStyles ) ); 
         formData.append( 'globalBlockStylesFontFamilies', JSON.stringify( globalBlockStylesFontFamilies ) ); 
         formData.append( 'blockName', blockName );
-        formData.append( 'postId', select( 'core/editor' ).getCurrentPostId() );
+        formData.append( 'postId', currentPostID );
         formData.append( 'globalBlockStyleId', globalBlockStyleId );
         formData.append( 'bulkUpdateStyles', bulkUpdateStyles );
-
-        if ( bulkUpdateStyles ) {
-            formData.append( 'multiSelected', JSON.stringify( multiSelected ) );
-        }
 
         apiFetch( {
             url: uagb_blocks_info.ajax_url,
@@ -121,24 +133,10 @@ const GlobalBlockStyles = ( props ) => {
             if ( data?.success ) {
     
                 updateGlobalBlockStyles( data?.data );
-                Object.keys( currentBlockDefaultAttributes ).map( ( attribute ) => {
-
-                    if ( currentBlockDefaultAttributes[attribute]?.UAGCopyPaste ) {
-                        setAttributes( {
-                            [attribute] : currentBlockDefaultAttributes[attribute]?.default || undefined
-                        } );
-                        setAttributes( {
-                            [attribute] : ''
-                        } );
-                        
-                    }
-                    return attribute;
-                } );
-                setAttributes( {
-                    loadOnlyDefaultStyles : true
-                } );
+                clearCurrentAttributes();
             }
             setUpdateLoader( false );
+            setPanelLoader( false );
             setSaveToDatabase( false );
         } );
     };
@@ -151,7 +149,7 @@ const GlobalBlockStyles = ( props ) => {
         if ( ! newStyleID ) {
             return;
         }
-
+        setPanelLoader( true );
         globalBlockStyles.map( ( style ) => {
             if ( newStyleID && style?.value === String( newStyleID ) ) {
     
@@ -179,14 +177,12 @@ const GlobalBlockStyles = ( props ) => {
                 style.editorStyles = blockStyling;
                 style.props = newProps;
                 
-                const currentPostID = select( 'core/editor' ).getCurrentPostId()
-                
                 if ( style?.post_ids ) {
                     style.post_ids.push( currentPostID );
                 } else {
                     style.post_ids = [currentPostID];
                 }
-                style.post_ids = [...new Set( style.post_ids )]
+                style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
             }
             return style
 
@@ -221,6 +217,7 @@ const GlobalBlockStyles = ( props ) => {
         <UAGAdvancedPanelBody
             title={ __( 'Global Block Styles', 'ultimate-addons-for-gutenberg' ) }
             initialOpen={ true }
+            className={ panelLoader ? 'loading' : '' }
         >
             {
                 ( ! globalBlockStyleName || '' === globalBlockStyleName ) && (
@@ -256,6 +253,7 @@ const GlobalBlockStyles = ( props ) => {
                         />
                         <button 
                             onClick={ () => {
+                                setGenerate( true );
                                 setAttributes( 
                                     { 
                                         globalBlockStyleName: tempStyleName,
@@ -289,7 +287,6 @@ const GlobalBlockStyles = ( props ) => {
                     } }
                     onChange = {
                         ( value ) => {
-
                             let label = '';
                             for ( let i = 0; i < globalBlockStyles.length; i++ ) {
                                 if ( globalBlockStyles[i]?.value === value ) {
@@ -298,13 +295,27 @@ const GlobalBlockStyles = ( props ) => {
                                 }
                             }
 
+                            globalBlockStyles.map( ( style ) => {
+                                if ( style?.value === value ) {
+                                    label = style?.label;
+                                    if ( style?.post_ids ) {
+                                        style.post_ids.push( currentPostID );
+                                    } else {
+                                        style.post_ids = [currentPostID];
+                                    }
+                                    style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
+                                }
+                                return style;
+                            } );
+                            updateGlobalBlockStyles( globalBlockStyles );
+                            saveStylesToDatabase( 'bulkUpdateStyles', globalBlockStyles );
                             setAttributes( 
                                 { 
                                     globalBlockStyleId: value,
                                     globalBlockStyleName: label 
                                 } 
                             );
-
+                            setPanelLoader( true );
                             setUniqueID( value );
                         }
                     }
@@ -378,6 +389,7 @@ const GlobalBlockStyles = ( props ) => {
                                 } );
                                 updateGlobalBlockStyles( filterGBS );
                                 saveStylesToDatabase( 'bulkUpdateStyles', filterGBS );
+                                setPanelLoader( true );
                                 setUniqueID( false );
                             } }
                             variant="primary"
@@ -388,7 +400,7 @@ const GlobalBlockStyles = ( props ) => {
                 )
             }
             {
-                ( globalBlockStyleName && '' !== globalBlockStyleName ) && (
+                ( globalBlockStyleId && '' !== globalBlockStyleId ) && (
                     <>
                         {
                             attributesChanged &&

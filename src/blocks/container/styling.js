@@ -336,7 +336,7 @@ function styling( props, baseSelector = false ) {
 		'align-content' : alignContentDesktop,
 	}
 
-	let widthSelector = baseSelector ? baseSelector : `#block-${ props.clientId }`;
+	const widthSelector = baseSelector ? baseSelector : `#block-${ props.clientId }`;
 
 	const widthSelectorsDesktop = {
 		[`.is-root-container > .block-editor-block-list__block .block-editor-block-list__block${widthSelector} `] : {

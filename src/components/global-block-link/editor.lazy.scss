@@ -77,6 +77,20 @@
 	}
 }
 
+.uag-advance-panel-body-global-block-styles {
+	opacity: 1;
+	transition: opacity 0.5s ease-out;
+	-moz-transition: opacity 0.5s ease-out;
+	-webkit-transition: opacity 0.5s ease-out;
+	-o-transition: opacity 0.5s ease-out;
+
+	&.loading {
+		position: relative;
+		opacity: 0.4;
+		pointer-events: none;
+	}
+}
+
 @keyframes button-loading-spinner {
 
 	from {

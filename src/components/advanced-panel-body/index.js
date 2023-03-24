@@ -7,7 +7,8 @@ import { applyFilters } from '@wordpress/hooks';
 const UAGAdvancedPanelBody = ( props ) => {
 
     const {
-        children
+        children,
+		className = ''
     } = props;
 
     const panelRef = useRef( null );
@@ -101,7 +102,7 @@ const UAGAdvancedPanelBody = ( props ) => {
             { ...props }
             onToggle={onPanelToggle}
             ref={panelRef}
-			className={`uag-advance-panel-body-${panelTitle}`}
+			className={`uag-advance-panel-body-${panelTitle} ${className}`}
         >
 			{tabBodyBefore}
             { children }

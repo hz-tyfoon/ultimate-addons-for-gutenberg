@@ -21,10 +21,6 @@ import { addFilter } from '@wordpress/hooks';
 				type: 'string',
 				default: '',
 			},
-			loadOnlyDefaultStyles: {
-				type: 'boolean',
-				default: false
-			}
 		} );
 	}
 

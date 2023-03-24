@@ -19,12 +19,12 @@ const loadBlockEditorStyles = ( props, styling ) => {
     const defaultProps = {...props};
     const dynamicProps = {...props};
 
-    let defaults = {};
-    let dynamics = {};
+    const defaults = {};
+    const dynamics = {};
 
     for ( const attribute in attributes ) {
         if ( defaultAttributes?.[attribute] && defaultAttributes?.[attribute] ) {
-            if ( defaultAttributes?.[attribute]?.hasOwnProperty('default') && defaultAttributes?.[attribute]?.default === attributes?.[attribute] ) {
+            if ( defaultAttributes?.[attribute]?.hasOwnProperty( 'default' ) && defaultAttributes?.[attribute]?.default === attributes?.[attribute] ) {
                 defaults[attribute] = defaultAttributes?.[attribute]?.default;
             } else {
                 dynamics[attribute] = attributes?.[attribute];
@@ -38,9 +38,7 @@ const loadBlockEditorStyles = ( props, styling ) => {
         ...defaults,
         ...dynamics
     };
-    console.log(defaultProps);
-    console.log(dynamicProps);
-
+    
     const defaultStyling = styling( defaultProps, '.wp-block-uagb-container' );
     const dynamicStyling = styling( dynamicProps );
     

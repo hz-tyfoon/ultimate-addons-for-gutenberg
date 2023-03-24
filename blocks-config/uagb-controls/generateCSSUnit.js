@@ -1,5 +1,5 @@
 function generateCSSUnit( value, unit ) {
-	if( isNaN( value ) || value === '' ){
+	if( isNaN( value ) || value === '' || null === value ){
 		return '';
 	}
 
