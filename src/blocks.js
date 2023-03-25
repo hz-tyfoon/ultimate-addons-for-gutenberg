@@ -133,3 +133,6 @@ export const initAutoBlockRecovery = () => {
 if ( 'disabled' !== uagb_blocks_info.auto_block_recovery ) {
 	domReady( initAutoBlockRecovery );
 }
+
+export const iframe = document.getElementsByTagName( 'iframe' );
+// console.log(iframe)
