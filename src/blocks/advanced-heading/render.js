@@ -20,8 +20,6 @@ const Render = ( props ) => {
 		attributes: {
 			block_id,
 			headingTitleToggle,
-			headingTitle,
-			headingDesc,
 			headingDescToggle,
 			headingTag,
 			seperatorStyle,
@@ -30,7 +28,23 @@ const Render = ( props ) => {
 		},
 		setAttributes,
 		className,
+		context,
 	} = props;
+
+	let { headingTitle, headingDesc } = props.attributes
+
+	// Check if heading block is children block of loop builder.
+	if (-1 !== headingTitle.indexOf('<span data-spectra-dc-field="')) {
+		const renderedMarkup = wp.hooks.applyFilters(
+			`uag_render_text_loop_data`,
+			headingTitle,
+			context
+		);
+
+		if (renderedMarkup !== '') {
+			headingTitle = renderedMarkup;
+		}
+	}
 
 	const deviceType = useDeviceType();
 
