@@ -33,6 +33,7 @@ registerBlockType( 'uagb/advanced-heading', {
 	supports: {
 		anchor: true,
 	},
+	usesContext: [ 'postId', 'postType' ],
 	attributes,
 category: uagb_blocks_info.category,
 	edit: ( props ) =>
