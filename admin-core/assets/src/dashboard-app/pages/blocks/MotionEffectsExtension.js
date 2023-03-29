@@ -85,7 +85,6 @@ const MotionEffectsExtension = () => {
         ) }
         >
             <div className="flex-shrink-0">
-                {/* Motion Effects Reminder: Please update the icon */}
                 { UAGB_Block_Icons['motion-effects-extension'] }
             </div>
             <div className="uagb-admin-block__extension-title flex-1 min-w-0">
