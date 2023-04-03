@@ -574,6 +574,8 @@ $m_selectors[' .uagb-forms-main-form .uagb-slider:before']                      
 );
 
 if ( ! $attr['inheritFromTheme'] ) {
+	$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'submitText', ' .uagb-forms-main-form .uagb-forms-main-submit-button', $combined_selectors );
+
 	$selectors   = array(
 		' .uagb-forms-main-form .uagb-forms-main-submit-button ' => array_merge(
 			array(
@@ -686,8 +688,6 @@ $combined_selectors = array(
 	'tablet'  => $t_selectors,
 	'mobile'  => $m_selectors,
 );
-
-$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'submitText', ' .uagb-forms-main-form .uagb-forms-main-submit-button', $combined_selectors );
 
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'label', ' .uagb-forms-main-form .uagb-forms-input-label', $combined_selectors );
 
