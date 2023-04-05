@@ -8,9 +8,9 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( props ) {
+function styling( attributes, clientId, name, deviceType ) {
 
-	const blockName = props.name.replace( 'uagb/', '' );
+	const blockName = name.replace( 'uagb/', '' );
 
 	const {
 		headingAlign,
@@ -152,7 +152,7 @@ function styling( props ) {
 		subHeadSpace,
 		subHeadSpaceTablet,
 		subHeadSpaceMobile,
-	} = props.attributes;
+	} = attributes;
 
 	let tablet_selectors = {};
 	let mobile_selectors = {};
@@ -168,9 +168,9 @@ function styling( props ) {
 		}
 	}
 
-	const highLightBorderCSS = generateBorderCSS( props.attributes, 'highLight' )
-	const highLightBorderCSSTablet = generateBorderCSS( props.attributes, 'highLight', 'tablet' )
-	const highLightBorderCSSMobile = generateBorderCSS( props.attributes, 'highLight', 'mobile' )
+	const highLightBorderCSS = generateBorderCSS( attributes, 'highLight' )
+	const highLightBorderCSSTablet = generateBorderCSS( attributes, 'highLight', 'tablet' )
+	const highLightBorderCSSMobile = generateBorderCSS( attributes, 'highLight', 'mobile' )
 
 
 	let selectors = {
@@ -547,30 +547,34 @@ function styling( props ) {
 		),
 	};
 
-	const base_selector = `.editor-styles-wrapper #block-${ props.clientId } .uagb-block-${ props.clientId.substr(
+	const base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr(
 		0,
 		8
 	) }`;
 
-	selectors = applyFilters( `spectra.${blockName}.styling`, selectors, props.attributes );
-	tablet_selectors = applyFilters( `spectra.${blockName}.tabletStyling`, tablet_selectors, props.attributes );
-	mobile_selectors = applyFilters( `spectra.${blockName}.mobileStyling`, mobile_selectors, props.attributes );
+	selectors = applyFilters( `spectra.${blockName}.styling`, selectors, attributes );
+	tablet_selectors = applyFilters( `spectra.${blockName}.tabletStyling`, tablet_selectors, attributes );
+	mobile_selectors = applyFilters( `spectra.${blockName}.mobileStyling`, mobile_selectors, attributes );
 
 	let styling_css = generateCSS( selectors, base_selector );
 
-	styling_css += generateCSS(
-		tablet_selectors,
-		`${ base_selector }.uagb-editor-preview-mode-tablet`,
-		true,
-		'tablet'
-	);
+	if( 'Tablet' === deviceType ){
+		styling_css += generateCSS(
+			tablet_selectors,
+			`${ base_selector }.uagb-editor-preview-mode-tablet`,
+			true,
+			'tablet'
+		);
+	}
 
-	styling_css += generateCSS(
-		mobile_selectors,
-		`${ base_selector }.uagb-editor-preview-mode-mobile`,
-		true,
-		'mobile'
-	);
+	if( 'Mobile' === deviceType ){
+		styling_css += generateCSS(
+			mobile_selectors,
+			`${ base_selector }.uagb-editor-preview-mode-mobile`,
+			true,
+			'mobile'
+		);
+	}
 	return styling_css;
 }
 

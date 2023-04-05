@@ -2,12 +2,11 @@ import classnames from 'classnames';
 import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { memo } from '@wordpress/element';
-import styling from './styling';
 import { useDeviceType } from '@Controls/getPreviewType';
 
 const Render = ( props ) => {
 	props = props.parentProps;
-	const blockStyling = styling( props );
+
 	const {
 		attributes: {
 			block_id,
@@ -78,7 +77,6 @@ const Render = ( props ) => {
 				`uagb-block-${ block_id }`
 			) }
 		>
-			<style id={ `uagb-adv-heading-style-${ block_id }` }>{ blockStyling }</style>
 			{ headingDescToggle && 'above-heading' === headingDescPosition ? descText : '' }
 			{ headingTitleToggle && headingText }
 			{ headingDescToggle && 'below-heading' === headingDescPosition ? descText : '' }

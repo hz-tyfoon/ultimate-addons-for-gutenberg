@@ -9,9 +9,10 @@ import scrollBlockToView from '@Controls/scrollBlockToView';
 import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
-import WebfontLoader from '@Components/typography/fontloader';
 //  Import CSS.
 import './style.scss';
+import CssComponent from './cssComponent';
+import FontLoader from './FontLoader';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const deviceType = useDeviceType();
@@ -20,7 +21,8 @@ const UAGBAdvancedHeading = ( props ) => {
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, headLoadGoogleFonts, headFontFamily, headFontWeight, subHeadLoadGoogleFonts, subHeadFontFamily, subHeadFontWeight },
 		isSelected,
 		setAttributes,
-		clientId
+		clientId,
+		name
 	} = props;
 
 	useEffect( () => {
@@ -45,43 +47,12 @@ const UAGBAdvancedHeading = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
-	let loadHeadingGoogleFonts;
-	let loadSubHeadingGoogleFonts;
-
-	if ( headLoadGoogleFonts === true ) {
-		const hconfig = {
-			google: {
-				families: [
-					headFontFamily +
-						( headFontWeight ? ':' + headFontWeight : '' ),
-				],
-			},
-		};
-
-		loadHeadingGoogleFonts = (
-			<WebfontLoader config={ hconfig }></WebfontLoader>
-		);
-	}
-	if ( subHeadLoadGoogleFonts === true ) {
-		const sconfig = {
-			google: {
-				families: [
-					subHeadFontFamily +
-						( subHeadFontWeight ? ':' + subHeadFontWeight : '' ),
-				],
-			},
-		};
-
-		loadSubHeadingGoogleFonts = (
-			<WebfontLoader config={ sconfig }></WebfontLoader>
-		);
-	}
 	return (
 			<>
+			<CssComponent {...{attributes, clientId, name, deviceType}} />
+			<FontLoader {...{headLoadGoogleFonts, headFontFamily, headFontWeight, subHeadLoadGoogleFonts, subHeadFontFamily, subHeadFontWeight}} />
 			{ isSelected && <Settings parentProps={ props } /> }
 				<Render parentProps={ props } />
-				{ loadHeadingGoogleFonts }
-				{ loadSubHeadingGoogleFonts }
 			</>
 	);
 };

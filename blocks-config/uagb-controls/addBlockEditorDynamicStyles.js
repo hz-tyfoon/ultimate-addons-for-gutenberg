@@ -1,5 +1,5 @@
 
-const addBlockEditorDynamicStyles = ( styleTagId, styling ) => {
+const addBlockEditorDynamicStyles = () => {
 
 	setTimeout( () => {
 
