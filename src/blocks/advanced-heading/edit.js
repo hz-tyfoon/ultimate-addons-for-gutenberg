@@ -2,7 +2,7 @@
  * BLOCK: Advanced Heading
  */
 
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
@@ -12,7 +12,7 @@ import Render from './render';
 //  Import CSS.
 import './style.scss';
 import styling from './styling';
-import DynamicCSSLoader from '../../components/dynamic-css-loader/dynamicCSSLoader';
+import DynamicCSSLoader from '../../components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 
 const UAGBAdvancedHeading = ( props ) => {
@@ -48,12 +48,15 @@ const UAGBAdvancedHeading = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
-	const blockStyling = styling( attributes, clientId, name, deviceType );
+	const blockStyling = useMemo(
+		() => styling(attributes, clientId, name, deviceType),
+		[attributes, deviceType]
+	);
 
 	return (
 			<>
-			<DynamicCSSLoader {...{blockStyling}} />
-			<DynamicFontLoader {...{attributes}} />
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
 			{ isSelected && <Settings parentProps={ props } /> }
 				<Render parentProps={ props } />
 			</>
