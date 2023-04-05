@@ -93,7 +93,6 @@ class Common_Settings extends Ajax_Base {
 
 		$this->init_ajax_events( $ajax_events );
 	}
-<<<<<<< HEAD
 	/**
 	 * Save settings.
 	 *
@@ -137,8 +136,6 @@ class Common_Settings extends Ajax_Base {
 	 * @return void
 	 */
 	public static function pro_activate() {
-=======
->>>>>>> 7bc2ce2d10105e4f22bf0581007d1cfbd15bd762
 
 	/**
 	 * Checks if the user has the permission to perform the requested action and verifies the nonce.
