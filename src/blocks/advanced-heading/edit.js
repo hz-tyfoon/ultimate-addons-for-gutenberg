@@ -12,7 +12,7 @@ import Render from './render';
 //  Import CSS.
 import './style.scss';
 import CssComponent from './cssComponent';
-import FontLoader from './FontLoader';
+import FontLoader from '../../components/font-loader/FontLoader';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const deviceType = useDeviceType();
