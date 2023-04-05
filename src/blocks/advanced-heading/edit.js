@@ -12,7 +12,7 @@ import Render from './render';
 //  Import CSS.
 import './style.scss';
 import styling from './styling';
-import DynamicCSSLoader from '../../components/dynamic-css-loader/dynamicCSSLoader';
+import DynamicCSSLoader from '../../components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 
 const UAGBAdvancedHeading = ( props ) => {
