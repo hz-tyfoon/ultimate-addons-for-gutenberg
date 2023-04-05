@@ -1,7 +1,7 @@
 /**
  * BLOCK: Advanced Heading
  */
-import styling from './styling';
+
 import { useEffect } from '@wordpress/element';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
@@ -22,7 +22,7 @@ const UAGBAdvancedHeading = ( props ) => {
 		setAttributes,
 		clientId
 	} = props;
-	
+
 	useEffect( () => {
 
 		responsiveConditionPreview( props );
@@ -38,11 +38,7 @@ const UAGBAdvancedHeading = ( props ) => {
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-		addBlockEditorDynamicStyles(
-			'uagb-adv-heading-style-' + clientId.substr( 0, 8 ),
-			blockStyling
-		);
+		addBlockEditorDynamicStyles();
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
