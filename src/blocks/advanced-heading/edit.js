@@ -12,14 +12,14 @@ import Render from './render';
 //  Import CSS.
 import './style.scss';
 import styling from './styling';
-import DynamicCSSLoader from '../../components/dynamic-css-loader/CssLoader';
-import DynamicFontLoader from '../../components/dynamic-font-loader/FontLoader';
+import DynamicCSSLoader from '../../components/dynamic-css-loader/dynamicCSSLoader';
+import DynamicFontLoader from './dynamicFontLoader';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const deviceType = useDeviceType();
 	const {
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, headLoadGoogleFonts, headFontFamily, headFontWeight, subHeadLoadGoogleFonts, subHeadFontFamily, subHeadFontWeight },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		isSelected,
 		setAttributes,
 		clientId,
@@ -53,7 +53,7 @@ const UAGBAdvancedHeading = ( props ) => {
 	return (
 			<>
 			<DynamicCSSLoader {...{blockStyling}} />
-			<DynamicFontLoader {...{headLoadGoogleFonts, headFontFamily, headFontWeight, subHeadLoadGoogleFonts, subHeadFontFamily, subHeadFontWeight}} />
+			<DynamicFontLoader {...{attributes}} />
 			{ isSelected && <Settings parentProps={ props } /> }
 				<Render parentProps={ props } />
 			</>

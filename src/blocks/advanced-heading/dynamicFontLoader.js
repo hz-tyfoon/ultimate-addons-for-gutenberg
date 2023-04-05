@@ -1,7 +1,16 @@
 import WebfontLoader from '@Components/typography/fontloader';
 import { memo } from '@wordpress/element';
 
-const DynamicFontLoader = ( { headLoadGoogleFonts, headFontFamily, headFontWeight, subHeadLoadGoogleFonts, subHeadFontFamily, subHeadFontWeight } ) => {
+const DynamicFontLoader = ( { attributes } ) => {
+
+	const {
+		headLoadGoogleFonts,
+		headFontFamily,
+		headFontWeight,
+		subHeadLoadGoogleFonts,
+		subHeadFontFamily,
+		subHeadFontWeight
+	} = attributes;
 
 	let loadHeadingGoogleFonts;
 	let loadSubHeadingGoogleFonts;
