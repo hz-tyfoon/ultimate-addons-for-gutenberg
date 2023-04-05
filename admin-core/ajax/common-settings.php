@@ -131,13 +131,6 @@ public function btn_inherit_from_theme() {
 }
 
 	/**
-	 * Required Spectra Pro Plugin Activate
-	 *
-	 * @return void
-	 */
-public static function pro_activate() {
-
-	/**
 	 * Checks if the user has the permission to perform the requested action and verifies the nonce.
 	 *
 	 * @param string $option The name of the option to check the nonce against.
