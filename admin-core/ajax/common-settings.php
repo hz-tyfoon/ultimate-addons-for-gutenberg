@@ -28,7 +28,7 @@ class Common_Settings extends Ajax_Base {
 	 * 
 	 * @since 2.0.0
 	 */
-	private static $instance;
+private static $instance;
 
 	/**
 	 * Initiator
@@ -37,105 +37,105 @@ class Common_Settings extends Ajax_Base {
 	 * 
 	 * @since 2.0.0
 	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) ) {
-			self::$instance = new self();
-		}
-		return self::$instance;
+public static function get_instance() {
+	if ( ! isset( self::$instance ) ) {
+		self::$instance = new self();
 	}
+	return self::$instance;
+}
 
 	/**
 	 * Register_ajax_events.
 	 *
 	 * @return void
 	 */
-	public function register_ajax_events() {
+public function register_ajax_events() {
 
-		$ajax_events = array(
-			'enable_beta_updates',
-			'enable_file_generation',
-			'regenerate_assets',
-			'enable_templates_button',
-			'enable_on_page_css_button',
-			'enable_block_condition',
-			'enable_masonry_gallery',
-			'enable_block_responsive',
-			'enable_dynamic_content',
-			'blocks_activation_and_deactivation',
-			'load_select_font_globally',
-			'select_font_globally',
-			'load_gfonts_locally',
-			'preload_local_fonts',
-			'collapse_panels',
-			'copy_paste',
-			'social',
-			'dynamic_content_mode',
-			'content_width',
-			'container_global_padding',
-			'container_global_elements_gap',
-			'blocks_editor_spacing',
-			'recaptcha_site_key_v2',
-			'recaptcha_secret_key_v2',
-			'recaptcha_site_key_v3',
-			'recaptcha_secret_key_v3',
-			'enable_coming_soon_mode',
-			'coming_soon_page',
-			'fetch_pages',
-			'load_font_awesome_5',
-			'auto_block_recovery',
-			'enable_legacy_blocks',
-			'pro_activate',
-			'btn_inherit_from_theme',
-			'insta_linked_accounts',
-			'insta_all_users_media',
-			'insta_refresh_all_tokens',
-		);
+	$ajax_events = array(
+		'enable_beta_updates',
+		'enable_file_generation',
+		'regenerate_assets',
+		'enable_templates_button',
+		'enable_on_page_css_button',
+		'enable_block_condition',
+		'enable_masonry_gallery',
+		'enable_block_responsive',
+		'enable_dynamic_content',
+		'blocks_activation_and_deactivation',
+		'load_select_font_globally',
+		'select_font_globally',
+		'load_gfonts_locally',
+		'preload_local_fonts',
+		'collapse_panels',
+		'copy_paste',
+		'social',
+		'dynamic_content_mode',
+		'content_width',
+		'container_global_padding',
+		'container_global_elements_gap',
+		'blocks_editor_spacing',
+		'recaptcha_site_key_v2',
+		'recaptcha_secret_key_v2',
+		'recaptcha_site_key_v3',
+		'recaptcha_secret_key_v3',
+		'enable_coming_soon_mode',
+		'coming_soon_page',
+		'fetch_pages',
+		'load_font_awesome_5',
+		'auto_block_recovery',
+		'enable_legacy_blocks',
+		'pro_activate',
+		'btn_inherit_from_theme',
+		'insta_linked_accounts',
+		'insta_all_users_media',
+		'insta_refresh_all_tokens',
+	);
 
-		$this->init_ajax_events( $ajax_events );
-	}
+	$this->init_ajax_events( $ajax_events );
+}
 	/**
 	 * Save settings.
 	 *
 	 * @return void
 	 */
-	public function btn_inherit_from_theme() {
+public function btn_inherit_from_theme() {
 
-		$response_data = array( 'messsage' => $this->get_error_msg( 'permission' ) );
+	$response_data = array( 'messsage' => $this->get_error_msg( 'permission' ) );
 
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( $response_data );
-		}
-
-		/**
-		 * Nonce verification
-		 */
-		if ( ! check_ajax_referer( 'uag_btn_inherit_from_theme', 'security', false ) ) {
-			$response_data = array( 'messsage' => $this->get_error_msg( 'nonce' ) );
-			wp_send_json_error( $response_data );
-		}
-
-		if ( empty( $_POST ) ) {
-			$response_data = array( 'messsage' => __( 'No post data found!', 'ultimate-addons-for-gutenberg' ) );
-			wp_send_json_error( $response_data );
-		}
-
-		if ( isset( $_POST['value'] ) ) {
-			\UAGB_Admin_Helper::update_admin_settings_option( 'uag_btn_inherit_from_theme', sanitize_text_field( $_POST['value'] ) );
-		}
-
-		$response_data = array(
-			'messsage' => __( 'Successfully saved data!', 'ultimate-addons-for-gutenberg' ),
-		);
-		wp_send_json_success( $response_data );
-
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( $response_data );
 	}
+
+	/**
+	 * Nonce verification
+	 */
+	if ( ! check_ajax_referer( 'uag_btn_inherit_from_theme', 'security', false ) ) {
+		$response_data = array( 'messsage' => $this->get_error_msg( 'nonce' ) );
+		wp_send_json_error( $response_data );
+	}
+
+	if ( empty( $_POST ) ) {
+		$response_data = array( 'messsage' => __( 'No post data found!', 'ultimate-addons-for-gutenberg' ) );
+		wp_send_json_error( $response_data );
+	}
+
+	if ( isset( $_POST['value'] ) ) {
+		\UAGB_Admin_Helper::update_admin_settings_option( 'uag_btn_inherit_from_theme', sanitize_text_field( $_POST['value'] ) );
+	}
+
+	$response_data = array(
+		'messsage' => __( 'Successfully saved data!', 'ultimate-addons-for-gutenberg' ),
+	);
+	wp_send_json_success( $response_data );
+
+}
 
 	/**
 	 * Required Spectra Pro Plugin Activate
 	 *
 	 * @return void
 	 */
-	public static function pro_activate() {
+public static function pro_activate() {
 
 	/**
 	 * Checks if the user has the permission to perform the requested action and verifies the nonce.
