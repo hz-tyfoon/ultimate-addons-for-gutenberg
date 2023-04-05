@@ -11,8 +11,9 @@ import Settings from './settings';
 import Render from './render';
 //  Import CSS.
 import './style.scss';
-import CssComponent from './cssComponent';
-import FontLoader from '../../components/font-loader/FontLoader';
+import styling from './styling';
+import DynamicCSSLoader from '../../components/dynamic-css-loader/CssLoader';
+import DynamicFontLoader from '../../components/dynamic-font-loader/FontLoader';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const deviceType = useDeviceType();
@@ -47,10 +48,12 @@ const UAGBAdvancedHeading = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
+	const blockStyling = styling( attributes, clientId, name, deviceType );
+
 	return (
 			<>
-			<CssComponent {...{attributes, clientId, name, deviceType}} />
-			<FontLoader {...{headLoadGoogleFonts, headFontFamily, headFontWeight, subHeadLoadGoogleFonts, subHeadFontFamily, subHeadFontWeight}} />
+			<DynamicCSSLoader {...{blockStyling}} />
+			<DynamicFontLoader {...{headLoadGoogleFonts, headFontFamily, headFontWeight, subHeadLoadGoogleFonts, subHeadFontFamily, subHeadFontWeight}} />
 			{ isSelected && <Settings parentProps={ props } /> }
 				<Render parentProps={ props } />
 			</>
