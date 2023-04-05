@@ -14,6 +14,10 @@ const attributes = {
 		type: 'boolean',
 		default: false,
 	},
+	defaultTemplate: {
+		type: 'boolean',
+		default: false,
+	},
 	modalTrigger: {
 		type: 'string',
 		default: 'button'
