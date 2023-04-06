@@ -121,18 +121,18 @@ $t_selectors = array(
 );
 if ( ! $attr['inheritFromTheme'] ) {
 	
-$selectors[' .uagb-marketing-btn__link .uagb-marketing-btn__title'] = array(
-	'color' => $attr['titleColor'],
-);
+	$selectors[' .uagb-marketing-btn__link .uagb-marketing-btn__title'] = array(
+		'color' => $attr['titleColor'],
+	);
 
-$selectors[' .uagb-marketing-btn__link:hover .uagb-marketing-btn__title'] = array(
-	'color' => $attr['titleHoverColor'],
-);
-$selectors[' .uagb-marketing-btn__link:focus .uagb-marketing-btn__title'] = array(
-	'color' => $attr['titleHoverColor'],
-);
+	$selectors[' .uagb-marketing-btn__link:hover .uagb-marketing-btn__title'] = array(
+		'color' => $attr['titleHoverColor'],
+	);
+	$selectors[' .uagb-marketing-btn__link:focus .uagb-marketing-btn__title'] = array(
+		'color' => $attr['titleHoverColor'],
+	);
 	$selectors   = array(
-		' p.uagb-marketing-btn__prefix'        => array(
+		' p.uagb-marketing-btn__prefix'                    => array(
 			'color' => $attr['prefixColor'],
 		),
 		' .uagb-marketing-btn__link:hover p.uagb-marketing-btn__prefix' => array(
