@@ -61,15 +61,6 @@ $selectors = array(
 		'width'  => UAGB_Helper::get_css_value( $icon_font_size_fallback, $attr['iconFontSizeType'] ),
 		'height' => UAGB_Helper::get_css_value( $icon_font_size_fallback, $attr['iconFontSizeType'] ),
 	),
-	' p.uagb-marketing-btn__prefix'        => array(
-		'color' => $attr['prefixColor'],
-	),
-	' .uagb-marketing-btn__link:hover p.uagb-marketing-btn__prefix' => array(
-		'color' => $attr['prefixHoverColor'],
-	),
-	' .uagb-marketing-btn__link:focus p.uagb-marketing-btn__prefix' => array(
-		'color' => $attr['prefixHoverColor'],
-	),
 	' .uagb-marketing-btn__link:hover svg' => array(
 		'fill' => $icon_hover_color,
 	),
@@ -94,17 +85,6 @@ $selectors = array(
 	' .uagb-marketing-btn__title-wrap .uagb-marketing-btn__icon-wrap svg' => array( // For backword compatibility.
 		'vertical-align' => 'sub',
 	),
-);
-
-$selectors[' .uagb-marketing-btn__link .uagb-marketing-btn__title'] = array(
-	'color' => $attr['titleColor'],
-);
-
-$selectors[' .uagb-marketing-btn__link:hover .uagb-marketing-btn__title'] = array(
-	'color' => $attr['titleHoverColor'],
-);
-$selectors[' .uagb-marketing-btn__link:focus .uagb-marketing-btn__title'] = array(
-	'color' => $attr['titleHoverColor'],
 );
 
 $m_selectors = array(
@@ -140,7 +120,27 @@ $t_selectors = array(
 
 );
 if ( ! $attr['inheritFromTheme'] ) {
+	
+$selectors[' .uagb-marketing-btn__link .uagb-marketing-btn__title'] = array(
+	'color' => $attr['titleColor'],
+);
+
+$selectors[' .uagb-marketing-btn__link:hover .uagb-marketing-btn__title'] = array(
+	'color' => $attr['titleHoverColor'],
+);
+$selectors[' .uagb-marketing-btn__link:focus .uagb-marketing-btn__title'] = array(
+	'color' => $attr['titleHoverColor'],
+);
 	$selectors   = array(
+		' p.uagb-marketing-btn__prefix'        => array(
+			'color' => $attr['prefixColor'],
+		),
+		' .uagb-marketing-btn__link:hover p.uagb-marketing-btn__prefix' => array(
+			'color' => $attr['prefixHoverColor'],
+		),
+		' .uagb-marketing-btn__link:focus p.uagb-marketing-btn__prefix' => array(
+			'color' => $attr['prefixHoverColor'],
+		),
 		' .uagb-marketing-btn__link.wp-block-button__link' => array_merge(
 			array(
 				'padding-left'   => UAGB_Helper::get_css_value( $btn_padding_left, $attr['paddingBtnUnit'] ),

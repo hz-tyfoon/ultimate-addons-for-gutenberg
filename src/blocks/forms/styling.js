@@ -569,6 +569,46 @@ function styling( props ) {
 			},
 			' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background)': submitBorderMobile,
 		};
+		if ( 'color' === submitBgType ) {
+			selectors[ ' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button.wp-block-button__link' ] = {
+				'background-color': submitBgColor,
+			};
+		} else if( 'gradient' === submitBgType ) {
+	
+			const backgroundAttributes = {
+				'backgroundType': 'gradient',
+				'gradientValue': gradientValue,
+			};
+	
+			const btnBackground = generateBackgroundCSS( backgroundAttributes );
+	
+			selectors[ ' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button.wp-block-button__link' ] = btnBackground;
+		} else if( 'transparent' === submitBgType ) {
+			selectors[ ' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button.wp-block-button__link' ] = {
+				'background': 'transparent',
+			};
+		}
+		//Hover
+		if ( 'color' === submitBgHoverType ) {
+			selectors[ ' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap:hover .uagb-forms-main-submit-button.wp-block-button__link' ] = {
+				'background-color': submitBgColorHover,
+			};
+		} else if( 'gradient' === submitBgHoverType ) {
+	
+			const hoverbackgroundAttributes = {
+				'backgroundType': 'gradient',
+				'gradientValue': gradientHValue,
+			};
+	
+			const btnhBackground = generateBackgroundCSS( hoverbackgroundAttributes );
+	
+			selectors[ ' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap:hover .uagb-forms-main-submit-button.wp-block-button__link' ] = btnhBackground;
+	
+		} else if( 'transparent' === submitBgHoverType ) {
+			selectors[ ' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap:hover .uagb-forms-main-submit-button.wp-block-button__link' ] = {
+				'background' : 'transparent',
+			}
+		}
 	}
 	tabletSelectors = {
 		'.uagb-forms__outer-wrap': {
@@ -743,47 +783,6 @@ function styling( props ) {
 			'text-align': buttonAlignMobile,
 		},
 	};
-
-	if ( 'color' === submitBgType ) {
-		selectors[ ' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button.wp-block-button__link' ] = {
-			'background-color': submitBgColor,
-		};
-	} else if( 'gradient' === submitBgType ) {
-
-		const backgroundAttributes = {
-			'backgroundType': 'gradient',
-			'gradientValue': gradientValue,
-		};
-
-		const btnBackground = generateBackgroundCSS( backgroundAttributes );
-
-		selectors[ ' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button.wp-block-button__link' ] = btnBackground;
-	} else if( 'transparent' === submitBgType ) {
-		selectors[ ' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button.wp-block-button__link' ] = {
-			'background': 'transparent',
-		};
-	}
-	//Hover
-	if ( 'color' === submitBgHoverType ) {
-		selectors[ ' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap:hover .uagb-forms-main-submit-button.wp-block-button__link' ] = {
-			'background-color': submitBgColorHover,
-		};
-	} else if( 'gradient' === submitBgHoverType ) {
-
-		const hoverbackgroundAttributes = {
-			'backgroundType': 'gradient',
-			'gradientValue': gradientHValue,
-		};
-
-		const btnhBackground = generateBackgroundCSS( hoverbackgroundAttributes );
-
-		selectors[ ' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap:hover .uagb-forms-main-submit-button.wp-block-button__link' ] = btnhBackground;
-
-	} else if( 'transparent' === submitBgHoverType ) {
-		selectors[ ' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap:hover .uagb-forms-main-submit-button.wp-block-button__link' ] = {
-			'background' : 'transparent',
-		}
-	}
 	
 	if ( 'boxed' === formStyle ) {
 		selectors[ ' .uagb-forms-main-form  .uagb-forms-input' ] = {
