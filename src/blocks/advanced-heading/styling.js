@@ -8,7 +8,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( attributes, clientId, name, deviceType ) {
+function styling( attributes, clientId, name, deviceType ) { // eslint-disable-line no-unused-vars
 
 	const blockName = name.replace( 'uagb/', '' );
 
@@ -558,23 +558,22 @@ function styling( attributes, clientId, name, deviceType ) {
 
 	let styling_css = generateCSS( selectors, base_selector );
 
-	if( 'Tablet' === deviceType ){
+
 		styling_css += generateCSS(
 			tablet_selectors,
 			`${ base_selector }.uagb-editor-preview-mode-tablet`,
 			true,
 			'tablet'
 		);
-	}
 
-	if( 'Mobile' === deviceType ){
+
 		styling_css += generateCSS(
 			mobile_selectors,
 			`${ base_selector }.uagb-editor-preview-mode-mobile`,
 			true,
 			'mobile'
 		);
-	}
+
 	return styling_css;
 }
 
