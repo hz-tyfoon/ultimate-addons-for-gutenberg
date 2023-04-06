@@ -662,7 +662,7 @@ if ( 'button' === $attr['ctaType'] && ! $attr['inheritFromTheme'] ) {
 if ( ! $attr['inheritFromTheme'] ) {
 	$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'cta', '.wp-block-uagb-call-to-action a.uagb-cta__button-link-wrapper', $combined_selectors );
 }
-if ( ! $attr['inheritFromTheme'] ) {
+if ( ! $attr['secondInheritFromTheme'] ) {
 	$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'secondCta', '.wp-block-uagb-call-to-action a.uagb-cta-second__button', $combined_selectors );
 }
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'title', ' .uagb-cta__title', $combined_selectors );
