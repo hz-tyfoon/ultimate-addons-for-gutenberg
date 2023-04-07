@@ -23,7 +23,7 @@ const UAGBAdvancedHeading = ( props ) => {
 		isSelected,
 		setAttributes,
 		clientId,
-		name
+		name,
 	} = props;
 
 	useEffect( () => {
@@ -45,18 +45,15 @@ const UAGBAdvancedHeading = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
-	const blockStyling = useMemo(
-		() => styling( attributes, clientId, name, deviceType ),
-		[attributes, deviceType]
-	);
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	return (
-			<>
+		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
 			<DynamicFontLoader { ...{ attributes } } />
 			{ isSelected && <Settings parentProps={ props } /> }
-				<Render parentProps={ props } />
-			</>
+			<Render parentProps={ props } />
+		</>
 	);
 };
 export default UAGBAdvancedHeading;

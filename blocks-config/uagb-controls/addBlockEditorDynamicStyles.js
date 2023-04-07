@@ -1,6 +1,4 @@
-
 const addBlockEditorDynamicStyles = () => {
-
 	setTimeout( () => {
 		// Static Editor CSS.
 
@@ -151,7 +149,6 @@ const addBlockEditorDynamicStyles = () => {
 					iframeDocument.head.appendChild( cloneBlockEditorSpacingCSSStylesTag );
 				}
 			}
-
 		}
 	} );
 };

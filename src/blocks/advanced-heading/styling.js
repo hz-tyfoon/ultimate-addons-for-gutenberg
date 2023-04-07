@@ -9,7 +9,6 @@ import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import { applyFilters } from '@wordpress/hooks';
 
 function styling( attributes, clientId, name ) {
-
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
@@ -168,11 +167,9 @@ function styling( attributes, clientId, name ) {
 		};
 	}
 
-
-	const highLightBorderCSS = generateBorderCSS( attributes, 'highLight' )
-	const highLightBorderCSSTablet = generateBorderCSS( attributes, 'highLight', 'tablet' )
-	const highLightBorderCSSMobile = generateBorderCSS( attributes, 'highLight', 'mobile' )
-
+	const highLightBorderCSS = generateBorderCSS( attributes, 'highLight' );
+	const highLightBorderCSSTablet = generateBorderCSS( attributes, 'highLight', 'tablet' );
+	const highLightBorderCSSMobile = generateBorderCSS( attributes, 'highLight', 'mobile' );
 
 	let selectors = {
 		'.wp-block-uagb-advanced-heading ': {
@@ -399,33 +396,27 @@ function styling( attributes, clientId, name ) {
 		),
 	};
 
-	const base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr(
-		0,
-		8
-	) }`;
+	const base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
-
-	selectors = applyFilters( `spectra.${blockName}.styling`, selectors, attributes );
-	tablet_selectors = applyFilters( `spectra.${blockName}.tabletStyling`, tablet_selectors, attributes );
-	mobile_selectors = applyFilters( `spectra.${blockName}.mobileStyling`, mobile_selectors, attributes );
+	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
+	tablet_selectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tablet_selectors, attributes );
+	mobile_selectors = applyFilters( `spectra.${ blockName }.mobileStyling`, mobile_selectors, attributes );
 
 	let styling_css = generateCSS( selectors, base_selector );
 
+	styling_css += generateCSS(
+		tablet_selectors,
+		`${ base_selector }.uagb-editor-preview-mode-tablet`,
+		true,
+		'tablet'
+	);
 
-		styling_css += generateCSS(
-			tablet_selectors,
-			`${ base_selector }.uagb-editor-preview-mode-tablet`,
-			true,
-			'tablet'
-		);
-
-
-		styling_css += generateCSS(
-			mobile_selectors,
-			`${ base_selector }.uagb-editor-preview-mode-mobile`,
-			true,
-			'mobile'
-		);
+	styling_css += generateCSS(
+		mobile_selectors,
+		`${ base_selector }.uagb-editor-preview-mode-mobile`,
+		true,
+		'mobile'
+	);
 
 	return styling_css;
 }
