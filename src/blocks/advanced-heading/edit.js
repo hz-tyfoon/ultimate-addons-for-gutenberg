@@ -27,16 +27,13 @@ const UAGBAdvancedHeading = ( props ) => {
 	} = props;
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-		setAttributes( { classMigrate: true } )
-
+		setAttributes( { classMigrate: true } );
 	}, [] );
 
 	useEffect( () => {
