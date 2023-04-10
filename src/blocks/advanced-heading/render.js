@@ -1,35 +1,26 @@
-import classnames from 'classnames';
-import { RichText } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { useLayoutEffect,memo } from '@wordpress/element';
+import { memo } from '@wordpress/element';
+import { uagbClassNames } from '@Utils/Helpers';
 
 import { useDeviceType } from '@Controls/getPreviewType';
-import styles from './editor.lazy.scss';
+import Renderer from './renderer';
+import RendererDesc from './renderer-desc';
 
 const Render = ( props ) => {
 	props = props.parentProps;
 
-	useLayoutEffect( () => {
-		styles.use();
-		return () => {
-			styles.unuse();
-		};
-	}, [] );
-
 	const {
+		attributes,
 		attributes: {
 			block_id,
 			headingTitleToggle,
-			headingTitle,
-			headingDesc,
 			headingDescToggle,
-			headingTag,
 			seperatorStyle,
 			seperatorPosition,
-			headingDescPosition
+			headingDescPosition,
 		},
 		setAttributes,
 		className,
+		context,
 	} = props;
 
 	const deviceType = useDeviceType();
@@ -42,21 +33,8 @@ const Render = ( props ) => {
 
 	const headingText = (
 		<>
-
 			{ seperatorPosition === 'above-heading' ? separator : '' }
-			<RichText
-				tagName={ headingTag }
-				placeholder={ __(
-					'Write a Heading',
-					'ultimate-addons-for-gutenberg'
-				) }
-				value={ headingTitle }
-				className="uagb-heading-text"
-				multiline={ false }
-				onChange={ ( value ) => {
-					setAttributes( { headingTitle: value } );
-				} }
-			/>
+			<Renderer { ...{ setAttributes, attributes, context } } />
 			{ seperatorPosition === 'below-heading' ? separator : '' }
 		</>
 	);
@@ -64,27 +42,18 @@ const Render = ( props ) => {
 	const descText = (
 		<>
 			{ seperatorPosition === 'above-sub-heading' ? separator : '' }
-			<RichText
-				tagName="p"
-				placeholder={ __(
-					'Write a Description',
-					'ultimate-addons-for-gutenberg'
-				) }
-				value={ headingDesc }
-				className="uagb-desc-text"
-				onChange={ ( value ) => setAttributes( { headingDesc: value } ) }
-			/>
+			<RendererDesc { ...{ setAttributes, attributes, context } } />
 			{ seperatorPosition === 'below-sub-heading' ? separator : '' }
 		</>
 	);
 
 	return (
 		<div
-			className={ classnames(
+			className={ uagbClassNames( [
 				className,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ block_id }`
-			) }
+				`uagb-block-${ block_id }`,
+			] ) }
 		>
 			{ headingDescToggle && 'above-heading' === headingDescPosition ? descText : '' }
 			{ headingTitleToggle && headingText }
