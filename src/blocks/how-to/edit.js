@@ -70,19 +70,19 @@ const HowToComponent = ( props ) => {
 		const jsonData = {
 			'@context': 'https://schema.org',
 			'@type': 'HowTo',
-			name: attributes.headingTitle,
-			description: attributes.headingDesc,
-			image: {
+			'name': attributes.headingTitle,
+			'description': attributes.headingDesc,
+			'image': {
 				'@type': 'ImageObject',
-				url: urlChk,
-				height: '406',
-				width: '305',
+				'url': urlChk,
+				'height': '406',
+				'width': '305',
 			},
-			totalTime: '',
-			estimatedCost: [],
-			tool: [],
-			supply: [],
-			step: [],
+			'totalTime': '',
+			'estimatedCost': [],
+			'tool': [],
+			'supply': [],
+			'step': [],
 		};
 
 		const y = attributes.timeInYears ? attributes.timeInYears : 0;
@@ -99,8 +99,8 @@ const HowToComponent = ( props ) => {
 		if ( attributes.showEstcost ) {
 			jsonData.estimatedCost = {
 				'@type': 'MonetaryAmount',
-				currency: attributes.currencyType,
-				value: attributes.cost,
+				'currency': attributes.currencyType,
+				'value': attributes.cost,
 			};
 		}
 
@@ -108,7 +108,7 @@ const HowToComponent = ( props ) => {
 			attributes.tools.forEach( ( attrTools, key ) => {
 				toolsData = {
 					'@type': 'HowToTool',
-					name: attrTools.add_required_tools,
+					'name': attrTools.add_required_tools,
 				};
 				jsonData.tool[ key ] = toolsData;
 			} );
@@ -118,7 +118,7 @@ const HowToComponent = ( props ) => {
 			attributes.materials.forEach( ( attrMaterials, key ) => {
 				materialsData = {
 					'@type': 'HowToSupply',
-					name: attrMaterials.add_required_materials,
+					'name': attrMaterials.add_required_materials,
 				};
 				jsonData.supply[ key ] = materialsData;
 			} );
@@ -129,10 +129,10 @@ const HowToComponent = ( props ) => {
 		getChildBlocks.forEach( ( steps, key ) => {
 			stepsData = {
 				'@type': 'HowToStep',
-				url: steps.attributes?.ctaLink || steps.attributes?.url,
-				name: steps.attributes?.infoBoxTitle || steps.attributes?.name,
-				text: steps.attributes?.headingDesc || steps.attributes?.description,
-				image: steps.attributes?.iconImage?.url || steps.attributes?.image?.url,
+				'url': steps.attributes?.ctaLink || steps.attributes?.url,
+				'name': steps.attributes?.infoBoxTitle || steps.attributes?.name,
+				'text': steps.attributes?.headingDesc || steps.attributes?.description,
+				'image': steps.attributes?.iconImage?.url || steps.attributes?.image?.url,
 			};
 			jsonData.step[ key ] = stepsData;
 		} );

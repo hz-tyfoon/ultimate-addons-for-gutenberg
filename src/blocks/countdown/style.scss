@@ -43,7 +43,7 @@
 	}
 }
 
-html:not( [dir='rtl'] ) {
+html:not( [dir="rtl"] ) {
 	.wp-block-uagb-countdown {
 		&__box {
 			&:not( :last-child ) {
@@ -74,7 +74,7 @@ html:not( [dir='rtl'] ) {
 	display: none;
 }
 
-html[dir='rtl'] {
+html[dir="rtl"] {
 	.wp-block-uagb-countdown {
 		&__box {
 			&:not( :first-child ) {
@@ -90,7 +90,7 @@ html[dir='rtl'] {
 }
 
 // These fixes are specific to the Astra theme.
-body[class*='astra'] {
+body[class*="astra"] {
 	.wp-block-uagb-countdown {
 		line-height: normal;
 	}

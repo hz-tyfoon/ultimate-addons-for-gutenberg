@@ -164,7 +164,7 @@ function RestMenuStyle( props ) {
 		},
 		// Image
 		' img': {
-			width: generateCSSUnit( imageWidthFallback, imageWidthType ),
+			'width': generateCSSUnit( imageWidthFallback, imageWidthType ),
 			'max-width': generateCSSUnit( imageWidthFallback, imageWidthType ),
 		},
 		' .uagb-rm__content': {
@@ -176,7 +176,7 @@ function RestMenuStyle( props ) {
 		// Prefix Style
 		'.wp-block-uagb-restaurant-menu .uagb-rest_menu__wrap .uagb-rm__content .uagb-rm-details .uagb-rm__title': {
 			'font-size': generateCSSUnit( titleFontSize, titleFontSizeType ),
-			color: titleColor,
+			'color': titleColor,
 			'margin-bottom': generateCSSUnit( titleSpaceFallback, titleSpaceType ),
 			'font-family': titleFontFamily,
 			'font-style': titleFontStyle,
@@ -195,7 +195,7 @@ function RestMenuStyle( props ) {
 			'font-style': priceFontStyle,
 			'font-weight': priceFontWeight,
 			'line-height': generateCSSUnit( priceLineHeight, priceLineHeightType ),
-			color: priceColor,
+			'color': priceColor,
 			'letter-spacing': generateCSSUnit( priceLetterSpacing, priceLetterSpacingType ),
 		},
 		// Description Style
@@ -207,7 +207,7 @@ function RestMenuStyle( props ) {
 			'font-style': descFontStyle,
 			'font-weight': descFontWeight,
 			'line-height': generateCSSUnit( descLineHeight, descLineHeightType ),
-			color: descColor,
+			'color': descColor,
 			'margin-bottom': generateCSSUnit( descSpace, 'px' ),
 			'letter-spacing': generateCSSUnit( descLetterSpacing, descLetterSpacingType ),
 		},
@@ -216,7 +216,7 @@ function RestMenuStyle( props ) {
 	tabletSelectors = {
 		// Image
 		' img': {
-			width: generateCSSUnit( imageWidthTabletFallback, imageWidthType ),
+			'width': generateCSSUnit( imageWidthTabletFallback, imageWidthType ),
 			'max-width': generateCSSUnit( imageWidthTabletFallback, imageWidthType ),
 		},
 		'.wp-block-uagb-restaurant-menu': {
@@ -256,7 +256,7 @@ function RestMenuStyle( props ) {
 	mobileSelectors = {
 		// Image
 		' img': {
-			width: generateCSSUnit( imageWidthMobileFallback, imageWidthType ),
+			'width': generateCSSUnit( imageWidthMobileFallback, imageWidthType ),
 			'max-width': generateCSSUnit( imageWidthMobileFallback, imageWidthType ),
 		},
 		'.wp-block-uagb-restaurant-menu': {
@@ -298,13 +298,13 @@ function RestMenuStyle( props ) {
 			'border-top-color': seperatorColor,
 			'border-top-style': seperatorStyle,
 			'border-top-width': generateCSSUnit( seperatorThicknessFallback, 'px' ),
-			width: generateCSSUnit( seperatorWidthFallback, seperatorWidthType ),
+			'width': generateCSSUnit( seperatorWidthFallback, seperatorWidthType ),
 		};
 		tabletSelectors[ ' .uagb-rm__separator' ] = {
-			width: generateCSSUnit( seperatorWidthTabletFallback, seperatorWidthType ),
+			'width': generateCSSUnit( seperatorWidthTabletFallback, seperatorWidthType ),
 		};
 		mobileSelectors[ ' .uagb-rm__separator' ] = {
-			width: generateCSSUnit( seperatorWidthMobileFallback, seperatorWidthType ),
+			'width': generateCSSUnit( seperatorWidthMobileFallback, seperatorWidthType ),
 		};
 	}
 
@@ -316,19 +316,19 @@ function RestMenuStyle( props ) {
 		if ( stack === 'tablet' ) {
 			if ( imagePosition === 'left' ) {
 				tabletSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					display: 'block',
+					'display': 'block',
 				};
 				mobileSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					display: 'block',
+					'display': 'block',
 				};
 			} else {
 				tabletSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					display: 'flex',
+					'display': 'flex',
 					'flex-direction': 'column-reverse',
 					'align-items': 'flex-end',
 				};
 				mobileSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					display: 'flex',
+					'display': 'flex',
 					'flex-direction': 'column-reverse',
 					'align-items': 'flex-end',
 				};
@@ -336,11 +336,11 @@ function RestMenuStyle( props ) {
 		} else if ( stack === 'mobile' ) {
 			if ( imagePosition === 'left' ) {
 				mobileSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					display: 'block',
+					'display': 'block',
 				};
 			} else {
 				mobileSelectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
-					display: 'flex',
+					'display': 'flex',
 					'flex-direction': 'column-reverse',
 					'align-items': 'flex-end',
 				};
@@ -366,7 +366,7 @@ function RestMenuStyle( props ) {
 	if ( imgAlign === 'top' ) {
 		selectors[ ' .wp-block-uagb-restaurant-menu-child ' ] = {
 			'text-align': headingAlign,
-			display: 'block',
+			'display': 'block',
 		};
 		selectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__content' ] = {
 			'text-align': headingAlign,
@@ -374,13 +374,13 @@ function RestMenuStyle( props ) {
 
 		if ( 'center' === headingAlign ) {
 			selectors[ ' .uagb-rm__content ' ] = {
-				display: 'block',
+				'display': 'block',
 			};
 			selectors[ ' .uagb-rm__content ' ] = {
-				display: 'block',
+				'display': 'block',
 			};
 			selectors[ ' .wp-block-uagb-restaurant-menu-child  .uagb-rm__separator' ] = {
-				margin: '0 auto',
+				'margin': '0 auto',
 			};
 		} else if ( 'right' === headingAlign ) {
 			selectors[ ' .wp-block-uagb-restaurant-menu-child .uagb-rm__separator' ] = {

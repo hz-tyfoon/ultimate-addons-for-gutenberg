@@ -159,7 +159,7 @@ function styling( props ) {
 			'text-decoration': fontDecoration,
 			'text-transform': fontTransform,
 			'font-weight': fontWeight,
-			color: linkColor,
+			'color': linkColor,
 			'letter-spacing': generateCSSUnit( letterSpacing, letterSpacingType ),
 		},
 		' .uagb-toc__title-wrap': {
@@ -176,11 +176,11 @@ function styling( props ) {
 			'text-decoration': headingDecoration,
 			'text-transform': headingTransform,
 			'font-weight': headingFontWeight,
-			color: headingColor,
+			'color': headingColor,
 			'letter-spacing': generateCSSUnit( headingLetterSpacing, headingLetterSpacingType ),
 		},
 		' .uagb-toc__list-wrap ol li a:hover': {
-			color: linkHoverColor,
+			'color': linkHoverColor,
 		},
 		' .uagb-toc__wrap': {
 			...overallBorderCSS,
@@ -188,7 +188,7 @@ function styling( props ) {
 			'padding-right': generateCSSUnit( rightPadding, paddingTypeDesktop ),
 			'padding-top': generateCSSUnit( topPadding, paddingTypeDesktop ),
 			'padding-bottom': generateCSSUnit( bottomPadding, paddingTypeDesktop ),
-			background: backgroundColor,
+			'background': backgroundColor,
 		},
 		' .uagb-toc__wrap:hover': {
 			'border-color': overallBorderHColor,
@@ -200,7 +200,7 @@ function styling( props ) {
 			'margin-bottom': generateCSSUnit( bottomMargin, marginTypeDesktop ),
 		},
 		' .uagb-toc__list-wrap > ol.uagb-toc__list li': {
-			color: bulletColor,
+			'color': bulletColor,
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list:last-child > li:last-child': {
 			'padding-bottom': 0,
@@ -216,20 +216,20 @@ function styling( props ) {
 			'padding-bottom': 'calc( ' + generateCSSUnit( contentPaddingDesktop, contentPaddingTypeDesktop ) + ' / 2 )',
 		},
 		' .uag-toc__collapsible-wrap svg': {
-			width: generateCSSUnit( iconSize, 'px' ),
-			height: generateCSSUnit( iconSize, 'px' ),
-			fill: iconColor,
+			'width': generateCSSUnit( iconSize, 'px' ),
+			'height': generateCSSUnit( iconSize, 'px' ),
+			'fill': iconColor,
 		},
 		' svg': {
-			width: generateCSSUnit( iconSize, 'px' ),
-			height: generateCSSUnit( iconSize, 'px' ),
-			fill: iconColor,
+			'width': generateCSSUnit( iconSize, 'px' ),
+			'height': generateCSSUnit( iconSize, 'px' ),
+			'fill': iconColor,
 		},
 	};
 
 	selectors[ ' .uagb-toc__list-wrap' ] = {
 		'column-count': tColumnsDesktopFallback,
-		overflow: 'hidden',
+		'overflow': 'hidden',
 		'text-align': align,
 	};
 
@@ -273,7 +273,7 @@ function styling( props ) {
 		},
 		' .uagb-toc__wrap': {
 			...overallBorderCSSTablet,
-			width: generateCSSUnit( widthTablet, widthTypeTablet ),
+			'width': generateCSSUnit( widthTablet, widthTypeTablet ),
 			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
 			'padding-right': generateCSSUnit( rightPaddingTablet, paddingTypeTablet ),
 			'padding-top': generateCSSUnit( topPaddingTablet, paddingTypeTablet ),
@@ -287,7 +287,7 @@ function styling( props ) {
 		},
 		' .uagb-toc__list-wrap': {
 			'column-count': tColumnsTabletFallback,
-			overflow: 'hidden',
+			'overflow': 'hidden',
 			'text-align': align,
 		},
 
@@ -327,7 +327,7 @@ function styling( props ) {
 		},
 		' .uagb-toc__wrap': {
 			...overallBorderCSSMobile,
-			width: generateCSSUnit( widthMobile, widthTypeMobile ),
+			'width': generateCSSUnit( widthMobile, widthTypeMobile ),
 			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
 			'padding-right': generateCSSUnit( rightPaddingMobile, paddingTypeMobile ),
 			'padding-top': generateCSSUnit( topPaddingMobile, paddingTypeMobile ),
@@ -341,7 +341,7 @@ function styling( props ) {
 		},
 		' .uagb-toc__list-wrap': {
 			'column-count': tColumnsMobileFallback,
-			overflow: 'hidden',
+			'overflow': 'hidden',
 			'text-align': align,
 		},
 		' .uagb-toc__list-wrap > ol.uagb-toc__list > li:first-child': {
@@ -380,7 +380,7 @@ function styling( props ) {
 				getFallbackNumber( separatorHeight, 'separatorHeight', blockName ),
 				separatorHeightType
 			),
-			width: 'calc( 100% + ' + calcPaddingLeft + ' + ' + calcPaddingRight + ')',
+			'width': 'calc( 100% + ' + calcPaddingLeft + ' + ' + calcPaddingRight + ')',
 			'margin-left': '-' + calcPaddingLeft,
 			'border-color': separatorColor,
 			'margin-bottom': generateCSSUnit(
@@ -394,7 +394,7 @@ function styling( props ) {
 		};
 
 		tablet_selectors[ ' .uagb-toc__separator' ] = {
-			width: 'calc( 100% + ' + tCalcPaddingLeft + ' + ' + tCalcPaddingRight + ')',
+			'width': 'calc( 100% + ' + tCalcPaddingLeft + ' + ' + tCalcPaddingRight + ')',
 			'margin-left': '-' + tCalcPaddingLeft,
 			'margin-bottom': generateCSSUnit(
 				getFallbackNumber( separatorSpaceTablet, 'separatorSpaceTablet', blockName ),
@@ -403,7 +403,7 @@ function styling( props ) {
 		};
 
 		mobile_selectors[ ' .uagb-toc__separator' ] = {
-			width: 'calc( 100% + ' + mCalcPaddingLeft + ' + ' + mCalcPaddingRight + ')',
+			'width': 'calc( 100% + ' + mCalcPaddingLeft + ' + ' + mCalcPaddingRight + ')',
 			'margin-left': '-' + mCalcPaddingLeft,
 			'margin-bottom': generateCSSUnit(
 				getFallbackNumber( separatorSpaceMobile, 'separatorSpaceMobile', blockName ),

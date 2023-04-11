@@ -13,7 +13,7 @@
 	left: -1px;
 	z-index: 0;
 	border: 1px dashed #03ddff;
-	content: '';
+	content: "";
 }
 
 .uagb-section__edit-active.uagb-section__wrap::before {
@@ -30,7 +30,7 @@
 	margin-left: 10px;
 }
 
-.editor-block-list__layout .editor-block-list__block[data-align='full'][data-type='uagb/section'] {
+.editor-block-list__layout .editor-block-list__block[data-align="full"][data-type="uagb/section"] {
 	margin-right: 0;
 	margin-left: 0;
 }

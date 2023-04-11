@@ -84,7 +84,7 @@ function styling( props ) {
 	const selectors = {
 		'.uagb-section__wrap': inlineStyles( props ),
 		' .uagb-section__video-wrap': {
-			opacity: videoOpacity,
+			'opacity': videoOpacity,
 		},
 		' .uagb-section__inner-wrap': {
 			'max-width': inner_width,
@@ -122,7 +122,7 @@ function styling( props ) {
 		if ( 'color' === overlayType ) {
 			backgroundTypeCSS = {
 				'background-color': backgroundImageColor,
-				opacity: backgroundOpacity && 0 !== backgroundOpacity ? backgroundOpacity / 100 : '',
+				'opacity': backgroundOpacity && 0 !== backgroundOpacity ? backgroundOpacity / 100 : '',
 			};
 		} else {
 			backgroundTypeCSS[ 'background-image' ] = gradientValue;
@@ -130,7 +130,7 @@ function styling( props ) {
 	} else if ( 'color' === backgroundType ) {
 		backgroundTypeCSS = {
 			'background-color': backgroundColor,
-			opacity: backgroundOpacity && 0 !== backgroundOpacity ? backgroundOpacity / 100 : '',
+			'opacity': backgroundOpacity && 0 !== backgroundOpacity ? backgroundOpacity / 100 : '',
 		};
 	} else if ( 'gradient' === backgroundType ) {
 		let gradient;

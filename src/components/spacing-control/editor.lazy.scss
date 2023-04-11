@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .uagb-spacing-control {
 	position: relative;
@@ -12,7 +12,7 @@
 		margin-top: -8px;
 	}
 
-	input[type='number'].uagb-spacing-control__number,
+	input[type="number"].uagb-spacing-control__number,
 	.uagb-spacing-control__link {
 		border-left: 1px solid;
 		border-right: 1px solid;
@@ -26,7 +26,7 @@
 		width: 25%;
 	}
 
-	input[type='number'].uagb-spacing-control__number:focus {
+	input[type="number"].uagb-spacing-control__number:focus {
 		z-index: 1;
 		outline-offset: -1px;
 		outline: 1px solid $spectra-color-icon-disabled;
@@ -52,7 +52,7 @@
 		}
 	}
 
-	.uagb-spacing-control__mobile-controls button[type='button'] > span {
+	.uagb-spacing-control__mobile-controls button[type="button"] > span {
 		cursor: pointer;
 		width: 15px;
 		height: 15px;

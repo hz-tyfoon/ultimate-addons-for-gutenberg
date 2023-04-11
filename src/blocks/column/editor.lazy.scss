@@ -5,8 +5,8 @@
  * which makes it higher in priority.
  */
 
-.wp-block[data-type='uagb/column']::before {
-	content: '';
+.wp-block[data-type="uagb/column"]::before {
+	content: "";
 	position: absolute;
 	border: 1px dashed #a3aeb6;
 	top: 0;
@@ -18,7 +18,7 @@
 	height: 100%;
 }
 
-.is-selected.wp-block[data-type='uagb/column']::before {
+.is-selected.wp-block[data-type="uagb/column"]::before {
 	border-color: #59646c;
 }
 
@@ -32,7 +32,7 @@
 	margin-left: 10px;
 }
 
-.wp-block[data-type='uagb/column'] .block-editor-block-list__block-edit {
+.wp-block[data-type="uagb/column"] .block-editor-block-list__block-edit {
 	height: 100%;
 }
 

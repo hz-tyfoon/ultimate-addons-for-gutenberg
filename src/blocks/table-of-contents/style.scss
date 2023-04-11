@@ -92,7 +92,7 @@ ol.uagb-toc__list > li {
 		width: 1.6em;
 		height: 0.6em;
 		margin-left: 0;
-		transform: translate( 0, -20% ) rotate( 180deg );
+		transform: translate(0, -20%) rotate(180deg);
 		fill: currentColor;
 	}
 
@@ -102,7 +102,7 @@ ol.uagb-toc__list > li {
 }
 
 // These fixes are specific to the Astra theme.
-body[class*='astra'] {
+body[class*="astra"] {
 	.uagb-toc__list {
 		line-height: normal;
 	}

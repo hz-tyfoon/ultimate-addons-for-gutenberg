@@ -20,19 +20,19 @@ function styling( props ) {
 
 	const selectors = {
 		' .uagb-google-map__iframe': {
-			height: generateCSSUnit( heightFallback, 'px' ),
+			'height': generateCSSUnit( heightFallback, 'px' ),
 		},
 	};
 
 	tabletSelectors = {
 		' .uagb-google-map__iframe': {
-			height: generateCSSUnit( heightTabletFallback, 'px' ),
+			'height': generateCSSUnit( heightTabletFallback, 'px' ),
 		},
 	};
 
 	mobileSelectors = {
 		' .uagb-google-map__iframe': {
-			height: generateCSSUnit( heightMobileFallback, 'px' ),
+			'height': generateCSSUnit( heightMobileFallback, 'px' ),
 		},
 	};
 

@@ -189,7 +189,7 @@ function testimonialStyle( props ) {
 		},
 		// Image
 		' .uagb-tm__image img': {
-			width: generateCSSUnit( imageWidthFallback, imageWidthType ),
+			'width': generateCSSUnit( imageWidthFallback, imageWidthType ),
 			'max-width': generateCSSUnit( imageWidthFallback, imageWidthType ),
 		},
 		' .uagb-tm__content': {
@@ -208,7 +208,7 @@ function testimonialStyle( props ) {
 			'text-decoration': nameDecoration,
 			'text-transform': nameTransform,
 			'line-height': generateCSSUnit( nameLineHeight, nameLineHeightType ),
-			color: authorColor,
+			'color': authorColor,
 			'margin-bottom': generateCSSUnit( nameSpaceFallback, nameSpaceType ),
 			'letter-spacing': generateCSSUnit( nameLetterSpacing, nameLetterSpacingType ),
 		},
@@ -221,7 +221,7 @@ function testimonialStyle( props ) {
 			'text-decoration': companyDecoration,
 			'text-transform': companyTransform,
 			'line-height': generateCSSUnit( companyLineHeight, companyLineHeightType ),
-			color: companyColor,
+			'color': companyColor,
 			'letter-spacing': generateCSSUnit( companyLetterSpacing, companyLetterSpacingType ),
 		},
 		// Description Style
@@ -233,20 +233,20 @@ function testimonialStyle( props ) {
 			'text-transform': descTransform,
 			'font-weight': descFontWeight,
 			'line-height': generateCSSUnit( descLineHeight, descLineHeightType ),
-			color: descColor,
+			'color': descColor,
 			'margin-bottom': generateCSSUnit( descSpaceFallback, descSpaceType ),
 			'letter-spacing': generateCSSUnit( descLetterSpacing, descLetterSpacingType ),
 		},
 		' ul.slick-dots li button:before': {
-			color: arrowColor,
+			'color': arrowColor,
 		},
 		' ul.slick-dots li.slick-active button:before': {
-			color: arrowColor,
+			'color': arrowColor,
 		},
 		' .slick-arrow svg': {
-			fill: arrowColor,
-			height: generateCSSUnit( arrowSizeFallback, arrowSizeType ),
-			width: generateCSSUnit( arrowSizeFallback, arrowSizeType ),
+			'fill': arrowColor,
+			'height': generateCSSUnit( arrowSizeFallback, arrowSizeType ),
+			'width': generateCSSUnit( arrowSizeFallback, arrowSizeType ),
 		},
 		' .uagb-testimonial__wrap .uagb-tm__content': overallBorderCSS,
 		' .uagb-testimonial__wrap .uagb-tm__content:hover': {
@@ -256,25 +256,25 @@ function testimonialStyle( props ) {
 
 	if ( testItemCountFallback === columnsFallback ) {
 		selectors[ '.uagb-slick-carousel' ] = {
-			padding: '0',
+			'padding': '0',
 		};
 	}
 
 	if ( arrowDots === 'dots' ) {
 		selectors[ ' .uagb-slick-carousel.uagb-tm__arrow-outside' ] = {
-			padding: '0 0 35px 0',
+			'padding': '0 0 35px 0',
 		};
 	}
 
 	if ( testItemCountFallback === 1 || testItemCountFallback === columnsFallback ) {
 		selectors[ ' .uagb-slick-carousel.uagb-tm__arrow-outside' ] = {
-			padding: '0',
+			'padding': '0',
 		};
 	}
 
 	const mobileSelectors = {
 		' .uagb-tm__image img': {
-			width: generateCSSUnit( imageWidthMobile, imageWidthType ),
+			'width': generateCSSUnit( imageWidthMobile, imageWidthType ),
 			'max-width': generateCSSUnit( imageWidthMobile, imageWidthType ),
 		},
 		' .uagb-testimonial__wrap': {
@@ -320,7 +320,7 @@ function testimonialStyle( props ) {
 
 	const tabletSelectors = {
 		' .uagb-tm__image img': {
-			width: generateCSSUnit( imageWidthTablet, imageWidthType ),
+			'width': generateCSSUnit( imageWidthTablet, imageWidthType ),
 			'max-width': generateCSSUnit( imageWidthTablet, imageWidthType ),
 		},
 		' .block-editor-rich-text__editable.uagb-tm__author-name': {

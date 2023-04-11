@@ -489,7 +489,7 @@ const Settings = ( props ) => {
 						},
 					} }
 					min={ 0 }
-					limitMax={ { px: 50, '%': 100, em: 50 } }
+					limitMax={ { 'px': 50, '%': 100, 'em': 50 } }
 					units={ [
 						{
 							name: __( 'PX', 'ultimate-addons-for-gutenberg' ),
@@ -535,7 +535,7 @@ const Settings = ( props ) => {
 						},
 					} }
 					min={ 0 }
-					limitMax={ { px: 100, '%': 100, em: 100 } }
+					limitMax={ { 'px': 100, '%': 100, 'em': 100 } }
 					units={ [
 						{
 							name: __( 'PX', 'ultimate-addons-for-gutenberg' ),

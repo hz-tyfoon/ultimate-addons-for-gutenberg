@@ -324,12 +324,12 @@ export default function styling( props ) {
 			'border-color': iconWrapBorderHColor,
 		},
 		'.wp-block-uagb-counter .wp-block-uagb-counter__icon svg': {
-			width: generateCSSUnit( iconSizeFallback, iconSizeType ),
-			height: generateCSSUnit( iconSizeFallback, iconSizeType ),
-			fill: iconColor,
+			'width': generateCSSUnit( iconSizeFallback, iconSizeType ),
+			'height': generateCSSUnit( iconSizeFallback, iconSizeType ),
+			'fill': iconColor,
 		},
 		'.wp-block-uagb-counter:hover .wp-block-uagb-counter__icon svg': {
-			fill: iconHoverColor,
+			'fill': iconHoverColor,
 		},
 		'.wp-block-uagb-counter .wp-block-uagb-counter__title': {
 			'font-family': headingFontFamily,
@@ -340,7 +340,7 @@ export default function styling( props ) {
 			'font-size': generateCSSUnit( headingFontSize, headingFontSizeType ),
 			'line-height': generateCSSUnit( headingLineHeight, headingLineHeightType ),
 			'letter-Spacing': generateCSSUnit( headingLetterSpacing, headingLetterSpacingType ),
-			color: headingColor,
+			'color': headingColor,
 			'margin-top': generateCSSUnit( headingTopMargin, headingMarginUnit ),
 			'margin-right': generateCSSUnit( headingRightMargin, headingMarginUnit ),
 			'margin-bottom': generateCSSUnit( headingBottomMargin, headingMarginUnit ),
@@ -355,7 +355,7 @@ export default function styling( props ) {
 			'font-size': generateCSSUnit( numberFontSize, numberFontSizeType ),
 			'line-height': generateCSSUnit( numberLineHeight, numberLineHeightType ),
 			'letter-Spacing': generateCSSUnit( numberLetterSpacing, numberLetterSpacingType ),
-			color: numberColor,
+			'color': numberColor,
 			'margin-top': generateCSSUnit( numberTopMargin, numberMarginUnit ),
 			'margin-right': generateCSSUnit( numberRightMargin, numberMarginUnit ),
 			'margin-bottom': generateCSSUnit( numberBottomMargin, numberMarginUnit ),
@@ -372,13 +372,13 @@ export default function styling( props ) {
 		},
 		'.wp-block-uagb-counter--circle .wp-block-uagb-counter-circle-container svg circle': {
 			'stroke-width': generateCSSUnit( circleStrokeSizeFallback, 'px' ),
-			stroke: circleBackground,
-			r: generateCSSUnit( circleRadius, 'px' ),
-			cx: generateCSSUnit( circlePos, 'px' ),
-			cy: generateCSSUnit( circlePos, 'px' ),
+			'stroke': circleBackground,
+			'r': generateCSSUnit( circleRadius, 'px' ),
+			'cx': generateCSSUnit( circlePos, 'px' ),
+			'cy': generateCSSUnit( circlePos, 'px' ),
 		},
 		'.wp-block-uagb-counter--circle .wp-block-uagb-counter-circle-container svg .uagb-counter-circle__progress': {
-			stroke: circleForeground,
+			'stroke': circleForeground,
 			'stroke-dasharray': generateCSSUnit( circleDash, 'px' ),
 			'stroke-dashoffset': generateCSSUnit( circleDash, 'px' ),
 		},
@@ -386,11 +386,11 @@ export default function styling( props ) {
 			'flex-direction': barFlip ? 'column-reverse' : 'column',
 		},
 		'.wp-block-uagb-counter--bars .wp-block-uagb-counter-bars-container': {
-			background: barBackground,
+			'background': barBackground,
 		},
 		'.wp-block-uagb-counter--bars .wp-block-uagb-counter-bars-container .wp-block-uagb-counter__number': {
-			height: generateCSSUnit( barSizeFallback, 'px' ),
-			background: barForeground,
+			'height': generateCSSUnit( barSizeFallback, 'px' ),
+			'background': barForeground,
 			'padding-top': generateCSSUnit( numberTopMargin, numberMarginUnit ),
 			'padding-right': generateCSSUnit( numberRightMargin, numberMarginUnit ),
 			'padding-bottom': generateCSSUnit( numberBottomMargin, numberMarginUnit ),
@@ -429,8 +429,8 @@ export default function styling( props ) {
 	};
 
 	tablet_selectors[ '.wp-block-uagb-counter .wp-block-uagb-counter__icon svg' ] = {
-		width: generateCSSUnit( iconSizeFallbackTablet, iconSizeTypeTablet ),
-		height: generateCSSUnit( iconSizeFallbackTablet, iconSizeTypeTablet ),
+		'width': generateCSSUnit( iconSizeFallbackTablet, iconSizeTypeTablet ),
+		'height': generateCSSUnit( iconSizeFallbackTablet, iconSizeTypeTablet ),
 	};
 
 	tablet_selectors[ '.wp-block-uagb-counter .wp-block-uagb-counter__title' ] = {
@@ -494,8 +494,8 @@ export default function styling( props ) {
 	};
 
 	mobile_selectors[ '.wp-block-uagb-counter .wp-block-uagb-counter__icon svg' ] = {
-		width: generateCSSUnit( iconSizeFallbackMobile, iconSizeTypeMobile ),
-		height: generateCSSUnit( iconSizeFallbackMobile, iconSizeTypeMobile ),
+		'width': generateCSSUnit( iconSizeFallbackMobile, iconSizeTypeMobile ),
+		'height': generateCSSUnit( iconSizeFallbackMobile, iconSizeTypeMobile ),
 	};
 
 	mobile_selectors[ '.wp-block-uagb-counter .wp-block-uagb-counter__title' ] = {
@@ -536,15 +536,15 @@ export default function styling( props ) {
 	if ( imageWidthType ) {
 		// Image
 		selectors[ ' .wp-block-uagb-counter__image-wrap .wp-block-uagb-counter__image' ] = {
-			width: generateCSSUnit( imageWidthFallback, imageWidthUnit ),
+			'width': generateCSSUnit( imageWidthFallback, imageWidthUnit ),
 		};
 
 		tablet_selectors[ ' .wp-block-uagb-counter__image-wrap .wp-block-uagb-counter__image' ] = {
-			width: generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
+			'width': generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
 		};
 
 		mobile_selectors[ ' .wp-block-uagb-counter__image-wrap .wp-block-uagb-counter__image' ] = {
-			width: generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
+			'width': generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
 		};
 	}
 
@@ -552,7 +552,7 @@ export default function styling( props ) {
 
 	if ( layout === 'number' && ( iconImgPosition === 'left-number' || iconImgPosition === 'right-number' ) ) {
 		selectors[ ' .wp-block-uagb-counter__number' ] = {
-			display: 'flex',
+			'display': 'flex',
 			'align-items': 'center',
 			'justify-content': align,
 		};

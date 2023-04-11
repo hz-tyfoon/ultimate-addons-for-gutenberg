@@ -11,7 +11,7 @@ import { applyFilters } from '@wordpress/hooks';
 
 export default function styling( props ) {
 	const {
-		attributes: {
+		'attributes': {
 			showDays,
 			showHours,
 			showMinutes,
@@ -226,21 +226,21 @@ export default function styling( props ) {
 
 	// Box Shadow
 	const boxShadowCSS = generateShadowCSS( {
-		horizontal: boxShadowHOffset,
-		vertical: boxShadowVOffset,
-		blur: boxShadowBlur,
-		spread: boxShadowSpread,
-		color: boxShadowColor,
-		position: boxShadowPosition,
+		'horizontal': boxShadowHOffset,
+		'vertical': boxShadowVOffset,
+		'blur': boxShadowBlur,
+		'spread': boxShadowSpread,
+		'color': boxShadowColor,
+		'position': boxShadowPosition,
 	} );
 	const boxShadowHoverCSS = generateShadowCSS( {
-		horizontal: boxShadowHOffsetHover,
-		vertical: boxShadowVOffsetHover,
-		blur: boxShadowBlurHover,
-		spread: boxShadowSpreadHover,
-		color: boxShadowColorHover,
-		position: boxShadowPositionHover,
-		altColor: boxShadowColor,
+		'horizontal': boxShadowHOffsetHover,
+		'vertical': boxShadowVOffsetHover,
+		'blur': boxShadowBlurHover,
+		'spread': boxShadowSpreadHover,
+		'color': boxShadowColorHover,
+		'position': boxShadowPositionHover,
+		'altColor': boxShadowColor,
 	} );
 
 	let tabletSelectors = {};
@@ -259,18 +259,18 @@ export default function styling( props ) {
 			'padding-left': generateCSSUnit( blockLeftPadding, blockPaddingUnit ),
 		},
 		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box.wp-block-uagb-countdown__box-days': {
-			display: showDays ? '' : 'none',
+			'display': showDays ? '' : 'none',
 		},
 		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box.wp-block-uagb-countdown__box-hours': {
-			display: showDays || showHours ? '' : 'none',
+			'display': showDays || showHours ? '' : 'none',
 		},
 		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box.wp-block-uagb-countdown__box-minutes': {
-			display: showDays || showHours || showMinutes ? '' : 'none',
+			'display': showDays || showHours || showMinutes ? '' : 'none',
 		},
 		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box': {
 			'aspect-ratio': isSquareBox ? 1 : 'auto',
-			width: generateCSSUnit( boxWidth, 'px' ),
-			height: isSquareBox ? generateCSSUnit( boxWidth, 'px' ) : 'auto',
+			'width': generateCSSUnit( boxWidth, 'px' ),
+			'height': isSquareBox ? generateCSSUnit( boxWidth, 'px' ) : 'auto',
 			'flex-direction': boxFlex,
 			'justify-content': boxFlex !== 'column' ? boxAlign : 'center',
 			'align-items': boxFlex !== 'row' ? boxAlign : 'center',
@@ -298,7 +298,7 @@ export default function styling( props ) {
 			'font-size': generateCSSUnit( digitFontSize, digitFontSizeType ),
 			'line-height': generateCSSUnit( digitLineHeight, digitLineHeightType ),
 			'letter-spacing': generateCSSUnit( digitLetterSpacing, digitLetterSpacingType ),
-			color: digitColor,
+			'color': digitColor,
 		},
 		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box:not(:last-child) .wp-block-uagb-countdown__time::after': {}, // Empty ruleset to prevent undefined error.
 		'.wp-block-uagb-countdown .wp-block-uagb-countdown__box:not(:first-child)': {}, // Empty ruleset to prevent undefined error (for RTL Box Gap).
@@ -312,7 +312,7 @@ export default function styling( props ) {
 			'font-size': generateCSSUnit( labelFontSize, labelFontSizeType ),
 			'line-height': generateCSSUnit( labelLineHeight, labelLineHeightType ),
 			'letter-spacing': generateCSSUnit( labelLetterSpacing, labelLetterSpacingType ),
-			color: labelColor,
+			'color': labelColor,
 		},
 	};
 
@@ -335,8 +335,8 @@ export default function styling( props ) {
 	};
 
 	tabletSelectors[ '.wp-block-uagb-countdown .wp-block-uagb-countdown__box' ] = {
-		width: generateCSSUnit( boxWidthTablet, 'px' ),
-		height: isSquareBox ? generateCSSUnit( boxWidthTablet, 'px' ) : 'auto',
+		'width': generateCSSUnit( boxWidthTablet, 'px' ),
+		'height': isSquareBox ? generateCSSUnit( boxWidthTablet, 'px' ) : 'auto',
 		'flex-direction': boxFlexTablet,
 		'justify-content': boxFlexTablet !== 'column' ? boxAlignTablet : 'center',
 		'align-items': boxFlexTablet !== 'row' ? boxAlignTablet : 'center',
@@ -381,8 +381,8 @@ export default function styling( props ) {
 	};
 
 	mobileSelectors[ '.wp-block-uagb-countdown .wp-block-uagb-countdown__box' ] = {
-		width: generateCSSUnit( boxWidthMobile, 'px' ),
-		height: isSquareBox ? generateCSSUnit( boxWidthMobile, 'px' ) : 'auto',
+		'width': generateCSSUnit( boxWidthMobile, 'px' ),
+		'height': isSquareBox ? generateCSSUnit( boxWidthMobile, 'px' ) : 'auto',
 		'flex-direction': boxFlexMobile,
 		'justify-content': boxFlexMobile !== 'column' ? boxAlignMobile : 'center',
 		'align-items': boxFlexMobile !== 'row' ? boxAlignMobile : 'center',
@@ -417,30 +417,30 @@ export default function styling( props ) {
 	// Separator.
 	if ( showSeparator ) {
 		selectors[ separatorSelector ] = {
-			content: "'" + separatorType + "'",
+			'content': "'" + separatorType + "'",
 			'font-family': separatorFontFamily,
 			'font-style': separatorFontStyle,
 			'font-weight': separatorFontWeight,
 			'font-size': generateCSSUnit( separatorFontSize, separatorFontSizeType ),
 			'line-height': generateCSSUnit( separatorLineHeight, separatorLineHeightType ),
-			color: separatorColor,
+			'color': separatorColor,
 
-			right: generateCSSUnit( -separatorRightSpacingFallback, 'px' ),
-			top: generateCSSUnit( separatorTopSpacingFallback, 'px' ),
+			'right': generateCSSUnit( -separatorRightSpacingFallback, 'px' ),
+			'top': generateCSSUnit( separatorTopSpacingFallback, 'px' ),
 		};
 
 		tabletSelectors[ separatorSelector ] = {
 			'font-size': generateCSSUnit( separatorFontSizeTablet, separatorFontSizeType ),
 			'line-height': generateCSSUnit( separatorLineHeightTablet, separatorLineHeightType ),
-			right: generateCSSUnit( -separatorRightSpacingTabletFallback, 'px' ),
-			top: generateCSSUnit( separatorTopSpacingTabletFallback, 'px' ),
+			'right': generateCSSUnit( -separatorRightSpacingTabletFallback, 'px' ),
+			'top': generateCSSUnit( separatorTopSpacingTabletFallback, 'px' ),
 		};
 
 		mobileSelectors[ separatorSelector ] = {
 			'font-size': generateCSSUnit( separatorFontSizeMobile, separatorFontSizeType ),
 			'line-height': generateCSSUnit( separatorLineHeightMobile, separatorLineHeightType ),
-			right: generateCSSUnit( -separatorRightSpacingMobileFallback, 'px' ),
-			top: generateCSSUnit( separatorTopSpacingMobileFallback, 'px' ),
+			'right': generateCSSUnit( -separatorRightSpacingMobileFallback, 'px' ),
+			'top': generateCSSUnit( separatorTopSpacingMobileFallback, 'px' ),
 		};
 	}
 

@@ -220,105 +220,105 @@ function styling( props ) {
 			: 1;
 
 	const videoBackgroundAttributes = {
-		backgroundType: backgroundType,
-		backgroundImage: backgroundImageDesktop,
-		backgroundColor: backgroundColor,
-		gradientValue: gradientValue,
-		gradientColor1: gradientColor1,
-		gradientColor2: gradientColor2,
-		gradientLocation1: gradientLocation1,
-		gradientLocation2: gradientLocation2,
-		gradientType: gradientType,
-		gradientAngle: gradientAngle,
-		selectGradient: selectGradient,
-		backgroundRepeat: backgroundRepeatDesktop,
-		backgroundPosition: backgroundPositionDesktop,
-		backgroundSize: backgroundSizeDesktop,
-		backgroundAttachment: backgroundAttachmentDesktop,
-		backgroundCustomSize: backgroundCustomSizeDesktop,
-		backgroundCustomSizeType: backgroundCustomSizeType,
-		backgroundImageColor: backgroundImageColor,
-		overlayType: overlayType,
-		backgroundVideo: backgroundVideo,
-		backgroundVideoColor: backgroundVideoColor,
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageDesktop,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'gradientColor1': gradientColor1,
+		'gradientColor2': gradientColor2,
+		'gradientLocation1': gradientLocation1,
+		'gradientLocation2': gradientLocation2,
+		'gradientType': gradientType,
+		'gradientAngle': gradientAngle,
+		'selectGradient': selectGradient,
+		'backgroundRepeat': backgroundRepeatDesktop,
+		'backgroundPosition': backgroundPositionDesktop,
+		'backgroundSize': backgroundSizeDesktop,
+		'backgroundAttachment': backgroundAttachmentDesktop,
+		'backgroundCustomSize': backgroundCustomSizeDesktop,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
+		'backgroundVideo': backgroundVideo,
+		'backgroundVideoColor': backgroundVideoColor,
 	};
 
 	const videoBackgroundCSS = generateBackgroundCSS( videoBackgroundAttributes );
 
 	const selectors = {
 		'.wp-block-uagb-container .block-editor-block-list__block': {
-			color: textColor,
+			'color': textColor,
 		},
 		'.wp-block-uagb-container h1': {
-			color: textColor,
+			'color': textColor,
 		},
 		'.wp-block-uagb-container h2': {
-			color: textColor,
+			'color': textColor,
 		},
 		'.wp-block-uagb-container h3': {
-			color: textColor,
+			'color': textColor,
 		},
 		'.wp-block-uagb-container h4': {
-			color: textColor,
+			'color': textColor,
 		},
 		'.wp-block-uagb-container h5': {
-			color: textColor,
+			'color': textColor,
 		},
 		'.wp-block-uagb-container h6': {
-			color: textColor,
+			'color': textColor,
 		},
 		'.wp-block-uagb-container .block-editor-block-list__block a': {
-			color: linkColor,
+			'color': linkColor,
 		},
 		'.wp-block-uagb-container .block-editor-block-list__block a:hover': {
-			color: linkHoverColor,
+			'color': linkHoverColor,
 		},
 		' > .uagb-container__shape-top svg': {
-			width: 'calc( ' + topWidth + '% + 1.3px )',
-			height: generateCSSUnit( topHeight, 'px' ),
+			'width': 'calc( ' + topWidth + '% + 1.3px )',
+			'height': generateCSSUnit( topHeight, 'px' ),
 		},
 		' > .uagb-container__shape-top .uagb-container__shape-fill': {
-			fill: topColor,
+			'fill': topColor,
 		},
 		' > .uagb-container__shape-bottom svg': {
-			width: 'calc( ' + bottomWidth + '% + 1.3px )',
-			height: generateCSSUnit( bottomHeight, 'px' ),
+			'width': 'calc( ' + bottomWidth + '% + 1.3px )',
+			'height': generateCSSUnit( bottomHeight, 'px' ),
 		},
 		' > .uagb-container__shape-bottom .uagb-container__shape-fill': {
-			fill: bottomColor,
+			'fill': bottomColor,
 		},
 		' .uagb-container__video-wrap video': {
-			opacity: backgroundVideoOpacityValue,
+			'opacity': backgroundVideoOpacityValue,
 		},
 	};
 
 	const backgroundAttributesDesktop = {
-		backgroundType: backgroundType,
-		backgroundImage: backgroundImageDesktop,
-		backgroundColor: backgroundColor,
-		gradientValue: gradientValue,
-		gradientColor1: gradientColor1,
-		gradientColor2: gradientColor2,
-		gradientLocation1: gradientLocation1,
-		gradientLocation2: gradientLocation2,
-		gradientType: gradientType,
-		gradientAngle: gradientAngle,
-		selectGradient: selectGradient,
-		backgroundRepeat: backgroundRepeatDesktop,
-		backgroundPosition: backgroundPositionDesktop,
-		backgroundSize: backgroundSizeDesktop,
-		backgroundAttachment: backgroundAttachmentDesktop,
-		backgroundCustomSize: backgroundCustomSizeDesktop,
-		backgroundCustomSizeType: backgroundCustomSizeType,
-		backgroundImageColor: backgroundImageColor,
-		overlayType: overlayType,
-		backgroundVideo: backgroundVideo,
-		backgroundVideoColor: backgroundVideoColor,
-		customPosition: customPosition,
-		xPosition: xPositionDesktop,
-		xPositionType: xPositionType,
-		yPosition: yPositionDesktop,
-		yPositionType: yPositionType,
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageDesktop,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'gradientColor1': gradientColor1,
+		'gradientColor2': gradientColor2,
+		'gradientLocation1': gradientLocation1,
+		'gradientLocation2': gradientLocation2,
+		'gradientType': gradientType,
+		'gradientAngle': gradientAngle,
+		'selectGradient': selectGradient,
+		'backgroundRepeat': backgroundRepeatDesktop,
+		'backgroundPosition': backgroundPositionDesktop,
+		'backgroundSize': backgroundSizeDesktop,
+		'backgroundAttachment': backgroundAttachmentDesktop,
+		'backgroundCustomSize': backgroundCustomSizeDesktop,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
+		'backgroundVideo': backgroundVideo,
+		'backgroundVideoColor': backgroundVideoColor,
+		'customPosition': customPosition,
+		'xPosition': xPositionDesktop,
+		'xPositionType': xPositionType,
+		'yPosition': yPositionDesktop,
+		'yPositionType': yPositionType,
 	};
 
 	const containerBackgroundCSSDesktop = generateBackgroundCSS( backgroundAttributesDesktop );
@@ -359,7 +359,7 @@ function styling( props ) {
 			boxShadowPositionCSS,
 		'min-height': generateCSSUnit( minHeightDesktop, minHeightType ),
 		...borderCSS,
-		overflow: overflow,
+		'overflow': overflow,
 	};
 
 	boxShadowBlurHover = isNaN( boxShadowBlurHover ) ? '' : boxShadowBlurHover;
@@ -394,21 +394,21 @@ function styling( props ) {
 	const widthSelectorsDesktop = {
 		[ `.is-root-container > .block-editor-block-list__block .block-editor-block-list__block#block-${ props.clientId } ` ]: {
 			'max-width': generateCSSUnit( widthDesktopFallback, widthType ),
-			width: '100%',
+			'width': '100%',
 		},
 	};
 
 	const widthSelectorsTablet = {
 		[ `.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-tablet.block-editor-block-list__block#block-${ props.clientId } ` ]: {
 			'max-width': generateCSSUnit( widthTablet, widthTypeTablet ),
-			width: '100%',
+			'width': '100%',
 		},
 	};
 
 	const widthSelectorsMobile = {
 		[ `.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-mobile.block-editor-block-list__block#block-${ props.clientId } ` ]: {
 			'max-width': generateCSSUnit( widthMobile, widthTypeMobile ),
-			width: '100%',
+			'width': '100%',
 		},
 	};
 
@@ -418,7 +418,7 @@ function styling( props ) {
 		] = {
 			'--inner-content-custom-width': `min(${ containerFullWidth },${ innerContentCustomWidthDesktopFallback }${ innerContentCustomWidthType })`,
 			'max-width': 'var(--inner-content-custom-width)',
-			width: '100%',
+			'width': '100%',
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
@@ -430,7 +430,7 @@ function styling( props ) {
 				innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback
 			}${ innerContentCustomWidthTypeTablet })`,
 			'max-width': 'var(--inner-content-custom-width)',
-			width: '100%',
+			'width': '100%',
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
@@ -442,39 +442,39 @@ function styling( props ) {
 				innerContentCustomWidthMobile || innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback
 			}${ innerContentCustomWidthTypeMobile })`,
 			'max-width': 'var(--inner-content-custom-width)',
-			width: '100%',
+			'width': '100%',
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
 	}
 
 	const backgroundAttributesTablet = {
-		backgroundType: backgroundType,
-		backgroundImage: backgroundImageTablet,
-		backgroundColor: backgroundColor,
-		gradientValue: gradientValue,
-		gradientColor1: gradientColor1,
-		gradientColor2: gradientColor2,
-		gradientLocation1: gradientLocation1,
-		gradientLocation2: gradientLocation2,
-		gradientType: gradientType,
-		gradientAngle: gradientAngle,
-		selectGradient: selectGradient,
-		backgroundRepeat: backgroundRepeatTablet,
-		backgroundPosition: backgroundPositionTablet,
-		backgroundSize: backgroundSizeTablet,
-		backgroundAttachment: backgroundAttachmentTablet,
-		backgroundCustomSize: backgroundCustomSizeTablet,
-		backgroundCustomSizeType: backgroundCustomSizeType,
-		backgroundImageColor: backgroundImageColor,
-		overlayType: overlayType,
-		backgroundVideo: backgroundVideo,
-		backgroundVideoColor: backgroundVideoColor,
-		customPosition: customPosition,
-		xPosition: xPositionTablet,
-		xPositionType: xPositionTypeTablet,
-		yPosition: yPositionTablet,
-		yPositionType: yPositionTypeTablet,
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageTablet,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'gradientColor1': gradientColor1,
+		'gradientColor2': gradientColor2,
+		'gradientLocation1': gradientLocation1,
+		'gradientLocation2': gradientLocation2,
+		'gradientType': gradientType,
+		'gradientAngle': gradientAngle,
+		'selectGradient': selectGradient,
+		'backgroundRepeat': backgroundRepeatTablet,
+		'backgroundPosition': backgroundPositionTablet,
+		'backgroundSize': backgroundSizeTablet,
+		'backgroundAttachment': backgroundAttachmentTablet,
+		'backgroundCustomSize': backgroundCustomSizeTablet,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
+		'backgroundVideo': backgroundVideo,
+		'backgroundVideoColor': backgroundVideoColor,
+		'customPosition': customPosition,
+		'xPosition': xPositionTablet,
+		'xPositionType': xPositionTypeTablet,
+		'yPosition': yPositionTablet,
+		'yPositionType': yPositionTypeTablet,
 	};
 
 	const containerBackgroundCSSTablet = generateBackgroundCSS( backgroundAttributesTablet );
@@ -499,40 +499,40 @@ function styling( props ) {
 			'align-content': alignContentTablet,
 		},
 		' > .uagb-container__shape-top svg': {
-			height: generateCSSUnit( topHeightTablet, 'px' ),
+			'height': generateCSSUnit( topHeightTablet, 'px' ),
 		},
 		' > .uagb-container__shape-bottom svg': {
-			height: generateCSSUnit( bottomHeightTablet, 'px' ),
+			'height': generateCSSUnit( bottomHeightTablet, 'px' ),
 		},
 	};
 
 	const backgroundAttributesMobile = {
-		backgroundType: backgroundType,
-		backgroundImage: backgroundImageMobile,
-		backgroundColor: backgroundColor,
-		gradientValue: gradientValue,
-		gradientColor1: gradientColor1,
-		gradientColor2: gradientColor2,
-		gradientLocation1: gradientLocation1,
-		gradientLocation2: gradientLocation2,
-		gradientType: gradientType,
-		gradientAngle: gradientAngle,
-		selectGradient: selectGradient,
-		backgroundRepeat: backgroundRepeatMobile,
-		backgroundPosition: backgroundPositionMobile,
-		backgroundSize: backgroundSizeMobile,
-		backgroundAttachment: backgroundAttachmentMobile,
-		backgroundCustomSize: backgroundCustomSizeMobile,
-		backgroundCustomSizeType: backgroundCustomSizeType,
-		backgroundImageColor: backgroundImageColor,
-		overlayType: overlayType,
-		backgroundVideo: backgroundVideo,
-		backgroundVideoColor: backgroundVideoColor,
-		customPosition: customPosition,
-		xPosition: xPositionMobile,
-		xPositionType: xPositionTypeMobile,
-		yPosition: yPositionMobile,
-		yPositionType: yPositionTypeMobile,
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageMobile,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'gradientColor1': gradientColor1,
+		'gradientColor2': gradientColor2,
+		'gradientLocation1': gradientLocation1,
+		'gradientLocation2': gradientLocation2,
+		'gradientType': gradientType,
+		'gradientAngle': gradientAngle,
+		'selectGradient': selectGradient,
+		'backgroundRepeat': backgroundRepeatMobile,
+		'backgroundPosition': backgroundPositionMobile,
+		'backgroundSize': backgroundSizeMobile,
+		'backgroundAttachment': backgroundAttachmentMobile,
+		'backgroundCustomSize': backgroundCustomSizeMobile,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
+		'backgroundVideo': backgroundVideo,
+		'backgroundVideoColor': backgroundVideoColor,
+		'customPosition': customPosition,
+		'xPosition': xPositionMobile,
+		'xPositionType': xPositionTypeMobile,
+		'yPosition': yPositionMobile,
+		'yPositionType': yPositionTypeMobile,
 	};
 
 	const containerBackgroundCSSMobile = generateBackgroundCSS( backgroundAttributesMobile );
@@ -557,10 +557,10 @@ function styling( props ) {
 			'align-content': alignContentMobile,
 		},
 		' > .uagb-container__shape-top svg': {
-			height: generateCSSUnit( topHeightMobile, 'px' ),
+			'height': generateCSSUnit( topHeightMobile, 'px' ),
 		},
 		' > .uagb-container__shape-bottom svg': {
-			height: generateCSSUnit( bottomHeightMobile, 'px' ),
+			'height': generateCSSUnit( bottomHeightMobile, 'px' ),
 		},
 	};
 
@@ -597,7 +597,7 @@ function styling( props ) {
 				' ' +
 				boxShadowPositionCSS,
 			'min-height': generateCSSUnit( minHeightDesktop, minHeightType ),
-			overflow: overflow,
+			'overflow': overflow,
 		};
 		tablet_selectors[ '.wp-block' ] = {
 			'padding-top': generateCSSUnit( topPaddingTablet, paddingTypeTablet ),

@@ -359,7 +359,7 @@ const Background = ( props ) => {
 											},
 										} }
 										min={ 0 }
-										limitMax={ { px: 1600, '%': 100, em: 574 } }
+										limitMax={ { 'px': 1600, '%': 100, 'em': 574 } }
 										unit={ {
 											value: backgroundCustomSizeType.value,
 											label: backgroundCustomSizeType.label,
@@ -443,8 +443,8 @@ const Background = ( props ) => {
 													},
 												},
 											} }
-											limitMin={ { px: -800, '%': -100, em: -100, vw: -100 } }
-											limitMax={ { px: 800, '%': 100, em: 100, vw: 100 } }
+											limitMin={ { 'px': -800, '%': -100, 'em': -100, 'vw': -100 } }
+											limitMax={ { 'px': 800, '%': 100, 'em': 100, 'vw': 100 } }
 											units={ [
 												{
 													name: __( 'PX', 'ultimate-addons-for-gutenberg' ),
@@ -495,8 +495,8 @@ const Background = ( props ) => {
 													},
 												},
 											} }
-											limitMin={ { px: -800, '%': -100, em: -100, vh: -100 } }
-											limitMax={ { px: 800, '%': 100, em: 100, vh: 100 } }
+											limitMin={ { 'px': -800, '%': -100, 'em': -100, 'vh': -100 } }
+											limitMax={ { 'px': 800, '%': 100, 'em': 100, 'vh': 100 } }
 											units={ [
 												{
 													name: __( 'PX', 'ultimate-addons-for-gutenberg' ),
@@ -597,7 +597,7 @@ const Background = ( props ) => {
 										label={ __( 'Width', 'ultimate-addons-for-gutenberg' ) }
 										data={ backgroundCustomSize }
 										min={ 0 }
-										limitMax={ { px: 1600, '%': 100, em: 574 } }
+										limitMax={ { 'px': 1600, '%': 100, 'em': 574 } }
 										unit={ {
 											value: backgroundCustomSizeType.value,
 											label: backgroundCustomSizeType.label,

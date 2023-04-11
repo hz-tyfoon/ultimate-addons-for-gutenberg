@@ -26,35 +26,35 @@ function styling( props ) {
 
 	const selectors = {
 		'.uagb-lottie__outer-wrap': {
-			width: widthFallback,
-			height: heightFallback,
-			background: backgroundColor,
+			'width': widthFallback,
+			'height': heightFallback,
+			'background': backgroundColor,
 		},
 		'.uagb-lottie__outer-wrap:hover': {
-			background: backgroundHColor,
+			'background': backgroundHColor,
 		},
 		' .lf-player-container #lottie': {
-			height: heightFallback,
+			'height': heightFallback,
 		},
 	};
 
 	const tablet_selectors = {
 		'.uagb-lottie__outer-wrap': {
-			width: widthTabletFallback,
-			height: heightTabletFallback,
+			'width': widthTabletFallback,
+			'height': heightTabletFallback,
 		},
 		' .lf-player-container #lottie': {
-			height: heightTabletFallback,
+			'height': heightTabletFallback,
 		},
 	};
 
 	const mobile_selectors = {
 		'.uagb-lottie__outer-wrap': {
-			width: widthMobFallback,
-			height: heightMobFallback,
+			'width': widthMobFallback,
+			'height': heightMobFallback,
 		},
 		' .lf-player-container #lottie': {
-			height: heightMobFallback,
+			'height': heightMobFallback,
 		},
 	};
 

@@ -90,32 +90,32 @@ const ReviewComponent = ( props ) => {
 		const jsonData = {
 			'@context': 'https://schema.org/',
 			'@type': 'Review',
-			reviewBody: summaryDescription,
-			description: rContent,
-			itemReviewed: [],
-			reviewRating: {
+			'reviewBody': summaryDescription,
+			'description': rContent,
+			'itemReviewed': [],
+			'reviewRating': {
 				'@type': 'Rating',
-				ratingValue: newAverage,
-				worstRating: '0',
-				bestRating: starCount,
+				'ratingValue': newAverage,
+				'worstRating': '0',
+				'bestRating': starCount,
 			},
-			author: {
+			'author': {
 				'@type': 'Person',
-				name: rAuthor,
+				'name': rAuthor,
 			},
-			publisher: reviewPublisher,
-			datePublished: datepublish,
-			url: ctaLink,
+			'publisher': reviewPublisher,
+			'datePublished': datepublish,
+			'url': ctaLink,
 		};
 
 		switch ( itemType ) {
 			case 'Book':
 				jsonData.itemReviewed = {
 					'@type': itemtype,
-					name: rTitle,
-					description: rContent,
-					image: [],
-					author: rAuthor,
+					'name': rTitle,
+					'description': rContent,
+					'image': [],
+					'author': rAuthor,
 					isbn,
 				};
 				break;
@@ -123,9 +123,9 @@ const ReviewComponent = ( props ) => {
 			case 'Course':
 				jsonData.itemReviewed = {
 					'@type': itemType,
-					name: rTitle,
-					description: rContent,
-					image: [],
+					'name': rTitle,
+					'description': rContent,
+					'image': [],
 					provider,
 				};
 				break;
@@ -133,26 +133,26 @@ const ReviewComponent = ( props ) => {
 			case 'Product':
 				jsonData.itemReviewed = {
 					'@type': itemtype,
-					name: rTitle,
-					description: rContent,
-					image: [],
+					'name': rTitle,
+					'description': rContent,
+					'image': [],
 					sku,
-					brand: {
+					'brand': {
 						'@type': 'Brand',
-						name: brand,
+						'name': brand,
 					},
-					offers: [],
+					'offers': [],
 				};
 				break;
 
 			case 'Movie':
 				jsonData.itemReviewed = {
 					'@type': itemType,
-					name: rTitle,
-					dateCreated: datecreated,
-					director: {
+					'name': rTitle,
+					'dateCreated': datecreated,
+					'director': {
 						'@type': 'Person',
-						name: directorname,
+						'name': directorname,
 					},
 				};
 				break;
@@ -160,19 +160,19 @@ const ReviewComponent = ( props ) => {
 			case 'SoftwareApplication':
 				jsonData.itemReviewed = {
 					'@type': itemtype,
-					name: rTitle,
-					applicationCategory: appCategory,
+					'name': rTitle,
+					'applicationCategory': appCategory,
 					operatingSystem,
-					aggregateRating: {
+					'aggregateRating': {
 						'@type': aggregateType,
-						ratingValue: newAverage,
-						ratingCount: newAverageCount,
+						'ratingValue': newAverage,
+						'ratingCount': newAverageCount,
 					},
-					offers: {
+					'offers': {
 						'@type': offerType,
-						price: offerPrice,
-						url: ctaLink,
-						priceCurrency: offerCurrency,
+						'price': offerPrice,
+						'url': ctaLink,
+						'priceCurrency': offerCurrency,
 					},
 				};
 				break;
@@ -189,11 +189,11 @@ const ReviewComponent = ( props ) => {
 			jsonData.itemReviewed[ identifierType ] = identifier;
 			jsonData.itemReviewed.offers = {
 				'@type': offerType,
-				price: offerPrice,
-				url: ctaLink,
-				priceValidUntil: offerExpiry,
-				priceCurrency: offerCurrency,
-				availability: offerStatus,
+				'price': offerPrice,
+				'url': ctaLink,
+				'priceValidUntil': offerExpiry,
+				'priceCurrency': offerCurrency,
+				'availability': offerStatus,
 			};
 		}
 

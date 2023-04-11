@@ -61,25 +61,25 @@ function styling( props ) {
 			'padding-left': generateCSSUnit( childLeftPadding, childPaddingUnit ),
 		},
 		'.wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap svg': {
-			color: icon_color,
-			fill: icon_color,
+			'color': icon_color,
+			'fill': icon_color,
 		},
 		'.wp-block-uagb-icon-list-child:hover .uagb-icon-list__source-wrap svg': {
-			color: icon_hover_color,
-			fill: icon_hover_color,
+			'color': icon_hover_color,
+			'fill': icon_hover_color,
 		},
 		'.wp-block-uagb-icon-list-child .uagb-icon-list__label': {
-			color: label_color,
+			'color': label_color,
 		},
 		'.wp-block-uagb-icon-list-child:hover .uagb-icon-list__label': {
-			color: label_hover_color,
+			'color': label_hover_color,
 		},
 		'.wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap': {
-			background: icon_bg_color,
+			'background': icon_bg_color,
 			'border-color': icon_border_color,
 		},
 		'.wp-block-uagb-icon-list-child:hover .uagb-icon-list__source-wrap': {
-			background: icon_bg_hover_color,
+			'background': icon_bg_hover_color,
 			'border-color': icon_border_hover_color,
 		},
 	};
