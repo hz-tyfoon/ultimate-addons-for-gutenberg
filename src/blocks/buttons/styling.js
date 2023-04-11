@@ -73,6 +73,10 @@ function styling( props ) {
 
 	} = props.attributes;
 
+	const gapFallback = getFallbackNumber( gap, 'gap', blockName );
+	const gapTabletFallback = getFallbackNumber( gapTablet, 'gapTablet', blockName );
+	const gapMobileFallback = getFallbackNumber( gapMobile, 'gapMobile', blockName ); 
+
 	const selectors = {};
 	const tabletSelectors = {};
 	const mobileSelectors = {};
@@ -111,53 +115,53 @@ function styling( props ) {
 	if ( 'desktop' === stack ) {
 		selectors[ '.uagb-editor-preview-mode-desktop .uagb-buttons-stack-desktop .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
+			'row-gap': generateCSSUnit( gapFallback, 'px' ),
 		};
 		tabletSelectors[ '.uagb-editor-preview-mode-tablet .uagb-buttons-stack-desktop .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapTablet, 'px' )
+			'row-gap': generateCSSUnit( gapTabletFallback, 'px' )
 		};
 		mobileSelectors[ '.uagb-editor-preview-mode-mobile .uagb-buttons-stack-desktop .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapMobile, 'px' )
+			'row-gap': generateCSSUnit( gapMobileFallback, 'px' )
 		};
 	} else if ( 'tablet' === stack ) {
 		selectors[ '.uagb-editor-preview-mode-desktop .uagb-buttons-stack-tablet .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ) , 'px' ),
+			'column-gap': generateCSSUnit( gapFallback, 'px' ),
 			'align-items': 'center'
 		};
 		tabletSelectors['.uagb-editor-preview-mode-tablet .uagb-buttons-stack-tablet .block-editor-block-list__layout'] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapTablet, 'px' ),
+			'row-gap': generateCSSUnit( gapTabletFallback, 'px' ),
 		};
 		mobileSelectors['.uagb-editor-preview-mode-mobile .uagb-buttons-stack-tablet .block-editor-block-list__layout'] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapMobile, 'px' ),
+			'row-gap': generateCSSUnit( gapMobileFallback, 'px' ),
 		};
 
 	} else if ( 'mobile' === stack ) {
 		selectors[ '.uagb-editor-preview-mode-desktop .uagb-buttons-stack-mobile .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ) , 'px' ),
+			'column-gap': generateCSSUnit( gapFallback, 'px' ),
 			'align-items': 'center'
 		};
 		tabletSelectors[ '.uagb-editor-preview-mode-tablet .uagb-buttons-stack-mobile .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( gapTablet , 'px' ),
+			'column-gap': generateCSSUnit( gapTabletFallback, 'px' ),
 			'align-items': 'center'
 		};
 		mobileSelectors['.uagb-editor-preview-mode-mobile .uagb-buttons-stack-mobile .block-editor-block-list__layout'] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapMobile, 'px' ),
+			'row-gap': generateCSSUnit( gapMobileFallback, 'px' ),
 		};
 	} else if ( 'none' === stack ) {
-		selectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ) , 'px' ),
+		selectors[ '.uagb-editor-preview-mode-desktop .uagb-buttons-stack-none .block-editor-block-list__layout' ] = {
+			'column-gap': generateCSSUnit( gapFallback, 'px' ),
 			'align-items': 'center'
 		};
-		tabletSelectors[ '.uagb-editor-preview-mode-tablet .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( gapTablet , 'px' ),
+		tabletSelectors[ '.uagb-editor-preview-mode-tablet .uagb-buttons-stack-none .block-editor-block-list__layout' ] = {
+			'column-gap': generateCSSUnit( gapTabletFallback, 'px' ),
 		};
-		mobileSelectors['.uagb-editor-preview-mode-mobile .block-editor-block-list__layout'] = {
-			'column-gap': generateCSSUnit( gapMobile, 'px' ),
+		mobileSelectors['.uagb-editor-preview-mode-mobile .uagb-buttons-stack-none .block-editor-block-list__layout'] = {
+			'column-gap': generateCSSUnit( gapMobileFallback, 'px' ),
 		};
 	}
 
@@ -180,7 +184,7 @@ function styling( props ) {
 	} else {
 		tabletSelectors['.uagb-editor-preview-mode-tablet .block-editor-block-list__layout'] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
+			'row-gap': generateCSSUnit( gapFallback, 'px' ),
 		};
 		tabletSelectors[ '.uagb-editor-preview-mode-tablet .block-editor-block-list__layout' ] = {
 			'width': '100%'
@@ -196,7 +200,7 @@ function styling( props ) {
 	} else {
 		mobileSelectors['.uagb-editor-preview-mode-mobile .block-editor-block-list__layout'] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
+			'row-gap': generateCSSUnit( gapFallback, 'px' ),
 		};
 		mobileSelectors[ '.uagb-editor-preview-mode-mobile .block-editor-block-list__layout' ] = {
 			'width': '100%'
