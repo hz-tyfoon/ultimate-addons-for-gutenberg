@@ -132,7 +132,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSS,
 		},
@@ -143,7 +143,7 @@ function styling( props ) {
 		'.uagb-tabs__hstyle3-desktop .uagb-tab': {
 			'border-bottom-width': '0px',
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSS,
 		},
@@ -165,7 +165,7 @@ function styling( props ) {
 			'border-left': 0,
 			'border-right': 0,
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 		},
 		'.uagb-tabs__hstyle5-desktop .uagb-tab.uagb-tabs__active': {
@@ -175,7 +175,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSS,
 		},
@@ -188,7 +188,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSS,
 		},
@@ -199,7 +199,7 @@ function styling( props ) {
 		'.uagb-tabs__vstyle8-desktop .uagb-tab': {
 			'border-right-width': '0px',
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSS,
 		},
@@ -227,12 +227,12 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSS,
 		},
 		' > .uagb-tabs__panel .uagb-tab': {
-			'background': headerBgColor,
+			background: headerBgColor,
 			'text-align': titleAlign,
 			'margin-top': generateCSSUnit( tabTitleTopMargin, tabTitleMarginUnit ),
 			'margin-left': generateCSSUnit( tabTitleLeftMargin, tabTitleMarginUnit ),
@@ -246,7 +246,7 @@ function styling( props ) {
 			'padding-right': generateCSSUnit( tabTitleRightPadding, tabTitlePaddingUnit ),
 		},
 		' > .uagb-tabs__panel .uagb-tab a > p': {
-			'color': headerTextColor,
+			color: headerTextColor,
 			'font-family': titleFontFamily,
 			'font-weight': titleFontWeight,
 			'font-size': generateCSSUnit( titleFontSize, titleFontSizeType ),
@@ -257,16 +257,16 @@ function styling( props ) {
 			'font-style': titleFontStyle,
 		},
 		' > .uagb-tabs__panel .uagb-tab.uagb-tabs__active ': {
-			'background': activeTabBgColor,
+			background: activeTabBgColor,
 		},
 		' > .uagb-tabs__panel .uagb-tab.uagb-tabs__active p': {
-			'color': activeTabTextColor,
+			color: activeTabTextColor,
 		},
 		' > .uagb-tabs__panel .uagb-tab.uagb-tabs__active .uagb-tabs__icon svg': {
-			'fill': activeiconColor,
+			fill: activeiconColor,
 		},
 		' > .uagb-tabs__body-wrap ': {
-			'background': bodyBgColor,
+			background: bodyBgColor,
 			'padding-top': generateCSSUnit( tabBodyTopPadding, tabBodyPaddingUnit ),
 			'padding-bottom': generateCSSUnit( tabBodyBottomPadding, tabBodyPaddingUnit ),
 			'padding-left': generateCSSUnit( tabBodyLeftPadding, tabBodyPaddingUnit ),
@@ -277,12 +277,12 @@ function styling( props ) {
 			'margin-bottom': generateCSSUnit( tabBodyBottomMargin, tabBodyMarginUnit ),
 		},
 		' > .uagb-tabs__body-wrap > .block-editor-inner-blocks p': {
-			'color': bodyTextColor,
+			color: bodyTextColor,
 		},
 		' .uagb-tabs__icon svg': {
-			'height': generateCSSUnit( iconSizeFallback, 'px' ),
-			'width': generateCSSUnit( iconSizeFallback, 'px' ),
-			'fill': iconColor,
+			height: generateCSSUnit( iconSizeFallback, 'px' ),
+			width: generateCSSUnit( iconSizeFallback, 'px' ),
+			fill: iconColor,
 		},
 		'.uagb-tabs__wrap > .uagb-tabs__panel .uagb-tab:hover': {
 			'border-color': tabBorderHColor,
@@ -316,7 +316,7 @@ function styling( props ) {
 		};
 	} else {
 		selectors[ ' .uagb-tabs__panel' ] = {
-			'margin': 'auto',
+			margin: 'auto',
 		};
 	}
 
@@ -334,7 +334,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSTablet,
 		},
@@ -345,7 +345,7 @@ function styling( props ) {
 		'.uagb-tabs__hstyle3-tablet .uagb-tab': {
 			'border-bottom-width': '0px',
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSTablet,
 		},
@@ -367,7 +367,7 @@ function styling( props ) {
 			'border-left': 0,
 			'border-right': 0,
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 		},
 		'.uagb-tabs__hstyle5-tablet .uagb-tab.uagb-tabs__active': {
@@ -377,7 +377,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSTablet,
 		},
@@ -390,7 +390,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSTablet,
 		},
@@ -401,7 +401,7 @@ function styling( props ) {
 		'.uagb-tabs__vstyle8-tablet .uagb-tab': {
 			'border-right-width': '0px',
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSTablet,
 		},
@@ -429,13 +429,13 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSTablet,
 		},
 		' .uagb-tabs__icon svg': {
-			'height': generateCSSUnit( iconSizeTablet, 'px' ),
-			'width': generateCSSUnit( iconSizeTablet, 'px' ),
+			height: generateCSSUnit( iconSizeTablet, 'px' ),
+			width: generateCSSUnit( iconSizeTablet, 'px' ),
 		},
 		' > .uagb-tabs__panel .uagb-tab p': {
 			'font-size': generateCSSUnit( titleFontSizeTablet, titleFontSizeType ),
@@ -493,7 +493,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
@@ -504,7 +504,7 @@ function styling( props ) {
 		'.uagb-tabs__hstyle3-mobile .uagb-tab': {
 			'border-bottom-width': '0px',
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
@@ -526,7 +526,7 @@ function styling( props ) {
 			'border-left': 0,
 			'border-right': 0,
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 		},
 		'.uagb-tabs__hstyle5-mobile .uagb-tab.uagb-tabs__active': {
@@ -536,7 +536,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
@@ -549,7 +549,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
@@ -560,7 +560,7 @@ function styling( props ) {
 		'.uagb-tabs__vstyle8-mobile .uagb-tab': {
 			'border-right-width': '0px',
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
@@ -588,7 +588,7 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
@@ -597,7 +597,7 @@ function styling( props ) {
 		'.uagb-tabs__stack12-mobile .uagb-tab': {
 			'border-bottom-width': '0px',
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
@@ -617,7 +617,7 @@ function styling( props ) {
 			'border-left': 0,
 			'border-right': 0,
 			'border-bottom': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 		},
 		'.uagb-tabs__stack14-mobile .uagb-tab.uagb-tabs__active': {
@@ -627,14 +627,14 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
 
 		' .uagb-tabs__icon svg': {
-			'height': generateCSSUnit( iconSizeMobile, 'px' ),
-			'width': generateCSSUnit( iconSizeMobile, 'px' ),
+			height: generateCSSUnit( iconSizeMobile, 'px' ),
+			width: generateCSSUnit( iconSizeMobile, 'px' ),
 		},
 		' > .uagb-tabs__panel .uagb-tab p': {
 			'font-size': generateCSSUnit( titleFontSizeMobile, titleFontSizeType ),

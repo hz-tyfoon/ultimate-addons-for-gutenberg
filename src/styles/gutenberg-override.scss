@@ -160,13 +160,13 @@
 				border-radius: $spectra-control-border-radius;
 			}
 
-			&__field input[type="text"] {
+			&__field input[type='text'] {
 				color: $spectra-color-body;
 				border-color: $spectra-color-border;
 				border-radius: $spectra-control-border-radius;
 				padding: $spectra-control-input-padding;
 				// Separate Padding Right to avoid Overflow under Reset Button. Right Padding + Button Width.
-				padding-right: calc(12px + 16px);
+				padding-right: calc( 12px + 16px );
 
 				&:focus {
 					border-color: $spectra-color-border-hover;
@@ -342,7 +342,7 @@
 		// Update the Spearator Color and Height to match the style guidelines.
 		.components-datetime__time-separator {
 			border-color: $spectra-color-border;
-			line-height: calc(#{$spectra-control-input-height} - 2px);
+			line-height: calc( #{$spectra-control-input-height} - 2px );
 		}
 
 		// Reduce the height for all the input fields in the date-time control.

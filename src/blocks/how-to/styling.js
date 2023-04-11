@@ -94,7 +94,7 @@ function styling( props ) {
 			'font-weight': subHeadFontWeight,
 			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
-			'color': subHeadingColor,
+			color: subHeadingColor,
 			'letter-spacing': generateCSSUnit( subHeadLetterSpacing, subHeadLetterSpacingType ),
 		},
 		'.uagb-how-to-main-wrap p': {
@@ -149,7 +149,7 @@ function styling( props ) {
 			'font-weight': priceFontWeight,
 			'font-size': generateCSSUnit( priceFontSize, priceFontSizeType ),
 			'line-height': generateCSSUnit( priceLineHeight, priceLineHeightType ),
-			'color': showTotaltimecolor,
+			color: showTotaltimecolor,
 			'letter-spacing': generateCSSUnit( priceLetterSpacing, priceLetterSpacingType ),
 		},
 		' .uagb-howto-timeNeeded-value': {
@@ -160,7 +160,7 @@ function styling( props ) {
 			'font-weight': subHeadFontWeight,
 			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
-			'color': subHeadingColor,
+			color: subHeadingColor,
 			'margin-left': generateCSSUnit( getFallbackNumber( timeSpace, 'timeSpace', blockName ), 'px' ),
 		},
 		' .uagb-howto-timeINmin-text ': {
@@ -171,7 +171,7 @@ function styling( props ) {
 			'font-weight': subHeadFontWeight,
 			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
-			'color': subHeadingColor,
+			color: subHeadingColor,
 		},
 		' .block-editor-rich-text__editable.uagb-howto-estcost-text': {
 			'font-family': priceFontFamily,
@@ -181,7 +181,7 @@ function styling( props ) {
 			'font-weight': priceFontWeight,
 			'font-size': generateCSSUnit( priceFontSize, priceFontSizeType ),
 			'line-height': generateCSSUnit( priceLineHeight, priceLineHeightType ),
-			'color': showTotaltimecolor,
+			color: showTotaltimecolor,
 		},
 		' .block-editor-rich-text__editable.uagb-howto-estcost-value': {
 			'font-family': subHeadFontFamily,
@@ -191,7 +191,7 @@ function styling( props ) {
 			'font-weight': subHeadFontWeight,
 			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
-			'color': subHeadingColor,
+			color: subHeadingColor,
 			'margin-left': generateCSSUnit( getFallbackNumber( costSpace, 'costSpace', blockName ), 'px' ),
 		},
 
@@ -222,7 +222,7 @@ function styling( props ) {
 			'font-weight': subHeadFontWeight,
 			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
-			'color': subHeadingColor,
+			color: subHeadingColor,
 		},
 
 		' .block-editor-rich-text__editable.uagb-howto-req-tools-text': {
@@ -233,7 +233,7 @@ function styling( props ) {
 			'font-weight': priceFontWeight,
 			'font-size': generateCSSUnit( priceFontSize, priceFontSizeType ),
 			'line-height': generateCSSUnit( priceLineHeight, priceLineHeightType ),
-			'color': showTotaltimecolor,
+			color: showTotaltimecolor,
 		},
 
 		'  .block-editor-rich-text__editable.uagb-tools__label': {
@@ -244,7 +244,7 @@ function styling( props ) {
 			'font-weight': subHeadFontWeight,
 			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
-			'color': subHeadingColor,
+			color: subHeadingColor,
 		},
 
 		' .block-editor-rich-text__editable.uagb-howto-req-materials-text': {
@@ -255,7 +255,7 @@ function styling( props ) {
 			'font-weight': priceFontWeight,
 			'font-size': generateCSSUnit( priceFontSize, priceFontSizeType ),
 			'line-height': generateCSSUnit( priceLineHeight, priceLineHeightType ),
-			'color': showTotaltimecolor,
+			color: showTotaltimecolor,
 		},
 
 		' .block-editor-rich-text__editable.uagb-howto-req-steps-text': {
@@ -266,7 +266,7 @@ function styling( props ) {
 			'font-weight': priceFontWeight,
 			'font-size': generateCSSUnit( priceFontSize, priceFontSizeType ),
 			'line-height': generateCSSUnit( priceLineHeight, priceLineHeightType ),
-			'color': showTotaltimecolor,
+			color: showTotaltimecolor,
 		},
 
 		' .block-editor-rich-text__editable.uagb-materials__label': {
@@ -277,13 +277,13 @@ function styling( props ) {
 			'font-weight': subHeadFontWeight,
 			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
-			'color': subHeadingColor,
+			color: subHeadingColor,
 		},
 	};
 
 	selectors[ '.uagb-how-to-main-wrap' ] = {
 		'text-align': overallAlignment,
-		'display': 'block',
+		display: 'block',
 	};
 
 	selectors[ ' ' + headingTag + '.block-editor-rich-text__editable.uagb-howto-heading-text' ] = {
@@ -294,7 +294,7 @@ function styling( props ) {
 		'font-weight': headFontWeight,
 		'font-size': generateCSSUnit( headFontSize, headFontSizeType ),
 		'line-height': generateCSSUnit( headLineHeight, headLineHeightType ),
-		'color': headingColor,
+		color: headingColor,
 		'margin-bottom': generateCSSUnit( headSpace, 'px' ),
 		'letter-spacing': generateCSSUnit( headLetterSpacing, headLetterSpacingType ),
 	};

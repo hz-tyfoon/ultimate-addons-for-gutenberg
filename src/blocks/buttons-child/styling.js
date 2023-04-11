@@ -133,7 +133,7 @@ function styling( props ) {
 			'margin-right': generateCSSUnit( rightMargin, marginType ),
 			'margin-top': generateCSSUnit( topMargin, marginType ),
 			'margin-bottom': generateCSSUnit( bottomMargin, marginType ),
-			'color': color,
+			color: color,
 			'box-shadow':
 				generateCSSUnit( boxShadowHOffset, 'px' ) +
 				' ' +
@@ -149,13 +149,13 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( letterSpacing, letterSpacingType ),
 		},
 		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover': {
-			'color': hColor,
+			color: hColor,
 		},
 		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover .uagb-button__link': {
-			'color': hColor,
+			color: hColor,
 		},
 		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__link': {
-			'color': color,
+			color: color,
 		},
 	};
 	selectors[ ' .wp-block-button__link.uagb-buttons-repeater' ] = borderCSS;
@@ -213,28 +213,28 @@ function styling( props ) {
 	};
 
 	selectors[ '.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__icon svg' ] = {
-		'width': generateCSSUnit( getFallbackNumber( iconSize, 'iconSize', blockName ), 'px' ),
-		'height': generateCSSUnit( getFallbackNumber( iconSize, 'iconSize', blockName ), 'px' ),
-		'fill': iconColor,
+		width: generateCSSUnit( getFallbackNumber( iconSize, 'iconSize', blockName ), 'px' ),
+		height: generateCSSUnit( getFallbackNumber( iconSize, 'iconSize', blockName ), 'px' ),
+		fill: iconColor,
 	};
 	tabletSelectors[
 		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__icon svg'
 	] = {
-		'width': generateCSSUnit( iconSizeTablet, 'px' ),
-		'height': generateCSSUnit( iconSizeTablet, 'px' ),
-		'fill': iconColor,
+		width: generateCSSUnit( iconSizeTablet, 'px' ),
+		height: generateCSSUnit( iconSizeTablet, 'px' ),
+		fill: iconColor,
 	};
 	mobileSelectors[
 		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__icon svg'
 	] = {
-		'width': generateCSSUnit( iconSizeMobile, 'px' ),
-		'height': generateCSSUnit( iconSizeMobile, 'px' ),
-		'fill': iconColor,
+		width: generateCSSUnit( iconSizeMobile, 'px' ),
+		height: generateCSSUnit( iconSizeMobile, 'px' ),
+		fill: iconColor,
 	};
 	selectors[
 		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover .uagb-button__icon > svg'
 	] = {
-		'fill': iconHColor,
+		fill: iconHColor,
 	};
 	if ( ! removeText ) {
 		selectors[ ' .uagb-button__icon-position-after' ] = {
@@ -262,44 +262,44 @@ function styling( props ) {
 
 	if ( 'transparent' === backgroundType ) {
 		selectors[ '.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater' ] = {
-			'background': 'transparent',
+			background: 'transparent',
 		};
 	} else if ( 'gradient' === backgroundType ) {
 		const backgroundAttributes = {
-			'backgroundType': 'gradient',
-			'gradientValue': gradientValue,
-			'gradientColor1': gradientColor1,
-			'gradientColor2': gradientColor2,
-			'gradientLocation1': gradientLocation1,
-			'gradientLocation2': gradientLocation2,
-			'gradientType': gradientType,
-			'gradientAngle': gradientAngle,
-			'selectGradient': selectGradient,
+			backgroundType: 'gradient',
+			gradientValue: gradientValue,
+			gradientColor1: gradientColor1,
+			gradientColor2: gradientColor2,
+			gradientLocation1: gradientLocation1,
+			gradientLocation2: gradientLocation2,
+			gradientType: gradientType,
+			gradientAngle: gradientAngle,
+			selectGradient: selectGradient,
 		};
 
 		const btnBackground = generateBackgroundCSS( backgroundAttributes );
 		selectors[ '.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater' ] = btnBackground;
 	} else if ( 'color' === backgroundType ) {
 		selectors[ '.uagb-buttons__outer-wrap.wp-block-button .wp-block-button__link.uagb-buttons-repeater' ] = {
-			'background': background,
+			background: background,
 		};
 	}
 
 	if ( 'transparent' === hoverbackgroundType ) {
 		selectors[ '.uagb-buttons__outer-wrap.wp-block-button .wp-block-button__link.uagb-buttons-repeater:hover' ] = {
-			'background': 'transparent',
+			background: 'transparent',
 		};
 	} else if ( 'gradient' === hoverbackgroundType ) {
 		const hoverbackgroundAttributes = {
-			'backgroundType': 'gradient',
-			'gradientValue': hovergradientValue,
-			'gradientColor1': hovergradientColor1,
-			'gradientColor2': hovergradientColor2,
-			'gradientLocation1': hovergradientLocation1,
-			'gradientLocation2': hovergradientLocation2,
-			'gradientType': hovergradientType,
-			'gradientAngle': hovergradientAngle,
-			'selectGradient': hoverselectGradient,
+			backgroundType: 'gradient',
+			gradientValue: hovergradientValue,
+			gradientColor1: hovergradientColor1,
+			gradientColor2: hovergradientColor2,
+			gradientLocation1: hovergradientLocation1,
+			gradientLocation2: hovergradientLocation2,
+			gradientType: hovergradientType,
+			gradientAngle: hovergradientAngle,
+			selectGradient: hoverselectGradient,
 		};
 
 		const btnhBackground = generateBackgroundCSS( hoverbackgroundAttributes );
@@ -308,7 +308,7 @@ function styling( props ) {
 		] = btnhBackground;
 	} else if ( 'color' === hoverbackgroundType ) {
 		selectors[ '.uagb-buttons__outer-wrap.wp-block-button .wp-block-button__link.uagb-buttons-repeater:hover' ] = {
-			'background': hBackground,
+			background: hBackground,
 		};
 	}
 	const id = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;

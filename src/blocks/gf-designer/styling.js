@@ -251,14 +251,14 @@ function styling( props ) {
 			'text-align': align,
 		},
 		' .wp-block-uagb-gf-styler form:not(input)': {
-			'color': fieldLabelColor,
+			color: fieldLabelColor,
 		},
 		' .gform_heading': {
 			'text-align': titleDescAlignment,
 		},
 		' input:not([type=submit])': {
 			'background-color': fieldBgColor,
-			'color': fieldInputColor,
+			color: fieldInputColor,
 			'border-style': fieldBorderStyle,
 			'border-color': fieldBorderColor,
 			'border-width': generateCSSUnit(
@@ -302,7 +302,7 @@ function styling( props ) {
 				'px'
 			),
 			'margin-bottom': generateCSSUnit( getFallbackNumber( fieldSpacing, 'fieldSpacing', blockName ), 'px' ),
-			'color': fieldInputColor,
+			color: fieldInputColor,
 			'font-size': generateCSSUnit( inputFontSize, inputFontSizeType ),
 			'font-family': inputFontFamily,
 			'font-style': inputFontStyle,
@@ -334,7 +334,7 @@ function styling( props ) {
 				'px'
 			),
 			'margin-bottom': generateCSSUnit( getFallbackNumber( fieldSpacing, 'fieldSpacing', blockName ), 'px' ),
-			'color': fieldInputColor,
+			color: fieldInputColor,
 			'font-size': generateCSSUnit( inputFontSize, inputFontSizeType ),
 			'font-family': inputFontFamily,
 			'font-style': inputFontStyle,
@@ -366,7 +366,7 @@ function styling( props ) {
 		},
 		' .gform_wrapper .gfield textarea': {
 			'background-color': fieldBgColor,
-			'color': fieldInputColor,
+			color: fieldInputColor,
 		},
 		' .gform_wrapper.gravity-theme .gfield textarea': {
 			'border-color': fieldBorderColor,
@@ -396,22 +396,22 @@ function styling( props ) {
 			'font-weight': inputFontWeight,
 			'line-height': generateCSSUnit( inputLineHeight, inputLineHeightType ),
 			'text-align': align,
-			'height':
+			height:
 				'auto' === getFallbackNumber( textAreaHeight, 'textAreaHeight', blockName )
 					? getFallbackNumber( textAreaHeight, 'textAreaHeight', blockName )
 					: getFallbackNumber( textAreaHeight, 'textAreaHeight', blockName ) + 'px',
 			'letter-spacing': generateCSSUnit( inputLetterSpacing, inputLetterSpacingType ),
 		},
 		' textarea::placeholder': {
-			'color': fieldInputColor,
+			color: fieldInputColor,
 			'text-align': align,
 		},
 		' input::placeholder': {
-			'color': fieldInputColor,
+			color: fieldInputColor,
 			'text-align': align,
 		},
 		' form .gfield_label': {
-			'color': fieldLabelColor,
+			color: fieldLabelColor,
 			'font-size': generateCSSUnit( labelFontSize, labelFontSizeType ),
 			'font-family': labelFontFamily,
 			'font-style': labelFontStyle,
@@ -422,7 +422,7 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( labelLetterSpacing, labelLetterSpacingType ),
 		},
 		' form .gfield_radio label.gfield_label': {
-			'color': fieldLabelColor,
+			color: fieldLabelColor,
 			'font-size': generateCSSUnit( labelFontSize, labelFontSizeType ),
 			'font-family': labelFontFamily,
 			'font-style': labelFontStyle,
@@ -433,7 +433,7 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( labelLetterSpacing, labelLetterSpacingType ),
 		},
 		' form .gfield_checkbox label.gfield_label': {
-			'color': fieldLabelColor,
+			color: fieldLabelColor,
 			'font-size': generateCSSUnit( labelFontSize, labelFontSizeType ),
 			'font-family': labelFontFamily,
 			'font-style': labelFontStyle,
@@ -463,7 +463,7 @@ function styling( props ) {
 
 		// Submit button.
 		' input.gform_button': {
-			'color': buttonTextColor,
+			color: buttonTextColor,
 			'background-color': buttonBgColor,
 			'font-size': generateCSSUnit( buttonFontSize, buttonFontSizeType ) + ' !important',
 			'font-family': buttonFontFamily,
@@ -489,12 +489,12 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( buttonLetterSpacing, buttonLetterSpacingType ),
 		},
 		':hover input.gform_button': {
-			'color': buttonTextHoverColor,
+			color: buttonTextHoverColor,
 			'background-color': buttonBgHoverColor,
 			'border-color': buttonBorderHoverColor,
 		},
 		':hover input.gform_next_button': {
-			'color': buttonTextHoverColor,
+			color: buttonTextHoverColor,
 			'background-color': buttonBgHoverColor,
 			'border-color': buttonBorderHoverColor,
 		},
@@ -567,9 +567,9 @@ function styling( props ) {
 		// Override check box.
 		" .uagb-gf-styler__check-style-enabled .gfield_checkbox input[type='checkbox'] + label:before": {
 			'background-color': radioCheckBgColor,
-			'color': radioCheckSelectColor,
-			'height': generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
-			'width': generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
+			color: radioCheckSelectColor,
+			height: generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
+			width: generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
 			'font-size': 'calc( ' + getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ) + 'px / 1.2 )',
 			'border-color': radioCheckBorderColor,
 			'border-style': 'solid',
@@ -587,9 +587,9 @@ function styling( props ) {
 		},
 		" .uagb-gf-styler__check-style-enabled input[type='checkbox'] + label:before": {
 			'background-color': radioCheckBgColor,
-			'color': radioCheckSelectColor,
-			'height': generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
-			'width': generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
+			color: radioCheckSelectColor,
+			height: generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
+			width: generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
 			'font-size': 'calc( ' + getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ) + 'px / 1.2 )',
 			'border-color': radioCheckBorderColor,
 			'border-width': generateCSSUnit(
@@ -604,9 +604,9 @@ function styling( props ) {
 		},
 		" .uagb-gf-styler__check-style-enabled .gfield_radio input[type='radio'] + label:before": {
 			'background-color': radioCheckBgColor,
-			'color': radioCheckSelectColor,
-			'height': generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
-			'width': generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
+			color: radioCheckSelectColor,
+			height: generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
+			width: generateCSSUnit( getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ), 'px' ),
 			'font-size': 'calc( ' + getFallbackNumber( radioCheckSize, 'radioCheckSize', blockName ) + 'px / 1.2 )',
 			'border-color': radioCheckBorderColor,
 			'border-width': generateCSSUnit(
@@ -630,7 +630,7 @@ function styling( props ) {
 			'text-transform': radioCheckTransform,
 			'font-weight': radioCheckFontWeight,
 			'line-height': generateCSSUnit( radioCheckLineHeight, radioCheckLineHeightType ),
-			'color': radioCheckLableColor,
+			color: radioCheckLableColor,
 			'letter-spacing': generateCSSUnit( radioCheckLetterSpacing, radioCheckLetterSpacingType ),
 		},
 		' .uagb-gf-styler__check-style-enabled form .gfield_checkbox label': {
@@ -641,12 +641,12 @@ function styling( props ) {
 			'text-transform': radioCheckTransform,
 			'font-weight': radioCheckFontWeight,
 			'line-height': generateCSSUnit( radioCheckLineHeight, radioCheckLineHeightType ),
-			'color': radioCheckLableColor,
+			color: radioCheckLableColor,
 			'letter-spacing': generateCSSUnit( radioCheckLetterSpacing, radioCheckLetterSpacingType ),
 		},
 
 		' .gform_wrapper .gfield_description.validation_message': {
-			'color': validationMsgColor,
+			color: validationMsgColor,
 		},
 		' .gform_wrapper .validation_message': {
 			'font-size': generateCSSUnit( validationMsgFontSize, validationMsgFontSizeType ),
@@ -718,7 +718,7 @@ function styling( props ) {
 		},
 
 		' .gform_wrapper div.validation_error': {
-			'color': errorMsgColor,
+			color: errorMsgColor,
 			'background-color': errorMsgBgColor,
 			'border-color': errorMsgBorderColor,
 			'border-style': 'solid',
@@ -745,7 +745,7 @@ function styling( props ) {
 		},
 
 		' .gform_confirmation_message': {
-			'color': successMsgColor,
+			color: successMsgColor,
 			'font-size': generateCSSUnit( successMsgFontSize, successMsgFontSizeType ),
 			'font-family': successMsgFontFamily,
 			'font-style': successMsgFontStyle,
@@ -775,11 +775,11 @@ function styling( props ) {
 				'calc( ' + getFallbackNumber( radioCheckSizeTablet, 'radioCheckSizeTablet', blockName ) + 'px / 1.2)',
 		},
 		" .uagb-gf-styler__check-style-enabled input[type='checkbox'] + label:before": {
-			'height': generateCSSUnit(
+			height: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeTablet, 'radioCheckSizeTablet', blockName ),
 				'px'
 			),
-			'width': generateCSSUnit(
+			width: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeTablet, 'radioCheckSizeTablet', blockName ),
 				'px'
 			),
@@ -792,18 +792,18 @@ function styling( props ) {
 		},
 		" .uagb-gf-styler__check-style-enabled .gfield_radio input[type='radio'] + label:before": {
 			'background-color': radioCheckBgColor,
-			'color': radioCheckSelectColor,
+			color: radioCheckSelectColor,
 			'border-color': radioCheckBorderColor,
 			'border-style': 'solid',
 			'border-radius': generateCSSUnit(
 				getFallbackNumber( radioCheckBorderRadius, 'radioCheckBorderRadius', blockName ),
 				radioCheckBorderRadiusType
 			),
-			'height': generateCSSUnit(
+			height: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeTablet, 'radioCheckSizeTablet', blockName ),
 				'px'
 			),
-			'width': generateCSSUnit(
+			width: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeTablet, 'radioCheckSizeTablet', blockName ),
 				'px'
 			),
@@ -816,18 +816,18 @@ function styling( props ) {
 		},
 		" .uagb-gf-styler__check-style-enabled .gfield_checkbox input[type='checkbox'] + label:before": {
 			'background-color': radioCheckBgColor,
-			'color': radioCheckSelectColor,
+			color: radioCheckSelectColor,
 			'border-color': radioCheckBorderColor,
 			'border-style': 'solid',
 			'border-radius': generateCSSUnit(
 				getFallbackNumber( radioCheckBorderRadius, 'radioCheckBorderRadius', blockName ),
 				radioCheckBorderRadiusType
 			),
-			'height': generateCSSUnit(
+			height: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeTablet, 'radioCheckSizeTablet', blockName ),
 				'px'
 			),
-			'width': generateCSSUnit(
+			width: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeTablet, 'radioCheckSizeTablet', blockName ),
 				'px'
 			),
@@ -888,7 +888,7 @@ function styling( props ) {
 				'px'
 			),
 			'letter-spacing': generateCSSUnit( inputLetterSpacingTablet, inputLetterSpacingType ),
-			'height':
+			height:
 				'auto' === getFallbackNumber( textAreaHeightTablet, 'textAreaHeightTablet', blockName )
 					? getFallbackNumber( textAreaHeightTablet, 'textAreaHeightTablet', blockName )
 					: getFallbackNumber( textAreaHeightTablet, 'textAreaHeightTablet', blockName ) + 'px',
@@ -924,7 +924,7 @@ function styling( props ) {
 				getFallbackNumber( buttonBorderWidthTablet, 'buttonBorderWidthTablet', blockName ),
 				buttonBorderWidthType
 			),
-			'color': buttonTextColor,
+			color: buttonTextColor,
 			'background-color': buttonBgColor,
 			'border-color': buttonBorderColor,
 			'border-style': buttonBorderStyle,
@@ -983,11 +983,11 @@ function styling( props ) {
 				'calc( ' + getFallbackNumber( radioCheckSizeMobile, 'radioCheckSizeMobile', blockName ) + 'px / 1.2)',
 		},
 		" .uagb-gf-styler__check-style-enabled input[type='checkbox'] + label:before": {
-			'height': generateCSSUnit(
+			height: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeMobile, 'radioCheckSizeMobile', blockName ),
 				'px'
 			),
-			'width': generateCSSUnit(
+			width: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeMobile, 'radioCheckSizeMobile', blockName ),
 				'px'
 			),
@@ -1000,18 +1000,18 @@ function styling( props ) {
 		},
 		" .uagb-gf-styler__check-style-enabled .gfield_radio input[type='radio'] + label:before": {
 			'background-color': radioCheckBgColor,
-			'color': radioCheckSelectColor,
+			color: radioCheckSelectColor,
 			'border-color': radioCheckBorderColor,
 			'border-style': 'solid',
 			'border-radius': generateCSSUnit(
 				getFallbackNumber( radioCheckBorderRadius, 'radioCheckBorderRadius', blockName ),
 				radioCheckBorderRadiusType
 			),
-			'height': generateCSSUnit(
+			height: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeMobile, 'radioCheckSizeMobile', blockName ),
 				'px'
 			),
-			'width': generateCSSUnit(
+			width: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeMobile, 'radioCheckSizeMobile', blockName ),
 				'px'
 			),
@@ -1024,18 +1024,18 @@ function styling( props ) {
 		},
 		" .uagb-gf-styler__check-style-enabled .gfield_checkbox input[type='checkbox'] + label:before": {
 			'background-color': radioCheckBgColor,
-			'color': radioCheckSelectColor,
+			color: radioCheckSelectColor,
 			'border-color': radioCheckBorderColor,
 			'border-style': 'solid',
 			'border-radius': generateCSSUnit(
 				getFallbackNumber( radioCheckBorderRadius, 'radioCheckBorderRadius', blockName ),
 				radioCheckBorderRadiusType
 			),
-			'height': generateCSSUnit(
+			height: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeMobile, 'radioCheckSizeMobile', blockName ),
 				'px'
 			),
-			'width': generateCSSUnit(
+			width: generateCSSUnit(
 				getFallbackNumber( radioCheckSizeMobile, 'radioCheckSizeMobile', blockName ),
 				'px'
 			),
@@ -1092,7 +1092,7 @@ function styling( props ) {
 				'px'
 			),
 			'letter-spacing': generateCSSUnit( inputLetterSpacingMobile, inputLetterSpacingType ),
-			'height':
+			height:
 				'auto' === getFallbackNumber( textAreaHeightMobile, 'textAreaHeightMobile', blockName )
 					? getFallbackNumber( textAreaHeightMobile, 'textAreaHeightMobile', blockName )
 					: getFallbackNumber( textAreaHeightMobile, 'textAreaHeightMobile', blockName ) + 'px',
@@ -1127,7 +1127,7 @@ function styling( props ) {
 				getFallbackNumber( buttonBorderWidthMobile, 'buttonBorderWidthMobile', blockName ),
 				buttonBorderWidthType
 			),
-			'color': buttonTextColor,
+			color: buttonTextColor,
 			'background-color': buttonBgColor,
 			'border-color': buttonBorderColor,
 			'border-style': buttonBorderStyle,

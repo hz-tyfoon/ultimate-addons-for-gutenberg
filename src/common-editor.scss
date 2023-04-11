@@ -7,7 +7,7 @@
 
 /* ------------------------------------------------------------------------------------------------*/
 
-@import "styles/variables";
+@import 'styles/variables';
 
 /* Gutenberg Reset CSS */
 .block-editor-block-inspector {
@@ -127,7 +127,7 @@
 }
 
 .interface-interface-skeleton__sidebar::-webkit-scrollbar-thumb {
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgba( 0, 0, 0, 0.3 );
 	border-radius: 100px;
 }
 
@@ -368,7 +368,7 @@ hr.uagb-editor__separator {
 
 .uagb-size-type-field button.components-button.uagb-size-btn.is-primary,
 .uagb-size-type-field
-button.components-button.uagb-size-btn.is-primary:focus:not( :disabled ):not( [aria-disabled="true"] ) {
+	button.components-button.uagb-size-btn.is-primary:focus:not( :disabled ):not( [aria-disabled='true'] ) {
 	box-shadow: none;
 	background: transparent;
 	border: none;
@@ -385,7 +385,7 @@ button.components-button.uagb-size-btn.is-primary:focus:not( :disabled ):not( [a
 
 .uagb-size-type-field button.components-button.uagb-size-btn:hover,
 .uagb-size-type-field
-button.components-button.uagb-size-btn:hover:focus:not( :disabled ):not( [aria-disabled="true"] ) {
+	button.components-button.uagb-size-btn:hover:focus:not( :disabled ):not( [aria-disabled='true'] ) {
 	color: $spectra-color-heading;
 	background: transparent;
 	-webkit-box-shadow: none;
@@ -424,7 +424,7 @@ button.components-button.uagb-size-btn:hover:focus:not( :disabled ):not( [aria-d
 	background-color: transparent;
 }
 
-[class^="fipicon-"] {
+[class^='fipicon-'] {
 	speak: none;
 	font-style: normal;
 	font-weight: 400;
@@ -437,22 +437,22 @@ button.components-button.uagb-size-btn:hover:focus:not( :disabled ):not( [aria-d
 
 i.fipicon-angle-down::before {
 	font-family: dashicons, serif;
-	content: "\f140";
+	content: '\f140';
 }
 
 i.fipicon-angle-up::before {
 	font-family: dashicons, serif;
-	content: "\f142";
+	content: '\f142';
 }
 
 i.fipicon-angle-right::before {
 	font-family: dashicons, serif;
-	content: "\f345";
+	content: '\f345';
 }
 
 i.fipicon-angle-left::before {
 	font-family: dashicons, serif;
-	content: "\f341";
+	content: '\f341';
 }
 
 label.wp-block-uagb-blockquote__via-label svg {
@@ -643,7 +643,7 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	appearance: none;
 }
 
-.uagb-inspector-tab span[CLASS*="-ThumbWrapper"] {
+.uagb-inspector-tab span[CLASS*='-ThumbWrapper'] {
 	left: 0%;
 	height: 17px;
 	width: 17px;
@@ -656,7 +656,7 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	margin-bottom: 10px;
 	overflow-x: hidden;
 
-	.components-panel[data-uagb-tab="advance"] {
+	.components-panel[data-uagb-tab='advance'] {
 		.block-editor-block-inspector__advanced.uagb-extention-tab {
 			border: none;
 			border-bottom: 1px solid #e0e0e0;
@@ -810,17 +810,17 @@ button.components-button.uagb-review-select-btn.is-secondary {
 	}
 }
 
-.editor-styles-wrapper .block-editor-block-list__block.wp-block[data-type*="uagb"] {
+.editor-styles-wrapper .block-editor-block-list__block.wp-block[data-type*='uagb'] {
 	::selection {
 		color: #fff;
 		background: #2f86dd;
 	}
 }
 
-@import "styles/gutenberg-override";
-@import "styles/control-responsive";
-@import "styles/control-header";
-@import "styles/control-popup";
-@import "styles/control-media-picker";
-@import "styles/spectra-change-indicators";
-@import "styles/spectra-legacy";
+@import 'styles/gutenberg-override';
+@import 'styles/control-responsive';
+@import 'styles/control-header';
+@import 'styles/control-popup';
+@import 'styles/control-media-picker';
+@import 'styles/spectra-change-indicators';
+@import 'styles/spectra-legacy';

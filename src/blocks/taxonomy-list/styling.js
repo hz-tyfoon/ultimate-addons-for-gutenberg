@@ -140,7 +140,7 @@ function styling( props ) {
 	selectors = {
 		//grid layout styling
 		'.uagb-taxonomy__outer-wrap.uagb-layout-grid': {
-			'display': 'grid',
+			display: 'grid',
 			'grid-template-columns': 'repeat(' + columnsFallback + ', 1fr)',
 			'grid-column-gap': generateCSSUnit( columnGapFallback, 'px' ),
 			'grid-row-gap': generateCSSUnit( rowGapFallback, 'px' ),
@@ -167,7 +167,7 @@ function styling( props ) {
 				boxShadowPositionCSS,
 		},
 		'.uagb-layout-grid .uagb-tax-link': {
-			'color': countColor,
+			color: countColor,
 			'font-size': generateCSSUnit( countFontSize, countFontSizeType ),
 			'font-family': countFontFamily,
 			'font-weight': countFontWeight,
@@ -178,7 +178,7 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( countLetterSpacing, countLetterSpacingType ),
 		},
 		'.uagb-layout-grid .uagb-tax-title': {
-			'color': titleColor,
+			color: titleColor,
 			'margin-top': '0',
 			'margin-bottom': generateCSSUnit( titleBottomSpaceFallback, 'px' ),
 			'font-size': generateCSSUnit( titleFontSize, titleFontSizeType ),
@@ -192,7 +192,7 @@ function styling( props ) {
 		},
 		'.uagb-layout-list .uagb-tax-list': {
 			'list-style': listStyle,
-			'color': listStyleColor,
+			color: listStyleColor,
 			'font-size': generateCSSUnit( listFontSize, listFontSizeType ),
 			'font-family': listFontFamily,
 			'font-weight': listFontWeight,
@@ -204,17 +204,17 @@ function styling( props ) {
 		},
 		'.uagb-layout-list .uagb-tax-list:hover': {
 			// For Bullets.
-			'color': hoverlistStyleColor,
+			color: hoverlistStyleColor,
 		},
 		'.uagb-layout-list .uagb-tax-link-wrap:hover': {
 			// For Numbers.
-			'color': hoverlistStyleColor,
+			color: hoverlistStyleColor,
 		},
 		'.uagb-layout-list .uagb-tax-list a.uagb-tax-link': {
-			'color': listTextColor,
+			color: listTextColor,
 		},
 		'.uagb-layout-list .uagb-tax-list a.uagb-tax-link:hover': {
-			'color': hoverlistTextColor,
+			color: hoverlistTextColor,
 		},
 		'.uagb-layout-list .uagb-tax-list .uagb-tax-link-wrap': {
 			'margin-bottom': generateCSSUnit( listBottomMarginFallback, 'px' ),
@@ -222,7 +222,7 @@ function styling( props ) {
 		/* start Backword */
 		//grid layout styling
 		' .uagb-taxonomy-wrap.uagb-layout-grid': {
-			'display': 'grid',
+			display: 'grid',
 			'grid-template-columns': 'repeat(' + columnsFallback + ', 1fr)',
 			'grid-column-gap': generateCSSUnit( columnGapFallback, 'px' ),
 			'grid-row-gap': generateCSSUnit( rowGapFallback, 'px' ),
@@ -248,7 +248,7 @@ function styling( props ) {
 				boxShadowPositionCSS,
 		},
 		' .uagb-layout-grid .uagb-tax-title': {
-			'color': titleColor,
+			color: titleColor,
 			'margin-top': '0',
 			'margin-bottom': generateCSSUnit( titleBottomSpaceFallback, 'px' ),
 			'font-size': generateCSSUnit( titleFontSize, titleFontSizeType ),
@@ -260,7 +260,7 @@ function styling( props ) {
 			'text-transform': titleTransform,
 		},
 		' .uagb-layout-grid .uagb-tax-link': {
-			'color': countColor,
+			color: countColor,
 			'font-size': generateCSSUnit( countFontSize, countFontSizeType ),
 			'font-family': countFontFamily,
 			'font-weight': countFontWeight,
@@ -272,7 +272,7 @@ function styling( props ) {
 		//List layout styling.
 		' .uagb-layout-list .uagb-tax-list': {
 			'list-style': listStyle,
-			'color': listStyleColor,
+			color: listStyleColor,
 			'font-size': generateCSSUnit( listFontSize, listFontSizeType ),
 			'font-family': listFontFamily,
 			'font-weight': listFontWeight,
@@ -282,13 +282,13 @@ function styling( props ) {
 			'text-transform': listTransform,
 		},
 		' .uagb-layout-list .uagb-tax-list:hover': {
-			'color': hoverlistStyleColor,
+			color: hoverlistStyleColor,
 		},
 		' .uagb-layout-list .uagb-tax-list a.uagb-tax-link': {
-			'color': listTextColor,
+			color: listTextColor,
 		},
 		' .uagb-layout-list .uagb-tax-list a.uagb-tax-link:hover': {
-			'color': hoverlistTextColor,
+			color: hoverlistTextColor,
 		},
 		' .uagb-layout-list .uagb-tax-list .uagb-tax-link-wrap': {
 			'margin-bottom': generateCSSUnit( listBottomMarginFallback, 'px' ),
@@ -301,7 +301,7 @@ function styling( props ) {
 			'border-top-color': seperatorColor,
 			'border-top-style': seperatorStyle,
 			'border-top-width': generateCSSUnit( seperatorThickness, 'px' ),
-			'width': generateCSSUnit( seperatorWidth, '%' ),
+			width: generateCSSUnit( seperatorWidth, '%' ),
 		};
 		selectors[ ' .uagb-layout-list .uagb-tax-separator:hover' ] = {
 			'border-top-color': seperatorHoverColor,
@@ -311,7 +311,7 @@ function styling( props ) {
 			'border-top-color': seperatorColor,
 			'border-top-style': seperatorStyle,
 			'border-top-width': generateCSSUnit( seperatorThickness, 'px' ),
-			'width': generateCSSUnit( seperatorWidth, '%' ),
+			width: generateCSSUnit( seperatorWidth, '%' ),
 		};
 		selectors[ '.uagb-layout-list .uagb-tax-separator:hover' ] = {
 			'border-top-color': seperatorHoverColor,

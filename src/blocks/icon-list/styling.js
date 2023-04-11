@@ -183,16 +183,16 @@ function styling( props ) {
 
 	selectors = {
 		' .wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap': {
-			'background': iconBgColor,
+			background: iconBgColor,
 			'border-color': iconBorderColor,
-			'padding': generateCSSUnit( bgSizeFallback, bgSizeType ),
+			padding: generateCSSUnit( bgSizeFallback, bgSizeType ),
 			'border-radius': generateCSSUnit( borderRadiusFallback, borderRadiusType ),
 			'border-style': 0 === borderFallback || undefined === borderFallback ? 'none' : 'solid',
 			'border-width': generateCSSUnit( borderFallback, borderType ),
 			'align-self': position,
 		},
 		' .uagb-icon-list__source-image': {
-			'width': generateCSSUnit( sizeFallback, sizeType ),
+			width: generateCSSUnit( sizeFallback, sizeType ),
 		},
 		' .uagb-icon-list__wrap .block-editor-inner-blocks': {
 			'text-align': align,
@@ -206,28 +206,28 @@ function styling( props ) {
 			'padding-left': generateCSSUnit( blockLeftPadding, blockPaddingUnit ),
 		},
 		' .wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap svg': {
-			'color': iconColor,
-			'fill': iconColor,
+			color: iconColor,
+			fill: iconColor,
 		},
 		' .wp-block-uagb-icon-list-child:hover .uagb-icon-list__source-wrap svg': {
-			'color': iconHoverColor,
-			'fill': iconHoverColor,
+			color: iconHoverColor,
+			fill: iconHoverColor,
 		},
 		' .wp-block-uagb-icon-list-child .uagb-icon-list__label': {
-			'color': labelColor,
+			color: labelColor,
 		},
 		' .wp-block-uagb-icon-list-child:hover .uagb-icon-list__label': {
-			'color': labelHoverColor,
+			color: labelHoverColor,
 		},
 		' .wp-block-uagb-icon-list-child:hover .uagb-icon-list__source-wrap': {
-			'background': iconBgHoverColor,
+			background: iconBgHoverColor,
 			'border-color': iconBorderHoverColor,
 		},
 	};
 
 	tabletSelectors = {
 		' .uagb-icon-list__source-image': {
-			'width': generateCSSUnit( sizeTabletFallback, sizeType ),
+			width: generateCSSUnit( sizeTabletFallback, sizeType ),
 		},
 		' .uagb-icon-list__wrap .block-editor-inner-blocks': {
 			'text-align': alignTablet,
@@ -244,7 +244,7 @@ function styling( props ) {
 
 	mobileSelectors = {
 		' .uagb-icon-list__source-image': {
-			'width': generateCSSUnit( sizeMobileFallback, sizeType ),
+			width: generateCSSUnit( sizeMobileFallback, sizeType ),
 		},
 		' .uagb-icon-list__wrap .block-editor-inner-blocks': {
 			'text-align': alignMobile,
@@ -260,19 +260,19 @@ function styling( props ) {
 	};
 
 	selectors[ ' .uagb-icon-list__source-wrap svg' ] = {
-		'width': generateCSSUnit( sizeFallback, sizeType ),
-		'height': generateCSSUnit( sizeFallback, sizeType ),
+		width: generateCSSUnit( sizeFallback, sizeType ),
+		height: generateCSSUnit( sizeFallback, sizeType ),
 		'font-size': generateCSSUnit( sizeFallback, sizeType ),
 	};
 	tabletSelectors[ ' .uagb-icon-list__source-wrap svg' ] = {
-		'width': generateCSSUnit( sizeTabletFallback, sizeType ),
-		'height': generateCSSUnit( sizeTabletFallback, sizeType ),
+		width: generateCSSUnit( sizeTabletFallback, sizeType ),
+		height: generateCSSUnit( sizeTabletFallback, sizeType ),
 		'font-size': generateCSSUnit( sizeTabletFallback, sizeType ),
 	};
 
 	mobileSelectors[ ' .uagb-icon-list__source-wrap svg' ] = {
-		'width': generateCSSUnit( sizeMobileFallback, sizeType ),
-		'height': generateCSSUnit( sizeMobileFallback, sizeType ),
+		width: generateCSSUnit( sizeMobileFallback, sizeType ),
+		height: generateCSSUnit( sizeMobileFallback, sizeType ),
 		'font-size': generateCSSUnit( sizeMobileFallback, sizeType ),
 	};
 
@@ -282,7 +282,7 @@ function styling( props ) {
 			'-webkit-box-pack': alignment,
 			'-ms-flex-pack': alignment,
 			'align-items': 'center',
-			'display': 'inline-flex',
+			display: 'inline-flex',
 			'flex-direction': 'row',
 		};
 		selectors[ ' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]' ] = {
@@ -298,7 +298,7 @@ function styling( props ) {
 			'flex-direction': 'column',
 		};
 		selectors[ ' .wp-block[data-type="uagb/icon-list-child"]' ] = {
-			'display': 'block',
+			display: 'block',
 			'margin-left': 0,
 			'margin-right': 0,
 			'margin-bottom': generateCSSUnit( gapFallback, gapType ),
@@ -311,7 +311,7 @@ function styling( props ) {
 			'-webkit-box-pack': tabletAlignment,
 			'-ms-flex-pack': tabletAlignment,
 			'align-items': 'center',
-			'display': 'inline-flex',
+			display: 'inline-flex',
 			'flex-direction': 'row',
 		};
 		tabletSelectors[ ' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]' ] = {
@@ -339,7 +339,7 @@ function styling( props ) {
 			'-webkit-box-pack': mobileAlignment,
 			'-ms-flex-pack': mobileAlignment,
 			'align-items': 'center',
-			'display': 'inline-flex',
+			display: 'inline-flex',
 			'flex-direction': 'row',
 		};
 		mobileSelectors[ ' .block-editor-block-list__layout .wp-block[data-type="uagb/icon-list-child"]' ] = {
@@ -352,7 +352,7 @@ function styling( props ) {
 		};
 	} else if ( 'vertical' === iconListLayoutMobile ) {
 		mobileSelectors[ ' .wp-block[data-type="uagb/icon-list-child"]' ] = {
-			'display': 'block',
+			display: 'block',
 			'margin-left': 0 + ' !important',
 			'margin-right': 0 + ' !important',
 			'margin-bottom': generateCSSUnit( gapMobileFallback, gapType ),
@@ -409,7 +409,7 @@ function styling( props ) {
 		'font-weight': fontWeight,
 		'line-height': generateCSSUnit( lineHeight, lineHeightType ),
 		'letter-spacing': generateCSSUnit( labelLetterSpacing, labelLetterSpacingType ),
-		'color': labelColor,
+		color: labelColor,
 	};
 
 	mobileSelectors[ ' .wp-block-uagb-icon-list-child .uagb-icon-list__label' ] = {
@@ -426,7 +426,7 @@ function styling( props ) {
 
 	mobileSelectors[ ' .wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap' ] = {
 		'border-radius': generateCSSUnit( borderRadiusMobileFallback, borderRadiusType ),
-		'padding': generateCSSUnit( bgSizeMobileFallback, 'px' ),
+		padding: generateCSSUnit( bgSizeMobileFallback, 'px' ),
 		'border-style': 0 === borderMobileFallback || undefined === borderMobileFallback ? 'none' : 'solid',
 		'border-width': generateCSSUnit( borderMobileFallback, borderType ),
 		'align-self': positionMobile,
@@ -434,7 +434,7 @@ function styling( props ) {
 
 	tabletSelectors[ ' .wp-block-uagb-icon-list-child .uagb-icon-list__source-wrap' ] = {
 		'border-radius': generateCSSUnit( borderRadiusTabletFallback, borderRadiusType ),
-		'padding': generateCSSUnit( bgSizeTabletFallback, 'px' ),
+		padding: generateCSSUnit( bgSizeTabletFallback, 'px' ),
 		'border-style': 0 === borderTabletFallback || undefined === borderTabletFallback ? 'none' : 'solid',
 		'border-width': generateCSSUnit( borderTabletFallback, borderType ),
 		'align-self': positionTablet,

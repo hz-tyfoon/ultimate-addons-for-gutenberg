@@ -125,42 +125,42 @@ function styling( props ) {
 			'font-style': titleFontStyle,
 			'text-transform': titleTransform,
 			'text-decoration': titleDecoration,
-			'color': titleColor,
+			color: titleColor,
 			'letter-spacing': generateCSSUnit( titleLetterSpacing, titleLetterSpacingType ),
 		},
 		' svg': {
-			'fill': setIconColor,
-			'width': generateCSSUnit( iconFontSizeFallback, iconFontSizeType ),
-			'height': generateCSSUnit( iconFontSizeFallback, iconFontSizeType ),
+			fill: setIconColor,
+			width: generateCSSUnit( iconFontSizeFallback, iconFontSizeType ),
+			height: generateCSSUnit( iconFontSizeFallback, iconFontSizeType ),
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
 			'font-size': generateCSSUnit( prefixFontSize, prefixFontSizeType ),
 			'line-height': generateCSSUnit( prefixLineHeight, prefixLineHeightType ),
 			'font-family': prefixFontFamily,
 			'font-weight': prefixFontWeight,
-			'color': prefixColor,
+			color: prefixColor,
 			'font-style': prefixFontStyle,
 			'text-transform': prefixTransform,
 			'text-decoration': prefixDecoration,
 			'letter-spacing': generateCSSUnit( prefixLetterSpacing, prefixLetterSpacingType ),
 		},
 		' .uagb-marketing-btn__link:hover .block-editor-rich-text__editable.uagb-marketing-btn__title': {
-			'color': titleHoverColor,
+			color: titleHoverColor,
 		},
 		' .uagb-marketing-btn__link:focus .block-editor-rich-text__editable.uagb-marketing-btn__title': {
-			'color': titleHoverColor,
+			color: titleHoverColor,
 		},
 		' .uagb-marketing-btn__link:hover .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
-			'color': prefixHoverColor,
+			color: prefixHoverColor,
 		},
 		' .uagb-marketing-btn__link:focus .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
-			'color': prefixHoverColor,
+			color: prefixHoverColor,
 		},
 		' .uagb-marketing-btn__link:hover svg': {
-			'fill': setIconHoverColor,
+			fill: setIconHoverColor,
 		},
 		' .uagb-marketing-btn__link:focus svg': {
-			'fill': setIconHoverColor,
+			fill: setIconHoverColor,
 		},
 		' .uagb-marketing-btn__link:not(.has-background)': {
 			'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
@@ -225,8 +225,8 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( prefixLetterSpacingTablet, prefixLetterSpacingType ),
 		},
 		' svg': {
-			'width': generateCSSUnit( iconFontSizeTablet, iconFontSizeType ),
-			'height': generateCSSUnit( iconFontSizeTablet, iconFontSizeType ),
+			width: generateCSSUnit( iconFontSizeTablet, iconFontSizeType ),
+			height: generateCSSUnit( iconFontSizeTablet, iconFontSizeType ),
 		},
 		' .uagb-marketing-btn__link': {
 			'padding-left': generateCSSUnit( paddingBtnLeftTablet, tabletPaddingBtnUnit ),
@@ -252,8 +252,8 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( prefixLetterSpacingMobile, prefixLetterSpacingType ),
 		},
 		' svg': {
-			'width': generateCSSUnit( iconFontSizeMobile, iconFontSizeType ),
-			'height': generateCSSUnit( iconFontSizeMobile, iconFontSizeType ),
+			width: generateCSSUnit( iconFontSizeMobile, iconFontSizeType ),
+			height: generateCSSUnit( iconFontSizeMobile, iconFontSizeType ),
 		},
 		' .uagb-marketing-btn__link': {
 			'padding-left': generateCSSUnit( paddingBtnLeftMobile, mobilePaddingBtnUnit ),

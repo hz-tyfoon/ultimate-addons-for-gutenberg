@@ -148,7 +148,7 @@ function styling( props ) {
 		},
 		' .uag-star-rating > span': {
 			'margin-right': generateCSSUnit( gapFallback, 'px' ),
-			'color': unmarkedColor,
+			color: unmarkedColor,
 		},
 		' p.uag-star-rating__title.block-editor-rich-text__editable': {
 			'font-size': generateCSSUnit( fontSize, fontSizeType ),
@@ -158,7 +158,7 @@ function styling( props ) {
 			'text-transform': fontTransform,
 			'font-weight': fontWeight,
 			'line-height': generateCSSUnit( lineHeight, lineHeightType ),
-			'color': titleColor,
+			color: titleColor,
 			'letter-spacing': generateCSSUnit( letterSpacing, letterSpacingType ),
 		},
 		'.wp-block-uagb-star-rating ': {
@@ -209,20 +209,20 @@ function styling( props ) {
 
 	if ( 0 !== width ) {
 		selectors[ ' .uag-star:nth-child(' + Math.ceil( ratingFallback ) + '):before' ] = {
-			'color': color,
-			'width': generateCSSUnit( width, '%' ),
-			'position': 'absolute',
-			'content': "'★'",
-			'overflow': 'hidden',
+			color: color,
+			width: generateCSSUnit( width, '%' ),
+			position: 'absolute',
+			content: "'★'",
+			overflow: 'hidden',
 		};
 
 		selectors[ ' .uag-star:nth-child(' + Math.ceil( ratingFallback ) + ')' ] = {
-			'position': 'relative',
+			position: 'relative',
 		};
 	}
 
 	selectors[ ' .uag-star:nth-child(-n+' + Math.floor( ratingFallback ) + ')' ] = {
-		'color': color,
+		color: color,
 	};
 
 	const wrapperCSSTablet = {

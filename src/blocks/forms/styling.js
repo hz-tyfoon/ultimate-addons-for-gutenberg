@@ -351,7 +351,7 @@ function styling( props ) {
 			'text-align': overallAlignment,
 		},
 		' .uagb-forms-input-label': {
-			'display': displayLabels ? 'block' : 'none',
+			display: displayLabels ? 'block' : 'none',
 		},
 
 		' .uagb-forms-main-form .uagb-forms-field-set': {
@@ -365,7 +365,7 @@ function styling( props ) {
 			'text-transform': labelTransform,
 			'text-decoration': labelDecoration,
 			'font-weight': labelFontWeight,
-			'color': labelColor,
+			color: labelColor,
 			'margin-bottom': generateCSSUnit( labelGapFallback, labelGapUnit ),
 			'letter-spacing': generateCSSUnit( labelLetterSpacing, labelLetterSpacingType ),
 		},
@@ -377,7 +377,7 @@ function styling( props ) {
 			'text-transform': inputTransform,
 			'text-decoration': inputDecoration,
 			'font-weight': inputFontWeight,
-			'color': inputplaceholderColor,
+			color: inputplaceholderColor,
 			'letter-spacing': generateCSSUnit( inputLetterSpacing, inputLetterSpacingType ),
 		},
 		' .uagb-forms-main-form input': {
@@ -388,7 +388,7 @@ function styling( props ) {
 			'text-transform': inputTransform,
 			'text-decoration': inputDecoration,
 			'font-weight': inputFontWeight,
-			'color': inputplaceholderColor,
+			color: inputplaceholderColor,
 			'letter-spacing': generateCSSUnit( inputLetterSpacing, inputLetterSpacingType ),
 		},
 		' .components-input-control__container': {
@@ -402,7 +402,7 @@ function styling( props ) {
 			'text-transform': inputTransform,
 			'text-decoration': inputDecoration,
 			'font-weight': inputFontWeight,
-			'color': inputplaceholderColor,
+			color: inputplaceholderColor,
 			'letter-spacing': generateCSSUnit( inputLetterSpacing, inputLetterSpacingType ),
 		},
 		' .uagb-forms-main-form select': {
@@ -413,19 +413,19 @@ function styling( props ) {
 			'text-transform': inputTransform,
 			'text-decoration': inputDecoration,
 			'font-weight': inputFontWeight,
-			'color': inputplaceholderColor,
+			color: inputplaceholderColor,
 			'letter-spacing': generateCSSUnit( inputLetterSpacing, inputLetterSpacingType ),
 		},
 		' .uagb-forms-main-form .uagb-forms-input:focus': {
-			'outline': ' none !important',
-			'border': '2px solid ' + fieldBorderHColor,
+			outline: ' none !important',
+			border: '2px solid ' + fieldBorderHColor,
 			'background-color': `${ bgActiveColor } !important`,
 		},
 		' .uagb-forms-main-form .uagb-forms-input:focus::placeholder': {
-			'color': `${ inputplaceholderActiveColor } !important`,
+			color: `${ inputplaceholderActiveColor } !important`,
 		},
 		' .uagb-forms-main-form .uagb-forms-phone-flex': {
-			'height': `calc(${
+			height: `calc(${
 				inputLineHeight ? generateCSSUnit( inputLineHeight, inputLineHeightType ) : '2em'
 			} + ${ generateCSSUnit( paddingFieldTop, paddingFieldUnit ) } + ${ generateCSSUnit(
 				paddingFieldBottom,
@@ -436,7 +436,7 @@ function styling( props ) {
 			'text-align': buttonAlign,
 		},
 		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button': {
-			'color': submitColor,
+			color: submitColor,
 			'font-size': generateCSSUnit( submitTextFontSize, submitTextFontSizeType ),
 			'line-height': generateCSSUnit( submitTextLineHeight, submitTextLineHeightType ),
 			'font-family': submitTextFontFamily,
@@ -452,7 +452,7 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( submitTextLetterSpacing, submitTextLetterSpacingType ),
 		},
 		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background)': {
-			'color': submitColor,
+			color: submitColor,
 			'font-size': generateCSSUnit( submitTextFontSize, submitTextFontSizeType ),
 			'line-height': generateCSSUnit( submitTextLineHeight, submitTextLineHeightType ),
 			'font-family': submitTextFontFamily,
@@ -467,23 +467,23 @@ function styling( props ) {
 			'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
 		},
 		' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:not(.has-background):hover': {
-			'color': submitColorHover,
+			color: submitColorHover,
 			'border-color': btnBorderHColor,
 		},
 		' .uagb-forms-main-form .uagb-forms-main-submit-button:hover': {
-			'color': submitColorHover,
+			color: submitColorHover,
 			'border-color': btnBorderHColor,
 		},
 		' .uagb-switch': {
 			// 20 is the min size of the toggle.
 			// Space around the toggle dot is calculated as 1/6th the size of the toggle dot.
-			'height': `calc(${ toggleBorder[ 'border-bottom-width' ] } + ${
+			height: `calc(${ toggleBorder[ 'border-bottom-width' ] } + ${
 				toggleBorder[ 'border-top-width' ]
 			} + ${ generateCSSUnit(
 				parseInt( 20 + toggleWidthSizeNumber + ( 20 + toggleWidthSizeNumber ) / 3 ),
 				'px'
 			) })`,
-			'width': `calc(${ toggleBorder[ 'border-left-width' ] } + ${
+			width: `calc(${ toggleBorder[ 'border-left-width' ] } + ${
 				toggleBorder[ 'border-right-width' ]
 			} + ${ generateCSSUnit(
 				parseInt( ( 20 + toggleWidthSizeNumber ) * 2.5 + ( 20 + toggleWidthSizeNumber ) / 3 ),
@@ -501,11 +501,11 @@ function styling( props ) {
 			'box-shadow': '0 0 1px' + toggleActiveColor,
 		},
 		' .uagb-slider:before': {
-			'height': generateCSSUnit( 20 + toggleWidthSizeNumber, 'px' ),
-			'width': generateCSSUnit( 20 + toggleWidthSizeNumber, 'px' ),
-			'top': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumber ) / 6 ), 'px' ),
-			'bottom': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumber ) / 6 ), 'px' ),
-			'left': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumber ) / 6 ), 'px' ),
+			height: generateCSSUnit( 20 + toggleWidthSizeNumber, 'px' ),
+			width: generateCSSUnit( 20 + toggleWidthSizeNumber, 'px' ),
+			top: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumber ) / 6 ), 'px' ),
+			bottom: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumber ) / 6 ), 'px' ),
+			left: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumber ) / 6 ), 'px' ),
 			'background-color': toggleDotColor,
 			'border-radius': `${ toggleBorderRadiusTLFallback } ${ toggleBorderRadiusTRFallback } ${ toggleBorderRadiusBRFallback } ${ toggleBorderRadiusBLFallback }`,
 		},
@@ -513,7 +513,7 @@ function styling( props ) {
 			'border-radius': generateCSSUnit( 20 + toggleWidthSizeNumber, 'px' ),
 		},
 		' .uagb-switch input:checked + .uagb-slider:before ': {
-			'transform': `translateX(${ generateCSSUnit(
+			transform: `translateX(${ generateCSSUnit(
 				parseInt( ( 20 + toggleWidthSizeNumber ) * 2.5 - ( 20 + toggleWidthSizeNumber ) ),
 				'px'
 			) })`,
@@ -527,14 +527,14 @@ function styling( props ) {
 		},
 		' .uagb-forms-radio-wrap input[type=radio] + label:before': {
 			'background-color': toggleColor,
-			'width': generateCSSUnit( toggleSizeNumber, toggleSizeType ),
-			'height': generateCSSUnit( toggleSizeNumber, toggleSizeType ),
+			width: generateCSSUnit( toggleSizeNumber, toggleSizeType ),
+			height: generateCSSUnit( toggleSizeNumber, toggleSizeType ),
 		},
 		' .uagb-forms-radio-wrap > label': {
-			'color': inputColor,
+			color: inputColor,
 		},
 		' .uagb-forms-checkbox-wrap input[type=checkbox]:checked + label:before': {
-			'color': toggleDotActiveColor,
+			color: toggleDotActiveColor,
 			'background-color': toggleActiveColor,
 			'border-color': `${ checkBoxToggleBorderHColor } !important`,
 			'font-size': 'calc(' + toggleSizeNumber + 'px / 1.2 )',
@@ -542,14 +542,14 @@ function styling( props ) {
 		' .uagb-forms-checkbox-wrap input[type=checkbox] + label:before': {
 			'background-color': toggleColor,
 			'border-radius': generateCSSUnit( toggleBorderRadius, 'px' ),
-			'width': generateCSSUnit( toggleSizeNumber, 'px' ),
-			'height': generateCSSUnit( toggleSizeNumber, 'px' ),
+			width: generateCSSUnit( toggleSizeNumber, 'px' ),
+			height: generateCSSUnit( toggleSizeNumber, 'px' ),
 		},
 		' .uagb-forms-checkbox-wrap > label': {
-			'color': inputColor,
+			color: inputColor,
 		},
 		' .uagb-forms-accept-wrap input[type=checkbox]:checked + label:before': {
-			'color': toggleDotActiveColor,
+			color: toggleDotActiveColor,
 			'background-color': toggleActiveColor,
 			'border-color': `${ checkBoxToggleBorderHColor } !important`,
 			'font-size': 'calc(' + toggleSizeNumber + 'px / 1.2 )',
@@ -557,25 +557,25 @@ function styling( props ) {
 		' .uagb-forms-accept-wrap input[type=checkbox] + label:before': {
 			'border-radius': generateCSSUnit( toggleBorderRadius, 'px' ),
 			'background-color': toggleColor,
-			'width': generateCSSUnit( toggleSizeNumber, 'px' ),
-			'height': generateCSSUnit( toggleSizeNumber, 'px' ),
+			width: generateCSSUnit( toggleSizeNumber, 'px' ),
+			height: generateCSSUnit( toggleSizeNumber, 'px' ),
 		},
 		' .uagb-forms-accept-wrap > label': {
-			'color': inputColor,
+			color: inputColor,
 		},
 		// Hover Colors
 		' .uagb-forms-field-set:hover .uagb-forms-input-label': {
-			'color': labelHoverColor,
+			color: labelHoverColor,
 		},
 		' .uagb-forms-field-set:hover .uagb-forms-input': {
 			'background-color': bgHoverColor,
 			'border-color': fieldBorderHColor,
 		},
 		' .uagb-forms-field-set:hover .uagb-forms-input::placeholder': {
-			'color': inputplaceholderHoverColor,
+			color: inputplaceholderHoverColor,
 		},
 		' .uagb-forms-field-set:hover .uagb-forms-input select': {
-			'color': inputplaceholderHoverColor,
+			color: inputplaceholderHoverColor,
 		},
 	};
 
@@ -593,39 +593,39 @@ function styling( props ) {
 			'font-size': 'calc(' + toggleSizeNumberTablet + toggleSizeType + ' / 1.2 )',
 		},
 		' .uagb-forms-radio-wrap input[type=radio] + label:before': {
-			'width': generateCSSUnit( toggleSizeTabletFallback, toggleSizeType ),
-			'height': generateCSSUnit( toggleSizeTabletFallback, toggleSizeType ),
+			width: generateCSSUnit( toggleSizeTabletFallback, toggleSizeType ),
+			height: generateCSSUnit( toggleSizeTabletFallback, toggleSizeType ),
 		},
 		' .uagb-forms-checkbox-wrap input[type=checkbox]:checked + label:before': {
 			'font-size': 'calc(' + toggleSizeNumberTablet + 'px / 1.2 )',
 		},
 		' .uagb-forms-checkbox-wrap input[type=checkbox] + label:before': {
-			'width': generateCSSUnit( toggleSizeTabletFallback, 'px' ),
-			'height': generateCSSUnit( toggleSizeTabletFallback, 'px' ),
+			width: generateCSSUnit( toggleSizeTabletFallback, 'px' ),
+			height: generateCSSUnit( toggleSizeTabletFallback, 'px' ),
 		},
 		' .uagb-forms-accept-wrap input[type=checkbox]:checked + label:before': {
 			'font-size': 'calc(' + toggleSizeNumberTablet + 'px / 1.2 )',
 		},
 		' .uagb-forms-accept-wrap input[type=checkbox] + label:before': {
-			'width': generateCSSUnit( toggleSizeTabletFallback, 'px' ),
-			'height': generateCSSUnit( toggleSizeTabletFallback, 'px' ),
+			width: generateCSSUnit( toggleSizeTabletFallback, 'px' ),
+			height: generateCSSUnit( toggleSizeTabletFallback, 'px' ),
 		},
 		' .uagb-switch': {
-			'height': `calc(${ toggleBorderTTabletFallback } + ${ toggleBorderBTabletFallback } + ${ generateCSSUnit(
+			height: `calc(${ toggleBorderTTabletFallback } + ${ toggleBorderBTabletFallback } + ${ generateCSSUnit(
 				parseInt( 20 + toggleWidthSizeNumberTablet + ( 20 + toggleWidthSizeNumberTablet ) / 3 ),
 				'px'
 			) })`,
-			'width': `calc(${ toggleBorderLTabletFallback } + ${ toggleBorderRTabletFallback } + ${ generateCSSUnit(
+			width: `calc(${ toggleBorderLTabletFallback } + ${ toggleBorderRTabletFallback } + ${ generateCSSUnit(
 				parseInt( ( 20 + toggleWidthSizeNumberTablet ) * 2.5 + ( 20 + toggleWidthSizeNumberTablet ) / 3 ),
 				'px'
 			) })`,
 		},
 		' .uagb-switch .uagb-slider:before': {
-			'height': generateCSSUnit( 20 + toggleWidthSizeNumberTablet, 'px' ),
-			'width': generateCSSUnit( 20 + toggleWidthSizeNumberTablet, 'px' ),
-			'top': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberTablet ) / 6 ), 'px' ),
-			'bottom': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberTablet ) / 6 ), 'px' ),
-			'left': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberTablet ) / 6 ), 'px' ),
+			height: generateCSSUnit( 20 + toggleWidthSizeNumberTablet, 'px' ),
+			width: generateCSSUnit( 20 + toggleWidthSizeNumberTablet, 'px' ),
+			top: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberTablet ) / 6 ), 'px' ),
+			bottom: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberTablet ) / 6 ), 'px' ),
+			left: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberTablet ) / 6 ), 'px' ),
 			'background-color': toggleDotColor,
 			'border-radius': `${ toggleBorderRadiusTLTabletFallback } ${ toggleBorderRadiusTRTabletFallback } ${ toggleBorderRadiusBRTabletFallback } ${ toggleBorderRadiusBLTabletFallback }`,
 		},
@@ -633,7 +633,7 @@ function styling( props ) {
 			'border-radius': generateCSSUnit( 20 + toggleWidthSizeNumberTablet, 'px' ),
 		},
 		' .uagb-switch input:checked + .uagb-slider:before ': {
-			'transform': `translateX(${ generateCSSUnit(
+			transform: `translateX(${ generateCSSUnit(
 				parseInt( ( 20 + toggleWidthSizeNumberTablet ) * 2.5 - ( 20 + toggleWidthSizeNumberTablet ) ),
 				'px'
 			) })`,
@@ -676,42 +676,42 @@ function styling( props ) {
 			'font-size': 'calc(' + toggleSizeNumberMobile + toggleSizeType + ' / 1.2 )',
 		},
 		' .uagb-forms-radio-wrap input[type=radio] + label:before': {
-			'width': generateCSSUnit( toggleSizeMobileFallback, toggleSizeType ),
-			'height': generateCSSUnit( toggleSizeMobileFallback, toggleSizeType ),
+			width: generateCSSUnit( toggleSizeMobileFallback, toggleSizeType ),
+			height: generateCSSUnit( toggleSizeMobileFallback, toggleSizeType ),
 		},
 		' .uagb-forms-checkbox-wrap input[type=checkbox]:checked + label:before': {
 			'font-size': 'calc(' + toggleSizeNumberMobile + 'px / 1.2 )',
 		},
 		' .uagb-forms-checkbox-wrap input[type=checkbox] + label:before': {
-			'width': generateCSSUnit( toggleSizeMobileFallback, 'px' ),
-			'height': generateCSSUnit( toggleSizeMobileFallback, 'px' ),
+			width: generateCSSUnit( toggleSizeMobileFallback, 'px' ),
+			height: generateCSSUnit( toggleSizeMobileFallback, 'px' ),
 		},
 		' .uagb-forms-accept-wrap input[type=checkbox]:checked + label:before': {
 			'font-size': 'calc(' + toggleSizeNumberMobile + 'px / 1.2 )',
 		},
 		' .uagb-forms-accept-wrap input[type=checkbox] + label:before': {
-			'width': generateCSSUnit( toggleSizeMobileFallback, 'px' ),
-			'height': generateCSSUnit( toggleSizeMobileFallback, 'px' ),
+			width: generateCSSUnit( toggleSizeMobileFallback, 'px' ),
+			height: generateCSSUnit( toggleSizeMobileFallback, 'px' ),
 		},
 		' .uagb-forms-main-form .uagb-forms-field-set': {
 			'margin-bottom': generateCSSUnit( fieldGapMobile, fieldGapType ),
 		},
 		' .uagb-switch': {
-			'height': `calc(${ toggleBorderTMobileFallback } + ${ toggleBorderBMobileFallback } + ${ generateCSSUnit(
+			height: `calc(${ toggleBorderTMobileFallback } + ${ toggleBorderBMobileFallback } + ${ generateCSSUnit(
 				parseInt( 20 + toggleWidthSizeNumberMobile + ( 20 + toggleWidthSizeNumberMobile ) / 3 ),
 				'px'
 			) })`,
-			'width': `calc(${ toggleBorderLMobileFallback } + ${ toggleBorderRMobileFallback } + ${ generateCSSUnit(
+			width: `calc(${ toggleBorderLMobileFallback } + ${ toggleBorderRMobileFallback } + ${ generateCSSUnit(
 				parseInt( ( 20 + toggleWidthSizeNumberMobile ) * 2.5 + ( 20 + toggleWidthSizeNumberMobile ) / 3 ),
 				'px'
 			) })`,
 		},
 		' .uagb-switch .uagb-slider:before': {
-			'height': generateCSSUnit( 20 + toggleWidthSizeNumberMobile, 'px' ),
-			'width': generateCSSUnit( 20 + toggleWidthSizeNumberMobile, 'px' ),
-			'top': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberMobile ) / 6 ), 'px' ),
-			'bottom': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberMobile ) / 6 ), 'px' ),
-			'left': generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberMobile ) / 6 ), 'px' ),
+			height: generateCSSUnit( 20 + toggleWidthSizeNumberMobile, 'px' ),
+			width: generateCSSUnit( 20 + toggleWidthSizeNumberMobile, 'px' ),
+			top: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberMobile ) / 6 ), 'px' ),
+			bottom: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberMobile ) / 6 ), 'px' ),
+			left: generateCSSUnit( parseInt( ( 20 + toggleWidthSizeNumberMobile ) / 6 ), 'px' ),
 			'background-color': toggleDotColor,
 			'border-radius': `${ toggleBorderRadiusTLMobileFallback } ${ toggleBorderRadiusTRMobileFallback } ${ toggleBorderRadiusBRMobileFallback } ${ toggleBorderRadiusBLMobileFallback }`,
 		},
@@ -719,7 +719,7 @@ function styling( props ) {
 			'border-radius': generateCSSUnit( 20 + toggleWidthSizeNumberMobile, 'px' ),
 		},
 		' .uagb-switch input:checked + .uagb-slider:before ': {
-			'transform': `translateX(${ generateCSSUnit(
+			transform: `translateX(${ generateCSSUnit(
 				parseInt( ( 20 + toggleWidthSizeNumberMobile ) * 2.5 - ( 20 + toggleWidthSizeNumberMobile ) ),
 				'px'
 			) })`,
@@ -760,15 +760,15 @@ function styling( props ) {
 		};
 	} else if ( 'gradient' === submitBgType ) {
 		const backgroundAttributes = {
-			'backgroundType': 'gradient',
-			'gradientValue': gradientValue,
-			'gradientColor1': gradientColor1,
-			'gradientColor2': gradientColor2,
-			'gradientLocation1': gradientLocation1,
-			'gradientLocation2': gradientLocation2,
-			'gradientType': gradientType,
-			'gradientAngle': gradientAngle,
-			'selectGradient': selectGradient,
+			backgroundType: 'gradient',
+			gradientValue: gradientValue,
+			gradientColor1: gradientColor1,
+			gradientColor2: gradientColor2,
+			gradientLocation1: gradientLocation1,
+			gradientLocation2: gradientLocation2,
+			gradientType: gradientType,
+			gradientAngle: gradientAngle,
+			selectGradient: selectGradient,
 		};
 
 		const btnBackground = generateBackgroundCSS( backgroundAttributes );
@@ -780,7 +780,7 @@ function styling( props ) {
 		selectors[
 			' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap .uagb-forms-main-submit-button.wp-block-button__link'
 		] = {
-			'background': 'transparent',
+			background: 'transparent',
 		};
 	}
 	//Hover
@@ -792,15 +792,15 @@ function styling( props ) {
 		};
 	} else if ( 'gradient' === submitBgHoverType ) {
 		const hoverbackgroundAttributes = {
-			'backgroundType': 'gradient',
-			'gradientValue': gradientHValue,
-			'gradientColor1': gradientHColor1,
-			'gradientColor2': gradientHColor2,
-			'gradientLocation1': gradientHLocation1,
-			'gradientLocation2': gradientHLocation2,
-			'gradientType': gradientHType,
-			'gradientAngle': gradientHAngle,
-			'selectGradient': selectHGradient,
+			backgroundType: 'gradient',
+			gradientValue: gradientHValue,
+			gradientColor1: gradientHColor1,
+			gradientColor2: gradientHColor2,
+			gradientLocation1: gradientHLocation1,
+			gradientLocation2: gradientHLocation2,
+			gradientType: gradientHType,
+			gradientAngle: gradientHAngle,
+			selectGradient: selectHGradient,
 		};
 
 		const btnhBackground = generateBackgroundCSS( hoverbackgroundAttributes );
@@ -812,7 +812,7 @@ function styling( props ) {
 		selectors[
 			' .uagb-forms-main-form  .uagb-forms-main-submit-button-wrap:hover .uagb-forms-main-submit-button.wp-block-button__link'
 		] = {
-			'background': 'transparent',
+			background: 'transparent',
 		};
 	}
 
@@ -820,7 +820,7 @@ function styling( props ) {
 		selectors[ ' .uagb-forms-main-form  .uagb-forms-input' ] = {
 			...inputBorder,
 			'background-color': bgColor,
-			'color': inputColor,
+			color: inputColor,
 			'padding-top': generateCSSUnit( paddingFieldTop, paddingFieldUnit ),
 			'padding-bottom': generateCSSUnit( paddingFieldBottom, paddingFieldUnit ),
 			'padding-left': generateCSSUnit( paddingFieldLeft, paddingFieldUnit ),
@@ -882,11 +882,11 @@ function styling( props ) {
 			'border-top': 0,
 			'border-left': 0,
 			'border-right': 0,
-			'outline': 0,
+			outline: 0,
 			'border-radius': 0,
-			'background': 'transparent',
+			background: 'transparent',
 			...inputBorder,
-			'color': inputColor,
+			color: inputColor,
 			'padding-top': generateCSSUnit( paddingFieldTop, paddingFieldUnit ),
 			'padding-bottom': generateCSSUnit( paddingFieldBottom, paddingFieldUnit ),
 			'padding-left': generateCSSUnit( paddingFieldLeft, paddingFieldUnit ),

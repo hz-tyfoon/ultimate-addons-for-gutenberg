@@ -23,8 +23,8 @@
 			}
 		}
 
-		input[type="checkbox"],
-		input[type="radio"] {
+		input[type='checkbox'],
+		input[type='radio'] {
 			margin-top: 5px;
 			margin-bottom: 5px;
 		}
@@ -84,7 +84,7 @@ select.uagb-forms-select-box.uagb-forms-input {
 		width: 100%;
 
 		& .components-base-control__field {
-			height: calc(100% - 8px);
+			height: calc( 100% - 8px );
 		}
 
 		& .uagb-form-phone-country {

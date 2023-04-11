@@ -92,10 +92,10 @@ function styling( props ) {
 
 	const selectors = {
 		' .uagb-star-inner-container svg': {
-			'fill': starColor,
+			fill: starColor,
 		},
 		' .uagb-avg-review-star-inner-container svg': {
-			'fill': starColor,
+			fill: starColor,
 		},
 		' .uagb-rating-title': {
 			'font-size': generateCSSUnit( headFontSize, headFontSizeType ),
@@ -106,7 +106,7 @@ function styling( props ) {
 			'text-transform': headTransform,
 			'line-height': generateCSSUnit( headLineHeight, headLineHeightType ),
 			'letter-spacing': generateCSSUnit( headLetterSpacing, headLetterSpacingType ),
-			'color': titleColor,
+			color: titleColor,
 		},
 		' .uagb_review_entry': {
 			'font-size': generateCSSUnit( headFontSize, headFontSizeType ),
@@ -127,7 +127,7 @@ function styling( props ) {
 			'text-transform': subHeadTransform,
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
 			'letter-spacing': generateCSSUnit( subHeadLetterSpacing, subHeadLetterSpacingType ),
-			'color': descColor,
+			color: descColor,
 		},
 		' .uagb-rating-author': {
 			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
@@ -138,7 +138,7 @@ function styling( props ) {
 			'text-transform': subHeadTransform,
 			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
 			'letter-spacing': generateCSSUnit( subHeadLetterSpacing, subHeadLetterSpacingType ),
-			'color': authorColor,
+			color: authorColor,
 		},
 		' .uagb_review_block': {
 			'padding-left': generateCSSUnit( leftPadding, paddingUnit ),
@@ -156,17 +156,17 @@ function styling( props ) {
 			'text-transform': contentTransform,
 			'line-height': generateCSSUnit( contentLineHeight, contentLineHeightType ),
 			'letter-spacing': generateCSSUnit( contentLetterSpacing, contentLetterSpacingType ),
-			'color': summaryColor,
+			color: summaryColor,
 		},
 		' .uagb_review_entry .rich-text': {
-			'color': contentColor,
+			color: contentColor,
 		},
 		' .uagb_review_entry .star, .uagb_review_average_stars .star': {
-			'fill': starColor,
+			fill: starColor,
 		},
 		' .uagb_review_entry path, .uagb_review_average_stars path': {
-			'stroke': starOutlineColor,
-			'fill': starActiveColor,
+			stroke: starOutlineColor,
+			fill: starActiveColor,
 		},
 	};
 

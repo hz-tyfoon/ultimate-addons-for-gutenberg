@@ -161,7 +161,7 @@ function styling( props ) {
 			'text-decoration': titleDecoration,
 			'text-transform': titleTransform,
 			'line-height': generateCSSUnit( titleLineHeight, titleLineHeightType ),
-			'color': titleColor,
+			color: titleColor,
 			'padding-left': generateCSSUnit( lPadding, titlePaddingUnit ),
 			'padding-right': generateCSSUnit( rPadding, titlePaddingUnit ),
 			'padding-top': generateCSSUnit( titleTopPadding, titlePaddingUnit ),
@@ -169,7 +169,7 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( titleLetterSpacing, titleLetterSpacingType ),
 		},
 		' .rich-text.block-editor-rich-text__editable.uagb-notice-text': {
-			'color': textColor,
+			color: textColor,
 			'padding-left': generateCSSUnit( contentLeftPadding, contentPaddingUnit ),
 			'padding-right': generateCSSUnit( contentRightPadding, contentPaddingUnit ),
 			'padding-top': generateCSSUnit( contentTopPadding, contentPaddingUnit ),
@@ -185,21 +185,21 @@ function styling( props ) {
 		},
 		' span.uagb-notice-dismiss': {
 			// For Backward.
-			'fill': noticeDismissColor,
+			fill: noticeDismissColor,
 		},
 		' svg': {
-			'fill': noticeDismissColor,
+			fill: noticeDismissColor,
 		},
 		'.uagb-dismissable > svg': {
-			'width': generateCSSUnit( iconSizeFallback, iconSizeUnit ),
-			'height': generateCSSUnit( iconSizeFallback, iconSizeUnit ),
-			'top': generateCSSUnit( titleTopPadding, titlePaddingUnit ),
+			width: generateCSSUnit( iconSizeFallback, iconSizeUnit ),
+			height: generateCSSUnit( iconSizeFallback, iconSizeUnit ),
+			top: generateCSSUnit( titleTopPadding, titlePaddingUnit ),
 		},
 		'.uagb-inline_notice__align-left svg': {
-			'right': generateCSSUnit( titleRightPadding, titlePaddingUnit ),
+			right: generateCSSUnit( titleRightPadding, titlePaddingUnit ),
 		},
 		'.uagb-inline_notice__align-center svg': {
-			'right': generateCSSUnit( titleRightPadding, titlePaddingUnit ),
+			right: generateCSSUnit( titleRightPadding, titlePaddingUnit ),
 		},
 	};
 
@@ -224,15 +224,15 @@ function styling( props ) {
 			'padding-bottom': generateCSSUnit( contentBottomPaddingMobile, mobileContentPaddingUnit ),
 		},
 		'.uagb-dismissable > svg': {
-			'width': generateCSSUnit( iconSizeMobFallback, iconSizeUnit ),
-			'height': generateCSSUnit( iconSizeMobFallback, iconSizeUnit ),
-			'top': generateCSSUnit( posTopMob, posTopUnitMob ),
+			width: generateCSSUnit( iconSizeMobFallback, iconSizeUnit ),
+			height: generateCSSUnit( iconSizeMobFallback, iconSizeUnit ),
+			top: generateCSSUnit( posTopMob, posTopUnitMob ),
 		},
 		'.uagb-inline_notice__align-left svg': {
-			'right': generateCSSUnit( posRightMob, posRightUnitMob ),
+			right: generateCSSUnit( posRightMob, posRightUnitMob ),
 		},
 		'.uagb-inline_notice__align-center svg': {
-			'right': generateCSSUnit( posRightMob, posRightUnitMob ),
+			right: generateCSSUnit( posRightMob, posRightUnitMob ),
 		},
 	};
 
@@ -257,15 +257,15 @@ function styling( props ) {
 			'padding-bottom': generateCSSUnit( contentBottomPaddingTablet, tabletContentPaddingUnit ),
 		},
 		'.uagb-dismissable > svg': {
-			'width': generateCSSUnit( iconSizeTabFallback, iconSizeUnit ),
-			'height': generateCSSUnit( iconSizeTabFallback, iconSizeUnit ),
-			'top': generateCSSUnit( posTopTab, posTopUnitTab ),
+			width: generateCSSUnit( iconSizeTabFallback, iconSizeUnit ),
+			height: generateCSSUnit( iconSizeTabFallback, iconSizeUnit ),
+			top: generateCSSUnit( posTopTab, posTopUnitTab ),
 		},
 		'.uagb-inline_notice__align-left svg': {
-			'right': generateCSSUnit( posRightTab, posRightUnitTab ),
+			right: generateCSSUnit( posRightTab, posRightUnitTab ),
 		},
 		'.uagb-inline_notice__align-center svg': {
-			'right': generateCSSUnit( posRightTab, posRightUnitTab ),
+			right: generateCSSUnit( posRightTab, posRightUnitTab ),
 		},
 	};
 
@@ -287,13 +287,13 @@ function styling( props ) {
 		selectors[ ' .rich-text.block-editor-rich-text__editable.uagb-notice-text' ][ 'border-bottom-right-radius' ] =
 			'3px';
 		selectors[ '.uagb-inline_notice__align-right svg' ] = {
-			'left': generateCSSUnit( titleLeftPadding, titlePaddingUnit ),
+			left: generateCSSUnit( titleLeftPadding, titlePaddingUnit ),
 		};
 		tabletSelectors[ '.uagb-inline_notice__align-right svg' ] = {
-			'left': generateCSSUnit( posLeftTab, posLeftUnitTab ),
+			left: generateCSSUnit( posLeftTab, posLeftUnitTab ),
 		};
 		mobileSelectors[ '.uagb-inline_notice__align-right svg' ] = {
-			'left': generateCSSUnit( posLeftMob, posLeftUnitMob ),
+			left: generateCSSUnit( posLeftMob, posLeftUnitMob ),
 		};
 	} else if ( 'simple' === layout ) {
 		selectors[ ' .rich-text.block-editor-rich-text__editable.uagb-notice-title' ][
@@ -315,19 +315,19 @@ function styling( props ) {
 		tabletSelectors[ ' .rich-text.block-editor-rich-text__editable.uagb-notice-title' ][ 'border-left' ] =
 			generateCSSUnit( highlightWidthTabletFallback, 'px' ) + ' solid ' + noticeColor;
 		selectors[ '.uagb-inline_notice__align-right svg' ] = {
-			'left': `calc(${ generateCSSUnit( titleLeftPadding, titlePaddingUnit ) } + ${ generateCSSUnit(
+			left: `calc(${ generateCSSUnit( titleLeftPadding, titlePaddingUnit ) } + ${ generateCSSUnit(
 				highlightWidthFallback,
 				'px'
 			) })`,
 		};
 		tabletSelectors[ '.uagb-inline_notice__align-right svg' ] = {
-			'left': `calc(${ generateCSSUnit( posLeftTab, posLeftUnitTab ) } + ${ generateCSSUnit(
+			left: `calc(${ generateCSSUnit( posLeftTab, posLeftUnitTab ) } + ${ generateCSSUnit(
 				posClassicTab,
 				'px'
 			) })`,
 		};
 		mobileSelectors[ '.uagb-inline_notice__align-right svg' ] = {
-			'left': `calc(${ generateCSSUnit( posLeftMob, posLeftUnitMob ) } + ${ generateCSSUnit(
+			left: `calc(${ generateCSSUnit( posLeftMob, posLeftUnitMob ) } + ${ generateCSSUnit(
 				posClassicMob,
 				'px'
 			) })`,

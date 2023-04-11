@@ -274,19 +274,19 @@ function styling( props ) {
 		// Icon css
 		' .uagb-ifb-content .uagb-ifb-icon-wrap svg': {
 			'font-size': generateCSSUnit( iconSizeFallback, iconSizeType ),
-			'color': iconColor,
-			'fill': iconColor,
+			color: iconColor,
+			fill: iconColor,
 			'line-height': generateCSSUnit( iconSizeFallback, iconSizeType ),
 		},
 		// Need This for All
 		' .uagb-iconbox-icon-wrap': {
-			'margin': 'auto',
-			'display': 'inline-flex',
+			margin: 'auto',
+			display: 'inline-flex',
 			'align-items': 'center',
 			'justify-content': 'center',
 			'box-sizing': 'content-box',
-			'width': generateCSSUnit( iconSizeFallback, iconSizeType ),
-			'height': generateCSSUnit( iconSizeFallback, iconSizeType ),
+			width: generateCSSUnit( iconSizeFallback, iconSizeType ),
+			height: generateCSSUnit( iconSizeFallback, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallback, iconSizeType ),
 			'padding-left': generateCSSUnit( iconLeftMargin, iconMarginUnit ),
 			'padding-right': generateCSSUnit( iconRightMargin, iconMarginUnit ),
@@ -295,41 +295,41 @@ function styling( props ) {
 		},
 		' .uagb-ifb-content .uagb-ifb-left-title-image svg': {
 			'font-size': generateCSSUnit( iconSizeFallback, iconSizeType ),
-			'color': iconColor,
-			'fill': iconColor,
-			'width': generateCSSUnit( iconSizeFallback, iconSizeType ),
+			color: iconColor,
+			fill: iconColor,
+			width: generateCSSUnit( iconSizeFallback, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallback, iconSizeType ),
 		},
 		' .uagb-ifb-content .uagb-ifb-right-title-image svg': {
 			'font-size': generateCSSUnit( iconSizeFallback, iconSizeType ),
-			'color': iconColor,
-			'fill': iconColor,
-			'width': generateCSSUnit( iconSizeFallback, iconSizeType ),
+			color: iconColor,
+			fill: iconColor,
+			width: generateCSSUnit( iconSizeFallback, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallback, iconSizeType ),
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-icon-wrap svg': {
 			'font-size': generateCSSUnit( iconSizeFallback, iconSizeType ),
-			'color': iconColor,
-			'fill': iconColor,
-			'width': generateCSSUnit( iconSizeFallback, iconSizeType ),
-			'height': generateCSSUnit( iconSizeFallback, iconSizeType ),
+			color: iconColor,
+			fill: iconColor,
+			width: generateCSSUnit( iconSizeFallback, iconSizeType ),
+			height: generateCSSUnit( iconSizeFallback, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallback, iconSizeType ),
 		},
 		' .uagb-ifb-content .uagb-ifb-icon-wrap svg:hover': {
-			'fill': iconHover,
+			fill: iconHover,
 		},
 		'.uagb-infobox-icon-left .uagb-ifb-icon-wrap > svg:hover': {
-			'fill': iconHover,
+			fill: iconHover,
 		},
 		'.uagb-infobox-icon-right .uagb-ifb-icon-wrap:hover > svg:hover': {
-			'fill': iconHover,
+			fill: iconHover,
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-icon-wrap > svg:hover': {
-			'fill': iconHover,
+			fill: iconHover,
 		},
 		'.uagb-infobox_cta-type-all:hover .uagb-infobox__content-wrap svg': {
-			'fill': iconHover,
-			'color': iconHover,
+			fill: iconHover,
+			color: iconHover,
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-icon-wrap > svg': {
 			'padding-left': generateCSSUnit( iconLeftMargin, iconMarginUnit ),
@@ -382,23 +382,23 @@ function styling( props ) {
 			'text-transform': ctaTransform,
 			'letter-spacing': generateCSSUnit( ctaLetterSpacing, ctaLetterSpacingType ),
 			'line-height': generateCSSUnit( ctaLineHeight, ctaLineHeightType ),
-			'color': ctaLinkColor,
+			color: ctaLinkColor,
 		},
 		' div.uagb-ifb-cta a.uagb-infobox-cta-link:hover': {
-			'color': ctaLinkHoverColor,
+			color: ctaLinkHoverColor,
 		},
 		' .uagb-infobox-cta-link svg': {
 			'font-size': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
-			'height': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
-			'width': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
+			height: generateCSSUnit( ctaFontSize, ctaFontSizeType ),
+			width: generateCSSUnit( ctaFontSize, ctaFontSizeType ),
 			'line-height': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
-			'fill': ctaLinkColor,
+			fill: ctaLinkColor,
 		},
 		' .uagb-infobox-cta-link:hover svg': {
-			'fill': ctaLinkHoverColor,
+			fill: ctaLinkHoverColor,
 		},
 		' div.uagb-ifb-button-wrapper a.uagb-infobox-cta-link': {
-			'color': ctaBtnLinkColor,
+			color: ctaBtnLinkColor,
 			'background-color': ctaBgType === 'color' ? ctaBgColor : 'transparent', // Since the only other case we currently have is 'transparent'.
 			'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
 			'padding-bottom': generateCSSUnit( paddingBtnBottom, paddingBtnUnit ),
@@ -406,7 +406,7 @@ function styling( props ) {
 			'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link': {
-			'color': ctaBtnLinkColor,
+			color: ctaBtnLinkColor,
 			'background-color': ctaBgColor,
 			'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
 			'padding-bottom': generateCSSUnit( paddingBtnBottom, paddingBtnUnit ),
@@ -414,20 +414,20 @@ function styling( props ) {
 			'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link:hover': {
-			'color': ctaLinkHoverColor,
+			color: ctaLinkHoverColor,
 			'background-color': ctaBgHoverType === 'color' ? ctaBgHoverColor : 'transparent',
 			'border-color': btnBorderHColor,
 		},
 		' .uagb-ifb-button-wrapper .uagb-infobox-cta-link:hover': {
-			'color': ctaLinkHoverColor,
+			color: ctaLinkHoverColor,
 			'background-color': ctaBgHoverType === 'color' ? ctaBgHoverColor : 'transparent',
 			'border-color': btnBorderHColor,
 		},
 		' .uagb-ifb-button-wrapper .uagb-infobox-cta-link svg': {
-			'fill': ctaBtnLinkColor,
+			fill: ctaBtnLinkColor,
 		},
 		' .uagb-ifb-button-wrapper .uagb-infobox-cta-link:hover svg': {
-			'fill': ctaLinkHoverColor,
+			fill: ctaLinkHoverColor,
 		},
 		// Prefix Style
 		' .block-editor-rich-text__editable.uagb-ifb-title-prefix': {
@@ -438,7 +438,7 @@ function styling( props ) {
 			'font-style': prefixFontStyle,
 			'text-decoration': prefixDecoration,
 			'text-transform': prefixTransform,
-			'color': prefixColor,
+			color: prefixColor,
 			'letter-spacing': generateCSSUnit( prefixLetterSpacing, prefixLetterSpacingType ),
 			'margin-bottom': generateCSSUnit( prefixSpace, prefixSpaceUnit ),
 			'margin-top': generateCSSUnit( prefixTopMargin, prefixSpaceUnit ),
@@ -447,7 +447,7 @@ function styling( props ) {
 		},
 		// Title Style
 		' .block-editor-rich-text__editable.uagb-ifb-title a': {
-			'color': headingColor,
+			color: headingColor,
 		},
 		' .block-editor-rich-text__editable.uagb-ifb-title': {
 			'font-size': generateCSSUnit( headFontSize, headFontSizeType ),
@@ -458,7 +458,7 @@ function styling( props ) {
 			'text-decoration': headDecoration,
 			'text-transform': headTransform,
 			'letter-spacing': generateCSSUnit( headLetterSpacing, headLetterSpacingType ),
-			'color': headingColor,
+			color: headingColor,
 			'margin-top': generateCSSUnit( headTopMargin, headSpaceUnit ),
 			'margin-bottom': generateCSSUnit( headSpace, headSpaceUnit ),
 			'margin-left': generateCSSUnit( headLeftMargin, headSpaceUnit ),
@@ -474,7 +474,7 @@ function styling( props ) {
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'letter-spacing': generateCSSUnit( subHeadLetterSpacing, subHeadLetterSpacingType ),
-			'color': subHeadingColor,
+			color: subHeadingColor,
 			'margin-bottom': generateCSSUnit( subHeadSpace, subHeadSpaceUnit ),
 			'margin-top': generateCSSUnit( subHeadTopMargin, subHeadSpaceUnit ),
 			'margin-left': generateCSSUnit( subHeadLeftMargin, subHeadSpaceUnit ),
@@ -482,7 +482,7 @@ function styling( props ) {
 		},
 		// Seperator
 		'.uagb-infobox__content-wrap .uagb-ifb-separator': {
-			'width': generateCSSUnit( seperatorWidthFallback, separatorWidthType ),
+			width: generateCSSUnit( seperatorWidthFallback, separatorWidthType ),
 			'border-top-width': generateCSSUnit( seperatorThicknessFallback, thicknessUnit ),
 			'border-top-color': seperatorColor,
 			'border-top-style': seperatorStyle,
@@ -513,14 +513,14 @@ function styling( props ) {
 		};
 	} else if ( 'Framed' === iconView ) {
 		selectors[ ' .uagb-iconbox-icon-wrap.uagb-infobox-shape-circle' ] = {
-			'border': `${ iconBorderWidth }px solid ${ iconBackgroundColor }`,
+			border: `${ iconBorderWidth }px solid ${ iconBackgroundColor }`,
 			'border-radius': '50%',
 		};
 		selectors[ ' .uagb-iconbox-icon-wrap.uagb-infobox-shape-squre' ] = {
-			'border': `${ iconBorderWidth }px solid ${ iconBackgroundColor }`,
+			border: `${ iconBorderWidth }px solid ${ iconBackgroundColor }`,
 		};
 		selectors[ ' .uagb-iconbox-icon-wrap:hover' ] = {
-			'border': `${ iconBorderWidth }px solid ${ iconBackgroundHoverColor }`,
+			border: `${ iconBorderWidth }px solid ${ iconBackgroundHoverColor }`,
 		};
 	}
 	selectors[ ' .uagb-infobox-cta-link.wp-block-button__link' ] = ctaBorderCSS;
@@ -531,8 +531,8 @@ function styling( props ) {
 			'padding-right': generateCSSUnit( iconMarginRightTablet, iconTabletMarginUnit ),
 			'padding-bottom': generateCSSUnit( iconMarginBottomTablet, iconTabletMarginUnit ),
 			'padding-left': generateCSSUnit( iconMarginLeftTablet, iconTabletMarginUnit ),
-			'width': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
-			'height': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
+			width: generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
+			height: generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 		},
 		' .block-editor-rich-text__editable.uagb-ifb-desc': {
@@ -611,12 +611,12 @@ function styling( props ) {
 		},
 		' .uagb-infobox-cta-link svg': {
 			'font-size': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
-			'height': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
+			height: generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
 			'line-height': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
-			'width': generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
+			width: generateCSSUnit( ctaFontSizeTablet, ctaFontSizeType ),
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-separator': {
-			'width': generateCSSUnit( seperatorWidthFallbackTablet, separatorWidthType ),
+			width: generateCSSUnit( seperatorWidthFallbackTablet, separatorWidthType ),
 		},
 		' .uagb-ifb-separator': {
 			'margin-bottom': generateCSSUnit( seperatorTabletSpace, separatorTabletMarginUnit ),
@@ -634,18 +634,18 @@ function styling( props ) {
 		},
 		' .uagb-ifb-content .uagb-ifb-left-title-image svg': {
 			'font-size': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
-			'width': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
+			width: generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 		},
 		' .uagb-ifb-content .uagb-ifb-right-title-image svg': {
 			'font-size': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
-			'width': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
+			width: generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-icon-wrap svg': {
 			'font-size': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
-			'width': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
-			'height': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
+			width: generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
+			height: generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallbackTablet, iconSizeType ),
 		},
 	};
@@ -739,13 +739,13 @@ function styling( props ) {
 			'line-height': generateCSSUnit( ctaLineHeightMobile, ctaLineHeightType ),
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-separator': {
-			'width': generateCSSUnit( seperatorWidthFallbackMobile, separatorWidthType ),
+			width: generateCSSUnit( seperatorWidthFallbackMobile, separatorWidthType ),
 		},
 		' .uagb-infobox-cta-link svg': {
 			'font-size': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
-			'height': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
+			height: generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
 			'line-height': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
-			'width': generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
+			width: generateCSSUnit( ctaFontSizeMobile, ctaFontSizeType ),
 		},
 		' .uagb-ifb-content .uagb-ifb-icon-wrap svg': {
 			'font-size': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
@@ -753,18 +753,18 @@ function styling( props ) {
 		},
 		' .uagb-ifb-content .uagb-ifb-left-title-image svg': {
 			'font-size': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
-			'width': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
+			width: generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 		},
 		' .uagb-ifb-content .uagb-ifb-right-title-image svg': {
 			'font-size': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
-			'width': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
+			width: generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 		},
 		'.uagb-infobox__content-wrap .uagb-ifb-icon-wrap svg': {
 			'font-size': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
-			'width': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
-			'height': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
+			width: generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
+			height: generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 			'line-height': generateCSSUnit( iconSizeFallbackMobile, iconSizeType ),
 		},
 	};
@@ -815,42 +815,42 @@ function styling( props ) {
 	if ( imageWidthType ) {
 		// Image
 		selectors[ '.uagb-infobox__content-wrap img' ] = {
-			'width': generateCSSUnit( imageWidthFallback, imageWidthUnit ),
+			width: generateCSSUnit( imageWidthFallback, imageWidthUnit ),
 		};
 		selectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-right-title-image > img' ] = {
-			'width': generateCSSUnit( imageWidthFallback, imageWidthUnit ),
+			width: generateCSSUnit( imageWidthFallback, imageWidthUnit ),
 		};
 		selectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-left-title-image > img' ] = {
-			'width': generateCSSUnit( imageWidthFallback, imageWidthUnit ),
+			width: generateCSSUnit( imageWidthFallback, imageWidthUnit ),
 		};
 		selectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-image-content > img' ] = {
-			'width': generateCSSUnit( imageWidthFallback, imageWidthUnit ),
+			width: generateCSSUnit( imageWidthFallback, imageWidthUnit ),
 		};
 
 		tabletSelectors[ '.uagb-infobox__content-wrap img' ] = {
-			'width': generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
+			width: generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
 		};
 		tabletSelectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-right-title-image > img' ] = {
-			'width': generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
+			width: generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
 		};
 		tabletSelectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-left-title-image > img' ] = {
-			'width': generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
+			width: generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
 		};
 		tabletSelectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-image-content > img' ] = {
-			'width': generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
+			width: generateCSSUnit( imageWidthFallbackTablet, imageWidthUnitTablet ),
 		};
 
 		mobileSelectors[ '.uagb-infobox__content-wrap img' ] = {
-			'width': generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
+			width: generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
 		};
 		mobileSelectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-right-title-image > img' ] = {
-			'width': generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
+			width: generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
 		};
 		mobileSelectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-left-title-image > img' ] = {
-			'width': generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
+			width: generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
 		};
 		mobileSelectors[ '.uagb-infobox__content-wrap .uagb-ifb-content .uagb-ifb-image-content > img' ] = {
-			'width': generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
+			width: generateCSSUnit( imageWidthFallbackMobile, imageWidthUnitMobile ),
 		};
 	}
 

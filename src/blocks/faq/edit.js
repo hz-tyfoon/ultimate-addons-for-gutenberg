@@ -61,7 +61,7 @@ const FaqComponent = ( props ) => {
 			'@context': 'https://schema.org',
 			'@type': 'FAQPage',
 			'@id': pageURL,
-			'mainEntity': [],
+			mainEntity: [],
 		};
 
 		allBlocks.forEach( ( block ) => {
@@ -69,10 +69,10 @@ const FaqComponent = ( props ) => {
 
 			faqData = {
 				'@type': 'Question',
-				'name': block.attributes.question,
-				'acceptedAnswer': {
+				name: block.attributes.question,
+				acceptedAnswer: {
 					'@type': 'Answer',
-					'text': block.attributes.answer,
+					text: block.attributes.answer,
 				},
 			};
 			jsonData.mainEntity.push( faqData );

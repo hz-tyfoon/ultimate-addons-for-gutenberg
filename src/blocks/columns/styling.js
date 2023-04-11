@@ -96,30 +96,30 @@ function styling( props ) {
 	const selectors = {
 		'.uagb-columns__wrap': inlineStyles( props ),
 		' .uagb-columns__video-wrap': {
-			'opacity': videoOpacity,
+			opacity: videoOpacity,
 		},
 		' > .uagb-columns__inner-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout': {
 			'max-width': max_width,
 		},
 		' > .uagb-columns__inner-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="uagb/column"]': {
-			'padding': generateCSSUnit( columnGap, 'px' ),
+			padding: generateCSSUnit( columnGap, 'px' ),
 		},
 		' .uagb-columns__shape-top svg': {
-			'width': 'calc( ' + topWidth + '% + 1.3px )',
-			'height': generateCSSUnit( topHeight, 'px' ),
+			width: 'calc( ' + topWidth + '% + 1.3px )',
+			height: generateCSSUnit( topHeight, 'px' ),
 		},
 		' .uagb-columns__shape-top .uagb-columns__shape-fill': {
-			'fill': hexToRgba(
+			fill: hexToRgba(
 				maybeGetColorForVariable( topColor ),
 				typeof topDividerOpacity !== 'undefined' ? topDividerOpacity : 100
 			),
 		},
 		' .uagb-columns__shape-bottom svg': {
-			'width': 'calc( ' + bottomWidth + '% + 1.3px )',
-			'height': generateCSSUnit( bottomHeight, 'px' ),
+			width: 'calc( ' + bottomWidth + '% + 1.3px )',
+			height: generateCSSUnit( bottomHeight, 'px' ),
 		},
 		' .uagb-columns__shape-bottom .uagb-columns__shape-fill': {
-			'fill': hexToRgba(
+			fill: hexToRgba(
 				maybeGetColorForVariable( bottomColor ),
 				typeof bottomDividerOpacity !== 'undefined' ? bottomDividerOpacity : 100
 			),
@@ -156,7 +156,7 @@ function styling( props ) {
 	} else if ( 'image' === backgroundType ) {
 		if ( 'color' === overlayType ) {
 			selectors[ ' > .uagb-columns__overlay' ] = {
-				'opacity':
+				opacity:
 					typeof backgroundOpacity !== 'undefined' && 0 !== backgroundOpacity ? backgroundOpacity / 100 : '',
 				'background-color': backgroundImageColor,
 			};
@@ -165,7 +165,7 @@ function styling( props ) {
 		}
 	} else if ( 'color' === backgroundType ) {
 		selectors[ ' > .uagb-columns__overlay' ] = {
-			'opacity': typeof backgroundOpacity !== 'undefined' && 0 !== backgroundOpacity ? backgroundOpacity / 100 : '',
+			opacity: typeof backgroundOpacity !== 'undefined' && 0 !== backgroundOpacity ? backgroundOpacity / 100 : '',
 			'background-color': backgroundColor,
 		};
 	} else if ( 'gradient' === backgroundType ) {
@@ -212,10 +212,10 @@ function styling( props ) {
 			...borderCSSTablet,
 		},
 		' .uagb-columns__shape-top svg': {
-			'height': generateCSSUnit( topHeightTablet, 'px' ),
+			height: generateCSSUnit( topHeightTablet, 'px' ),
 		},
 		' .uagb-columns__shape-bottom svg': {
-			'height': generateCSSUnit( bottomHeightTablet, 'px' ),
+			height: generateCSSUnit( bottomHeightTablet, 'px' ),
 		},
 	};
 
@@ -230,10 +230,10 @@ function styling( props ) {
 			...borderCSSMobile,
 		},
 		' .uagb-columns__shape-top svg': {
-			'height': generateCSSUnit( topHeightMobile, 'px' ),
+			height: generateCSSUnit( topHeightMobile, 'px' ),
 		},
 		' .uagb-columns__shape-bottom svg': {
-			'height': generateCSSUnit( bottomHeightMobile, 'px' ),
+			height: generateCSSUnit( bottomHeightMobile, 'px' ),
 		},
 	};
 
