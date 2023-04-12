@@ -7,7 +7,6 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 function styling( props ) {
-
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
@@ -70,20 +69,16 @@ function styling( props ) {
 		fontLetterSpacingTablet,
 		fontLetterSpacingMobile,
 		fontLetterSpacingType,
-
 	} = props.attributes;
-
-	const gapFallback = getFallbackNumber( gap, 'gap', blockName );
-	const gapTabletFallback = getFallbackNumber( gapTablet, 'gapTablet', blockName );
-	const gapMobileFallback = getFallbackNumber( gapMobile, 'gapMobile', blockName ); 
 
 	const selectors = {};
 	const tabletSelectors = {};
 	const mobileSelectors = {};
 
-	selectors[ ' .uagb-button__wrapper .uagb-buttons-repeater:not(.wp-block-button__link)' ] = { // For Backword user.
+	selectors[ ' .uagb-button__wrapper .uagb-buttons-repeater:not(.wp-block-button__link)' ] = {
+		// For Backword user.
 		'font-family': fontFamily,
-		'font-style' : fontStyle,
+		'font-style': fontStyle,
 		'text-decoration': fontDecoration,
 		'text-transform': fontTransform,
 		'font-weight': fontWeight,
@@ -91,9 +86,10 @@ function styling( props ) {
 		'line-height': generateCSSUnit( lineHeight, lineHeightType ),
 	};
 
-	selectors[ '.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link' ] = { // For new user.
+	selectors[ '.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link' ] = {
+		// For new user.
 		'font-family': fontFamily,
-		'font-style' : fontStyle,
+		'font-style': fontStyle,
 		'text-decoration': fontDecoration,
 		'text-transform': fontTransform,
 		'font-weight': fontWeight,
@@ -106,63 +102,78 @@ function styling( props ) {
 		'margin-left': generateCSSUnit( leftMargin, marginType ),
 		'margin-right': generateCSSUnit( rightMargin, marginType ),
 		'margin-top': generateCSSUnit( topMargin, marginType ),
-		'margin-bottom': generateCSSUnit(
-			bottomMargin,
-			marginType
-		),
+		'margin-bottom': generateCSSUnit( bottomMargin, marginType ),
 		'letter-spacing': generateCSSUnit( fontLetterSpacing, fontLetterSpacingType ),
 	};
 	if ( 'desktop' === stack ) {
-		selectors[ '.uagb-editor-preview-mode-desktop .uagb-buttons-stack-desktop .block-editor-block-list__layout' ] = {
+		selectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapFallback, 'px' ),
+			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
 		};
-		tabletSelectors[ '.uagb-editor-preview-mode-tablet .uagb-buttons-stack-desktop .block-editor-block-list__layout' ] = {
+		tabletSelectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapTabletFallback, 'px' )
+			'row-gap': generateCSSUnit( gapTablet, 'px' ),
 		};
-		mobileSelectors[ '.uagb-editor-preview-mode-mobile .uagb-buttons-stack-desktop .block-editor-block-list__layout' ] = {
+		mobileSelectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapMobileFallback, 'px' )
+			'row-gap': generateCSSUnit( gapMobile, 'px' ),
 		};
 	} else if ( 'tablet' === stack ) {
-		selectors[ '.uagb-editor-preview-mode-desktop .uagb-buttons-stack-tablet .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( gapFallback, 'px' ),
-			'align-items': 'center'
-		};
-		tabletSelectors['.uagb-editor-preview-mode-tablet .uagb-buttons-stack-tablet .block-editor-block-list__layout'] = {
+		selectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapTabletFallback, 'px' ),
+			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
 		};
-		mobileSelectors['.uagb-editor-preview-mode-mobile .uagb-buttons-stack-tablet .block-editor-block-list__layout'] = {
+		tabletSelectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapMobileFallback, 'px' ),
+			'row-gap': generateCSSUnit( gapTablet, 'px' ),
 		};
-
+		mobileSelectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
+			'flex-direction': 'column',
+			'row-gap': generateCSSUnit( gapMobile, 'px' ),
+		};
 	} else if ( 'mobile' === stack ) {
-		selectors[ '.uagb-editor-preview-mode-desktop .uagb-buttons-stack-mobile .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( gapFallback, 'px' ),
-			'align-items': 'center'
-		};
-		tabletSelectors[ '.uagb-editor-preview-mode-tablet .uagb-buttons-stack-mobile .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( gapTabletFallback, 'px' ),
-			'align-items': 'center'
-		};
-		mobileSelectors['.uagb-editor-preview-mode-mobile .uagb-buttons-stack-mobile .block-editor-block-list__layout'] = {
+		selectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapMobileFallback, 'px' ),
+			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
+		};
+		tabletSelectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
+			'flex-direction': 'column',
+			'row-gap': generateCSSUnit( gapTablet, 'px' ),
+		};
+		mobileSelectors[
+			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
+		] = {
+			'flex-direction': 'column',
+			'row-gap': generateCSSUnit( gapMobile, 'px' ),
 		};
 	} else if ( 'none' === stack ) {
-		selectors[ '.uagb-editor-preview-mode-desktop .uagb-buttons-stack-none .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( gapFallback, 'px' ),
-			'align-items': 'center'
+		selectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
+			'column-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
+			'align-items': 'center',
 		};
-		tabletSelectors[ '.uagb-editor-preview-mode-tablet .uagb-buttons-stack-none .block-editor-block-list__layout' ] = {
-			'column-gap': generateCSSUnit( gapTabletFallback, 'px' ),
+		tabletSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
+			'column-gap': generateCSSUnit( gapTablet, 'px' ),
 		};
-		mobileSelectors['.uagb-editor-preview-mode-mobile .uagb-buttons-stack-none .block-editor-block-list__layout'] = {
-			'column-gap': generateCSSUnit( gapMobileFallback, 'px' ),
+		mobileSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
+			'column-gap': generateCSSUnit( gapMobile, 'px' ),
 		};
+		console.log('tab',gapTablet, 'mob', gapMobile);
 	}
 
 	if ( align !== 'full' ) {
@@ -170,9 +181,9 @@ function styling( props ) {
 			'text-align': align,
 		};
 	} else {
-		selectors['.uagb-editor-preview-mode-desktop .block-editor-block-list__layout'] = {
-			'width': '100%'
-		}
+		selectors[ '.uagb-editor-preview-mode-desktop .block-editor-block-list__layout' ] = {
+			'width': '100%',
+		};
 		selectors[ ' .block-editor-block-list__block' ] = {
 			'width': '100%',
 		};
@@ -182,13 +193,13 @@ function styling( props ) {
 			'text-align': alignTablet,
 		};
 	} else {
-		tabletSelectors['.uagb-editor-preview-mode-tablet .block-editor-block-list__layout'] = {
+		tabletSelectors[ '.uagb-editor-preview-mode-tablet .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapFallback, 'px' ),
+			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
 		};
 		tabletSelectors[ '.uagb-editor-preview-mode-tablet .block-editor-block-list__layout' ] = {
-			'width': '100%'
-		}
+			'width': '100%',
+		};
 		tabletSelectors[ ' .block-editor-block-list__block ' ] = {
 			'width': '100%',
 		};
@@ -198,95 +209,56 @@ function styling( props ) {
 			'text-align': alignMobile,
 		};
 	} else {
-		mobileSelectors['.uagb-editor-preview-mode-mobile .block-editor-block-list__layout'] = {
+		mobileSelectors[ '.uagb-editor-preview-mode-mobile .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
-			'row-gap': generateCSSUnit( gapFallback, 'px' ),
+			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
 		};
 		mobileSelectors[ '.uagb-editor-preview-mode-mobile .block-editor-block-list__layout' ] = {
-			'width': '100%'
-		}
+			'width': '100%',
+		};
 		mobileSelectors[ ' .block-editor-block-list__block ' ] = {
 			'width': '100%',
 		};
 	}
 
-	tabletSelectors[ '.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link' ] = {
+	tabletSelectors[
+		'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link'
+	] = {
 		'font-size': generateCSSUnit( fontSizeTablet, fontSizeType ),
 		'line-height': generateCSSUnit( lineHeightTablet, lineHeightType ),
-		'padding-left': generateCSSUnit(
-			leftTabletPadding,
-			tabletPaddingUnit
-		),
-		'padding-right': generateCSSUnit(
-			rightTabletPadding,
-			tabletPaddingUnit
-		),
-		'padding-top': generateCSSUnit(
-			topTabletPadding,
-			tabletPaddingUnit
-		),
-		'padding-bottom': generateCSSUnit(
-			bottomTabletPadding,
-			tabletPaddingUnit
-		),
+		'padding-left': generateCSSUnit( leftTabletPadding, tabletPaddingUnit ),
+		'padding-right': generateCSSUnit( rightTabletPadding, tabletPaddingUnit ),
+		'padding-top': generateCSSUnit( topTabletPadding, tabletPaddingUnit ),
+		'padding-bottom': generateCSSUnit( bottomTabletPadding, tabletPaddingUnit ),
 		'margin-left': generateCSSUnit( leftMarginTablet, marginType ),
 		'margin-right': generateCSSUnit( rightMarginTablet, marginType ),
 		'margin-top': generateCSSUnit( topMarginTablet, marginType ),
-		'margin-bottom': generateCSSUnit(
-			bottomMarginTablet,
-			marginType
-		),
+		'margin-bottom': generateCSSUnit( bottomMarginTablet, marginType ),
 		'letter-spacing': generateCSSUnit( fontLetterSpacingTablet, fontLetterSpacingType ),
 	};
 
-	mobileSelectors[ '.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link' ] = {
+	mobileSelectors[
+		'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link'
+	] = {
 		'font-size': generateCSSUnit( fontSizeMobile, fontSizeType ),
 		'line-height': generateCSSUnit( lineHeightMobile, lineHeightType ),
-		'padding-left': generateCSSUnit(
-			leftMobilePadding,
-			mobilePaddingUnit
-		),
-		'padding-right': generateCSSUnit(
-			rightMobilePadding,
-			mobilePaddingUnit
-		),
-		'padding-top': generateCSSUnit(
-			topMobilePadding,
-			mobilePaddingUnit
-		),
-		'padding-bottom': generateCSSUnit(
-			bottomMobilePadding,
-			mobilePaddingUnit
-		),
+		'padding-left': generateCSSUnit( leftMobilePadding, mobilePaddingUnit ),
+		'padding-right': generateCSSUnit( rightMobilePadding, mobilePaddingUnit ),
+		'padding-top': generateCSSUnit( topMobilePadding, mobilePaddingUnit ),
+		'padding-bottom': generateCSSUnit( bottomMobilePadding, mobilePaddingUnit ),
 		'margin-left': generateCSSUnit( leftMarginMobile, marginType ),
 		'margin-right': generateCSSUnit( rightMarginMobile, marginType ),
 		'margin-top': generateCSSUnit( topMarginMobile, marginType ),
-		'margin-bottom': generateCSSUnit(
-			bottomMarginMobile,
-			marginType
-		),
+		'margin-bottom': generateCSSUnit( bottomMarginMobile, marginType ),
 		'letter-spacing': generateCSSUnit( fontLetterSpacingMobile, fontLetterSpacingType ),
 	};
 
-	const base_selector = ` .uagb-block-${ props.clientId.substr(
-		0,
-		8
-	) }`;
+	const base_selector = ` .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
 	let styling_css = generateCSS( selectors, base_selector );
 
-	styling_css += generateCSS(
-		tabletSelectors,
-		`${ base_selector }.uagb-editor-preview-mode-tablet`,
-		true,
-		'tablet'
-	);
+	styling_css += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );
 
-	styling_css += generateCSS(
-		mobileSelectors,
-		`${ base_selector }.uagb-editor-preview-mode-mobile`,
-		true,
-		'mobile'
-	);
+	styling_css += generateCSS( mobileSelectors, `${ base_selector }`, true, 'mobile' );
 
 	return styling_css;
 }

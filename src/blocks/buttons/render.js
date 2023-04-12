@@ -33,8 +33,6 @@ const Render = ( props ) => {
 
 		return childButtons;
 	}, [ btn_count, buttons ] );
-	console.log(deviceType);
-	console.log(stack);
 
 	return (
 		<div
