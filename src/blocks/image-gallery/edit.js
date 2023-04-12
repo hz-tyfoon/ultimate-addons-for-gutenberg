@@ -15,9 +15,23 @@ const UAGBImageGallery = ( props ) => {
 	const {
 		clientId,
 		attributes,
-		attributes:{ UAGHideDesktop, UAGHideTab, UAGHideMob, captionLoadGoogleFonts, captionFontFamily, captionFontWeight, loadMoreLoadGoogleFonts, loadMoreFontFamily, loadMoreFontWeight, lightboxLoadGoogleFonts, lightboxFontFamily, lightboxFontWeight },
+		attributes: {
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+			captionLoadGoogleFonts,
+			captionFontFamily,
+			captionFontWeight,
+			loadMoreLoadGoogleFonts,
+			loadMoreFontFamily,
+			loadMoreFontWeight,
+			lightboxLoadGoogleFonts,
+			lightboxFontFamily,
+			lightboxFontWeight,
+			focusList,
+		},
 		isSelected,
-		setAttributes
+		setAttributes,
 	} = props;
 
 	const deviceType = useDeviceType();
@@ -25,32 +39,43 @@ const UAGBImageGallery = ( props ) => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 		setAttributes( { classMigrate: true } );
+
+		// Replacing the old Focus List Array with the Object List.
+		if ( Array.isArray( focusList ) && focusList.length ) {
+			const convertedList = {};
+			focusList.forEach( ( isFocused, imageIndex ) => {
+				if ( true === isFocused ) {
+					convertedList[ imageIndex ] = true;
+				}
+			} );
+			setAttributes( {
+				focusList: [],
+				focusListObject: { ...convertedList },
+			} );
+		}
 	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 		const blockStyling = styling( props );
-        addBlockEditorDynamicStyles( 'uagb-image-gallery-style-' + clientId.substr( 0, 8 ), blockStyling );
+		addBlockEditorDynamicStyles( 'uagb-image-gallery-style-' + clientId.substr( 0, 8 ), blockStyling );
 	}, [ attributes, deviceType ] );
 
-
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-		// Lightbox disabled by default for the block on every instance.
-		const [ lightboxPreview, setLightboxPreview ] = useState( false );
+	// Lightbox disabled by default for the block on every instance.
+	const [ lightboxPreview, setLightboxPreview ] = useState( false );
 
-		// Disable the Lightbox when the block isn't selected.
-		useEffect( () => {
-			if ( ! isSelected ) {
-				setLightboxPreview( false );
-			}
-		}, [ isSelected ] );
+	// Disable the Lightbox when the block isn't selected.
+	useEffect( () => {
+		if ( ! isSelected ) {
+			setLightboxPreview( false );
+		}
+	}, [ isSelected ] );
 
-			// Loading Google Fonts.
+	// Loading Google Fonts.
 	let loadCaptionGoogleFonts;
 	let loadLoadMoreGoogleFonts;
 	let loadLightboxGoogleFonts;
@@ -58,55 +83,37 @@ const UAGBImageGallery = ( props ) => {
 	if ( captionLoadGoogleFonts === true ) {
 		const captionConfig = {
 			google: {
-				families: [
-					captionFontFamily +
-						( captionFontWeight ? ':' + captionFontWeight : '' ),
-				],
+				families: [ captionFontFamily + ( captionFontWeight ? ':' + captionFontWeight : '' ) ],
 			},
 		};
 
-		loadCaptionGoogleFonts = (
-			<WebfontLoader config={ captionConfig }></WebfontLoader>
-		);
+		loadCaptionGoogleFonts = <WebfontLoader config={ captionConfig }></WebfontLoader>;
 	}
 
 	if ( loadMoreLoadGoogleFonts === true ) {
 		const loadMoreConfig = {
 			google: {
-				families: [
-					loadMoreFontFamily + ( loadMoreFontWeight ? ':' + loadMoreFontWeight : '' ),
-				],
+				families: [ loadMoreFontFamily + ( loadMoreFontWeight ? ':' + loadMoreFontWeight : '' ) ],
 			},
 		};
 
-		loadLoadMoreGoogleFonts = (
-			<WebfontLoader config={ loadMoreConfig }></WebfontLoader>
-		);
+		loadLoadMoreGoogleFonts = <WebfontLoader config={ loadMoreConfig }></WebfontLoader>;
 	}
 
 	if ( lightboxLoadGoogleFonts === true ) {
 		const lightboxConfig = {
 			google: {
-				families: [
-					lightboxFontFamily + ( lightboxFontWeight ? ':' + lightboxFontWeight : '' ),
-				],
+				families: [ lightboxFontFamily + ( lightboxFontWeight ? ':' + lightboxFontWeight : '' ) ],
 			},
 		};
 
-		loadLightboxGoogleFonts = (
-			<WebfontLoader config={ lightboxConfig }></WebfontLoader>
-		);
+		loadLightboxGoogleFonts = <WebfontLoader config={ lightboxConfig }></WebfontLoader>;
 	}
-
 
 	return (
 		<>
-			{isSelected && (
-				<Settings
-					{...{ ...props, lightboxPreview, setLightboxPreview }}
-				/>
-			)}
-			<Render {...{ ...props, lightboxPreview, setLightboxPreview }} />
+			{ isSelected && <Settings { ...{ ...props, lightboxPreview, setLightboxPreview } } /> }
+			<Render { ...{ ...props, lightboxPreview, setLightboxPreview } } />
 			{ loadCaptionGoogleFonts }
 			{ loadLoadMoreGoogleFonts }
 			{ loadLightboxGoogleFonts }

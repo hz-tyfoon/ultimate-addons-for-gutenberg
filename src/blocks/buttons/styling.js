@@ -106,59 +106,41 @@ function styling( props ) {
 		'letter-spacing': generateCSSUnit( fontLetterSpacing, fontLetterSpacingType ),
 	};
 	if ( 'desktop' === stack ) {
-		selectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		selectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
 		};
-		tabletSelectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		tabletSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( gapTablet, 'px' ),
 		};
-		mobileSelectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		mobileSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( gapMobile, 'px' ),
 		};
 	} else if ( 'tablet' === stack ) {
-		selectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		selectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
 		};
-		tabletSelectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		tabletSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( gapTablet, 'px' ),
 		};
-		mobileSelectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		mobileSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( gapMobile, 'px' ),
 		};
 	} else if ( 'mobile' === stack ) {
-		selectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		selectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( getFallbackNumber( gap, 'gap', blockName ), 'px' ),
 		};
-		tabletSelectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		tabletSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( gapTablet, 'px' ),
 		};
-		mobileSelectors[
-			'.uagb-buttons__outer-wrap .block-editor-block-list__layout'
-		] = {
+		mobileSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'flex-direction': 'column',
 			'row-gap': generateCSSUnit( gapMobile, 'px' ),
 		};
@@ -173,7 +155,6 @@ function styling( props ) {
 		mobileSelectors[ '.uagb-buttons__outer-wrap .block-editor-block-list__layout' ] = {
 			'column-gap': generateCSSUnit( gapMobile, 'px' ),
 		};
-		console.log('tab',gapTablet, 'mob', gapMobile);
 	}
 
 	if ( align !== 'full' ) {
