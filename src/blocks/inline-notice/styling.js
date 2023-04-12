@@ -6,7 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( attributes, clientId, name, ) {
+function styling( attributes, clientId, name ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {

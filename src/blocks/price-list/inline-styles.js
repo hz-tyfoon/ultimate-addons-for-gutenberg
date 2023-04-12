@@ -6,7 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function RestMenuStyle( attributes, clientId, name ) { 
+function RestMenuStyle( attributes, clientId, name ) {
 	const {
 		headingAlign,
 		priceColor,

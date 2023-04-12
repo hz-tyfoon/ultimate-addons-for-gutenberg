@@ -8,7 +8,7 @@ import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( attributes, clientId ) { 
+function styling( attributes, clientId ) {
 	let {
 		backgroundType,
 		backgroundImageDesktop,

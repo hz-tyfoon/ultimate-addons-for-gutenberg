@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( attributes, clientId, ) {
+function styling( attributes, clientId ) {
 	let {
 		backgroundType,
 		backgroundImageDesktop,

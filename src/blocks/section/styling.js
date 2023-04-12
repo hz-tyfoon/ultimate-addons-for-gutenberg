@@ -6,7 +6,7 @@ import inlineStyles from './inline-styles';
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 
-function styling( attributes, clientId ) { 
+function styling( attributes, clientId ) {
 	const {
 		backgroundType,
 		backgroundVideoColor,

@@ -9,7 +9,7 @@ import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import { applyFilters } from '@wordpress/hooks';
 
-export default function styling( attributes, clientId, name ) { 
+export default function styling( attributes, clientId, name ) {
 	const {
 		modalTrigger,
 		buttonIconPosition,

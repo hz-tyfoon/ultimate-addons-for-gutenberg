@@ -29,7 +29,7 @@ let imageSizeOptions = [
 	{ value: 'medium', label: __( 'Medium', 'ultimate-addons-for-gutenberg' ) },
 	{ value: 'full', label: __( 'Large', 'ultimate-addons-for-gutenberg' ) },
 ];
-
+const isPro = uagb_blocks_info.spectra_pro_status;
 export default function Settings( props ) {
 	props = props.parentProps;
 	const { attributes, setAttributes, deviceType } = props;
@@ -205,7 +205,7 @@ export default function Settings( props ) {
 		yPositionTypeMobile,
 		modalTriggerBgType,
 		modalTriggerBgHoverType,
-		openModalAs
+		openModalAs,
 	} = attributes;
 
 	/*
@@ -290,7 +290,7 @@ export default function Settings( props ) {
 	}
 
 	const modalTriggerPanel = (
-		<UAGAdvancedPanelBody title={ __( 'Trigger', 'ultimate-addons-for-gutenberg' ) } initialOpen={ true }>
+		<UAGAdvancedPanelBody title={ __( 'Trigger', 'ultimate-addons-for-gutenberg' ) } initialOpen={ ! isPro }>
 			<UAGSelectControl
 				setAttributes={ setAttributes }
 				label={ __( 'Modal Trigger', 'ultimate-addons-for-gutenberg' ) }
@@ -416,7 +416,7 @@ export default function Settings( props ) {
 		</UAGAdvancedPanelBody>
 	);
 
-	const isTypePopup = ( 'left-off-canvas' !== openModalAs && 'right-off-canvas' !== openModalAs );
+	const isTypePopup = 'left-off-canvas' !== openModalAs && 'right-off-canvas' !== openModalAs;
 
 	const modalContentPanel = (
 		<UAGAdvancedPanelBody title={ __( 'Container', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
@@ -454,7 +454,7 @@ export default function Settings( props ) {
 				] }
 				setAttributes={ setAttributes }
 			/>
-			{ ( isTypePopup ) &&
+			{ isTypePopup && (
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
 					label={ __( 'Modal Popup Height', 'ultimate-addons-for-gutenberg' ) }
@@ -475,7 +475,7 @@ export default function Settings( props ) {
 					showIcons={ false }
 					responsive={ false }
 				/>
-			}
+			) }
 			{ isTypePopup && modalBoxHeight !== 'custom' && (
 				<ResponsiveSlider
 					label={ __( 'Max Height', 'ultimate-addons-for-gutenberg' ) }

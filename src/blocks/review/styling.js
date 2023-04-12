@@ -5,7 +5,7 @@
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 
-function styling( attributes ) { 
+function styling( attributes ) {
 	const {
 		block_id,
 		starColor,

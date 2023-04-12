@@ -16,7 +16,7 @@ const UAGBImageGallery = ( props ) => {
 	const {
 		clientId,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, focusList },
 		isSelected,
 		setAttributes,
 		name,
