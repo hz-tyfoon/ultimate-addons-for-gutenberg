@@ -1,5 +1,5 @@
 const addBlockEditorDynamicStyles = () => {
-	// setTimeout( () => {
+	setTimeout( () => {
 		// Static Editor CSS.
 		const editorStaticCSSStylesTag = document.getElementById( 'uagb-editor-styles' );
 		let cloneEditorStaticCSSStylesTag = false;
@@ -134,7 +134,7 @@ const addBlockEditorDynamicStyles = () => {
 			// Loop end.
 		}
 		// condition end.
-	// } );
+	} );
 };
 
 export default addBlockEditorDynamicStyles;
