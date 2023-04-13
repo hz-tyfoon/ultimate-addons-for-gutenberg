@@ -5,7 +5,7 @@
 **Requires at least:** 5.6  
 **Requires PHP:** 5.6  
 **Tested up to:** 6.2  
-**Stable tag:** 2.4.2  
+**Stable tag:** 2.4.2.1  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -169,6 +169,9 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 1. /assets/screenshots/1.png
 
 ## Changelog ##
+
+### 2.4.2.1 ###
+* Fix: Container - Neve theme full width issues on front-end.
 
 ### 2.4.2 - WEDNESDAY, 12th APRIL 2023 ###
 * Fix: Container - Updated default content width for block based themes to wideSize.
