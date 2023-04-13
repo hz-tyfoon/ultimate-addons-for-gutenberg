@@ -14,6 +14,7 @@ import './style.scss';
 import styling from './styling';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
+import { compose } from '@wordpress/compose';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const deviceType = useDeviceType();
@@ -36,10 +37,10 @@ const UAGBAdvancedHeading = ( props ) => {
 		setAttributes( { classMigrate: true } );
 	}, [] );
 
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		addBlockEditorDynamicStyles();
-	}, [ attributes, deviceType ] );
+	// useEffect( () => {
+	// 	// Replacement for componentDidUpdate.
+	// 	addBlockEditorDynamicStyles();
+	// }, [ deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
@@ -56,4 +57,20 @@ const UAGBAdvancedHeading = ( props ) => {
 		</>
 	);
 };
-export default UAGBAdvancedHeading;
+
+const AddStaticStyles = ( ChildComponent )=> {
+	return ( props ) => {
+		const deviceType = useDeviceType();
+		useEffect( () => {
+			addBlockEditorDynamicStyles();
+		}, [ deviceType ] );
+	
+		return <ChildComponent { ...props }/>
+	}
+}
+
+export default compose(
+	AddStaticStyles,
+)( UAGBAdvancedHeading );
+
+// export default UAGBAdvancedHeading;

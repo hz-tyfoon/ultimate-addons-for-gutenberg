@@ -1,7 +1,6 @@
 const addBlockEditorDynamicStyles = () => {
-	setTimeout( () => {
+	// setTimeout( () => {
 		// Static Editor CSS.
-
 		const editorStaticCSSStylesTag = document.getElementById( 'uagb-editor-styles' );
 		let cloneEditorStaticCSSStylesTag = false;
 
@@ -67,90 +66,75 @@ const addBlockEditorDynamicStyles = () => {
 		}
 
 		// Block Editor Spacing CSS Ends.
+		const getAllIFrames = document.getElementsByTagName( 'iframe' );
+		if ( getAllIFrames.length > 0 ) {
+			for ( const iterateIFrames of getAllIFrames ) {
+				const iframeDocument = iterateIFrames?.contentWindow.document || iterateIFrames?.contentDocument;
+				
+				// Static CSS.
+				if ( cloneStaticCSSStylesTag ) {
+					const iframeStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-block-css-css' );
+					if ( !iframeStaticCSSStylesTag ) {
+						iframeDocument.head.appendChild( cloneStaticCSSStylesTag );
+					}
+				}
 
-		// Tablet / Mobile Starts.
-		const tabletPreview = document.getElementsByClassName( 'is-tablet-preview' );
-		const mobilePreview = document.getElementsByClassName( 'is-mobile-preview' );
-		const twentyTwentyEditorIframe = document.getElementsByClassName( 'edit-site-visual-editor__editor-canvas' );
+				// Static Editor CSS.
+				if ( cloneEditorStaticCSSStylesTag ) {
+					const iframeEditorStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-editor-styles' );
+					if ( iframeEditorStaticCSSStylesTag ) {
+						iframeDocument.head.removeChild( iframeEditorStaticCSSStylesTag );
+					}
+					iframeDocument.head.appendChild( cloneEditorStaticCSSStylesTag );
+				}
 
-		if ( 0 !== tabletPreview.length || 0 !== mobilePreview.length || 0 !== twentyTwentyEditorIframe.length ) {
-			const preview = tabletPreview[ 0 ] || mobilePreview[ 0 ];
+				// Static Pro Editor CSS.
+				if ( cloneEditorProStaticCSSStylesTag ) {
+					const iframeEditorProStaticCSSStylesTag = iframeDocument.getElementById( 'spectra-pro-editor-styles' );
+					if ( iframeEditorProStaticCSSStylesTag ) {
+						iframeDocument.head.removeChild( iframeEditorProStaticCSSStylesTag );
+					}
+					iframeDocument.head.appendChild( cloneEditorProStaticCSSStylesTag );
+				}
 
-			let iframe = false;
+				// Dashicons CSS.
+				if ( cloneEditorDashiconsCSSStylesTag ) {
+					const iframeEditorDashiconsCSSStylesTag = iframeDocument.getElementById( 'dashicons-css' );
+					if ( iframeEditorDashiconsCSSStylesTag ) {
+						iframeDocument.head.removeChild( iframeEditorDashiconsCSSStylesTag );
+					}
+					iframeDocument.head.appendChild( cloneEditorDashiconsCSSStylesTag );
+				}
 
-			if ( 0 !== twentyTwentyEditorIframe.length ) {
-				iframe = twentyTwentyEditorIframe[ 0 ];
-			} else if ( preview ) {
-				iframe = preview.getElementsByTagName( 'iframe' )[ 0 ];
-			}
+				// Slick CSS.
+				if ( cloneSlickStaticCSSStylesTag ) {
+					const iframeSlickStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-slick-css-css' );
+					if ( !iframeSlickStaticCSSStylesTag ) {
+						iframeDocument.head.appendChild( cloneSlickStaticCSSStylesTag );
+					}
+				}
 
-			const iframeDocument = iframe?.contentWindow.document || iframe?.contentDocument;
+				if ( cloneSwiperStaticCSSStylesTag ) {
+					const iframeSwiperStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-swiper-css-css' );
+					if ( !iframeSwiperStaticCSSStylesTag ) {
+						iframeDocument.head.appendChild( cloneSwiperStaticCSSStylesTag );
+					}
+				}
 
-			if ( ! iframe || ! iframeDocument ) {
-				return;
-			}
-
-			// Static CSS.
-			if ( cloneStaticCSSStylesTag ) {
-				const iframeStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-block-css-css' );
-				if ( ! iframeStaticCSSStylesTag ) {
-					iframeDocument.head.appendChild( cloneStaticCSSStylesTag );
+				// Block Editor Spacing  CSS.
+				if ( cloneBlockEditorSpacingCSSStylesTag ) {
+					const iframeBlockEditorSpacingCSSStylesTag = iframeDocument.getElementById(
+						'uagb-blocks-editor-spacing-style'
+					);
+					if ( !iframeBlockEditorSpacingCSSStylesTag ) {
+						iframeDocument.head.appendChild( cloneBlockEditorSpacingCSSStylesTag );
+					}
 				}
 			}
-
-			// Static Editor CSS.
-			if ( cloneEditorStaticCSSStylesTag ) {
-				const iframeEditorStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-editor-styles' );
-				if ( iframeEditorStaticCSSStylesTag ) {
-					iframeDocument.head.removeChild( iframeEditorStaticCSSStylesTag );
-				}
-				iframeDocument.head.appendChild( cloneEditorStaticCSSStylesTag );
-			}
-
-			// Static Pro Editor CSS.
-			if ( cloneEditorProStaticCSSStylesTag ) {
-				const iframeEditorProStaticCSSStylesTag = iframeDocument.getElementById( 'spectra-pro-editor-styles' );
-				if ( iframeEditorProStaticCSSStylesTag ) {
-					iframeDocument.head.removeChild( iframeEditorProStaticCSSStylesTag );
-				}
-				iframeDocument.head.appendChild( cloneEditorProStaticCSSStylesTag );
-			}
-
-			// Dashicons CSS.
-			if ( cloneEditorDashiconsCSSStylesTag ) {
-				const iframeEditorDashiconsCSSStylesTag = iframeDocument.getElementById( 'dashicons-css' );
-				if ( iframeEditorDashiconsCSSStylesTag ) {
-					iframeDocument.head.removeChild( iframeEditorDashiconsCSSStylesTag );
-				}
-				iframeDocument.head.appendChild( cloneEditorDashiconsCSSStylesTag );
-			}
-
-			// Slick CSS.
-			if ( cloneSlickStaticCSSStylesTag ) {
-				const iframeSlickStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-slick-css-css' );
-				if ( ! iframeSlickStaticCSSStylesTag ) {
-					iframeDocument.head.appendChild( cloneSlickStaticCSSStylesTag );
-				}
-			}
-
-			if ( cloneSwiperStaticCSSStylesTag ) {
-				const iframeSwiperStaticCSSStylesTag = iframeDocument.getElementById( 'uagb-swiper-css-css' );
-				if ( ! iframeSwiperStaticCSSStylesTag ) {
-					iframeDocument.head.appendChild( cloneSwiperStaticCSSStylesTag );
-				}
-			}
-
-			// Block Editor Spacing  CSS.
-			if ( cloneBlockEditorSpacingCSSStylesTag ) {
-				const iframeBlockEditorSpacingCSSStylesTag = iframeDocument.getElementById(
-					'uagb-blocks-editor-spacing-style'
-				);
-				if ( ! iframeBlockEditorSpacingCSSStylesTag ) {
-					iframeDocument.head.appendChild( cloneBlockEditorSpacingCSSStylesTag );
-				}
-			}
+			// Loop end.
 		}
-	} );
+		// condition end.
+	// } );
 };
 
 export default addBlockEditorDynamicStyles;
