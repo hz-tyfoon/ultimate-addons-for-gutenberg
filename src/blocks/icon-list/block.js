@@ -13,12 +13,15 @@ import { __ } from '@wordpress/i18n';
 
 import { registerBlockType } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
-
+import { applyFilters } from '@wordpress/hooks';
+import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
+let iconListCommonData = {};
+iconListCommonData = applyFilters( 'uagb/icon-list', addCommonDataToSpectraBlocks( iconListCommonData ) );
 registerBlockType( 'uagb/icon-list', {
+	...iconListCommonData,
 	title: __( 'Icon List', 'ultimate-addons-for-gutenberg' ),
 	description: __( 'Create a list highlighted with icons/images.', 'ultimate-addons-for-gutenberg' ),
 	icon: UAGB_Block_Icons.icon_list,
-	category: uagb_blocks_info.category,
 	keywords: [
 		__( 'icon list', 'ultimate-addons-for-gutenberg' ),
 		__( 'image list', 'ultimate-addons-for-gutenberg' ),
@@ -27,18 +30,9 @@ registerBlockType( 'uagb/icon-list', {
 	supports: {
 		anchor: true,
 	},
-	example: {
-		attributes: {
-			isPreview: true,
-		}
-	},
 	attributes,
-	edit: ( props ) =>
-			props.attributes.isPreview ? (
-				<PreviewImage image="icon-list" />
-			) : (
-				<Edit { ...props } />
-			),
+	category: uagb_blocks_info.category,
+	edit: ( props ) => ( props.attributes.isPreview ? <PreviewImage image="icon-list" /> : <Edit { ...props } /> ),
 	save,
 	deprecated,
 } );

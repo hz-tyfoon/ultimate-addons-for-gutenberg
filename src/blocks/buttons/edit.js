@@ -3,25 +3,25 @@
  */
 
 import styling from './styling';
-import { useEffect,useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import WebfontLoader from '@Components/typography/fontloader';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 
 let prevState;
 
 const ButtonsComponent = ( props ) => {
-
 	const deviceType = useDeviceType();
 	const {
 		isSelected,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, loadGoogleFonts, fontFamily, fontWeight },
 		setAttributes,
-		clientId
+		clientId,
 	} = props;
 
 	const initialState = {
@@ -40,7 +40,6 @@ const ButtonsComponent = ( props ) => {
 		setAttributes( { childMigrate: true } );
 
 		prevState = props.isSelected;
-		
 	}, [] );
 
 	useEffect( () => {
@@ -56,23 +55,33 @@ const ButtonsComponent = ( props ) => {
 		addBlockEditorDynamicStyles( 'uagb-style-buttons-' + clientId.substr( 0, 8 ), blockStyling );
 
 		prevState = props.isSelected;
-		
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+
+	let loadBtnGoogleFonts;
+
+	if ( loadGoogleFonts === true ) {
+		const btnconfig = {
+			google: {
+				families: [ fontFamily + ( fontWeight ? ':' + fontWeight : '' ) ],
+			},
+		};
+
+		loadBtnGoogleFonts = <WebfontLoader config={ btnconfig }></WebfontLoader>;
+	}
 
 	return (
 		<>
 			{ isSelected && <Settings parentProps={ props } /> }
 			<Render parentProps={ props } />
+			{ loadBtnGoogleFonts }
 		</>
 	);
 };

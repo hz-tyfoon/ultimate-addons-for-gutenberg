@@ -72,7 +72,6 @@ body {
 			border-radius: 100px;
 		}
 	}
-
 }
 
 .entry {
@@ -90,8 +89,8 @@ body {
 	}
 }
 
-.uagb-modal-trigger {
-
+.uagb-modal-trigger:not(img) {
+	display: flex;
 	svg {
 		font-size: 30px;
 		width: 30px;
