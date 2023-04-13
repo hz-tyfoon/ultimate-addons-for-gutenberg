@@ -33,10 +33,6 @@ const MotionEffectsExtension = () => {
 			url: uag_react.ajax_url,
 			method: 'POST',
 			body: formData,
-		} ).then( ( data ) => {
-            if ( data.success ) {
-				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: __( 'Assets Regenerated!', 'ultimate-addons-for-gutenberg' ) } );
-			}
 		} );
     };
 
