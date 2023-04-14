@@ -1,12 +1,11 @@
 import { useEffect } from '@wordpress/element';
-import { useDeviceType } from '@Controls/getPreviewType';
 import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 const AddStaticStyles = ( ChildComponent )=> {
 	return ( props ) => {
-		const deviceType = useDeviceType();
+		// eslint-disable-next-line react-hooks/rules-of-hooks
 		useEffect( () => {
 			addBlockEditorDynamicStyles();
-		}, [ deviceType ] );
+		}, [] );
 	
 		return <ChildComponent { ...props }/>
 	}
