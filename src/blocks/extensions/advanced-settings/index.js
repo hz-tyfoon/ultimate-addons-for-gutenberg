@@ -295,6 +295,10 @@ addFilter( 'uag_advance_tab_content', 'uagb/advanced-display-condition', functio
 
 	const { isSelected, name } = props;
 
+	const excludeMotionFXBlocks = [
+		'uagb/content-timeline-child',
+	];
+
 	const excludeBlocks = [
 		'uagb/buttons-child',
 		'uagb/faq-child',
@@ -354,7 +358,9 @@ addFilter( 'uag_advance_tab_content', 'uagb/advanced-display-condition', functio
 						{ zIndexOptions( props ) }
 					</UAGAdvancedPanelBody>
 				) }
-				{ applyFilters( 'spectra.motion-effects-extension.panel', '', name ) }
+				{ ! excludeMotionFXBlocks.includes( name ) &&
+					applyFilters( 'spectra.motion-effects-extension.panel', '', name )
+				}
 			</>
 		);
 	}
