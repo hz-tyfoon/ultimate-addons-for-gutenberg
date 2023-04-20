@@ -113,9 +113,9 @@ const Render = ( props ) => {
 		<div className={ classnames( 'uagb-spectra-button-wrapper', 'wp-block-button' ) }>
 			<a // eslint-disable-line jsx-a11y/anchor-is-valid
 				className={ buttonClasses }
-				href="#"
-				target="_self"
-				rel="noopener noreferrer"
+				href='javascript:void(0);'
+				target='_self'
+				rel='noopener noreferrer'
 			>
 				<span className="uagb-modal-content-wrapper">
 					{ showBtnIcon && buttonIconPosition === 'before' && buttonIconOutput }

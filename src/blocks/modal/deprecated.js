@@ -1,7 +1,14 @@
+/**
+ * BLOCK: Modal - Deprecated Block
+ */
 import attributes from './attributes';
 import classnames from 'classnames';
 import renderSVG from '@Controls/renderIcon';
 import { RichText, InnerBlocks } from '@wordpress/block-editor';
+
+import attributesV2_4_2 from './deprecated/v2_4_2/attributes';
+import saveV2_4_2 from './deprecated/v2_4_2/save';
+
 const deprecated = [
 	{
 		attributes,
@@ -108,6 +115,11 @@ const deprecated = [
 				</div>
 			);
 		},
+	},
+	{
+		// Deprecated for v2.4.2
+		attributes: attributesV2_4_2,
+		save: saveV2_4_2,
 	},
 ];
 
