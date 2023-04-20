@@ -1,6 +1,3 @@
-/**
- * BLOCK: Modal - Attributes - v2.4.2
- */
 import { getBorderAttributes } from '@Controls/generateAttributes';
 const btnBorderAttributes = getBorderAttributes( 'btn' );
 const contentBorderAttributes = getBorderAttributes( 'content' );
@@ -1082,4 +1079,3 @@ const attributes = {
 };
 
 export default attributes;
-
