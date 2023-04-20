@@ -14,6 +14,7 @@
 <!-- Please describe in detail how you tested your changes. -->
 
 ### Checklist:
+- [ ] I've added the changelog entry for this fix <!-- Guidelines: https://docs.google.com/document/d/1oiF7iFLSx5GQprXhnLjwdVcHK7dFwaCW1-qqOxcs1CA/edit?usp=sharing -->
 - [ ] My code is tested
 - [ ] My code follows accessibility standards <!-- Guidelines: https://make.wordpress.org/core/handbook/best-practices/coding-standards/accessibility-coding-standards/ -->
 - [ ] My code has proper inline documentation <!-- Guidelines: https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/javascript/ -->
