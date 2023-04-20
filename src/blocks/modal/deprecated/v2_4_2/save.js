@@ -1,3 +1,6 @@
+/**
+ * BLOCK: Modal - Save Block - v2.4.2
+ */
 import classnames from 'classnames';
 import renderSVG from '@Controls/renderIcon';
 import { RichText, InnerBlocks } from '@wordpress/block-editor';
