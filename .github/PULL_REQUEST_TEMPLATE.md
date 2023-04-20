@@ -14,6 +14,7 @@
 <!-- Please describe in detail how you tested your changes. -->
 
 ### Checklist:
+- [ ] My code is self reviewed
 - [ ] My code is tested
 - [ ] My code follows accessibility standards <!-- Guidelines: https://make.wordpress.org/core/handbook/best-practices/coding-standards/accessibility-coding-standards/ -->
 - [ ] My code has proper inline documentation <!-- Guidelines: https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/javascript/ -->
