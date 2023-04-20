@@ -189,6 +189,7 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 * Fix: Control_units - Alignment issue in control_units when switched to RTL.
 * Fix: Color_reset_button - Padding issue in reset and color indicator padding issue when switched to RTL.
 * Fix: Image - Extra spacing and escaping container size issue in FSE Theme.
+* Fix: Modal - Resolved an issue in the editor in which clicking on the button would refresh the page.
 
 ### 2.4.2 - WEDNESDAY, 12th APRIL 2023 ###
 * Fix: Container - Updated default content width for block based themes to wideSize.
