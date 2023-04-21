@@ -1,7 +1,7 @@
 import { getBorderAttributes } from '@Controls/generateAttributes';
 const btnBorderAttributes = getBorderAttributes( 'btn' );
 const contentBorderAttributes = getBorderAttributes( 'content' );
-
+console.log( contentBorderAttributes );
 const attributes = {
 	block_id: {
 		type: 'string',

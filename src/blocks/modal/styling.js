@@ -168,6 +168,11 @@ export default function styling( attributes, clientId, name ) {
 		selectGradient,
 		modalTriggerBgType,
 		modalTriggerBgHoverType,
+		contentBorderTopLeftRadius,
+		contentBorderTopRightRadius,
+		contentBorderBottomLeftRadius,
+		contentBorderBottomRightRadius,
+		contentBorderRadiusUnit
 	} = attributes;
 
 	const blockName = name.replace( 'uagb/', '' );
@@ -218,7 +223,11 @@ export default function styling( attributes, clientId, name ) {
 		' .uagb-modal-popup-wrap': {
 			'width': generateCSSUnit( modalWidth, modalWidthType ),
 			'height': generateCSSUnit( modalHeight, modalHeightType ),
-			...contentBorderCSS,
+			'border-top-left-radius' : generateCSSUnit( contentBorderTopLeftRadius, contentBorderRadiusUnit ),
+			'border-top-right-radius' : generateCSSUnit( contentBorderTopRightRadius, contentBorderRadiusUnit ),
+			'border-bottom-left-radius' : generateCSSUnit( contentBorderBottomLeftRadius, contentBorderRadiusUnit ),
+			'border-bottom-right-radius' : generateCSSUnit( contentBorderBottomRightRadius, contentBorderRadiusUnit ),
+			'border-style': 'none',
 		},
 		' .uagb-modal-popup-wrap:hover': {
 			'border-color': contentBorderHColor,
@@ -239,6 +248,7 @@ export default function styling( attributes, clientId, name ) {
 			'padding-top': generateCSSUnit( paddingModalTop, paddingModalUnit ),
 			'padding-bottom': generateCSSUnit( paddingModalBottom, paddingModalUnit ),
 			...modalPopupContentBackgroundCSSDesktop,
+			...contentBorderCSS,
 		},
 		' .uagb-modal-trigger svg': {
 			'width': generateCSSUnit( iconSize, 'px' ),
@@ -434,20 +444,26 @@ export default function styling( attributes, clientId, name ) {
 			'height': 'auto',
 			'width': generateCSSUnit( modalWidth, modalWidthType ),
 			'max-height': generateCSSUnit( maxHeight, maxHeightType ),
-			...contentBorderCSS,
+			'border-top-left-radius' : generateCSSUnit( contentBorderTopLeftRadius, contentBorderRadiusUnit ),
+			'border-top-right-radius' : generateCSSUnit( contentBorderTopRightRadius, contentBorderRadiusUnit ),
+			'border-bottom-left-radius' : generateCSSUnit( contentBorderBottomLeftRadius, contentBorderRadiusUnit ),
+			'border-bottom-right-radius' : generateCSSUnit( contentBorderBottomRightRadius, contentBorderRadiusUnit ),
 		};
+		selectors[ ' .uagb-modal-popup-content' ] = contentBorderCSS;
 		tabletSelectors[ ' .uagb-modal-popup-wrap' ] = {
 			'height': 'auto',
 			'width': generateCSSUnit( modalWidthTablet, modalWidthType ),
 			'max-height': generateCSSUnit( maxHeightTablet, maxHeightType ),
 			...contentBorderCSSTablet,
 		};
+		tabletSelectors[ ' .uagb-modal-popup-content' ] = contentBorderCSSTablet;
 		mobileSelectors[ ' .uagb-modal-popup-wrap' ] = {
 			'height': 'auto',
 			'width': generateCSSUnit( modalWidthMobile, modalWidthType ),
 			'max-height': generateCSSUnit( maxHeightMobile, maxHeightType ),
 			...contentBorderCSSMobile,
 		};
+		mobileSelectors[ ' .uagb-modal-popup-content' ] = contentBorderCSSMobile;
 	}
 	if ( 'popup-top-right' === closeIconPosition ) {
 		selectors[ ' .uagb-modal-popup.active .uagb-modal-popup-close' ] = {
