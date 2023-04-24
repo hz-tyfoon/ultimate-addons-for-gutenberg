@@ -145,7 +145,7 @@ class Admin_Menu {
 			array( $this, 'render' )
 		);
 
-		// Use this action hook to add sub menu to above menu. 
+		// Use this action hook to add sub menu to above menu.
 		do_action( 'spectra_after_menu_register' );
 
 	}
@@ -294,6 +294,7 @@ class Admin_Menu {
 					'slider-child',
 					'slider-pro',
 					'image-gallery-pro',
+					'loop-wrapper',
 				);
 
 				if ( ( 'cf7-styler' === $addon && 'active' !== $cf7_status ) || ( 'gf-styler' === $addon && 'active' !== $gf_status ) ) {
