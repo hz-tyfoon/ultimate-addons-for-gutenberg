@@ -168,11 +168,6 @@ export default function styling( attributes, clientId, name ) {
 		selectGradient,
 		modalTriggerBgType,
 		modalTriggerBgHoverType,
-		contentBorderTopLeftRadius,
-		contentBorderTopRightRadius,
-		contentBorderBottomLeftRadius,
-		contentBorderBottomRightRadius,
-		contentBorderRadiusUnit
 	} = attributes;
 
 	const blockName = name.replace( 'uagb/', '' );
@@ -223,11 +218,8 @@ export default function styling( attributes, clientId, name ) {
 		' .uagb-modal-popup-wrap': {
 			'width': generateCSSUnit( modalWidth, modalWidthType ),
 			'height': generateCSSUnit( modalHeight, modalHeightType ),
-			'border-top-left-radius' : generateCSSUnit( contentBorderTopLeftRadius, contentBorderRadiusUnit ),
-			'border-top-right-radius' : generateCSSUnit( contentBorderTopRightRadius, contentBorderRadiusUnit ),
-			'border-bottom-left-radius' : generateCSSUnit( contentBorderBottomLeftRadius, contentBorderRadiusUnit ),
-			'border-bottom-right-radius' : generateCSSUnit( contentBorderBottomRightRadius, contentBorderRadiusUnit ),
-			'border-style': 'none',
+			...contentBorderCSS,
+			...modalPopupContentBackgroundCSSDesktop,
 		},
 		' .uagb-modal-popup-wrap:hover': {
 			'border-color': contentBorderHColor,
@@ -247,8 +239,6 @@ export default function styling( attributes, clientId, name ) {
 			'padding-right': generateCSSUnit( paddingModalRight, paddingModalUnit ),
 			'padding-top': generateCSSUnit( paddingModalTop, paddingModalUnit ),
 			'padding-bottom': generateCSSUnit( paddingModalBottom, paddingModalUnit ),
-			...modalPopupContentBackgroundCSSDesktop,
-			...contentBorderCSS,
 		},
 		' .uagb-modal-trigger svg': {
 			'width': generateCSSUnit( iconSize, 'px' ),
@@ -345,13 +335,13 @@ export default function styling( attributes, clientId, name ) {
 			'width': generateCSSUnit( modalWidthTablet, modalWidthType ),
 			'height': generateCSSUnit( modalHeightTablet, modalHeightType ),
 			...contentBorderCSSTablet,
+			...modalPopupContentBackgroundCSSTablet,
 		},
 		' .uagb-modal-popup-content': {
 			'padding-left': generateCSSUnit( paddingModalLeftTablet, tabletPaddingModalUnit ),
 			'padding-right': generateCSSUnit( paddingModalRightTablet, tabletPaddingModalUnit ),
 			'padding-top': generateCSSUnit( paddingModalTopTablet, tabletPaddingModalUnit ),
 			'padding-bottom': generateCSSUnit( paddingModalBottomTablet, tabletPaddingModalUnit ),
-			...modalPopupContentBackgroundCSSTablet,
 		},
 		' .uagb-modal-text.uagb-modal-trigger': {
 			'font-size': generateCSSUnit( textFontSizeTablet, textFontSizeType ),
@@ -408,13 +398,13 @@ export default function styling( attributes, clientId, name ) {
 			'width': generateCSSUnit( modalWidthMobile, modalWidthType ),
 			'height': generateCSSUnit( modalHeightMobile, modalHeightType ),
 			...contentBorderCSSMobile,
+			...modalPopupContentBackgroundCSSMobile,
 		},
 		' .uagb-modal-popup-content': {
 			'padding-left': generateCSSUnit( paddingModalLeftMobile, mobilePaddingModalUnit ),
 			'padding-right': generateCSSUnit( paddingModalRightMobile, mobilePaddingModalUnit ),
 			'padding-top': generateCSSUnit( paddingModalTopMobile, mobilePaddingModalUnit ),
-			'padding-bottom': generateCSSUnit( paddingModalBottomMobile, mobilePaddingModalUnit ),
-			...modalPopupContentBackgroundCSSMobile,
+			'padding-bottom': generateCSSUnit( paddingModalBottomMobile, mobilePaddingModalUnit )
 		},
 		' .uagb-modal-text.uagb-modal-trigger': {
 			'font-size': generateCSSUnit( textFontSizeMobile, textFontSizeType ),
@@ -444,26 +434,24 @@ export default function styling( attributes, clientId, name ) {
 			'height': 'auto',
 			'width': generateCSSUnit( modalWidth, modalWidthType ),
 			'max-height': generateCSSUnit( maxHeight, maxHeightType ),
-			'border-top-left-radius' : generateCSSUnit( contentBorderTopLeftRadius, contentBorderRadiusUnit ),
-			'border-top-right-radius' : generateCSSUnit( contentBorderTopRightRadius, contentBorderRadiusUnit ),
-			'border-bottom-left-radius' : generateCSSUnit( contentBorderBottomLeftRadius, contentBorderRadiusUnit ),
-			'border-bottom-right-radius' : generateCSSUnit( contentBorderBottomRightRadius, contentBorderRadiusUnit ),
+			...contentBorderCSS,
+			...modalPopupContentBackgroundCSSDesktop,
 		};
-		selectors[ ' .uagb-modal-popup-content' ] = contentBorderCSS;
 		tabletSelectors[ ' .uagb-modal-popup-wrap' ] = {
 			'height': 'auto',
 			'width': generateCSSUnit( modalWidthTablet, modalWidthType ),
 			'max-height': generateCSSUnit( maxHeightTablet, maxHeightType ),
 			...contentBorderCSSTablet,
+			...modalPopupContentBackgroundCSSTablet
 		};
-		tabletSelectors[ ' .uagb-modal-popup-content' ] = contentBorderCSSTablet;
 		mobileSelectors[ ' .uagb-modal-popup-wrap' ] = {
 			'height': 'auto',
 			'width': generateCSSUnit( modalWidthMobile, modalWidthType ),
 			'max-height': generateCSSUnit( maxHeightMobile, maxHeightType ),
 			...contentBorderCSSMobile,
+			...modalPopupContentBackgroundCSSMobile
+			
 		};
-		mobileSelectors[ ' .uagb-modal-popup-content' ] = contentBorderCSSMobile;
 	}
 	if ( 'popup-top-right' === closeIconPosition ) {
 		selectors[ ' .uagb-modal-popup.active .uagb-modal-popup-close' ] = {
