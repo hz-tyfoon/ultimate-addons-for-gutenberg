@@ -8,8 +8,8 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( props ) {
-	const blockName = props.name.replace( 'uagb/', '' );
+function styling( attributes, clientId, name ) {
+	const blockName = name.replace( 'uagb/', '' );
 
 	const {
 		headingAlign,
@@ -151,7 +151,8 @@ function styling( props ) {
 		subHeadSpace,
 		subHeadSpaceTablet,
 		subHeadSpaceMobile,
-	} = props.attributes;
+		headingDescToggle
+	} = attributes;
 
 	let tablet_selectors = {};
 	let mobile_selectors = {};
@@ -167,9 +168,9 @@ function styling( props ) {
 		};
 	}
 
-	const highLightBorderCSS = generateBorderCSS( props.attributes, 'highLight' );
-	const highLightBorderCSSTablet = generateBorderCSS( props.attributes, 'highLight', 'tablet' );
-	const highLightBorderCSSMobile = generateBorderCSS( props.attributes, 'highLight', 'mobile' );
+	const highLightBorderCSS = generateBorderCSS( attributes, 'highLight' );
+	const highLightBorderCSSTablet = generateBorderCSS( attributes, 'highLight', 'tablet' );
+	const highLightBorderCSSMobile = generateBorderCSS( attributes, 'highLight', 'mobile' );
 
 	let selectors = {
 		'.wp-block-uagb-advanced-heading ': {
@@ -257,7 +258,6 @@ function styling( props ) {
 		'font-size': generateCSSUnit( headFontSize, headFontSizeType ),
 		'line-height': generateCSSUnit( headLineHeight, headLineHeightType ),
 		'color': headingColor,
-		'margin-bottom': generateCSSUnit( getFallbackNumber( headSpace, 'headSpace', blockName ), 'px' ),
 		'letter-spacing': generateCSSUnit( headLetterSpacing, headLetterSpacingType ),
 		...headingGradientStyle,
 	};
@@ -316,7 +316,6 @@ function styling( props ) {
 		'font-size': generateCSSUnit( headFontSizeTablet, headFontSizeType ),
 		'line-height': generateCSSUnit( headLineHeightTablet, headLineHeightType ),
 		'letter-spacing': generateCSSUnit( headLetterSpacingTablet, headLetterSpacingType ),
-		'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceTablet, 'headSpaceTablet', blockName ), 'px' ),
 	};
 	tablet_selectors[ ' p.uagb-desc-text' ] = {
 		'font-size': generateCSSUnit( subHeadFontSizeTablet, subHeadFontSizeType ),
@@ -364,7 +363,6 @@ function styling( props ) {
 		'font-size': generateCSSUnit( headFontSizeMobile, headFontSizeType ),
 		'line-height': generateCSSUnit( headLineHeightMobile, headLineHeightType ),
 		'letter-spacing': generateCSSUnit( headLetterSpacingMobile, headLetterSpacingType ),
-		'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceMobile, 'headSpaceMobile', blockName ), 'px' ),
 	};
 	mobile_selectors[ ' p.uagb-desc-text' ] = {
 		'font-size': generateCSSUnit( subHeadFontSizeMobile, subHeadFontSizeType ),
@@ -396,30 +394,28 @@ function styling( props ) {
 		),
 	};
 
-	const base_selector = `.editor-styles-wrapper #block-${ props.clientId } .uagb-block-${ props.clientId.substr(
-		0,
-		8
-	) }`;
+	if( headingDescToggle || 'none' !== seperatorStyle ) {
+		selectors[ ' .uagb-heading-text' ] ={ 
+			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpace, 'headSpace', blockName ), 'px' ),
+		};
+		tablet_selectors[ ' .uagb-heading-text' ] = {
+			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceTablet, 'headSpaceTablet', blockName ), 'px' ),
+		};
+		mobile_selectors[ ' .uagb-heading-text' ] = {
+			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceMobile, 'headSpaceMobile', blockName ), 'px' ),
+		};
+	}
+	const base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
-	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, props.attributes );
-	tablet_selectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tablet_selectors, props.attributes );
-	mobile_selectors = applyFilters( `spectra.${ blockName }.mobileStyling`, mobile_selectors, props.attributes );
+	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
+	tablet_selectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tablet_selectors, attributes );
+	mobile_selectors = applyFilters( `spectra.${ blockName }.mobileStyling`, mobile_selectors, attributes );
 
 	let styling_css = generateCSS( selectors, base_selector );
 
-	styling_css += generateCSS(
-		tablet_selectors,
-		`${ base_selector }.uagb-editor-preview-mode-tablet`,
-		true,
-		'tablet'
-	);
+	styling_css += generateCSS( tablet_selectors, `${ base_selector }`, true, 'tablet' );
 
-	styling_css += generateCSS(
-		mobile_selectors,
-		`${ base_selector }.uagb-editor-preview-mode-mobile`,
-		true,
-		'mobile'
-	);
+	styling_css += generateCSS( mobile_selectors, `${ base_selector }`, true, 'mobile' );
 	return styling_css;
 }
 

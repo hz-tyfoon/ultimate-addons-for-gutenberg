@@ -730,6 +730,9 @@ const Settings = ( props ) => {
 							createSuggestionButtonText={ ( newValue ) =>
 								`${ __( 'New:', 'ultimate-addons-for-gutenberg' ) } ${ newValue }`
 							}
+							onRemove={ () => {
+								setAttributes( { htmlTagLink: undefined } )
+							} }
 						/>
 					) }
 					<MultiButtonsControl
@@ -1321,7 +1324,7 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<ResponsiveSlider
-					label={ __( 'Column Gap', 'ultimate	-addons-for-gutenberg' ) }
+					label={ __( 'Column Gap', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
 							value: columnGapDesktop,
