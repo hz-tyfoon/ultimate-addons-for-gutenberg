@@ -33,7 +33,8 @@ const Render = ( props ) => {
 		formLabel,
 		buttonSize,
 		reCaptchaEnable,
-		reCaptchaType
+		reCaptchaType,
+		inheritFromTheme
 	} = attributes;
 
 	const onSubmitClick = useCallback( ( e ) => {
@@ -73,7 +74,7 @@ const Render = ( props ) => {
 				className={ classnames(
 					'uagb-forms__outer-wrap',
 					`uagb-block-${ block_id }`,
-					`uagb-forms__${ buttonSize }-btn`,
+					! inheritFromTheme ? `uagb-forms__${ buttonSize }-btn` : '',
 					`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
 				) }
 			>

@@ -19,6 +19,7 @@ export default function save( props ) {
 		reCaptchaEnable,
 		reCaptchaType,
 		buttonSize,
+		inheritFromTheme
 	} = attributes;
 
 	const renderButtonHtml = () => {
@@ -38,7 +39,7 @@ export default function save( props ) {
 			className={ classnames(
 				'uagb-forms__outer-wrap',
 				`uagb-block-${ block_id }`,
-				`uagb-forms__${ buttonSize }-btn`
+				! inheritFromTheme ? `uagb-forms__${ buttonSize }-btn` : ''
 			) }
 		>
 			<form
