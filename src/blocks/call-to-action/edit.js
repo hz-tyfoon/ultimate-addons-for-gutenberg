@@ -3,18 +3,19 @@
  */
 
 import CtaStyle from './inline-styles';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
-
+import DynamicFontLoader from './dynamicFontLoader';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
 
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 const UAGBCallToAction = ( props ) => {
-
 	const deviceType = useDeviceType();
 	const {
 		isSelected,
@@ -36,6 +37,7 @@ const UAGBCallToAction = ( props ) => {
 			ctaBorderRadius,
 		},
 		clientId,
+		name,
 	} = props;
 
 	useEffect( () => {
@@ -44,12 +46,12 @@ const UAGBCallToAction = ( props ) => {
 
 		setAttributes( { classMigrate: true } );
 
-		if( stack === 'tablet' ) {
-			setAttributes( {stack: 'tablet'} );
-		}else if ( stack === 'mobile' ) {
-			setAttributes( {stack: 'mobile'} )
+		if ( stack === 'tablet' ) {
+			setAttributes( { stack: 'tablet' } );
+		} else if ( stack === 'mobile' ) {
+			setAttributes( { stack: 'mobile' } );
 		} else if ( stack === 'none' && ctaPosition === 'right' ) {
-			setAttributes( {stack: 'none'} )
+			setAttributes( { stack: 'none' } );
 		} else if ( stack === 'none' && 'below-title' === ctaPosition ) {
 			setAttributes( { stack: 'desktop' } );
 		}
@@ -61,55 +63,58 @@ const UAGBCallToAction = ( props ) => {
 		}
 
 		// border
-		if( ctaBorderWidth || ctaBorderRadius || ctaBorderColor || ctaBorderhoverColor || ctaBorderStyle ){
-			migrateBorderAttributes( 'btn', {
-				label: 'ctaBorderWidth',
-				value: ctaBorderWidth,
-			}, {
-				label: 'ctaBorderRadius',
-				value: ctaBorderRadius
-			}, {
-				label: 'ctaBorderColor',
-				value: ctaBorderColor
-			}, {
-				label: 'ctaBorderhoverColor',
-				value: ctaBorderhoverColor
-			},{
-				label: 'ctaBorderStyle',
-				value: ctaBorderStyle
-			},
-			setAttributes,
-			attributes
+		if ( ctaBorderWidth || ctaBorderRadius || ctaBorderColor || ctaBorderhoverColor || ctaBorderStyle ) {
+			migrateBorderAttributes(
+				'btn',
+				{
+					label: 'ctaBorderWidth',
+					value: ctaBorderWidth,
+				},
+				{
+					label: 'ctaBorderRadius',
+					value: ctaBorderRadius,
+				},
+				{
+					label: 'ctaBorderColor',
+					value: ctaBorderColor,
+				},
+				{
+					label: 'ctaBorderhoverColor',
+					value: ctaBorderhoverColor,
+				},
+				{
+					label: 'ctaBorderStyle',
+					value: ctaBorderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
-		
 	}, [] );
 
 	useEffect( () => {
-
-		// Replacement for componentDidUpdate.
-		const blockStyling = CtaStyle( props );
-
-		addBlockEditorDynamicStyles( 'uagb-cta-style-' + clientId.substr( 0, 8 ), blockStyling );
-		
-	}, [ attributes, deviceType ] );
-
-	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	useEffect( () => {
-
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+
+	const blockStyling = useMemo( () => CtaStyle( attributes, clientId, name, deviceType ), [
+		attributes,
+		deviceType,
+	] );
 
 	return (
 		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
 			{ isSelected && <Settings parentProps={ props } /> }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default UAGBCallToAction;
+export default compose(
+	AddStaticStyles,
+)( UAGBCallToAction );

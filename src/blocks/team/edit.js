@@ -3,12 +3,13 @@
  */
 
 import styling from './styling';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-
-
+import DynamicCSSLoader from '../../components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
 import Settings from './settings';
 import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
@@ -21,21 +22,12 @@ const UAGBTeam = ( props ) => {
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		clientId,
+		name,
 	} = props;
-	
-	useEffect( () => {
 
+	useEffect( () => {
 		responsiveConditionPreview( props );
-
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
-
-	useEffect( () => {
-
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-team-style-' + clientId.substr( 0, 8 ), blockStyling );
-		
-	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
@@ -45,15 +37,20 @@ const UAGBTeam = ( props ) => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 		setAttributes( { classMigrate: true } );
-
 	}, [] );
+
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	return (
 		<>
-		{ isSelected && <Settings parentProps={ props } /> }
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings parentProps={ props } /> }
 			<Render parentProps={ props } />
 		</>
 	);
 };
 
-export default UAGBTeam;
+export default compose(
+	AddStaticStyles,
+)( UAGBTeam );

@@ -11,6 +11,7 @@ module.exports = {
 		'space-in-parens': ['error', 'always', { exceptions: [ 'empty' ] } ],
 		'jsx-a11y/click-events-have-key-events': 'off',
 		'jsx-a11y/no-static-element-interactions': 'off',
+		'@wordpress/i18n-text-domain': [ 'error', { allowedTextDomain: 'ultimate-addons-for-gutenberg' }, ],
 	},
 	overrides: [
 		{
@@ -42,6 +43,11 @@ module.exports = {
 		UAGBTableOfContents: true,
 		localStorage: true,
 		uagb_timeline_data: true,
+		uagb_countdown_data: true,
 		UAGBModal: true,
+		CustomEvent: true,
+		fetch: true,
+		Headers: true,
+		FormData: true,
 	},
 };
