@@ -55,7 +55,7 @@ $bg_obj_desktop           = array(
 $container_bg_css_desktop = UAGB_Block_Helper::uag_get_background_obj( $bg_obj_desktop );
 
 $selectors               = array(
-	' .uagb-modal-popup-wrap'                    => array(
+	'.uagb-modal-popup .uagb-modal-popup-wrap'   => array(
 		'width'                      => UAGB_Helper::get_css_value( $attr['modalWidth'], $attr['modalWidthType'] ),
 		'height'                     => UAGB_Helper::get_css_value( $attr['modalHeight'], $attr['modalHeightType'] ),
 		'border-style'               => 'none',
@@ -163,17 +163,20 @@ $bg_obj_tablet           = array(
 );
 $container_bg_css_tablet = UAGB_Block_Helper::uag_get_background_obj( $bg_obj_tablet );
 $t_selectors             = array(
-	'.uagb-modal-wrapper'        => array(
+	'.uagb-modal-wrapper'                      => array(
 		'text-align' => $attr['modalAlignTablet'],
 	),
-	' .uagb-modal-popup-wrap'    => array_merge(
-		array(
-			'width'  => UAGB_Helper::get_css_value( $attr['modalWidthTablet'], $attr['modalWidthType'] ),
-			'height' => UAGB_Helper::get_css_value( $attr['modalHeightTablet'], $attr['modalHeightType'] ),
-		),
-		$content_border_css_tablet
+	'.uagb-modal-popup .uagb-modal-popup-wrap' => array(
+		'width'                      => UAGB_Helper::get_css_value( $attr['modalWidthTablet'], $attr['modalWidthType'] ),
+		'height'                     => UAGB_Helper::get_css_value( $attr['modalHeightTablet'], $attr['modalHeightType'] ),
+		'border-style'               => 'none',
+		'border-color'               => 'none',
+		'border-top-left-radius'     => UAGB_Helper::get_css_value( $attr['contentBorderTopLeftRadiusTablet'], $attr['contentBorderRadiusUnitTablet'] ),
+		'border-top-right-radius'    => UAGB_Helper::get_css_value( $attr['contentBorderTopRightRadiusTablet'], $attr['contentBorderRadiusUnitTablet'] ),
+		'border-bottom-left-radius'  => UAGB_Helper::get_css_value( $attr['contentBorderBottomLeftRadiusTablet'], $attr['contentBorderRadiusUnitTablet'] ),
+		'border-bottom-right-radius' => UAGB_Helper::get_css_value( $attr['contentBorderBottomRightRadiusTablet'], $attr['contentBorderRadiusUnitTablet'] ),
 	),
-	' .uagb-modal-popup-content' => array_merge(
+	' .uagb-modal-popup-content'               => array_merge(
 		array(
 			'height'         => UAGB_Helper::get_css_value( $attr['modalHeightTablet'], $attr['modalHeightType'] ),
 			'width'          => UAGB_Helper::get_css_value( $attr['modalWidthTablet'], $attr['modalWidthType'] ),
@@ -226,17 +229,23 @@ $bg_obj_mobile           = array(
 );
 $container_bg_css_mobile = UAGB_Block_Helper::uag_get_background_obj( $bg_obj_mobile );
 $m_selectors             = array(
-	'.uagb-modal-wrapper'        => array(
+	'.uagb-modal-wrapper'                      => array(
 		'text-align' => $attr['modalAlignMobile'],
 	),
-	' .uagb-modal-popup-wrap'    => array_merge(
+	'.uagb-modal-popup .uagb-modal-popup-wrap' => array_merge(
 		array(
-			'width'  => UAGB_Helper::get_css_value( $attr['modalWidthMobile'], $attr['modalWidthType'] ),
-			'height' => UAGB_Helper::get_css_value( $attr['modalHeightMobile'], $attr['modalHeightType'] ),
+			'width'                      => UAGB_Helper::get_css_value( $attr['modalWidthMobile'], $attr['modalWidthType'] ),
+			'height'                     => UAGB_Helper::get_css_value( $attr['modalHeightMobile'], $attr['modalHeightType'] ),
+			'border-style'               => 'none',
+			'border-color'               => 'none',
+			'border-top-left-radius'     => UAGB_Helper::get_css_value( $attr['contentBorderTopLeftRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
+			'border-top-right-radius'    => UAGB_Helper::get_css_value( $attr['contentBorderTopRightRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
+			'border-bottom-left-radius'  => UAGB_Helper::get_css_value( $attr['contentBorderBottomLeftRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
+			'border-bottom-right-radius' => UAGB_Helper::get_css_value( $attr['contentBorderBottomRightRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
+		
 		),
-		$content_border_css_mobile
 	),
-	' .uagb-modal-popup-content' => array_merge(
+	' .uagb-modal-popup-content'               => array_merge(
 		array(
 			'width'          => UAGB_Helper::get_css_value( $attr['modalWidthMobile'], $attr['modalWidthType'] ),
 			'height'         => UAGB_Helper::get_css_value( $attr['modalHeightMobile'], $attr['modalHeightType'] ),
@@ -349,7 +358,7 @@ $t_selectors[' .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-t
 $m_selectors[' .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-trigger'] = $btn_border_css_mobile;
 
 if ( 'custom' !== $attr['modalBoxHeight'] ) {
-	$selectors[' .uagb-modal-popup-wrap']   = array(
+	$selectors['.uagb-modal-popup .uagb-modal-popup-wrap']   = array(
 		'height'                     => 'auto',
 		'width'                      => UAGB_Helper::get_css_value( $attr['modalWidth'], $attr['modalWidthType'] ),
 		'max-height'                 => UAGB_Helper::get_css_value( $attr['maxHeight'], $attr['maxHeightType'] ),
@@ -360,7 +369,7 @@ if ( 'custom' !== $attr['modalBoxHeight'] ) {
 		'border-bottom-left-radius'  => UAGB_Helper::get_css_value( $attr['contentBorderBottomLeftRadius'], $attr['contentBorderRadiusUnit'] ),
 		'border-bottom-right-radius' => UAGB_Helper::get_css_value( $attr['contentBorderBottomRightRadius'], $attr['contentBorderRadiusUnit'] ),
 	);
-	$t_selectors[' .uagb-modal-popup-wrap'] = array(
+	$t_selectors['.uagb-modal-popup .uagb-modal-popup-wrap'] = array(
 		'height'                     => 'auto',
 		'width'                      => UAGB_Helper::get_css_value( $attr['modalWidthTablet'], $attr['modalWidthType'] ),
 		'max-height'                 => UAGB_Helper::get_css_value( $attr['maxHeightTablet'], $attr['maxHeightType'] ),
@@ -371,7 +380,7 @@ if ( 'custom' !== $attr['modalBoxHeight'] ) {
 		'border-bottom-left-radius'  => UAGB_Helper::get_css_value( $attr['contentBorderBottomLeftRadiusTablet'], $attr['contentBorderRadiusUnitTablet'] ),
 		'border-bottom-right-radius' => UAGB_Helper::get_css_value( $attr['contentBorderBottomRightRadiusTablet'], $attr['contentBorderRadiusUnitTablet'] ),
 	);
-	$m_selectors[' .uagb-modal-popup-wrap'] = array(
+	$m_selectors['.uagb-modal-popup .uagb-modal-popup-wrap'] = array(
 		'height'                     => 'auto',
 		'width'                      => UAGB_Helper::get_css_value( $attr['modalWidthMobile'], $attr['modalWidthType'] ),
 		'max-height'                 => UAGB_Helper::get_css_value( $attr['maxHeightMobile'], $attr['maxHeightType'] ),
