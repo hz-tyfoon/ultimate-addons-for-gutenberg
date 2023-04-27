@@ -94,7 +94,7 @@ const GlobalBlockStyles = ( props ) => {
 
         Object.keys( currentBlockDefaultAttributes ).map( ( attribute ) => {
 
-            if ( currentBlockDefaultAttributes[attribute]?.isGBSAttribute ) {
+            if ( currentBlockDefaultAttributes[attribute]?.UAGCopyPaste ) {
                 setAttributes( {
                     [attribute] : currentBlockDefaultAttributes[attribute]?.default || undefined
                 } );
@@ -135,6 +135,7 @@ const GlobalBlockStyles = ( props ) => {
                 updateGlobalBlockStyles( data?.data );
                 clearCurrentAttributes();
             }
+            
             setUpdateLoader( false );
             setPanelLoader( false );
             setSaveToDatabase( false );
@@ -149,7 +150,7 @@ const GlobalBlockStyles = ( props ) => {
         if ( ! newStyleID ) {
             return;
         }
-        setPanelLoader( true );
+        
         globalBlockStyles.map( ( style ) => {
             if ( newStyleID && style?.value === String( newStyleID ) ) {
     
@@ -157,9 +158,9 @@ const GlobalBlockStyles = ( props ) => {
                 const baseSelector = `.spectra-gbs-${blockNameClass}-${styleNameClass}`;
                 const asArray = Object.entries( attributes );
                 const filtered = asArray.filter( ( [key, value] ) => {
-                    // if ( currentBlockDefaultAttributes[key]?.UAGCopyPaste ) {
+                    if ( currentBlockDefaultAttributes[key]?.UAGCopyPaste ) {
                         return currentBlockDefaultAttributes[key]?.default !== value;
-                    // }
+                    }
                 } );
 
                 const justStrings = Object.fromEntries( filtered );
