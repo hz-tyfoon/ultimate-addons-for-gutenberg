@@ -232,18 +232,15 @@ $m_selectors             = array(
 	'.uagb-modal-wrapper'                      => array(
 		'text-align' => $attr['modalAlignMobile'],
 	),
-	'.uagb-modal-popup .uagb-modal-popup-wrap' => array_merge(
-		array(
-			'width'                      => UAGB_Helper::get_css_value( $attr['modalWidthMobile'], $attr['modalWidthType'] ),
-			'height'                     => UAGB_Helper::get_css_value( $attr['modalHeightMobile'], $attr['modalHeightType'] ),
-			'border-style'               => 'none',
-			'border-color'               => 'none',
-			'border-top-left-radius'     => UAGB_Helper::get_css_value( $attr['contentBorderTopLeftRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
-			'border-top-right-radius'    => UAGB_Helper::get_css_value( $attr['contentBorderTopRightRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
-			'border-bottom-left-radius'  => UAGB_Helper::get_css_value( $attr['contentBorderBottomLeftRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
-			'border-bottom-right-radius' => UAGB_Helper::get_css_value( $attr['contentBorderBottomRightRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
-		
-		),
+	'.uagb-modal-popup .uagb-modal-popup-wrap' => array(
+		'width'                      => UAGB_Helper::get_css_value( $attr['modalWidthMobile'], $attr['modalWidthType'] ),
+		'height'                     => UAGB_Helper::get_css_value( $attr['modalHeightMobile'], $attr['modalHeightType'] ),
+		'border-style'               => 'none',
+		'border-color'               => 'none',
+		'border-top-left-radius'     => UAGB_Helper::get_css_value( $attr['contentBorderTopLeftRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
+		'border-top-right-radius'    => UAGB_Helper::get_css_value( $attr['contentBorderTopRightRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
+		'border-bottom-left-radius'  => UAGB_Helper::get_css_value( $attr['contentBorderBottomLeftRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
+		'border-bottom-right-radius' => UAGB_Helper::get_css_value( $attr['contentBorderBottomRightRadiusMobile'], $attr['contentBorderRadiusUnitMobile'] ),
 	),
 	' .uagb-modal-popup-content'               => array_merge(
 		array(
