@@ -221,8 +221,8 @@ export default function styling( attributes, clientId, name ) {
 	const modalPopupContentBackgroundCSSDesktop = generateBackgroundCSS( backgroundAttributesDesktop );
 	let selectors = {
 		' .uagb-modal-popup-wrap': {
-			'width': generateCSSUnit( modalWidth, modalWidthType ),
 			'height': generateCSSUnit( modalHeight, modalHeightType ),
+			'width': generateCSSUnit( modalWidth, modalWidthType ),
 			'border-style' : 'none',
 			'border-color' : 'none',
 			'border-top-left-radius' : generateCSSUnit( contentBorderTopLeftRadius, contentBorderRadiusUnit ),
@@ -244,6 +244,7 @@ export default function styling( attributes, clientId, name ) {
 			'background': overlayColor,
 		},
 		' .uagb-modal-popup-content': {
+			'height': generateCSSUnit( modalHeight, modalHeightType ),
 			'padding-left': generateCSSUnit( paddingModalLeft, paddingModalUnit ),
 			'padding-right': generateCSSUnit( paddingModalRight, paddingModalUnit ),
 			'padding-top': generateCSSUnit( paddingModalTop, paddingModalUnit ),
@@ -343,10 +344,11 @@ export default function styling( attributes, clientId, name ) {
 	const modalPopupContentBackgroundCSSTablet = generateBackgroundCSS( backgroundAttributesTablet );
 	let tabletSelectors = {
 		' .uagb-modal-popup-wrap': {
-			'width': generateCSSUnit( modalWidthTablet, modalWidthType ),
 			'height': generateCSSUnit( modalHeightTablet, modalHeightType ),
+			'width': generateCSSUnit( modalWidthTablet, modalWidthType ),
 		},
 		' .uagb-modal-popup-content': {
+			'height': generateCSSUnit( modalHeightTablet, modalHeightType ),
 			'padding-left': generateCSSUnit( paddingModalLeftTablet, tabletPaddingModalUnit ),
 			'padding-right': generateCSSUnit( paddingModalRightTablet, tabletPaddingModalUnit ),
 			'padding-top': generateCSSUnit( paddingModalTopTablet, tabletPaddingModalUnit ),
@@ -406,10 +408,11 @@ export default function styling( attributes, clientId, name ) {
 	const modalPopupContentBackgroundCSSMobile = generateBackgroundCSS( backgroundAttributesMobile );
 	let mobileSelectors = {
 		' .uagb-modal-popup-wrap': {
-			'width': generateCSSUnit( modalWidthMobile, modalWidthType ),
 			'height': generateCSSUnit( modalHeightMobile, modalHeightType ),
+			'width': generateCSSUnit( modalWidthMobile, modalWidthType ),
 		},
 		' .uagb-modal-popup-content': {
+			'height': generateCSSUnit( modalHeightMobile, modalHeightType ),
 			'padding-left': generateCSSUnit( paddingModalLeftMobile, mobilePaddingModalUnit ),
 			'padding-right': generateCSSUnit( paddingModalRightMobile, mobilePaddingModalUnit ),
 			'padding-top': generateCSSUnit( paddingModalTopMobile, mobilePaddingModalUnit ),
