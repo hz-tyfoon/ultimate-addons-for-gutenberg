@@ -177,6 +177,7 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 * Fix: Modal - Container background do not get border radius.
 * Fix: Modal - Background not applying properly when custom width is set.
 * Fix: Resolve an issue of PHP error appear for block-based widget editor.
+* Fix: Table Of Contents - Removed the console warning that was thrown for an empty collapsible Table Of Contents block.
 
 = 2.5.0 - TUESDAY, 25th APRIL 2023 =
 * New: Spectra now has support for the all-new Spectra Pro!
