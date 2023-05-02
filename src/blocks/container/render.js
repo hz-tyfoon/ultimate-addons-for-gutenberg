@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { memo } from '@wordpress/element';
 import shapes from './shapes';
-import { select } from '@wordpress/data';
+import { select, useSelect } from '@wordpress/data';
 import { useDeviceType } from '@Controls/getPreviewType';
 
 const Render = ( props ) => {
@@ -108,6 +108,24 @@ const Render = ( props ) => {
 			.filter( ( blockName ) => [ 'uagb/slider' ].indexOf( blockName ) === -1 );
 
 		innerBlocksParams.allowedBlocks = ALLOWED_BLOCKS;
+	}
+
+	const { getBlockParentsAll, getBlockSingle } = useSelect( ( selectStore ) => {
+		const { getBlockParents, getBlock } = selectStore( 'core/block-editor' );
+		return { getBlockParentsAll: getBlockParents, getBlockSingle: getBlock };
+	}, [] );
+
+	const parentBlockIds = getBlockParentsAll( clientId );
+	const parentBlockNames = parentBlockIds.map( ( id ) => getBlockSingle( id ).name );
+
+	if ( parentBlockNames.includes( 'uagb/loop-builder' ) ) {
+		const allowedBlocks = [
+			'uagb/advanced-heading',
+			'uagb/image',
+			'uagb/buttons',
+			'uagb/container'
+		]
+		innerBlocksParams.allowedBlocks = allowedBlocks;
 	}
 
 	return (
