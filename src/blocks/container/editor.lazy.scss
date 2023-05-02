@@ -252,6 +252,10 @@
 	z-index: 2;
 }
 
+.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks .wp-block{
+	width: inherit;
+}
+
 .wp-block-uagb-container > .uagb-container-inner-blocks-wrap {
 	width: 100%;
 }
