@@ -580,6 +580,56 @@ if ( ! class_exists( 'UAGB_Taxonomy_List' ) ) {
 			}
 		}
 
+		public function tax_recursive_array_for_slug( $categories_array ) {
+			// if( ! is_object( $categories_array ) ){
+			// 	return;
+			// }
+			// error_log(print_r($categories_array,true));
+			foreach ( $categories_array as $key => $category ) {
+				if( $categories_array ){
+					// error_log(print_r($category,true));
+					// error_log(print_r($key,true));
+
+					if ( ! empty( $categories_array->children ) ){
+						// error_log(print_r($this->tax_recursive_array_for_slug($categories_array->children),true));
+						$this->tax_recursive_array_for_slug($categories_array->children);
+					}
+					if( ! empty( $category ) && ! is_array( $category ) ){
+						return $category;
+					}
+
+				}
+			}
+		}
+
+		// function display($num){
+		// 	if($num<=5){
+		// 		echo "$num <br>";
+		// 		display($num +1);
+		// 	}
+		// }
+		// display(1);
+
+		function factorial($categories){
+			error_log(print_r($categories,true));
+			if( ! empty( $categories ) && is_array( $categories ) ){
+			// return $categories->term_id;
+			// }
+				foreach ( $categories as $category ) {
+					return $category->slug;
+					// error_log(print_r($category,true));
+				}
+
+				// return $categories->slug;
+			}
+			if ( ! empty( $categories->children ) ){
+				return $this->factorial($categories->children);
+				// error_log(print_r($categories->children,true));
+					// return($n*factorial($n-1));
+			}
+		}
+		// echo factorial(5);
+
 		/**
 		 * Render List HTML.
 		 *
@@ -612,6 +662,8 @@ if ( ! class_exists( 'UAGB_Taxonomy_List' ) ) {
 				);
 
 				$new_categories_list = get_terms( $attributes['taxonomyType'], $args );
+				// error_log(print_r(get_term_link( $value->slug, $attributes['taxonomyType'] ),true));
+				// error_log(print_r($value->slug,true));
 
 				if ( is_array( $new_categories_list ) ) {
 					foreach ( $new_categories_list as $key => $value ) {
@@ -631,6 +683,13 @@ if ( ! class_exists( 'UAGB_Taxonomy_List' ) ) {
 						<?php
 						if ( is_array( $new_categories_list ) ) {
 							foreach ( $new_categories_list as $key => $value ) {
+								// foreach ( $value as $term ) {
+								// 	error_log(print_r($term,true));
+								// 	// How write a recursive function in php?
+
+								// }
+								$slug = $this->factorial($value);//->children);
+								error_log(print_r($slug,true));
 								$link = get_term_link( $value->slug, $attributes['taxonomyType'] );
 								if ( is_wp_error( $link ) ) {
 									$link = '#';
