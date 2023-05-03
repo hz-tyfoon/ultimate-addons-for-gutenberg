@@ -13,6 +13,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddInitialAttr from '@Controls/addInitialAttr';
 const UAGBWpSearchEdit = ( props ) => {
 	const {
 		isSelected,
@@ -41,12 +42,6 @@ const UAGBWpSearchEdit = ( props ) => {
 
 	// componentDidMount.
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-
-		setAttributes( {
-			block_id: clientId.substr( 0, 8 ),
-		} );
-
 		// border
 		if ( borderWidth || borderRadius || borderColor || borderHColor || borderStyle ) {
 			migrateBorderAttributes(
@@ -112,5 +107,6 @@ const UAGBWpSearchEdit = ( props ) => {
 };
 
 export default compose(
+	AddInitialAttr,
 	AddStaticStyles,
 )( UAGBWpSearchEdit );
