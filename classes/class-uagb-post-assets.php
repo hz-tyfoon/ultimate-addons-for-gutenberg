@@ -209,7 +209,13 @@ class UAGB_Post_Assets {
 	 */
 	public function __construct( $post_id ) {
 
+		// $spectra_global_block_styles = get_option( 'spectra_global_block_styles', array() );
+		// var_dump($spectra_global_block_styles);
+
 		$this->post_id = intval( $post_id );
+
+		// For Spectra Global Block Styles.
+		$this->spectra_gbs_load_gfonts();
 
 		$this->preview = isset( $_GET['preview'] ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
@@ -233,6 +239,50 @@ class UAGB_Post_Assets {
 			$this->prepare_assets( $this_post );
 			$content = get_option( 'widget_block' );
 			$this->prepare_widget_area_assets( $content );
+		}
+	}
+
+	/**
+	 * Load Styles for Spectra Global Block Styles.
+	 *
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function spectra_gbs_load_styles() {
+
+		$spectra_global_block_styles = get_option( 'spectra_global_block_styles', array() );
+		
+		if ( empty( $this->stylesheet ) || empty( $spectra_global_block_styles ) || ! is_array( $spectra_global_block_styles ) ) {
+			return;
+		}
+
+		foreach ( $spectra_global_block_styles as $style ) {
+			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] && ! empty( $style['post_ids'] ) && in_array( $this->post_id, $style['post_ids'] ) ) ) {
+				$this->stylesheet = $this->stylesheet . $style['frontendStyles'];
+			}
+		}
+	}
+
+	/**
+	 * Load Google Fonts for Spectra Global Block Styles.
+	 *
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function spectra_gbs_load_gfonts() {
+
+		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
+		
+		$families = array();
+		foreach ( $spectra_gbs_google_fonts as $style ) {
+			if ( is_array( $style ) ) {
+				foreach ( $style as $family ) {
+					if ( ! in_array( $family, $families ) ) {
+						UAGB_Helper::blocks_google_font( true, $family, false );
+						$families[] = $family;
+					}
+				}
+			}
 		}
 	}
 
@@ -343,6 +393,9 @@ class UAGB_Post_Assets {
 	 * @since 1.23.0
 	 */
 	public function enqueue_scripts() {
+
+		// For Spectra Global Block Styles.
+		$this->spectra_gbs_load_styles();
 
 		// Global Required assets.
 		if ( has_blocks( $this->post_id ) ) {

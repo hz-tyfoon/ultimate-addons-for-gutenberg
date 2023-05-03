@@ -1333,6 +1333,91 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 
 			return $combined_selectors;
 		}
+
+		/**
+		 * This function deletes the Page assets from the Page Meta Key.
+		 *
+		 * @param int $post_id Post Id.
+		 * @since 1.23.0
+		 */
+		public static function delete_page_assets( $post_id ) {
+			$current_post_type = get_post_type( $post_id );
+			if ( 'wp_template_part' === $current_post_type || 'wp_template' === $current_post_type ) {
+
+				// Delete all the TOC Post Meta on update of the template.
+				delete_post_meta_by_key( '_uagb_toc_options' );
+
+				$wp_upload_dir = UAGB_Helper::get_uag_upload_dir_path();
+
+				if ( file_exists( $wp_upload_dir . 'custom-style-blocks.css' ) ) {
+					wp_delete_file( $wp_upload_dir . 'custom-style-blocks.css' );
+				}
+
+				$file_generation = UAGB_Helper::allow_file_generation();
+
+				if ( 'enabled' === $file_generation ) {
+
+					UAGB_Helper::delete_uag_asset_dir();
+				}
+
+				UAGB_Admin_Helper::create_specific_stylesheet();
+
+				/* Update the asset version */
+				UAGB_Admin_Helper::update_admin_settings_option( '__uagb_asset_version', time() );
+				return;
+			}
+
+			if ( 'enabled' === UAGB_Helper::$file_generation ) {
+
+				$css_asset_info = UAGB_Scripts_Utils::get_asset_info( 'css', $post_id );
+				$js_asset_info  = UAGB_Scripts_Utils::get_asset_info( 'js', $post_id );
+
+				$css_file_path = $css_asset_info['css'];
+				$js_file_path  = $js_asset_info['js'];
+
+				if ( file_exists( $css_file_path ) ) {
+					wp_delete_file( $css_file_path );
+				}
+				if ( file_exists( $js_file_path ) ) {
+					wp_delete_file( $js_file_path );
+				}
+			}
+
+			delete_post_meta( $post_id, '_uag_page_assets' );
+			delete_post_meta( $post_id, '_uag_css_file_name' );
+			delete_post_meta( $post_id, '_uag_js_file_name' );
+
+			$does_post_contain_reusable_blocks = self::does_post_contain_reusable_blocks( $post_id );
+
+			if ( true === $does_post_contain_reusable_blocks ) {
+
+				/* Update the asset version */
+				update_option( '__uagb_asset_version', time() );
+			}
+		}
+
+		/**
+		 * Does Post contains reusable blocks.
+		 *
+		 * @param int $post_id Post ID.
+		 *
+		 * @since 1.23.5
+		 *
+		 * @return boolean Wether the Post contains any Reusable blocks or not.
+		 */
+		public static function does_post_contain_reusable_blocks( $post_id ) {
+
+			$post_content = get_post_field( 'post_content', $post_id, 'raw' );
+			$tag          = '<!-- wp:block';
+			$flag         = strpos( $post_content, $tag );
+
+			if ( false !== $flag ) {
+
+				return true;
+			}
+
+			return false;
+		}
 	}
 
 	/**

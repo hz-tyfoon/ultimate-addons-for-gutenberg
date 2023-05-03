@@ -8,7 +8,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
@@ -405,7 +405,12 @@ function styling( attributes, clientId, name ) {
 			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceMobile, 'headSpaceMobile', blockName ), 'px' ),
 		};
 	}
-	const base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	let base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
+
+	// For Global Block Styles.
+	if ( gbsSelector ) {
+		base_selector = gbsSelector;
+	}
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
 	tablet_selectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tablet_selectors, attributes );
