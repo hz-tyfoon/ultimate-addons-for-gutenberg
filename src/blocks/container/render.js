@@ -123,7 +123,8 @@ const Render = ( props ) => {
 			'uagb/advanced-heading',
 			'uagb/image',
 			'uagb/buttons',
-			'uagb/container'
+			'uagb/container',
+			'uagb/info-box'
 		]
 		innerBlocksParams.allowedBlocks = allowedBlocks;
 	}
