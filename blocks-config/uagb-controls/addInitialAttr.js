@@ -1,11 +1,12 @@
 import { useEffect } from '@wordpress/element';
 const addInitialAttr = ( ChildComponent )=> {
 	const WrappedComponent = ( props ) => {
-        const { name } = props;
+        const { setAttributes, clientId, name } = props;
 
 		useEffect( () => {
-
-            if( name === 'uagb/advanced-heading' || name === 'uagb/blockquote') {
+            const listOfClassMigrate = [ 'uagb/advanced-heading', 'uagb/blockquote' ];
+            
+            if( listOfClassMigrate.includes( name ) ) {
                 setAttributes( { classMigrate: true } );
             }
 
