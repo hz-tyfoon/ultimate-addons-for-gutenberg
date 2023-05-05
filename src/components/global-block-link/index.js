@@ -13,6 +13,7 @@ import { STORE_NAME as storeName } from '@Store/constants';
 import { compose } from '@wordpress/compose';
 import Select from 'react-select';
 import UAGSelectControl from '@Components/select-control';
+import { useDeviceType } from '@Controls/getPreviewType';
 
 const GlobalBlockStyles = ( props ) => {
    // Add and remove the CSS on the drop and remove of the component.
@@ -22,6 +23,8 @@ const GlobalBlockStyles = ( props ) => {
 			styles.unuse();
 		};
 	}, [] );
+
+    const deviceType = useDeviceType();
 
     const {
         globalBlockStyles,
@@ -41,7 +44,7 @@ const GlobalBlockStyles = ( props ) => {
         blockName,
         clientId
     } = props;
-console.log(globalBlockStyleId);
+
     const [ uniqueID, setUniqueID ] = useState( false );
     const [ bulkEdit, setBulkEdit ] = useState( false );
     const [ multiSelected, setMultiSelected ] = useState( [] );
@@ -88,16 +91,36 @@ console.log(globalBlockStyleId);
 
     const clearCurrentAttributes = () => {
 
-        Object.keys( currentBlockDefaultAttributes ).map( ( attribute ) => {
+        const saveAttr = {};
+        for (const attrKey in currentBlockDefaultAttributes) {
+            const attrObject = currentBlockDefaultAttributes[ attrKey ];
+            if( attrObject?.UAGCopyPaste ){
+                
+                let value = '';
+                
+                switch (attrObject.type) {
+                    case 'boolean':
+                        value = false;
+                        break;
+                    case 'number':
+                        value = 0.001020304;
+                        break;
+                    case 'object':
+                        value = {};
+                        break;
+                    case 'array':
+                        value = [];
+                        break;
+                }
 
-            if ( currentBlockDefaultAttributes[attribute]?.UAGCopyPaste ) {
-                setAttributes( {
-                    [attribute] : currentBlockDefaultAttributes[attribute]?.default || undefined
-                } );
-
+                saveAttr[ attrKey ] = value;
             }
-            return attribute;
-        } );
+
+        }
+
+        if( saveAttr ){
+            setAttributes( saveAttr );
+        }
     }
     const saveStylesToDatabase = ( bulkUpdateStyles = 'no', spectraGlobalStyles = globalBlockStyles ) => {
 
@@ -160,13 +183,13 @@ console.log(globalBlockStyleId);
                 } );
 
                 const finalAttributes = Object.fromEntries( filtered );
-    
+    console.log(finalAttributes);
                 const newAttributes = {
                     ...style?.attributes,
                     ...finalAttributes
                 };
 
-                const blockStyling = styling( newAttributes, clientId, blockName, baseSelector );
+                const blockStyling = styling( newAttributes, clientId, blockName, deviceType,baseSelector );
                 style.editorStyles = blockStyling;
                 style.attributes = newAttributes;
                 style.clientId = clientId;
@@ -184,6 +207,7 @@ console.log(globalBlockStyleId);
         
         updateGlobalBlockStyles( globalBlockStyles );
         setSaveToDatabase( true );
+        setGenerate( false );
     };
     const updateGoogleFontData = ( attrs ) => {
         Object.keys( attrs ).map( ( attribute ) => {

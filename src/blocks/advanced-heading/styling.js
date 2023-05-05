@@ -8,7 +8,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( attributes, clientId, name, gbsSelector = false ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
