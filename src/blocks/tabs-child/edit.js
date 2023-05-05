@@ -6,6 +6,7 @@ import { useEffect } from '@wordpress/element';
 
 import Render from './render';
 import { select } from '@wordpress/data';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBTabsChildEdit = ( props ) => {
 	const { attributes, setAttributes, clientId } = props;

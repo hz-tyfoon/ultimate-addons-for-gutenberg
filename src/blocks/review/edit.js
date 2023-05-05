@@ -13,6 +13,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const ReviewComponent = ( props ) => {
 	const {
@@ -195,8 +196,6 @@ const ReviewComponent = ( props ) => {
 	};
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 
 		if ( contentVrPadding ) {
 			if ( undefined === topPadding ) {
@@ -306,5 +305,6 @@ const ReviewComponent = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( ReviewComponent );

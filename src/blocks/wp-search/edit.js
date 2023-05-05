@@ -13,7 +13,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
-import AddInitialAttr from '@Controls/addInitialAttr';
+import addInitialAttr from '@Controls/addInitialAttr';
 const UAGBWpSearchEdit = ( props ) => {
 	const {
 		isSelected,
@@ -107,6 +107,6 @@ const UAGBWpSearchEdit = ( props ) => {
 };
 
 export default compose(
-	AddInitialAttr,
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBWpSearchEdit );

@@ -12,6 +12,7 @@ import Settings from './settings';
 import Render from './render';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBInfoBox = ( props ) => {
 	const {
@@ -37,11 +38,7 @@ const UAGBInfoBox = ( props ) => {
 	} = props;
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
-		setAttributes( { classMigrate: true } );
-
+		
 		if ( ctaBgType === undefined ) {
 			setAttributes( { ctaBgType: 'color' } );
 		}
@@ -105,5 +102,6 @@ const UAGBInfoBox = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBInfoBox );
