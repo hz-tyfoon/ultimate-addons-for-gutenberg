@@ -1,4 +1,8 @@
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
+const placeHolderImage = { 
+	type: 'image', 
+	url: uagb_blocks_info.uagb_url + '/admin/assets/images/uag-placeholder.svg' 
+};
 const backgroundCss = ( attributes, deviceType ) => {
 	const {
 		backgroundType,
@@ -52,7 +56,7 @@ const backgroundCss = ( attributes, deviceType ) => {
 	const backgroundAttributesDesktop = {
 		backgroundType,
 		backgroundColor,
-		backgroundImage: backgroundImageDesktop,
+		backgroundImage: backgroundImageDesktop?.url ? backgroundImageDesktop : placeHolderImage,
 		gradientValue,
 		gradientColor1,
 		gradientColor2,
@@ -81,7 +85,7 @@ const backgroundCss = ( attributes, deviceType ) => {
 	const backgroundAttributesTablet = {
 		backgroundType,
 		backgroundColor,
-		backgroundImage: backgroundImageTablet,
+		backgroundImage: backgroundImageTablet?.url ? backgroundImageTablet : placeHolderImage,
 		gradientValue,
 		gradientColor1,
 		gradientColor2,
@@ -110,7 +114,7 @@ const backgroundCss = ( attributes, deviceType ) => {
 	const backgroundAttributesMobile = {
 		backgroundType,
 		backgroundColor,
-		backgroundImage: backgroundImageMobile,
+		backgroundImage: backgroundImageMobile?.url ? backgroundImageMobile : placeHolderImage,
 		gradientValue,
 		gradientColor1,
 		gradientColor2,

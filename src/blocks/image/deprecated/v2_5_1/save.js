@@ -32,21 +32,19 @@ export default function Save( props ) {
 	} = props.attributes;
 
 	const image = (
-		url && '' !== url && (
-			<img
-				srcSet={ `${ url } ${ urlTablet ? ',' + urlTablet + ' 780w' : '' }${
-					urlMobile ? ', ' + urlMobile + ' 360w' : ''
-				}` }
-				sizes="(max-width: 480px) 150px"
-				src={ url }
-				alt={ alt }
-				className={ id ? `uag-image-${ id }` : null }
-				width={ width ? width : naturalWidth }
-				height={ height ? height : naturalHeight }
-				title={ title }
-				loading="lazy"
-			/>
-		)
+		<img
+			srcSet={ `${ url } ${ urlTablet ? ',' + urlTablet + ' 780w' : '' }${
+				urlMobile ? ', ' + urlMobile + ' 360w' : ''
+			}` }
+			sizes="(max-width: 480px) 150px"
+			src={ url }
+			alt={ alt }
+			className={ id ? `uag-image-${ id }` : null }
+			width={ width ? width : naturalWidth }
+			height={ height ? height : naturalHeight }
+			title={ title }
+			loading="lazy"
+		/>
 	);
 	// block validation issue fixing - ImageURLInputUI components automatic provide "noopener"
 	const getRel = () => {
