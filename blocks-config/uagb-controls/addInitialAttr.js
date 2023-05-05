@@ -4,6 +4,7 @@ const addInitialAttr = ( ChildComponent )=> {
         const { name, setAttributes, clientId } = props;
 
 		useEffect( () => {
+
             if ( name === 'uagb/countdown' ) {
                 // editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
 		        setAttributes( {

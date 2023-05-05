@@ -4,12 +4,14 @@
 
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
+import { compose } from '@wordpress/compose';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsCheckboxEdit = ( props ) => {
-	const { isSelected, setAttributes, clientId } = props;
+	const { isSelected, clientId } = props;
 	// eslint-disable-next-line no-unused-vars
 	const [ state, setState ] = useState( {
 		optionsstate: [
@@ -20,9 +22,6 @@ const UAGBFormsCheckboxEdit = ( props ) => {
 	} );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
 		// Pushing Style tag for this block css.
 		const $style = document.createElement( 'style' );
 		$style.setAttribute( 'id', 'uagb-style-forms-checkbox-' + clientId.substr( 0, 8 ) );
@@ -37,4 +36,6 @@ const UAGBFormsCheckboxEdit = ( props ) => {
 	);
 };
 
-export default UAGBFormsCheckboxEdit;
+export default compose(
+	addInitialAttr,
+)( UAGBFormsCheckboxEdit );
