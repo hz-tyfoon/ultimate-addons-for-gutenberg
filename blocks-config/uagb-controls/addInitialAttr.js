@@ -4,20 +4,27 @@ const addInitialAttr = ( ChildComponent )=> {
         const { name, setAttributes, clientId } = props;
 
 		useEffect( () => {
+            const listOfClassMigrate = [ 'uagb/advanced-heading', 'uagb/blockquote', 'uagb/buttons', 'uagb/call-to-action', 'uagb/column', 'uagb/columns', 'uagb/icon-list', 'uagb/image-gallery' ];
 
-            if ( name === 'uagb/countdown' ) {
+            const listOfChildMigrate = [ 'uagb/buttons', 'uagb/icon-list' ];
+
+            const listOfIsHtml = [ 'uagb/cf7-styler', 'uagb/gf-styler' ];
+
+            const listOfEditorInnerblocksPreview = [ 'uagb/countdown' ]
+          
+            if ( listOfEditorInnerblocksPreview.includes( name ) ) {
                 // editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
 		        setAttributes( {
 			       editorInnerblocksPreview: false,
 		        } );
             }
-            if( name === 'uagb/cf7-styler' ) {
+            if( listOfIsHtml.includes( name ) ) {
                 setAttributes( { isHtml: false } );
             }
-            if( name === 'uagb/buttons' ) {
+            if( listOfChildMigrate.includes( name ) ) {
                 setAttributes( { childMigrate: true } );
             }
-            if( name === 'uagb/advanced-heading' || 'uagb/blockquote' || 'uagb/buttons' || 'uagb/call-to-action' || 'uagb/column' || 'uagb/columns' ) {
+            if( listOfClassMigrate.includes( name ) ) {
                 setAttributes( { classMigrate: true } );
             }
 
