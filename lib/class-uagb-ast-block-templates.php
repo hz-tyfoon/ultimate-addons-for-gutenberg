@@ -120,3 +120,4 @@ if ( ! class_exists( 'UAGB_Ast_Block_Templates' ) ) :
 	UAGB_Ast_Block_Templates::get_instance();
 
 endif;
+
