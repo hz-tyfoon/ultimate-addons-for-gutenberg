@@ -184,10 +184,11 @@ const GlobalBlockStyles = ( props ) => {
                     }
                 } );
 
+                const defaultAttributes = style?.attributes || attributes;
                 const finalAttributes = Object.fromEntries( filtered );
-    console.log(finalAttributes);
+
                 const newAttributes = {
-                    ...style?.attributes,
+                    ...defaultAttributes,
                     ...finalAttributes
                 };
 
