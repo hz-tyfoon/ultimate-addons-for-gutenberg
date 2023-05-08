@@ -5,7 +5,6 @@
 import { useEffect, useMemo } from '@wordpress/element';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
 //  Import CSS.
@@ -18,7 +17,6 @@ import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBAdvancedHeading = ( props ) => {
-	const deviceType = useDeviceType();
 	const {
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
@@ -26,6 +24,7 @@ const UAGBAdvancedHeading = ( props ) => {
 		setAttributes,
 		clientId,
 		name,
+		deviceType,
 	} = props;
 
 	useEffect( () => {
