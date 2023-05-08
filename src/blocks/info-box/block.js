@@ -34,5 +34,7 @@ registerBlockType( 'uagb/info-box', {
 	category: uagb_blocks_info.category,
 	edit: ( props ) => ( props.attributes.isPreview ? <PreviewImage image="info-box" /> : <Edit { ...props } /> ),
 	save,
+	__experimentalLabel: ( atts ) =>
+		applyFilters( 'uag_loop_data_source_label', __( 'Info Box', 'ultimate-addons-for-gutenberg' ), atts ),
 	deprecated,
 } );

@@ -2,13 +2,12 @@ import classnames from 'classnames';
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { memo } from '@wordpress/element';
 import shapes from './shapes';
-import { select } from '@wordpress/data';
-import { useDeviceType } from '@Controls/getPreviewType';
+import { select, useSelect } from '@wordpress/data';
+import backgroundCss from './backgroundCss';
 
 const Render = ( props ) => {
-	const deviceType = useDeviceType();
 	props = props.parentProps;
-	const { attributes, clientId } = props;
+	const { attributes, clientId, deviceType } = props;
 
 	const {
 		block_id,
@@ -27,12 +26,13 @@ const Render = ( props ) => {
 		isBlockRootParent,
 		contentWidth,
 		innerContentWidth,
-		hasSliderParent,
+		hasSliderParent
 	} = attributes;
 
 	const direction = attributes[ 'direction' + deviceType ];
 
 	const moverDirection = 'row' === direction ? 'horizontal' : 'vertical';
+	const getContainerBGStyle = backgroundCss( attributes, deviceType );
 
 	const topDividerHtml = 'none' !== topType && (
 		<div
@@ -91,6 +91,7 @@ const Render = ( props ) => {
 	const isRootContainerClass = isBlockRootParent ? `${ contentWidth } uagb-is-root-container` : '';
 	const blockProps = useBlockProps( {
 		className: `uagb-block-${ block_id } ${ hasChildrenClass } uagb-editor-preview-mode-${ deviceType.toLowerCase() } ${ isRootContainerClass }`,
+		style: getContainerBGStyle
 	} );
 
 	const innerBlocksParams = {
@@ -108,6 +109,25 @@ const Render = ( props ) => {
 			.filter( ( blockName ) => [ 'uagb/slider' ].indexOf( blockName ) === -1 );
 
 		innerBlocksParams.allowedBlocks = ALLOWED_BLOCKS;
+	}
+
+	const { getBlockParentsAll, getBlockSingle } = useSelect( ( selectStore ) => {
+		const { getBlockParents, getBlock } = selectStore( 'core/block-editor' );
+		return { getBlockParentsAll: getBlockParents, getBlockSingle: getBlock };
+	}, [] );
+
+	const parentBlockIds = getBlockParentsAll( clientId );
+	const parentBlockNames = parentBlockIds.map( ( id ) => getBlockSingle( id ).name );
+
+	if ( parentBlockNames.includes( 'uagb/loop-builder' ) ) {
+		const allowedBlocks = [
+			'uagb/advanced-heading',
+			'uagb/image',
+			'uagb/buttons',
+			'uagb/container',
+			'uagb/info-box'
+		]
+		innerBlocksParams.allowedBlocks = allowedBlocks;
 	}
 
 	return (
