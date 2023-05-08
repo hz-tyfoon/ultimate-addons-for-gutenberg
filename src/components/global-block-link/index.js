@@ -90,18 +90,15 @@ const GlobalBlockStyles = ( props ) => {
 	}, [globalBlockStyleId, globalBlockStyles] );
 
     const clearCurrentAttributes = () => {
-        // console.log( 'clearCurrentAttributes', currentBlockDefaultAttributes );
+        
         const saveAttr = {};
-        for (const attrKey in currentBlockDefaultAttributes) {
+        for ( const attrKey in currentBlockDefaultAttributes ) {
             const attrObject = currentBlockDefaultAttributes[ attrKey ];
             if( attrObject?.UAGCopyPaste ){
-                // console.log( 'attrObject', attrObject );
-                // console.log( 'attrObject attrKey', attrKey );
-                // console.log( 'attrObject UAGCopyPaste', attrObject.UAGCopyPaste );
                 
                 let value = '';
                 
-                switch (attrObject.type) {
+                switch ( attrObject.type ) {
                     case 'boolean':
                         value = false;
                         break;
@@ -180,8 +177,9 @@ const GlobalBlockStyles = ( props ) => {
                 const asArray = Object.entries( attributes );
                 const filtered = asArray.filter( ( [key, value] ) => {
                     if ( currentBlockDefaultAttributes[key]?.UAGCopyPaste ) {
-                        return currentBlockDefaultAttributes[key]?.default !== value;
+                        return ( '0.001020304' !== value && '' !== value && {} !== value && [] !== value && false !== value );
                     }
+                    return false;
                 } );
 
                 const defaultAttributes = style?.attributes || attributes;
@@ -191,7 +189,12 @@ const GlobalBlockStyles = ( props ) => {
                     ...defaultAttributes,
                     ...finalAttributes
                 };
-
+                for( const attribute in newAttributes ) {
+                    if( 0.001020304 === newAttributes?.[attribute] ){
+                        newAttributes[attribute] = '';
+                    }
+                }
+                
                 const blockStyling = styling( newAttributes, clientId, blockName, deviceType,baseSelector );
                 style.editorStyles = blockStyling;
                 style.attributes = newAttributes;
@@ -468,7 +471,6 @@ export default compose(
         const selectedBlockData = getSelectedBlock();
         
         const {
-            attributes,
             name,
             clientId
         } = selectedBlockData;
@@ -477,7 +479,6 @@ export default compose(
 			globalBlockStyles,
             isOpen,
             globalBlockStylesFontFamilies,
-            attributes,
             blockName : name,
             clientId
 		};	

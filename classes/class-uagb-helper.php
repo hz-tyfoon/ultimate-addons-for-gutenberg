@@ -1347,17 +1347,17 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				// Delete all the TOC Post Meta on update of the template.
 				delete_post_meta_by_key( '_uagb_toc_options' );
 
-				$wp_upload_dir = UAGB_Helper::get_uag_upload_dir_path();
+				$wp_upload_dir = self::get_uag_upload_dir_path();
 
 				if ( file_exists( $wp_upload_dir . 'custom-style-blocks.css' ) ) {
 					wp_delete_file( $wp_upload_dir . 'custom-style-blocks.css' );
 				}
 
-				$file_generation = UAGB_Helper::allow_file_generation();
+				$file_generation = self::allow_file_generation();
 
 				if ( 'enabled' === $file_generation ) {
 
-					UAGB_Helper::delete_uag_asset_dir();
+					self::delete_uag_asset_dir();
 				}
 
 				UAGB_Admin_Helper::create_specific_stylesheet();
@@ -1367,7 +1367,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				return;
 			}
 
-			if ( 'enabled' === UAGB_Helper::$file_generation ) {
+			if ( 'enabled' === self::$file_generation ) {
 
 				$css_asset_info = UAGB_Scripts_Utils::get_asset_info( 'css', $post_id );
 				$js_asset_info  = UAGB_Scripts_Utils::get_asset_info( 'js', $post_id );

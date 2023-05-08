@@ -11,9 +11,9 @@ const AddGBSStyles = ( ChildComponent )=> {
 			globalBlockStyleName
 		} = props?.attributes;
 		
-		if ( ! globalBlockStyleId ) {
-			return <ChildComponent { ...props }/>
-		}
+		// if ( ! globalBlockStyleId ) {
+		// 	return <ChildComponent { ...props }/>
+		// }
 
 		const editorStyles = getGBSEditorStyles( globalBlockStyles, globalBlockStyleId, globalBlockStyleName );
 
@@ -33,11 +33,12 @@ const AddGBSStyles = ( ChildComponent )=> {
 
 		const modifiedAttr = { ...props.attributes };
 
-		for (const objectKey in modifiedAttr ) {
+		for ( const objectKey in modifiedAttr ) {
 			if( 0.001020304 === modifiedAttr?.[objectKey] ){
 				modifiedAttr[objectKey] = '';
 			}
 		}
+		
 		const updatedAtributes = {
 			...props.attributes,
 			...modifiedAttr

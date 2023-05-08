@@ -805,7 +805,7 @@ class UAGB_Init_Blocks {
 			return $block_content;
 		}
 		
-		$block_id = $block['attrs']['block_id'];
+		$block_id            = $block['attrs']['block_id'];
 		$block_name          = $block['blockName'];
 		$style_name          = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
 		$style_class_name    = 'spectra-gbs-' . explode( '/', $block['blockName'] )[1] . '-' . $style_name;
@@ -851,7 +851,7 @@ class UAGB_Init_Blocks {
 			if ( ! empty( $_POST['globalBlockStyleId'] ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
 				$block_attr = $style['attributes'];
 				
-				if ( ! $block_attr) {
+				if ( ! $block_attr ) {
 					$response_data = array( 'messsage' => __( 'No post data found!', 'ultimate-addons-for-gutenberg' ) );
 					wp_send_json_error( $response_data );
 				}

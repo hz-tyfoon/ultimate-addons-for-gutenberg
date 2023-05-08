@@ -1,6 +1,6 @@
 import GlobalBlockStyles from '@Components/global-block-link';
 
-const renderGBSSettings = (styling, setAttributes) => {
+const renderGBSSettings = ( styling, setAttributes, attributes ) => {
 
 	const isPro = uagb_blocks_info.spectra_pro_status;
 
@@ -15,6 +15,7 @@ const renderGBSSettings = (styling, setAttributes) => {
         <GlobalBlockStyles
             setAttributes = {setAttributes}
             styling = {styling}
+            attributes = {attributes}
         />
     )
 };

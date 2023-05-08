@@ -209,9 +209,6 @@ class UAGB_Post_Assets {
 	 */
 	public function __construct( $post_id ) {
 
-		// $spectra_global_block_styles = get_option( 'spectra_global_block_styles', array() );
-		// var_dump($spectra_global_block_styles);
-
 		$this->post_id = intval( $post_id );
 
 		// For Spectra Global Block Styles.
