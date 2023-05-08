@@ -84,9 +84,9 @@ const UAGBContainer = ( props ) => {
 
 		const parentBlockName = select( 'core/block-editor' ).getBlocksByClientId( isBlockRootParentID );
 		const excludeBlockNames = [ 'uagb/container', 'uagb/loop-builder' ];
-		const keyExists = parentBlockName.some(item => excludeBlockNames.includes(item.name));
+		const excludeBlockExists = parentBlockName.some( item => excludeBlockNames.includes( item.name ) );
 		
-		if ( ! keyExists ) {
+		if ( ! excludeBlockExists ) {
 			setAttributes( { isBlockRootParent: true } );
 		}
 
