@@ -7,6 +7,17 @@ const headingAlignmentDefault = 'yes' === uagb_blocks_info.uagb_old_user_less_th
 const headingDescToggleDefault = 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ? true : false;
 
 const attributes = {
+	AAA1style: {
+		type: 'string',
+		default: '12333',
+		UAGCopyPaste: {
+			styleType: 'block-blackground-type',
+		},
+	},
+	AAA2style: {
+		type: 'string',
+		default: 'dafiojoifjoijf',
+	},
 	block_id: {
 		type: 'string',
 	},

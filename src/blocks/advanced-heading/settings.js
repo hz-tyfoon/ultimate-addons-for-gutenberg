@@ -519,7 +519,7 @@ const Settings = ( props ) => {
 						label: 'headingGradientColor',
 					} }
 					setAttributes={ setAttributes }
-				/>
+				/> 
 				<TextShadowControl
 					blockId={ block_id }
 					setAttributes={ setAttributes }
@@ -1220,7 +1220,7 @@ const Settings = ( props ) => {
 						{ renderGBSSettings( styling, setAttributes ) }
 						{ generalPanel() }
 						{ subHeadingPanel() }
-						{ separatorPanel() }
+						{ separatorPanel() } 
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
 						{ headingTitleToggle && headingStylePanel() }
@@ -1229,7 +1229,7 @@ const Settings = ( props ) => {
 						{ linkStylePanel() }
 						{ highLightStylePanel() }
 						{ backgroundStylePanel() }
-						{ spacingStylePanel() }
+						{ spacingStylePanel() } 
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
 				</InspectorTabs>

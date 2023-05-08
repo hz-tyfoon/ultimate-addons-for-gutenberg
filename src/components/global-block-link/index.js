@@ -90,11 +90,14 @@ const GlobalBlockStyles = ( props ) => {
 	}, [globalBlockStyleId, globalBlockStyles] );
 
     const clearCurrentAttributes = () => {
-
+        // console.log( 'clearCurrentAttributes', currentBlockDefaultAttributes );
         const saveAttr = {};
         for (const attrKey in currentBlockDefaultAttributes) {
             const attrObject = currentBlockDefaultAttributes[ attrKey ];
             if( attrObject?.UAGCopyPaste ){
+                // console.log( 'attrObject', attrObject );
+                // console.log( 'attrObject attrKey', attrKey );
+                // console.log( 'attrObject UAGCopyPaste', attrObject.UAGCopyPaste );
                 
                 let value = '';
                 
@@ -112,13 +115,12 @@ const GlobalBlockStyles = ( props ) => {
                         value = [];
                         break;
                 }
-
                 saveAttr[ attrKey ] = value;
             }
 
         }
 
-        if( saveAttr ){
+        if( Object.keys( saveAttr ).length ){
             setAttributes( saveAttr );
         }
     }
