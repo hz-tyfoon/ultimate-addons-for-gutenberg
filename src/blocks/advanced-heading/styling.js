@@ -409,7 +409,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// For Global Block Styles.
 	if ( gbsSelector ) {
-		base_selector = gbsSelector;
+		base_selector = gbsSelector + ' ';
 	}
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
