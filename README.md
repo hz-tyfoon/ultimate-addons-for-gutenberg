@@ -175,7 +175,7 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 * Improvement: Added functionality in which a new paragraph block will be created when clicking enter in heading block.
 * Fix: Forms - Issue on submit failure in FSE theme.
 * Fix: Image Gallery - Resolved an issue wherein the carousel images would initially appear big on load.
-* Fix: Form - forms is not being submitted when the block is used inside the footer widget
+* Fix: Form - Resolved an issue in which the forms were not being submitted when the block is used inside the footer widget.
 
 ### 2.5.1 - THURSDAY, 27th APRIL 2023 ###
 * Feature: You can now add Google Fonts to Block Based Themes from Spectra Dashboard.
