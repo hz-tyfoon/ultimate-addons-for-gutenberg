@@ -176,6 +176,7 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 * Fix: Forms - Issue on submit failure in FSE theme.
 * Fix: Image Gallery - Resolved an issue wherein the carousel images would initially appear big on load.
 * Fix: Form - Resolved an issue in which the forms were not being submitted when the block is used inside the footer widget.
+* Fix: Container - Resolved an issue where the video/image background styling were not working as expected on the front-end.
 
 ### 2.5.1 - THURSDAY, 27th APRIL 2023 ###
 * Feature: You can now add Google Fonts to Block Based Themes from Spectra Dashboard.
