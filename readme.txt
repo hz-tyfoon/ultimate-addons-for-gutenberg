@@ -172,16 +172,29 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 
 = x.x.x =
 * New: Animations - Give a new life to your page with some scroll-based entrance animations.
+* Improvement: Typography - Added Bebas Neue Google font in Font Families .
+* Improvement: Countdown - Added the Countdown block to the list of Core Blocks.
 * Improvement: Added functionality in which a new paragraph block will be created when clicking enter in heading block.
+* Fix: Image - giving an error `Could not edit image. No route was found matching the URL and request method.` when we try to crop the image.
+* Fix: Buttons - Text hover color applying to Icon when Enable Icon setting is ON.
 * Fix: Forms - Issue on submit failure in FSE theme.
 * Fix: Image Gallery - Resolved an issue wherein the carousel images would initially appear big on load.
 * Fix: Form - Resolved an issue in which the forms were not being submitted when the block is used inside the footer widget.
+* Fix: Post Grid - Resolved a pagination bug in Post Grid that affected the other grid's pagination.
+* Fix: Table of Content - Gap Between Lists not working in front-end
+* Fix: Taxonomy List - Child taxonomies link were showing the link of the parent taxonomy.
+* Fix: Info Box -  Prefix margin not getting applied on frontend.
+* Fix: Tabs - Set tabs title default color to inherit to prevent it from taking link color from theme.
 * Fix: Container - Resolved an issue where the video/image background styling were not working as expected on the front-end.
+* Fix: Modal - Resolved an issue with the close button in Astra's custom layout action hook `before_add_to_card_form`.
+* Fix: Custom CSS - CSS were not loading on frontend when WP core block uses a custom css on page and there is no spectra block on the page.
+* Fix: Modal - Inside the Container, the alignment of the block gets in center from the left.
 
 = 2.5.1 - THURSDAY, 27th APRIL 2023 =
 * Feature: You can now add Google Fonts to Block Based Themes from Spectra Dashboard.
 * Fix: Counter - Added support for use within Slider (previously not working within Slider when it's set to infinite loop).
 * Fix: Buttons - Gap settings on Mobile preview is taking desktop value as default.
+* Fix: Masonry Gallery - Resolved an issue in which the Masonry Gallery extension would not work as intended in the FSE.
 * Fix: Modal - Container background do not get border radius.
 * Fix: Modal - Background not applying properly when custom width is set.
 * Fix: Resolve an issue of PHP error appear for block-based widget editor.
@@ -208,6 +221,7 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 * Fix: Post Carousel - Resolved an issue in which the gap between posts was not visible when only 2 posts were present.
 * Fix: Slider - Updated dot color setting to avoid taking the background color of arrows.
 * Fix: Table Of Contents - Resolved an HTML validation issue in the HTML validator.
+* Fix: Table Of Contents - Updated the front-end preview UI to match in the "Inside Post/Page Content" type of Astra's Custom Layout.
 * Fix: Advanced Columns - Resolved an issue in which the border radius was not getting applied in the front-end.
 * Fix: Controls - Updated control UI to render seamlessly when in RTL mode.
 * Fix: Spacing Control - Removed the capability to set negative values for width and border radius settings.

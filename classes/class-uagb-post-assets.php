@@ -231,8 +231,38 @@ class UAGB_Post_Assets {
 			global $post;
 			$this_post = $this->preview ? $post : get_post( $this->post_id );
 			$this->prepare_assets( $this_post );
+			$this->prepare_ast_custom_layout_post_assets();
 			$content = get_option( 'widget_block' );
 			$this->prepare_widget_area_assets( $content );
+		}
+
+	}
+
+	/**
+	 * Generate assets of Astra custom layout post in preview 
+	 * 
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function prepare_ast_custom_layout_post_assets() {
+
+		if ( ! defined( 'ASTRA_ADVANCED_HOOKS_POST_TYPE' ) ) {
+			return;
+		}
+		
+		$option = array(
+			'location'  => 'ast-advanced-hook-location',
+			'exclusion' => 'ast-advanced-hook-exclusion',
+			'users'     => 'ast-advanced-hook-users',
+		);
+		$result = Astra_Target_Rules_Fields::get_instance()->get_posts_by_conditions( ASTRA_ADVANCED_HOOKS_POST_TYPE, $option );
+
+		if ( empty( $result ) || ! is_array( $result ) ) {
+			return;
+		}
+		foreach ( $result as $post_id => $post_data ) {
+			$custom_post = get_post( $post_id );
+			$this->prepare_assets( $custom_post );
 		}
 	}
 
@@ -343,9 +373,11 @@ class UAGB_Post_Assets {
 	 * @since 1.23.0
 	 */
 	public function enqueue_scripts() {
-
+		global $_wp_current_template_content;
+		$blocks = parse_blocks( $_wp_current_template_content );
 		// Global Required assets.
-		if ( has_blocks( $this->post_id ) ) {
+		// If the current template has content and contains blocks, execute this code block.
+		if ( has_blocks( $this->post_id ) || ( $_wp_current_template_content && has_blocks( $blocks ) ) ) {
 			/* Print conditional css for all blocks */
 			add_action( 'wp_head', array( $this, 'print_conditional_css' ), 80 );
 		}
@@ -388,6 +420,11 @@ class UAGB_Post_Assets {
 			// Print Dynamic JS.
 			if ( 'disabled' === $this->file_generation || $this->fallback_js ) {
 				add_action( 'wp_footer', array( $this, 'print_script' ), 1000 );
+			}
+		} else {
+			// this custom css load,if only WP core block is present on the page.
+			if ( $this->stylesheet ) {
+				add_action( 'wp_head', array( $this, 'print_stylesheet' ), 80 );
 			}
 		}
 	}
@@ -484,12 +521,14 @@ class UAGB_Post_Assets {
 		}
 
 		$uagb_masonry_ajax_nonce = wp_create_nonce( 'uagb_masonry_ajax_nonce' );
+		$uagb_grid_ajax_nonce    = wp_create_nonce( 'uagb_grid_ajax_nonce' );
 		wp_localize_script(
 			'uagb-post-js',
 			'uagb_data',
 			array(
 				'ajax_url'                => admin_url( 'admin-ajax.php' ),
 				'uagb_masonry_ajax_nonce' => $uagb_masonry_ajax_nonce,
+				'uagb_grid_ajax_nonce'    => $uagb_grid_ajax_nonce,
 			)
 		);
 
@@ -590,7 +629,6 @@ class UAGB_Post_Assets {
 		if ( in_array( 'uagb/masonry-gallery', $this->current_block_list, true ) ) {
 			$conditional_block_css .= UAGB_Block_Helper::get_masonry_gallery_css();
 		}
-
 		echo '<style id="uagb-style-conditional-extension">' . $conditional_block_css . '</style>'; //phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
 
 		self::$conditional_blocks_printed = true;
