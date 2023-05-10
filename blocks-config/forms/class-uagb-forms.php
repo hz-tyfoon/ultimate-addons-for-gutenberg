@@ -160,7 +160,7 @@ if ( ! class_exists( 'UAGB_Forms' ) ) {
 						$content = $value['content'];
 
 						if ( has_block( 'uagb/forms', $content ) ) {
-							$content = parse_blocks( $content );
+							$content                  = parse_blocks( $content );
 							$current_block_attributes = $this->recursive_inner_forms( $content, $block_id );
 						}
 					}
