@@ -786,7 +786,8 @@ class UAGB_Post_Assets {
 		if (
 			'enabled' === \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_motion_effects_extension', 'enabled' ) &&
 			( strpos( $name, 'uagb' ) === 0 ) &&
-			( isset( $block['attrs']['UAGMFXMouse'] ) && $block['attrs']['UAGMFXMouse'] )
+			( isset( $block['attrs']['UAGMFXMouse'] ) && $block['attrs']['UAGMFXMouse'] ) ||
+			( isset( $block['attrs']['UAGMFXScroll'] ) && $block['attrs']['UAGMFXScroll'] )
 		) {
 			$this->current_block_list[] = 'uagb/motion-effects-extension';
 
