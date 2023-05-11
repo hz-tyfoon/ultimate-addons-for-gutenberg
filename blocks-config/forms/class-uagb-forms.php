@@ -155,20 +155,20 @@ if ( ! class_exists( 'UAGB_Forms' ) ) {
 			} 
 			
 			$widget_content = get_option( 'widget_block' );
-
-			if ( ! empty( $widget_content ) && is_array( $widget_content ) ) {
-				foreach ( $widget_content as $key => $value ) {
-					$content = $value['content'];
-
-					if ( has_block( 'uagb/forms', $content ) ) {
-						$content                  = parse_blocks( $content );
-						$current_block_attributes = $this->recursive_inner_forms( $content, $block_id );
-					}
-				}
-			}
 			
 			if ( empty( $current_block_attributes ) ) {
-				wp_send_json_error( 400 );
+				if ( ! empty( $widget_content ) && is_array( $widget_content ) ) {
+					foreach ( $widget_content as $key => $value ) {
+						$content = $value['content'];
+	
+						if ( has_block( 'uagb/forms', $content ) ) {
+							$content                  = parse_blocks( $content );
+							$current_block_attributes = $this->recursive_inner_forms( $content, $block_id );
+						}
+					}
+				}else {
+					wp_send_json_error( 400 );
+				}
 			}
 			if ( ! isset( $current_block_attributes['reCaptchaType'] ) ) {
 				$current_block_attributes['reCaptchaType'] = 'v2';
