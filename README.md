@@ -5,7 +5,7 @@
 **Requires at least:** 5.6  
 **Requires PHP:** 5.6  
 **Tested up to:** 6.2  
-**Stable tag:** 2.5.1  
+**Stable tag:** 2.6.0  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -117,10 +117,6 @@ We understand the need for a quality product backed by dedicated support that ca
 
 You may now contribute to the plugin on Github: <a href="https://github.com/brainstormforce/ultimate-addons-for-gutenberg" target="_blank" rel="">Spectra on Github</a>
 
-<strong>CREDITS</strong>
-
-The awesome React FontIconPicker is developed by <a href="http://codeb.it/" target="_blank" rel="">Alessandro Benoit</a> & <a href="https://github.com/swashata" target="_blank" rel="">Swashata</a>. Our external packages use <a href="https://github.com/n49/react-stars" target="_blank" rel="">Star Ratings Component</a> that are distributed under the terms of the ISC. While <a href="https://github.com/akiran/react-slick" target="_blank" rel="">Slick</a>, <a href="https://github.com/chenqingspring/react-lottie" target="_blank" rel="">Lottie</a> and <a href="https://github.com/ericnorris/striptags" target="_blank" rel="">Striptags</a> is distributed under the terms of the MIT.
-
 ## Installation ##
 
 1. Install the Spectra either via the WordPress plugin directory or by uploading the files to your server at wp-content/plugins.
@@ -162,7 +158,7 @@ When you use the Spectra along with the free Astra theme, you get a huge library
 
 ## Credits ##
 
-The awesome React FontIconPicker is developed by [Alessandro Benoit](http://codeb.it/) & [Swashata](https://github.com/swashata). Our external packages uses [Rating Star Component](https://github.com/n49/react-stars) that are distributed under the terms of the ISC. While [Slick](https://github.com/akiran/react-slick), [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT, [WP Background Processing](https://github.com/deliciousbrains/wp-background-processing) is distributed under the terms of the GPL-2.0 license.
+Our external packages use [Rating Star Component](https://github.com/n49/react-stars) that are distributed under the terms of the ISC. While [Slick](https://github.com/akiran/react-slick), [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT.
 
 ## Screenshots ##
 
@@ -170,14 +166,19 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 
 ## Changelog ##
 
-### x.x.x ###
-* New: Animations - Give a new life to your page with some scroll-based entrance animations.
-* Improvement: Typography - Added Bebas Neue Google font in Font Families .
+### 2.6.0 - THURSDAY, 11th MAY 2023 ###
+* New: Introducing the Popup Builder - Create sitewide Popups and Info Bars with ease!
+* New: Introducing the Animations extension - Give a new life to your page with some scroll-based entrance animations.
+* New: Introducing the Separator block -  Divide your page content in style.
+* Improvement: Heading - Added the functionality to move onto a new paragraph when pressing the enter key inside the Heading block.
 * Improvement: Countdown - Added the Countdown block to the list of Core Blocks.
-* Improvement: Added functionality in which a new paragraph block will be created when clicking enter in heading block.
-* Fix: Image - giving an error `Could not edit image. No route was found matching the URL and request method.` when we try to crop the image.
-* Fix: Buttons - Text hover color applying to Icon when Enable Icon setting is ON.
-* Fix: Forms - Issue on submit failure in FSE theme.
+* Improvement: Typography - Added 'Bebas Neue' Google font in Font Families.
+* Fix: Container - Resolved an issue in which the content box width would not apply in the editor inside the column core block.
+* Fix: Container - Resolved an issue where the video/image background styling was not working as expected on the front-end.
+* Fix: Image - Resolved an issue where an error would occur when we try to crop the image.
+* Fix: Buttons - Fixed the issue in which the text hover color would apply to the icon when the icon is enabled.
+* Fix: Info Box -  Resolved an issue in which the prefix margin would not be applied on the front-end.
+* Fix: Forms - Fixed an issue on form submission failure in FSE themes.
 * Fix: Image Gallery - Resolved an issue wherein the carousel images would initially appear big on load.
 * Fix: Form - Resolved an issue in which the forms were not being submitted when the block is used inside the footer widget.
 * Fix: Post Grid - Resolved a pagination bug in Post Grid that affected the other grid's pagination.
@@ -186,15 +187,26 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 * Fix: Info Box -  Prefix margin not getting applied on frontend.
 * Fix: Tabs - Set tabs title default color to inherit to prevent it from taking link color from theme.
 * Fix: Container - Resolved an issue where the video/image background styling were not working as expected on the front-end.
+* Fix: Masonry Gallery Extension - Resolved an issue in which the Masonry Gallery extension would not work as intended in the FSE.
 * Fix: Modal - Resolved an issue with the close button in Astra's custom layout action hook `before_add_to_card_form`.
-* Fix: Custom CSS - CSS were not loading on frontend when WP core block uses a custom css on page and there is no spectra block on the page.
-* Fix: Modal - Inside the Container, the alignment of the block gets in center from the left.
+* Fix: Modal - Resolved an issue wherein the alignment of the block moves to the center from the left when inside the Container.
+* Fix: Post Blocks - Resolved an issue wherein the Spectra Heading and Container blocks were not displayed in post excerpts.
+* Fix: Post Grid - Resolved a pagination bug in Post Grid that affected the other grid's pagination.
+* Fix: Table Of Contents - Updated the front-end preview UI to match in the "Inside Post/Page Content" type of Astra's Custom Layout.
+* Fix: Table Of Contents - Resolved an issue wherein the gap between lists setting would not work as required on the front-end.
+* Fix: Tabs - Set the tab title default color to 'inherit' to prevent it from taking the link color from the theme.
+* Fix: Taxonomy List - Resolved an issue where the child taxonomy links would show the link of the parent taxonomy.
+* Fix: Multi-buttons Control - Resolved a console issue that occurs when setAttributes is not defined.
+* Fix: Custom CSS - Added support for Custom CSS on the front-end for WP Core blocks without requiring a Spectra block to be present.
+* Fix: Global - Resolved an issue wherein a PHP error would appear for the Full Site Editing (FSE) font compatibility feature.
+* Fix: Global - Fixed an issue wherein a Google error would appear when loading Google Fonts locally with a specific font weight and family set to default.
+* Fix: Global - Fixed a font resource URL breakage issue that occurs when the provided 'google_font' array contains a font family with an empty string.
+* Fix: Global - Updated dynamic styling to load in FSE (Full Site Editing) template pages in the front-end for reusable blocks.
 
 ### 2.5.1 - THURSDAY, 27th APRIL 2023 ###
 * Feature: You can now add Google Fonts to Block Based Themes from Spectra Dashboard.
 * Fix: Counter - Added support for use within Slider (previously not working within Slider when it's set to infinite loop).
 * Fix: Buttons - Gap settings on Mobile preview is taking desktop value as default.
-* Fix: Masonry Gallery - Resolved an issue in which the Masonry Gallery extension would not work as intended in the FSE.
 * Fix: Modal - Container background do not get border radius.
 * Fix: Modal - Background not applying properly when custom width is set.
 * Fix: Resolve an issue of PHP error appear for block-based widget editor.
@@ -221,7 +233,6 @@ The awesome React FontIconPicker is developed by [Alessandro Benoit](http://code
 * Fix: Post Carousel - Resolved an issue in which the gap between posts was not visible when only 2 posts were present.
 * Fix: Slider - Updated dot color setting to avoid taking the background color of arrows.
 * Fix: Table Of Contents - Resolved an HTML validation issue in the HTML validator.
-* Fix: Table Of Contents - Updated the front-end preview UI to match in the "Inside Post/Page Content" type of Astra's Custom Layout.
 * Fix: Advanced Columns - Resolved an issue in which the border radius was not getting applied in the front-end.
 * Fix: Controls - Updated control UI to render seamlessly when in RTL mode.
 * Fix: Spacing Control - Removed the capability to set negative values for width and border radius settings.
