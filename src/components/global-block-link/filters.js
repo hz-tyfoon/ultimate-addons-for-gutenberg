@@ -17,8 +17,7 @@ const addStyleClass = createHigherOrderComponent( ( BlockListBlock ) => {
         if ( ! globalBlockStyleName || ( globalBlockStyleName && '' === globalBlockStyleName ) ) {
             return <BlockListBlock {...props} />;
         }
-
-        const blockNameClass = name?.split( '/' )?.pop();
+        
         const styleNameClass = globalBlockStyleName?.replace( /\s+/g, '-' )?.toLowerCase();
 
 		return (
@@ -26,7 +25,7 @@ const addStyleClass = createHigherOrderComponent( ( BlockListBlock ) => {
 				{ ...props }
 				className={ uagbClassNames( [
                     className,
-                    `spectra-gbs-${blockNameClass}-${styleNameClass}`,
+                    `spectra-gbs-${styleNameClass}`,
                 ] ) }
 			/>
 		);

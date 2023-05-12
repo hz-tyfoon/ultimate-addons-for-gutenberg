@@ -899,7 +899,7 @@ class UAGB_Init_Blocks {
 		$block_id            = $block['attrs']['block_id'];
 		$block_name          = $block['blockName'];
 		$style_name          = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
-		$style_class_name    = 'spectra-gbs-' . explode( '/', $block['blockName'] )[1] . '-' . $style_name;
+		$style_class_name    = 'spectra-gbs-' . $style_name;
 		$wp_block_class_name = str_replace( '/', '-', $block_name );
 		
 		$html = str_replace(

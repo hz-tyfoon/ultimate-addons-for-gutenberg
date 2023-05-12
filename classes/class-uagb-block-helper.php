@@ -1940,19 +1940,5 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 				$horizontal . ' ' . $vertical . ' ' . $blur . ( $spread ? " {$spread}" : '' ) . ' ' . ( $color ? $color : $alt_color ) . ( 'outset' === $position ? '' : " {$position}" )
 			);
 		}
-
-		/**
-		 * Get the Global block styles CSS selector.
-		 *
-		 * @param string $block_name Block Name.
-		 * @param string $style_name Style Name.
-		 * 
-		 * @since x.x.x
-		 * @return string $selector Styles Selector.
-		 */
-		public static function get_gbs_selector( $block_name, $style_name ) {
-			$style_name = str_replace( ' ', '-', strtolower( $style_name ) );
-			return '.spectra-gbs-' . $block_name . '-' . $style_name;
-		}
 	}
 }

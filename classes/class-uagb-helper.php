@@ -853,13 +853,46 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		}
 
 		/**
+		 * Sets the selector to Global Block Styles Selector if applicable.
+		 *
+		 * @param string $selector Selector.
+		 * @param array  $gbs_attributes GBS attributes array.
+		 * @since x.x.x
+		 * @return string $selector Updated selector.
+		 */
+		public static function add_gbs_selector_if_applicable( $selector, $gbs_attributes ) {
+			if ( ! empty( $gbs_attributes['globalBlockStyleName'] ) && ! empty( $gbs_attributes['globalBlockStyleId'] ) ) {
+				$selector = self::get_gbs_selector( $gbs_attributes['globalBlockStyleName'] );
+			}
+			return $selector;
+		}
+
+		/**
+		 * Get the Global block styles CSS selector.
+		 *
+		 * @param string $style_name Style Name.
+		 * 
+		 * @since x.x.x
+		 * @return string $selector Styles Selector.
+		 */
+		public static function get_gbs_selector( $style_name ) {
+			$style_name = str_replace( ' ', '-', strtolower( $style_name ) );
+			return '.spectra-gbs-' . $style_name;
+		}
+
+		/**
 		 * Parse CSS into correct CSS syntax.
 		 *
 		 * @param array  $combined_selectors The combined selector array.
 		 * @param string $id The selector ID.
+		 * @param array  $gbs_attributes The GBS attributes array.
 		 * @since 1.15.0
 		 */
-		public static function generate_all_css( $combined_selectors, $id ) {
+		public static function generate_all_css( $combined_selectors, $id, $gbs_attributes = false ) {
+
+			if ( $gbs_attributes ) {
+				$id = self::add_gbs_selector_if_applicable( $id, $gbs_attributes );
+			}
 
 			return array(
 				'desktop' => self::generate_css( $combined_selectors['desktop'], $id ),

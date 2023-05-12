@@ -173,7 +173,7 @@ const GlobalBlockStyles = ( props ) => {
             if ( newStyleID && style?.value === String( newStyleID ) ) {
     
                 const styleNameClass = style?.label?.replace( /\s+/g, '-' )?.toLowerCase();
-                const baseSelector = `.spectra-gbs-${blockNameClass}-${styleNameClass}`;
+                const baseSelector = `.spectra-gbs-${styleNameClass}`;
                 const asArray = Object.entries( attributes );
                 const filtered = asArray.filter( ( [key, value] ) => {
                     if ( currentBlockDefaultAttributes[key]?.UAGCopyPaste ) {
