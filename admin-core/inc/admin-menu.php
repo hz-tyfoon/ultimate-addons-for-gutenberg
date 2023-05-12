@@ -145,7 +145,7 @@ class Admin_Menu {
 			array( $this, 'render' )
 		);
 
-		// Use this action hook to add sub menu to above menu. 
+		// Use this action hook to add sub menu to above menu.
 		do_action( 'spectra_after_menu_register' );
 
 	}
@@ -199,7 +199,12 @@ class Admin_Menu {
 
 		wp_enqueue_style( 'wp-components' );
 
-		$theme    = wp_get_theme();
+		$theme = wp_get_theme();
+
+		$theme_data          = \WP_Theme_JSON_Resolver::get_theme_data();
+		$theme_settings      = $theme_data->get_settings();
+		$theme_font_families = isset( $theme_settings['typography']['fontFamilies']['theme'] ) && is_array( $theme_settings['typography']['fontFamilies']['theme'] ) ? $theme_settings['typography']['fontFamilies']['theme'] : array();
+
 		$localize = apply_filters(
 			'uag_react_admin_localize',
 			array(
@@ -223,6 +228,7 @@ class Admin_Menu {
 				'spectra_pro_ver'          => defined( 'SPECTRA_PRO_VER' ) ? SPECTRA_PRO_VER : null,
 				'spectra_custom_fonts'     => apply_filters( 'spectra_system_fonts', array() ),
 				'is_allow_registration'    => (bool) get_option( 'users_can_register' ),
+				'theme_fonts'              => $theme_font_families,
 			)
 		);
 
@@ -294,6 +300,7 @@ class Admin_Menu {
 					'slider-child',
 					'slider-pro',
 					'image-gallery-pro',
+					'loop-wrapper',
 				);
 
 				if ( ( 'cf7-styler' === $addon && 'active' !== $cf7_status ) || ( 'gf-styler' === $addon && 'active' !== $gf_status ) ) {
