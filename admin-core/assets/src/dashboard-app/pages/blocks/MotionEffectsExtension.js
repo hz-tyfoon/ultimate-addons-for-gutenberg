@@ -20,6 +20,22 @@ const MotionEffectsExtension = () => {
 
     const motionEffectsExtensionStatus = 'disabled' === enableMotionEffectsExtension ? false : true;
 
+
+    // We need to regenerate assets to ensure the extension is not added to blocks-list after it's disabled and vice-versa.
+    // Will be shifted to helper file after the Animations PR is merged.
+    const regenerateAssets = () => {
+        const formData = new window.FormData();
+		formData.append( 'action', 'uag_regenerate_assets' );
+		formData.append( 'security', uag_react.regenerate_assets_nonce );
+		formData.append( 'value', true );
+
+		apiFetch( {
+			url: uag_react.ajax_url,
+			method: 'POST',
+			body: formData,
+		} );
+    };
+
     useEffect( () => {
 
         const sendApiCall = setTimeout( () => {
@@ -51,6 +67,8 @@ const MotionEffectsExtension = () => {
 
         dispatch( {type: 'UPDATE_ENABLE_MOTION_EFFECTS_EXTENSION', payload: assetStatus } );
         dispatch( {type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: 'Successfully saved!' } );
+
+        regenerateAssets();
     };
 
     return (
@@ -63,7 +81,6 @@ const MotionEffectsExtension = () => {
         ) }
         >
             <div className="flex-shrink-0">
-                {/* Motion Effects Reminder: Please update the icon */}
                 { UAGB_Block_Icons['motion-effects-extension'] }
             </div>
             <div className="uagb-admin-block__extension-title flex-1 min-w-0">
