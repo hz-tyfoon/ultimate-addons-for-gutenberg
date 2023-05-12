@@ -5,7 +5,7 @@
 **Requires at least:** 5.6  
 **Requires PHP:** 5.6  
 **Tested up to:** 6.2  
-**Stable tag:** 2.5.1  
+**Stable tag:** 2.5.1.1  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -165,6 +165,8 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 1. /assets/screenshots/1.png
 
 ## Changelog ##
+### 2.5.1.1 ###
+* Fix: Container - Resolved an issue where the heading block overflow container width in mobile devices.
 
 ### 2.5.1 - THURSDAY, 27th APRIL 2023 ###
 * Feature: You can now add Google Fonts to Block Based Themes from Spectra Dashboard.

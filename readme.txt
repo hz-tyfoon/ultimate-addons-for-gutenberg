@@ -166,6 +166,9 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 == Changelog ==
 
+= 2.5.1.1 =
+* Fix: Container - Resolved an issue where the heading block overflow container width in mobile devices.
+
 = 2.5.1 - THURSDAY, 27th APRIL 2023 =
 * Feature: You can now add Google Fonts to Block Based Themes from Spectra Dashboard.
 * Fix: Counter - Added support for use within Slider (previously not working within Slider when it's set to infinite loop).
