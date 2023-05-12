@@ -16,11 +16,7 @@ import { addFilter } from '@wordpress/hooks';
 			globalBlockStyleId: {
 				type: 'string',
 				default: '',
-			},
-			spectraBlockName: {
-				type: 'string',
-				default: '',
-			},
+			}
 		} );
 	}
 

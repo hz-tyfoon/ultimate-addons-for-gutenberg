@@ -9,10 +9,11 @@
  * Webpack is compiling as the input file.
  */
 
+import { registerPlugin } from '@wordpress/plugins';
+
 import './store'; // Spectra Redux store initialized.
 
-import { registerPlugin } from '@wordpress/plugins';
-import SpectraLoadGlobalGoogleFonts from '@Components/global-block-link/load-google-fonts';
+import SpectraLoadGlobalGoogleFonts from '@Components/global-block-link/load-google-fonts'; // Spectra Global Block Styles Font Loader.
 
 registerPlugin( 'spectra-global-blocks-fonts', { render: SpectraLoadGlobalGoogleFonts } ); // Spectra Global Block Styles Font Loading.
 

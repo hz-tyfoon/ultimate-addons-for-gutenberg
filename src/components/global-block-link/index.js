@@ -62,11 +62,6 @@ const GlobalBlockStyles = ( props ) => {
     const currentBlockDefaultAttributes = allBlocksAttributes[blockNameStripped]
 
     useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { spectraBlockName: blockName } );
-	}, [] );
-
-    useEffect( () => {
         if ( currentAttributesState !== attributes ) {
             setCurrentAttributesState( attributes );
             setAttributesChanged( true );

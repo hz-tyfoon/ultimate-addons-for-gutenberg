@@ -284,7 +284,7 @@ class UAGB_Post_Assets {
 		}
 
 		foreach ( $spectra_global_block_styles as $style ) {
-			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) && ! empty( $style['post_ids'] ) ) {
+			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) ) {
 				$this->stylesheet = $this->stylesheet . $style['frontendStyles'];
 			}
 		}
