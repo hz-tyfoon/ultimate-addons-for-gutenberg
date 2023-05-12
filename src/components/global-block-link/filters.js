@@ -7,7 +7,6 @@ const addStyleClass = createHigherOrderComponent( ( BlockListBlock ) => {
 	return ( props ) => {
 
         const {
-            name,
             className,
             attributes : {
                 globalBlockStyleName
@@ -17,7 +16,7 @@ const addStyleClass = createHigherOrderComponent( ( BlockListBlock ) => {
         if ( ! globalBlockStyleName || ( globalBlockStyleName && '' === globalBlockStyleName ) ) {
             return <BlockListBlock {...props} />;
         }
-        
+
         const styleNameClass = globalBlockStyleName?.replace( /\s+/g, '-' )?.toLowerCase();
 
 		return (

@@ -155,8 +155,6 @@ const GlobalBlockStyles = ( props ) => {
         } );
     };
 
-    const blockNameClass = blockName?.split( '/' )?.pop();
-
     const generateBlockStyles = ( newStyleID = globalBlockStyleId ) => {
         updateGoogleFontData( attributes );
 
