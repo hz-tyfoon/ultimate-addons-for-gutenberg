@@ -184,6 +184,10 @@ function styling( attributes, clientId, name ) {
 	rightMarginTablet = 'undefined' !== typeof rightMarginTablet ? rightMarginTablet : rightMarginDesktop;
 	rightMarginMobile = 'undefined' !== typeof rightMarginMobile ? rightMarginMobile : rightMarginTablet;
 
+	if( 'alignfull' === contentWidth || 'alignwide' === contentWidth ){
+		leftMarginDesktop = rightMarginDesktop = leftMarginTablet = rightMarginTablet = leftMarginMobile = rightMarginMobile  = '';
+	}
+
 	const containerFullWidth = '100vw';
 
 	const backgroundVideoOpacityValue =
@@ -285,8 +289,8 @@ function styling( attributes, clientId, name ) {
 		'padding-right': generateCSSUnit( rightPaddingDesktop, paddingType ),
 		'margin-top': generateCSSUnit( topMarginDesktop, marginType ) + ' !important',
 		'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType ) + ' !important',
-		'margin-left': generateCSSUnit( leftMarginDesktop, marginType ),
-		'margin-right': generateCSSUnit( rightMarginDesktop, marginType ),
+		'margin-left': generateCSSUnit( leftMarginDesktop, marginType ) + ' !important',
+		'margin-right': generateCSSUnit( rightMarginDesktop, marginType ) + ' !important',
 		'box-shadow':
 			generateCSSUnit( boxShadowHOffset, 'px' ) +
 			' ' +
@@ -315,7 +319,6 @@ function styling( attributes, clientId, name ) {
 	}
 
 	selectors[ containerFlexSelector ] = {
-		'min-height': generateCSSUnit( minHeightDesktop, minHeightType ),
 		'flex-direction': directionDesktop,
 		'align-items': alignItemsDesktop,
 		'justify-content': justifyContentDesktop,
@@ -356,7 +359,7 @@ function styling( attributes, clientId, name ) {
 
 	if ( 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ) {
 		widthSelectorsDesktop[
-			`.is-root-container > .block-editor-block-list__block.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`
+			`.block-editor-block-list__block.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`
 		] = {
 			'--inner-content-custom-width': `min(${ containerFullWidth },${ innerContentCustomWidthDesktopFallback }${ innerContentCustomWidthType })`,
 			'max-width': 'var(--inner-content-custom-width)',
@@ -364,21 +367,17 @@ function styling( attributes, clientId, name ) {
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
-
-		widthSelectorsTablet[
-			`.is-root-container > .block-editor-block-list__block.uagb-editor-preview-mode-table.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`
-		] = {
-			'--inner-content-custom-width': `min(${ containerFullWidth },${
-				innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback
-			}${ innerContentCustomWidthTypeTablet })`,
-			'max-width': 'var(--inner-content-custom-width)',
-			'width': '100%',
+		
+		widthSelectorsTablet[`.block-editor-block-list__block.uagb-editor-preview-mode-tablet.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`] = {
+			'--inner-content-custom-width' : `min(${ containerFullWidth },${ innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback }${ innerContentCustomWidthTypeTablet })`,
+			'max-width' : 'var(--inner-content-custom-width)',
+			'width' :'100%',
 			'margin-left': 'auto',
-			'margin-right': 'auto',
+			'margin-right': 'auto'
 		};
 
 		widthSelectorsMobile[
-			`.is-root-container > .block-editor-block-list__block.uagb-editor-preview-mode-mobile.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`
+			`.block-editor-block-list__block.uagb-editor-preview-mode-mobile.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`
 		] = {
 			'--inner-content-custom-width': `min(${ containerFullWidth },${
 				innerContentCustomWidthMobile || innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback
@@ -388,6 +387,7 @@ function styling( attributes, clientId, name ) {
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
+		
 	}
 
 	const tablet_selectors = {
@@ -462,8 +462,9 @@ function styling( attributes, clientId, name ) {
 			'padding-right': generateCSSUnit( rightPaddingDesktop, paddingType ),
 			'margin-top': generateCSSUnit( topMarginDesktop, marginType ) + ' !important',
 			'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginDesktop, marginType ),
-			'margin-right': generateCSSUnit( rightMarginDesktop, marginType ),
+			// For avoiding the margin collapse issue between themes style and our style we are adding !important.
+			'margin-left': generateCSSUnit( leftMarginDesktop, marginType ) + ' !important',
+			'margin-right': generateCSSUnit( rightMarginDesktop, marginType ) + ' !important',
 			'box-shadow':
 				generateCSSUnit( boxShadowHOffset, 'px' ) +
 				' ' +
@@ -486,8 +487,8 @@ function styling( attributes, clientId, name ) {
 			'padding-right': generateCSSUnit( rightPaddingTablet, paddingTypeTablet ),
 			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet ) + ' !important',
 			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet ),
-			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ),
+			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet ) + ' !important',
+			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ) + ' !important',
 			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet ),
 		};
 		mobile_selectors[ '.wp-block' ] = {
@@ -497,8 +498,8 @@ function styling( attributes, clientId, name ) {
 			'padding-right': generateCSSUnit( rightPaddingMobile, paddingTypeMobile ),
 			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile ) + ' !important',
 			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile ),
-			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ),
+			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile ) + ' !important',
+			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ) + ' !important',
 			'min-height': generateCSSUnit( minHeightMobile, minHeightTypeMobile ),
 		};
 		selectors[ '.wp-block:hover .uagb-container__video-wrap' ] = {
@@ -531,9 +532,9 @@ function styling( attributes, clientId, name ) {
 			'padding-right': generateCSSUnit( rightPaddingTablet, paddingTypeTablet ),
 			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet ) + ' !important',
 			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet ),
-			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ),
-			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet ),
+			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet ) + ' !important',
+			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ) + ' !important',
+			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet ) + ' !important',
 			...borderCSSTablet,
 		};
 		mobile_selectors[ '.wp-block' ] = {
@@ -543,8 +544,8 @@ function styling( attributes, clientId, name ) {
 			'padding-right': generateCSSUnit( rightPaddingMobile, paddingTypeMobile ),
 			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile ) + ' !important',
 			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile ),
-			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ),
+			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile ) + ' !important',
+			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ) + ' !important',
 			'min-height': generateCSSUnit( minHeightMobile, minHeightTypeMobile ),
 			...borderCSSMobile,
 		};

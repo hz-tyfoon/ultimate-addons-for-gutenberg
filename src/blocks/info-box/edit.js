@@ -13,6 +13,7 @@ import Render from './render';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import addInitialAttr from '@Controls/addInitialAttr';
+import { InfoBoxWrapper } from './components/Wrapper';
 
 const UAGBInfoBox = ( props ) => {
 	const {
@@ -104,4 +105,5 @@ const UAGBInfoBox = ( props ) => {
 export default compose(
 	addInitialAttr,
 	AddStaticStyles,
+	InfoBoxWrapper,
 )( UAGBInfoBox );
