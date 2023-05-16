@@ -75,10 +75,6 @@ const UAGBGF = ( props ) => {
 		};
 	} );
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { isHtml: false } );
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
 		if ( buttonVrPadding ) {
 			if ( undefined === buttontopPadding ) {
 				setAttributes( { buttontopPadding: buttonVrPadding } );

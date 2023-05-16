@@ -39,30 +39,30 @@ const addInitialAttr = ( ChildComponent ) => {
 
 			const listOfAllTaxonomyStore = [ 'uagb/post-carousel', 'uagb/post-grid', 'uagb/post-masonry' ];
 
+			let attributeObject = { block_id: clientId.substr( 0, 8 ) };
+
 			if ( listOfAllTaxonomyStore.includes( name ) ) {
-				setAttributes( { allTaxonomyStore: undefined } );
+				attributeObject['allTaxonomyStore'] = undefined;
 			}
 			
             // editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
 			if ( listOfEditorInnerblocksPreview.includes( name ) ) {
-				setAttributes( {
-					editorInnerblocksPreview: false,
-				} );
+				attributeObject['editorInnerblocksPreview'] = false;
 			}
 
 			if ( listOfIsHtml.includes( name ) ) {
-				setAttributes( { isHtml: false } );
+				attributeObject['isHtml'] = false;
 			}
 
 			if ( listOfChildMigrate.includes( name ) ) {
-				setAttributes( { childMigrate: true } );
+				attributeObject['childMigrate'] = true;
 			}
 
 			if ( listOfClassMigrate.includes( name ) ) {
-				setAttributes( { classMigrate: true } );
+				attributeObject['classMigrate'] = true;
 			}
 
-			setAttributes( { block_id: clientId.substr( 0, 8 ) } );
+			setAttributes( attributeObject );
 		}, [] );
 
 		return <ChildComponent { ...props } />;
