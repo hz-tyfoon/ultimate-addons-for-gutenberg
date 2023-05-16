@@ -547,11 +547,11 @@ class Common_Settings extends Ajax_Base {
 	}
 
 	/**
-	 * Required Plugin Activate
+	 * Save setting - Enables animation extension.
 	 *
 	 * @return void
-	 * 
-	 * @since x.x.x
+	 *
+	 * @since 2.6.0
 	 */
 	public function enable_animations_extension() {
 		$this->check_permission_nonce( 'uag_enable_animations_extension' );
