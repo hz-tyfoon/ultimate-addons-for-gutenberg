@@ -20,6 +20,7 @@ import maybeGetColorForVariable from '@Controls/maybeGetColorForVariable';
 import styles from './editor.lazy.scss';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const ColumnsComponent = ( props ) => {
 	const {
@@ -114,12 +115,6 @@ const ColumnsComponent = ( props ) => {
 			}
 			setAttributes( { gradientValue: gradientVal } );
 		}
-
-		// Replacement for componentDidMount.
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
-		setAttributes( { classMigrate: true } );
 
 		//Margin
 		if ( topMargin ) {
@@ -228,6 +223,7 @@ const ColumnsComponent = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	withNotices,
 	AddStaticStyles,
 )( ColumnsComponent );
