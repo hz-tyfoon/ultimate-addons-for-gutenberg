@@ -12,6 +12,7 @@ const addInitialAttr = ( ChildComponent ) => {
 				'uagb/column',
 				'uagb/columns',
 				'uagb/icon-list',
+				'uagb/marketing-button',
 				'uagb/image-gallery',
 				'uagb/info-box',
 				'uagb/lottie',
@@ -27,7 +28,6 @@ const addInitialAttr = ( ChildComponent ) => {
 			const listOfChildMigrate = [
 				'uagb/buttons',
 				'uagb/icon-list',
-				'uagb/marketing-button',
 				'uagb/restaurant-menu',
 				'uagb/social-share',
                 'uagb/content-timeline',
@@ -42,18 +42,22 @@ const addInitialAttr = ( ChildComponent ) => {
 			if ( listOfAllTaxonomyStore.includes( name ) ) {
 				setAttributes( { allTaxonomyStore: undefined } );
 			}
+			
+            // editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
 			if ( listOfEditorInnerblocksPreview.includes( name ) ) {
-				// editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
 				setAttributes( {
 					editorInnerblocksPreview: false,
 				} );
 			}
+
 			if ( listOfIsHtml.includes( name ) ) {
 				setAttributes( { isHtml: false } );
 			}
+
 			if ( listOfChildMigrate.includes( name ) ) {
 				setAttributes( { childMigrate: true } );
 			}
+
 			if ( listOfClassMigrate.includes( name ) ) {
 				setAttributes( { classMigrate: true } );
 			}
