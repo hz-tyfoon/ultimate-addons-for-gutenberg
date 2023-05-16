@@ -12,6 +12,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 let prevState;
 
@@ -20,7 +21,6 @@ const ButtonsComponent = ( props ) => {
 		isSelected,
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
-		setAttributes,
 		clientId,
 		name,
 		deviceType
@@ -34,13 +34,6 @@ const ButtonsComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
-		// Assigning block_id in the attribute.
-		setAttributes( { classMigrate: true } );
-		setAttributes( { childMigrate: true } );
-
 		prevState = props.isSelected;
 	}, [] );
 
@@ -75,5 +68,6 @@ const ButtonsComponent = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( ButtonsComponent );

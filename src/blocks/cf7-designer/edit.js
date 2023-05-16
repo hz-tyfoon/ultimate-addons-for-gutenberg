@@ -10,6 +10,7 @@ import Settings from './settings';
 import Render from './render';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 import { useSelect } from '@wordpress/data';
 
 const UAGBCF7 = ( props ) => {
@@ -109,9 +110,6 @@ const UAGBCF7 = ( props ) => {
 	} );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { isHtml: false } );
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
 		if ( msgVrPadding ) {
 			if ( ! messageTopPaddingDesktop ) {
@@ -298,5 +296,6 @@ const UAGBCF7 = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBCF7 );

@@ -7,12 +7,12 @@ import DynamicFontLoader from './dynamicFontLoader';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 //  Import CSS.
 import './style.scss';
 
 const UAGBCounterEdit = ( props ) => {
 	const {
-		setAttributes,
 		isSelected,
 		clientId,
 		attributes,
@@ -20,11 +20,6 @@ const UAGBCounterEdit = ( props ) => {
 		name,
 		deviceType
 	} = props;
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-	}, [] );
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
@@ -43,5 +38,6 @@ const UAGBCounterEdit = ( props ) => {
 }
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBCounterEdit );
