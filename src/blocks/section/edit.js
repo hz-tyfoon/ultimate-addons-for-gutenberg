@@ -101,11 +101,6 @@ const UAGBSectionEdit = ( props ) => {
 			setAttributes( { gradientValue: gradientVal } );
 		}
 
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		setAttributes( { classMigrate: true } );
-
 		if ( 'image' === backgroundType ) {
 			if ( 101 !== backgroundOpacity ) {
 				const color = hexToRGBA( maybeGetColorForVariable( backgroundImageColor ), backgroundOpacity );

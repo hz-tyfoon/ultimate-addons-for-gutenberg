@@ -8,22 +8,17 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBModalEdit = ( props ) => {
 	const {
 		isSelected,
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
-		setAttributes,
 		clientId,
 		name,
 		deviceType
 	} = props;
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
@@ -60,5 +55,6 @@ const UAGBModalEdit = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBModalEdit );

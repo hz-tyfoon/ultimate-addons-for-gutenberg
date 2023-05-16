@@ -30,6 +30,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from '.././dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 import Settings from './settings';
 import Render from './render';
 
@@ -299,7 +300,6 @@ const UAGBPostMasonry = ( props ) => {
 	const [ isTaxonomyLoading, setIsTaxonomyLoading ] = useState( false );
 
 	useEffect( () => {
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 		if ( vpaginationButtonPaddingDesktop ) {
 			if ( ! paginationButtonPaddingTop ) {
 				setAttributes( {
@@ -446,8 +446,6 @@ const UAGBPostMasonry = ( props ) => {
 				} );
 			}
 		}
-
-		setAttributes( { allTaxonomyStore: undefined } );
 	}, [] );
 
 	useEffect( () => {
@@ -2332,5 +2330,6 @@ const UAGBPostMasonry = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBPostMasonry );

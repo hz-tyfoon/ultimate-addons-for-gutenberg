@@ -13,6 +13,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBRestaurantMenu = ( props ) => {
 	const {
@@ -26,10 +27,6 @@ const UAGBRestaurantMenu = ( props ) => {
 	} = props;
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-		setAttributes( { classMigrate: true } );
-		setAttributes( { childMigrate: true } );
 		if ( imagePosition ) {
 			if ( 'left' === imagePosition ) {
 				setAttributes( { imgAlign: 'side' } );
@@ -92,5 +89,6 @@ const UAGBRestaurantMenu = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBRestaurantMenu );

@@ -14,6 +14,7 @@ import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 const UAGBTaxonomyList = ( props ) => {
 	const {
 		isSelected,
@@ -75,8 +76,6 @@ const UAGBTaxonomyList = ( props ) => {
 	} );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
 		const formData = new window.FormData();
 
@@ -162,5 +161,6 @@ const UAGBTaxonomyList = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBTaxonomyList );
