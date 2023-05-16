@@ -95,8 +95,8 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		 * @param string $id   Block id.
 		 * @return array
 		 */
-		public static function get_frontend_css( $slug, $attr, $id ) {
-			return self::get_frontend_assets( $slug, $attr, $id, 'css' );
+		public static function get_frontend_css( $slug, $attr, $id, $is_gbs = false ) {
+			return self::get_frontend_assets( $slug, $attr, $id, 'css', $is_gbs );
 		}
 
 		/**
@@ -145,7 +145,7 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		 * @param string $type Asset Type.
 		 * @return array
 		 */
-		public static function get_frontend_assets( $slug, $attr, $id, $type = 'css' ) {
+		public static function get_frontend_assets( $slug, $attr, $id, $type = 'css', $is_gbs = false ) {
 
 			$attr = self::gbs_filter_placeholder_attributes( $attr ); // Filter out GBS Placeholders if any added.
 
@@ -179,14 +179,19 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 
 				if ( file_exists( $assets_file ) ) {
 
+					
 					// Set default attributes.
 					$attr_file = $block_dir . '/attributes.php';
-
+					
 					if ( file_exists( $attr_file ) ) {
-
+						
 						$default_attr = include $attr_file;
-
+						
 						$attr = self::get_fallback_values( $default_attr, $attr );
+						
+						if ( ! empty( $attr['globalBlockStyleName'] ) && $is_gbs ) {
+							$gbs_class = UAGB_Helper::get_gbs_selector( $attr['globalBlockStyleName'] );
+						}
 					}
 
 					// Get Assets.

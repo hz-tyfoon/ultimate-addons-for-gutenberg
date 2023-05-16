@@ -21,6 +21,8 @@ import AdvancedPopColorControl from '@Components/color-control/advanced-pop-colo
 import Range from '@Components/range/Range';
 import innerContainerPresets, { boxShadowPresets, boxShadowHoverPresets } from './presets';
 import UAGPresets from '@Components/presets';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -1870,6 +1872,7 @@ const Settings = ( props ) => {
 		<InspectorControls>
 			<InspectorTabs>
 				<InspectorTab { ...UAGTabs.general }>
+					{ renderGBSSettings( styling, setAttributes, attributes ) }
 					{ isBlockRootParent && presetSettings() }
 					{ generalSettings() }
 				</InspectorTab>

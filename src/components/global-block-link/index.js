@@ -89,7 +89,7 @@ const GlobalBlockStyles = ( props ) => {
         const saveAttr = {};
         for ( const attrKey in currentBlockDefaultAttributes ) {
             const attrObject = currentBlockDefaultAttributes[ attrKey ];
-            if( attrObject?.UAGCopyPaste ){
+            if( attrObject?.isGBSStyle ){
                 
                 let value = '';
                 
@@ -169,7 +169,7 @@ const GlobalBlockStyles = ( props ) => {
                 const baseSelector = `.spectra-gbs-${styleNameClass}`;
                 const asArray = Object.entries( attributes );
                 const filtered = asArray.filter( ( [key, value] ) => {
-                    if ( currentBlockDefaultAttributes[key]?.UAGCopyPaste ) {
+                    if ( currentBlockDefaultAttributes[key]?.isGBSStyle ) {
                         return ( '0.001020304' !== value && '' !== value && {} !== value && [] !== value && false !== value );
                     }
                     return false;

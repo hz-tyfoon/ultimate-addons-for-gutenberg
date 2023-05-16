@@ -948,7 +948,7 @@ class UAGB_Init_Blocks {
 				}
 				
 				$_block_slug = str_replace( 'uagb/', '', sanitize_text_field( $_POST['blockName'] ) );
-				$_block_css  = UAGB_Block_Module::get_frontend_css( $_block_slug, $block_attr, $block_attr['block_id'] );
+				$_block_css  = UAGB_Block_Module::get_frontend_css( $_block_slug, $block_attr, $block_attr['block_id'], true );
 
 				$desktop = '';
 				$tablet  = '';

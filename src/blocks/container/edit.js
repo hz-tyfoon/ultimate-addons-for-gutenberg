@@ -21,6 +21,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import { containerWrapper } from './containerWrapper';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBContainer = ( props ) => {
 	const {
@@ -255,4 +256,5 @@ const UAGBContainer = ( props ) => {
 export default compose(
 	containerWrapper,
 	AddStaticStyles,
+	AddGBSStyles
 )( UAGBContainer );

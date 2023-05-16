@@ -8,9 +8,9 @@ import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	 
 	let {
 		block_id,
 		widthDesktop,
@@ -335,23 +335,23 @@ function styling( attributes, clientId, name ) {
 		'flex-wrap': wrapDesktop,
 		'align-content': alignContentDesktop,
 	};
-
+	let gbsWidthSelector = gbsSelector ? gbsSelector : `#block-${ clientId }`;
 	const widthSelectorsDesktop = {
-		[ `.is-root-container > .block-editor-block-list__block .block-editor-block-list__block#block-${ clientId } ` ]: {
+		[ `.is-root-container > .block-editor-block-list__block .block-editor-block-list__block${ gbsWidthSelector } ` ]: {
 			'max-width': generateCSSUnit( widthDesktopFallback, widthType ),
 			'width': '100%',
 		},
 	};
 
 	const widthSelectorsTablet = {
-		[ `.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-tablet.block-editor-block-list__block#block-${ clientId } ` ]: {
+		[ `.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-tablet.block-editor-block-list__block${ gbsWidthSelector } ` ]: {
 			'max-width': generateCSSUnit( widthTablet, widthTypeTablet ),
 			'width': '100%',
 		},
 	};
 
 	const widthSelectorsMobile = {
-		[ `.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-mobile.block-editor-block-list__block#block-${ clientId } ` ]: {
+		[ `.is-root-container > .block-editor-block-list__block .uagb-editor-preview-mode-mobile.block-editor-block-list__block${ gbsWidthSelector } ` ]: {
 			'max-width': generateCSSUnit( widthMobile, widthTypeMobile ),
 			'width': '100%',
 		},
@@ -455,7 +455,7 @@ function styling( attributes, clientId, name ) {
 		mobile_selectors[ ' .uagb-container__video-wrap' ] = {
 			...borderCSSMobile,
 		};
-		selectors[ '.wp-block' ] = {
+		selectors[ '.wp-block-uagb-container' ] = {
 			'padding-top': generateCSSUnit( topPaddingDesktop, paddingType ),
 			'padding-bottom': generateCSSUnit( bottomPaddingDesktop, paddingType ),
 			'padding-left': generateCSSUnit( leftPaddingDesktop, paddingType ),
@@ -480,7 +480,7 @@ function styling( attributes, clientId, name ) {
 			'min-height': generateCSSUnit( minHeightDesktop, minHeightType ),
 			'overflow': overflow,
 		};
-		tablet_selectors[ '.wp-block' ] = {
+		tablet_selectors[ '.wp-block-uagb-container' ] = {
 			'padding-top': generateCSSUnit( topPaddingTablet, paddingTypeTablet ),
 			'padding-bottom': generateCSSUnit( bottomPaddingTablet, paddingTypeTablet ),
 			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
@@ -491,7 +491,7 @@ function styling( attributes, clientId, name ) {
 			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ) + ' !important',
 			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet ),
 		};
-		mobile_selectors[ '.wp-block' ] = {
+		mobile_selectors[ '.wp-block-uagb-container' ] = {
 			'padding-top': generateCSSUnit( topPaddingMobile, paddingTypeMobile ),
 			'padding-bottom': generateCSSUnit( bottomPaddingMobile, paddingTypeMobile ),
 			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
@@ -502,7 +502,7 @@ function styling( attributes, clientId, name ) {
 			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ) + ' !important',
 			'min-height': generateCSSUnit( minHeightMobile, minHeightTypeMobile ),
 		};
-		selectors[ '.wp-block:hover .uagb-container__video-wrap' ] = {
+		selectors[ '.wp-block-uagb-container:hover .uagb-container__video-wrap' ] = {
 			'border-color': containerBorderHColor,
 			'box-shadow': '',
 		};
@@ -510,7 +510,7 @@ function styling( attributes, clientId, name ) {
 			const boxShadowBlurHoverCSSUnit =
 				'' === boxShadowBlurHover ? '' : generateCSSUnit( boxShadowBlurHover, 'px' );
 
-			selectors[ '.wp-block:hover .uagb-container__video-wrap' ][ 'box-shadow' ] =
+			selectors[ '.wp-block-uagb-container:hover .uagb-container__video-wrap' ][ 'box-shadow' ] =
 				generateCSSUnit( boxShadowHOffsetHover, 'px' ) +
 				' ' +
 				generateCSSUnit( boxShadowVOffsetHover, 'px' ) +
@@ -524,8 +524,8 @@ function styling( attributes, clientId, name ) {
 				boxShadowPositionCSSHover;
 		}
 	} else {
-		selectors[ '.wp-block' ] = containerCSS;
-		tablet_selectors[ '.wp-block' ] = {
+		selectors[ '.wp-block-uagb-container' ] = containerCSS;
+		tablet_selectors[ '.wp-block-uagb-container' ] = {
 			'padding-top': generateCSSUnit( topPaddingTablet, paddingTypeTablet ),
 			'padding-bottom': generateCSSUnit( bottomPaddingTablet, paddingTypeTablet ),
 			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
@@ -537,7 +537,7 @@ function styling( attributes, clientId, name ) {
 			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet ) + ' !important',
 			...borderCSSTablet,
 		};
-		mobile_selectors[ '.wp-block' ] = {
+		mobile_selectors[ '.wp-block-uagb-container' ] = {
 			'padding-top': generateCSSUnit( topPaddingMobile, paddingTypeMobile ),
 			'padding-bottom': generateCSSUnit( bottomPaddingMobile, paddingTypeMobile ),
 			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
@@ -549,7 +549,7 @@ function styling( attributes, clientId, name ) {
 			'min-height': generateCSSUnit( minHeightMobile, minHeightTypeMobile ),
 			...borderCSSMobile,
 		};
-		selectors[ '.wp-block:hover' ] = {
+		selectors[ '.wp-block-uagb-container:hover' ] = {
 			'border-color': containerBorderHColor,
 			'box-shadow': '',
 		};
@@ -557,7 +557,7 @@ function styling( attributes, clientId, name ) {
 			const boxShadowBlurHoverCSSUnit =
 				'' === boxShadowBlurHover ? '' : generateCSSUnit( boxShadowBlurHover, 'px' );
 
-			selectors[ '.wp-block:hover' ][ 'box-shadow' ] =
+			selectors[ '.wp-block-uagb-container:hover' ][ 'box-shadow' ] =
 				generateCSSUnit( boxShadowHOffsetHover, 'px' ) +
 				' ' +
 				generateCSSUnit( boxShadowVOffsetHover, 'px' ) +
@@ -589,7 +589,12 @@ function styling( attributes, clientId, name ) {
 		);
 	}
 
-	const base_selector = `.editor-styles-wrapper #block-${ clientId }`;
+	let base_selector = `.editor-styles-wrapper #block-${ clientId }`;
+
+	// For Global Block Styles.
+	if ( gbsSelector ) {
+		base_selector = gbsSelector;
+	}
 
 	let styling_css = generateCSS( selectors, base_selector );
 
