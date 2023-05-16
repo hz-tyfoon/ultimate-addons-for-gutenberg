@@ -11,15 +11,12 @@ import Render from './render';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
+
 let hideLabel;
 
 const UAGBIconListChild = ( props ) => {
-	const { isSelected, setAttributes, clientId, attributes, name, deviceType } = props;
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-	}, [] );
+	const { isSelected, clientId, attributes, name, deviceType } = props;
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
@@ -37,5 +34,6 @@ const UAGBIconListChild = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBIconListChild );

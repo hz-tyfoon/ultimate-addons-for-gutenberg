@@ -2,18 +2,13 @@
  * BLOCK: Forms - Toggle - Edit
  */
 
-import { useEffect } from '@wordpress/element';
-
+import { compose } from '@wordpress/compose';
+import addInitialAttr from '@Controls/addInitialAttr';
 import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsToggleEdit = ( props ) => {
-	const { setAttributes, isSelected, clientId } = props;
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-	}, [] );
+	const { isSelected } = props;
 
 	return (
 		<>
@@ -23,4 +18,6 @@ const UAGBFormsToggleEdit = ( props ) => {
 	);
 };
 
-export default UAGBFormsToggleEdit;
+export default compose(
+	addInitialAttr,
+)( UAGBFormsToggleEdit );

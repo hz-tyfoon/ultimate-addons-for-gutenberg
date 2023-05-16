@@ -9,6 +9,7 @@ import DynamicFontLoader from './dynamicFontLoader';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 //  Import CSS.
 import './style.scss';
 
@@ -68,13 +69,6 @@ const UAGBCountdownEdit = ( props ) => {
 				timeModified: true,
 			} );
 		}
-
-		// editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
-		// block_id: Assigning block_id in the attribute.
-		setAttributes( {
-			editorInnerblocksPreview: false,
-			block_id: clientId.substr( 0, 8 ),
-		} );
 	}, [] );
 
 	const countdownRef = useRef( null );
@@ -116,5 +110,6 @@ const UAGBCountdownEdit = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBCountdownEdit );

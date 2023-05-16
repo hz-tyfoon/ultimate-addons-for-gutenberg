@@ -21,6 +21,7 @@ import { addFilter } from '@wordpress/hooks';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBFormsEdit = ( props ) => {
 	const {
@@ -84,9 +85,6 @@ const UAGBFormsEdit = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
 		if ( bgColor ) {
 			if ( undefined === toggleColor ) {
 				setAttributes( { toggleColor: bgColor } );
@@ -344,5 +342,6 @@ addFilter( 'editor.BlockListBlock', 'uagb/forms', addAdvancedClasses );
 export default compose(
 	withNotices,
 	addAdvancedClasses,
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBFormsEdit );
