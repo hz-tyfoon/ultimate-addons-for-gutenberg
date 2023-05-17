@@ -93,6 +93,7 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		 * @param string $slug Block slug.
 		 * @param array  $attr Block attributes.
 		 * @param string $id   Block id.
+		 * @param bool   $is_gbs Is Global Block Style.
 		 * @return array
 		 */
 		public static function get_frontend_css( $slug, $attr, $id, $is_gbs = false ) {
@@ -143,6 +144,7 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		 * @param array  $attr Block attributes.
 		 * @param string $id   Block id.
 		 * @param string $type Asset Type.
+		 * @param bool   $is_gbs Is Global Block Style.
 		 * @return array
 		 */
 		public static function get_frontend_assets( $slug, $attr, $id, $type = 'css', $is_gbs = false ) {

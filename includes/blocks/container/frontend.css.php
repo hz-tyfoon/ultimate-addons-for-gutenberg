@@ -7,7 +7,7 @@
  * @package uagb
  */
 
- // For Global Block Styles.
+// For Global Block Styles.
 $base_selector = $is_gbs ? $gbs_class : '.uagb-block-' . $id;
 
 $inner_content_custom_width_tablet_fallback = is_numeric( $attr['innerContentCustomWidthTablet'] ) ? $attr['innerContentCustomWidthTablet'] : $attr['innerContentCustomWidthDesktop'];
@@ -134,38 +134,38 @@ if ( ( $attr['isBlockRootParent'] && ! ( 'alignwide' === $attr['innerContentWidt
 $background_video_opacity_value = ( isset( $attr['backgroundVideoOpacity'] ) && 'none' !== $attr['overlayType'] && ( ( 'color' === $attr['overlayType'] && ! empty( $attr['backgroundVideoColor'] ) ) || ( 'gradient' === $attr['overlayType'] && ! empty( $attr['gradientValue'] ) ) ) ) ? 1 - $attr['backgroundVideoOpacity'] : 1;
 
 $selectors = array(
-	$base_selector . '.wp-block-uagb-container' => array(
+	$base_selector . '.wp-block-uagb-container'           => array(
 		'color' => $attr['textColor'],
 	),
-	$base_selector . '.wp-block-uagb-container h1'                     => array(
+	$base_selector . '.wp-block-uagb-container h1'        => array(
 		'color' => $attr['textColor'],
 	),
-	$base_selector . '.wp-block-uagb-container h2'                     => array(
+	$base_selector . '.wp-block-uagb-container h2'        => array(
 		'color' => $attr['textColor'],
 	),
-	$base_selector . '.wp-block-uagb-container h3'                     => array(
+	$base_selector . '.wp-block-uagb-container h3'        => array(
 		'color' => $attr['textColor'],
 	),
-	$base_selector . '.wp-block-uagb-container h4'                     => array(
+	$base_selector . '.wp-block-uagb-container h4'        => array(
 		'color' => $attr['textColor'],
 	),
-	$base_selector . '.wp-block-uagb-container h5'                     => array(
+	$base_selector . '.wp-block-uagb-container h5'        => array(
 		'color' => $attr['textColor'],
 	),
-	$base_selector . '.wp-block-uagb-container h6'                     => array(
+	$base_selector . '.wp-block-uagb-container h6'        => array(
 		'color' => $attr['textColor'],
 	),
-	$base_selector . ' a'                       => array(
+	$base_selector . ' a'                                 => array(
 		'color' => $attr['linkColor'],
 	),
-	$base_selector . ' a:hover'                 => array(
+	$base_selector . ' a:hover'                           => array(
 		'color' => $attr['linkHoverColor'],
 	),
-	'.uagb-is-root-container ' . $base_selector      => array( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	'.uagb-is-root-container ' . $base_selector           => array( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		'max-width' => UAGB_Helper::get_css_value( $attr['widthDesktop'], $attr['widthType'] ),
 		'width'     => '100%',
 	),
-	$base_selector . ' .uagb-container__shape-top svg' => array(
+	$base_selector . ' .uagb-container__shape-top svg'    => array(
 		'height' => UAGB_Helper::get_css_value( $attr['topHeight'], 'px' ),
 	),
 	$base_selector . ' .uagb-container__shape.uagb-container__shape-top .uagb-container__shape-fill' => array(
@@ -249,14 +249,14 @@ if ( ( $attr['isBlockRootParent'] && ! ( 'alignwide' === $attr['innerContentWidt
 	$container_tablet_css = array_merge( $container_tablet_css, $inner_container_tablet_css );
 }
 $t_selectors = array(
-	'.uagb-is-root-container ' . $base_selector => array( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	'.uagb-is-root-container ' . $base_selector           => array( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		'max-width' => UAGB_Helper::get_css_value( $attr['widthTablet'], $attr['widthTypeTablet'] ),
 		'width'     => '100%',
 	),
 	$base_selector . ' .uagb-container__shape-bottom svg' => array(
 		'height' => UAGB_Helper::get_css_value( $attr['bottomHeightTablet'], 'px' ),
 	),
-	$base_selector . ' .uagb-container__shape-top svg' => array(
+	$base_selector . ' .uagb-container__shape-top svg'    => array(
 		'height' => UAGB_Helper::get_css_value( $attr['topHeightTablet'], 'px' ),
 	),
 );
@@ -320,14 +320,14 @@ if ( ( $attr['isBlockRootParent'] && ! ( 'alignwide' === $attr['innerContentWidt
 	$container_mobile_css = array_merge( $container_mobile_css, $inner_container_mobile_css );
 }
 $m_selectors = array(
-	'.uagb-is-root-container ' . $base_selector => array( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	'.uagb-is-root-container ' . $base_selector           => array( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		'max-width' => UAGB_Helper::get_css_value( $attr['widthMobile'], $attr['widthTypeMobile'] ),
 		'width'     => '100%',
 	),
 	$base_selector . ' .uagb-container__shape-bottom svg' => array(
 		'height' => UAGB_Helper::get_css_value( $attr['bottomHeightMobile'], 'px' ),
 	),
-	$base_selector . ' .uagb-container__shape-top svg' => array(
+	$base_selector . ' .uagb-container__shape-top svg'    => array(
 		'height' => UAGB_Helper::get_css_value( $attr['topHeightMobile'], 'px' ),
 	),
 );
@@ -369,7 +369,7 @@ if ( 'video' === $attr['backgroundType'] ) {
 	if ( 'alignwide' === $attr['innerContentWidth'] && 'alignfull' === $attr['contentWidth'] ) {
 		$selectorClass = $base_selector . ' .uagb-container-inner-blocks-wrap';
 	} else {
-		$selectorClass = '.wp-block-uagb-container'. $base_selector;
+		$selectorClass = '.wp-block-uagb-container' . $base_selector;
 	}
 	$selectors[ $base_selector . ' > div:not(.uagb-container__video-wrap)' ] = array(
 		'position' => 'relative',
@@ -450,9 +450,9 @@ if ( 'video' === $attr['backgroundType'] ) {
 
 	}
 } else {
-	$selectors[ $base_selector ]                                    = $container_css; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-	$t_selectors[ $base_selector ]                                  = $container_tablet_css; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-	$m_selectors[ $base_selector ]                                  = $container_mobile_css; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	$selectors[ $base_selector ]   = $container_css; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	$t_selectors[ $base_selector ] = $container_tablet_css; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	$m_selectors[ $base_selector ] = $container_mobile_css; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	$selectors[ '.wp-block-uagb-container' . $base_selector . ':hover' ] = array(
 		'border-color' => $attr['containerBorderHColor'],
 	);

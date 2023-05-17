@@ -12,7 +12,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	const blockName = name.replace( 'uagb/', '' );
 	 
 	let {
-		block_id,
 		widthDesktop,
 		widthTablet,
 		widthMobile,
@@ -145,6 +144,32 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		gradientType,
 		gradientAngle,
 		selectGradient,
+
+		customPosition,
+		xPositionDesktop,
+		xPositionTablet,
+		xPositionMobile,
+		xPositionType,
+		xPositionTypeTablet,
+		xPositionTypeMobile,
+		yPositionDesktop,
+		yPositionTablet,
+		yPositionMobile,
+		yPositionType,
+		yPositionTypeTablet,
+		yPositionTypeMobile,
+		backgroundCustomSizeTablet,
+		backgroundCustomSizeMobile,
+		backgroundSizeTablet,
+		backgroundSizeMobile,
+		backgroundRepeatTablet,
+		backgroundRepeatMobile,
+		backgroundAttachmentTablet,
+		backgroundAttachmentMobile,
+		backgroundPositionTablet,
+		backgroundPositionMobile,
+		backgroundImageTablet,
+		backgroundImageMobile,
 	} = attributes;
 
 	const innerContentCustomWidthDesktopFallback = getFallbackNumber(
@@ -282,6 +307,106 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		boxShadowPositionCSSHover = '';
 	}
 
+	// For Global Block Styles.
+	let containerBackgroundCSSMobile = {};
+	let containerBackgroundCSSTablet = {};
+	let containerBackgroundCSSDesktop = {};
+	if ( gbsSelector ) {
+		const backgroundAttributesDesktop = {
+			'backgroundType': backgroundType,
+			'backgroundImage': backgroundImageDesktop,
+			'backgroundColor': backgroundColor,
+			'gradientValue': gradientValue,
+			'gradientColor1': gradientColor1,
+			'gradientColor2': gradientColor2,
+			'gradientLocation1': gradientLocation1,
+			'gradientLocation2': gradientLocation2,
+			'gradientType': gradientType,
+			'gradientAngle': gradientAngle,
+			'selectGradient': selectGradient,
+			'backgroundRepeat': backgroundRepeatDesktop,
+			'backgroundPosition': backgroundPositionDesktop,
+			'backgroundSize': backgroundSizeDesktop,
+			'backgroundAttachment': backgroundAttachmentDesktop,
+			'backgroundCustomSize': backgroundCustomSizeDesktop,
+			'backgroundCustomSizeType': backgroundCustomSizeType,
+			'backgroundImageColor': backgroundImageColor,
+			'overlayType': overlayType,
+			'backgroundVideo': backgroundVideo,
+			'backgroundVideoColor': backgroundVideoColor,
+			'customPosition': customPosition,
+			'xPosition': xPositionDesktop,
+			'xPositionType': xPositionType,
+			'yPosition': yPositionDesktop,
+			'yPositionType': yPositionType,
+		};
+	
+		containerBackgroundCSSDesktop = generateBackgroundCSS( backgroundAttributesDesktop );
+
+		const backgroundAttributesTablet = {
+			'backgroundType': backgroundType,
+			'backgroundImage': backgroundImageTablet,
+			'backgroundColor': backgroundColor,
+			'gradientValue': gradientValue,
+			'gradientColor1': gradientColor1,
+			'gradientColor2': gradientColor2,
+			'gradientLocation1': gradientLocation1,
+			'gradientLocation2': gradientLocation2,
+			'gradientType': gradientType,
+			'gradientAngle': gradientAngle,
+			'selectGradient': selectGradient,
+			'backgroundRepeat': backgroundRepeatTablet,
+			'backgroundPosition': backgroundPositionTablet,
+			'backgroundSize': backgroundSizeTablet,
+			'backgroundAttachment': backgroundAttachmentTablet,
+			'backgroundCustomSize': backgroundCustomSizeTablet,
+			'backgroundCustomSizeType': backgroundCustomSizeType,
+			'backgroundImageColor': backgroundImageColor,
+			'overlayType': overlayType,
+			'backgroundVideo': backgroundVideo,
+			'backgroundVideoColor': backgroundVideoColor,
+			'customPosition': customPosition,
+			'xPosition': xPositionTablet,
+			'xPositionType': xPositionTypeTablet,
+			'yPosition': yPositionTablet,
+			'yPositionType': yPositionTypeTablet,
+		};
+	
+		containerBackgroundCSSTablet = generateBackgroundCSS( backgroundAttributesTablet );
+
+		const backgroundAttributesMobile = {
+			'backgroundType': backgroundType,
+			'backgroundImage': backgroundImageMobile,
+			'backgroundColor': backgroundColor,
+			'gradientValue': gradientValue,
+			'gradientColor1': gradientColor1,
+			'gradientColor2': gradientColor2,
+			'gradientLocation1': gradientLocation1,
+			'gradientLocation2': gradientLocation2,
+			'gradientType': gradientType,
+			'gradientAngle': gradientAngle,
+			'selectGradient': selectGradient,
+			'backgroundRepeat': backgroundRepeatMobile,
+			'backgroundPosition': backgroundPositionMobile,
+			'backgroundSize': backgroundSizeMobile,
+			'backgroundAttachment': backgroundAttachmentMobile,
+			'backgroundCustomSize': backgroundCustomSizeMobile,
+			'backgroundCustomSizeType': backgroundCustomSizeType,
+			'backgroundImageColor': backgroundImageColor,
+			'overlayType': overlayType,
+			'backgroundVideo': backgroundVideo,
+			'backgroundVideoColor': backgroundVideoColor,
+			'customPosition': customPosition,
+			'xPosition': xPositionMobile,
+			'xPositionType': xPositionTypeMobile,
+			'yPosition': yPositionMobile,
+			'yPositionType': yPositionTypeMobile,
+		};
+	
+		containerBackgroundCSSMobile = generateBackgroundCSS( backgroundAttributesMobile );
+
+	}
+	
 	const containerCSS = {
 		'padding-top': generateCSSUnit( topPaddingDesktop, paddingType ),
 		'padding-bottom': generateCSSUnit( bottomPaddingDesktop, paddingType ),
@@ -305,6 +430,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			boxShadowPositionCSS,
 		'min-height': generateCSSUnit( minHeightDesktop, minHeightType ),
 		...borderCSS,
+		...containerBackgroundCSSDesktop,
 		'overflow': overflow,
 	};
 
@@ -335,7 +461,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'flex-wrap': wrapDesktop,
 		'align-content': alignContentDesktop,
 	};
-	let gbsWidthSelector = gbsSelector ? gbsSelector : `#block-${ clientId }`;
+	const gbsWidthSelector = gbsSelector ? gbsSelector : `#block-${ clientId }`;
 	const widthSelectorsDesktop = {
 		[ `.is-root-container > .block-editor-block-list__block .block-editor-block-list__block${ gbsWidthSelector } ` ]: {
 			'max-width': generateCSSUnit( widthDesktopFallback, widthType ),
@@ -359,7 +485,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	if ( 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ) {
 		widthSelectorsDesktop[
-			`.block-editor-block-list__block.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`
+			`.block-editor-block-list__block.wp-block-uagb-container${ gbsWidthSelector } > .uagb-container-inner-blocks-wrap`
 		] = {
 			'--inner-content-custom-width': `min(${ containerFullWidth },${ innerContentCustomWidthDesktopFallback }${ innerContentCustomWidthType })`,
 			'max-width': 'var(--inner-content-custom-width)',
@@ -368,7 +494,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-right': 'auto',
 		};
 		
-		widthSelectorsTablet[`.block-editor-block-list__block.uagb-editor-preview-mode-tablet.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`] = {
+		widthSelectorsTablet[`.block-editor-block-list__block.uagb-editor-preview-mode-tablet.wp-block-uagb-container${ gbsWidthSelector } > .uagb-container-inner-blocks-wrap`] = {
 			'--inner-content-custom-width' : `min(${ containerFullWidth },${ innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback }${ innerContentCustomWidthTypeTablet })`,
 			'max-width' : 'var(--inner-content-custom-width)',
 			'width' :'100%',
@@ -377,7 +503,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		};
 
 		widthSelectorsMobile[
-			`.block-editor-block-list__block.uagb-editor-preview-mode-mobile.wp-block-uagb-container.uagb-block-${ block_id } > .uagb-container-inner-blocks-wrap`
+			`.block-editor-block-list__block.uagb-editor-preview-mode-mobile.wp-block-uagb-container${ gbsWidthSelector } > .uagb-container-inner-blocks-wrap`
 		] = {
 			'--inner-content-custom-width': `min(${ containerFullWidth },${
 				innerContentCustomWidthMobile || innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback
@@ -536,6 +662,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ) + ' !important',
 			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet ) + ' !important',
 			...borderCSSTablet,
+			...containerBackgroundCSSTablet,
 		};
 		mobile_selectors[ '.wp-block-uagb-container' ] = {
 			'padding-top': generateCSSUnit( topPaddingMobile, paddingTypeMobile ),
@@ -548,6 +675,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ) + ' !important',
 			'min-height': generateCSSUnit( minHeightMobile, minHeightTypeMobile ),
 			...borderCSSMobile,
+			...containerBackgroundCSSMobile
 		};
 		selectors[ '.wp-block-uagb-container:hover' ] = {
 			'border-color': containerBorderHColor,
