@@ -32,11 +32,9 @@ const UAGBSlide = ( props ) => {
 
 const applyWithSelect = withSelect( ( select, props ) => {
 
-	// 'edit-post' context is not available in FSE editors, hence we need to use 'edit-site' in that case.
-	const store = select( 'core/edit-post' ) ? 'core/edit-post' : 'core/edit-site';
-
+	// 'edit-post' - Post/Page editor, 'edit-widgets' - Widgets editor, 'edit-site' - FSE editor.
 	// eslint-disable-line no-shadow
-	const { __experimentalGetPreviewDeviceType = null } = select( store );
+	const { __experimentalGetPreviewDeviceType = null } = select( 'core/edit-post' ) || select( 'core/edit-widgets' ) || select( 'core/edit-site' );
 	const deviceType = __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
 	const { getBlocks, getBlockIndex } = select( 'core/block-editor' );
 	const { getBlockType } = select( 'core/blocks' );

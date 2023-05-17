@@ -29,11 +29,9 @@ const Render = ( props ) => {
 	doAction( `spectra.slider.before_render`, attributes );
 
 	const { isListViewOpen, hasChildren } = useSelect( ( select ) => {
-		
-		// 'edit-post' context is not available in FSE editors, hence we need to use 'edit-site' in that case.
-		const store = select( 'core/edit-post' ) ? 'core/edit-post' : 'core/edit-site';
 
-		const { isListViewOpened } = select( store );
+		// 'edit-post' - Post/Page editor, 'edit-widgets' - Widgets editor, 'edit-site' - FSE editor.
+		const { isListViewOpened } = select( 'core/edit-post' ) || select( 'core/edit-widgets' ) || select( 'core/edit-site' );
 
 		return {
 			isListViewOpen: isListViewOpened(),
