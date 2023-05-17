@@ -197,6 +197,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Global - Fixed an issue wherein a Google error would appear when loading Google Fonts locally with a specific font weight and family set to default.
 * Fix: Global - Fixed a font resource URL breakage issue that occurs when the provided 'google_font' array contains a font family with an empty string.
 * Fix: Global - Updated dynamic styling to load in FSE (Full Site Editing) template pages in the front-end for reusable blocks.
+* Fix: Slider - Fixed slider not working in FSE and widgets editor.
 
 = 2.5.1 - THURSDAY, 27th APRIL 2023 =
 * Feature: You can now add Google Fonts to Block Based Themes from Spectra Dashboard.
