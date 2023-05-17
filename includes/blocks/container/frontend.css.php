@@ -137,22 +137,22 @@ $selectors = array(
 	$base_selector . '.wp-block-uagb-container' => array(
 		'color' => $attr['textColor'],
 	),
-	'.wp-block-uagb-container h1'                     => array(
+	$base_selector . '.wp-block-uagb-container h1'                     => array(
 		'color' => $attr['textColor'],
 	),
-	'.wp-block-uagb-container h2'                     => array(
+	$base_selector . '.wp-block-uagb-container h2'                     => array(
 		'color' => $attr['textColor'],
 	),
-	'.wp-block-uagb-container h3'                     => array(
+	$base_selector . '.wp-block-uagb-container h3'                     => array(
 		'color' => $attr['textColor'],
 	),
-	'.wp-block-uagb-container h4'                     => array(
+	$base_selector . '.wp-block-uagb-container h4'                     => array(
 		'color' => $attr['textColor'],
 	),
-	'.wp-block-uagb-container h5'                     => array(
+	$base_selector . '.wp-block-uagb-container h5'                     => array(
 		'color' => $attr['textColor'],
 	),
-	'.wp-block-uagb-container h6'                     => array(
+	$base_selector . '.wp-block-uagb-container h6'                     => array(
 		'color' => $attr['textColor'],
 	),
 	$base_selector . ' a'                       => array(
