@@ -87,7 +87,6 @@ const attributes = {
 	iconimgPosition: {
 		type: 'string',
 		default: 'above-title',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'icon-img-position',
 		},
@@ -615,7 +614,6 @@ const attributes = {
 	seperatorPosition: {
 		type: 'string',
 		default: 'after_title',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'seperator-position',
 		},
@@ -623,7 +621,6 @@ const attributes = {
 	seperatorStyle: {
 		type: 'string',
 		default: 'none',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-style',
 		},
@@ -950,14 +947,12 @@ const attributes = {
 	imageSize: {
 		type: 'string',
 		default: 'thumbnail',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-size',
 		},
 	},
 	imageWidth: {
 		type: 'number',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-width',
 		},
@@ -980,7 +975,6 @@ const attributes = {
 	imageWidthType: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-width-type',
 		},
