@@ -106,4 +106,8 @@ return array(
 	'fontLetterSpacingTablet' => '',
 	'fontLetterSpacingMobile' => '',
 	'fontLetterSpacingType'   => 'px',
+
+	// For Global Block Styles.
+	'globalBlockStyleName'    => '',
+	'globalBlockStyleId'      => '',
 );

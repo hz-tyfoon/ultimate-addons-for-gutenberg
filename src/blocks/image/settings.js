@@ -27,6 +27,8 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import boxShadowPresets from './presets';
 import UAGPresets from '@Components/presets';
 import { pickRelevantMediaFiles } from './utils';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 export default function Settings( props ) {
 	const deviceType = useDeviceType();
@@ -1607,6 +1609,7 @@ export default function Settings( props ) {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
 						{ generalPanel }
 						{ shapeGeneralPanel }
 						{ layout === 'overlay' && (

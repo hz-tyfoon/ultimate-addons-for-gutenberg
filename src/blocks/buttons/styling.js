@@ -6,7 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
@@ -243,7 +243,12 @@ function styling( attributes, clientId, name ) {
 		'letter-spacing': generateCSSUnit( fontLetterSpacingMobile, fontLetterSpacingType ),
 	};
 
-	const base_selector = ` .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	let base_selector = ` .uagb-block-${ clientId.substr( 0, 8 ) }`;
+
+	// For Global Block Styles.
+	if ( gbsSelector ) {
+		base_selector = gbsSelector + ' ';
+	}
 
 	let styling_css = generateCSS( selectors, base_selector );
 

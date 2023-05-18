@@ -9,6 +9,7 @@ import DynamicFontLoader from './dynamicFontLoader';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 //  Import CSS.
 import './style.scss';
 
@@ -117,4 +118,5 @@ const UAGBCountdownEdit = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles
 )( UAGBCountdownEdit );

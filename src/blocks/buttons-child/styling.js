@@ -8,7 +8,7 @@ import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
@@ -308,12 +308,18 @@ function styling( attributes, clientId, name ) {
 			'background': hBackground,
 		};
 	}
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
-	let stylingCss = generateCSS( selectors, id );
+	let base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	// For Global Block Styles.
+	if ( gbsSelector ) {
+		base_selector = gbsSelector + ' ';
+	}
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
+	let stylingCss = generateCSS( selectors, base_selector );
+
+	stylingCss += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );
+
+	stylingCss += generateCSS( mobileSelectors, `${ base_selector }`, true, 'mobile' );
 
 	return stylingCss;
 }

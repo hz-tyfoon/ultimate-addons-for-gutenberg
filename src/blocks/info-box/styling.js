@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const {
 		headingAlign,
 		headingAlignTablet,
@@ -878,12 +878,18 @@ function styling( attributes, clientId, name ) {
 	mobileSelectors[ ' .uagb-infobox-cta-link.wp-block-button__link' ] = ctaBorderCSSMobile;
 	tabletSelectors[ ' .uagb-infobox-cta-link.wp-block-button__link' ] = ctaBorderCSSTablet;
 
-	const id = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
-	let stylingCss = generateCSS( selectors, id );
+	let base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	// For Global Block Styles.
+	if ( gbsSelector ) {
+		base_selector = gbsSelector + ' ';
+	}
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
+	let stylingCss = generateCSS( selectors, base_selector );
+
+	stylingCss += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );
+
+	stylingCss += generateCSS( mobileSelectors, `${ base_selector }`, true, 'mobile' );
 	return stylingCss;
 }
 

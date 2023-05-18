@@ -21,6 +21,8 @@ import { InspectorControls } from '@wordpress/block-editor';
 import Separator from '@Components/separator';
 import { getSettings as getDateSettings } from '@wordpress/date';
 import { memo } from '@wordpress/element';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 function Settings( props ) {
 	props = props.parentProps;
@@ -1321,6 +1323,7 @@ function Settings( props ) {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
 						{ presetsPanel }
 						{ generalPanel }
 						{ labelGeneralPanel }

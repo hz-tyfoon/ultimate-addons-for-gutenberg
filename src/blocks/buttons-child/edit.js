@@ -13,6 +13,7 @@ import Settings from './settings';
 import Render from './render';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const ButtonsChildComponent = ( props ) => {
 	const {
@@ -90,4 +91,5 @@ const ButtonsChildComponent = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles
 )( ButtonsChildComponent );

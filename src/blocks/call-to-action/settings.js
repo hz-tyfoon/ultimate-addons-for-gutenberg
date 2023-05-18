@@ -19,6 +19,8 @@ import { ToggleControl, Icon } from '@wordpress/components';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import ResponsiveSlider from '@Components/responsive-slider';
 import { useDeviceType } from '@Controls/getPreviewType';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './inline-styles';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -1717,6 +1719,7 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
 						{ presetSettings() }
 						{ layouts() }
 						{ ctaSettings() }

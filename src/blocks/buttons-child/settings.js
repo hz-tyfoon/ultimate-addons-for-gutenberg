@@ -28,6 +28,8 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 import boxShadowPresets, { buttonsPresets } from './presets';
 import UAGPresets from '@Components/presets';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -811,6 +813,7 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
 						{ presetSettings() }
 						{ buttonSettings() }
 					</InspectorTab>
