@@ -14,7 +14,6 @@ const attributes = {
 	layout: {
 		type: 'string',
 		default: 'default',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-layout',
 		},
@@ -46,7 +45,6 @@ const attributes = {
 	align: {
 		type: 'string',
 		default: '',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-align',
 		},
@@ -94,7 +92,6 @@ const attributes = {
 	width: {
 		type: 'integer',
 		default: '',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-width',
 		},
@@ -102,7 +99,6 @@ const attributes = {
 	widthTablet: {
 		type: 'integer',
 		default: '',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-width-tablet',
 		},
@@ -110,7 +106,6 @@ const attributes = {
 	widthMobile: {
 		type: 'integer',
 		default: '',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-width-mobile',
 		},
@@ -118,7 +113,6 @@ const attributes = {
 	height: {
 		type: 'integer',
 		default: '',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-height',
 		},
@@ -126,7 +120,6 @@ const attributes = {
 	heightTablet: {
 		type: 'integer',
 		default: '',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-height-tablet',
 		},
@@ -134,7 +127,6 @@ const attributes = {
 	heightMobile: {
 		type: 'integer',
 		default: '',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-height-mobile',
 		},
@@ -766,7 +758,6 @@ const attributes = {
 	overlayContentPosition: {
 		type: 'string',
 		default: 'center center',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'overlay-content-position',
 		},
@@ -807,7 +798,6 @@ const attributes = {
 	seperatorStyle: {
 		type: 'string',
 		default: 'none',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-style',
 		},

@@ -53,7 +53,6 @@ const attributes = {
 	showLabels: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'countdown-show-labels',
 		},
