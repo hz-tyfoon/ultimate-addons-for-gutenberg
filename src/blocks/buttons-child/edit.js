@@ -22,8 +22,11 @@ const ButtonsChildComponent = ( props ) => {
 		attributes: { borderStyle, borderWidth, borderRadius, borderHColor, borderColor },
 		setAttributes,
 		name,
-		deviceType
+		deviceType,
+		context
 	} = props;
+
+	console.log(context);
 
 	const initialState = {
 		isURLPickerOpen: false,
