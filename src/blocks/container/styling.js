@@ -445,6 +445,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	selectors[ containerFlexSelector ] = {
+		'min-height': generateCSSUnit( minHeightDesktop, minHeightType ),
 		'flex-direction': directionDesktop,
 		'align-items': alignItemsDesktop,
 		'justify-content': justifyContentDesktop,
