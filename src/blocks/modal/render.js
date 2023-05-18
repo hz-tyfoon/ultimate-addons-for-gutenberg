@@ -109,11 +109,7 @@ const Render = ( props ) => {
 
 	const buttonHTML = (
 		<div className={ classnames( 'uagb-spectra-button-wrapper', 'wp-block-button' ) }>
-			<div
-				className={ buttonClasses }
-				target="_self"
-				rel="noopener noreferrer"
-			>
+			<div className={ buttonClasses } >
 				<span className="uagb-modal-content-wrapper">
 					{ showBtnIcon && buttonIconPosition === 'before' && buttonIconOutput }
 					<RichText
