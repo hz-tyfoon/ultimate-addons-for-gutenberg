@@ -109,7 +109,7 @@ const Render = ( props ) => {
 
 	const buttonHTML = (
 		<div className={ classnames( 'uagb-spectra-button-wrapper', 'wp-block-button' ) }>
-			<a // eslint-disable-line jsx-a11y/anchor-is-valid
+			<div
 				className={ buttonClasses }
 				target="_self"
 				rel="noopener noreferrer"
@@ -126,7 +126,7 @@ const Render = ( props ) => {
 					/>
 					{ showBtnIcon && buttonIconPosition === 'after' && buttonIconOutput }
 				</span>
-			</a>
+			</div>
 		</div>
 	);
 
