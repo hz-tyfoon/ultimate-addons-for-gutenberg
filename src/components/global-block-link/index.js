@@ -155,6 +155,11 @@ const GlobalBlockStyles = ( props ) => {
         } );
     };
 
+    // Function to check if an object is empty
+    const isEmptyObject = ( obj ) => {
+        return Object.keys( obj ).length === 0 && obj.constructor === Object;
+    }
+
     const generateBlockStyles = ( newStyleID = globalBlockStyleId ) => {
         updateGoogleFontData( attributes );
 
@@ -170,7 +175,14 @@ const GlobalBlockStyles = ( props ) => {
                 const asArray = Object.entries( attributes );
                 const filtered = asArray.filter( ( [key, value] ) => {
                     if ( currentBlockDefaultAttributes[key]?.isGBSStyle ) {
-                        return ( '0.001020304' !== value && '' !== value && {} !== value && [] !== value && false !== value );
+                        return (
+                            '0.001020304' !== value &&
+                            '' !== value &&
+                            {} !== value &&
+                            [] !== value &&
+                            false !== value &&
+                            !isEmptyObject( value )
+                          );
                     }
                     return false;
                 } );
