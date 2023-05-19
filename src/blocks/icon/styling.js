@@ -194,7 +194,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	let base_selector = `.uagb-block-${ block_id }`;
 	// For Global Block Styles.
 	if ( gbsSelector ) {
-		base_selector = gbsSelector + ' ';
+		base_selector = gbsSelector;
 	}
 	stylingCss = generateCSS( selectors, base_selector );
 

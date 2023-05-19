@@ -460,7 +460,7 @@ export default function styling( attributes, clientId, name, deviceType, gbsSele
 
 	// For Global Block Styles.
 	if ( gbsSelector ) {
-		baseSelector = gbsSelector + ' ';
+		baseSelector = gbsSelector;
 	}
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
