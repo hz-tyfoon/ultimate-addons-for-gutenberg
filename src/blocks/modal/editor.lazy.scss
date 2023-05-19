@@ -34,27 +34,30 @@
 				position: relative;
 			}
 		}
-		div.uagb-modal-button-link {
-			text-decoration: none;
-			align-items: center;
-		}
-
-		div.uagb-spectra-button-wrapper {
-			line-height: 1;
-
-			div.uagb-modal-button-link.uagb-modal-trigger {
-				display: inline-flex;
+		div {
+			&.uagb-modal-button-link {
 				text-decoration: none;
 				align-items: center;
-				cursor: pointer;
+			}
+			&.uagb-spectra-button-wrapper {
+				line-height: 1;
 
-				svg {
-					fill: currentColor;
-					font-style: normal;
-					vertical-align: top;
-					width: 15px;
-					height: 15px;
-					font-size: 15px;
+				div {
+					&.uagb-modal-button-link.uagb-modal-trigger {
+						display: inline-flex;
+						text-decoration: none;
+						align-items: center;
+						cursor: pointer;
+
+						svg {
+							fill: currentColor;
+							font-style: normal;
+							vertical-align: top;
+							width: 15px;
+							height: 15px;
+							font-size: 15px;
+						}
+					}
 				}
 			}
 		}
