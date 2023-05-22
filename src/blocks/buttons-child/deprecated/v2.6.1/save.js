@@ -23,7 +23,6 @@ export default function save( props ) {
 		background,
 		color,
 		showIcon,
-		dynamicContent
 	} = attributes;
 
 	const btnText = () => {
@@ -71,7 +70,7 @@ export default function save( props ) {
 						color !== '' ? 'has-text-color' : ''
 					) }
 					href={ '' === link || '#' === link ? '#' : link }
-					onClick={ ( '' === link || '#' === link ) && ( ! dynamicContent?.link?.enable ) ? 'return false;' : 'return true;' }
+					onClick={ '' === link || '#' === link ? 'return false;' : 'return true;' }
 					rel={ noFollow ? 'nofollow noopener' : 'follow noopener' }
 					target={ openNewWindow }
 				>
