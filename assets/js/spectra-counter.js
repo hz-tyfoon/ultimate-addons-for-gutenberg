@@ -1,8 +1,18 @@
-// eslint-disable-next-line no-undef
 UAGBCounter = {
 	elements: {},
 	init( mainSelector, data = {} ) {
 		this.elements = this.getDefaultElements( mainSelector );
+		const elements = document.querySelectorAll( `.wp-block-uagb-counter${mainSelector}` );
+        if ( elements && elements.length > 1 ) {
+            for( const element of elements ) {
+                this.elements.counterWrapper = element;
+                this.handleCounterWrapper( data );	
+            }
+        } else {
+            this.handleCounterWrapper( data );
+        }   
+	},
+	handleCounterWrapper( data ) {
 		data = this._getCounterData( this.elements.counterWrapper, data );
 
 		if( !data.isFrontend ){
@@ -57,7 +67,7 @@ UAGBCounter = {
 				}
 			} );
 		};
-		const IO = new IntersectionObserver( callback, { threshold: 1 } ); // eslint-disable-line no-undef
+		const IO = new IntersectionObserver( callback, { threshold: 0.75 } );
 		IO.observe( that.elements.counterWrapper );
 	},
 	_numberCount( data ) {
@@ -174,8 +184,8 @@ UAGBCounter = {
 	_getCounterData( element,data ){
 		
 		// Getting data from html attribute data-counter and overwrite data which comes from php.
-		let getCounterData = element.getAttribute( 'data-counter' );
-		if( ! getCounterData || null === getCounterData || undefined === getCounterData ){
+		let getCounterData = element?.getAttribute( 'data-counter' );
+		if( ! getCounterData ){
 			return data;
 		}
 
