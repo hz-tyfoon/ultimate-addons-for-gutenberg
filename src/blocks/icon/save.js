@@ -2,6 +2,7 @@
  * Block Icon : Save.
  */
 import renderSVG from '@Controls/renderIcon';
+import renderMutisiteSVG from '@Controls/renderMutisiteIcon';
 import { useBlockProps } from '@wordpress/block-editor';
 import { getProtocol, prependHTTP } from '@wordpress/url';
 
@@ -39,6 +40,7 @@ export default function save( props ) {
 	return (
 		<div { ...blockProps }>
 			<span className="uagb-svg-wrapper">{ iconHtml }</span>
+			{ renderMutisiteSVG( icon ) }
 		</div>
 	);
 }
