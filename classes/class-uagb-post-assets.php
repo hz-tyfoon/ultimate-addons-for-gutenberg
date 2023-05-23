@@ -285,7 +285,7 @@ class UAGB_Post_Assets {
 
 		foreach ( $spectra_global_block_styles as $style ) {
 			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) ) {
-				$this->stylesheet = $this->stylesheet . $style['frontendStyles'];
+				$this->stylesheet = $style['frontendStyles'] . $this->stylesheet;
 			}
 		}
 	}
@@ -905,9 +905,15 @@ class UAGB_Post_Assets {
 
 		if ( strpos( $name, 'uagb/' ) !== false ) {
 			$_block_slug = str_replace( 'uagb/', '', $name );
-			$_block_css  = UAGB_Block_Module::get_frontend_css( $_block_slug, $blockattr, $block_id );
-			$_block_js   = UAGB_Block_Module::get_frontend_js( $_block_slug, $blockattr, $block_id, 'js' );
-			$css         = array_merge( $css, $_block_css );
+
+			$is_gbs = false;
+
+			if ( ! empty( $blockattr['globalBlockStyleId'] ) ) {
+				$is_gbs = true;
+			}
+			$_block_css = UAGB_Block_Module::get_frontend_css( $_block_slug, $blockattr, $block_id, $is_gbs );
+			$_block_js  = UAGB_Block_Module::get_frontend_js( $_block_slug, $blockattr, $block_id, 'js' );
+			$css        = array_merge( $css, $_block_css );
 			if ( ! empty( $_block_js ) ) {
 				$js .= $_block_js;
 			}

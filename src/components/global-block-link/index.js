@@ -210,7 +210,11 @@ const GlobalBlockStyles = ( props ) => {
                 } else {
                     style.post_ids = [currentPostID];
                 }
+                
+
                 style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
+                
+
             }
             return style
 
@@ -325,6 +329,7 @@ const GlobalBlockStyles = ( props ) => {
                             }
 
                             globalBlockStyles.map( ( style ) => {
+                                
                                 if ( style?.value === value ) {
                                     label = style?.label;
                                     if ( style?.post_ids ) {
@@ -332,7 +337,11 @@ const GlobalBlockStyles = ( props ) => {
                                     } else {
                                         style.post_ids = [currentPostID];
                                     }
+                                
+
                                     style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
+                                
+
                                 }
                                 return style;
                             } );

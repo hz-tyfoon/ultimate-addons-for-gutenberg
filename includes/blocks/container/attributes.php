@@ -182,6 +182,10 @@ return array_merge(
 		'gradientLocation2'                 => 100,
 		'gradientAngle'                     => 0,
 		'selectGradient'                    => 'basic',
+
+		// For Global Block Styles.
+		'globalBlockStyleName'              => '',
+		'globalBlockStyleId'                => '',
 	),
 	$border_attribute
 );
