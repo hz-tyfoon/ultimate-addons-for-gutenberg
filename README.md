@@ -167,6 +167,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ## Changelog ##
 
 ### x.x.x ###
+* Improvement: Table Of Contents - Added Allow Dynamic Heading feature.
 * Fix: Image Gallery - Removed the additional bottom spacing in the masonry layout that would appear on certain themes.
 * Fix: Image Gallery - Resolved an issue in which the masonry layout would appear stacked for a brief moment on load.
 
