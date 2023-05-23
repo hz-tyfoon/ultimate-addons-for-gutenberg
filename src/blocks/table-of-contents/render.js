@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import TableOfContents from './toc';
-import { useEffect, useRef, useLayoutEffect, memo } from '@wordpress/element';
+import { useEffect, useLayoutEffect, memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import renderSVG from '@Controls/renderIcon';
 import { RichText } from '@wordpress/block-editor';
@@ -38,18 +38,7 @@ const Render = ( props ) => {
 			const selector = baseSelector + props.clientId.substr( 0, 8 );
 			UAGBTableOfContents.init( selector );
 		}
-	}, [] );
-
-	// Editor Useable Collaps Begins Here.
-	const tocRoot = useRef();
-
-	useEffect( () => {
-		if ( tocRoot.current && ! makeCollapsible && tocRoot.current.classList.contains( 'uagb-toc__collapse' ) ) {
-			tocRoot.current.classList.remove( 'uagb-toc__collapse' );
-			UAGBTableOfContents._slideDown( tocRoot.current.querySelector( '.uagb-toc__list-wrap' ), 500 );
-		}
 	}, [ makeCollapsible ] );
-	// Editor Useable Collaps Ends Here.
 
 	let iconHtml = '';
 
@@ -67,7 +56,6 @@ const Render = ( props ) => {
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
 				`uagb-block-${ props.clientId.substr( 0, 8 ) }`
 			) }
-			ref={ tocRoot }
 		>
 			<div className="uagb-toc__wrap">
 				<div className="uagb-toc__title">
