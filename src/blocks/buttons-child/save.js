@@ -55,8 +55,8 @@ export default function save( props ) {
 		<div
 			className={ classnames(
 				className,
-				'uagb-buttons__outer-wrap',
 				`uagb-block-${ block_id }`,
+				'uagb-buttons__outer-wrap',
 				'wp-block-button',
 				btnBorderStyle !== 'none' && btnBorderStyle !== 'default' ? 'is-style-outline' : ''
 			) }
