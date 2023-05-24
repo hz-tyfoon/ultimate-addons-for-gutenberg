@@ -1,9 +1,7 @@
 import { useEffect } from '@wordpress/element';
 
+const getAllBlocks = () => wp.data.select( 'core/block-editor' ).getBlocks();
 
-import { useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-const getEditorBlocks = () => wp.data.select( 'core/block-editor' ).getBlocks();
 /**
  * Search all blocks for uniqueIds
  *
@@ -29,64 +27,14 @@ export const getUniqueIdFromBlocks = ( blocks ) => blocks
 		return result;
 	}, { uniqueIds: [], clientIds: [] } );
 
-/**
- * Generates a unique id based on the clientId
- *
- * @param {string} clientId The block clientId
- * @return {string} The uniqueId
- */
-export const generateUniqueId = ( clientId ) => clientId.substr( 2, 9 ).replace( '-', '' );
-
-/**
- * Checks if the array contains duplicates of the value
- *
- * @param {Array}  arr          The array to check the values
- * @param {any}    value        The value to check if has duplicates
- * @param {number} currentIndex The current index
- * @return {boolean} If the array has duplicates
- */
-export const hasDuplicates = ( arr, value, currentIndex ) => (
+const checkDuplicate = ( arr, value, currentIndex ) => (
 	arr.filter( ( el ) => ( el === value ) ).length > 1 &&
 	currentIndex === arr.lastIndexOf( value )
 );
 
-/**
- * It will enhance a block component with the attributes.uniqueId property
- *
- * @param {any} WrappedComponent The component to add the uniqueId
- * @return {function(*)} The wrapped component
- */
-// export default ( WrappedComponent ) => ( ( props ) => {
-// 	const { clientId, attributes } = props;
-// 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
-
-// 	useEffect( () => {
-// 		const { uniqueIds, clientIds } = getUniqueIdFromBlocks( getEditorBlocks() );
-
-// 		if (
-// 			! attributes.uniqueId ||
-// 			hasDuplicates( uniqueIds, attributes.uniqueId, clientIds.indexOf( clientId ) )
-// 		) {
-// 			const uniqueId = generateUniqueId( clientId );
-
-// 			updateBlockAttributes( clientId, { uniqueId } );
-// 		}
-// 	}, [ clientId ] );
-
-// 	return ( <WrappedComponent { ...props } /> );
-// } );
-
-
-
-
 const addInitialAttr = ( ChildComponent ) => {
 	const WrappedComponent = ( props ) => {
-		// console.log( 'hoc props', props);
-
 		const { name, setAttributes, clientId, attributes } = props;
-
-		const { updateBlockAttributes } = useDispatch( blockEditorStore );
-
 		useEffect( () => {
 			const listOfClassMigrate = [
 				'uagb/advanced-heading',
@@ -154,95 +102,95 @@ const addInitialAttr = ( ChildComponent ) => {
 			 */
 			const REUSABLE_BLOCK_ISSUE_RESOLVED_BLOCKS = [ 
 				// "uagb/advanced-heading",
-				"uagb/blockquote",
-				"uagb/buttons",
-				"uagb/buttons-child",
-				"uagb/call-to-action",
-				"uagb/cf7-styler",
-				"uagb/column",
-				"uagb/columns",
-				"uagb/container",
-				"uagb/countdown",
-				"uagb/counter",
-				"uagb/faq",
-				"uagb/faq-child",
-				"uagb/forms",
-				"uagb/forms-accept",
-				"uagb/forms-checkbox",
-				"uagb/forms-date",
-				"uagb/forms-email",
-				"uagb/forms-hidden",
-				"uagb/forms-name",
-				"uagb/forms-phone",
-				"uagb/forms-radio",
-				"uagb/forms-select",
-				"uagb/forms-textarea",
-				"uagb/forms-toggle",
-				"uagb/forms-upload",
-				"uagb/forms-url",
-				"uagb/gf-styler",
-				"uagb/google-map",
-				"uagb/how-to",
-				"uagb/how-to-step",
-				"uagb/icon",
-				"uagb/icon-list",
-				"uagb/icon-list-child",
-				"uagb/image",
-				"uagb/image-gallery",
-				"uagb/info-box",
-				"uagb/inline-notice",
-				"uagb/lottie",
-				"uagb/marketing-button",
-				"uagb/modal",
-				"uagb/popup-builder",
-				"uagb/post-button",
-				"uagb/post-carousel",
-				"uagb/post-excerpt",
-				"uagb/post-grid",
-				"uagb/post-image",
-				"uagb/post-masonry",
-				"uagb/post-meta",
-				"uagb/post-taxonomy",
-				"uagb/post-title",
-				"uagb/restaurant-menu",
-				"uagb/restaurant-menu-child",
-				"uagb/review",
-				"uagb/section",
-				"uagb/separator",
-				"uagb/slider",
-				"uagb/slider-child",
-				"uagb/social-share",
-				"uagb/social-share-child",
-				"uagb/star-rating",
-				"uagb/table-of-contents",
-				"uagb/tabs",
-				"uagb/tabs-child",
-				"uagb/taxonomy-list",
-				"uagb/team",
-				"uagb/testimonial",
-				"uagb/content-timeline",
-				"uagb/content-timeline-child",
-				"uagb/post-timeline",
-				"uagb/wp-search",
-				"uagb/instagram-feed",
-				"uagb/login",
-				"uagb/loop-builder",
-				"uagb/loop-wrapper",
-				"uagb/register",
-				"uagb/register-email",
-				"uagb/register-first-name",
-				"uagb/register-last-name",
-				"uagb/register-password",
-				"uagb/register-reenter-password",
-				"uagb/register-terms",
-				"uagb/register-username",
+				'uagb/blockquote',
+				'uagb/buttons',
+				'uagb/buttons-child',
+				'uagb/call-to-action',
+				'uagb/cf7-styler',
+				'uagb/column',
+				'uagb/columns',
+				'uagb/container',
+				'uagb/countdown',
+				'uagb/counter',
+				'uagb/faq',
+				'uagb/faq-child',
+				'uagb/forms',
+				'uagb/forms-accept',
+				'uagb/forms-checkbox',
+				'uagb/forms-date',
+				'uagb/forms-email',
+				'uagb/forms-hidden',
+				'uagb/forms-name',
+				'uagb/forms-phone',
+				'uagb/forms-radio',
+				'uagb/forms-select',
+				'uagb/forms-textarea',
+				'uagb/forms-toggle',
+				'uagb/forms-upload',
+				'uagb/forms-url',
+				'uagb/gf-styler',
+				'uagb/google-map',
+				'uagb/how-to',
+				'uagb/how-to-step',
+				'uagb/icon',
+				'uagb/icon-list',
+				'uagb/icon-list-child',
+				'uagb/image',
+				'uagb/image-gallery',
+				'uagb/info-box',
+				'uagb/inline-notice',
+				'uagb/lottie',
+				'uagb/marketing-button',
+				'uagb/modal',
+				'uagb/popup-builder',
+				'uagb/post-button',
+				'uagb/post-carousel',
+				'uagb/post-excerpt',
+				'uagb/post-grid',
+				'uagb/post-image',
+				'uagb/post-masonry',
+				'uagb/post-meta',
+				'uagb/post-taxonomy',
+				'uagb/post-title',
+				'uagb/restaurant-menu',
+				'uagb/restaurant-menu-child',
+				'uagb/review',
+				'uagb/section',
+				'uagb/separator',
+				'uagb/slider',
+				'uagb/slider-child',
+				'uagb/social-share',
+				'uagb/social-share-child',
+				'uagb/star-rating',
+				'uagb/table-of-contents',
+				'uagb/tabs',
+				'uagb/tabs-child',
+				'uagb/taxonomy-list',
+				'uagb/team',
+				'uagb/testimonial',
+				'uagb/content-timeline',
+				'uagb/content-timeline-child',
+				'uagb/post-timeline',
+				'uagb/wp-search',
+				'uagb/instagram-feed',
+				'uagb/login',
+				'uagb/loop-builder',
+				'uagb/loop-wrapper',
+				'uagb/register',
+				'uagb/register-email',
+				'uagb/register-first-name',
+				'uagb/register-last-name',
+				'uagb/register-password',
+				'uagb/register-reenter-password',
+				'uagb/register-terms',
+				'uagb/register-username',
 			];
 
 			if( ! REUSABLE_BLOCK_ISSUE_RESOLVED_BLOCKS.includes( name ) ){
-				const { uniqueIds, clientIds } = getUniqueIdFromBlocks(getEditorBlocks());
+				const { uniqueIds, clientIds } = getUniqueIdFromBlocks( getAllBlocks() );
 				if (
 					!attributes.block_id ||
-					hasDuplicates(uniqueIds, attributes.block_id, clientIds.indexOf(clientId))
+					checkDuplicate( uniqueIds, attributes.block_id, clientIds.indexOf( clientId ) )
 				) {
 					setAttributes( attributeObject );
 				}
