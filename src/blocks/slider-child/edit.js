@@ -9,6 +9,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import { withSelect, useDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
+import { useDeviceType } from '@Controls/getPreviewType';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 
 const UAGBSlide = ( props ) => {
@@ -31,9 +32,7 @@ const UAGBSlide = ( props ) => {
 };
 
 const applyWithSelect = withSelect( ( select, props ) => {
-	// eslint-disable-line no-shadow
-	const { __experimentalGetPreviewDeviceType = null } = select( 'core/edit-post' ) || select( 'core/edit-widgets' ) || select( 'core/edit-site' );;
-	const deviceType = __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
+	const deviceType = useDeviceType();
 	const { getBlocks, getBlockIndex } = select( 'core/block-editor' );
 	const { getBlockType } = select( 'core/blocks' );
 	const { insertBlock } = useDispatch( 'core/block-editor' );

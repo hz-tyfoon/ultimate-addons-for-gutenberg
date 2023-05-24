@@ -4,8 +4,7 @@
 import { ButtonGroup, Button, Tooltip } from '@wordpress/components';
 import { useDeviceType } from '@Controls/getPreviewType';
 import { __, sprintf } from '@wordpress/i18n';
-import { useCallback, useLayoutEffect } from '@wordpress/element';
-import { dispatch } from '@wordpress/data';
+import { useLayoutEffect } from '@wordpress/element';
 import styles from './editor.lazy.scss';
 const DeviceIcons = () => {
 	// Add and remove the CSS on the drop and remove of the component.
@@ -18,10 +17,10 @@ const DeviceIcons = () => {
 
 	const deviceType = useDeviceType();
 
-	const customSetPreviewDeviceType = useCallback( ( device ) => {
-		const { __experimentalSetPreviewDeviceType: setPreviewDeviceType } = dispatch( 'core/edit-post' );
-		setPreviewDeviceType( device );
-	}, [] );
+	// const customSetPreviewDeviceType = useCallback( ( device ) => {
+	// 	const { deviceType: setPreviewDeviceType } = dispatch( 'core/edit-post' );
+	// 	setPreviewDeviceType( device );
+	// }, [] );
 
 	const devicesSvgs = {
 		desktop: (
@@ -88,7 +87,6 @@ const DeviceIcons = () => {
 								staticName === deviceType ? ' active-tab' : ''
 							}` }
 							aria-pressed={ deviceType === staticName }
-							onClick={ () => customSetPreviewDeviceType( staticName ) }
 						>
 							{ title }
 						</Button>
