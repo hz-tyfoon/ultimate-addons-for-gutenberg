@@ -23,10 +23,7 @@ const ButtonsChildComponent = ( props ) => {
 		setAttributes,
 		name,
 		deviceType,
-		context
 	} = props;
-
-	console.log(context);
 
 	const initialState = {
 		isURLPickerOpen: false,
