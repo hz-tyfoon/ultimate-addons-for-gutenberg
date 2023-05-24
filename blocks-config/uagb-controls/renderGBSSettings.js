@@ -9,13 +9,8 @@ const renderGBSSettings = ( styling, setAttributes, attributes ) => {
     }
 
     return (
-        // <GlobalBlockStyles
-        //     { ...{ setAttributes, styling  } }
-        // />
         <GlobalBlockStyles
-            setAttributes = {setAttributes}
-            styling = {styling}
-            attributes = {attributes}
+            { ...{ setAttributes, styling, attributes  } }
         />
     )
 };

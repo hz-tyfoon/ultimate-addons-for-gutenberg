@@ -504,7 +504,7 @@ addFilter( 'uag_advance_tab_content', 'uagb/advanced-display-condition', functio
 				notHasDisallowedParentForAnimations && (
 					<UAGAdvancedPanelBody
 						title={ __( 'Animations', 'ultimate-addons-for-gutenberg' ) }
-						initialOpen={ true }
+						initialOpen={ false }
 						className="block-editor-block-inspector__advanced uagb-extention-tab"
 					>
 						{ animationOptions( props ) }

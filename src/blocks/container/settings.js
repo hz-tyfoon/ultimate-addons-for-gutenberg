@@ -1860,7 +1860,6 @@ const Settings = ( props ) => {
 		<InspectorControls>
 			<InspectorTabs>
 				<InspectorTab { ...UAGTabs.general }>
-					{ renderGBSSettings( styling, setAttributes, attributes ) }
 					{ isBlockRootParent && presetSettings() }
 					{ generalSettings() }
 				</InspectorTab>
@@ -1872,7 +1871,9 @@ const Settings = ( props ) => {
 					{ shapeDividersSettings() }
 					{ spacingSettings() }
 				</InspectorTab>
-				<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+				<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+					{ renderGBSSettings( styling, setAttributes, attributes ) }
+				</InspectorTab>
 			</InspectorTabs>
 		</InspectorControls>
 	);

@@ -813,7 +813,6 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
-						{ renderGBSSettings( styling, setAttributes, attributes ) }
 						{ presetSettings() }
 						{ buttonSettings() }
 					</InspectorTab>
@@ -825,7 +824,9 @@ const Settings = ( props ) => {
 						{ boxShadowSettings() }
 						{ spacingSettings() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

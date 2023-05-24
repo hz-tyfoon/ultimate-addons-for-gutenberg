@@ -1609,7 +1609,6 @@ export default function Settings( props ) {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
-						{ renderGBSSettings( styling, setAttributes, attributes ) }
 						{ generalPanel }
 						{ shapeGeneralPanel }
 						{ layout === 'overlay' && (
@@ -1633,7 +1632,9 @@ export default function Settings( props ) {
 						{ enableCaption && layout !== 'overlay' && captionStylePanel }
 						{ 'none' !== seperatorStyle && layout === 'overlay' && seperatorStylePanel }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

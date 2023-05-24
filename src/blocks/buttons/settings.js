@@ -13,8 +13,6 @@ import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
 import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
-import renderGBSSettings from '@Controls/renderGBSSettings';
-import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -465,7 +463,6 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
-						{ renderGBSSettings( styling, setAttributes, attributes ) }
 						{ generalSettings() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>

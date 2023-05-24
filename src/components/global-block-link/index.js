@@ -249,7 +249,7 @@ const GlobalBlockStyles = ( props ) => {
     return (
         <UAGAdvancedPanelBody
             title={ __( 'Global Block Styles', 'ultimate-addons-for-gutenberg' ) }
-            initialOpen={ true }
+            initialOpen={ false }
             className={ panelLoader ? 'loading' : '' }
         >
             {
