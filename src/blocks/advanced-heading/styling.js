@@ -12,6 +12,7 @@ function styling( attributes, clientId, name ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
+		block_id,
 		headingAlign,
 		headingAlignTablet,
 		headingAlignMobile,
@@ -405,7 +406,7 @@ function styling( attributes, clientId, name ) {
 			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceMobile, 'headSpaceMobile', blockName ), 'px' ),
 		};
 	}
-	const base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ block_id }`;
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
 	tablet_selectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tablet_selectors, attributes );
