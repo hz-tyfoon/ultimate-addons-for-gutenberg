@@ -972,10 +972,16 @@ class UAGB_Init_Blocks {
 				}
 				$_block_css                                    = $desktop . $tab_styling_css . $mob_styling_css;
 				$global_block_styles[ $key ]['frontendStyles'] = $_block_css;
+				$gbs_stored                                    = get_option( 'spectra_global_block_styles', array() );
+
+				if ( ! empty( $gbs_stored[ $key ]['post_ids'] ) ) {
+					$global_block_styles[ $key ]['post_ids'] = array_merge( $global_block_styles[ $key ]['post_ids'], $gbs_stored[ $key ]['post_ids'] );
+				}
+
 				update_option( 'spectra_global_block_styles', $global_block_styles );
 
-				if ( ! empty( $style['post_ids'] ) && is_array( $style['post_ids'] ) ) {
-					foreach ( $style['post_ids'] as $post_id ) {
+				if ( ! empty( $global_block_styles[ $key ]['post_ids'] ) && is_array( $global_block_styles[ $key ]['post_ids'] ) ) {
+					foreach ( $global_block_styles[ $key ]['post_ids'] as $post_id ) {
 						UAGB_Helper::delete_page_assets( $post_id );
 					}
 				}

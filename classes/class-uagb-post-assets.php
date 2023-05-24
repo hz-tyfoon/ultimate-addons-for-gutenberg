@@ -221,7 +221,7 @@ class UAGB_Post_Assets {
 
 		// For Spectra Global Block Styles.
 		$this->spectra_gbs_load_gfonts();
-		
+
 		if ( wp_is_post_revision( $this->post_id ) ) {
 			$this->is_post_revision = true;
 		}
@@ -296,7 +296,7 @@ class UAGB_Post_Assets {
 		}
 
 		foreach ( $spectra_global_block_styles as $style ) {
-			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) ) {
+			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) && ! empty( $style['post_ids'] ) && in_array( $this->post_id, $style['post_ids'] ) ) {
 				$this->stylesheet = $style['frontendStyles'] . $this->stylesheet;
 			}
 		}
@@ -433,9 +433,6 @@ class UAGB_Post_Assets {
 	 */
 	public function enqueue_scripts() {
 
-		// For Spectra Global Block Styles.
-		$this->spectra_gbs_load_styles();
-
 		global $_wp_current_template_content;
 		$blocks = parse_blocks( $_wp_current_template_content );
 		// Global Required assets.
@@ -490,6 +487,9 @@ class UAGB_Post_Assets {
 				add_action( 'wp_head', array( $this, 'print_stylesheet' ), 80 );
 			}
 		}
+
+		// For Spectra Global Block Styles.
+		$this->spectra_gbs_load_styles();
 	}
 	/**
 	 * Get saved fonts.
