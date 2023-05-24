@@ -5,7 +5,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 5.6
 Tested up to: 6.2
-Stable tag: 2.6.0
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,7 +166,22 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 == Changelog ==
 
-= 2.6.0 - THURSDAY, 11th MAY 2023 =
+= x.x.x =
+* Fix: Global - Resolved an issue in which the CSS would not load in the front-end in edge cases.
+* Fix: Image Gallery - Removed the additional bottom spacing in the masonry layout that would appear on certain themes.
+* Fix: Image Gallery - Resolved an issue in which the masonry layout would appear stacked for a brief moment on load.
+* Fix: Call To Action - When using call to action with additional button, on responsive view button is getting more height
+* Fix: Spectra Custom CSS - Resolved Conflict with Astra Custom Layout Sticky Settings.
+
+= 2.6.1 - FRIDAY, 19th MAY 2003 =
+* Improvement: Added Premium Templates in Template Kits library.
+* Fix: Admin Dashboard - Added missing i18n support for some strings.
+* Fix: Admin Dashboard - 'Activate all' and 'Deactivate all' previously had no impact on the status of Animations extension.
+* Fix: Animations Extension - Resolved the 'Error loading' issue for dynamic blocks that was caused by animation attributes.
+* Fix: CF7 Designer - Resolved an issue with CF7 Styler where CSS of custom classes were not being applied correctly to multiple column fields.
+* Fix: Image Gallery - Resolved an issue in which the 'show on hover' border color for bar-type captions would not work as intended.
+
+= 2.6.0 - WEDNESDAY, 17th MAY 2023 =
 * New: Introducing the Popup Builder - Create sitewide Popups and Info Bars with ease!
 * New: Introducing the Animations extension - Give a new life to your page with some scroll-based entrance animations.
 * New: Introducing the Separator block -  Divide your page content in style.
@@ -187,6 +202,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Modal - Resolved an issue wherein the alignment of the block moves to the center from the left when inside the Container.
 * Fix: Post Blocks - Resolved an issue wherein the Spectra Heading and Container blocks were not displayed in post excerpts.
 * Fix: Post Grid - Resolved a pagination bug in Post Grid that affected the other grid's pagination.
+* Fix: Slider - Fixed an issue that was causing the Slider block to malfunction when used in the Full Site Editing (FSE) template and widget editors.
 * Fix: Table Of Contents - Updated the front-end preview UI to match in the "Inside Post/Page Content" type of Astra's Custom Layout.
 * Fix: Table Of Contents - Resolved an issue wherein the gap between lists setting would not work as required on the front-end.
 * Fix: Tabs - Set the tab title default color to 'inherit' to prevent it from taking the link color from the theme.
