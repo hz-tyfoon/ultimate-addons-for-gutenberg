@@ -90,6 +90,11 @@
 		opacity: 0.4;
 		pointer-events: none;
 	}
+	.spectra-gbs-buttons-wrap {
+		display: flex;
+		justify-content: space-between;
+		padding-top: 10px;
+	}
 }
 
 @keyframes button-loading-spinner {

@@ -926,16 +926,23 @@ class UAGB_Init_Blocks {
 			wp_send_json_error();
 		}
 		
+		if ( empty( $_POST['spectraGlobalStyles'] ) ) {
+			$response_data = array( 'messsage' => __( 'Noo post data found!', 'ultimate-addons-for-gutenberg' ) );
+			wp_send_json_error( $response_data );
+		}
+
+		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		if ( ! empty( $_POST['bulkUpdateStyles'] ) && 'no' !== $_POST['bulkUpdateStyles'] ) {
+			update_option( 'spectra_global_block_styles', $global_block_styles );
+			wp_send_json_success( $global_block_styles );
+		}
+		
 		if ( empty( $_POST ) || empty( $_POST['attributes'] ) || empty( $_POST['blockName'] ) || empty( $_POST['postId'] ) || empty( $_POST['spectraGlobalStyles'] ) ) {
 			$response_data = array( 'messsage' => __( 'Noo post data found!', 'ultimate-addons-for-gutenberg' ) );
 			wp_send_json_error( $response_data );
 		}
 	
-		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		if ( ! empty( $_POST['bulkUpdateStyles'] ) && 'no' !== $_POST['bulkUpdateStyles'] ) {
-			update_option( 'spectra_global_block_styles', $global_block_styles );
-			wp_send_json_success( $global_block_styles );
-		}
 		$post_id = sanitize_text_field( $_POST['postId'] );
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
 		foreach ( $global_block_styles as $key => $style ) {

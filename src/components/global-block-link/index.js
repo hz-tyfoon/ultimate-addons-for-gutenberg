@@ -4,14 +4,13 @@ import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import styles from './editor.lazy.scss';
 import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
-import { select, withSelect, withDispatch, dispatch } from '@wordpress/data';
+import { select, withSelect, withDispatch } from '@wordpress/data';
 import { Button, Modal  } from '@wordpress/components';
 import UAGTextControl from '@Components/text-control';
 import apiFetch from '@wordpress/api-fetch';
 import { store as spectraStore } from '@Store';
 import { STORE_NAME as storeName } from '@Store/constants';
 import { compose } from '@wordpress/compose';
-import Select from 'react-select';
 import UAGSelectControl from '@Components/select-control';
 import { useDeviceType } from '@Controls/getPreviewType';
 
@@ -46,14 +45,10 @@ const GlobalBlockStyles = ( props ) => {
     } = props;
 
     const [ uniqueID, setUniqueID ] = useState( false );
-    const [ bulkEdit, setBulkEdit ] = useState( false );
-    const [ multiSelected, setMultiSelected ] = useState( [] );
     const [ updateLoader, setUpdateLoader ] = useState( false );
     const [ panelLoader, setPanelLoader ] = useState( false );
     const [ tempStyleName, setTempStyleName ] = useState( '' );
     const [ saveToDatabase, setSaveToDatabase ] = useState( false );
-    const [currentAttributesState, setCurrentAttributesState] = useState( attributes );
-    const [ attributesChanged, setAttributesChanged ] = useState( false );
     const [ generate, setGenerate ] = useState( false );
 
     const blockNameStripped = blockName.replace( 'uagb/', '' );
@@ -61,16 +56,6 @@ const GlobalBlockStyles = ( props ) => {
 	const allBlocksAttributes = wp.hooks.applyFilters( 'uagb.blocksAttributes', blocksAttributes )
     const currentBlockDefaultAttributes = allBlocksAttributes[blockNameStripped]
 
-    useEffect( () => {
-        if ( currentAttributesState !== attributes ) {
-            setCurrentAttributesState( attributes );
-            setAttributesChanged( true );
-            
-        } else {
-            setAttributesChanged( false );
-        }
-		
-	}, [attributes] );
 
     useEffect( () => {
         if ( saveToDatabase ) {
@@ -262,7 +247,7 @@ const GlobalBlockStyles = ( props ) => {
                         } }
                         variant="primary"
                     >
-                        { __( 'Save as a New Global Block Style', 'ultimate-addons-for-gutenberg' ) }
+                        { __( 'Add New', 'ultimate-addons-for-gutenberg' ) }
                     </Button>
                 )
             }
@@ -309,150 +294,68 @@ const GlobalBlockStyles = ( props ) => {
                     </div>
 				</Modal>
 			) }
-            {
-                ! bulkEdit &&
-
-                <UAGSelectControl
-                    label={ selectLabel }
-                    data={ {
-                        value: globalBlockStyleId,
-                        label: 'globalBlockStyleId',
-                    } }
-                    onChange = {
-                        ( value ) => {
-                            let label = '';
-                            for ( let i = 0; i < globalBlockStyles.length; i++ ) {
-                                if ( globalBlockStyles[i]?.value === value ) {
-                                    label = globalBlockStyles[i]?.label;
-                                    break;
-                                }
-                            }
-
-                            globalBlockStyles.map( ( style ) => {
-                                
-                                if ( style?.value === value ) {
-                                    label = style?.label;
-                                    if ( style?.post_ids ) {
-                                        style.post_ids.push( currentPostID );
-                                    } else {
-                                        style.post_ids = [currentPostID];
-                                    }
-                                
-
-                                    style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
-                                
-
-                                }
-                                return style;
-                            } );
-                            updateGlobalBlockStyles( globalBlockStyles );
-                            saveStylesToDatabase( 'bulkUpdateStyles', globalBlockStyles );
-                            setAttributes( 
-                                { 
-                                    globalBlockStyleId: value,
-                                    globalBlockStyleName: label 
-                                } 
-                            );
-                            setPanelLoader( true );
-                            setUniqueID( value );
-                        }
-                    }
-                    options={ globalBlockStyles }
-                    layout="stack"
-                />
-            }
-            { bulkEdit && (
-                <>
-                    <label htmlFor="select-label">{selectLabel}</label>
-                    <Select
-                        data={ {
-                            value: globalBlockStyleId,
-                            label: 'globalBlockStyleId',
-                        } }
-                        defaultValue={multiSelected}
-                        onChange = {
-                            ( value ) => {    
-                                if ( bulkEdit ) {
-                                    setMultiSelected( value );
-                                }
-                            }
-                        }
-                        options={ globalBlockStyles }
-                        classNamePrefix={'spectra-multi-select'}
-                        className={'spectra-multi-select components-base-control'}
-                        isMulti={true}
-                    />
-                </>
-            )
-            }
-            <Button
-                className="spectra-gbs-button components-base-control"
-                onClick={ () => {
-                    setBulkEdit( true );
-                    setMultiSelected( globalBlockStyles.filter( ( item ) => item.value && globalBlockStyleId?.includes( item.value ) ) );
+            
+            <UAGSelectControl
+                label={ selectLabel }
+                data={ {
+                    value: globalBlockStyleId,
+                    label: 'globalBlockStyleId',
                 } }
-                variant="primary"
-            >
-                { __( 'Bulk Edit', 'ultimate-addons-for-gutenberg' ) }
-            </Button>
-            { bulkEdit &&
-                (
-                    <>
-                        <Button
-                            className="spectra-gbs-button delete components-base-control"
-                            onClick={ () => {
-                                setMultiSelected( globalBlockStyles );
-                            } }
-                            variant="primary"
-                        >
-                            { __( 'Select All', 'ultimate-addons-for-gutenberg' ) }
-                        </Button>
-                        <Button
-                            className="spectra-gbs-button delete components-base-control"
-                            onClick={ () => {
-                                setBulkEdit( false );
-                                const toBeDeletedIDs = [];
-                                for( const style in multiSelected ) {
-                                    toBeDeletedIDs.push( multiSelected[style]?.value );
+                onChange = {
+                    ( value ) => {
+                        let label = '';
+                        for ( let i = 0; i < globalBlockStyles.length; i++ ) {
+                            if ( globalBlockStyles[i]?.value === value ) {
+                                label = globalBlockStyles[i]?.label;
+                                break;
+                            }
+                        }
+
+                        globalBlockStyles.map( ( style ) => {
+                            
+                            if ( style?.value === value ) {
+                                label = style?.label;
+                                if ( style?.post_ids ) {
+                                    style.post_ids.push( currentPostID );
+                                } else {
+                                    style.post_ids = [currentPostID];
                                 }
-                                const filterGBS = globalBlockStyles.filter( ( style ) => {
-                                    if ( style?.value && toBeDeletedIDs.includes( style?.value ) && 'None' !== style?.label ) {
-                                        dispatch( 'core/block-editor' ).updateBlockAttributes( style?.clientId, { 
-                                            globalBlockStyleId: '',
-                                            globalBlockStyleName: '' 
-                                        } );
-                                        return false;
-                                    }
-                                    return true;
-                                } );
-                                updateGlobalBlockStyles( filterGBS );
-                                saveStylesToDatabase( 'bulkUpdateStyles', filterGBS );
-                                setPanelLoader( true );
-                                setUniqueID( false );
-                            } }
-                            variant="primary"
-                        >
-                            { __( 'Delete Selected Styles', 'ultimate-addons-for-gutenberg' ) }
-                        </Button>
-                    </>
-                )
-            }
+                            
+
+                                style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
+                            
+
+                            }
+                            return style;
+                        } );
+                        updateGlobalBlockStyles( globalBlockStyles );
+                        saveStylesToDatabase( 'bulkUpdateStyles', globalBlockStyles );
+                        setAttributes( 
+                            { 
+                                globalBlockStyleId: value,
+                                globalBlockStyleName: label 
+                            } 
+                        );
+                        setPanelLoader( true );
+                        setUniqueID( value );
+                    }
+                }
+                options={ globalBlockStyles }
+                layout="stack"
+            />
             {
                 ( globalBlockStyleId && '' !== globalBlockStyleId ) && (
-                    <>
-                        {
-                            attributesChanged &&
-                            <Button
-                                className={`spectra-gbs-button ${updateLoader ? 'loading' : ''} components-base-control`}
-                                onClick={ () => {
-                                    setUpdateLoader( true );
-                                    generateBlockStyles();
-                                } }
-                                variant="primary"
-                            >
-                                { __( 'Update Global Block Style', 'ultimate-addons-for-gutenberg' ) }
-                            </Button>
-                        }
+                    <div className='spectra-gbs-buttons-wrap'>
+                        <Button
+                            className={`spectra-gbs-button ${updateLoader ? 'loading' : ''} components-base-control`}
+                            onClick={ () => {
+                                setUpdateLoader( true );
+                                generateBlockStyles();
+                            } }
+                            variant="primary"
+                        >
+                            { __( 'Update Globally!', 'ultimate-addons-for-gutenberg' ) }
+                        </Button>
                         <Button
                                 className="spectra-gbs-button components-base-control"
                                 onClick={ () => {
@@ -466,9 +369,9 @@ const GlobalBlockStyles = ( props ) => {
                                 } }
                                 variant="primary"
                         >
-                            { __( 'Unlink Global Block Style', 'ultimate-addons-for-gutenberg' ) }
+                            { __( 'Unlink Style', 'ultimate-addons-for-gutenberg' ) }
                         </Button>
-                    </>
+                    </div>
                 )
             }
         </UAGAdvancedPanelBody>
