@@ -26,12 +26,12 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 		 */
 		private static $instance;
 
-				/**
-				 * Post content.
-				 *
-				 * @since x.x.x
-				 * @var string
-				 */
+		/**
+		 * Post content.
+		 *
+		 * @since x.x.x
+		 * @var string
+		 */
 		public static $output_content = '';
 
 		/**
