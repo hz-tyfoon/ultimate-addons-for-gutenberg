@@ -269,7 +269,7 @@ const GlobalBlockStyles = ( props ) => {
                             } }
                             showHeaderControls={false}
                         />
-                        <button 
+                        <Button
                             onClick={ () => {
                                 setGenerate( true );
                                 setAttributes( 
@@ -288,9 +288,10 @@ const GlobalBlockStyles = ( props ) => {
                                 closeModal();
                                 updateGlobalBlockStyles( spectraGlobalStyles );
                             } }
+                            variant="primary"
                         >
-                            <p> { __( 'Save', 'ultimate-addons-for-gutenberg' ) }</p>
-                        </button>
+                            { __( 'Save', 'ultimate-addons-for-gutenberg' ) }
+                        </Button>
                     </div>
 				</Modal>
 			) }
