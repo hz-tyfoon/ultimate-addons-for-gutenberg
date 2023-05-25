@@ -62,6 +62,7 @@ class UAGB_Front_Assets {
 			add_filter( 'render_block', array( $this, 'render_icons_dynamically' ), 10, 2 );
 		}
 	}
+
 	/**
 	 * On build convert icons into svgs.
 	 *
@@ -83,6 +84,7 @@ class UAGB_Front_Assets {
 		}
 		return $block_content;
 	}
+
 	/**
 	 * Replace the svg with the svg path.
 	 *
@@ -99,6 +101,7 @@ class UAGB_Front_Assets {
 					</svg>';
 		}
 	}
+	
 	/**
 	 * Set initial variables.
 	 *
