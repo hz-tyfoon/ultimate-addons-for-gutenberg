@@ -6,7 +6,7 @@
  */
 
 import parseSVG from './parseIcon';
-function renderSVG( svg, setAttributes = false  ) {
+function renderSVG( svg, setAttributes = false ) {
 	svg = parseSVG( svg );
 	let fontAwesome;
 	// Load Polyfiller Array if needed.
@@ -30,7 +30,7 @@ function renderSVG( svg, setAttributes = false  ) {
 
 		if ( multisite && ! is_super_admin && ! setAttributes ) {
 			return ( 
-				<span class = "uagb-mutisite__svg" data-path={ path } data-viewBox={ viewBox }></span>
+				<span className = "uagb-mutisite__svg" data-path={ path } data-viewBox={ viewBox }></span>
 			);
 		} 
 
