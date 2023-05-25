@@ -437,8 +437,6 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 		 * Sets the current post for usage in template blocks.
 		 *
 		 * @since x.x.x
-		 * @access public
-		 *
 		 * @return WP_Post|null The post if any, or null otherwise.
 		 */
 		public function get_post_from_context() {
@@ -449,7 +447,7 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 			}
 			// Prevent an issue with the terms and conditions page in the woocommerce checkout.
 			if ( class_exists( 'woocommerce' ) && is_checkout() ) {
-				return '';
+				return null;
 			}
 
 			return get_post();
@@ -457,10 +455,9 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 		/**
 		 * Renders blocks to allow dynamic blocks that bring in headings to be accounted for.
 		 *
-		 * @since x.x.x
-		 * @access private
-		 *
 		 * @param string $block The page content content.
+		 * @since x.x.x
+		 * @return void
 		 */
 		private function uagb_get_dynamic_parse_blocks( $block ) {
 			if ( 'uagb/table-of-contents' !== $block['blockName'] ) {
@@ -473,12 +470,9 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 		 * otherwise, returns only data from headings on the current page being
 		 * rendered.
 		 *
-		 * @since x.x.x
-		 * @access private
-		 *
 		 * @param WP_Post $post The post to extract headings from.
-		 * @param array   $attributes the block attributes.
-		 *
+		 * @param array   $attributes array of attributes.
+		 * @since x.x.x
 		 * @return array The list of headings.
 		 */
 		private function table_of_contents_get_dynamic_headings( $post, $attributes = array() ) {
