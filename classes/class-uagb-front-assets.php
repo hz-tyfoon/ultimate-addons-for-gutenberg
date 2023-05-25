@@ -58,7 +58,9 @@ class UAGB_Front_Assets {
 	public function __construct() {
 		add_action( 'wp', array( $this, 'set_initial_variables' ), 99 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_asset_files' ) );
-		add_filter( 'render_block', array( $this, 'render_icons_dynamically' ), 10, 2 );
+		if ( is_multisite() && ! is_super_admin() && ! current_user_can( 'manage_network' ) ) {
+			add_filter( 'render_block', array( $this, 'render_icons_dynamically' ), 10, 2 );
+		}
 	}
 	/**
 	 * On build convert icons into svgs.
