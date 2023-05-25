@@ -13,6 +13,7 @@ import Settings from './settings';
 import Render from './render';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const ButtonsChildComponent = ( props ) => {
 	const {
@@ -32,9 +33,6 @@ const ButtonsChildComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
 		// border migration
 		if ( borderWidth || borderRadius || borderColor || borderHColor || borderStyle ) {
 			migrateBorderAttributes(
@@ -89,5 +87,6 @@ const ButtonsChildComponent = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( ButtonsChildComponent );

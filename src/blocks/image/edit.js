@@ -10,10 +10,10 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import { getLoopImage } from './getLoopImage';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 function UAGBImageEdit( props ) {
 	const {
-		setAttributes,
 		isSelected,
 		clientId,
 		attributes,
@@ -21,11 +21,6 @@ function UAGBImageEdit( props ) {
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		deviceType
 	} = props;
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-	}, [] );
 
 	useEffect( () => {
 		scrollBlockToView();
@@ -45,4 +40,8 @@ function UAGBImageEdit( props ) {
 		</>
 	);
 }
-export default compose( getLoopImage, AddStaticStyles )( UAGBImageEdit );
+export default compose( 
+	getLoopImage, 
+	addInitialAttr, 
+	AddStaticStyles 
+	)( UAGBImageEdit );

@@ -20,6 +20,7 @@ import ReactHtmlParser from 'react-html-parser';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 import { containerWrapper } from './containerWrapper';
 
 const UAGBContainer = ( props ) => {
@@ -129,9 +130,6 @@ const UAGBContainer = ( props ) => {
 			hasSliderParent: blockParents.hasSliderParent,
 			hasPopupParent: blockParents.hasPopupParent
 		} );
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
 		const iframeEl = document.querySelector( `iframe[name='editor-canvas']` );
 		let element;
@@ -254,5 +252,6 @@ const UAGBContainer = ( props ) => {
 
 export default compose(
 	containerWrapper,
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBContainer );
