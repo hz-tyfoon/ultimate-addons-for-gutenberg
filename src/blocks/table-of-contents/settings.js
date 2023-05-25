@@ -463,7 +463,7 @@ const Settings = ( props ) => {
 					) }
 					checked={ allowDynamicBlock }
 					help={ __(
-						'This feature works only on front-end.',
+						'This feature works only on the front-end.',
 						'ultimate-addons-for-gutenberg'
 					) }
 					onChange={ () =>
