@@ -66,7 +66,7 @@ class UAGB_Front_Assets {
 	}
 
 	/**
-	 * On build convert icons into svgs.
+	 * Render icons dynamically for multisite.
 	 *
 	 * @param string $block_content the block data.
 	 * @since x.x.x
