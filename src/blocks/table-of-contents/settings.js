@@ -144,7 +144,7 @@ const Settings = ( props ) => {
 		separatorSpaceTablet,
 		separatorSpaceMobile,
 		separatorSpaceType,
-		allowDynamicBlock
+		allowDynamicBlock,
 	} = attributes;
 
 	const getGeneralPanelBody = () => {
