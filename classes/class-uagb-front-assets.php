@@ -58,23 +58,25 @@ class UAGB_Front_Assets {
 	public function __construct() {
 		add_action( 'wp', array( $this, 'set_initial_variables' ), 99 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_asset_files' ) );
+
 		if ( is_multisite() && ! is_super_admin() && ! current_user_can( 'manage_network' ) ) {
 			add_filter( 'render_block', array( $this, 'render_icons_dynamically' ), 10, 2 );
 		}
+		
 	}
 
 	/**
 	 * On build convert icons into svgs.
 	 *
-	 * @param string $block_content the name of the svg.
-	 * @param object $block the block data.
+	 * @param string $block_content the block data.
 	 * @since x.x.x
 	 * @return string|void
 	 */
-	public function render_icons_dynamically( $block_content, $block ) {
+	public function render_icons_dynamically( $block_content ) {
 		if ( is_admin() ) {
 			return $block_content;
 		}
+
 		if ( ! empty( $block_content ) ) {
 			$pattern                = '/<span\s+class="uagb-mutisite__svg"\s+data-path="([^"]*)"(\s+data-viewbox="([^"]*)")?><\/span>/';
 			$replaced_block_content = preg_replace_callback( $pattern, array( $this, 'replace_svg' ), $block_content );
@@ -82,13 +84,14 @@ class UAGB_Front_Assets {
 			// If the regex errored out, don't replace the $block_content.
 			$block_content = null === $replaced_block_content ? $block_content : $replaced_block_content;
 		}
+
 		return $block_content;
 	}
 
 	/**
 	 * Replace the svg with the svg path.
 	 *
-	 * @param array $matches the name of the svg.
+	 * @param array $matches the data of path and viewbox.
 	 * @since x.x.x
 	 * @return string|void
 	 */
