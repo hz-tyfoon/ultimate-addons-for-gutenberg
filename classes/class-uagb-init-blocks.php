@@ -751,7 +751,8 @@ class UAGB_Init_Blocks {
 				'insta_all_users_media'                   => apply_filters( 'uag_instagram_transients', array() ),
 				'is_site_editor'                          => $screen->id,
 				'current_post_id'                         => get_the_ID(),
-				'is_multisite' => is_multisite(),
+				'is_multisite'                            => is_multisite(),
+				'is_super_admin'                          => is_super_admin() && current_user_can( 'manage_network' ),
 			)
 		);
 		// To match the editor with frontend.

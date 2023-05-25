@@ -6,7 +6,7 @@
  */
 
 import parseSVG from './parseIcon';
-function renderSVG( svg, setAttributes = false ) {
+function renderSVG( svg, setAttributes = false  ) {
 	svg = parseSVG( svg );
 	let fontAwesome;
 	// Load Polyfiller Array if needed.
@@ -16,7 +16,9 @@ function renderSVG( svg, setAttributes = false ) {
 			fontAwesome = uagb_blocks_info.uagb_svg_icons[ uagb_blocks_info.font_awesome_5_polyfill?.[ svg ] ];
 		}
 	}
-
+	const multisite = uagb_blocks_info.is_multisite;
+	const is_super_admin = uagb_blocks_info.is_super_admin;
+	
 	if ( 'undefined' !== typeof fontAwesome ) {
 		const viewbox_array = fontAwesome.svg.hasOwnProperty( 'brands' )
 			? fontAwesome.svg.brands.viewBox
@@ -25,6 +27,12 @@ function renderSVG( svg, setAttributes = false ) {
 			? fontAwesome.svg.brands.path
 			: fontAwesome.svg.solid.path;
 		const viewBox = viewbox_array.join( ' ' );
+
+		if ( multisite && ! is_super_admin && ! setAttributes ) {
+			return ( 
+				<span class = "uagb-mutisite__svg" data-path={ path } data-viewBox={ viewBox }></span>
+			);
+		} 
 
 		switch ( svg ) {
 			case 'align-center':
@@ -56,7 +64,7 @@ function renderSVG( svg, setAttributes = false ) {
 					</svg>
 				);
 		}
-
+		
 		return ! setAttributes || 'not_set' === setAttributes ? (
 			<svg xmlns="https://www.w3.org/2000/svg" viewBox={ viewBox }>
 				<path d={ path }></path>
