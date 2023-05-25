@@ -7,9 +7,13 @@ const AddGBSStyles = ( ChildComponent )=> {
 	const WrapWithStyle = ( props ) => {
 		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
 		const { 
+			attributes,
+			setAttributes
+		} = props;
+		const { 
 			globalBlockStyleId,
 			globalBlockStyleName
-		} = props?.attributes;
+		} = attributes;
 		
 		const editorStyles = getGBSEditorStyles( globalBlockStyles, globalBlockStyleId, globalBlockStyleName );
 
@@ -25,9 +29,24 @@ const AddGBSStyles = ( ChildComponent )=> {
 			}
 		}, [editorStyles] );
 
+		useEffect( () => {
+			const isGBSPresent = globalBlockStyles?.find( style => {
+				return style?.value === globalBlockStyleId;
+			} );
+			
+			if( ! isGBSPresent ){
+				setAttributes( 
+					{ 
+						globalBlockStyleId: '',
+						globalBlockStyleName: ''
+					} 
+				);
+			}
+		}, [] );
+
 		// Filter the placeholder attribute.
 
-		const modifiedAttr = { ...props.attributes };
+		const modifiedAttr = { ...attributes };
 
 		for ( const objectKey in modifiedAttr ) {
 			if( 0.001020304 === modifiedAttr?.[objectKey] ){
@@ -36,7 +55,7 @@ const AddGBSStyles = ( ChildComponent )=> {
 		}
 		
 		const updatedAtributes = {
-			...props.attributes,
+			...attributes,
 			...modifiedAttr
 		};
 
