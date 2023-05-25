@@ -65,7 +65,7 @@ class UAGB_Front_Assets {
 	 *
 	 * @param string $block_content the name of the svg.
 	 * @param object $block the block data.
-	 *
+	 * @since x.x.x
 	 * @return string|void
 	 */
 	public function render_icons_dynamically( $block_content, $block ) {
@@ -82,13 +82,11 @@ class UAGB_Front_Assets {
 		return $block_content;
 	}
 	/**
-	 * Replace the svg with the svg markup.
+	 * Replace the svg with the svg path.
 	 *
-	 * @param array $matches the matches from the regex.
+	 * @param array $matches the name of the svg.
+	 * @since x.x.x
 	 * @return string|void
-	 * @since 1.23.`
-	 * @access private
-	 * @todo add a filter to allow users to add their own svgs.
 	 */
 	private function replace_svg( $matches ) {
 		if ( ! empty( $matches ) ) {
