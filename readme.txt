@@ -166,6 +166,9 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 == Changelog ==
 
+= x.x.x =
+* Fix: Global - Resolved an edge case issue in multi-sites wherein SVGs would not render as required.
+
 = 2.6.1 - FRIDAY, 19th MAY 2003 =
 * Improvement: Added Premium Templates in Template Kits library
 * Fix: Admin Dashboard - Added missing i18n support for some strings.
