@@ -932,7 +932,6 @@ const attributes = {
 	isSquareBox: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'countdown-box-square',
 		},

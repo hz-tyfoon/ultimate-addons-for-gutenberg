@@ -526,7 +526,6 @@ const attributes = {
 	ctaBgType: {
 		type: 'string',
 		default: 'color',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-bg-type',
 		},
@@ -542,7 +541,6 @@ const attributes = {
 	secondCtaBgType: {
 		type: 'string',
 		default: 'color',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'second-btn-bg-type',
 		},
