@@ -15,7 +15,6 @@ import addInitialAttr from '@Controls/addInitialAttr';
 function UAGBImageEdit( props ) {
 	const {
 		isSelected,
-		clientId,
 		attributes,
 		name,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
@@ -26,7 +25,7 @@ function UAGBImageEdit( props ) {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, name, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
 		responsiveConditionPreview( props );

@@ -10,6 +10,7 @@ function styling( attributes, clientId, name ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
+		block_id,
 		fontFamily,
 		fontWeight,
 		gap,
@@ -243,7 +244,7 @@ function styling( attributes, clientId, name ) {
 		'letter-spacing': generateCSSUnit( fontLetterSpacingMobile, fontLetterSpacingType ),
 	};
 
-	const base_selector = ` .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = ` .uagb-block-${ block_id }`;
 
 	let styling_css = generateCSS( selectors, base_selector );
 

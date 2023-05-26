@@ -2,39 +2,31 @@ import { useEffect } from '@wordpress/element';
 
 const getAllBlocks = () => wp.data.select( 'core/block-editor' ).getBlocks();
 
-/**
- * Search all blocks for uniqueIds
- *
- * @param {Array} blocks The blocks array
- * @return {Array} The array of uniqueIds
- */
-export const getUniqueIdFromBlocks = ( blocks ) => blocks
+const getUniqId = ( blocks ) => blocks
 	.reduce( ( result, block ) => {
-		if (
-			block.name &&
-			( block.attributes && block.attributes.block_id )
-		) {
-			result.uniqueIds.push( block.attributes.block_id );
+		if ( block?.attributes?.block_id ) {
+			result.blockIds.push( block.attributes.block_id );
 			result.clientIds.push( block.clientId );
 		}
 
 		if ( block.innerBlocks ) {
-			const { uniqueIds, clientIds } = getUniqueIdFromBlocks( block.innerBlocks );
-			result.uniqueIds = result.uniqueIds.concat( uniqueIds );
-			result.clientIds = result.clientIds.concat( clientIds );
+			const { blockIds, clientIds } = getUniqId( block.innerBlocks );
+			result.blockIds = [ ...result.blockIds, ...blockIds ];
+			result.clientIds = [ ...result.clientIds, ...clientIds ];
 		}
 
 		return result;
-	}, { uniqueIds: [], clientIds: [] } );
+	}, { blockIds: [], clientIds: [] } );
 
-const checkDuplicate = ( arr, value, currentIndex ) => (
-	arr.filter( ( el ) => ( el === value ) ).length > 1 &&
-	currentIndex === arr.lastIndexOf( value )
-);
+const checkDuplicate = ( blockIds, block_id, currentIndex ) => {
+	const getFiltered =  blockIds.filter( ( el ) => ( el === block_id ) );
+	return getFiltered.length > 1 && currentIndex === blockIds.lastIndexOf( block_id )
+}
 
 const addInitialAttr = ( ChildComponent ) => {
 	const WrappedComponent = ( props ) => {
-		const { name, setAttributes, clientId, attributes } = props;
+		const { name, setAttributes, clientId, attributes : { block_id } } = props;
+		
 		useEffect( () => {
 			const listOfClassMigrate = [
 				'uagb/advanced-heading',
@@ -101,16 +93,16 @@ const addInitialAttr = ( ChildComponent ) => {
 			 * After tested few blocks we will implement this is all blocks.
 			 */
 			const REUSABLE_BLOCK_ISSUE_RESOLVED_BLOCKS = [ 
-				// "uagb/advanced-heading",
+				// "uagb/advanced-heading", //need
 				'uagb/blockquote',
-				'uagb/buttons',
-				'uagb/buttons-child',
-				'uagb/call-to-action',
+				// 'uagb/buttons', //need
+				// 'uagb/buttons-child', //need
+				// 'uagb/call-to-action', //need
 				'uagb/cf7-styler',
 				'uagb/column',
 				'uagb/columns',
-				'uagb/container',
-				'uagb/countdown',
+				'uagb/container', //need
+				// 'uagb/countdown', //need
 				'uagb/counter',
 				'uagb/faq',
 				'uagb/faq-child',
@@ -132,12 +124,12 @@ const addInitialAttr = ( ChildComponent ) => {
 				'uagb/google-map',
 				'uagb/how-to',
 				'uagb/how-to-step',
-				'uagb/icon',
+				// 'uagb/icon', //need
 				'uagb/icon-list',
 				'uagb/icon-list-child',
-				'uagb/image',
+				// 'uagb/image', //need
 				'uagb/image-gallery',
-				'uagb/info-box',
+				// 'uagb/info-box', //need
 				'uagb/inline-notice',
 				'uagb/lottie',
 				'uagb/marketing-button',
@@ -187,11 +179,8 @@ const addInitialAttr = ( ChildComponent ) => {
 			];
 
 			if( ! REUSABLE_BLOCK_ISSUE_RESOLVED_BLOCKS.includes( name ) ){
-				const { uniqueIds, clientIds } = getUniqueIdFromBlocks( getAllBlocks() );
-				if (
-					!attributes.block_id ||
-					checkDuplicate( uniqueIds, attributes.block_id, clientIds.indexOf( clientId ) )
-				) {
+				const { blockIds, clientIds } = getUniqId( getAllBlocks() );
+				if ( 'not_set' === block_id || ! block_id || checkDuplicate( blockIds, block_id, clientIds.indexOf( clientId ) ) ) {
 					setAttributes( attributeObject );
 				}
 			}else{

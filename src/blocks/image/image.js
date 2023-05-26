@@ -18,6 +18,7 @@ import { isMediaDestroyed } from './utils';
 
 export default function Image( {
 	temporaryURL,
+	attributes,
 	attributes: {
 		url = '',
 		urlTablet = '',
@@ -89,7 +90,11 @@ export default function Image( {
 		const naturalWidth = imageRef.current?.naturalWidth || loadedNaturalWidth || undefined;
 		// eslint-disable-next-line
 		const naturalHeight = imageRef.current?.naturalHeight || loadedNaturalHeight || undefined;
-		setAttributes( { naturalWidth, naturalHeight } );
+		
+		if( ! attributes.naturalWidth || ! attributes.naturalHeight ){
+			setAttributes( { naturalWidth, naturalHeight } );
+		}
+
 		return {
 			naturalWidth,
 			naturalHeight,

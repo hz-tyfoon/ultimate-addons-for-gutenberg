@@ -12,6 +12,7 @@ function styling( attributes, clientId, name ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
+		block_id,
 		fontFamily,
 		fontWeight,
 		size,
@@ -308,7 +309,7 @@ function styling( attributes, clientId, name ) {
 			'background': hBackground,
 		};
 	}
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 	let stylingCss = generateCSS( selectors, id );
 
 	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );

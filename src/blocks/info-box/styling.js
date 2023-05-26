@@ -9,6 +9,7 @@ import generateBorderCSS from '@Controls/generateBorderCSS';
 
 function styling( attributes, clientId, name ) {
 	const {
+		block_id,
 		headingAlign,
 		headingAlignTablet,
 		headingAlignMobile,
@@ -878,7 +879,7 @@ function styling( attributes, clientId, name ) {
 	mobileSelectors[ ' .uagb-infobox-cta-link.wp-block-button__link' ] = ctaBorderCSSMobile;
 	tabletSelectors[ ' .uagb-infobox-cta-link.wp-block-button__link' ] = ctaBorderCSSTablet;
 
-	const id = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ block_id }`;
 	let stylingCss = generateCSS( selectors, id );
 
 	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );

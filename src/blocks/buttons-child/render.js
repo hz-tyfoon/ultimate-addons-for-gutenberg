@@ -26,6 +26,7 @@ const Render = ( props ) => {
 		background,
 		color,
 		showIcon,
+		block_id,
 	} = attributes;
 
 	const iconHtml = ( curr_position ) => {
@@ -67,7 +68,7 @@ const Render = ( props ) => {
 				className,
 				'uagb-buttons__outer-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
+				`uagb-block-${ block_id }`,
 				'wp-block-button',
 				btnBorderStyle !== 'none' && btnBorderStyle !== 'default' ? 'is-style-outline' : ''
 			) }

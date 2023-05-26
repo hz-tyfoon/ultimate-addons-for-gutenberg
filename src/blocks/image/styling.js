@@ -7,10 +7,11 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-export default function styling( attributes, clientId, name ) {
+export default function styling( attributes, name ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
+		block_id,
 		width,
 		widthTablet,
 		widthMobile,
@@ -375,7 +376,7 @@ export default function styling( attributes, clientId, name ) {
 		}
 	}
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	const tablet_selectors = {};
 	const mobile_selectors = {};

@@ -11,6 +11,7 @@ import { applyFilters } from '@wordpress/hooks';
 
 export default function styling( attributes, clientId, name ) {
 	const {
+		block_id,
 		showDays,
 		showHours,
 		showMinutes,
@@ -456,7 +457,7 @@ export default function styling( attributes, clientId, name ) {
 		mobileSelectors[ boxGapSelectorRTL ][ 'margin-right' ] = generateCSSUnit( boxSpacingFallbackMobile, 'px' );
 	}
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
 	tabletSelectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tabletSelectors, attributes );

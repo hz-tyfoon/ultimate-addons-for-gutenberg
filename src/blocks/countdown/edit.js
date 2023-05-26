@@ -76,7 +76,7 @@ const UAGBCountdownEdit = ( props ) => {
 	useEffect( () => {
 		if ( countdownRef ) {
 			setTimeout( () => {
-				UAGBCountdown.editorInit( '.uagb-block-' + clientId.substr( 0, 8 ), attributes, countdownRef.current ); // eslint-disable-line no-undef
+				UAGBCountdown.editorInit( '.uagb-block-' + block_id, attributes, countdownRef.current ); // eslint-disable-line no-undef
 			} );
 		}
 	}, [ countdownRef ] );

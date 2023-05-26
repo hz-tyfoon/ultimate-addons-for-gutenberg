@@ -187,6 +187,7 @@ function CtaStyle( attributes, clientId, name ) {
 		btncontentWidthMobile,
 		btncontentWidthType,
 		enabledSecondCtaButton,
+		block_id,
 	} = attributes;
 
 	const ctaBorderCSS = generateBorderCSS( attributes, 'btn' );
@@ -742,7 +743,7 @@ function CtaStyle( attributes, clientId, name ) {
 		};
 	}
 
-	const id = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ block_id }`;
 
 	let stylingCss = generateCSS( selectors, `${ id }` );
 
