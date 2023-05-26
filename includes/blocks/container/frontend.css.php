@@ -428,7 +428,7 @@ if ( 'video' === $attr['backgroundType'] ) {
 		'margin-left'    => UAGB_Helper::get_css_value( $left_margin_mobile, $attr['marginTypeMobile'] ),
 		'margin-right'   => UAGB_Helper::get_css_value( $right_margin_mobile, $attr['marginTypeMobile'] ),
 		'row-gap'        => UAGB_Helper::get_css_value( $attr['rowGapMobile'], $attr['rowGapTypeMobile'] ),
-		'column-gap'     => UAGB_Helper::get_css_value( $attr['columnGapMobile'], $attr['columnGapTypeMobile'] ), 
+		'column-gap'     => UAGB_Helper::get_css_value( $attr['columnGapMobile'], $attr['columnGapTypeMobile'] ),
 	);
 	$selectors[ '.wp-block-uagb-container' . $base_selector . ':hover .uagb-container__video-wrap' ] = array(
 		'border-color' => $attr['containerBorderHColor'],
