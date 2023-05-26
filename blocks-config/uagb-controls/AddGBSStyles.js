@@ -31,9 +31,9 @@ const AddGBSStyles = ( ChildComponent )=> {
 
 		useEffect( () => {
 			const isGBSPresent = globalBlockStyles?.find( style => {
-				return style?.value === globalBlockStyleId;
+				return globalBlockStyleId && style?.value === globalBlockStyleId;
 			} );
-			
+
 			if( ! isGBSPresent ){
 				setAttributes( 
 					{ 

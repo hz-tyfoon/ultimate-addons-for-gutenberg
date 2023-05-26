@@ -190,14 +190,23 @@ const GlobalBlockStyles = ( props ) => {
                 style.attributes = newAttributes;
                 style.clientId = clientId;
                 
+                // Save the Post IDs of the Pages where GBS is used.
                 if ( style?.post_ids ) {
                     style.post_ids.push( currentPostID );
                 } else {
                     style.post_ids = [currentPostID];
                 }
                 
-
                 style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
+
+                // Save all the clientIds of the blocks where GBS is used.
+                if ( style?.blocksLinked ) {
+                    style.blocksLinked.push( clientId );
+                } else {
+                    style.blocksLinked = [clientId];
+                }
+                
+                style.blocksLinked = [...new Set( style.blocksLinked )] // Make array values unique.
                 
 
             }
@@ -316,14 +325,24 @@ const GlobalBlockStyles = ( props ) => {
                             
                             if ( style?.value === value ) {
                                 label = style?.label;
+                                
+                                // Save the Post IDs of the Pages where GBS is used.
                                 if ( style?.post_ids ) {
                                     style.post_ids.push( currentPostID );
                                 } else {
                                     style.post_ids = [currentPostID];
                                 }
-                            
-
+                        
                                 style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
+
+                                // Save all the clientIds of the blocks where GBS is used.
+                                if ( style?.blocksLinked ) {
+                                    style.blocksLinked.push( clientId );
+                                } else {
+                                    style.blocksLinked = [clientId];
+                                }
+                                
+                                style.blocksLinked = [...new Set( style.blocksLinked )] // Make array values unique.
                             
 
                             }
