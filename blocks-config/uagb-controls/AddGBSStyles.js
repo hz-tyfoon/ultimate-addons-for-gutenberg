@@ -6,6 +6,8 @@ import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
 const AddGBSStyles = ( ChildComponent )=> {
 	const WrapWithStyle = ( props ) => {
 		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
+		const initialStateFlag = select( storeName ).getState()?.initialStateSetFlag;
+		
 		const { 
 			attributes,
 			setAttributes
@@ -34,7 +36,7 @@ const AddGBSStyles = ( ChildComponent )=> {
 				return globalBlockStyleId && style?.value === globalBlockStyleId;
 			} );
 
-			if( ! isGBSPresent ){
+			if( initialStateFlag && ! isGBSPresent ){
 				setAttributes( 
 					{ 
 						globalBlockStyleId: '',
@@ -42,7 +44,7 @@ const AddGBSStyles = ( ChildComponent )=> {
 					} 
 				);
 			}
-		}, [] );
+		}, [globalBlockStyles] );
 
 		// Filter the placeholder attribute.
 
