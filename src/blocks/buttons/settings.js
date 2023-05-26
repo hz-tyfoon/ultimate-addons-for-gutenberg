@@ -462,9 +462,7 @@ const Settings = ( props ) => {
 		<>
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
-						{ generalSettings() }
-					</InspectorTab>
+					<InspectorTab { ...UAGTabs.general }>{ generalSettings() }</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
 						{ styleSettings() }
 						{ spacingSettings() }

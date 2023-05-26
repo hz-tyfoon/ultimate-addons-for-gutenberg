@@ -13,11 +13,11 @@ export default function save( props ) {
 		<div
 			className={ classnames(
 				className,
-				`uagb-block-${ block_id }`,
 				'uagb-buttons__outer-wrap',
 				`uagb-btn__${ buttonSize }-btn`,
 				`uagb-btn-tablet__${ buttonSizeTablet }-btn`,
 				`uagb-btn-mobile__${ buttonSizeMobile }-btn`,
+				`uagb-block-${ block_id }`,
 			) }
 		>
 			<div className="uagb-buttons__wrap uagb-buttons-layout-wrap">

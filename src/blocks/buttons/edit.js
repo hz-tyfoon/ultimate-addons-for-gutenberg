@@ -12,7 +12,6 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
-import AddGBSStyles from '@Controls/AddGBSStyles';
 
 let prevState;
 
@@ -77,5 +76,4 @@ const ButtonsComponent = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
-	AddGBSStyles
 )( ButtonsComponent );
