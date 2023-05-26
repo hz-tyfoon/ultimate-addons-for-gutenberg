@@ -30,7 +30,7 @@ function renderSVG( svg, setAttributes = false ) {
 
 		if ( multisite && ! is_super_admin && ! setAttributes ) {
 			return ( 
-				<span className = "uagb-mutisite__svg" data-path={ path } data-viewBox={ viewBox }></span>
+				<span className="uagb-mutisite__svg" data-path={ path } data-viewBox={ viewBox }></span>
 			);
 		} 
 

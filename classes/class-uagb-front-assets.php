@@ -70,22 +70,18 @@ class UAGB_Front_Assets {
 	 *
 	 * @param string $block_content the block data.
 	 * @since x.x.x
-	 * @return string|void
+	 * @return string
 	 */
 	public function render_icons_dynamically( $block_content ) {
-		if ( is_admin() ) {
+		if ( is_admin() && empty( $block_content ) ) {
 			return $block_content;
 		}
-
-		if ( ! empty( $block_content ) ) {
-			$pattern                = '/<span\s+class="uagb-mutisite__svg"\s+data-path="([^"]*)"(\s+data-viewbox="([^"]*)")?><\/span>/';
-			$replaced_block_content = preg_replace_callback( $pattern, array( $this, 'replace_svg' ), $block_content );
-			
-			// If the regex errored out, don't replace the $block_content.
-			$block_content = null === $replaced_block_content ? $block_content : $replaced_block_content;
-		}
-
-		return $block_content;
+		$pattern                = '/<span\s+class="uagb-mutisite__svg"\s+data-path="([^"]*)"(\s+data-viewbox="([^"]*)")?><\/span>/';
+		$replaced_block_content = preg_replace_callback( $pattern, array( $this, 'replace_svg' ), $block_content );
+		
+		// If the regex errored out, don't replace the $block_content.
+		return empty( $replaced_block_content ) ? $block_content : $replaced_block_content;
+		
 	}
 
 	/**
