@@ -5,7 +5,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 5.6
 Tested up to: 6.2
-Stable tag: 2.6.0
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,7 +166,34 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 == Changelog ==
 
-= 2.6.0 - THURSDAY, 11th MAY 2023 =
+= x.x.x =
+* Improvement: Icon-List - When enter add new list item to the Icon-List.
+* Improvement: Global - Updated the hover box shadow generation, added shadow transitions and added optional hover shadow separation.
+* Fix: Global - Resolved an issue in which the CSS would not load in the front-end in edge cases.
+* Fix: Global - Resolved an issue wherein the border would overlap parts of the background images and gradients.
+* Fix: Container - Fixed an issue where setting a text color for a heading from a child container would affect all other headings on the page.
+* Fix: Image Gallery - Removed the additional bottom spacing in the masonry layout that would appear on certain themes.
+* Fix: Image Gallery - Resolved an issue in which the masonry layout would appear stacked for a brief moment on load.
+* Fix: Image Gallery - Resolved an issue in FSE themes wherein the lightbox would have an extra top-margin on the front-end.
+* Fix: Call To Action - When using call to action with additional button, on responsive view button is getting more height
+* Fix: Table Of Contents - Resolved an issue in which the Table Of Contents block would overflow the Container in Full Site Editing (FSE) themes.
+* Fix: Post Carousel - The preset layout 4 is not showing as a slider on the frontend.
+* Fix: Post Carousel - Resolved an issue in which the carousel would appear as a grid for some time on load.
+* Fix: Post Carousel - Resolved an issue in the FSE ( Full Site Editing ) template in which the arrows would overflow the page.
+* Fix: Forms - Resolved an issue in which Custom class for form block uag-col-2 is not working as intended on the frontend.
+* Fix: Team - Resolved an issue in which the alignment would not function properly when the Team block is used in RTL mode.
+* Fix: Taxonomy - Number of columns option is not working for responsive devices on frontend.
+* Fix: Spectra Custom CSS - Resolved Conflict with Astra Custom Layout Sticky Settings.
+
+= 2.6.1 - FRIDAY, 19th MAY 2003 =
+* Improvement: Added Premium Templates in Template Kits library.
+* Fix: Admin Dashboard - Added missing i18n support for some strings.
+* Fix: Admin Dashboard - 'Activate all' and 'Deactivate all' previously had no impact on the status of Animations extension.
+* Fix: Animations Extension - Resolved the 'Error loading' issue for dynamic blocks that was caused by animation attributes.
+* Fix: CF7 Designer - Resolved an issue with CF7 Styler where CSS of custom classes were not being applied correctly to multiple column fields.
+* Fix: Image Gallery - Resolved an issue in which the 'show on hover' border color for bar-type captions would not work as intended.
+
+= 2.6.0 - WEDNESDAY, 17th MAY 2023 =
 * New: Introducing the Popup Builder - Create sitewide Popups and Info Bars with ease!
 * New: Introducing the Animations extension - Give a new life to your page with some scroll-based entrance animations.
 * New: Introducing the Separator block -  Divide your page content in style.
@@ -182,10 +209,12 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Image Gallery - Resolved an issue wherein the carousel images would initially appear big on load.
 * Fix: Form - Resolved an issue in which the forms were not being submitted when the block is used inside the footer widget.
 * Fix: Masonry Gallery Extension - Resolved an issue in which the Masonry Gallery extension would not work as intended in the FSE.
+* Fix: Masonry Gallery - Resolved an issue in which the reset button did not work as intended.
 * Fix: Modal - Resolved an issue with the close button in Astra's custom layout action hook `before_add_to_card_form`.
 * Fix: Modal - Resolved an issue wherein the alignment of the block moves to the center from the left when inside the Container.
 * Fix: Post Blocks - Resolved an issue wherein the Spectra Heading and Container blocks were not displayed in post excerpts.
 * Fix: Post Grid - Resolved a pagination bug in Post Grid that affected the other grid's pagination.
+* Fix: Slider - Fixed an issue that was causing the Slider block to malfunction when used in the Full Site Editing (FSE) template and widget editors.
 * Fix: Table Of Contents - Updated the front-end preview UI to match in the "Inside Post/Page Content" type of Astra's Custom Layout.
 * Fix: Table Of Contents - Resolved an issue wherein the gap between lists setting would not work as required on the front-end.
 * Fix: Tabs - Set the tab title default color to 'inherit' to prevent it from taking the link color from the theme.

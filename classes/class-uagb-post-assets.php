@@ -203,6 +203,14 @@ class UAGB_Post_Assets {
 	public static $custom_css_appended = false;
 
 	/**
+	 * Is current post a revision.
+	 *
+	 * @since x.x.x
+	 * @var is_post_revision
+	 */
+	public $is_post_revision = false;
+
+	/**
 	 * Constructor
 	 *
 	 * @param int $post_id Post ID.
@@ -211,11 +219,15 @@ class UAGB_Post_Assets {
 
 		$this->post_id = intval( $post_id );
 
+		if ( wp_is_post_revision( $this->post_id ) ) {
+			$this->is_post_revision = true;
+		}
+
 		$this->preview = isset( $_GET['preview'] ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$this->load_uag_fonts = apply_filters( 'uagb_enqueue_google_fonts', $this->load_uag_fonts );
 
-		if ( $this->preview ) {
+		if ( $this->preview || $this->is_post_revision ) {
 			$this->file_generation              = 'disabled';
 			$this->is_allowed_assets_generation = true;
 		} else {
@@ -447,7 +459,7 @@ class UAGB_Post_Assets {
 	 */
 	public function update_page_assets() {
 
-		if ( $this->preview ) {
+		if ( $this->preview || $this->is_post_revision ) {
 			return;
 		}
 
@@ -870,12 +882,21 @@ class UAGB_Post_Assets {
 			foreach ( $block['innerBlocks'] as $j => $inner_block ) {
 				if ( 'core/block' === $inner_block['blockName'] ) {
 					$id = ( isset( $inner_block['attrs']['ref'] ) ) ? $inner_block['attrs']['ref'] : 0;
-
 					if ( $id ) {
 						$assets = $this->get_assets_using_post_content( $id );
-
-						$this->stylesheet .= $assets['css'];
-						$this->script     .= $assets['js'];
+						if ( wp_is_block_theme() ) {
+							$reuse_block_css             = array(
+								'desktop' => '',
+								'tablet'  => '',
+								'mobile'  => '',
+							);
+							$reuse_block_css['desktop'] .= $assets['css'];
+							$css                         = array_merge( $css, $reuse_block_css );
+							$js                         .= $assets['js'];
+						} else {
+							$this->stylesheet .= $assets['css'];
+							$this->script     .= $assets['js'];
+						}
 					}
 				} else {
 					// Get CSS for the Block.
@@ -1164,7 +1185,7 @@ class UAGB_Post_Assets {
 			// Create a new file.
 			$result = $file_system->put_contents( $file_path, $file_data, FS_CHMOD_FILE );
 
-			if ( $result ) {
+			if ( $result && ! $this->is_post_revision ) {
 				// Update meta with current timestamp.
 				update_post_meta( $this->post_id, '_uag_' . $type . '_file_name', $file_name );
 			}
