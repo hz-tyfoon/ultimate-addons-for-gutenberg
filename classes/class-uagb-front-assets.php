@@ -80,7 +80,7 @@ class UAGB_Front_Assets {
 		$replaced_block_content = preg_replace_callback( $pattern, array( $this, 'replace_svg' ), $block_content );
 		
 		// If the regex errored out, don't replace the $block_content.
-		return empty( $replaced_block_content ) ? $block_content : $replaced_block_content;
+		return ( ! $replaced_block_content || empty( $replaced_block_content ) ) ? $block_content : $replaced_block_content;
 		
 	}
 
@@ -97,6 +97,10 @@ class UAGB_Front_Assets {
 		}
 		$svg_path = isset( $matches[1] ) ? $matches[1] : '';
 		$view_box = isset( $matches[3] ) ? $matches[3] : ''; 
+
+		if ( empty( $svg_path ) || empty( $view_box ) ) {
+			return;
+		}
 
 		return '<svg xmlns="https://www.w3.org/2000/svg" viewBox="' . $view_box . '">
 					<path d="' . $svg_path . '"></path>
