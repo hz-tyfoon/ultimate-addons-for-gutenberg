@@ -718,12 +718,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		);
 	}
 
-	let base_selector = `.editor-styles-wrapper #block-${ clientId }`;
-
-	// For Global Block Styles.
-	if ( gbsSelector ) {
-		base_selector = gbsSelector;
-	}
+	const base_selector = gbsSelector ? gbsSelector : `.editor-styles-wrapper #block-${ clientId }`;
 
 	let styling_css = generateCSS( selectors, base_selector );
 

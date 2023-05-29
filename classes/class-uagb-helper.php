@@ -862,7 +862,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 */
 		public static function add_gbs_selector_if_applicable( $selector, $gbs_attributes ) {
 			if ( ! empty( $gbs_attributes['globalBlockStyleName'] ) && ! empty( $gbs_attributes['globalBlockStyleId'] ) ) {
-				$selector = self::get_gbs_selector( $gbs_attributes['globalBlockStyleName'] );
+				return self::get_gbs_selector( $gbs_attributes['globalBlockStyleName'] );
 			}
 			return $selector;
 		}
@@ -890,6 +890,8 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * @param array  $combined_selectors The combined selector array.
 		 * @param string $id The selector ID.
 		 * @param array  $gbs_attributes The GBS attributes array.
+		 * 
+		 * @return array Responsive CSS.
 		 * @since 1.15.0
 		 */
 		public static function generate_all_css( $combined_selectors, $id, $gbs_attributes = false ) {
@@ -1375,6 +1377,8 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * This function deletes the Page assets from the Page Meta Key.
 		 *
 		 * @param int $post_id Post Id.
+		 * 
+		 * @return void
 		 * @since 1.23.0
 		 */
 		public static function delete_page_assets( $post_id ) {
@@ -1448,12 +1452,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			$tag          = '<!-- wp:block';
 			$flag         = strpos( $post_content, $tag );
 
-			if ( false !== $flag ) {
-
-				return true;
-			}
-
-			return false;
+			return ! false === strpos( $post_content, $tag );
 		}
 	}
 

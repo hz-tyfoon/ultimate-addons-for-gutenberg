@@ -10,12 +10,12 @@ const AddGBSStyles = ( ChildComponent )=> {
 		
 		const { 
 			attributes,
+			attributes : {
+				globalBlockStyleId,
+				globalBlockStyleName
+			},
 			setAttributes
 		} = props;
-		const { 
-			globalBlockStyleId,
-			globalBlockStyleName
-		} = attributes;
 		
 		const editorStyles = getGBSEditorStyles( globalBlockStyles, globalBlockStyleId, globalBlockStyleName );
 

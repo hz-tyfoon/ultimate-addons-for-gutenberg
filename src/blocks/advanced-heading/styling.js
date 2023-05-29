@@ -405,12 +405,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceMobile, 'headSpaceMobile', blockName ), 'px' ),
 		};
 	}
-	let base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
-
-	// For Global Block Styles.
-	if ( gbsSelector ) {
-		base_selector = gbsSelector + ' ';
-	}
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
 	tablet_selectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tablet_selectors, attributes );

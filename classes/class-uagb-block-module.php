@@ -117,8 +117,8 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		/**
 		 * Filter GBS Placeholder Attributes.
 		 *
-		 * @since x.x.x
 		 * @param array $attributes Block attributes.
+		 * @since x.x.x
 		 * @return array
 		 */
 		public static function gbs_filter_placeholder_attributes( $attributes ) {

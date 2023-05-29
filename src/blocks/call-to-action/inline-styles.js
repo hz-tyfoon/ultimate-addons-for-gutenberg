@@ -742,12 +742,7 @@ function CtaStyle( attributes, clientId, name, deviceType, gbsSelector = false )
 		};
 	}
 
-	let base_selector = `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
-
-	// For Global Block Styles.
-	if ( gbsSelector ) {
-		base_selector = gbsSelector + ' ';
-	}
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	let stylingCss = generateCSS( selectors, `${ base_selector }` );
 

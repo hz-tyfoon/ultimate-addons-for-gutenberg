@@ -217,7 +217,7 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 				array(
 					array(
 						'value' => '',
-						'label' => 'None',
+						'label' => __( 'None', 'ultimate-addons-for-gutenberg' ),
 					),
 				) 
 			);
@@ -230,7 +230,7 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 				$spectra_global_block_styles = array(
 					array(
 						'value' => '',
-						'label' => 'None',
+						'label' => __( 'None', 'ultimate-addons-for-gutenberg' ),
 					),
 				);
 			}

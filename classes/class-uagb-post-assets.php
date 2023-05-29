@@ -311,11 +311,15 @@ class UAGB_Post_Assets {
 
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
 		
+		if ( ! is_array( $spectra_gbs_google_fonts ) ) {
+			return;
+		}
+
 		$families = array();
 		foreach ( $spectra_gbs_google_fonts as $style ) {
 			if ( is_array( $style ) ) {
 				foreach ( $style as $family ) {
-					if ( ! in_array( $family, $families ) ) {
+					if ( ! in_array( $family, $families, true ) ) {
 						UAGB_Helper::blocks_google_font( true, $family, false );
 						$families[] = $family;
 					}
@@ -917,11 +921,8 @@ class UAGB_Post_Assets {
 		if ( strpos( $name, 'uagb/' ) !== false ) {
 			$_block_slug = str_replace( 'uagb/', '', $name );
 
-			$is_gbs = false;
-
-			if ( ! empty( $blockattr['globalBlockStyleId'] ) ) {
-				$is_gbs = true;
-			}
+			$is_gbs = ! empty( $blockattr['globalBlockStyleId'] );
+			
 			$_block_css = UAGB_Block_Module::get_frontend_css( $_block_slug, $blockattr, $block_id, $is_gbs );
 			$_block_js  = UAGB_Block_Module::get_frontend_js( $_block_slug, $blockattr, $block_id, 'js' );
 			$css        = array_merge( $css, $_block_css );

@@ -456,12 +456,7 @@ export default function styling( attributes, clientId, name, deviceType, gbsSele
 		mobileSelectors[ boxGapSelectorRTL ][ 'margin-right' ] = generateCSSUnit( boxSpacingFallbackMobile, 'px' );
 	}
 
-	let baseSelector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
-
-	// For Global Block Styles.
-	if ( gbsSelector ) {
-		baseSelector = gbsSelector;
-	}
+	const baseSelector = gbsSelector ? gbsSelector : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
 	tabletSelectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tabletSelectors, attributes );

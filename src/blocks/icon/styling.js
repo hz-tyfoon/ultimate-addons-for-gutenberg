@@ -191,11 +191,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	};
 
 	let stylingCss = '';
-	let base_selector = `.uagb-block-${ block_id }`;
-	// For Global Block Styles.
-	if ( gbsSelector ) {
-		base_selector = gbsSelector;
-	}
+	const base_selector = gbsSelector ? gbsSelector : `.uagb-block-${ block_id }`;
+	
 	stylingCss = generateCSS( selectors, base_selector );
 
 	stylingCss += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );

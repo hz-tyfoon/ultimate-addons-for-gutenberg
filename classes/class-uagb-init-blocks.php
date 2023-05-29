@@ -892,7 +892,7 @@ class UAGB_Init_Blocks {
 	 */
 	public function add_gbs_class( $block_content, $block ) {
 		
-		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs'] ) || empty( $block['attrs']['globalBlockStyleName'] ) || empty( $block['attrs']['block_id'] ) ) {
+		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs']['globalBlockStyleName'] ) || empty( $block['attrs']['block_id'] ) ) {
 			return $block_content;
 		}
 		
@@ -926,8 +926,9 @@ class UAGB_Init_Blocks {
 			wp_send_json_error();
 		}
 		
+		$response_data = array( 'messsage' => __( 'No post data found!', 'ultimate-addons-for-gutenberg' ) );
+
 		if ( empty( $_POST['spectraGlobalStyles'] ) ) {
-			$response_data = array( 'messsage' => __( 'Noo post data found!', 'ultimate-addons-for-gutenberg' ) );
 			wp_send_json_error( $response_data );
 		}
 
@@ -939,7 +940,6 @@ class UAGB_Init_Blocks {
 		}
 		
 		if ( empty( $_POST ) || empty( $_POST['attributes'] ) || empty( $_POST['blockName'] ) || empty( $_POST['postId'] ) || empty( $_POST['spectraGlobalStyles'] ) || ! is_array( $global_block_styles ) ) {
-			$response_data = array( 'messsage' => __( 'Noo post data found!', 'ultimate-addons-for-gutenberg' ) );
 			wp_send_json_error( $response_data );
 		}
 	
@@ -950,7 +950,6 @@ class UAGB_Init_Blocks {
 				$block_attr = $style['attributes'];
 				
 				if ( ! $block_attr ) {
-					$response_data = array( 'messsage' => __( 'No post data found!', 'ultimate-addons-for-gutenberg' ) );
 					wp_send_json_error( $response_data );
 				}
 				
