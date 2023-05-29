@@ -9,6 +9,7 @@ const propTypes = {
 	label: PropTypes.string,
 	options: PropTypes.array,
 	data: PropTypes.object,
+	isSearchable: PropTypes.bool,
 	setAttributes: PropTypes.func,
 };
 
@@ -19,10 +20,11 @@ const defaultProps = {
 		label: '',
 		value: [],
 	},
+	isSearchable: false,
 	setAttributes: () => {},
 };
 
-export default function UAGMultiSelectControl( { label, options, data, setAttributes } ) {
+export default function UAGMultiSelectControl( { label, options, data, isSearchable, setAttributes } ) {
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 	const { getSelectedBlock } = select( 'core/block-editor' );
@@ -48,12 +50,19 @@ export default function UAGMultiSelectControl( { label, options, data, setAttrib
 		selectedBlock
 	);
 
+	const allOptionsFlat = allOptions.reduce( ( accumulator, currentItem ) => {
+		if ( currentItem.options ) {
+			return [...accumulator, ...currentItem.options];
+		}
+		return [...accumulator, currentItem];
+	}, [] );
+
 	return (
 		<div ref={ panelRef } className="components-base-control">
 			{ controlBeforeDomElement }
 			<Select
 				options={ allOptions }
-				defaultValue={ allOptions.filter( ( item ) => data.value.includes( item.value ) ) }
+				defaultValue={ allOptionsFlat.filter( ( item ) => data.value.includes( item.value ) ) }
 				onChange={ ( option ) =>
 					setAttributes( {
 						[ data.label ]: option.reduce( ( acc, current ) => {
@@ -64,6 +73,7 @@ export default function UAGMultiSelectControl( { label, options, data, setAttrib
 				}
 				classNamePrefix={ 'spectra-multi-select' }
 				className={ 'spectra-multi-select' }
+				isSearchable={ isSearchable }
 				isMulti
 			/>
 			{ controlAfterDomElement }
