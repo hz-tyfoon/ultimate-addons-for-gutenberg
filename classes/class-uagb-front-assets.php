@@ -73,7 +73,7 @@ class UAGB_Front_Assets {
 	 * @return string
 	 */
 	public function render_icons_dynamically( $block_content ) {
-		if ( is_admin() && empty( $block_content ) ) {
+		if ( is_admin() || empty( $block_content ) ) {
 			return $block_content;
 		}
 		$pattern                = '/<span\s+class="uagb-mutisite__svg"\s+data-path="([^"]*)"(\s+data-viewbox="([^"]*)")?><\/span>/';
