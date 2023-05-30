@@ -58,10 +58,7 @@ export default function UAGMultiSelectControl( props ) {
 	);
 
 	const allOptionsFlat = allOptions.reduce( ( accumulator, currentItem ) => {
-		return [
-			...accumulator,
-			...( currentItem?.options ? currentItem.options : [ currentItem ] ),
-		]
+		return [ ...accumulator, ...( currentItem?.options || [ currentItem ] ) ]
 	}, [] );
 
 	return (
