@@ -86,9 +86,9 @@ export default function Image( {
 	// width and height. This resolves an issue in Safari where the loaded natural
 	// width and height is otherwise lost when switching between alignments.
 	const { naturalWidth, naturalHeight } = useMemo( () => {
-		// eslint-disable-next-line
+		// eslint-disable-next-line no-shadow
 		const naturalWidth = imageRef.current?.naturalWidth || loadedNaturalWidth || undefined;
-		// eslint-disable-next-line
+		// eslint-disable-next-line no-shadow
 		const naturalHeight = imageRef.current?.naturalHeight || loadedNaturalHeight || undefined;
 		
 		if( ! attributes.naturalWidth || ! attributes.naturalHeight ){
