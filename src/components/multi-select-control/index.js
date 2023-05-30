@@ -24,7 +24,14 @@ const defaultProps = {
 	setAttributes: () => {},
 };
 
-export default function UAGMultiSelectControl( { label, options, data, isSearchable, setAttributes } ) {
+export default function UAGMultiSelectControl( props ) {
+	const {
+		label,
+		options,
+		data,
+		isSearchable,
+		setAttributes
+	} = props;
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
 	const { getSelectedBlock } = select( 'core/block-editor' );
@@ -51,10 +58,10 @@ export default function UAGMultiSelectControl( { label, options, data, isSearcha
 	);
 
 	const allOptionsFlat = allOptions.reduce( ( accumulator, currentItem ) => {
-		if ( currentItem.options ) {
-			return [...accumulator, ...currentItem.options];
-		}
-		return [...accumulator, currentItem];
+		return [
+			...accumulator,
+			...( currentItem?.options ? currentItem.options : [ currentItem ] ),
+		]
 	}, [] );
 
 	return (
