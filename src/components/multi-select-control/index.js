@@ -57,9 +57,8 @@ export default function UAGMultiSelectControl( props ) {
 		selectedBlock
 	);
 
-	const allOptionsFlat = allOptions.reduce( ( accumulator, currentItem ) => {
-		return [ ...accumulator, ...( currentItem?.options || [ currentItem ] ) ]
-	}, [] );
+	const allOptionsFlat = allOptions.reduce( ( accumulator, currentItem ) => [ ...accumulator, ...( currentItem?.options || [ currentItem ] ) ], [] );
+	// console.log( 'allOptionsFlat', allOptionsFlat );
 
 	return (
 		<div ref={ panelRef } className="components-base-control">
