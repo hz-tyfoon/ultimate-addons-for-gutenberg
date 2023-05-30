@@ -972,6 +972,10 @@ const attributes = {
 	objectFitMobile: {
 		type: 'string',
 	},
+	useSeparateBoxShadows: {
+		type: 'boolean',
+		default: true,
+	},
 	imageBoxShadowColor: {
 		type: 'string',
 		default: '#00000070',
@@ -1017,6 +1021,51 @@ const attributes = {
 		UAGCopyPaste: {
 			styleType: 'image-shadow-position',
 		},
+	},
+	imageBoxShadowColorHover: {
+		type: 'string',
+		isUAGStyle: true,
+		UAGCopyPaste: {
+			styleType: 'image-shadow-color-hover'
+		}
+	},
+	imageBoxShadowHOffsetHover: {
+		type: 'number',
+		isUAGStyle: true,
+		default: 0,
+		UAGCopyPaste: {
+			styleType: 'image-shadow-h-offset-hover'
+		}
+	},
+	imageBoxShadowVOffsetHover: {
+		type: 'number',
+		default: 0,
+		isUAGStyle: true,
+		UAGCopyPaste: {
+			styleType: 'image-shadow-v-offset-hover'
+		}
+	},
+	imageBoxShadowBlurHover: {
+		type: 'number',
+		isUAGStyle: true,
+		UAGCopyPaste: {
+			styleType: 'image-shadow-blur-hover'
+		}
+	},
+	imageBoxShadowSpreadHover: {
+		type: 'number',
+		isUAGStyle: true,
+		UAGCopyPaste: {
+			styleType: 'image-shadow-spread-hover'
+		}
+	},
+	imageBoxShadowPositionHover: {
+		type: 'string',
+		default: 'outset',
+		isUAGStyle: true,
+		UAGCopyPaste: {
+			styleType: 'image-shadow-position-hover'
+		}
 	},
 	// mask
 	maskShape: {

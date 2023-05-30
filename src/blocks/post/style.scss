@@ -12,6 +12,8 @@
 	}
 
 	.uagb-post__inner-wrap {
+		transition: box-shadow 0.2s ease;
+
 		.uagb-post__taxonomy {
 			display: inline-block;
 
@@ -155,6 +157,7 @@
 		-webkit-flex-wrap: wrap;
 		flex-wrap: wrap;
 		width: 100%;
+		visibility: hidden;
 	}
 
 	&.is-grid .uagb-post__inner-wrap {

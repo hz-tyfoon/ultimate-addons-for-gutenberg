@@ -168,16 +168,21 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ### x.x.x ###
 * Improvement: Icon-List - When enter add new list item to the Icon-List.
+* Improvement: Global - Updated the hover box shadow generation, added shadow transitions and added optional hover shadow separation.
 * Fix: Global - Resolved an issue in which the CSS would not load in the front-end in edge cases.
 * Fix: Global - Resolved an issue wherein the border would overlap parts of the background images and gradients.
 * Fix: Container - Fixed an issue where setting a text color for a heading from a child container would affect all other headings on the page.
 * Fix: Image Gallery - Removed the additional bottom spacing in the masonry layout that would appear on certain themes.
 * Fix: Image Gallery - Resolved an issue in which the masonry layout would appear stacked for a brief moment on load.
-*  Fix: Image Gallery - Resolved an issue in FSE themes wherein the lightbox would have an extra top-margin on the front-end.
+* Fix: Image Gallery - Resolved an issue in FSE themes wherein the lightbox would have an extra top-margin on the front-end.
 * Fix: Call To Action - When using call to action with additional button, on responsive view button is getting more height
 * Fix: Table Of Contents - Resolved an issue in which the Table Of Contents block would overflow the Container in Full Site Editing (FSE) themes.
+* Fix: Post Carousel - The preset layout 4 is not showing as a slider on the frontend.
+* Fix: Post Carousel - Resolved an issue in which the carousel would appear as a grid for some time on load.
 * Fix: Post Carousel - Resolved an issue in the FSE ( Full Site Editing ) template in which the arrows would overflow the page.
+* Fix: Forms - Resolved an issue in which Custom class for form block uag-col-2 is not working as intended on the frontend.
 * Fix: Team - Resolved an issue in which the alignment would not function properly when the Team block is used in RTL mode.
+* Fix: Taxonomy - Number of columns option is not working for responsive devices on frontend.
 * Fix: Spectra Custom CSS - Resolved Conflict with Astra Custom Layout Sticky Settings.
 
 ### 2.6.1 - FRIDAY, 19th MAY 2003 ###

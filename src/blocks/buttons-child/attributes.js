@@ -595,8 +595,12 @@ const attributes = {
 		type: 'string',
 		default: true,
 	},
-	boxShadowColor: {
-		type: 'string',
+	useSeparateBoxShadows: {
+		type: 'boolean',
+		default: true,
+	},
+	boxShadowColor:{
+		type:'string',
 		default: '#00000026',
 		isGBSStyle: true,
 		UAGCopyPaste: {
@@ -641,9 +645,48 @@ const attributes = {
 			styleType: 'btn-box-shadow-position',
 		},
 	},
-	iconColor: {
+	boxShadowColorHover: {
 		type: 'string',
 		isGBSStyle: true,
+		UAGCopyPaste: {
+			styleType: 'btn-box-shadow-color-hover'
+		},
+	},
+	boxShadowHOffsetHover: {
+		type: 'number',
+		default: 0,
+		UAGCopyPaste: {
+			styleType: 'btn-box-shadow-hoffset-hover'
+		},
+	},
+	boxShadowVOffsetHover: {
+		type: 'number',
+		default: 0,
+		UAGCopyPaste: {
+			styleType: 'btn-box-shadow-voffset-hover'
+		},
+	},
+	boxShadowBlurHover: {
+		type: 'number',
+		UAGCopyPaste: {
+			styleType: 'btn-box-shadow-blur-hover'
+		},
+	},
+	boxShadowSpreadHover: {
+		type: 'number',
+		UAGCopyPaste: {
+			styleType: 'btn-box-shadow-spread-hover'
+		},
+	},
+	boxShadowPositionHover: {
+		type: 'string',
+		default: 'outset',
+		UAGCopyPaste: {
+			styleType: 'btn-box-shadow-position-hover'
+		},
+	},
+	iconColor:{
+		type:'string',
 		UAGCopyPaste: {
 			styleType: 'btn-icon-color',
 		},
