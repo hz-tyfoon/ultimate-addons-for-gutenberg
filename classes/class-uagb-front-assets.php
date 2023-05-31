@@ -92,7 +92,7 @@ class UAGB_Front_Assets {
 	 * @return string|void
 	 */
 	private function replace_svg( $matches ) {
-		if ( is_array( $matches ) && empty( $matches[1] ) || empty( $matches[3] ) ) {
+		if ( ! is_array( $matches ) || empty( $matches[1] ) || empty( $matches[3] ) ) {
 			return;
 		}
 
