@@ -32,6 +32,7 @@ import DynamicFontLoader from '.././dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 const MAX_POSTS_COLUMNS = 8;
+import addInitialAttr from '@Controls/addInitialAttr';
 import Settings from './settings';
 import Render from './render';
 import { Placeholder, Spinner, ToggleControl, Icon } from '@wordpress/components';
@@ -287,7 +288,6 @@ const UAGBPostCarousel = ( props ) => {
 	useEffect( () => {
 		const { block } = props;
 		setState( { innerBlocks: block } );
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 
 		if ( btnVPadding ) {
 			if ( undefined === paddingBtnTop ) {
@@ -425,8 +425,6 @@ const UAGBPostCarousel = ( props ) => {
 		if ( columnGapMobile ) {
 			setAttributes( { dotsMarginTopMobile: columnGapMobile } );
 		}
-
-		setAttributes( { allTaxonomyStore: undefined } );
 	}, [] );
 
 	useEffect( () => {
@@ -2168,5 +2166,6 @@ const UAGBPostCarousel = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBPostCarousel );

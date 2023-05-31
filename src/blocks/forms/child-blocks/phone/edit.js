@@ -3,17 +3,16 @@
  */
 
 import { useEffect } from '@wordpress/element';
+import { compose } from '@wordpress/compose';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsPhoneEdit = ( props ) => {
-	const { setAttributes, isSelected, clientId } = props;
+	const { isSelected, clientId } = props;
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
 		// Pushing Style tag for this block css.
 		const $style = document.createElement( 'style' );
 		$style.setAttribute( 'id', 'uagb-style-forms-phone-' + clientId.substr( 0, 8 ) );
@@ -28,4 +27,6 @@ const UAGBFormsPhoneEdit = ( props ) => {
 	);
 };
 
-export default UAGBFormsPhoneEdit;
+export default compose(
+	addInitialAttr,
+)( UAGBFormsPhoneEdit );

@@ -11,6 +11,7 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBLottie = ( props ) => {
 
@@ -19,12 +20,6 @@ const UAGBLottie = ( props ) => {
 	const { UAGHideDesktop, UAGHideTab, UAGHideMob, loop, reverse } = attributes;
 	const lottieplayer = useRef();
 	const [ state, setState ] = useState( { direction: 1, loopState: true } );
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-		setAttributes( { classMigrate: true } );
-	}, [] );
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
@@ -60,5 +55,6 @@ const UAGBLottie = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBLottie );

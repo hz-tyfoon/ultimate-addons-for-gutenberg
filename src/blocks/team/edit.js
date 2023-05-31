@@ -12,11 +12,11 @@ import AddStaticStyles from '@Controls/AddStaticStyles';
 import Settings from './settings';
 import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBTeam = ( props ) => {
 	const {
 		isSelected,
-		setAttributes,
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		clientId,
@@ -32,12 +32,6 @@ const UAGBTeam = ( props ) => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-		setAttributes( { classMigrate: true } );
-	}, [] );
-
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	return (
@@ -51,5 +45,6 @@ const UAGBTeam = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBTeam );

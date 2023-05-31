@@ -16,11 +16,11 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { addFilter } from '@wordpress/hooks';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBSlider = ( props ) => {
 	const {
 		isSelected,
-		setAttributes,
 		attributes,
 		clientId,
 		name,
@@ -34,11 +34,6 @@ const UAGBSlider = ( props ) => {
 		return () => {
 			styles.unuse();
 		};
-	}, [] );
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 	}, [] );
 
 	useEffect( () => {
@@ -73,6 +68,7 @@ const applyWithSelect = withSelect( ( select, props ) => {
 } );
 
 export default compose(
+	addInitialAttr,
 	applyWithSelect,
 	AddStaticStyles,
 )( UAGBSlider );

@@ -17,6 +17,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from '.././dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const PostGridComponent = ( props ) => {
 	const {
@@ -73,7 +74,6 @@ const PostGridComponent = ( props ) => {
 		// Replacement for componentDidMount.
 		const { block } = props;
 		setStateValue( { innerBlocks: block } );
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
 		if ( borderWidth ) {
 			if ( undefined === btnBorderTopWidth ) {
@@ -124,8 +124,6 @@ const PostGridComponent = ( props ) => {
 				setAttributes( { btnBorderStyle: borderStyle } );
 			}
 		}
-
-		setAttributes( { allTaxonomyStore: undefined } );
 	}, [] );
 
 	useEffect( () => {
@@ -281,5 +279,6 @@ const PostGridComponent = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( PostGridComponent );
