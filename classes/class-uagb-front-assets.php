@@ -92,18 +92,12 @@ class UAGB_Front_Assets {
 	 * @return string|void
 	 */
 	private function replace_svg( $matches ) {
-		if ( empty( $matches ) ) {
-			return;
-		}
-		$svg_path = isset( $matches[1] ) ? $matches[1] : '';
-		$view_box = isset( $matches[3] ) ? $matches[3] : ''; 
-
-		if ( empty( $svg_path ) || empty( $view_box ) ) {
+		if ( is_array( $matches ) && empty( $matches[1] ) || empty( $matches[3] ) ) {
 			return;
 		}
 
-		return '<svg xmlns="https://www.w3.org/2000/svg" viewBox="' . $view_box . '">
-					<path d="' . $svg_path . '"></path>
+		return '<svg xmlns="https://www.w3.org/2000/svg" viewBox="' . esc_attr( $matches[3] ) . '">
+					<path d="' . esc_attr( $matches[1] ) . '"></path>
 				</svg>';
 	}
 	
