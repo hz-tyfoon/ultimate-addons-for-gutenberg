@@ -28,7 +28,7 @@ const Render = ( props ) => {
 	for ( let i = 1; i <= rangeValue; i++ ) {
 		stars.push(
 			<span key={ i } className="uag-star">
-				★
+				&#9733;
 			</span>
 		);
 	}
