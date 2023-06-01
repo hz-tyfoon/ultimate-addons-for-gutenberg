@@ -219,7 +219,7 @@ const UAGBFormsEdit = ( props ) => {
 		}
 	}, [] );
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, name, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
