@@ -753,6 +753,7 @@ class UAGB_Init_Blocks {
 				'current_post_id'                         => get_the_ID(),
 				'is_multisite'                            => is_multisite(),
 				'is_super_admin'                          => is_super_admin() && current_user_can( 'manage_network' ),
+				'btn_inherit_from_theme'                  => UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' ),
 			)
 		);
 		// To match the editor with frontend.
