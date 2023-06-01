@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import attributes from './attributes';
 
 import { RichText } from '@wordpress/block-editor';
-import newSaveV2_6_3 from './deprecated/v2_6_3/save';
+import newSaveV2_6_2 from './deprecated/v2_6_2/save';
 
 const deprecated = [
 	{
@@ -42,7 +42,7 @@ const deprecated = [
 	},
 	{
 		attributes,
-		newSaveV2_6_3,
+		newSaveV2_6_2,
 	}
 ];
 
