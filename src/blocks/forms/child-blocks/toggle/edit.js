@@ -8,11 +8,9 @@ import Settings from './settings';
 import Render from './render';
 
 const UAGBFormsToggleEdit = ( props ) => {
-	const { isSelected } = props;
-
 	return (
 		<>
-			{ isSelected && <Settings parentProps={ props } /> }
+			{ props.isSelected && <Settings parentProps={ props } /> }
 			<Render parentProps={ props } />
 		</>
 	);
