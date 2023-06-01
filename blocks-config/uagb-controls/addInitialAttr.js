@@ -4,7 +4,7 @@ const getAllBlocks = () => wp.data.select( 'core/block-editor' ).getBlocks();
 
 const getUniqId = ( blocks ) => blocks
 	.reduce( ( result, block ) => {
-		if ( block?.attributes?.block_id ) {
+		if ( block?.attributes?.block_id && block.name.includes( 'uagb' ) ) {
 			result.blockIds.push( block.attributes.block_id );
 			result.clientIds.push( block.clientId );
 		}
