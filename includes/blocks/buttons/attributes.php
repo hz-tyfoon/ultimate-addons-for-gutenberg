@@ -37,7 +37,7 @@ return array(
 	'classMigrate'            => false,
 	'childMigrate'            => false,
 	'block_id'                => '',
-	'align'                   => 'center',
+	'align'                   => 'left',
 	'btn_count'               => '2',
 	'buttons'                 => $default_buttons_child,
 	'gap'                     => 10,

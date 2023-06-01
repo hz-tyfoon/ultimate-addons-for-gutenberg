@@ -653,7 +653,7 @@ const attributes = {
 	},
 	borderStyle: {
 		type: 'string',
-		default: 'solid',
+		default: 'none',
 	},
 	borderColor: {
 		type: 'string',

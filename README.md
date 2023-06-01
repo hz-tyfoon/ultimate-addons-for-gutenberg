@@ -166,6 +166,9 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ## Changelog ##
 
+### x.x.X ###
+* Improvement: Buttons - Updated default 2 button to 1 button, removed default border, default alignment into left and FSE button color issue fix.
+
 ### 2.6.2 - WEDNESDAY, 31st MAY 2023 ###
 * New: Introducing the Inherit From Theme option - Choose to make buttons in Spectra blocks inherit their styles from the theme.
 * Improvement: Icon List - Added the functionality to create a new list item when pressing the enter key inside the Icon List block.

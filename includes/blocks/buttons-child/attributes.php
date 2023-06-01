@@ -125,7 +125,7 @@ return array_merge(
 		'letterSpacingType'      => 'px',
 		'borderWidth'            => '',
 		'borderRadius'           => '',
-		'borderStyle'            => 'solid',
+		'borderStyle'            => 'none',
 		'borderColor'            => '#000',
 		'borderHColor'           => '',
 	),

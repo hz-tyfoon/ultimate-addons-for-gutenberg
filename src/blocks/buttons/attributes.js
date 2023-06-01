@@ -1,4 +1,4 @@
-const itemCount = 2;
+const itemCount = 1;
 
 const buttons = [];
 
@@ -48,7 +48,7 @@ const attributes = {
 	},
 	align: {
 		type: 'string',
-		default: 'center',
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
