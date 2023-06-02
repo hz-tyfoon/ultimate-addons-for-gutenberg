@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
+import save_v2_6_3 from './v2.6.3/save';
 
 const attributes = {
 	block_id: {
@@ -125,6 +126,10 @@ const deprecated = [
 				</div>
 			);
 		},
+	},
+	{
+		attributes: attributes,
+		save: save_v2_6_3,
 	},
 ];
 
