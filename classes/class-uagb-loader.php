@@ -506,7 +506,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 					}
 
 					$this->update_google_maps_api_url_on_a_post( $reusable_block );
-				} else if ( ! empty( $block['innerBlocks'] ) ) {
+				} elseif ( ! empty( $block['innerBlocks'] ) ) {
 					$this->update_google_maps_api_url_on_a_blocks( $block['innerBlocks'] );
 				} else {
 					$address  = ! empty( $block['attrs']['address'] ) ? rawurlencode( $block['attrs']['address'] ) : rawurlencode( 'Brainstorm Force' );
