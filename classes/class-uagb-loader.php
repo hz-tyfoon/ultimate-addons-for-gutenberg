@@ -467,7 +467,9 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 		 */
 		public function update_google_maps_api_url_on_a_post( $post = false ) {
 
-			$post = get_post( 151 );
+			if ( ! $post ) {
+				$post = get_post( 151 );
+			}
 
 			if ( ! $post || ! isset( $post->post_content ) ) {
 				return;
