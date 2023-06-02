@@ -26,7 +26,7 @@ const Render = ( props ) => {
 	const encoded_address = encodeURI( address );
 	const lang_par = language ? language : 'en';
 	
-	const url = `https://maps.google.com/maps?q=${ encoded_address }&z=${ getFallbackNumber( zoom, 'zoom', blockName ) }&hl=${ lang_par }&output=embed&iwloc=near`;
+	const url = `https://maps.google.com/maps?q=${ encoded_address }&z=${ getFallbackNumber( zoom, 'zoom', blockName ) }&hl=${ lang_par }&t=m&output=embed&iwloc=near`;
 	
 	return (
 		<div

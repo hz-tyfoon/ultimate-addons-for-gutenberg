@@ -8,7 +8,7 @@ export default function save( props ) {
 	const { block_id, zoom, address, language, height } = props.attributes;
 	const encoded_address = encodeURI( address );
 	const lang_par = language ? language : 'en';
-	const url = `https://maps.google.com/maps?q=${ encoded_address }&z=${ getFallbackNumber( zoom, 'zoom', blockName ) }&hl=${ lang_par }&output=embed&iwloc=near`;
+	const url = `https://maps.google.com/maps?q=${ encoded_address }&z=${ getFallbackNumber( zoom, 'zoom', blockName ) }&hl=${ lang_par }&t=m&output=embed&iwloc=near`;
 
 	return (
 		<div className={ classnames( props.className, 'uagb-google-map__wrap', `uagb-block-${ block_id }` ) }>
