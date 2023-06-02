@@ -50,7 +50,6 @@ if ( ! class_exists( 'UAGB_Update' ) ) :
 		 * @return void
 		 */
 		public function init() {
-			
 			// Get auto saved version number.
 			$saved_version = get_option( 'uagb-version', false );
 
