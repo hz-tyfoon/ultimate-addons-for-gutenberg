@@ -505,7 +505,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 				
 			}
 			
-			$updated_post_content = str_replace( $url_to_replace, $updated_url, $post_content );
+			$updated_post_content = str_replace( $url_to_replace, $updated_url, $post_content ); // Update the Old Google Map API URL with new Directly in the Post Content.
 
 			$post->post_content = $updated_post_content;
 
