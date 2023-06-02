@@ -506,35 +506,34 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 					}
 
 					$this->update_google_maps_api_url_on_a_post( $reusable_block );
-				}
-
-				if ( ! empty( $block['innerBlocks'] ) ) {
+				} else if ( ! empty( $block['innerBlocks'] ) ) {
 					$this->update_google_maps_api_url_on_a_blocks( $block['innerBlocks'] );
-				}
-				$address  = ! empty( $block['attrs']['address'] ) ? rawurlencode( $block['attrs']['address'] ) : rawurlencode( 'Brainstorm Force' );
-				$zoom     = ! empty( $block['attrs']['zoom'] ) ? $block['attrs']['zoom'] : 12;
-				$language = ! empty( $block['attrs']['language'] ) ? $block['attrs']['language'] : 'en';
+				} else {
+					$address  = ! empty( $block['attrs']['address'] ) ? rawurlencode( $block['attrs']['address'] ) : rawurlencode( 'Brainstorm Force' );
+					$zoom     = ! empty( $block['attrs']['zoom'] ) ? $block['attrs']['zoom'] : 12;
+					$language = ! empty( $block['attrs']['language'] ) ? $block['attrs']['language'] : 'en';
 
-				$updated_url = esc_url_raw(
-					add_query_arg(
-						array(
-							'q'      => $address,
-							'z'      => $zoom,
-							'hl'     => $language,
-							't'      => 'm',
-							'output' => 'embed',
-							'iwloc'  => 'near',
-						),
-						'https://maps.google.com/maps' 
-					)
-				);
+					$updated_url = esc_url_raw(
+						add_query_arg(
+							array(
+								'q'      => $address,
+								'z'      => $zoom,
+								'hl'     => $language,
+								't'      => 'm',
+								'output' => 'embed',
+								'iwloc'  => 'near',
+							),
+							'https://maps.google.com/maps' 
+						)
+					);
 
-				$url_to_replace = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4&amp;q=' . $address . '&amp;zoom=' . $zoom . '&amp;language=' . $language;
+					$url_to_replace = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4&amp;q=' . $address . '&amp;zoom=' . $zoom . '&amp;language=' . $language;
 
-				$block['innerHTML'] = str_replace( $url_to_replace, $updated_url, $block['innerHTML'] ); // Update the Old Google Map API URL with new Directly in the Post Content.
+					$block['innerHTML'] = str_replace( $url_to_replace, $updated_url, $block['innerHTML'] ); // Update the Old Google Map API URL with new Directly in the Post Content.
 
-				foreach ( $block['innerContent'] as $key => $inner_content ) {
-					$block['innerContent'][ $key ] = str_replace( $url_to_replace, $updated_url, $block['innerContent'][ $key ] );
+					foreach ( $block['innerContent'] as $key => $inner_content ) {
+						$block['innerContent'][ $key ] = str_replace( $url_to_replace, $updated_url, $block['innerContent'][ $key ] );
+					}
 				}
 			}
 
