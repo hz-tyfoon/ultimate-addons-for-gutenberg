@@ -22,11 +22,14 @@ const Render = ( props ) => {
 		attributes: { zoom, address, language, height },
 		deviceType
 	} = props;
-
-	const encoded_address = encodeURI( address );
-	const lang_par = language ? language : 'en';
 	
-	const url = `https://maps.google.com/maps?q=${ encoded_address }&z=${ getFallbackNumber( zoom, 'zoom', blockName ) }&hl=${ lang_par }&t=m&output=embed&iwloc=near`;
+	const url = 'https://maps.google.com/maps'
+	url.searchParams.set( 'q', encodeURI( address ) );
+	url.searchParams.set( 'z', getFallbackNumber( zoom, 'zoom', blockName ) );
+	url.searchParams.set( 'hl', language ? language : 'en' );
+	url.searchParams.set( 't', 'm' );
+	url.searchParams.set( 'output', 'embed' );
+	url.searchParams.set( 'iwloc', 'near' );
 	
 	return (
 		<div
