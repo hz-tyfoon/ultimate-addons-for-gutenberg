@@ -456,61 +456,6 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			// If either parameter is not an array, return the original excerpt blocks.
 			return $excerpt_blocks;
 		}
-
-		/**
-		 * Update Google Maps API URl in Bulk for all Pages/Posts.
-		 * 
-		 * @param mixed $post Post Object.
-		 * @since x.x.x
-		 * @return void.
-		 */
-		public function update_google_maps_api_url_on_a_post( $post = false ) {
-
-			$post = get_post( 151 );
-
-			if ( ! $post || ! has_blocks( $post->ID ) || ! isset( $post->post_content ) ) {
-				return;
-			}
-
-			$post_content = $post->post_content;
-
-			$blocks = parse_blocks( $post_content );
-
-			foreach ( $blocks as $block ) {
-				if ( 'uagb/google-map' !== $block['blockName'] ) {
-					continue;
-				}
-
-				$address  = ! empty( $block['attrs']['address'] ) ? rawurlencode( $block['attrs']['address'] ) : rawurlencode( 'Brainstorm Force' );
-				$zoom     = ! empty( $block['attrs']['zoom'] ) ? $block['attrs']['zoom'] : 12;
-				$language = ! empty( $block['attrs']['language'] ) ? $block['attrs']['language'] : 'en';
-
-				$updated_url = esc_url_raw(
-					add_query_arg(
-						array(
-							'q'      => $address,
-							'z'      => $zoom,
-							'hl'     => $language,
-							't'      => 'm',
-							'output' => 'embed',
-							'iwloc'  => 'near',
-						),
-						'https://maps.google.com/maps' 
-					)
-				);
-
-				$url_to_replace = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4&amp;q=' . $address . '&amp;zoom=' . $zoom . '&amp;language=' . $language;
-
-				break;
-				
-			}
-			
-			$updated_post_content = str_replace( $url_to_replace, $updated_url, $post_content ); // Update the Old Google Map API URL with new Directly in the Post Content.
-
-			$post->post_content = $updated_post_content;
-
-			wp_update_post( $post );
-		}
 	}
 }
 
