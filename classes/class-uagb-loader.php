@@ -488,7 +488,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 		 * @since x.x.x
 		 * @return array $blocks Blocks Array.
 		 */
-		public function update_google_maps_api_url_on_a_blocks( $blocks ) {
+		public function update_google_maps_api_url_on_a_blocks( &$blocks ) {
 
 			foreach ( $blocks as &$block ) {
 
