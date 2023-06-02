@@ -41,8 +41,6 @@ if ( ! class_exists( 'UAGB_Update' ) ) :
 		 */
 		public function __construct() {
 			add_action( 'admin_init', array( $this, 'init' ) );
-			add_action( 'cron_schedules', array( $this, 'add_every_minute_cron_schedule' ) );
-			add_action( 'execute_batch_update_google_maps_api_urls', array( $this, 'clear_google_maps_api_updated_meta' ) );
 		}
 
 		/**
@@ -52,6 +50,7 @@ if ( ! class_exists( 'UAGB_Update' ) ) :
 		 * @return void
 		 */
 		public function init() {
+			
 			// Get auto saved version number.
 			$saved_version = get_option( 'uagb-version', false );
 
@@ -120,10 +119,6 @@ if ( ! class_exists( 'UAGB_Update' ) ) :
 				}
 			}
 
-			if ( version_compare( $saved_version, '2.6.4', '<' ) ) {
-
-				$this->schedule_update_google_maps_api_urls();
-			}
 			// If the core block array is not empty, update the enabled blocks option.
 			if ( ! empty( $core_blocks ) ) {
 
@@ -162,138 +157,6 @@ if ( ! class_exists( 'UAGB_Update' ) ) :
 			if ( UAGB_Helper::is_uag_dir_has_write_permissions() ) {
 				update_option( '_uagb_allow_file_generation', 'enabled' );
 			}
-		}
-
-		/**
-		 * Schedule background update of Google Maps API URLs for posts/pages.
-		 * 
-		 * @since 2.6.4
-		 * @return void
-		 */
-		public function schedule_update_google_maps_api_urls() {
-			if ( ! wp_next_scheduled( 'execute_batch_update_google_maps_api_urls' ) ) {
-				wp_schedule_event( time(), 'every_minute', $this->execute_batch_update_google_maps_api_urls );
-			}
-		}
-
-		/**
-		 * Add a custom cron schedule for every minute.
-		 * 
-		 * @param array $schedules Schedules.
-		 * @since 2.6.4
-		 * @return array $schedules Updated Schedules.
-		 */
-		public function add_every_minute_cron_schedule( $schedules ) {
-			$schedules['every_minute'] = array(
-				'interval' => 60,
-				'display'  => __( 'Every Minute', 'ultimate-addons-for-gutenberg' ),
-			);
-			return $schedules;
-		}
-
-		/**
-		 * Update Google Maps API URl in Bulk for all Pages/Posts.
-		 * 
-		 * @param mixed $post Post Object.
-		 * @since x.x.x
-		 * @return void.
-		 */
-		public function update_google_maps_api_url_on_a_post( $post = false ) {
-
-			if ( ! $post || ! has_blocks( $post->ID ) || ! isset( $post->post_content ) ) {
-				return;
-			}
-
-			$post_content = $post->post_content;
-
-			$blocks = parse_blocks( $post_content );
-
-			foreach ( $blocks as $block ) {
-				if ( 'uagb/google-map' !== $block['blockName'] ) {
-					continue;
-				}
-
-				$address  = ! empty( $block['attrs']['address'] ) ? rawurlencode( $block['attrs']['address'] ) : rawurlencode( 'Brainstorm Force' );
-				$zoom     = ! empty( $block['attrs']['zoom'] ) ? $block['attrs']['zoom'] : 12;
-				$language = ! empty( $block['attrs']['language'] ) ? $block['attrs']['language'] : 'en';
-
-				$updated_url = esc_url_raw(
-					add_query_arg(
-						array(
-							'q'      => $address,
-							'z'      => $zoom,
-							'hl'     => $language,
-							't'      => 'm',
-							'output' => 'embed',
-							'iwloc'  => 'near',
-						),
-						'https://maps.google.com/maps' 
-					)
-				);
-
-				$url_to_replace = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4&amp;q=' . $address . '&amp;zoom=' . $zoom . '&amp;language=' . $language;
-
-				break;
-				
-			}
-			
-			$updated_post_content = str_replace( $url_to_replace, $updated_url, $post_content ); // Update the Old Google Map API URL with new Directly in the Post Content.
-
-			$post->post_content = $updated_post_content;
-
-			wp_update_post( $post );
-		}
-
-		/**
-		 * Execute batch update of Google Maps API URLs for all posts/pages.
-		 * 
-		 * @since 2.6.4
-		 * @return void
-		 */
-		public function execute_batch_update_google_maps_api_urls() {
-			$post_types = get_post_types(
-				array(
-					'public' => true,
-				),
-				'names' 
-			);
-
-			$args = array(
-				'post_type'      => $post_types,
-				'posts_per_page' => 5, // Batch size: 5 posts.
-				'orderby'        => 'ID', // Order by post ID.
-				'order'          => 'ASC', // Ascending order.
-				'post_status'    => 'publish', // Only consider published posts.
-				'meta_query'     => array( //phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-					array(
-						'key'     => 'google_maps_api_updated', // Custom meta field to track updated posts.
-						'compare' => 'NOT EXISTS', // Exclude already updated posts.
-					),
-				),
-			);
-
-			$query = new WP_Query( $args );
-
-			while ( $query->have_posts() ) {
-				$query->the_post();
-
-				$this->update_google_maps_api_url_on_a_post( $post );
-
-				// Set custom meta field to track updated posts.
-				update_post_meta( $post->ID, 'google_maps_api_updated', true );
-			}
-
-			wp_reset_postdata();
-		}
-
-		/**
-		 * Clear custom meta field after all posts/pages are updated.
-		 * 
-		 * @since 2.6.4
-		 * @return void
-		 */
-		public function clear_google_maps_api_updated_meta() {
-			delete_post_meta_by_key( 'google_maps_api_updated' );
 		}
 	}
 
