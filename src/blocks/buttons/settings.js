@@ -1,6 +1,7 @@
 import { memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, BlockControls, AlignmentToolbar, } from '@wordpress/block-editor';
+import { alignLeft, alignRight, alignCenter, } from '@wordpress/icons';
 import TypographyControl from '@Components/typography';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import renderSVG from '@Controls/renderIcon';
@@ -87,7 +88,7 @@ const Settings = ( props ) => {
 		fontLetterSpacingMobile,
 		fontLetterSpacingType,
 	} = attributes;
-
+    
 	const buttonSizeOptions = [
 		{
 			value: 'default',
@@ -110,6 +111,42 @@ const Settings = ( props ) => {
 			label: __( 'Extra Large', 'ultimate-addons-for-gutenberg' ),
 		},
 	];
+
+	const ALIGNMENT_CONTROLS = [
+		{
+			icon: <Icon icon={ renderSVG( 'dashicons-editor-justify' ) } />,
+			title: 'Full',
+			align: 'full',
+		},
+		{
+			icon: alignLeft,
+			title: 'Left',
+			align: 'left',
+		},
+		{
+			icon: alignCenter,
+			title: 'Center',
+			align: 'center',
+		},
+		{
+			icon: alignRight,
+			title: 'Right',
+			align: 'right',
+		},
+	];
+
+	const getBlockControls = () => (
+		<BlockControls>
+			<AlignmentToolbar
+						value={ align }
+						onChange={ ( value ) => {
+							setAttributes( { align: value } );
+						} }
+						alignmentControls = { ALIGNMENT_CONTROLS }
+					/>
+		</BlockControls>
+
+	)
 
 	const generalSettings = () => {
 		return (
@@ -460,6 +497,7 @@ const Settings = ( props ) => {
 
 	return (
 		<>
+		    { getBlockControls() }
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>{ generalSettings() }</InspectorTab>

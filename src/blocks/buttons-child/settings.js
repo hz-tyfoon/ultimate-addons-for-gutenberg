@@ -6,11 +6,15 @@
 import UAGIconPicker from '@Components/icon-picker';
 import { __ } from '@wordpress/i18n';
 
-import { memo } from '@wordpress/element';
+import { memo, } from '@wordpress/element';
+import { select, useDispatch } from '@wordpress/data';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
+import { alignLeft, alignRight, alignCenter } from '@wordpress/icons';
 import ResponsiveBorder from '@Components/responsive-border';
 import SpacingControl from '@Components/spacing-control';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
+import { Icon,  ToggleControl } from '@wordpress/components';
+import renderSVG from '@Controls/renderIcon';
 import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 import UAGTextControl from '@Components/text-control';
 import TypographyControl from '@Components/typography';
@@ -20,9 +24,7 @@ import BoxShadowControl from '@Components/box-shadow';
 import ResponsiveSlider from '@Components/responsive-slider';
 import GradientSettings from '@Components/gradient-settings';
 
-import { InspectorControls } from '@wordpress/block-editor';
-
-import { ToggleControl } from '@wordpress/components';
+import { InspectorControls, BlockControls, AlignmentToolbar, store as blockEditorStore  } from '@wordpress/block-editor';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
@@ -32,7 +34,7 @@ import UAGPresets from '@Components/presets';
 const Settings = ( props ) => {
 	props = props.parentProps;
 
-	const { attributes, setAttributes, deviceType } = props;
+	const { attributes, setAttributes, deviceType, clientId } = props;
 
 	const {
 		block_id,
@@ -42,6 +44,7 @@ const Settings = ( props ) => {
 		rightPadding,
 		bottomPadding,
 		leftPadding,
+		align,
 		//Mobile
 		topMobilePadding,
 		rightMobilePadding,
@@ -144,6 +147,21 @@ const Settings = ( props ) => {
 		inheritFromTheme
 	} = attributes;
 
+	const { updateBlockAttributes } = useDispatch( blockEditorStore );
+	const parentClientId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( clientId );
+console.log( 'parentclentid',parentClientId );
+
+const parentAttributes = select( 'core/block-editor' ).getBlockAttributes( parentClientId );
+
+console.log( 'parentAttributes', parentAttributes.align );
+
+const updateParentAlignment = ( alignment ) => {
+    const newParentAttributes = {
+      align: alignment
+    };
+    updateBlockAttributes( parentClientId, newParentAttributes );
+  };
+
 	const presetSettings = () => {
 		return (
 			<UAGAdvancedPanelBody title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) } initialOpen={ true }>
@@ -151,6 +169,43 @@ const Settings = ( props ) => {
 			</UAGAdvancedPanelBody>
 		);
 	};
+    
+	const ALIGNMENT_CONTROLS = [
+		{
+			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
+			title: 'Full',
+			align: 'full',
+		},
+		{
+			icon: alignLeft,
+			title: 'Left',
+			align: 'left',
+		},
+		{
+			icon: alignCenter,
+			title: 'Center',
+			align: 'center',
+		},
+		{
+			icon: alignRight,
+			title: 'Right',
+			align: 'right',
+		},
+	];
+
+	const getBlockControls = () => (
+		<BlockControls>
+			<AlignmentToolbar
+						value={ align }
+						onChange={ ( value ) => {
+							updateParentAlignment( value )
+						} }
+						alignmentControls = { ALIGNMENT_CONTROLS }
+					/>
+		</BlockControls>
+
+	)
+
 
 	const buttonSettings = () => {
 		return (
@@ -988,6 +1043,7 @@ const Settings = ( props ) => {
 
 	return (
 		<>
+		    { getBlockControls() }
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>

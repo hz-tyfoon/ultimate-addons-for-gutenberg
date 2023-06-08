@@ -52,6 +52,7 @@ const attributes = {
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
+		enum: ['none', 'left', 'center', 'right', 'full'],
 	},
 	alignTablet: {
 		type: 'string',
