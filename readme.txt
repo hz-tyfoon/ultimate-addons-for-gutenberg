@@ -5,7 +5,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 5.6
 Tested up to: 6.2.2
-Stable tag: 2.6.2
+Stable tag: 2.6.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,7 +167,20 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 == Changelog ==
 
 = x.x.X =
-* Improvement: Buttons - Updated default 2 button to 1 button, removed default border, default alignment into left and FSE button color issue fix.
+* Improvement: Buttons - Updated default 2 button to 1 button, removed default border, default alignment into left, FSE button color issue fix and Alignment in block toolbar.
+
+= 2.6.5 - WEDNESDAY, 07th JUNE 2023 =
+* Fix: Buttons - Resolved an issue in which an error was thrown when the background color was set to gradient.
+* Fix: Buttons - Resolved an issue in which the background color gradient would not work as intended on the front end.
+* Fix: Call To Action - Resolved an issue in which an undefined variable warning would appear on the frontend.
+
+= 2.6.4 - SATURDAY, 03rd JUNE 2023 =
+* Fix: Buttons - Resolved an issue in which the button size would not work as expected in the editor after adding padding.
+* Fix: Resolved an issue with an invalid Google Maps API Key in the Embed URL implementation, ensuring functionality, and made the block dynamic for enhanced flexibility.
+
+= 2.6.3 - THURSDAY, 01st JUNE 2023 =
+* Fix: Post Carousel - Resolved an issue in which the posts would not show up on the front end when the number of columns was greater than the number of posts.
+* Fix: Separator - Removed the block preview image from the Style Book.
 
 = 2.6.2 - WEDNESDAY, 31st MAY 2023 =
 * New: Introducing the Inherit From Theme option - Choose to make buttons in Spectra blocks inherit their styles from the theme.
