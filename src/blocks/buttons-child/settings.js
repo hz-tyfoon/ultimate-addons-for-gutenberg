@@ -7,7 +7,7 @@ import UAGIconPicker from '@Components/icon-picker';
 import { __ } from '@wordpress/i18n';
 
 import { memo, } from '@wordpress/element';
-import { select, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import { alignLeft, alignRight, alignCenter } from '@wordpress/icons';
 import ResponsiveBorder from '@Components/responsive-border';
@@ -148,19 +148,15 @@ const Settings = ( props ) => {
 	} = attributes;
 
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
-	const parentClientId = select( 'core/block-editor' ).getBlockHierarchyRootClientId( clientId );
-console.log( 'parentclentid',parentClientId );
 
-const parentAttributes = select( 'core/block-editor' ).getBlockAttributes( parentClientId );
+	const { parentClientId, parentAttributes }  = useSelect( ( select ) => {
+		const { getBlockHierarchyRootClientId, getBlockAttributes } = select( 'core/block-editor' );
+		const parentClientId = getBlockHierarchyRootClientId( clientId );
+		const parentAttributes = getBlockAttributes( parentClientId );
+		return { parentClientId, parentAttributes };
+	}, [] );
 
-console.log( 'parentAttributes', parentAttributes.align );
-
-const updateParentAlignment = ( alignment ) => {
-    const newParentAttributes = {
-      align: alignment
-    };
-    updateBlockAttributes( parentClientId, newParentAttributes );
-  };
+	const updateParentAlignment = ( align ) => updateBlockAttributes( parentClientId, { align } ) ;
 
 	const presetSettings = () => {
 		return (
@@ -196,14 +192,13 @@ const updateParentAlignment = ( alignment ) => {
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
-						value={ align }
-						onChange={ ( value ) => {
-							updateParentAlignment( value )
-						} }
-						alignmentControls = { ALIGNMENT_CONTROLS }
-					/>
+				value={parentAttributes.align}
+				onChange={(value) => {
+					updateParentAlignment(value)
+				}}
+				alignmentControls={ALIGNMENT_CONTROLS}
+			/>
 		</BlockControls>
-
 	)
 
 

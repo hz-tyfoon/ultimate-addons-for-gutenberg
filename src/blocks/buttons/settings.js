@@ -17,6 +17,7 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
+	console.log('buttons parent props', props);
 
 	const { attributes, setAttributes } = props;
 
@@ -114,7 +115,7 @@ const Settings = ( props ) => {
 
 	const ALIGNMENT_CONTROLS = [
 		{
-			icon: <Icon icon={ renderSVG( 'dashicons-editor-justify' ) } />,
+			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
 			title: 'Full',
 			align: 'full',
 		},
@@ -138,14 +139,13 @@ const Settings = ( props ) => {
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
-						value={ align }
-						onChange={ ( value ) => {
-							setAttributes( { align: value } );
-						} }
-						alignmentControls = { ALIGNMENT_CONTROLS }
-					/>
+				value={align}
+				onChange={(value) => {
+					setAttributes({ align: value });
+				}}
+				alignmentControls={ALIGNMENT_CONTROLS}
+			/>
 		</BlockControls>
-
 	)
 
 	const generalSettings = () => {
