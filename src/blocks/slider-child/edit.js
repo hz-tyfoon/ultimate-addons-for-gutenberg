@@ -32,6 +32,8 @@ const UAGBSlide = ( props ) => {
 };
 
 const applyWithSelect = withSelect( ( select, props ) => {
+	// eslint-disable-next-line no-shadow
+	const { useDeviceType } = select( 'core/edit-post' ) || select( 'core/edit-widgets' ) || select( 'core/edit-site' );
 	const deviceType = useDeviceType();
 	const { getBlocks, getBlockIndex } = select( 'core/block-editor' );
 	const { getBlockType } = select( 'core/blocks' );

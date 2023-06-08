@@ -6,6 +6,7 @@ import { useDeviceType } from '@Controls/getPreviewType';
 import { __, sprintf } from '@wordpress/i18n';
 import { useLayoutEffect } from '@wordpress/element';
 import styles from './editor.lazy.scss';
+
 const DeviceIcons = () => {
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -16,11 +17,7 @@ const DeviceIcons = () => {
 	}, [] );
 
 	const deviceType = useDeviceType();
-
-	// const customSetPreviewDeviceType = useCallback( ( device ) => {
-	// 	const { deviceType: setPreviewDeviceType } = dispatch( 'core/edit-post' );
-	// 	setPreviewDeviceType( device );
-	// }, [] );
+	const setPreviewDeviceType = useDeviceType();
 
 	const devicesSvgs = {
 		desktop: (
@@ -39,6 +36,7 @@ const DeviceIcons = () => {
 			</svg>
 		),
 	};
+
 	const devices = [
 		{
 			name: __( 'Desktop', 'ultimate-addons-for-gutenberg' ),
@@ -87,6 +85,7 @@ const DeviceIcons = () => {
 								staticName === deviceType ? ' active-tab' : ''
 							}` }
 							aria-pressed={ deviceType === staticName }
+							onClick={ () => setPreviewDeviceType( staticName ) }
 						>
 							{ title }
 						</Button>

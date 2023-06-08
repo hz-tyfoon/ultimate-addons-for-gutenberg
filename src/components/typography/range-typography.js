@@ -1,8 +1,10 @@
 /**
  * WordPress dependencies
  */
-import { useDeviceType } from '@Controls/getPreviewType';
 import Range from '@Components/range/Range.js';
+// Extend component
+import { useDeviceType } from '@Controls/getPreviewType'; // Import the useDeviceType hook
+
 /**
  * Build the Measure controls
  *
@@ -10,7 +12,7 @@ import Range from '@Components/range/Range.js';
  * @return {Object} Measure settings.
  */
 export default function RangeTypographyControl( props ) {
-	const deviceType = useDeviceType;
+	const deviceType = useDeviceType(); // Use the useDeviceType hook
 
 	const {
 		sizeText,
