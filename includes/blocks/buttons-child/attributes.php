@@ -124,7 +124,7 @@ return array_merge(
 		'letterSpacingMobile'    => '',
 		'letterSpacingType'      => 'px',
 		'borderWidth'            => '',
-		'borderRadius'           => '',
+		'borderRadius'           => 0,
 		'borderStyle'            => 'none',
 		'borderColor'            => '#000',
 		'borderHColor'           => '',
