@@ -9,7 +9,6 @@ import { __ } from '@wordpress/i18n';
 import { memo, } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
-import { alignLeft, alignRight, alignCenter } from '@wordpress/icons';
 import ResponsiveBorder from '@Components/responsive-border';
 import SpacingControl from '@Components/spacing-control';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
@@ -44,7 +43,6 @@ const Settings = ( props ) => {
 		rightPadding,
 		bottomPadding,
 		leftPadding,
-		align,
 		//Mobile
 		topMobilePadding,
 		rightMobilePadding,
@@ -151,7 +149,9 @@ const Settings = ( props ) => {
 
 	const { parentClientId, parentAttributes }  = useSelect( ( select ) => {
 		const { getBlockHierarchyRootClientId, getBlockAttributes } = select( 'core/block-editor' );
+		// eslint-disable-next-line no-shadow
 		const parentClientId = getBlockHierarchyRootClientId( clientId );
+		// eslint-disable-next-line no-shadow
 		const parentAttributes = getBlockAttributes( parentClientId );
 		return { parentClientId, parentAttributes };
 	}, [] );
@@ -168,33 +168,33 @@ const Settings = ( props ) => {
     
 	const ALIGNMENT_CONTROLS = [
 		{
-			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
-			title: 'Full',
-			align: 'full',
-		},
-		{
-			icon: alignLeft,
-			title: 'Left',
 			align: 'left',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+			title: __( 'Left', 'ultimate-addons-for-gutenberg' )
 		},
 		{
-			icon: alignCenter,
-			title: 'Center',
 			align: 'center',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
+			title: __( 'Center', 'ultimate-addons-for-gutenberg' )
 		},
 		{
-			icon: alignRight,
-			title: 'Right',
 			align: 'right',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
+			title: __( 'Right', 'ultimate-addons-for-gutenberg' )
 		},
+		{
+			align: 'full',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
+			title: __( 'Full', 'ultimate-addons-for-gutenberg' )
+		}
 	];
 
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
 				value={parentAttributes.align}
-				onChange={(value) => {
-					updateParentAlignment(value)
+				onChange={( value ) => {
+					updateParentAlignment( value )
 				}}
 				alignmentControls={ALIGNMENT_CONTROLS}
 			/>

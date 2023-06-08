@@ -1,7 +1,6 @@
 import { memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, BlockControls, AlignmentToolbar, } from '@wordpress/block-editor';
-import { alignLeft, alignRight, alignCenter, } from '@wordpress/icons';
 import TypographyControl from '@Components/typography';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import renderSVG from '@Controls/renderIcon';
@@ -17,7 +16,6 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
-	console.log('buttons parent props', props);
 
 	const { attributes, setAttributes } = props;
 
@@ -115,33 +113,33 @@ const Settings = ( props ) => {
 
 	const ALIGNMENT_CONTROLS = [
 		{
-			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
-			title: 'Full',
-			align: 'full',
-		},
-		{
-			icon: alignLeft,
-			title: 'Left',
 			align: 'left',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+			title: __( 'Left', 'ultimate-addons-for-gutenberg' )
 		},
 		{
-			icon: alignCenter,
-			title: 'Center',
 			align: 'center',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
+			title: __( 'Center', 'ultimate-addons-for-gutenberg' )
 		},
 		{
-			icon: alignRight,
-			title: 'Right',
 			align: 'right',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
+			title: __( 'Right', 'ultimate-addons-for-gutenberg' )
 		},
+		{
+			align: 'full',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
+			title: __( 'Full', 'ultimate-addons-for-gutenberg' )
+		}
 	];
 
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
 				value={align}
-				onChange={(value) => {
-					setAttributes({ align: value });
+				onChange={ ( value ) => {
+					setAttributes( { align: value } );
 				}}
 				alignmentControls={ALIGNMENT_CONTROLS}
 			/>
