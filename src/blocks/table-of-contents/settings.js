@@ -144,6 +144,7 @@ const Settings = ( props ) => {
 		separatorSpaceTablet,
 		separatorSpaceMobile,
 		separatorSpaceType,
+		allowDynamicBlock
 	} = attributes;
 
 	const getGeneralPanelBody = () => {
@@ -455,6 +456,20 @@ const Settings = ( props ) => {
 	const getContent = () => {
 		return (
 			<UAGAdvancedPanelBody title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
+				<ToggleControl
+					label={ __(
+						'Allow Dynamic Headings',
+						'ultimate-addons-for-gutenberg'
+					) }
+					checked={ allowDynamicBlock }
+					help={ __(
+						'This will be in action only in Front End.',
+						'ultimate-addons-for-gutenberg'
+					) }
+					onChange={ () =>
+						setAttributes( { allowDynamicBlock: ! allowDynamicBlock } )
+					}
+				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
 					label={ __( 'Overall Alignment', 'ultimate-addons-for-gutenberg' ) }
