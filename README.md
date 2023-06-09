@@ -166,6 +166,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ## Changelog ##
 
+<<<<<<< HEAD
 ### 2.6.5 - WEDNESDAY, 07th JUNE 2023 ###
 * Fix: Buttons - Resolved an issue in which an error was thrown when the background color was set to gradient.
 * Fix: Buttons - Resolved an issue in which the background color gradient would not work as intended on the front end.
@@ -186,6 +187,10 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Container - Fixed an issue where setting a text color for a heading from a child container would affect all other headings on the page.
 * Fix: Call To Action - Resolved an issue in the responsive view wherein the button would become taller when using an additional button.
 * Fix: Forms - Resolved an issue in which the custom class for Forms block `uag-col-2` was not working as intended on the front end.
+=======
+### x.x.x ###
+* Improvement: Table Of Contents - Added Allow Dynamic Heading feature.
+>>>>>>> 14976b67c4 (added improvement dynamic heading support in toc)
 * Fix: Image Gallery - Removed the additional bottom spacing in the masonry layout that would appear on certain themes.
 * Fix: Image Gallery - Resolved an issue in which the masonry layout would appear stacked for a brief moment on load.
 * Fix: Image Gallery - Resolved an issue in FSE themes wherein the lightbox would have an extra top margin on the front end.
