@@ -1092,6 +1092,10 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 					'excerptLetterSpacingTablet'    => array(
 						'type' => 'number',
 					),
+					'useSeparateBoxShadows'         => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
 					'boxShadowColor'                => array(
 						'type'    => 'string',
 						'default' => '#00000070',
@@ -1745,22 +1749,25 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 								if( 'top' !== imagePosition ){
 									// This CSS is for Post BG Image Spacing
 									let articles = document.querySelectorAll( '.uagb-post__image-position-background .uagb-post__inner-wrap' );
-									if( ! articles?.length ) {
-										return;
-									}
-									for( let article of articles ) {
-										let image = article.getElementsByClassName('uagb-post__image');
-										if ( image[0] ) {
-											let articleWidth = article.offsetWidth;
-											let rowGap = <?php echo esc_html( $value['rowGap'] ); ?>;
-											let imageWidth = 100 - ( rowGap / articleWidth ) * 100;
-											image[0].style.width = imageWidth + '%';
-											image[0].style.marginLeft = rowGap / 2 + 'px';
-
+									if( articles.length ) {
+										for( let article of articles ) {
+											let image = article.getElementsByClassName('uagb-post__image');
+											if ( image[0] ) {
+												let articleWidth = article.offsetWidth;
+												let rowGap = <?php echo esc_html( $value['rowGap'] ); ?>;
+												let imageWidth = 100 - ( rowGap / articleWidth ) * 100;
+												image[0].style.width = imageWidth + '%';
+												image[0].style.marginLeft = rowGap / 2 + 'px';
+											}
 										}
 									}
 								}
-								if ( ! $scope.hasClass('is-carousel') || cols >= $scope.children('article.uagb-post__inner-wrap').length ) {
+								// If this is not a Post Carousel, return.
+								// Else if it is a carousel but has less posts than the number of columns, return after setting visibility.
+								if ( ! $scope.hasClass('is-carousel') ) {
+									return;
+								} else if ( cols >= $scope.children('article.uagb-post__inner-wrap').length ) {
+									$scope.css( 'visibility', 'visible' );
 									return;
 								}
 								var slider_options = {
@@ -1796,8 +1803,10 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 
 								$scope.imagesLoaded( function() {
 									$scope.slick( slider_options );
+								}).always( function() {
+									$scope.css( 'visibility', 'visible' );
+								} );
 
-								});
 								var enableEqualHeight = ( '<?php echo esc_html( $equal_height ); ?>' );
 
 								if( enableEqualHeight ){
