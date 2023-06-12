@@ -358,7 +358,7 @@ module.exports = function ( grunt ) {
 			'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/metadata/icons.json',
 			function ( error, response, body ) {
 				if ( response && response.statusCode === 200 ) {
-					console.log( 'Fonts successfully fetched!' ); // eslint-disable-line
+					console.log( 'Fonts successfully fetched!' ); // eslint-disable-line no-console
 
 					const fonts = JSON.parse( body );
 					Object.keys( fonts ).map( ( key ) => {
@@ -387,7 +387,7 @@ module.exports = function ( grunt ) {
 						JSON.stringify( fonts, null, 4 ),
 						function ( err ) {
 							if ( ! err ) {
-								console.log( 'Font-Awesome library updated!' ); // eslint-disable-line
+								console.log( 'Font-Awesome library updated!' ); // eslint-disable-line no-console
 							}
 						}
 					);
@@ -409,10 +409,19 @@ module.exports = function ( grunt ) {
 
 				data.items.forEach( ( font ) => {
 					const fontName = font.family;
+					let fontVarient = [];
+					if( font.variants ) {
+						const copyFontVArient = [ ...font.variants ];
+						const filterFontVarient =  copyFontVArient.filter( variant => /^[0-9]+$/.test( variant ) && !/^[a-z]+$/.test( variant ) );
+						filterFontVarient.push( '400' );
+						const sortArray = filterFontVarient.sort( ( a, b ) => parseInt( a ) - parseInt( b ) );
+						fontVarient = [ 'Default', ...sortArray ];
+                    }
+					
 					const fontData = {
 						v: font.variants || [],
 						subset: font.subsets || [],
-						weight: font.variants ? ['Default',...font.variants.filter( variant => /^[0-9]+$/.test( variant ) && !/^[a-z]+$/.test( variant ) ),'400'].sort( ( a, b ) => parseInt( a ) - parseInt( b ) ) : [],
+						weight: fontVarient,
 						i: [],
 					};
 
@@ -450,9 +459,9 @@ module.exports = function ( grunt ) {
 						body,
 						function ( err ) {
 							if ( ! err ) {
-								console.log( 'Categories added' ); // eslint-disable-line
+								console.log( 'Categories added' ); // eslint-disable-line no-console
 								const yaml = require( 'js-yaml' );
-								const category_lists = yaml.load( fs.readFileSync( 'fontawesome-category.yml', {encoding: 'utf-8'} ) );
+								const category_lists = yaml.load( fs.readFileSync( 'fontawesome-category.yml', { encoding: 'utf-8' } ) );
 								fs.writeFileSync( './bin/icons-configure/fontawesome-category.json', JSON.stringify( category_lists, null, 2 ) );
 								fs.unlinkSync( 'fontawesome-category.yml' );
 							}
@@ -497,7 +506,7 @@ module.exports = function ( grunt ) {
 			JSON.stringify( getDownloadedIcons, null, 4 ),
 			function ( err ) {
 				if ( ! err ) {
-					console.log( 'Font-Awesome v6 library updated!' ); // eslint-disable-line
+					console.log( 'Font-Awesome v6 library updated!' ); // eslint-disable-line no-console
 				}
 			}
 		);

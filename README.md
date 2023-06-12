@@ -4,8 +4,8 @@
 **Tags:** gutenberg, blocks, gutenberg blocks, editor, block  
 **Requires at least:** 5.6  
 **Requires PHP:** 5.6  
-**Tested up to:** 6.2  
-**Stable tag:** 2.6.2  
+**Tested up to:** 6.2.2  
+**Stable tag:** 2.6.6  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -165,6 +165,24 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 1. /assets/screenshots/1.png
 
 ## Changelog ##
+
+### 2.6.6 - MONDAY, 12th JUNE 2023 ###
+* Improvement: Global - Added support for Spectra One's preview options.
+* Fix: Table Of Contents - Fixed the improper HTML markup/structure for the heading list.
+* Fix: Testimonial - Resolved an issue in which the default Testimonial blocks would share same the background image.
+
+### 2.6.5 - WEDNESDAY, 07th JUNE 2023 ###
+* Fix: Buttons - Resolved an issue in which an error was thrown when the background color was set to gradient.
+* Fix: Buttons - Resolved an issue in which the background color gradient would not work as intended on the front end.
+* Fix: Call To Action - Resolved an issue in which an undefined variable warning would appear on the frontend.
+
+### 2.6.4 - SATURDAY, 03rd JUNE 2023 ###
+* Fix: Buttons - Resolved an issue in which the button size would not work as expected in the editor after adding padding.
+* Fix: Resolved an issue with an invalid Google Maps API Key in the Embed URL implementation, ensuring functionality, and made the block dynamic for enhanced flexibility.
+
+### 2.6.3 - THURSDAY, 01st JUNE 2023 ###
+* Fix: Post Carousel - Resolved an issue in which the posts would not show up on the front end when the number of columns was greater than the number of posts.
+* Fix: Separator - Removed the block preview image from the Style Book.
 
 ### 2.6.2 - WEDNESDAY, 31st MAY 2023 ###
 * New: Introducing the Inherit From Theme option - Choose to make buttons in Spectra blocks inherit their styles from the theme.

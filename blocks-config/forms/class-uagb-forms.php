@@ -66,9 +66,8 @@ if ( ! class_exists( 'UAGB_Forms' ) ) {
 		 */
 		public function reusable_block_content_on_page( $reusable_ref_id ) {
 			if ( is_int( $reusable_ref_id ) ) {
-				$content                = get_post_field( 'post_content', $reusable_ref_id );
-				$reusable_block_content = parse_blocks( $content );
-				return $reusable_block_content;
+				$content = get_post_field( 'post_content', $reusable_ref_id );
+				return parse_blocks( $content );
 			}
 		}
 
@@ -116,10 +115,7 @@ if ( ! class_exists( 'UAGB_Forms' ) ) {
 				$block_attr              = $this->recursive_inner_forms( $reusable_blocks_content, $block_id );
 			}
 
-			if ( is_array( $block_attr ) && $block_attr['block_id'] === $block_id ) {
-				return $block_attr;
-			}
-			return false;
+			return ( is_array( $block_attr ) && $block_attr['block_id'] === $block_id ) ? $block_attr : false;
 		}
 
 		/**
@@ -216,7 +212,7 @@ if ( ! class_exists( 'UAGB_Forms' ) ) {
 						if ( is_wp_error( $template ) ) {
 							continue;
 						}
-						$template_post_content = ! empty( $post_content ) ? $template->content . $post_content : $template->content;
+						$template_post_content = $template->content . ( ! empty( $post_content ) ? $post_content : '' );
 						$template_content      = parse_blocks( $template_post_content );
 						if ( get_template() === $template->theme && ! empty( $template_content ) && is_array( $template_content ) ) {
 							$current_block_attributes = $this->recursive_inner_forms( $template_content, $block_id );
@@ -228,7 +224,7 @@ if ( ! class_exists( 'UAGB_Forms' ) ) {
 			$widget_content = get_option( 'widget_block' );
 			if ( ! empty( $widget_content ) && is_array( $widget_content ) && empty( $current_block_attributes ) ) {
 				foreach ( $widget_content as $value ) {
-					if ( is_int( $value ) || empty( $value['content'] ) ) {
+					if ( ! is_array( $value ) || empty( $value['content'] ) ) {
 						continue;
 					}
 					if ( has_block( 'uagb/forms', $value['content'] ) ) {

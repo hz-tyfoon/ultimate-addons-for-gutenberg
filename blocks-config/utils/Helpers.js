@@ -37,6 +37,8 @@ export function getPanelIdFromRef( ref ) {
 
 export const uagbClassNames = ( classes ) => classes.filter( Boolean ).join( ' ' );
 
+export const uagbDeepClone = ( arrayOrObject ) => JSON.parse( JSON.stringify( arrayOrObject ) );
+
 /**
  * Check if object is empty.
  * 

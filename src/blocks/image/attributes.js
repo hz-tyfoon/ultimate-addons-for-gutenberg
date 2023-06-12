@@ -1024,14 +1024,12 @@ const attributes = {
 	},
 	imageBoxShadowColorHover: {
 		type: 'string',
-		isUAGStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-shadow-color-hover'
 		}
 	},
 	imageBoxShadowHOffsetHover: {
 		type: 'number',
-		isUAGStyle: true,
 		default: 0,
 		UAGCopyPaste: {
 			styleType: 'image-shadow-h-offset-hover'
@@ -1040,21 +1038,18 @@ const attributes = {
 	imageBoxShadowVOffsetHover: {
 		type: 'number',
 		default: 0,
-		isUAGStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-shadow-v-offset-hover'
 		}
 	},
 	imageBoxShadowBlurHover: {
 		type: 'number',
-		isUAGStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-shadow-blur-hover'
 		}
 	},
 	imageBoxShadowSpreadHover: {
 		type: 'number',
-		isUAGStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-shadow-spread-hover'
 		}
@@ -1062,7 +1057,6 @@ const attributes = {
 	imageBoxShadowPositionHover: {
 		type: 'string',
 		default: 'outset',
-		isUAGStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-shadow-position-hover'
 		}
