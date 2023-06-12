@@ -30,10 +30,7 @@ const GlobalBlockStyles = ( props ) => {
 
     const {
         globalBlockStyles,
-        isOpen,
         globalBlockStylesFontFamilies,
-        openModal,
-        closeModal,
         updateGlobalBlockStyles,
         updateGlobalBlockStylesFontFamilies,
         attributes,
@@ -164,7 +161,7 @@ const GlobalBlockStyles = ( props ) => {
                             [] !== value &&
                             false !== value &&
                             !isEmptyObject( value )
-                          );
+                        );
                     }
                     return false;
                 } );
@@ -182,7 +179,7 @@ const GlobalBlockStyles = ( props ) => {
                     }
                 }
                 
-                const blockStyling = styling( newAttributes, clientId, blockName, deviceType,baseSelector );
+                const blockStyling = styling( newAttributes, clientId, blockName, deviceType, baseSelector );
                 style.editorStyles = blockStyling;
                 style.attributes = newAttributes;
                 style.clientId = clientId;
@@ -226,9 +223,9 @@ const GlobalBlockStyles = ( props ) => {
 
         const output = [];
         for( const item of globalBlockStylesFontFamilies ){
-    
-            if( !output.includes( item ) )
-              output.push( item )
+            if( ! output.includes( item ) ){
+                output.push( item );
+            }
         }
         updateGlobalBlockStylesFontFamilies( output );
     };
@@ -243,21 +240,7 @@ const GlobalBlockStyles = ( props ) => {
             initialOpen={ false }
             className={ panelLoader ? 'loading' : '' }
         >
-            {
-                ( ! globalBlockStyleName || '' === globalBlockStyleName ) && (
-                    <Button
-                        className="spectra-gbs-button components-base-control"
-                        onClick={ () => {
-                            openModal();
-                            setUniqueID( new Date().getTime().toString() );
-                        } }
-                        variant="primary"
-                    >
-                        { __( 'Add New', 'ultimate-addons-for-gutenberg' ) }
-                    </Button>
-                )
-            }
-            { 'open' === isOpen && <AddNewPopupStyle {...{ closeModal, setAttributes, globalBlockStyles, updateGlobalBlockStyles, setGenerate, setTempStyleName, tempStyleName, uniqueID }} />}
+            <AddNewPopupStyle { ...{ ...props, setGenerate, setTempStyleName, tempStyleName, uniqueID, setUniqueID } } />
             
             <UAGSelectControl
                 label={ selectLabel }
