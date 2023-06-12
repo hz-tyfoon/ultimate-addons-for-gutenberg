@@ -5,16 +5,19 @@ import { useState } from '@wordpress/element';
 import styles from './editor.lazy.scss';
 import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 import { select, withSelect, withDispatch } from '@wordpress/data';
-import { Button, Modal  } from '@wordpress/components';
-import UAGTextControl from '@Components/text-control';
+import { Button } from '@wordpress/components';
+// import UAGTextControl from '@Components/text-control';
 import apiFetch from '@wordpress/api-fetch';
 import { store as spectraStore } from '@Store';
 import { STORE_NAME as storeName } from '@Store/constants';
 import { compose } from '@wordpress/compose';
 import UAGSelectControl from '@Components/select-control';
 import { useDeviceType } from '@Controls/getPreviewType';
+import AddNewPopupStyle from './add-new-popup-style';
+import { isEmptyObject } from '@Utils/Helpers';
 
 const GlobalBlockStyles = ( props ) => {
+    console.log( 'GlobalBlockStyles', props );
    // Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
 		styles.use();
@@ -70,7 +73,6 @@ const GlobalBlockStyles = ( props ) => {
 	}, [globalBlockStyleId, globalBlockStyles] );
 
     const clearCurrentAttributes = () => {
-        
         const saveAttr = {};
         for ( const attrKey in currentBlockDefaultAttributes ) {
             const attrObject = currentBlockDefaultAttributes[ attrKey ];
@@ -94,13 +96,13 @@ const GlobalBlockStyles = ( props ) => {
                 }
                 saveAttr[ attrKey ] = value;
             }
-
         }
 
-        if( Object.keys( saveAttr ).length ){
+        if( ! isEmptyObject( saveAttr ) ){
             setAttributes( saveAttr );
         }
     }
+
     const saveStylesToDatabase = ( bulkUpdateStyles = 'no', spectraGlobalStyles = globalBlockStyles ) => {
 
         let styleAttributes = {};
@@ -139,11 +141,6 @@ const GlobalBlockStyles = ( props ) => {
             setSaveToDatabase( false );
         } );
     };
-
-    // Function to check if an object is empty
-    const isEmptyObject = ( obj ) => {
-        return Object.keys( obj ).length === 0 && obj.constructor === Object;
-    }
 
     const generateBlockStyles = ( newStyleID = globalBlockStyleId ) => {
         updateGoogleFontData( attributes );
@@ -260,50 +257,7 @@ const GlobalBlockStyles = ( props ) => {
                     </Button>
                 )
             }
-            { 'open' === isOpen && (
-                    <Modal 
-                        title={ __( 'Save as a Global Block Style', 'ultimate-addons-for-gutenberg' ) } onRequestClose={ closeModal }
-                        className="spectra-global-block-style-name-modal"
-                    >
-                    <p> { __( 'Enter a word or two to make a unique global block style & you\'ll be able to add this global style to multiple areas on your site.', 'ultimate-addons-for-gutenberg' ) }</p>
-                    <div className="button-input-wrap">
-                        <UAGTextControl
-                            placeholder={ __(
-                                'Style Name',
-                                'ultimate-addons-for-gutenberg'
-                            ) }
-                            value={ tempStyleName }
-                            onChange={ ( value ) => {
-                                setTempStyleName( value?.toString() );
-                            } }
-                            showHeaderControls={false}
-                        />
-                        <Button
-                            onClick={ () => {
-                                setGenerate( true );
-                                setAttributes( 
-                                    { 
-                                        globalBlockStyleName: tempStyleName,
-                                        globalBlockStyleId: uniqueID 
-                                    } 
-                                )
-                                const spectraGlobalStyles = [
-                                    ...globalBlockStyles,
-                                    {
-                                        value: uniqueID,
-                                        label: tempStyleName,
-                                    }
-                                ]
-                                closeModal();
-                                updateGlobalBlockStyles( spectraGlobalStyles );
-                            } }
-                            variant="primary"
-                        >
-                            { __( 'Save', 'ultimate-addons-for-gutenberg' ) }
-                        </Button>
-                    </div>
-				</Modal>
-			) }
+            { 'open' === isOpen && <AddNewPopupStyle {...{ closeModal, setAttributes, globalBlockStyles, updateGlobalBlockStyles, setGenerate, setTempStyleName, tempStyleName, uniqueID }} />}
             
             <UAGSelectControl
                 label={ selectLabel }
@@ -343,11 +297,10 @@ const GlobalBlockStyles = ( props ) => {
                                 }
                                 
                                 style.blocksLinked = [...new Set( style.blocksLinked )] // Make array values unique.
-                            
-
                             }
                             return style;
                         } );
+                        
                         updateGlobalBlockStyles( globalBlockStyles );
                         saveStylesToDatabase( 'bulkUpdateStyles', globalBlockStyles );
                         setAttributes( 

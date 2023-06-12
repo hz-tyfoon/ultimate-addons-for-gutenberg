@@ -36,3 +36,11 @@ export function getPanelIdFromRef( ref ) {
 }
 
 export const uagbClassNames = ( classes ) => classes.filter( Boolean ).join( ' ' );
+
+/**
+ * Check if object is empty.
+ * 
+ * @param {Object} obj - The object.
+ * @return {boolean} - The result.
+ */
+export const isEmptyObject = ( obj ) => Object.keys( obj ).length === 0 && obj.constructor === Object;
