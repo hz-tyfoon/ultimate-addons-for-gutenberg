@@ -1,12 +1,16 @@
 import { memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, BlockControls, AlignmentToolbar, } from '@wordpress/block-editor';
 import TypographyControl from '@Components/typography';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import renderSVG from '@Controls/renderIcon';
 import ResponsiveSlider from '@Components/responsive-slider';
 import SpacingControl from '@Components/spacing-control';
 import ResponsiveSelectControl from '@Components/responsive-select';
+import {
+	InspectorControls,
+	BlockControls,
+	AlignmentToolbar,
+} from '@wordpress/block-editor';
 
 import { Icon } from '@wordpress/components';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
@@ -87,7 +91,7 @@ const Settings = ( props ) => {
 		fontLetterSpacingMobile,
 		fontLetterSpacingType,
 	} = attributes;
-    
+
 	const buttonSizeOptions = [
 		{
 			value: 'default',
@@ -111,7 +115,7 @@ const Settings = ( props ) => {
 		},
 	];
 
-	const ALIGNMENT_CONTROLS = [
+	const alignmentControls = [
 		{
 			align: 'left',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
@@ -141,7 +145,7 @@ const Settings = ( props ) => {
 				onChange={ ( value ) => {
 					setAttributes( { align: value } );
 				}}
-				alignmentControls={ALIGNMENT_CONTROLS}
+				alignmentControls={alignmentControls}
 			/>
 		</BlockControls>
 	)

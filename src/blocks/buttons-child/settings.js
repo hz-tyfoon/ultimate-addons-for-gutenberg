@@ -6,13 +6,13 @@
 import UAGIconPicker from '@Components/icon-picker';
 import { __ } from '@wordpress/i18n';
 
-import { memo, } from '@wordpress/element';
+import { memo } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import ResponsiveBorder from '@Components/responsive-border';
 import SpacingControl from '@Components/spacing-control';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
-import { Icon,  ToggleControl } from '@wordpress/components';
+import { Icon, ToggleControl } from '@wordpress/components';
 import renderSVG from '@Controls/renderIcon';
 import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 import UAGTextControl from '@Components/text-control';
@@ -22,8 +22,12 @@ import MultiButtonsControl from '@Components/multi-buttons-control';
 import BoxShadowControl from '@Components/box-shadow';
 import ResponsiveSlider from '@Components/responsive-slider';
 import GradientSettings from '@Components/gradient-settings';
-
-import { InspectorControls, BlockControls, AlignmentToolbar, store as blockEditorStore  } from '@wordpress/block-editor';
+import {
+	InspectorControls,
+	BlockControls,
+	AlignmentToolbar,
+	store as blockEditorStore,
+} from '@wordpress/block-editor';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
@@ -166,7 +170,7 @@ const Settings = ( props ) => {
 		);
 	};
     
-	const ALIGNMENT_CONTROLS = [
+	const alignmentControls = [
 		{
 			align: 'left',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
@@ -196,7 +200,7 @@ const Settings = ( props ) => {
 				onChange={( value ) => {
 					updateParentAlignment( value )
 				}}
-				alignmentControls={ALIGNMENT_CONTROLS}
+				alignmentControls={alignmentControls}
 			/>
 		</BlockControls>
 	)

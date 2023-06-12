@@ -166,8 +166,10 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 == Changelog ==
 
-= x.x.X =
-* Improvement: Buttons - Updated default 2 button to 1 button, removed default border, default alignment into left, FSE button color issue fix and Alignment in block toolbar.
+= x.x.x =
+* Improvement: Buttons - Reduced the default number of buttons to 1 and updated the default styling.
+* Improvement: Buttons - Added alignment option to both child and parent block of buttons in block controls toolbar. 
+* Fix: Buttons - Fix FSE button color is different from theme color.
 
 = 2.6.5 - WEDNESDAY, 07th JUNE 2023 =
 * Fix: Buttons - Resolved an issue in which an error was thrown when the background color was set to gradient.
