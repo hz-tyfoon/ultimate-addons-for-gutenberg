@@ -106,7 +106,7 @@ class UAGB_Popup_Builder {
 		if ( ! is_front_page() ) {
 			$this->post_id = get_the_ID();
 		}
-		if ( 'spectra-popup' === get_post_type( $this->post_id ) ) {
+		if ( 'spectra-popup' === get_post_type( $this->post_id ) || defined( 'ELEMENTOR_VERSION' ) ) {
 			return;
 		}
 		$this->enqueue_popup_scripts();
