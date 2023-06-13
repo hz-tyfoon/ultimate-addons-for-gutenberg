@@ -151,14 +151,12 @@ const Settings = ( props ) => {
 
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
-	const { parentClientId, parentAttributes }  = useSelect( ( select ) => {
+	const { parentClientId, parentAttributes } = useSelect( ( select ) => {
 		const { getBlockHierarchyRootClientId, getBlockAttributes } = select( 'core/block-editor' );
-		// eslint-disable-next-line no-shadow
-		const parentClientId = getBlockHierarchyRootClientId( clientId );
-		// eslint-disable-next-line no-shadow
-		const parentAttributes = getBlockAttributes( parentClientId );
-		return { parentClientId, parentAttributes };
-	}, [] );
+		const newParentClientId = getBlockHierarchyRootClientId( clientId );
+		const newParentAttributes = getBlockAttributes( newParentClientId );
+		return { parentClientId: newParentClientId, parentAttributes: newParentAttributes };
+	  }, [] );
 
 	const updateParentAlignment = ( align ) => updateBlockAttributes( parentClientId, { align } ) ;
 
