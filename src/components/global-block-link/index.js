@@ -15,6 +15,7 @@ import UAGSelectControl from '@Components/select-control';
 import { useDeviceType } from '@Controls/getPreviewType';
 import AddNewPopupStyle from './add-new-popup-style';
 import { isEmptyObject } from '@Utils/Helpers';
+import { clearCurrentAttributes, getLabel, getGlobalBlockStylesOptions, getNewAttributes } from './utils';
 
 const GlobalBlockStyles = ( props ) => {
     console.log( 'GlobalBlockStyles', props );
@@ -34,10 +35,7 @@ const GlobalBlockStyles = ( props ) => {
         updateGlobalBlockStyles,
         updateGlobalBlockStylesFontFamilies,
         attributes,
-        attributes : {
-            globalBlockStyleName,
-            globalBlockStyleId
-        },
+        attributes : { globalBlockStyleId },
         styling,
         setAttributes,
         blockName,
@@ -69,37 +67,6 @@ const GlobalBlockStyles = ( props ) => {
         } 
 	}, [globalBlockStyleId, globalBlockStyles] );
 
-    const clearCurrentAttributes = () => {
-        const saveAttr = {};
-        for ( const attrKey in currentBlockDefaultAttributes ) {
-            const attrObject = currentBlockDefaultAttributes[ attrKey ];
-            if( attrObject?.isGBSStyle ){
-                
-                let value = '';
-                
-                switch ( attrObject.type ) {
-                    case 'boolean':
-                        value = false;
-                        break;
-                    case 'number':
-                        value = 0.001020304;
-                        break;
-                    case 'object':
-                        value = {};
-                        break;
-                    case 'array':
-                        value = [];
-                        break;
-                }
-                saveAttr[ attrKey ] = value;
-            }
-        }
-
-        if( ! isEmptyObject( saveAttr ) ){
-            setAttributes( saveAttr );
-        }
-    }
-
     const saveStylesToDatabase = ( bulkUpdateStyles = 'no', spectraGlobalStyles = globalBlockStyles ) => {
 
         let styleAttributes = {};
@@ -127,10 +94,10 @@ const GlobalBlockStyles = ( props ) => {
             method: 'POST',
             body: formData,
         } ).then( ( data ) => {
+            console.log( 'saveStylesToDatabase', data );
             if ( data?.success ) {
-    
                 updateGlobalBlockStyles( data?.data );
-                clearCurrentAttributes();
+                clearCurrentAttributes( currentBlockDefaultAttributes, setAttributes );
             }
             
             setUpdateLoader( false );
@@ -145,74 +112,41 @@ const GlobalBlockStyles = ( props ) => {
         if ( ! newStyleID ) {
             return;
         }
+
+        // console.log( 'globalBlockStyles 11', globalBlockStyles );
         
         globalBlockStyles.map( ( style ) => {
+
             if ( newStyleID && style?.value === String( newStyleID ) ) {
-    
                 const styleNameClass = style?.label?.replace( /\s+/g, '-' )?.toLowerCase();
                 const baseSelector = `.spectra-gbs-${styleNameClass}`;
-                const asArray = Object.entries( attributes );
-                const filtered = asArray.filter( ( [key, value] ) => {
-                    if ( currentBlockDefaultAttributes[key]?.isGBSStyle ) {
-                        return (
-                            '0.001020304' !== value &&
-                            '' !== value &&
-                            {} !== value &&
-                            [] !== value &&
-                            false !== value &&
-                            !isEmptyObject( value )
-                        );
-                    }
-                    return false;
-                } );
 
-                const defaultAttributes = style?.attributes || attributes;
-                const finalAttributes = Object.fromEntries( filtered );
-
-                const newAttributes = {
-                    ...defaultAttributes,
-                    ...finalAttributes
-                };
-                for( const attribute in newAttributes ) {
-                    if( 0.001020304 === newAttributes?.[attribute] ){
-                        newAttributes[attribute] = '';
-                    }
-                }
-                
+                const newAttributes = getNewAttributes( style, attributes, currentBlockDefaultAttributes );
                 const blockStyling = styling( newAttributes, clientId, blockName, deviceType, baseSelector );
                 style.editorStyles = blockStyling;
                 style.attributes = newAttributes;
                 style.clientId = clientId;
+                style.blockName = blockName;
                 
                 // Save the Post IDs of the Pages where GBS is used.
                 if ( style?.post_ids ) {
                     style.post_ids.push( currentPostID );
                 } else {
-                    style.post_ids = [currentPostID];
+                    style.post_ids = [ currentPostID ];
                 }
                 
-                style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
-
-                // Save all the clientIds of the blocks where GBS is used.
-                if ( style?.blocksLinked ) {
-                    style.blocksLinked.push( clientId );
-                } else {
-                    style.blocksLinked = [clientId];
-                }
-                
-                style.blocksLinked = [...new Set( style.blocksLinked )] // Make array values unique.
-                
-
+                style.post_ids = [ ...new Set( style.post_ids ) ] // Make array values unique.
             }
             return style
-
         } );
-        
+
         updateGlobalBlockStyles( globalBlockStyles );
         setSaveToDatabase( true );
         setGenerate( false );
     };
+
     const updateGoogleFontData = ( attrs ) => {
+        attrs = { ...attrs };
         Object.keys( attrs ).map( ( attribute ) => {
             
             if ( attribute.includes( 'Family' ) && '' !== attrs[attribute] ) {
@@ -229,10 +163,6 @@ const GlobalBlockStyles = ( props ) => {
         }
         updateGlobalBlockStylesFontFamilies( output );
     };
-
-    const selectLabel = ( ! globalBlockStyleName || '' === globalBlockStyleName ) ? __( 'Link to Existing Style',
-        'ultimate-addons-for-gutenberg' ) : __( 'Linked Style',
-        'ultimate-addons-for-gutenberg' );
     
     return (
         <UAGAdvancedPanelBody
@@ -243,13 +173,15 @@ const GlobalBlockStyles = ( props ) => {
             <AddNewPopupStyle { ...{ ...props, setGenerate, setTempStyleName, tempStyleName, uniqueID, setUniqueID } } />
             
             <UAGSelectControl
-                label={ selectLabel }
+                label={ getLabel( globalBlockStyleId ) }
                 data={ {
                     value: globalBlockStyleId,
                     label: 'globalBlockStyleId',
                 } }
                 onChange = {
                     ( value ) => {
+                        // console.log( 'select value', value );
+
                         let label = '';
                         for ( let i = 0; i < globalBlockStyles.length; i++ ) {
                             if ( globalBlockStyles[i]?.value === value ) {
@@ -272,14 +204,6 @@ const GlobalBlockStyles = ( props ) => {
                         
                                 style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
 
-                                // Save all the clientIds of the blocks where GBS is used.
-                                if ( style?.blocksLinked ) {
-                                    style.blocksLinked.push( clientId );
-                                } else {
-                                    style.blocksLinked = [clientId];
-                                }
-                                
-                                style.blocksLinked = [...new Set( style.blocksLinked )] // Make array values unique.
                             }
                             return style;
                         } );
@@ -296,7 +220,7 @@ const GlobalBlockStyles = ( props ) => {
                         setUniqueID( value );
                     }
                 }
-                options={ globalBlockStyles }
+                options={ getGlobalBlockStylesOptions( globalBlockStyles, blockName ) }
                 layout="stack"
             />
             {

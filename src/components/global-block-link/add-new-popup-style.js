@@ -14,28 +14,26 @@ const AddNewPopupStyle = ( props ) => {
         uniqueID,
         setUniqueID,
         openModal,
-        attributes : {
-            globalBlockStyleName,
-        },
+        attributes : { globalBlockStyleId },
         isOpen
     } = props;
 
-    return <>
-        {
-            ( ! globalBlockStyleName || '' === globalBlockStyleName ) && (
-                <Button
-                    className="spectra-gbs-button components-base-control"
-                    onClick={ () => {
-                        openModal();
-                        setUniqueID( new Date().getTime().toString() );
-                    } }
-                    variant="primary"
-                >
-                    { __( 'Add New', 'ultimate-addons-for-gutenberg' ) }
-                </Button>
-            )
-        }
+    const AddNewButton = ! globalBlockStyleId ? (
+        <Button
+            className="spectra-gbs-button components-base-control"
+            onClick={ () => {
+                openModal();
+                setUniqueID( new Date().getTime().toString() );
+            } }
+            variant="primary"
+        >
+            { __( 'Add New', 'ultimate-addons-for-gutenberg' ) }
+        </Button>
+    ) : null;
 
+
+    return <>
+        { AddNewButton }
         { 'open' === isOpen && <Modal
             title={__( 'Save as a Global Block Style', 'ultimate-addons-for-gutenberg' )} onRequestClose={closeModal}
             className="spectra-global-block-style-name-modal"
@@ -55,20 +53,25 @@ const AddNewPopupStyle = ( props ) => {
                 />
                 <Button
                     onClick={() => {
+
+                        if ( ! tempStyleName || '' === tempStyleName ) {
+                            // eslint-disable-next-line no-alert, no-undef
+                            alert( __( 'Please enter a style name', 'ultimate-addons-for-gutenberg' ) );
+                            return;
+                        }
+
                         setGenerate( true );
-                        setAttributes(
-                            {
-                                globalBlockStyleName: tempStyleName,
-                                globalBlockStyleId: uniqueID
-                            }
-                        )
+
+                        setAttributes( {  globalBlockStyleName: tempStyleName, globalBlockStyleId: uniqueID } );
+
                         const spectraGlobalStyles = [
                             ...globalBlockStyles,
                             {
                                 value: uniqueID,
                                 label: tempStyleName,
                             }
-                        ]
+                        ];
+                        
                         closeModal();
                         updateGlobalBlockStyles( spectraGlobalStyles );
                     }}
