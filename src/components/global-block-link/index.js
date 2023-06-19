@@ -14,7 +14,6 @@ import { compose } from '@wordpress/compose';
 import UAGSelectControl from '@Components/select-control';
 import { useDeviceType } from '@Controls/getPreviewType';
 import AddNewPopupStyle from './add-new-popup-style';
-import { isEmptyObject } from '@Utils/Helpers';
 import { clearCurrentAttributes, getLabel, getGlobalBlockStylesOptions, getNewAttributes } from './utils';
 
 const GlobalBlockStyles = ( props ) => {
