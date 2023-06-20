@@ -413,7 +413,7 @@ class UAGB_Post_Assets {
 
 			// RTL Styles Support.
 			UAGB_Scripts_Utils::enqueue_blocks_rtl_styles();
-
+			UAGB_Scripts_Utils::enqueue_blocks_styles(); // Enqueue block styles.
 			if ( $this->load_uag_fonts ) {
 				// Render google fonts.
 				$this->render_google_fonts();
@@ -426,7 +426,7 @@ class UAGB_Post_Assets {
 
 			// Print Dynamic CSS.
 			if ( 'disabled' === $this->file_generation || $this->fallback_css ) {
-				UAGB_Scripts_Utils::enqueue_blocks_styles(); // Enqueue block styles.
+				// UAGB_Scripts_Utils::enqueue_blocks_styles(); // Enqueue block styles.
 				add_action( 'wp_head', array( $this, 'print_stylesheet' ), 80 );
 			}
 			// Print Dynamic JS.
@@ -907,12 +907,12 @@ class UAGB_Post_Assets {
 					$css_tablet  = ( isset( $css['tablet'] ) ? $css['tablet'] : '' );
 					$css_mobile  = ( isset( $css['mobile'] ) ? $css['mobile'] : '' );
 
-					if ( 'enabled' === $this->file_generation ) { // Get common CSS for the block when file generation is enabled.
-						$css_common = ( isset( $css['common'] ) ? $css['common'] : '' );
-						if ( isset( $inner_block_css['common'] ) ) {
-							$css['common'] = $css_common . $inner_block_css['common'];
-						}
-					}
+					// if ( 'enabled' === $this->file_generation ) { // Get common CSS for the block when file generation is enabled.
+					// $css_common = ( isset( $css['common'] ) ? $css['common'] : '' );
+					// if ( isset( $inner_block_css['common'] ) ) {
+					// $css['common'] = $css_common . $inner_block_css['common'];
+					// }
+					// }
 
 					if ( isset( $inner_block_css['desktop'] ) ) {
 						$css['desktop'] = $css_desktop . $inner_block_css['desktop'];
@@ -1119,9 +1119,9 @@ class UAGB_Post_Assets {
 					// Get CSS for the Block.
 					$css = $block_assets['css'];
 
-					if ( ! empty( $css['common'] ) ) {
-						$desktop .= $css['common'];
-					}
+					// if ( ! empty( $css['common'] ) ) {
+					// $desktop .= $css['common'];
+					// }
 
 					if ( isset( $css['desktop'] ) ) {
 						$desktop .= $css['desktop'];
