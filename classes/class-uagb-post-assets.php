@@ -852,18 +852,6 @@ class UAGB_Post_Assets {
 			$this->uag_flag = true;
 		}
 
-		// Add static css here.
-		$blocks = UAGB_Block_Module::get_blocks_info();
-
-		$block_css_file_name = isset( $blocks[ $name ]['static_css'] ) ? $blocks[ $name ]['static_css'] : str_replace( 'uagb/', '', $name );
-
-		if ( 'enabled' === $this->file_generation && ! in_array( $block_css_file_name, $this->static_css_blocks, true ) ) {
-			$common_css = array(
-				'common' => $this->get_block_static_css( $block_css_file_name ),
-			);
-			$css       += $common_css;
-		}
-
 		if ( strpos( $name, 'uagb/' ) !== false ) {
 			$_block_slug = str_replace( 'uagb/', '', $name );
 			$_block_css  = UAGB_Block_Module::get_frontend_css( $_block_slug, $blockattr, $block_id );
@@ -992,13 +980,6 @@ class UAGB_Post_Assets {
 		}
 
 		$assets = $this->get_blocks_assets( $blocks );
-
-		if ( 'enabled' === $this->file_generation && isset( $assets['css'] ) && ! self::$common_assets_added ) {
-
-			$common_static_css_all_blocks = $this->get_block_static_css( 'extensions' );
-			$assets['css']                = $assets['css'] . $common_static_css_all_blocks;
-			self::$common_assets_added    = true;
-		}
 
 		$this->stylesheet .= $assets['css'];
 		$this->script     .= $assets['js'];
