@@ -42,6 +42,20 @@ export function clearCurrentAttributes( currentBlockDefaultAttributes, setAttrib
     }
 }
 
+export function clearNumberAttributes( currentAttributes, setAttributes ){
+    const saveAttr = {};
+    for ( const attrKey in currentAttributes ) {
+        const attrObject = currentAttributes[ attrKey ];
+        if( 0.001020304 === attrObject ){
+            saveAttr[ attrKey ] = undefined;
+        }
+    }
+
+    if( ! isEmptyObject( saveAttr ) ){
+        setAttributes( saveAttr );
+    }
+}
+
 export function getNewAttributes( style, attributes, currentBlockDefaultAttributes ){
     const defaultAttributes = style?.attributes || attributes;
     const finalAttributes = {};

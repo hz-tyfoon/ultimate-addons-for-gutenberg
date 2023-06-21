@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { Button, Modal } from '@wordpress/components';
 import UAGTextControl from '@Components/text-control';
+import { useState } from '@wordpress/element';
 
 const AddNewPopupStyle = ( props ) => {
     const {
@@ -9,14 +10,14 @@ const AddNewPopupStyle = ( props ) => {
         globalBlockStyles,
         updateGlobalBlockStyles,
         setGenerate,
-        setTempStyleName,
-        tempStyleName,
         uniqueID,
         setUniqueID,
         openModal,
         attributes : { globalBlockStyleId },
         isOpen
     } = props;
+
+    const [ tempStyleName, setTempStyleName ] = useState( '' );
 
     const AddNewButton = ! globalBlockStyleId ? (
         <Button
@@ -35,7 +36,10 @@ const AddNewPopupStyle = ( props ) => {
     return <>
         { AddNewButton }
         { 'open' === isOpen && <Modal
-            title={__( 'Save as a Global Block Style', 'ultimate-addons-for-gutenberg' )} onRequestClose={closeModal}
+            title={__('Save as a Global Block Style', 'ultimate-addons-for-gutenberg')} onRequestClose={() => {
+                closeModal();
+                setTempStyleName('');
+            }}
             className="spectra-global-block-style-name-modal"
         >
             <p> {__( 'Enter a word or two to make a unique global block style & you\'ll be able to add this global style to multiple areas on your site.', 'ultimate-addons-for-gutenberg' )}</p>
@@ -73,6 +77,7 @@ const AddNewPopupStyle = ( props ) => {
                         ];
                         
                         closeModal();
+                        setTempStyleName( '' );
                         updateGlobalBlockStyles( spectraGlobalStyles );
                     }}
                     variant="primary"

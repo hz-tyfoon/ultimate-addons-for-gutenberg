@@ -6,7 +6,6 @@ import styles from './editor.lazy.scss';
 import { blocksAttributes } from '@Attributes/getBlocksDefaultAttributes';
 import { select, withSelect, withDispatch } from '@wordpress/data';
 import { Button } from '@wordpress/components';
-// import UAGTextControl from '@Components/text-control';
 import apiFetch from '@wordpress/api-fetch';
 import { store as spectraStore } from '@Store';
 import { STORE_NAME as storeName } from '@Store/constants';
@@ -14,10 +13,10 @@ import { compose } from '@wordpress/compose';
 import UAGSelectControl from '@Components/select-control';
 import { useDeviceType } from '@Controls/getPreviewType';
 import AddNewPopupStyle from './add-new-popup-style';
-import { clearCurrentAttributes, getLabel, getGlobalBlockStylesOptions, getNewAttributes } from './utils';
+import { clearCurrentAttributes, getLabel, getGlobalBlockStylesOptions, getNewAttributes, clearNumberAttributes } from './utils';
 
 const GlobalBlockStyles = ( props ) => {
-    console.log( 'GlobalBlockStyles', props );
+    // console.log( 'GlobalBlockStyles', props );
    // Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
 		styles.use();
@@ -44,7 +43,6 @@ const GlobalBlockStyles = ( props ) => {
     const [ uniqueID, setUniqueID ] = useState( false );
     const [ updateLoader, setUpdateLoader ] = useState( false );
     const [ panelLoader, setPanelLoader ] = useState( false );
-    const [ tempStyleName, setTempStyleName ] = useState( '' );
     const [ saveToDatabase, setSaveToDatabase ] = useState( false );
     const [ generate, setGenerate ] = useState( false );
 
@@ -66,7 +64,7 @@ const GlobalBlockStyles = ( props ) => {
         } 
 	}, [globalBlockStyleId, globalBlockStyles] );
 
-    const saveStylesToDatabase = ( bulkUpdateStyles = 'no', spectraGlobalStyles = globalBlockStyles ) => {
+    const saveStylesToDatabase = ( bulkUpdateStyles = 'no', spectraGlobalStyles = globalBlockStyles, noneValue = false ) => {
 
         let styleAttributes = {};
 
@@ -93,10 +91,13 @@ const GlobalBlockStyles = ( props ) => {
             method: 'POST',
             body: formData,
         } ).then( ( data ) => {
-            console.log( 'saveStylesToDatabase', data );
             if ( data?.success ) {
                 updateGlobalBlockStyles( data?.data );
-                clearCurrentAttributes( currentBlockDefaultAttributes, setAttributes );
+                if( ! noneValue ){
+                    clearCurrentAttributes( currentBlockDefaultAttributes, setAttributes );
+                }else{
+                    clearNumberAttributes( attributes, setAttributes );
+                }
             }
             
             setUpdateLoader( false );
@@ -111,8 +112,6 @@ const GlobalBlockStyles = ( props ) => {
         if ( ! newStyleID ) {
             return;
         }
-
-        // console.log( 'globalBlockStyles 11', globalBlockStyles );
         
         globalBlockStyles.map( ( style ) => {
 
@@ -169,7 +168,7 @@ const GlobalBlockStyles = ( props ) => {
             initialOpen={ false }
             className={ panelLoader ? 'loading' : '' }
         >
-            <AddNewPopupStyle { ...{ ...props, setGenerate, setTempStyleName, tempStyleName, uniqueID, setUniqueID } } />
+            <AddNewPopupStyle { ...{ ...props, setGenerate, uniqueID, setUniqueID } } />
             
             <UAGSelectControl
                 label={ getLabel( globalBlockStyleId ) }
@@ -179,7 +178,7 @@ const GlobalBlockStyles = ( props ) => {
                 } }
                 onChange = {
                     ( value ) => {
-                        // console.log( 'select value', value );
+                        console.log( 'select value', value );
 
                         let label = '';
                         for ( let i = 0; i < globalBlockStyles.length; i++ ) {
@@ -208,7 +207,9 @@ const GlobalBlockStyles = ( props ) => {
                         } );
                         
                         updateGlobalBlockStyles( globalBlockStyles );
-                        saveStylesToDatabase( 'bulkUpdateStyles', globalBlockStyles );
+                        let noneValue = "" === value;
+                        saveStylesToDatabase( 'bulkUpdateStyles', globalBlockStyles, noneValue );
+
                         setAttributes( 
                             { 
                                 globalBlockStyleId: value,

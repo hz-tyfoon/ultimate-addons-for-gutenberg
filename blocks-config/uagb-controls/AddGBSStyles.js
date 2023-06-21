@@ -2,6 +2,7 @@ import { useEffect } from '@wordpress/element';
 import { STORE_NAME as storeName } from '@Store/constants';
 import { select } from '@wordpress/data';
 import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
+import AddGBSStylesDom from './AddGBSStylesDom';
 
 const AddGBSStyles = ( ChildComponent )=> {
 	const WrapWithStyle = ( props ) => {
@@ -20,15 +21,7 @@ const AddGBSStyles = ( ChildComponent )=> {
 		const editorStyles = getGBSEditorStyles( globalBlockStyles, globalBlockStyleId, globalBlockStyleName );
 
 		useEffect( () => {
-			const isExistStyle = document.getElementById( 'spectra-gbs-' + globalBlockStyleId );
-			if( ! isExistStyle ){
-				const node = document.createElement( 'style' )
-				node.setAttribute( 'id', 'spectra-gbs-' + globalBlockStyleId );
-				node.textContent = editorStyles;
-				document.head.appendChild( node )
-			}else{
-				isExistStyle.textContent = editorStyles
-			}
+			AddGBSStylesDom( globalBlockStyleId, editorStyles );
 		}, [editorStyles] );
 
 		useEffect( () => {
