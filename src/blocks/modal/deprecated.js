@@ -2,6 +2,9 @@ import attributes from './attributes';
 import classnames from 'classnames';
 import renderSVG from '@Controls/renderIcon';
 import { RichText, InnerBlocks } from '@wordpress/block-editor';
+import attributesV2_6_8 from './deprecated/v2_6_8/attributes';
+import saveV2_6_8 from './deprecated/v2_6_8/save';
+
 const deprecated = [
 	{
 		attributes,
@@ -108,6 +111,10 @@ const deprecated = [
 				</div>
 			);
 		},
+	},
+	{
+		attributes: attributesV2_6_8,
+		save: saveV2_6_8,
 	},
 ];
 

@@ -35,11 +35,19 @@ body {
 			text-align: center;
 			cursor: pointer;
 			fill: #fff;
+			transition: transform 100ms ease;
+
+			svg {
+				transition: filter 100ms ease;
+			}
 		}
 	}
 
 	.uagb-modal-popup-close {
 		display: none;
+		border: none;
+		background: transparent;
+		padding: 0;
 	}
 
 	.uagb-modal-popup-content {
