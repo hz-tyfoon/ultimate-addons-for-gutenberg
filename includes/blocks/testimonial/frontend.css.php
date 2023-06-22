@@ -132,6 +132,11 @@ if ( 'image' === $attr['backgroundType'] ) {
 } else {
 	$selectors['  .uagb-testimonial__wrap.uagb-tm__bg-type-color .uagb-tm__content'] = array(
 		'background-color' => $attr['backgroundColor'],
+	);
+}
+
+if ( true === $attr['equalHeight'] ) {
+	$selectors['  .uagb-tm__content'] = array(
 		'height' => '-webkit-fill-available',
 	);
 }
