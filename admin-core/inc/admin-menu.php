@@ -413,12 +413,12 @@ class Admin_Menu {
 			UAGB_VER
 		);
 
-		wp_register_style(
-			'uag-admin-google-fonts',
-			'https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap',
-			array(),
-			UAGB_VER
-		);
+		// wp_register_style(
+		// 	'uag-admin-google-fonts',
+		// 	'https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap',
+		// 	array(),
+		// 	UAGB_VER
+		// );
 
 		wp_enqueue_script( $handle );
 

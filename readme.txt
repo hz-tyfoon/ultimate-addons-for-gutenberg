@@ -166,6 +166,9 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 == Changelog ==
 
+= x.x.x =
+* Fix: Testimonial - Resolved equal height issue in frontend when 2 columns per slide is set.
+
 = 2.6.8 - WEDNESDAY, 21st JUNE 2023 =
 * Fix: Buttons - Resolved an issue in which the background color would appear transparent after installing the WooCommerce plugin.
 * Fix: Call To Action - Resolved an issue wherein an extra margin would appear above the heading of the Call To Action block in the Spectra One theme.
