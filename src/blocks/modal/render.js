@@ -155,7 +155,10 @@ const Render = ( props ) => {
 				>
 					{ isPro &&
 						( 'window-top-left' === closeIconPosition || 'window-top-right' === closeIconPosition ) && (
-							<button className={ classnames( 'uagb-modal-popup-close', closeIconPosition ) }>
+							<button
+								className={ classnames( 'uagb-modal-popup-close', closeIconPosition ) }
+								aria-label={ __( 'Close Modal', 'ultimate-addons-for-gutenberg') }
+							>
 								{ '' !== closeIcon && renderSVG( closeIcon ) }
 							</button>
 						) }
@@ -168,7 +171,10 @@ const Render = ( props ) => {
 							/>
 						</div>
 						{ ( 'popup-top-left' === closeIconPosition || 'popup-top-right' === closeIconPosition ) && (
-							<button className="uagb-modal-popup-close">
+							<button
+								className="uagb-modal-popup-close"
+								aria-label={ __( 'Close Modal', 'ultimate-addons-for-gutenberg') }
+							>
 								{ '' !== closeIcon && renderSVG( closeIcon, setAttributes ) }
 							</button>
 						) }

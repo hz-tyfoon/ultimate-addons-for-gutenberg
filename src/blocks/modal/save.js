@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import renderSVG from '@Controls/renderIcon';
 import { RichText, InnerBlocks } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
 
 export default function Save( props ) {
 	const {
@@ -99,7 +100,10 @@ export default function Save( props ) {
 				} ) }
 			>
 				{ isPro && ( 'window-top-left' === closeIconPosition || 'window-top-right' === closeIconPosition ) && (
-					<button className={ classnames( 'uagb-modal-popup-close', closeIconPosition ) }>
+					<button
+						className={ classnames( 'uagb-modal-popup-close', closeIconPosition ) }
+						aria-label={ __( 'Close Modal', 'ultimate-addons-for-gutenberg') }
+					>
 						{ '' !== closeIcon && renderSVG( closeIcon ) }
 					</button>
 				) }
@@ -108,7 +112,12 @@ export default function Save( props ) {
 						<InnerBlocks.Content />
 					</div>
 					{ ( 'popup-top-left' === closeIconPosition || 'popup-top-right' === closeIconPosition ) && (
-						<button className="uagb-modal-popup-close">{ '' !== closeIcon && renderSVG( closeIcon ) }</button>
+						<button
+							className="uagb-modal-popup-close"
+							aria-label={ __( 'Close Modal', 'ultimate-addons-for-gutenberg') }
+						>
+							{ '' !== closeIcon && renderSVG( closeIcon ) }
+						</button>
 					) }
 				</div>
 			</div>
