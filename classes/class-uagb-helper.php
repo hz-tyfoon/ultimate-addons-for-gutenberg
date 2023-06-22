@@ -1400,7 +1400,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				}
 			}//end if
 
-			return $limited_caption . ( $needs_ellipsis && $limited_caption !== $txt ? '&#8230;' : '' );
+			return $limited_caption . ( $needs_ellipsis ? '&#8230;' : '' );
 		}
 	}
 
