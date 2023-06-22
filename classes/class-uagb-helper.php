@@ -1333,6 +1333,75 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 
 			return $combined_selectors;
 		}
+
+		/**
+		 * Trim text but show only fully visible words.
+		 *
+		 * @param string  $txt The text to be trimmed.
+		 * @param integer $len Max trim length.
+		 * @return string
+		 *
+		 * @since 1.0.0
+		 */
+		public static function trim_text_to_fully_visible_word( $txt, $len ) {
+			$needs_ellipsis  = $len < strlen( $txt ) ? true : false;
+			$cap_space_pos   = isset( $txt ) ? strpos( $txt, ' ' ) : 0;
+			$limited_caption = $txt;
+
+			if ( $needs_ellipsis && strlen( $txt ) <= $len ) {
+				// The caption is already below the limiter.
+				$needs_ellipsis = false;
+			} elseif ( $needs_ellipsis ) {
+				$limited_caption   = substr( $limited_caption, 0, $len );
+				$limited_space_pos = strpos( $limited_caption, ' ' );
+				if ( ! $limited_space_pos ) {
+					// There's only 1 word.
+					if ( false !== $cap_space_pos ) {
+						// There's only 1 word in the original caption.
+						if ( strlen( $limited_caption ) === strlen( explode( ' ', $txt )[0] ) ) {
+							// The limited caption is the same as the original.
+							$needs_ellipsis = false;
+						} else {
+							// The limited caption differs from the original.
+							$limited_caption = '';
+						}
+					} else {
+						// There's more than 1 word in the original caption.
+						if ( strlen( $limited_caption ) !== strlen( explode( ' ', $txt )[0] ) ) {
+							// The limited caption is smaller than 1 word in the original.
+							$limited_caption = '';
+						}
+					}
+				} else {
+					// There is a space.
+					if ( strlen( $limited_caption ) === strlen( $txt ) ) {
+						// The limited caption is the same as the original.
+						$needs_ellipsis = false;
+					} else {
+						// The limited caption differs from the original.
+						if ( ' ' !== substr( $limited_caption, -1 ) ) {
+							$last_space_pos  = strrpos( $limited_caption, ' ' );
+							$limited_caption = substr(
+								$limited_caption,
+								0,
+								( false === $last_space_pos ) ? strlen( $limited_caption ) : min( strlen( $limited_caption ), $last_space_pos )
+							);
+						}
+					}
+				}//end if
+
+				// If the last character in the string matches any of the following, remove that character.				
+				switch ( substr( $limited_caption, -1 ) ) {
+					case ',':
+					case '.':
+					case ' ':
+					case '\'':
+						$limited_caption = substr( $limited_caption, 0, -1 );
+				}
+			}//end if
+
+			return $limited_caption . ( $needs_ellipsis && $limited_caption !== $txt ? '&#8230;' : '' );
+		}
 	}
 
 	/**
