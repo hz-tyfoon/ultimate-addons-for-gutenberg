@@ -74,11 +74,9 @@ $selectors               = array(
 		'font-size'   => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'fill'        => $attr['closeIconColor'],
 	),
-	' .uagb-modal-popup-close:focus'             => array(
-		'transform' => 'scale(1.2)',
-	),
 	' .uagb-modal-popup-close:focus svg'         => array(
-		'filter' => 'drop-shadow(0 0 1px ' . $attr['closeIconColor'] . ')',
+		'transform' => 'scale(1.2)',
+		'filter'    => 'drop-shadow(0 0 1px ' . $attr['closeIconColor'] . ')',
 	),
 	'.uagb-modal-popup.active'                   => array(
 		'background' => $attr['overlayColor'],
