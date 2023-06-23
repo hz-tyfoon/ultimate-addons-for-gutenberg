@@ -102,7 +102,7 @@ export default function Save( props ) {
 				{ isPro && ( 'window-top-left' === closeIconPosition || 'window-top-right' === closeIconPosition ) && (
 					<button
 						className={ classnames( 'uagb-modal-popup-close', closeIconPosition ) }
-						aria-label={ __( 'Close Modal', 'ultimate-addons-for-gutenberg') }
+						aria-label={ __( 'Close Modal', 'ultimate-addons-for-gutenberg' ) }
 					>
 						{ '' !== closeIcon && renderSVG( closeIcon ) }
 					</button>

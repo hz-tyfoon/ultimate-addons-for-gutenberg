@@ -24,7 +24,7 @@ export default function save( props ) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
-	const ariaLabel = ( 'popup' === variantType ) ?  __( 'Close Popup', 'ultimate-addons-for-gutenberg') : __( 'Close Info Bar', 'ultimate-addons-for-gutenberg');
+	const ariaLabel = ( 'popup' === variantType ) ?  __( 'Close Popup', 'ultimate-addons-for-gutenberg' ) : __( 'Close Info Bar', 'ultimate-addons-for-gutenberg' );
 
 	return variationSelected && (
 		<div

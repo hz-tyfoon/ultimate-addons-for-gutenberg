@@ -173,7 +173,7 @@ const Render = ( props ) => {
 						{ ( 'popup-top-left' === closeIconPosition || 'popup-top-right' === closeIconPosition ) && (
 							<button
 								className="uagb-modal-popup-close"
-								aria-label={ __( 'Close Modal', 'ultimate-addons-for-gutenberg') }
+								aria-label={ __( 'Close Modal', 'ultimate-addons-for-gutenberg' ) }
 							>
 								{ '' !== closeIcon && renderSVG( closeIcon, setAttributes ) }
 							</button>

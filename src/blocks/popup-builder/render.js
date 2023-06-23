@@ -74,7 +74,7 @@ const Render = ( props ) => {
 		] ),
 	} );
 
-	const ariaLabel = ( 'popup' === variantType ) ?  __( 'Close Popup', 'ultimate-addons-for-gutenberg') : __( 'Close Info Bar', 'ultimate-addons-for-gutenberg');
+	const ariaLabel = ( 'popup' === variantType ) ?  __( 'Close Popup', 'ultimate-addons-for-gutenberg' ) : __( 'Close Info Bar', 'ultimate-addons-for-gutenberg' );
 
 	const hasChildBlocks = getBlockOrder( clientId ).length > 0;
 	const ALLOWED_BLOCKS = getBlockTypes().map( block => block.name ).filter( blockName => ! excludeBlocks.includes( blockName ) );

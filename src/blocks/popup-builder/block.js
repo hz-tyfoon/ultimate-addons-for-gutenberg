@@ -11,10 +11,9 @@ import variations from './variations';
 import deprecated from './deprecated';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { addFilter } from '@wordpress/hooks';
+import { addFilter, applyFilters } from '@wordpress/hooks';
 import PreviewImage from '@Controls/previewImage';
 import { addSidebarPopupMenu } from './sidebar-settings/popup-sidebar';
-import { applyFilters } from '@wordpress/hooks';
 import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
 
 if ( 'spectra-popup' === window.typenow ) {
