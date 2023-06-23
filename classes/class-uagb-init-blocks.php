@@ -752,7 +752,8 @@ class UAGB_Init_Blocks {
 				'is_site_editor'                          => $screen->id,
 				'current_post_id'                         => get_the_ID(),
 				'btn_inherit_from_theme'                  => UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' ),
-			)
+				'google_api_key'                          => UAGB_Admin_Helper::get_admin_settings_option( 'uag_google_api_key', '' ),
+				)
 		);
 		// To match the editor with frontend.
 		// Scripts Dependency.

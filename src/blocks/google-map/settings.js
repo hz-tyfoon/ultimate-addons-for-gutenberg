@@ -5,17 +5,18 @@ import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
 import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 import UAGSelectControl from '@Components/select-control';
 import ResponsiveSlider from '@Components/responsive-slider';
-
+import UAGNumberControl from '@Components/number-control';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
 import { memo } from '@wordpress/element';
+import { ExternalLink } from '@wordpress/components';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
 
 	const {
 		setAttributes,
-		attributes: { height, heightTablet, heightMobile, zoom, address, language },
+		attributes: { height, heightTablet, heightMobile, zoom, address, language, latitude, longitude },
 	} = props;
 
 	return (
@@ -23,13 +24,77 @@ const Settings = ( props ) => {
 			<InspectorTabs tabs={ [ 'general', 'advance' ] }>
 				<InspectorTab { ...UAGTabs.general }>
 					<UAGAdvancedPanelBody initialOpen={ true }>
-						<p className="uagb-settings-notice">
-							{ __(
-								"This block uses Spectra's API key to display the map. You don't need to create your own API key or worry about renewing it.",
-								'ultimate-addons-for-gutenberg'
-							) }
-						</p>
-
+						<UAGNumberControl
+							label={__( 'Latitude', 'ultimate-addons-for-gutenberg' )}
+							value={latitude}
+							data={{
+								value: latitude,
+								label: 'latitude',
+							}}
+							displayUnit={false}
+							setAttributes={setAttributes}
+							help={
+								<>
+									{__(
+										'To find Latitude of your location ',
+										'ultimate-addons-for-gutenberg'
+									)}
+									<ExternalLink
+										href={
+											'https://www.latlong.net/'
+										}
+									>
+										{__( 'click here.', 'ultimate-addons-for-gutenberg' )}
+									</ExternalLink>
+								</>
+							}
+							inlineControl={false}
+							showControlHeader={false}
+							name='latitude'
+						/>
+						<UAGNumberControl
+							label={__( 'Longitude', 'ultimate-addons-for-gutenberg' )}
+							value={longitude}
+							data={{
+								value: longitude,
+								label: 'longitude',
+							}}
+							displayUnit={false}
+							setAttributes={setAttributes}
+							help={
+								<>
+									{ __(
+										'To find Longitude of your location ',
+										'ultimate-addons-for-gutenberg'
+									) }
+									<ExternalLink
+										href={
+											'https://www.latlong.net/'
+										}
+									>
+										{__( 'click here.', 'ultimate-addons-for-gutenberg' )}
+									</ExternalLink>
+								</>
+							}
+							inlineControl={false}
+							showControlHeader={false}
+							name='longitude'
+						/>
+						{/* <UAGTextControl
+							label={__('Longitude', 'ultimate-addons-for-gutenberg')}
+							value={longitude}
+							data={{
+								value: longitude,
+								label: 'longitude',
+							}}
+							setAttributes={setAttributes}
+							onChange={(value) =>
+								setAttributes({
+									longitude: value,
+								})
+							}
+							placeholder={__('Type the longitude', 'ultimate-addons-for-gutenberg')}
+						/> */}
 						<UAGTextControl
 							label={ __( 'Address', 'ultimate-addons-for-gutenberg' ) }
 							value={ address }

@@ -90,6 +90,14 @@ if ( ! class_exists( 'UAGB_Google_Map' ) ) {
 							'type'    => 'boolean',
 							'default' => false,
 						),
+						'latitude'     => array(
+							'type'    => 'number',
+							'default' => 18.606449,
+						),
+						'longitude'    => array(
+							'type'    => 'number',
+							'default' => 73.724480,
+						),
 					),
 					'render_callback' => array( $this, 'google_map_callback' ),
 				)
@@ -149,12 +157,14 @@ if ( ! class_exists( 'UAGB_Google_Map' ) ) {
 				$zindex_extention_enabled ? 'uag-blocks-common-selector' : '',
 			);
 
-			$address  = ! empty( $attributes['address'] ) ? rawurlencode( $attributes['address'] ) : rawurlencode( 'Brainstorm Force' );
-			$zoom     = ! empty( $attributes['zoom'] ) ? $attributes['zoom'] : 12;
-			$language = ! empty( $attributes['language'] ) ? $attributes['language'] : 'en';
-			$height   = ! empty( $attributes['height'] ) ? $attributes['height'] : 300;
+			$address   = ! empty( $attributes['address'] ) ? rawurlencode( $attributes['address'] ) : rawurlencode( 'Brainstorm Force' );
+			$zoom      = ! empty( $attributes['zoom'] ) ? $attributes['zoom'] : 12;
+			$language  = ! empty( $attributes['language'] ) ? $attributes['language'] : 'en';
+			$height    = ! empty( $attributes['height'] ) ? $attributes['height'] : 300;
+			$latitude  = ! empty( $attributes['latitude'] ) ? $attributes['latitude'] : 18.606449;
+			$longitude = ! empty( $attributes['longitude'] ) ? $attributes['longitude'] : 73.724480;
 
-			$updated_url = add_query_arg(
+			$updated_url  = add_query_arg(
 				array(
 					'q'      => $address,
 					'z'      => $zoom,
@@ -165,12 +175,14 @@ if ( ! class_exists( 'UAGB_Google_Map' ) ) {
 				),
 				'https://maps.google.com/maps' 
 			);
+			$user_api_key = UAGB_Admin_Helper::get_admin_settings_option( 'uag_google_api_key', '' );
 			ob_start();
 			?>
 			<div 
 			class="<?php echo esc_attr( implode( ' ', $main_classes ) ); ?>"
 			style="<?php echo esc_attr( implode( '', $zindex_wrap ) ); ?>" >
-				<iframe
+			<?php if ( empty( $user_api_key ) ) : ?>
+			<iframe
 					class="uagb-google-map__iframe"
 					title="<?php _e( 'Google Map for ', 'ultimate-addons-for-gutenberg' ) . $address; ?>"
 					src="<?php echo esc_url_raw( $updated_url ); ?>"
@@ -179,6 +191,20 @@ if ( ! class_exists( 'UAGB_Google_Map' ) ) {
 					loading="lazy"
 				></iframe>
 			</div>
+			<?php endif; ?>
+			<?php if ( ! empty( $user_api_key ) ) : ?>
+			<div id="uagb-google-map__iframe" style></div>
+			<script>
+				function initMap() {
+					var map = new google.maps.Map(document.getElementById('uagb-google-map__iframe'), {
+						center: { lat: <?php echo floatval( $latitude ); ?>, lng: <?php echo floatval( $longitude ); ?> },
+						zoom: <?php echo esc_html( $zoom ); ?>,
+						language: "<?php echo esc_html( $language ); ?>",
+					});
+				}
+			</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo htmlspecialchars( $user_api_key ); ?>&callback=initMap"></script>
+			<?php endif; ?>
 			<?php
 			return ob_get_clean();
 		}

@@ -29,6 +29,7 @@ import ContainerGlobalElementsGap from '@DashboardApp/pages/settings/ContainerGl
 import MyAccount from '@DashboardApp/pages/settings/MyAccount';
 import InstagramUsers from '@DashboardApp/pages/settings/block-settings/InstagramUsers';
 import InheritFromTheme from '@DashboardApp/pages/settings/InheritFromTheme';
+import GoogleMapAPISetting from '@DashboardApp/pages/settings/block-settings/GoogleMapAPISetting';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useEffect } from '@wordpress/element';
 import { uagbClassNames } from '@Utils/Helpers';
@@ -167,6 +168,7 @@ const Settings = () => {
 									uag_react.spectra_pro_status && (
 										<>
 											<InstagramUsers/>
+											<GoogleMapAPISetting/>
 											{/* SOCIAL MARKER */}
 										</>
 									)

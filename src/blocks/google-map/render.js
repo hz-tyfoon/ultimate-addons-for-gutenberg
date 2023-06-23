@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
-
+import MapComponent from './mapComponent';
 const Render = ( props ) => {
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -13,13 +13,15 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
+	const YOUR_API_KEY_HERE = uagb_blocks_info.google_api_key;
+	
 	props = props.parentProps;
 
 	const blockName = props.name.replace( 'uagb/', '' );
 
 	const {
 		className,
-		attributes: { zoom, address, language, height },
+		attributes: { zoom, address, language, height, latitude, longitude },
 		deviceType
 	} = props;
 
@@ -37,14 +39,19 @@ const Render = ( props ) => {
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
 			) }
 		>
-			<iframe
-				className="uagb-google-map__iframe"
-				title={ __( 'Google Map for ', 'ultimate-addons-for-gutenberg' ) + address }
-				src={ url }
-				width="640"
-				height={ height }
-				loading="lazy"
-			></iframe>
+			{ ! YOUR_API_KEY_HERE  && 
+				( <iframe
+					className="uagb-google-map__iframe"
+					title={ __( 'Google Map for ', 'ultimate-addons-for-gutenberg' ) + address }
+					src={ url }
+					width="640"
+					height={ height }
+					loading="lazy"
+				></iframe> 
+			) }
+			{ YOUR_API_KEY_HERE && (
+				<MapComponent apiKey={ YOUR_API_KEY_HERE } height={ height } zoom={ getFallbackNumber( zoom, 'zoom', blockName ) } latitude={ latitude } longitude={ longitude } language={ lang_par } />
+			) }
 		</div>
 	);
 };

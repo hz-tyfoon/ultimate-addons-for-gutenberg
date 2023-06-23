@@ -93,6 +93,7 @@ class Common_Settings extends Ajax_Base {
 			'insta_all_users_media',
 			'insta_refresh_all_tokens',
 			'btn_inherit_from_theme',
+			'google_api_key',
 		);
 
 		$this->init_ajax_events( $ajax_events );
@@ -238,6 +239,17 @@ class Common_Settings extends Ajax_Base {
 		$this->check_permission_nonce( 'uag_recaptcha_site_key_v2' );
 		$value = $this->check_post_value();
 		$this->save_admin_settings( 'uag_recaptcha_site_key_v2', sanitize_text_field( $value ) );
+	}
+
+	/**
+	 * Save settings - Saves google API key.
+	 *
+	 * @return void
+	 */
+	public function google_api_key() {
+		$this->check_permission_nonce( 'uag_google_api_key' );
+		$value = $this->check_post_value();
+		$this->save_admin_settings( 'uag_google_api_key', sanitize_text_field( $value ) );
 	}
 
 	/**

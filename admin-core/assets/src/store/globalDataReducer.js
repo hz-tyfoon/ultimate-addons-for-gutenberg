@@ -253,6 +253,11 @@ const globalDataReducer = ( state = {}, action ) => {
                 ...state,
                 btnInheritFromTheme: action.payload,
                 };
+		case 'UPDATE_GOOGLE_API_KEY':
+			return {
+				...state,
+				googleAPIKey: action.payload,
+			};
         default:
             return state;
     }

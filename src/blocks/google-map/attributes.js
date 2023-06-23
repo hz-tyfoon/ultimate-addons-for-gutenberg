@@ -39,6 +39,18 @@ const attributes = {
 		type: 'boolean',
 		default: false,
 	},
+	selectGoogleAPIKey: {
+		type: 'string',
+		default: 'default',
+	},
+	latitude: {
+		type: 'number',
+		default: 18.606449,
+	},
+	longitude: {
+		type: 'number',
+		default: 73.724480,
+	},
 };
 
 export default attributes;
