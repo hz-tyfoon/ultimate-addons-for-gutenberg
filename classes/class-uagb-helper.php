@@ -1346,6 +1346,11 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 */
 		public static function trim_text_to_fully_visible_word( $txt, $len, $use_ellipsis = true ) {
 
+			// Necessary for calculations with HTML entities.
+			if ( html_entity_decode( $txt ) !== $txt ) {
+				$len++;
+			}
+
 			$txt             = html_entity_decode( $txt );  // Decode HTML entities in text, if any.
 			$needs_ellipsis  = ( $len < strlen( $txt ) ) ? $use_ellipsis : false;
 			$cap_space_pos   = isset( $txt ) ? strpos( $txt, ' ' ) : 0;
@@ -1359,9 +1364,9 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				$limited_space_pos = strpos( $limited_caption, ' ' );
 				if ( ! $limited_space_pos ) {
 					// There's only 1 word.
-					if ( false !== $cap_space_pos ) {
+					if ( ! $cap_space_pos ) {
 						// There's only 1 word in the original caption.
-						if ( strlen( $limited_caption ) === strlen( explode( ' ', $txt )[0] ) ) {
+						if ( strlen( html_entity_decode( $limited_caption ) ) === strlen( explode( ' ', $txt )[0] ) ) {
 							// The limited caption is the same as the original.
 							$needs_ellipsis = false;
 						} else {
@@ -1370,7 +1375,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 						}
 					} else {
 						// There's more than 1 word in the original caption.
-						if ( strlen( $limited_caption ) !== strlen( explode( ' ', $txt )[0] ) ) {
+						if ( strlen( html_entity_decode( $limited_caption ) ) !== strlen( explode( ' ', $txt )[0] ) ) {
 							// The limited caption is smaller than 1 word in the original.
 							$limited_caption = '';
 						}
