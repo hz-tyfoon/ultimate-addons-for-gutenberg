@@ -19,11 +19,15 @@ const Settings = ( props ) => {
 		attributes: { height, heightTablet, heightMobile, zoom, address, language, latitude, longitude },
 	} = props;
 
+	const YOUR_API_KEY_HERE = uagb_blocks_info.google_api_key;
+
 	return (
 		<InspectorControls>
 			<InspectorTabs tabs={ [ 'general', 'advance' ] }>
 				<InspectorTab { ...UAGTabs.general }>
 					<UAGAdvancedPanelBody initialOpen={ true }>
+						{ YOUR_API_KEY_HERE && (
+						<>
 						<UAGNumberControl
 							label={__( 'Latitude', 'ultimate-addons-for-gutenberg' )}
 							value={latitude}
@@ -80,21 +84,9 @@ const Settings = ( props ) => {
 							showControlHeader={false}
 							name='longitude'
 						/>
-						{/* <UAGTextControl
-							label={__('Longitude', 'ultimate-addons-for-gutenberg')}
-							value={longitude}
-							data={{
-								value: longitude,
-								label: 'longitude',
-							}}
-							setAttributes={setAttributes}
-							onChange={(value) =>
-								setAttributes({
-									longitude: value,
-								})
-							}
-							placeholder={__('Type the longitude', 'ultimate-addons-for-gutenberg')}
-						/> */}
+						</>
+						) }
+						<>
 						<UAGTextControl
 							label={ __( 'Address', 'ultimate-addons-for-gutenberg' ) }
 							value={ address }
@@ -110,6 +102,7 @@ const Settings = ( props ) => {
 							}
 							placeholder={ __( 'Type the address', 'ultimate-addons-for-gutenberg' ) }
 						/>
+						</>
 						<Range
 							label={ __( 'Zoom', 'ultimate-addons-for-gutenberg' ) }
 							value={ zoom }

@@ -203,7 +203,7 @@ if ( ! class_exists( 'UAGB_Google_Map' ) ) {
 					});
 				}
 			</script>
-			<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo htmlspecialchars( $user_api_key ); ?>&callback=initMap"></script>
+			<script src="<?php echo esc_url_raw( "https://maps.googleapis.com/maps/api/js?key=$user_api_key&callback=initMap" ); ?>"></script>
 			<?php endif; ?>
 			<?php
 			return ob_get_clean();
