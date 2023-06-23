@@ -9,7 +9,6 @@
 
 $js               = '';
 $popup_id         = get_the_ID();
-$popup_aria_label = ( 'popup' === $attr['variantType'] ) ? __( 'Popup', 'ultimate-addons-for-gutenberg' ) : __( 'Info Bar', 'ultimate-addons-for-gutenberg' );
 
 // Render the JS Script to handle this popup on the current page.
 ob_start();
@@ -53,8 +52,6 @@ ob_start();
 		}
 
 		const theBody = document.querySelector( 'body' );
-		blockScope.style.display = 'flex';
-		blockScope.setAttribute( 'role', 'region' );
 		blockScope.setAttribute( 'aria-label', '<?php echo esc_attr( $popup_aria_label ) ?>' );
 		setTimeout( () => {
 			<?php
@@ -107,10 +104,10 @@ ob_start();
 				closeButton.addEventListener( 'click', () => closePopup() );
 				<?php
 				endif;
-			if ( $attr['closeEscapePress'] ) :
+			if ( $attr['closeEscapePress'] && 'popup' === $attr['variantType'] && $attr['haltBackgroundInteraction'] ) :
 				?>
-				blockScope.addEventListener( 'keyup', ( event ) => {
-					if ( 27 === event.keyCode ) {
+				document.addEventListener( 'keyup', ( event ) => {
+					if ( 27 === event.keyCode && blockScope.classList.contains( 'spectra-popup--open' ) ) {
 						return closePopup();
 					}
 				} );

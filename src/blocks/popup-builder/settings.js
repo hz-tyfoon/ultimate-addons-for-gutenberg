@@ -126,6 +126,7 @@ const Settings = ( props ) => {
 		closeIconSizeTablet,
 		closeIconSizeMobile,
 		closeIconColor,
+		closeIconColorHover,
 		// ------------------------- BOX SHADOW STYLING.
 		useSeparateBoxShadows,
 		boxShadowColor,
@@ -656,16 +657,18 @@ const Settings = ( props ) => {
 			/>
 			{ isDismissable && (
 				<>
-					<ToggleControl
-						label={ __(
-							'Close with Escape',
-							'ultimate-addons-for-gutenberg'
-						) }
-						checked={ closeEscapePress }
-						onChange={ () =>
-							setAttributes( { closeEscapePress: ! closeEscapePress } )
-						}
-					/>
+					{ ( 'popup' === variantType && haltBackgroundInteraction ) && (
+						<ToggleControl
+							label={ __(
+								'Close with Escape',
+								'ultimate-addons-for-gutenberg'
+							) }
+							checked={ closeEscapePress }
+							onChange={ () =>
+								setAttributes( { closeEscapePress: ! closeEscapePress } )
+							}
+						/>
+					) }
 					{ hasOverlay && (
 						<ToggleControl
 							label={ __(
@@ -1003,17 +1006,52 @@ const Settings = ( props ) => {
 				displayUnit={ false }
 				setAttributes={ setAttributes }
 			/>
-			<AdvancedPopColorControl
-				label={ __(
-					'Icon Color',
-					'ultimate-addons-for-gutenberg'
+			<UAGTabsControl
+				tabs={ [
+					{
+						name: 'normal',
+						title: __(
+							'Normal',
+							'ultimate-addons-for-gutenberg'
+						),
+					},
+					{
+						name: 'hover',
+						title: __(
+							'Hover',
+							'ultimate-addons-for-gutenberg'
+						),
+					},
+				] }
+				normal={ (
+					<AdvancedPopColorControl
+						label={ __(
+							'Icon Color',
+							'ultimate-addons-for-gutenberg'
+						) }
+						colorValue={ closeIconColor ? closeIconColor : '' }
+						data={ {
+							value: closeIconColor,
+							label: 'closeIconColor',
+						} }
+						setAttributes={ setAttributes }
+					/>
 				) }
-				colorValue={ closeIconColor ? closeIconColor : '' }
-				data={ {
-					value: closeIconColor,
-					label: 'closeIconColor',
-				} }
-				setAttributes={ setAttributes }
+				hover={ (
+					<AdvancedPopColorControl
+						label={ __(
+							'Icon Color',
+							'ultimate-addons-for-gutenberg'
+						) }
+						colorValue={ closeIconColorHover ? closeIconColorHover : '' }
+						data={ {
+							value: closeIconColorHover,
+							label: 'closeIconColorHover',
+						} }
+						setAttributes={ setAttributes }
+					/>
+				) }
+				disableBottomSeparator={ true }
 			/>
 		</UAGAdvancedPanelBody>
 	);

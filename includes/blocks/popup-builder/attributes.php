@@ -101,6 +101,7 @@ return array_merge(
 		'closeIconSizeTablet'         => '',
 		'closeIconSizeMobile'         => '',
 		'closeIconColor'              => '',
+		'closeIconColorHover'         => '',
 		// ------------------------- BOX SHADOW STYLING.
 		'useSeparateBoxShadows'       => false,
 		'boxShadowColor'              => '#00000070',

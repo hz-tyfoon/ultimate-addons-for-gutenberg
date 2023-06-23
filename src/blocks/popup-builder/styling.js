@@ -87,6 +87,7 @@ export default function styling( attributes, clientId, name ) {
 		closeIconSizeTablet,
 		closeIconSizeMobile,
 		closeIconColor,
+		closeIconColorHover,
 		// ------------------------- BOX SHADOW STYLING.
 		useSeparateBoxShadows,
 		boxShadowColor,
@@ -316,7 +317,7 @@ export default function styling( attributes, clientId, name ) {
 				popupMarginLeft,
 			),
 		},
-		' .uagb-popup-builder__close' : {
+		' button.uagb-popup-builder__close' : {
 			'left': ( 'top-left' === closeIconPosition ) ? 0 : undefined,
 			'right': ( 'top-right' === closeIconPosition ) ? 0 : undefined,
 			'padding': generateSpacing(
@@ -327,12 +328,15 @@ export default function styling( attributes, clientId, name ) {
 				closePaddingLeft,
 			),
 		},
-		' .uagb-popup-builder__close svg' : {
+		' button.uagb-popup-builder__close svg' : {
 			'width': generateCSSUnit( closeIconSize, 'px' ),
 			'height': generateCSSUnit( closeIconSize, 'px' ),
 			'line-height': generateCSSUnit( closeIconSize, 'px' ),
 			'font-size': generateCSSUnit( closeIconSize, 'px' ),
 			'fill': closeIconColor,
+		},
+		' button.uagb-popup-builder__close:hover svg' : {
+			'fill': closeIconColorHover,
 		},
 		' .uagb-popup-builder__container': {
 			'justify-content': hasFixedHeight ? popupContentAlignmentV : '',
@@ -374,7 +378,7 @@ export default function styling( attributes, clientId, name ) {
 				popupMarginLeftTablet,
 			),
 		},
-		' .uagb-popup-builder__close' : {
+		' button.uagb-popup-builder__close' : {
 			'padding': generateSpacing(
 				closePaddingUnitTablet,
 				closePaddingTopTablet,
@@ -383,7 +387,7 @@ export default function styling( attributes, clientId, name ) {
 				closePaddingLeftTablet,
 			),
 		},
-		' .uagb-popup-builder__close svg' : {
+		' button.uagb-popup-builder__close svg' : {
 			'width': generateCSSUnit( closeIconSizeTablet, 'px' ),
 			'height': generateCSSUnit( closeIconSizeTablet, 'px' ),
 			'line-height': generateCSSUnit( closeIconSizeTablet, 'px' ),
@@ -422,7 +426,7 @@ export default function styling( attributes, clientId, name ) {
 				popupMarginLeftMobile,
 			),
 		},
-		' .uagb-popup-builder__close' : {
+		' button.uagb-popup-builder__close' : {
 			'padding': generateSpacing(
 				closePaddingUnitMobile,
 				closePaddingTopMobile,
@@ -431,7 +435,7 @@ export default function styling( attributes, clientId, name ) {
 				closePaddingLeftMobile,
 			),
 		},
-		' .uagb-popup-builder__close svg' : {
+		' button.uagb-popup-builder__close svg' : {
 			'width': generateCSSUnit( closeIconSizeMobile, 'px' ),
 			'height': generateCSSUnit( closeIconSizeMobile, 'px' ),
 			'line-height': generateCSSUnit( closeIconSizeMobile, 'px' ),

@@ -59,10 +59,23 @@
 		}
 	}
 
-	&__close {
+	button.uagb-popup-builder__close {
 		position: absolute;
 		top: 0;
 		z-index: 999999999;
+		border: none;
+		background: transparent;
+		background-color: transparent;
+		padding: 0;
+
+		svg {
+			-webkit-transition-property: fill;
+			-moz-transition-property: fill;
+			-o-transition-property: fill;
+			transition-property: fill;
+
+			@include transitionSpeeds();		
+		}
 	}
 
 	&__body--overflow-hidden {

@@ -156,7 +156,7 @@ $selectors = array(
 			$attr['popupMarginLeft']
 		),
 	),
-	' .uagb-popup-builder__close'             => array(
+	' button.uagb-popup-builder__close'             => array(
 		'left'    => ( ( 'top-left' === $attr['closeIconPosition'] && ! is_rtl() ) || ( 'top-right' === $attr['closeIconPosition'] && is_rtl() ) ) ? 0 : '',
 		'right'   => ( ( 'top-right' === $attr['closeIconPosition'] && ! is_rtl() ) || ( 'top-left' === $attr['closeIconPosition'] && is_rtl() ) ) ? 0 : '',
 		'padding' => UAGB_Block_Helper::generate_spacing(
@@ -167,12 +167,18 @@ $selectors = array(
 			$attr['closePaddingLeft']
 		),
 	),
-	' .uagb-popup-builder__close svg'         => array(
+	' button.uagb-popup-builder__close svg'         => array(
 		'width'       => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'height'      => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'font-size'   => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'fill'        => $attr['closeIconColor'],
+	),
+	' button.uagb-popup-builder__close:hover svg'   => array(
+		'fill' => $attr['closeIconColorHover'],
+	),
+	' button.uagb-popup-builder__close:focus svg'   => array(
+		'fill' => $attr['closeIconColorHover'],
 	),
 	' .uagb-popup-builder__container'         => array_merge(
 		array(
@@ -219,7 +225,7 @@ $t_selectors = array(
 			$attr['popupMarginLeftTablet']
 		),
 	),
-	' .uagb-popup-builder__close'             => array(
+	' button.uagb-popup-builder__close'             => array(
 		'padding' => UAGB_Block_Helper::generate_spacing(
 			$attr['closePaddingUnitTablet'],
 			$attr['closePaddingTopTablet'],
@@ -228,7 +234,7 @@ $t_selectors = array(
 			$attr['closePaddingLeftTablet']
 		),
 	),
-	' .uagb-popup-builder__close svg'         => array(
+	' button.uagb-popup-builder__close svg'         => array(
 		'width'       => UAGB_Helper::get_css_value( $attr['closeIconSizeTablet'], 'px' ),
 		'height'      => UAGB_Helper::get_css_value( $attr['closeIconSizeTablet'], 'px' ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['closeIconSizeTablet'], 'px' ),
@@ -271,7 +277,7 @@ $m_selectors = array(
 			$attr['popupMarginLeftMobile']
 		),
 	),
-	' .uagb-popup-builder__close'             => array(
+	' button.uagb-popup-builder__close'             => array(
 		'padding' => UAGB_Block_Helper::generate_spacing(
 			$attr['closePaddingUnitMobile'],
 			$attr['closePaddingTopMobile'],
@@ -280,7 +286,7 @@ $m_selectors = array(
 			$attr['closePaddingLeftMobile']
 		),
 	),
-	' .uagb-popup-builder__close svg'         => array(
+	' button.uagb-popup-builder__close svg'         => array(
 		'width'       => UAGB_Helper::get_css_value( $attr['closeIconSizeMobile'], 'px' ),
 		'height'      => UAGB_Helper::get_css_value( $attr['closeIconSizeMobile'], 'px' ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['closeIconSizeMobile'], 'px' ),
