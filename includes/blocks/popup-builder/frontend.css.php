@@ -128,7 +128,7 @@ $box_shadow_css       = UAGB_Block_Helper::generate_shadow_css( $box_shadow_prop
 $box_shadow_hover_css = UAGB_Block_Helper::generate_shadow_css( $box_shadow_hover_properties );
 
 $selectors = array(
-	'.uagb-popup-builder'                     => array(
+	'.uagb-popup-builder'                         => array(
 		'align-items'      => $popup_position_v,
 		'justify-content'  => $popup_position_h,
 		'background-color' => $attr['hasOverlay'] ? $attr['popupOverlayColor'] : '',
@@ -137,14 +137,14 @@ $selectors = array(
 		'top'              => ( 'banner' === $attr['variantType'] && 'flex-end' === $attr['popupPositionV'] ) ? 'unset' : '',
 		'bottom'           => ( 'banner' === $attr['variantType'] && 'flex-end' === $attr['popupPositionV'] ) ? 0 : '',
 	),
-	' .uagb-popup-builder__wrapper'           => array(
+	' .uagb-popup-builder__wrapper'               => array(
 		'pointer-events' => 'auto',
 	),
-	' .uagb-popup-builder__wrapper--banner'   => array(
+	' .uagb-popup-builder__wrapper--banner'       => array(
 		'height'     => $attr['hasFixedHeight'] ? UAGB_Helper::get_css_value( $attr['popupHeight'], $attr['popupHeightUnit'] ) : 'auto',
 		'min-height' => ! $attr['hasFixedHeight'] ? UAGB_Helper::get_css_value( $attr['popupHeight'], $attr['popupHeightUnit'] ) : '',
 	),
-	' .uagb-popup-builder__wrapper--popup'    => array(
+	' .uagb-popup-builder__wrapper--popup'        => array(
 		'height'     => $attr['hasFixedHeight'] ? UAGB_Helper::get_css_value( $attr['popupHeight'], $attr['popupHeightUnit'] ) : '',
 		'max-height' => ! $attr['hasFixedHeight'] ? UAGB_Helper::get_css_value( $attr['popupHeight'], $attr['popupHeightUnit'] ) : '',
 		'width'      => UAGB_Helper::get_css_value( $attr['popupWidth'], $attr['popupWidthUnit'] ),
@@ -156,7 +156,7 @@ $selectors = array(
 			$attr['popupMarginLeft']
 		),
 	),
-	' button.uagb-popup-builder__close'             => array(
+	' button.uagb-popup-builder__close'           => array(
 		'left'    => ( ( 'top-left' === $attr['closeIconPosition'] && ! is_rtl() ) || ( 'top-right' === $attr['closeIconPosition'] && is_rtl() ) ) ? 0 : '',
 		'right'   => ( ( 'top-right' === $attr['closeIconPosition'] && ! is_rtl() ) || ( 'top-left' === $attr['closeIconPosition'] && is_rtl() ) ) ? 0 : '',
 		'padding' => UAGB_Block_Helper::generate_spacing(
@@ -167,20 +167,20 @@ $selectors = array(
 			$attr['closePaddingLeft']
 		),
 	),
-	' button.uagb-popup-builder__close svg'         => array(
+	' button.uagb-popup-builder__close svg'       => array(
 		'width'       => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'height'      => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'font-size'   => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
 		'fill'        => $attr['closeIconColor'],
 	),
-	' button.uagb-popup-builder__close:hover svg'   => array(
+	' button.uagb-popup-builder__close:hover svg' => array(
 		'fill' => $attr['closeIconColorHover'],
 	),
-	' button.uagb-popup-builder__close:focus svg'   => array(
+	' button.uagb-popup-builder__close:focus svg' => array(
 		'fill' => $attr['closeIconColorHover'],
 	),
-	' .uagb-popup-builder__container'         => array_merge(
+	' .uagb-popup-builder__container'             => array_merge(
 		array(
 			'justify-content' => $attr['hasFixedHeight'] ? $attr['popupContentAlignmentV'] : '',
 			'overflow-y'      => $attr['hasFixedHeight'] && ( 'center' === $attr['popupContentAlignmentV'] || 'flex-end' === $attr['popupContentAlignmentV'] ) ? 'hidden' : '',
@@ -196,14 +196,14 @@ $selectors = array(
 		$popup_bg_css,
 		$content_border_css
 	),
-	' .uagb-popup-builder__container:hover'   => array(
+	' .uagb-popup-builder__container:hover'       => array(
 		'box-shadow'   => $attr['useSeparateBoxShadows'] ? $box_shadow_hover_css : '',
 		'border-color' => $attr['contentBorderHColor'],
 	),
-	' .uagb-popup-builder__container--banner' => array(
+	' .uagb-popup-builder__container--banner'     => array(
 		'min-height' => ! $attr['hasFixedHeight'] ? UAGB_Helper::get_css_value( $attr['popupHeight'], $attr['popupHeightUnit'] ) : '',
 	),
-	' .uagb-popup-builder__container--popup'  => array(
+	' .uagb-popup-builder__container--popup'      => array(
 		'max-height' => ! $attr['hasFixedHeight'] ? UAGB_Helper::get_css_value( $attr['popupHeight'], $attr['popupHeightUnit'] ) : '',
 	),
 );
@@ -225,7 +225,7 @@ $t_selectors = array(
 			$attr['popupMarginLeftTablet']
 		),
 	),
-	' button.uagb-popup-builder__close'             => array(
+	' button.uagb-popup-builder__close'       => array(
 		'padding' => UAGB_Block_Helper::generate_spacing(
 			$attr['closePaddingUnitTablet'],
 			$attr['closePaddingTopTablet'],
@@ -234,7 +234,7 @@ $t_selectors = array(
 			$attr['closePaddingLeftTablet']
 		),
 	),
-	' button.uagb-popup-builder__close svg'         => array(
+	' button.uagb-popup-builder__close svg'   => array(
 		'width'       => UAGB_Helper::get_css_value( $attr['closeIconSizeTablet'], 'px' ),
 		'height'      => UAGB_Helper::get_css_value( $attr['closeIconSizeTablet'], 'px' ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['closeIconSizeTablet'], 'px' ),
@@ -277,7 +277,7 @@ $m_selectors = array(
 			$attr['popupMarginLeftMobile']
 		),
 	),
-	' button.uagb-popup-builder__close'             => array(
+	' button.uagb-popup-builder__close'       => array(
 		'padding' => UAGB_Block_Helper::generate_spacing(
 			$attr['closePaddingUnitMobile'],
 			$attr['closePaddingTopMobile'],
@@ -286,7 +286,7 @@ $m_selectors = array(
 			$attr['closePaddingLeftMobile']
 		),
 	),
-	' button.uagb-popup-builder__close svg'         => array(
+	' button.uagb-popup-builder__close svg'   => array(
 		'width'       => UAGB_Helper::get_css_value( $attr['closeIconSizeMobile'], 'px' ),
 		'height'      => UAGB_Helper::get_css_value( $attr['closeIconSizeMobile'], 'px' ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['closeIconSizeMobile'], 'px' ),
