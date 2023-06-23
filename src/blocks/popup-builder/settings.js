@@ -73,6 +73,7 @@ const Settings = ( props ) => {
 		closeIcon,
 		closeIconPosition,
 		closeOverlayClick,
+		closeEscapePress,
 		// ------------------------- POPUP STYLING ( BACKGROUND ).
 		selectGradient,
 		gradientValue,
@@ -655,6 +656,16 @@ const Settings = ( props ) => {
 			/>
 			{ isDismissable && (
 				<>
+					<ToggleControl
+						label={ __(
+							'Close with Escape',
+							'ultimate-addons-for-gutenberg'
+						) }
+						checked={ closeEscapePress }
+						onChange={ () =>
+							setAttributes( { closeEscapePress: ! closeEscapePress } )
+						}
+					/>
 					{ hasOverlay && (
 						<ToggleControl
 							label={ __(

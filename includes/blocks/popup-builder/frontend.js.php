@@ -7,8 +7,9 @@
  * @package uagb
  */
 
-$js       = '';
-$popup_id = get_the_ID();
+$js               = '';
+$popup_id         = get_the_ID();
+$popup_aria_label = ( 'popup' === $attr['variantType'] ) ? __( 'Popup', 'ultimate-addons-for-gutenberg' ) : __( 'Info Bar', 'ultimate-addons-for-gutenberg' );
 
 // Render the JS Script to handle this popup on the current page.
 ob_start();
@@ -53,6 +54,8 @@ ob_start();
 
 		const theBody = document.querySelector( 'body' );
 		blockScope.style.display = 'flex';
+		blockScope.setAttribute( 'role', 'region' );
+		blockScope.setAttribute( 'aria-label', '<?php echo esc_attr( $popup_aria_label ) ?>' );
 		setTimeout( () => {
 			<?php
 				// If this is a popup which prevent background interaction, hide the scrollbar.
@@ -60,12 +63,20 @@ ob_start();
 				?>
 				theBody.classList.add( 'uagb-popup-builder__body--overflow-hidden' );
 				blockScope.classList.add( 'spectra-popup--open' );
+				<?php // Once this popup is active, create a focusable element to add focus onto the popup and then remove it. ?>
+				blockScope.focus();
+				const focusElement = document.createElement( 'button' );
+				focusElement.style.position = 'absolute';
+				focusElement.style.opacity = '0';
+				const popupFocus = blockScope.insertBefore( focusElement, blockScope.firstChild );
+				popupFocus.focus();
+				popupFocus.remove();
 			<?php endif; ?>
 			blockScope.style.opacity = 1;
 		}, 100 );
 
 		const closePopup = ( event = null ) => {
-			if ( event && blockScope !== event.target ) {
+			if ( event && blockScope !== event?.target ) {
 				return;
 			}
 			blockScope.style.opacity = 0;
@@ -94,6 +105,15 @@ ob_start();
 				const closeButton = blockScope.querySelector( '.uagb-popup-builder__close' );
 				closeButton.style.cursor = 'pointer';
 				closeButton.addEventListener( 'click', () => closePopup() );
+				<?php
+				endif;
+			if ( $attr['closeEscapePress'] ) :
+				?>
+				blockScope.addEventListener( 'keyup', ( event ) => {
+					if ( 27 === event.keyCode ) {
+						return closePopup();
+					}
+				} );
 				<?php
 				endif;
 			endif;
