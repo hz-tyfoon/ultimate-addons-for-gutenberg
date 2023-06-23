@@ -1339,6 +1339,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 *
 		 * @param string  $txt The text to be trimmed.
 		 * @param integer $len Max trim length.
+		 * @param boolean $use_ellipsis Use ellipsis or not.
 		 * @return string
 		 *
 		 * @since 1.0.0
