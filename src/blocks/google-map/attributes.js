@@ -51,6 +51,18 @@ const attributes = {
 		type: 'number',
 		default: 73.724480,
 	},
+	infoWindow: {
+		type: 'string',
+		default: 'none',
+	},
+	title: {
+		type: 'string',
+		default: 'Brainstorm Force',
+	},
+	description: {
+		type: 'string',
+		default: 'Vasant Utsav, Opp. Shell Petrol Pump, Rajiv Gandhi Infotech Park, Hinjewadi Phase 1, Pune, Maharashtra 411057',
+	},
 };
 
 export default attributes;

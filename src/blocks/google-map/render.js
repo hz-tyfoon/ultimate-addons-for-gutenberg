@@ -21,7 +21,7 @@ const Render = ( props ) => {
 
 	const {
 		className,
-		attributes: { zoom, address, language, height, latitude, longitude },
+		attributes: { zoom, address, language, height, latitude, longitude, infoWindow, title, description, },
 		deviceType
 	} = props;
 
@@ -50,7 +50,7 @@ const Render = ( props ) => {
 				></iframe> 
 			) }
 			{ YOUR_API_KEY_HERE && (
-				<MapComponent apiKey={ YOUR_API_KEY_HERE } height={ height } zoom={ getFallbackNumber( zoom, 'zoom', blockName ) } latitude={ latitude } longitude={ longitude } language={ lang_par } />
+				<MapComponent apiKey={YOUR_API_KEY_HERE} height={height} zoom={getFallbackNumber(zoom, 'zoom', blockName)} latitude={latitude} longitude={longitude} language={lang_par} infoWindow={infoWindow} title={title} description={description}/>
 			) }
 		</div>
 	);

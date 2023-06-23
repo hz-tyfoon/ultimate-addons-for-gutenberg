@@ -16,7 +16,7 @@ const Settings = ( props ) => {
 
 	const {
 		setAttributes,
-		attributes: { height, heightTablet, heightMobile, zoom, address, language, latitude, longitude },
+		attributes: { height, heightTablet, heightMobile, zoom, address, language, latitude, longitude, infoWindow, description, title },
 	} = props;
 
 	const YOUR_API_KEY_HERE = uagb_blocks_info.google_api_key;
@@ -84,25 +84,79 @@ const Settings = ( props ) => {
 							showControlHeader={false}
 							name='longitude'
 						/>
-						</>
-						) }
-						<>
+						<UAGSelectControl
+							label={__('Info Window', 'ultimate-addons-for-gutenberg')}
+							data={{
+								value: infoWindow,
+								label: 'infoWindow',
+							}}
+							setAttributes={setAttributes}
+							options={[
+								{
+									value: 'none',
+									label: __('None', 'ultimate-addons-for-gutenberg'),
+								},
+								{
+									value: 'onClick',
+									label: __('On Click', 'ultimate-addons-for-gutenberg'),
+								},
+								{
+									value: 'onLoad',
+									label: __('On Load', 'ultimate-addons-for-gutenberg'),
+								},
+							]}
+						/>
 						<UAGTextControl
-							label={ __( 'Address', 'ultimate-addons-for-gutenberg' ) }
-							value={ address }
-							data={ {
-								value: address,
-								label: 'address',
-							} }
-							setAttributes={ setAttributes }
-							onChange={ ( value ) =>
-								setAttributes( {
-									address: value,
-								} )
+							label={__('Address Title', 'ultimate-addons-for-gutenberg')}
+							value={title}
+							data={{
+								value: title,
+								label: 'title',
+							}}
+							setAttributes={setAttributes}
+							onChange={(value) =>
+								setAttributes({
+									title: value,
+								})
 							}
-							placeholder={ __( 'Type the address', 'ultimate-addons-for-gutenberg' ) }
+							placeholder={__('Type the description', 'ultimate-addons-for-gutenberg')}
+						/>
+						<UAGTextControl
+							label={__('Address Information', 'ultimate-addons-for-gutenberg')}
+							value={description}
+							data={{
+								value: description,
+								label: 'description',
+							}}
+							setAttributes={setAttributes}
+							onChange={(value) =>
+								setAttributes({
+									description: value,
+								})
+							}
+							placeholder={__('Type the description', 'ultimate-addons-for-gutenberg')}
 						/>
 						</>
+						) }
+						{ ! YOUR_API_KEY_HERE && (
+						<>
+						<UAGTextControl
+							label={__('Address', 'ultimate-addons-for-gutenberg')}
+							value={address}
+							data={{
+								value: address,
+								label: 'address',
+							}}
+							setAttributes={setAttributes}
+							onChange={(value) =>
+								setAttributes({
+									address: value,
+								})
+							}
+							placeholder={__('Type the address', 'ultimate-addons-for-gutenberg')}
+						/>
+						</>
+						) }
 						<Range
 							label={ __( 'Zoom', 'ultimate-addons-for-gutenberg' ) }
 							value={ zoom }

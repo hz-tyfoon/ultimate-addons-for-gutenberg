@@ -98,6 +98,18 @@ if ( ! class_exists( 'UAGB_Google_Map' ) ) {
 							'type'    => 'number',
 							'default' => 73.724480,
 						),
+						'infoWindow'    => array(
+							'type'    => 'string',
+							'default' => 'none',
+						),
+						'title'    => array(
+							'type'    => 'string',
+							'default' => 'Brainstorm Force',
+						),
+						'description'    => array(
+							'type'    => 'string',
+							'default' => 'Vasant Utsav, Opp. Shell Petrol Pump, Rajiv Gandhi Infotech Park, Hinjewadi Phase 1, Pune, Maharashtra 411057',
+						),
 					),
 					'render_callback' => array( $this, 'google_map_callback' ),
 				)
@@ -163,7 +175,10 @@ if ( ! class_exists( 'UAGB_Google_Map' ) ) {
 			$height    = ! empty( $attributes['height'] ) ? $attributes['height'] : 300;
 			$latitude  = ! empty( $attributes['latitude'] ) ? $attributes['latitude'] : 18.606449;
 			$longitude = ! empty( $attributes['longitude'] ) ? $attributes['longitude'] : 73.724480;
-
+			$infoWindow = ! empty( $attributes['infoWindow'] ) ? $attributes['infoWindow'] : 'none';
+			$title = ! empty( $attributes['title'] ) ? $attributes['title'] : '';
+			$description = ! empty( $attributes['description'] ) ? $attributes['description'] : '';
+			
 			$updated_url  = add_query_arg(
 				array(
 					'q'      => $address,
@@ -196,11 +211,38 @@ if ( ! class_exists( 'UAGB_Google_Map' ) ) {
 			<div id="uagb-google-map__iframe" style></div>
 			<script>
 				function initMap() {
+					lat = <?php echo floatval( $latitude ); ?>;
+					lng = <?php echo floatval( $longitude ); ?>;
+					infoWindowOpenOn = "<?php echo esc_html( $infoWindow ); ?>";
 					var map = new google.maps.Map(document.getElementById('uagb-google-map__iframe'), {
-						center: { lat: <?php echo floatval( $latitude ); ?>, lng: <?php echo floatval( $longitude ); ?> },
+						center: { lat: lat, lng: lng },
 						zoom: <?php echo esc_html( $zoom ); ?>,
 						language: "<?php echo esc_html( $language ); ?>",
 					});
+					var marker = new google.maps.Marker({
+						position: { lat: lat, lng: lng },
+						map: map,
+						title: "<?php echo esc_html( $address ); ?>",
+                	});
+					const infowindow = new google.maps.InfoWindow({
+						content: `<div class="uagb-infowindow-content"><div class="uagb-infowindow-title"><?php echo esc_html( $title ); ?></div><div class="uagb-infowindow-description"><?php echo esc_html( $description ); ?></div></div>`,
+						ariaLabel: "<?php echo esc_html( $address ); ?>",
+					});
+					if( 'onClick' === infoWindowOpenOn ) {
+						marker.addListener("click", () => {
+							infowindow.open({
+							anchor: marker,
+							map,
+							});
+						});
+					} else if( 'onLoad' === infoWindowOpenOn ) {
+						marker.addListener("load", () => {
+							infowindow.open({
+							anchor: marker,
+							map,
+							});
+						});
+					}
 				}
 			</script>
 			<script src="<?php echo esc_url_raw( "https://maps.googleapis.com/maps/api/js?key=$user_api_key&callback=initMap" ); ?>"></script>
