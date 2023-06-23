@@ -101,7 +101,6 @@ class UAGB_Init_Blocks {
 			'add_new_item'       => __( 'Create New Popup', 'ultimate-addons-for-gutenberg' ),
 			'edit_item'          => __( 'Edit Popup', 'ultimate-addons-for-gutenberg' ),
 			'new_item'           => __( 'New Popup', 'ultimate-addons-for-gutenberg' ),
-			'view_item'          => __( 'View Popup', 'ultimate-addons-for-gutenberg' ),
 			'search_items'       => __( 'Search Popups', 'ultimate-addons-for-gutenberg' ),
 			'not_found'          => __( 'No Popups Found', 'ultimate-addons-for-gutenberg' ),
 			'not_found_in_trash' => __( 'No Popups in Trash', 'ultimate-addons-for-gutenberg' ),
