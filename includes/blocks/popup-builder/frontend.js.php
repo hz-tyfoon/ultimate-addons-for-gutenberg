@@ -7,8 +7,8 @@
  * @package uagb
  */
 
-$js               = '';
-$popup_id         = get_the_ID();
+$js       = '';
+$popup_id = get_the_ID();
 
 // Render the JS Script to handle this popup on the current page.
 ob_start();
@@ -61,7 +61,6 @@ ob_start();
 				theBody.classList.add( 'uagb-popup-builder__body--overflow-hidden' );
 				blockScope.classList.add( 'spectra-popup--open' );
 				<?php // Once this popup is active, create a focusable element to add focus onto the popup and then remove it. ?>
-				blockScope.focus();
 				const focusElement = document.createElement( 'button' );
 				focusElement.style.position = 'absolute';
 				focusElement.style.opacity = '0';

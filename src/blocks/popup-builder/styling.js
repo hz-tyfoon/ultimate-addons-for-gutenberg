@@ -338,6 +338,9 @@ export default function styling( attributes, clientId, name ) {
 		' button.uagb-popup-builder__close:hover svg' : {
 			'fill': closeIconColorHover,
 		},
+		' button.uagb-popup-builder__close:focus svg' : {
+			'fill': closeIconColorHover,
+		},
 		' .uagb-popup-builder__container': {
 			'justify-content': hasFixedHeight ? popupContentAlignmentV : '',
 			'overflow-y': hasFixedHeight && ( 'center' === popupContentAlignmentV || 'flex-end' === popupContentAlignmentV ) ? 'hidden' : '',
