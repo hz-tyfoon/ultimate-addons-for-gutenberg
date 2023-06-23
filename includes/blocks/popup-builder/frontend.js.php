@@ -52,7 +52,7 @@ ob_start();
 		}
 
 		const theBody = document.querySelector( 'body' );
-		blockScope.setAttribute( 'aria-label', '<?php echo esc_attr( $popup_aria_label ) ?>' );
+		blockScope.style.display = 'flex';
 		setTimeout( () => {
 			<?php
 				// If this is a popup which prevent background interaction, hide the scrollbar.

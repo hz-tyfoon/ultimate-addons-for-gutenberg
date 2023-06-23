@@ -123,6 +123,10 @@ const attributes = {
 		type: 'boolean',
 		default: true,
 	},
+	closeEscapePress: {
+		type: 'boolean',
+		default: true,
+	},
 
 	// ------------------------- POPUP STYLING ( BACKGROUND ).
 
