@@ -1340,9 +1340,8 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * @param string  $txt The text to be trimmed.
 		 * @param integer $len Max trim length.
 		 * @param boolean $use_ellipsis Use ellipsis or not.
+		 * @since x.x.x
 		 * @return string
-		 *
-		 * @since 1.0.0
 		 */
 		public static function trim_text_to_fully_visible_word( $txt, $len, $use_ellipsis = true ) {
 
