@@ -49,6 +49,8 @@ export const trimTextToFullyVisibleWord = ( text, maxLength ) => {
 	let needsEllipsis = true;
 	let limitedCaption = text;
 
+	const disallowedLastCharacters = [ ',', '.', ' ', "'" ]
+
 	if ( needsEllipsis && text.length <= maxLength ) {
 		// The caption is already below the limiter.
 		needsEllipsis = false;
@@ -84,14 +86,8 @@ export const trimTextToFullyVisibleWord = ( text, maxLength ) => {
 		}
 	}
 
-	// Remove Trailing Characters.
-	switch ( limitedCaption.charAt( limitedCaption.length - 1 ) ) {
-		case ',':
-		case '.':
-		case ' ':
-		case "'":
-			limitedCaption = limitedCaption.slice( 0, limitedCaption.length - 1 );
-			break;
+	if ( disallowedLastCharacters.includes( limitedCaption.charAt( limitedCaption.length - 1  ) ) ) {
+		limitedCaption = limitedCaption.slice( 0, limitedCaption.length - 1 );
 	}
 
 	return `${ limitedCaption }${ needsEllipsis ? '…' : '' }`;

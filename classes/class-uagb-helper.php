@@ -1350,6 +1350,8 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				$len++;
 			}
 
+			$disallowed_last_characters = array( ',', '.', ' ', "'" );
+
 			$txt             = html_entity_decode( $txt );  // Decode HTML entities in text, if any.
 			$needs_ellipsis  = ( $len < strlen( $txt ) ) ? $use_ellipsis : false;
 			$cap_space_pos   = isset( $txt ) ? strpos( $txt, ' ' ) : 0;
@@ -1397,13 +1399,9 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 					}
 				}//end if
 
-				// If the last character in the string matches any of the following, remove that character.				
-				switch ( substr( $limited_caption, -1 ) ) {
-					case ',':
-					case '.':
-					case ' ':
-					case '\'':
-						$limited_caption = substr( $limited_caption, 0, -1 );
+				// If the last character in the string matches any of the following, remove that character.
+				if ( in_array( substr( $limited_caption, -1 ), $disallowed_last_characters ) ) {
+					$limited_caption = substr( $limited_caption, 0, -1 );
 				}
 			}//end if
 
