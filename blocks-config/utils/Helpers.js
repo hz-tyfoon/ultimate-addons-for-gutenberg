@@ -51,7 +51,7 @@ export const trimTextToFullyVisibleWord = ( text, maxLength ) => {
 
 	const disallowedLastCharacters = [ ',', '.', ' ', "'" ]
 
-	if ( needsEllipsis && text.length <= maxLength ) {
+	if ( text.length <= maxLength ) {
 		// The caption is already below the limiter.
 		needsEllipsis = false;
 	} else if ( needsEllipsis ) {
