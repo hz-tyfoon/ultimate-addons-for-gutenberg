@@ -39,56 +39,48 @@ export const uagbClassNames = ( classes ) => classes.filter( Boolean ).join( ' '
 
 export const uagbDeepClone = ( arrayOrObject ) => JSON.parse( JSON.stringify( arrayOrObject ) );
 
-// Trim text by max character length to the last complete word. 
-export const trimTextToFullyVisibleWord = ( text, maxLength, useEllipsis = true ) => {
+// Function to check if a given string is a single word
+export const isSingleWord = ( str ) => str.lastIndexOf( ' ' ) === -1;
 
-	if( ! text ) {
+// Function to check if the given string is the first word in the original string
+export const isFirstWord = ( str, originalStr ) => str.length === originalStr.split( ' ' )[0].length;
+
+// Function to trim text by max character length to the last complete word
+export const trimTextToFullyVisibleWord = ( text, maxLength, useEllipsis = true ) => {
+	// Return an empty string if the input text is empty or not provided
+	if ( !text ) {
 		return '';
 	}
 
-	let needsEllipsis = ( text.length < maxLength ) ? useEllipsis : false;
-	let limitedCaption = text;
+	const disallowedLastCharacters = [',', '.', ' ', "'"];
 
-	const disallowedLastCharacters = [ ',', '.', ' ', "'" ];
-
+	// If the input text is already within the maxLength, return the original text
 	if ( text.length <= maxLength ) {
-		// The caption is already below the limiter.
-		needsEllipsis = false;
-	} else {
-		limitedCaption = limitedCaption.substr( 0, maxLength );
-		if ( -1 === limitedCaption.lastIndexOf( ' ' ) ) {
-			// There's only 1 word.
-			if ( -1 === text.lastIndexOf( ' ' ) ) {
-				// There's only 1 word in the original caption.
-				if ( limitedCaption.length === text.split( ' ' )[ 0 ].length ) {
-					// The limited caption is the same as the original.
-					needsEllipsis = false;
-				} else {
-					// The limited caption differs from the original.
-					limitedCaption = '';
-				}
-			} else if ( limitedCaption.length !== text.split( ' ' )[ 0 ].length ) {
-				// There's more than 1 word in the original caption and...
-				// The limited caption is smaller than 1 word in the original.
-				limitedCaption = '';
-			}
-		} else if ( limitedCaption.length === text.length ) {
-			// There is a space and...
-			// The limited caption is the same as the original.
-			needsEllipsis = false;
-		} else if ( ' ' !== text.charAt( limitedCaption.length ) ) {
-			// The limited caption differs from the original and...
-			// The end of the limited text is not a word.
-			limitedCaption = limitedCaption.substr(
-				0,
-				Math.min( limitedCaption.length, limitedCaption.lastIndexOf( ' ' ) )
-			);
-		}
+		return text;
 	}
 
-	if ( disallowedLastCharacters.includes( limitedCaption.charAt( limitedCaption.length - 1  ) ) ) {
+	// Limit the caption based on the maxLength
+	let limitedCaption = text.substr( 0, maxLength );
+
+	// Check if the limited caption is a single word
+	if ( isSingleWord( limitedCaption ) ) {
+		// If the original text is a single word and the limited caption is the first word, return the original text
+		if ( isSingleWord( text ) && isFirstWord( limitedCaption, text ) ) {
+			return text;
+		}
+		limitedCaption = '';
+	} else if ( limitedCaption.length !== text.length && text.charAt( limitedCaption.length ) !== ' ' ) {
+		// If the limited caption is not the same as the original text and the end of the limited text is not a word,
+		// trim the limited caption to the last complete word
+		limitedCaption = limitedCaption.substr( 0, Math.min( limitedCaption.length, limitedCaption.lastIndexOf( ' ' ) ) );
+	}
+
+	// Remove any disallowed characters from the end of the limited caption
+	if ( disallowedLastCharacters.includes( limitedCaption.charAt( limitedCaption.length - 1 ) ) ) {
 		limitedCaption = limitedCaption.slice( 0, limitedCaption.length - 1 );
 	}
 
-	return `${ limitedCaption }${ needsEllipsis ? '…' : '' }`;
+	// Determine if an ellipsis is needed based on the useEllipsis flag and the length of the input text
+	const needsEllipsis = useEllipsis && text.length > maxLength;
+	return `${limitedCaption}${needsEllipsis ? '…' : ''}`;
 };
