@@ -40,16 +40,16 @@ export const uagbClassNames = ( classes ) => classes.filter( Boolean ).join( ' '
 export const uagbDeepClone = ( arrayOrObject ) => JSON.parse( JSON.stringify( arrayOrObject ) );
 
 // Trim text by max character length to the last complete word. 
-export const trimTextToFullyVisibleWord = ( text, maxLength ) => {
+export const trimTextToFullyVisibleWord = ( text, maxLength, useEllipsis = true ) => {
 
 	if( ! text ) {
 		return '';
 	}
 
-	let needsEllipsis = true;
+	let needsEllipsis = ( text.length < maxLength ) ? useEllipsis : false;
 	let limitedCaption = text;
 
-	const disallowedLastCharacters = [ ',', '.', ' ', "'" ]
+	const disallowedLastCharacters = [ ',', '.', ' ', "'" ];
 
 	if ( text.length <= maxLength ) {
 		// The caption is already below the limiter.
