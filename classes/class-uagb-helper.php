@@ -1360,7 +1360,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			if ( strlen( $txt ) <= $len ) {
 				// The caption is already below the limiter.
 				$needs_ellipsis = false;
-			} elseif ( $needs_ellipsis ) {
+			} else {
 				$limited_caption   = htmlentities( mb_substr( $limited_caption, 0, $len ) );
 				$limited_space_pos = strpos( $limited_caption, ' ' );
 				if ( ! $limited_space_pos ) {

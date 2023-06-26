@@ -54,7 +54,7 @@ export const trimTextToFullyVisibleWord = ( text, maxLength ) => {
 	if ( text.length <= maxLength ) {
 		// The caption is already below the limiter.
 		needsEllipsis = false;
-	} else if ( needsEllipsis ) {
+	} else {
 		limitedCaption = limitedCaption.substr( 0, maxLength );
 		if ( -1 === limitedCaption.lastIndexOf( ' ' ) ) {
 			// There's only 1 word.
