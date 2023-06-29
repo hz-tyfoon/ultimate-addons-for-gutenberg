@@ -11,10 +11,11 @@ import newAttributesV2_0_14 from './deprecated/v2.0.14/attributes';
 import newSaveV2_0_14 from './deprecated/v2.0.14/save';
 
 import newAttributesV2_1_1 from './deprecated/v2.1.1/attributes';
-import newAttributesV2_6_6 from './deprecated/v2.6.6/attributes';
+import newAttributesV2_7_0 from './deprecated/v2.7.0/attributes';
 import newSaveV2_1_1 from './deprecated/v2.1.1/save';
 import saveV2_6_2 from './deprecated/v2.6.2/save';
-import saveV2_6_6 from './deprecated/v2.6.6/save';
+import saveV2_7_0 from './deprecated/v2.7.0/save';
+import saveV2_6_7 from './deprecated/v2.6.7/save';
 import attributesV2_6_2 from './attributes';
 
 const borderAttributes = getBorderAttributes( 'btn' );
@@ -255,9 +256,13 @@ const deprecated = [
 		save: saveV2_6_2,
 	},
 	{
-		attributes: newAttributesV2_6_6,
-		save: saveV2_6_6,
-	}
+		attributes: attributesV2_6_2,
+		save: saveV2_6_7,
+	},
+	{
+		attributes: newAttributesV2_7_0,
+		save: saveV2_7_0,
+	},
 ];
 
 export default deprecated;
