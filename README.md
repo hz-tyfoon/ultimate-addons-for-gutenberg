@@ -1,5 +1,5 @@
 # Spectra - WordPress Gutenberg Blocks #
-**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce/)  
+**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)  
 **Donate link:** https://www.paypal.me/BrainstormForce  
 **Tags:** gutenberg, blocks, gutenberg blocks, editor, block  
 **Requires at least:** 5.6  
@@ -166,12 +166,11 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ## Changelog ##
 
-<<<<<<< HEAD
 ### x.x.x ###
 * Improvement: Buttons - Reduced the default number of buttons to 1 and updated the default styling.
 * Improvement: Buttons - Added alignment options to both the child and parent blocks in the block controls toolbar. 
 * Fix: Buttons - Resolved an issue in which the button color would appear different from the theme color in FSE templates.
-=======
+
 ### 2.6.9 - TUESDAY, 27th June 2023 ###
 * Improvement: Post Grid - Added the option for normal pagination to disable Ajax-based pagination.
 * Fix: Info Box - Removed the line-height inherit CSS to resolve an issue with extra spacing in the editor.
@@ -188,7 +187,6 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ### 2.6.7 - WEDNESDAY, 14th JUNE 2023 ###
 * Improvement: Tightened the security of the plugin.
->>>>>>> bef8cb331f224731a3225bae6f2438e57466a4e3
 
 ### 2.6.6 - MONDAY, 12th JUNE 2023 ###
 * Improvement: Global - Added support for Spectra One's preview options.
