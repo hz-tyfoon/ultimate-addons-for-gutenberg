@@ -7,7 +7,7 @@ import UAGIconPicker from '@Components/icon-picker';
 import { __ } from '@wordpress/i18n';
 
 import { memo } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { select, useDispatch } from '@wordpress/data';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import ResponsiveBorder from '@Components/responsive-border';
 import SpacingControl from '@Components/spacing-control';
@@ -22,12 +22,7 @@ import MultiButtonsControl from '@Components/multi-buttons-control';
 import BoxShadowControl from '@Components/box-shadow';
 import ResponsiveSlider from '@Components/responsive-slider';
 import GradientSettings from '@Components/gradient-settings';
-import {
-	InspectorControls,
-	BlockControls,
-	AlignmentToolbar,
-	store as blockEditorStore,
-} from '@wordpress/block-editor';
+import { InspectorControls, BlockControls, AlignmentToolbar, store as blockEditorStore } from '@wordpress/block-editor';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
@@ -146,19 +141,16 @@ const Settings = ( props ) => {
 		letterSpacingType,
 
 		showIcon,
-		inheritFromTheme
+		inheritFromTheme,
 	} = attributes;
 
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
-	const { parentClientId, parentAttributes } = useSelect( ( select ) => {
-		const { getBlockHierarchyRootClientId, getBlockAttributes } = select( 'core/block-editor' );
-		const newParentClientId = getBlockHierarchyRootClientId( clientId );
-		const newParentAttributes = getBlockAttributes( newParentClientId );
-		return { parentClientId: newParentClientId, parentAttributes: newParentAttributes };
-	  }, [] );
+	const parentClientIds = select( 'core/block-editor' ).getBlockParents( clientId );
+	const immediateParentClientId = parentClientIds.at( -1 );
+	const parentBlockAttributes = select( 'core/block-editor' ).getBlockAttributes( immediateParentClientId );
 
-	const updateParentAlignment = ( align ) => updateBlockAttributes( parentClientId, { align } ) ;
+	const updateParentAlignment = ( align ) => updateBlockAttributes( immediateParentClientId, { align } );
 
 	const presetSettings = () => {
 		return (
@@ -167,55 +159,49 @@ const Settings = ( props ) => {
 			</UAGAdvancedPanelBody>
 		);
 	};
-    
+
 	const alignmentControls = [
 		{
 			align: 'left',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
-			title: __( 'Left', 'ultimate-addons-for-gutenberg' )
+			title: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			align: 'center',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
-			title: __( 'Center', 'ultimate-addons-for-gutenberg' )
+			title: __( 'Center', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			align: 'right',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
-			title: __( 'Right', 'ultimate-addons-for-gutenberg' )
+			title: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			align: 'full',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
-			title: __( 'Full', 'ultimate-addons-for-gutenberg' )
-		}
+			title: __( 'Full', 'ultimate-addons-for-gutenberg' ),
+		},
 	];
 
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
-				value={parentAttributes.align}
-				onChange={( value ) => {
-					updateParentAlignment( value )
-				}}
-				alignmentControls={alignmentControls}
+				value={ parentBlockAttributes.align }
+				onChange={ ( value ) => {
+					updateParentAlignment( value );
+				} }
+				alignmentControls={ alignmentControls }
 			/>
 		</BlockControls>
-	)
-
+	);
 
 	const buttonSettings = () => {
 		return (
 			<UAGAdvancedPanelBody title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<ToggleControl
 					checked={ inheritFromTheme }
-					onChange={ () =>
-						setAttributes( { inheritFromTheme: ! inheritFromTheme } )
-					}
-					label={ __(
-						'Inherit From Theme',
-						'ultimate-addons-for-gutenberg'
-					) }
+					onChange={ () => setAttributes( { inheritFromTheme: ! inheritFromTheme } ) }
+					label={ __( 'Inherit From Theme', 'ultimate-addons-for-gutenberg' ) }
 				/>
 				<ToggleControl
 					label={ __( 'Enable Icon', 'ultimate-addons-for-gutenberg' ) }
@@ -586,47 +572,126 @@ const Settings = ( props ) => {
 	};
 
 	const boxShadowSettings = () => {
-		return <UAGAdvancedPanelBody
-		title={ __( 'Box Shadow', 'ultimate-addons-for-gutenberg' ) }
-		initialOpen={ false }
-	>
-		<ToggleControl
-			label={ __( 'Separate Hover Shadow', 'ultimate-addons-for-gutenberg' ) }
-			checked={ useSeparateBoxShadows }
-			onChange={ () => setAttributes( { useSeparateBoxShadows: ! useSeparateBoxShadows } ) }
-		/>
-		{ useSeparateBoxShadows ? (
-			<UAGTabsControl
-				tabs={ [
-					{
-						name: 'normal',
-						title: __(
-							'Normal',
-							'ultimate-addons-for-gutenberg'
-						),
-					},
-					{
-						name: 'hover',
-						title: __(
-							'Hover',
-							'ultimate-addons-for-gutenberg'
-						),
-					},
-				] }
-				normal={
+		return (
+			<UAGAdvancedPanelBody title={ __( 'Box Shadow', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
+				<ToggleControl
+					label={ __( 'Separate Hover Shadow', 'ultimate-addons-for-gutenberg' ) }
+					checked={ useSeparateBoxShadows }
+					onChange={ () => setAttributes( { useSeparateBoxShadows: ! useSeparateBoxShadows } ) }
+				/>
+				{ useSeparateBoxShadows ? (
+					<UAGTabsControl
+						tabs={ [
+							{
+								name: 'normal',
+								title: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
+							},
+							{
+								name: 'hover',
+								title: __( 'Hover', 'ultimate-addons-for-gutenberg' ),
+							},
+						] }
+						normal={
+							<>
+								<UAGPresets
+									setAttributes={ setAttributes }
+									presets={ boxShadowPresets }
+									presetInputType="radioImage"
+								/>
+								<BoxShadowControl
+									blockId={ block_id }
+									setAttributes={ setAttributes }
+									label={ __( 'Box Shadow', 'ultimate-addons-for-gutenberg' ) }
+									boxShadowColor={ {
+										value: boxShadowColor,
+										label: 'boxShadowColor',
+										title: __( 'Color', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowHOffset={ {
+										value: boxShadowHOffset,
+										label: 'boxShadowHOffset',
+										title: __( 'Horizontal', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowVOffset={ {
+										value: boxShadowVOffset,
+										label: 'boxShadowVOffset',
+										title: __( 'Vertical', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowBlur={ {
+										value: boxShadowBlur,
+										label: 'boxShadowBlur',
+										title: __( 'Blur', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowSpread={ {
+										value: boxShadowSpread,
+										label: 'boxShadowSpread',
+										title: __( 'Spread', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowPosition={ {
+										value: boxShadowPosition,
+										label: 'boxShadowPosition',
+										title: __( 'Position', 'ultimate-addons-for-gutenberg' ),
+									} }
+								/>
+							</>
+						}
+						hover={
+							<>
+								<UAGPresets
+									setAttributes={ setAttributes }
+									presets={ boxShadowHoverPresets }
+									presetInputType="radioImage"
+								/>
+								<BoxShadowControl
+									blockId={ block_id }
+									setAttributes={ setAttributes }
+									label={ __( 'Box Shadow', 'ultimate-addons-for-gutenberg' ) }
+									boxShadowColor={ {
+										value: boxShadowColorHover,
+										label: 'boxShadowColorHover',
+										title: __( 'Color', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowHOffset={ {
+										value: boxShadowHOffsetHover,
+										label: 'boxShadowHOffsetHover',
+										title: __( 'Horizontal', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowVOffset={ {
+										value: boxShadowVOffsetHover,
+										label: 'boxShadowVOffsetHover',
+										title: __( 'Vertical', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowBlur={ {
+										value: boxShadowBlurHover,
+										label: 'boxShadowBlurHover',
+										title: __( 'Blur', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowSpread={ {
+										value: boxShadowSpreadHover,
+										label: 'boxShadowSpreadHover',
+										title: __( 'Spread', 'ultimate-addons-for-gutenberg' ),
+									} }
+									boxShadowPosition={ {
+										value: boxShadowPositionHover,
+										label: 'boxShadowPositionHover',
+										title: __( 'Position', 'ultimate-addons-for-gutenberg' ),
+									} }
+								/>
+							</>
+						}
+						disableBottomSeparator={ true }
+					/>
+				) : (
 					<>
 						<UAGPresets
-							setAttributes = { setAttributes }
-							presets = { boxShadowPresets }
-							presetInputType = 'radioImage'
+							setAttributes={ setAttributes }
+							presets={ boxShadowPresets }
+							presetInputType="radioImage"
 						/>
 						<BoxShadowControl
 							blockId={ block_id }
 							setAttributes={ setAttributes }
-							label={ __(
-								'Box Shadow',
-								'ultimate-addons-for-gutenberg'
-							) }
+							label={ __( 'Box Shadow', 'ultimate-addons-for-gutenberg' ) }
 							boxShadowColor={ {
 								value: boxShadowColor,
 								label: 'boxShadowColor',
@@ -635,18 +700,12 @@ const Settings = ( props ) => {
 							boxShadowHOffset={ {
 								value: boxShadowHOffset,
 								label: 'boxShadowHOffset',
-								title: __(
-									'Horizontal',
-									'ultimate-addons-for-gutenberg'
-								),
+								title: __( 'Horizontal', 'ultimate-addons-for-gutenberg' ),
 							} }
 							boxShadowVOffset={ {
 								value: boxShadowVOffset,
 								label: 'boxShadowVOffset',
-								title: __(
-									'Vertical',
-									'ultimate-addons-for-gutenberg'
-								),
+								title: __( 'Vertical', 'ultimate-addons-for-gutenberg' ),
 							} }
 							boxShadowBlur={ {
 								value: boxShadowBlur,
@@ -661,129 +720,13 @@ const Settings = ( props ) => {
 							boxShadowPosition={ {
 								value: boxShadowPosition,
 								label: 'boxShadowPosition',
-								title: __(
-									'Position',
-									'ultimate-addons-for-gutenberg'
-								),
+								title: __( 'Position', 'ultimate-addons-for-gutenberg' ),
 							} }
 						/>
 					</>
-				}
-				hover={
-					<>
-						<UAGPresets
-							setAttributes = { setAttributes }
-							presets = { boxShadowHoverPresets }
-							presetInputType = 'radioImage'
-						/>
-						<BoxShadowControl
-							blockId={ block_id }
-							setAttributes={ setAttributes }
-							label={ __(
-								'Box Shadow',
-								'ultimate-addons-for-gutenberg'
-							) }
-							boxShadowColor={ {
-								value: boxShadowColorHover,
-								label: 'boxShadowColorHover',
-								title: __( 'Color', 'ultimate-addons-for-gutenberg' ),
-							} }
-							boxShadowHOffset={ {
-								value: boxShadowHOffsetHover,
-								label: 'boxShadowHOffsetHover',
-								title: __(
-									'Horizontal',
-									'ultimate-addons-for-gutenberg'
-								),
-							} }
-							boxShadowVOffset={ {
-								value: boxShadowVOffsetHover,
-								label: 'boxShadowVOffsetHover',
-								title: __(
-									'Vertical',
-									'ultimate-addons-for-gutenberg'
-								),
-							} }
-							boxShadowBlur={ {
-								value: boxShadowBlurHover,
-								label: 'boxShadowBlurHover',
-								title: __( 'Blur', 'ultimate-addons-for-gutenberg' ),
-							} }
-							boxShadowSpread={ {
-								value: boxShadowSpreadHover,
-								label: 'boxShadowSpreadHover',
-								title: __( 'Spread', 'ultimate-addons-for-gutenberg' ),
-							} }
-							boxShadowPosition={ {
-								value: boxShadowPositionHover,
-								label: 'boxShadowPositionHover',
-								title: __(
-									'Position',
-									'ultimate-addons-for-gutenberg'
-								),
-							} }
-						/>
-					</>
-				}
-				disableBottomSeparator={ true }
-			/>
-		) : (
-			<>
-				<UAGPresets
-					setAttributes = { setAttributes }
-					presets = { boxShadowPresets }
-					presetInputType = 'radioImage'
-				/>
-				<BoxShadowControl
-					blockId={ block_id }
-					setAttributes={ setAttributes }
-					label={ __(
-						'Box Shadow',
-						'ultimate-addons-for-gutenberg'
-					) }
-					boxShadowColor={ {
-						value: boxShadowColor,
-						label: 'boxShadowColor',
-						title: __( 'Color', 'ultimate-addons-for-gutenberg' ),
-					} }
-					boxShadowHOffset={ {
-						value: boxShadowHOffset,
-						label: 'boxShadowHOffset',
-						title: __(
-							'Horizontal',
-							'ultimate-addons-for-gutenberg'
-						),
-					} }
-					boxShadowVOffset={ {
-						value: boxShadowVOffset,
-						label: 'boxShadowVOffset',
-						title: __(
-							'Vertical',
-							'ultimate-addons-for-gutenberg'
-						),
-					} }
-					boxShadowBlur={ {
-						value: boxShadowBlur,
-						label: 'boxShadowBlur',
-						title: __( 'Blur', 'ultimate-addons-for-gutenberg' ),
-					} }
-					boxShadowSpread={ {
-						value: boxShadowSpread,
-						label: 'boxShadowSpread',
-						title: __( 'Spread', 'ultimate-addons-for-gutenberg' ),
-					} }
-					boxShadowPosition={ {
-						value: boxShadowPosition,
-						label: 'boxShadowPosition',
-						title: __(
-							'Position',
-							'ultimate-addons-for-gutenberg'
-						),
-					} }
-				/>
-			</>
-		) }
-	</UAGAdvancedPanelBody>
+				) }
+			</UAGAdvancedPanelBody>
+		);
 	};
 
 	const IconSettings = () => {
@@ -892,7 +835,7 @@ const Settings = ( props ) => {
 	const spacingSettings = () => {
 		return (
 			<UAGAdvancedPanelBody title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
-				{ ! inheritFromTheme &&
+				{ ! inheritFromTheme && (
 					<SpacingControl
 						{ ...props }
 						label={ __( 'Padding', 'ultimate-addons-for-gutenberg' ) }
@@ -963,7 +906,7 @@ const Settings = ( props ) => {
 							label: 'paddingLink',
 						} }
 					/>
-				}
+				) }
 				<SpacingControl
 					{ ...props }
 					label={ __( 'Margin', 'ultimate-addons-for-gutenberg' ) }
@@ -1040,7 +983,7 @@ const Settings = ( props ) => {
 
 	return (
 		<>
-		    { getBlockControls() }
+			{ getBlockControls() }
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
@@ -1050,13 +993,13 @@ const Settings = ( props ) => {
 					<InspectorTab { ...UAGTabs.style }>
 						{ ! removeText && ! inheritFromTheme && textSettings() }
 						{ showIcon && '' !== icon && IconSettings() }
-						{ ! inheritFromTheme && 
+						{ ! inheritFromTheme && (
 							<>
 								{ backgroundSettings() }
 								{ borderSettings() }
 								{ boxShadowSettings() }
 							</>
-						}
+						) }
 						{ spacingSettings() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
