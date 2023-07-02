@@ -34,6 +34,10 @@ const attributes = {
 	gap: {
 		type: 'number',
 		default: 10,
+		isGBSStyle: true,
+		UAGCopyPaste: {
+			styleType: 'btn-align',
+		},
 	},
 	stack: {
 		type: 'string',
@@ -320,7 +324,6 @@ const attributes = {
 	mobilePaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit-mobile',
 		},
@@ -328,7 +331,6 @@ const attributes = {
 	tabletPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit-tablet',
 		},
@@ -372,7 +374,6 @@ const attributes = {
 	sizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-size-unit',
 		},
@@ -404,7 +405,6 @@ const attributes = {
 	lineHeightType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-line-height-type',
 		},
@@ -586,7 +586,6 @@ const attributes = {
 	marginType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-margin-type',
 		},

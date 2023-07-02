@@ -16,7 +16,7 @@ import AddNewPopupStyle from './add-new-popup-style';
 import { clearCurrentAttributes, getLabel, getGlobalBlockStylesOptions, getNewAttributes, clearNumberAttributes } from './utils';
 
 const GlobalBlockStyles = ( props ) => {
-    // console.log( 'GlobalBlockStyles', props );
+    console.log( 'GlobalBlockStyles', props );
    // Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
 		styles.use();

@@ -243,7 +243,6 @@ const attributes = {
 	imageMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-margin-unit',
 		},
@@ -251,7 +250,6 @@ const attributes = {
 	imageMarginUnitTablet: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-margin-unit-tablet',
 		},
@@ -259,7 +257,6 @@ const attributes = {
 	imageMarginUnitMobile: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'image-margin-unit-mobile',
 		},
@@ -336,7 +333,6 @@ const attributes = {
 	captionFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-font-size-type',
 		},
@@ -344,7 +340,6 @@ const attributes = {
 	captionLineHeightType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-line-height-type',
 		},
@@ -478,7 +473,6 @@ const attributes = {
 	captionMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-margin-unit',
 		},
@@ -486,7 +480,6 @@ const attributes = {
 	captionMarginUnitTablet: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-margin-unit-tablet',
 		},
@@ -494,7 +487,6 @@ const attributes = {
 	captionMarginUnitMobile: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-margin-unit-mobile',
 		},
@@ -571,7 +563,6 @@ const attributes = {
 	headingFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-font-size-type',
 		},
@@ -579,7 +570,6 @@ const attributes = {
 	headingLineHeightType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-line-height',
 		},
@@ -713,7 +703,6 @@ const attributes = {
 	headingMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-margin-unit',
 		},
@@ -721,7 +710,6 @@ const attributes = {
 	headingMarginUnitTablet: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-margin-unit-tablet',
 		},
@@ -729,7 +717,6 @@ const attributes = {
 	headingMarginUnitMobile: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-margin-unit-mobile',
 		},
@@ -750,7 +737,6 @@ const attributes = {
 	overlayPositionFromEdgeUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'overlay-position-from-edge-unit',
 		},
@@ -825,7 +811,6 @@ const attributes = {
 	separatorWidthType: {
 		type: 'string',
 		default: '%',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-width-type',
 		},
@@ -841,7 +826,6 @@ const attributes = {
 	seperatorThicknessUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-width-unit',
 		},
@@ -933,7 +917,6 @@ const attributes = {
 	seperatorMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-margin-unit',
 		},
@@ -941,7 +924,6 @@ const attributes = {
 	seperatorMarginUnitTablet: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-margin-unit-tablet',
 		},
@@ -949,7 +931,6 @@ const attributes = {
 	seperatorMarginUnitMobile: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-margin-unit-mobile',
 		},
@@ -1109,7 +1090,6 @@ const attributes = {
 	headingLetterSpacingType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing-type',
 		},
@@ -1138,7 +1118,6 @@ const attributes = {
 	captionLetterSpacingType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing-type',
 		},

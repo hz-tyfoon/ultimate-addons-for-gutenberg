@@ -77,7 +77,6 @@ const attributes = {
 	titleFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-font-size-type',
 		},
@@ -136,7 +135,6 @@ const attributes = {
 	titleLineHeightType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-line-height-type',
 		},
@@ -180,7 +178,6 @@ const attributes = {
 	descFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-font-size-type',
 		},
@@ -239,7 +236,6 @@ const attributes = {
 	descLineHeightType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-line-height-type',
 		},
@@ -298,7 +294,6 @@ const attributes = {
 	titleSpaceType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-unit-type',
 		},
@@ -328,7 +323,6 @@ const attributes = {
 	descSpaceType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-bottom-margin-unit-type',
 		},
@@ -418,7 +412,6 @@ const attributes = {
 	ctaFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-font-size-type',
 		},
@@ -507,7 +500,6 @@ const attributes = {
 	contentWidthType: {
 		type: 'string',
 		default: '%',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-width-type',
 		},
@@ -688,7 +680,6 @@ const attributes = {
 	ctaPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit',
 		},
@@ -696,7 +687,6 @@ const attributes = {
 	mobileCTAPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit-mobile',
 		},
@@ -704,7 +694,6 @@ const attributes = {
 	tabletCTAPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit-tablet',
 		},
@@ -861,7 +850,6 @@ const attributes = {
 	secondCtaPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit',
 		},
@@ -869,7 +857,6 @@ const attributes = {
 	secondCtaMobilePaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit-mobile',
 		},
@@ -877,7 +864,6 @@ const attributes = {
 	secondCtaTabletPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit-tablet',
 		},
@@ -949,7 +935,6 @@ const attributes = {
 	secondCtaFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-size-unit',
 		},
@@ -1113,7 +1098,6 @@ const attributes = {
 	overallBlockPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit',
 		},
@@ -1121,7 +1105,6 @@ const attributes = {
 	overallBlockMobilePaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit-mobile',
 		},
@@ -1129,7 +1112,6 @@ const attributes = {
 	overallBlockTabletPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-padding-unit-tablet',
 		},
@@ -1225,7 +1207,6 @@ const attributes = {
 	overallBlockMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-margin-unit',
 		},
@@ -1233,7 +1214,6 @@ const attributes = {
 	overallBlockMobileMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-margin-unit-mobile',
 		},
@@ -1241,7 +1221,6 @@ const attributes = {
 	overallBlockTabletMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-margin-unit-tablet',
 		},
@@ -1275,7 +1254,6 @@ const attributes = {
 	buttonRightSpaceType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-button-unit-type',
 		},
@@ -1326,7 +1304,6 @@ const attributes = {
 	titleLetterSpacingType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'main-title-letter-spacing-type',
 		},
@@ -1355,7 +1332,6 @@ const attributes = {
 	descLetterSpacingType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing-type',
 		},
@@ -1384,7 +1360,6 @@ const attributes = {
 	ctaLetterSpacingType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'cta-letter-spacing-type',
 		},
@@ -1413,7 +1388,6 @@ const attributes = {
 	secondCtaLetterSpacingType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'secondCta-letter-spacing-type',
 		},
@@ -1443,7 +1417,6 @@ const attributes = {
 	btncontentWidthType: {
 		type: 'string',
 		default: '%',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'desc-width-type',
 		},

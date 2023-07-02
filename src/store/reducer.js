@@ -7,14 +7,15 @@
  *
  * @return {Object} Updated state.
  */
+import { __ } from '@wordpress/i18n';
 
- const DEFAULT_STATE = {
+const DEFAULT_STATE = {
 	initialStateSetFlag: false,
     globalBlockStylesPopupState: 'close',
 	globalBlockStyles: [
         {
             value: '',
-            label: 'None'
+			label: __( 'None', 'ultimate-addons-for-gutenberg' ),
         }
     ],
 	globalBlockStylesFontFamilies: []

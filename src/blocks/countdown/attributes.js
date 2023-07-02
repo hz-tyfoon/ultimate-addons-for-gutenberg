@@ -158,7 +158,6 @@ const attributes = {
 	digitFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'digit-font-size-type',
 		},
@@ -166,7 +165,6 @@ const attributes = {
 	digitLineHeightType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'digit-line-height-type',
 		},
@@ -174,7 +172,6 @@ const attributes = {
 	digitLetterSpacingType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'digit-letter-spacing-type',
 		},
@@ -296,7 +293,6 @@ const attributes = {
 	labelFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'label-font-size-type',
 		},
@@ -304,7 +300,6 @@ const attributes = {
 	labelLineHeightType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'label-line-height-type',
 		},
@@ -312,7 +307,6 @@ const attributes = {
 	labelLetterSpacingType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'label-letter-spacing-type',
 		},
@@ -419,7 +413,6 @@ const attributes = {
 	separatorFontSizeType: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-font-size-type',
 		},
@@ -427,7 +420,6 @@ const attributes = {
 	separatorLineHeightType: {
 		type: 'string',
 		default: 'em',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'separator-line-height-type',
 		},
@@ -607,7 +599,6 @@ const attributes = {
 	blockMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'block-margin-unit',
 		},
@@ -615,7 +606,6 @@ const attributes = {
 	blockMarginUnitTablet: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'block-margin-unit-tablet',
 		},
@@ -623,7 +613,6 @@ const attributes = {
 	blockMarginUnitMobile: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'block-margin-unit-mobile',
 		},
@@ -720,7 +709,6 @@ const attributes = {
 	blockPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'block-padding-unit',
 		},
@@ -728,7 +716,6 @@ const attributes = {
 	blockPaddingUnitTablet: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'block-padding-unit-tablet',
 		},
@@ -736,7 +723,6 @@ const attributes = {
 	blockPaddingUnitMobile: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'block-padding-unit-mobile',
 		},
@@ -833,7 +819,6 @@ const attributes = {
 	boxPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'countdown-box-padding-unit',
 		},
@@ -841,7 +826,6 @@ const attributes = {
 	boxPaddingUnitTablet: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'countdown-box-padding-unit-tablet',
 		},
@@ -849,7 +833,6 @@ const attributes = {
 	boxPaddingUnitMobile: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'countdown-box-padding-unit-mobile',
 		},

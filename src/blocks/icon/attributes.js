@@ -36,7 +36,6 @@ const attributes = {
 	iconSizeUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'icon-size-type',
 		},
@@ -263,7 +262,6 @@ const attributes = {
 	iconPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'icon-padding-unit',
 		},
@@ -271,7 +269,6 @@ const attributes = {
 	iconTabletPaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'icon-tablet-padding-unit',
 		},
@@ -279,7 +276,6 @@ const attributes = {
 	iconMobilePaddingUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'icon-mobile-padding-unit',
 		},
@@ -376,7 +372,6 @@ const attributes = {
 	iconMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'icon-margin-unit',
 		},
@@ -384,7 +379,6 @@ const attributes = {
 	iconTabletMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'icon-tablet-margin-unit',
 		},
@@ -392,7 +386,6 @@ const attributes = {
 	iconMobileMarginUnit: {
 		type: 'string',
 		default: 'px',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'icon-mobile-margin-unit',
 		},

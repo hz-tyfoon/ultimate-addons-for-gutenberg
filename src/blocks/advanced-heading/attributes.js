@@ -56,7 +56,6 @@ const attributes = {
 	headingDescPosition: {
 		type: 'string',
 		default: 'below-heading',
-		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-position',
 		},
@@ -138,7 +137,6 @@ const attributes = {
 	seperatorStyle: {
 		type: 'string',
 		default: 'none',
-		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'separator-style',
 		},
@@ -146,7 +144,6 @@ const attributes = {
 	seperatorPosition: {
 		type: 'string',
 		default: 'below-heading',
-		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'separator-position',
 		},
