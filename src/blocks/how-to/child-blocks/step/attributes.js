@@ -53,6 +53,7 @@ const attributes = {
 	},
 	urlFontSize: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-font-size',
 		},
@@ -66,18 +67,21 @@ const attributes = {
 	},
 	urlFontSizeMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-font-size-mobile',
 		},
 	},
 	urlFontSizeTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-font-size-tablet',
 		},
 	},
 	urlFontFamily: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-font-family',
 		},
@@ -85,6 +89,7 @@ const attributes = {
 	},
 	urlFontWeight: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-font-weight',
 		},
@@ -92,18 +97,21 @@ const attributes = {
 	urlFontStyle: {
 		type: 'string',
 		default: 'normal',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-font-style',
 		},
 	},
 	urlTransform: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-transform',
 		},
 	},
 	urlDecoration: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-decoration',
 		},
@@ -118,6 +126,7 @@ const attributes = {
 
 	titleFontSize: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-font-size',
 		},
@@ -131,18 +140,21 @@ const attributes = {
 	},
 	titleFontSizeMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-font-size-mobile',
 		},
 	},
 	titleFontSizeTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-font-size-tablet',
 		},
 	},
 	titleFontFamily: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-font-family',
 		},
@@ -150,12 +162,14 @@ const attributes = {
 	},
 	titleFontWeight: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-font-weight',
 		},
 	},
 	titleFontStyle: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-font-style',
 		},
@@ -163,12 +177,14 @@ const attributes = {
 	},
 	titleTransform: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-transform',
 		},
 	},
 	titleDecoration: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-decoration',
 		},
@@ -183,6 +199,7 @@ const attributes = {
 
 	descriptionFontSize: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-font-size',
 		},
@@ -196,12 +213,14 @@ const attributes = {
 	},
 	descriptionFontSizeMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-font-size-mobile',
 		},
 	},
 	descriptionFontSizeTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-font-size-tablet',
 		},
@@ -209,12 +228,14 @@ const attributes = {
 	descriptionFontFamily: {
 		type: 'string',
 		default: 'Default',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-font-family',
 		},
 	},
 	descriptionFontWeight: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-font-weight',
 		},
@@ -222,18 +243,21 @@ const attributes = {
 	descriptionFontStyle: {
 		type: 'string',
 		default: 'normal',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-font-style',
 		},
 	},
 	descriptionTransform: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-transform',
 		},
 	},
 	descriptionDecoration: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-decoration',
 		},
@@ -252,36 +276,42 @@ const attributes = {
 	},
 	titleColor: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-color',
 		},
 	},
 	descriptionColor: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-color',
 		},
 	},
 	urlColor: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'prefix-color',
 		},
 	},
 	titleLetterSpacing: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-letter-spacing',
 		},
 	},
 	titleLetterSpacingTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-letter-spacing-tablet',
 		},
 	},
 	titleLetterSpacingMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-letter-spacing-mobile',
 		},
@@ -295,18 +325,21 @@ const attributes = {
 	},
 	titleLineHeight: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-line-height',
 		},
 	},
 	titleLineHeightTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-line-height-tablet',
 		},
 	},
 	titleLineHeightMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'main-title-line-height-mobile',
 		},
@@ -320,18 +353,21 @@ const attributes = {
 	},
 	descriptionLetterSpacing: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing',
 		},
 	},
 	descriptionLetterSpacingTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing-tablet',
 		},
 	},
 	descriptionLetterSpacingMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing-mobile',
 		},
@@ -345,6 +381,7 @@ const attributes = {
 	},
 	descriptionLineHeight: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-line-height',
 		},
@@ -358,30 +395,35 @@ const attributes = {
 	},
 	descriptionLineHeightTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-line-height-tablet',
 		},
 	},
 	descriptionLineHeightMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-line-height-mobile',
 		},
 	},
 	urlLetterSpacing: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing',
 		},
 	},
 	urlLetterSpacingTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing-tablet',
 		},
 	},
 	urlLetterSpacingMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-letter-spacing-mobile',
 		},
@@ -395,6 +437,7 @@ const attributes = {
 	},
 	urlLineHeight: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-line-height',
 		},
@@ -408,12 +451,14 @@ const attributes = {
 	},
 	urlLineHeightTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-line-height-tablet',
 		},
 	},
 	urlLineHeightMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'desc-line-height-mobile',
 		},

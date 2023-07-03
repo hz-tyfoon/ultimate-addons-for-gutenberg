@@ -14,6 +14,7 @@ import DynamicFontLoader from './dynamicFontLoader';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const FaqComponent = ( props ) => {
 	const {
@@ -258,4 +259,5 @@ const FaqComponent = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( FaqComponent );

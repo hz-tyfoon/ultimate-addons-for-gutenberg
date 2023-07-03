@@ -4,7 +4,7 @@
 
 import generateCSS from '@Controls/generateCSS';
 
-function styling( attributes, clientId ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const {
 		width,
 		widthTablet,
@@ -58,7 +58,7 @@ function styling( attributes, clientId ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	let styling_css = generateCSS( selectors, base_selector );
 

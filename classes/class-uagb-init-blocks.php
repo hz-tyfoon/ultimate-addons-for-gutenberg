@@ -901,11 +901,12 @@ class UAGB_Init_Blocks {
 		$style_name          = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
 		$style_class_name    = 'spectra-gbs-' . $style_name;
 		$wp_block_class_name = str_replace( '/', '-', $block_name );
-		
-		$html = str_replace(
-			'<div class="wp-block-' . $wp_block_class_name,
+
+		$html = preg_replace(
+			'/<div class="wp-block-' . $wp_block_class_name . '/',
 			'<div class="wp-block-' . $wp_block_class_name . ' ' . $style_class_name . ' ',
-			$block_content
+			$block_content, 
+			1
 		);
 
 		return $html;

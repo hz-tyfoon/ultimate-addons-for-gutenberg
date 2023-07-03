@@ -11,14 +11,17 @@ $selectors   = UAGB_Block_Helper::get_icon_list_child_selectors( $attr, $id, tru
 $t_selectors = UAGB_Block_Helper::get_icon_list_child_selectors( $attr, $id, true )['tablet'];
 $m_selectors = UAGB_Block_Helper::get_icon_list_child_selectors( $attr, $id, true )['mobile'];
 
-$desktop = UAGB_Helper::generate_css( $selectors, '.uagb-block-' . $id );
-$tablet  = UAGB_Helper::generate_css( $t_selectors, '.uagb-block-' . $id );
-$mobile  = UAGB_Helper::generate_css( $m_selectors, '.uagb-block-' . $id );
-
-$generated_css = array(
-	'desktop' => $desktop,
-	'tablet'  => $tablet,
-	'mobile'  => $mobile,
+$combined_selectors = array(
+	'desktop' => $selectors,
+	'tablet'  => $t_selectors,
+	'mobile'  => $m_selectors,
 );
 
-return $generated_css;
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	'.uagb-block-' . $id,
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	) 
+);

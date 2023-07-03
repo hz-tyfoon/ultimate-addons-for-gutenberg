@@ -19,6 +19,8 @@ let imageSizeOptions = [
 import { memo } from '@wordpress/element';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -507,7 +509,9 @@ const Settings = ( props ) => {
 						{ descriptionStyle() }
 						{ urlType === 'text' && linkStyle() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

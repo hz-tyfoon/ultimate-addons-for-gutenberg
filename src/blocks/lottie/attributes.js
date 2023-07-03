@@ -45,36 +45,42 @@ const attributes = {
 	// Style.
 	height: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'lottie-height',
 		},
 	},
 	heightTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'lottie-height-tablet',
 		},
 	},
 	heightMob: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'lottie-height-mobile',
 		},
 	},
 	width: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'lottie-width',
 		},
 	},
 	widthTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'lottie-width-tablet',
 		},
 	},
 	widthMob: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'lottie-width-mobile',
 		},
@@ -82,6 +88,7 @@ const attributes = {
 	backgroundColor: {
 		type: 'string',
 		default: '',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'lottie-bg-color',
 		},
@@ -89,6 +96,7 @@ const attributes = {
 	backgroundHColor: {
 		type: 'string',
 		default: '',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'lottie-bg-hover-color',
 		},

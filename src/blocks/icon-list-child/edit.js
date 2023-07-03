@@ -11,6 +11,7 @@ import Render from './render';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 let hideLabel;
 
 const UAGBIconListChild = ( props ) => {
@@ -38,4 +39,5 @@ const UAGBIconListChild = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBIconListChild );

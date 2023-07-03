@@ -94,4 +94,7 @@ return array(
 	'subHeadLetterSpacingTablet' => '',
 	'subHeadLetterSpacingMobile' => '',
 	'subHeadLetterSpacingType'   => 'px',
+	// For Global Block Styles.
+	'globalBlockStyleName'         => '',
+	'globalBlockStyleId'           => '',
 );

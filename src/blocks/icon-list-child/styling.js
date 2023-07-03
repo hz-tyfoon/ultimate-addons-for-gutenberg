@@ -5,7 +5,7 @@
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 
-function styling( attributes, clientId ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const {
 		icon_color,
 		label_color,
@@ -114,7 +114,7 @@ function styling( attributes, clientId ) {
 	};
 
 	let stylingCss = '';
-	const id = `.uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = gbsSelector ? gbsSelector + ' ' : `.uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	stylingCss = generateCSS( selectors, id );
 

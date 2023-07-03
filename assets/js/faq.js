@@ -148,6 +148,11 @@ function faqClick( e, faqItem, questionButtons ) {
 			slideUp( faqItem.getElementsByClassName( 'uagb-faq-content' )[ 0 ], 500 );
 		} else {
 			const parent = e.currentTarget.closest( '.wp-block-uagb-faq' );
+
+			if( ! parent ){
+				return;
+			}
+
 			let faqToggle = 'true';
 			if ( parent.classList.contains( 'wp-block-uagb-faq' ) ) {
 				faqToggle = parent.getAttribute( 'data-faqtoggle' );

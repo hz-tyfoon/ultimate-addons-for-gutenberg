@@ -24,4 +24,7 @@ return array(
 	'speed'            => 1,
 	'reverse'          => false,
 	'playOn'           => 'none',
+	// For Global Block Styles.
+	'globalBlockStyleName'         => '',
+	'globalBlockStyleId'           => '',
 );

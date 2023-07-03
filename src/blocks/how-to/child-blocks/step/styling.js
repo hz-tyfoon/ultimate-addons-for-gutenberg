@@ -5,7 +5,7 @@
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 
-function styling( attributes, clientId ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const {
 		urlFontSize,
 		urlFontSizeType,
@@ -141,7 +141,7 @@ function styling( attributes, clientId ) {
 		},
 	};
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const baseSelector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	let stylingCss = generateCSS( selectors, baseSelector );
 

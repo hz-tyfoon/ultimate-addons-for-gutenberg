@@ -16,6 +16,8 @@ import { ToggleControl, ToolbarGroup, Icon } from '@wordpress/components';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
 import { memo } from '@wordpress/element';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -24,6 +26,7 @@ const Settings = ( props ) => {
 
 	const {
 		setAttributes,
+		attributes,
 		attributes: {
 		lottieSource,
 		align,
@@ -326,7 +329,9 @@ const Settings = ( props ) => {
 				<InspectorTabs tabs={ [ 'general', 'style', 'advance' ] }>
 					<InspectorTab { ...UAGTabs.general }>{ controlsSettings }</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>{ styleSettings }</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>
