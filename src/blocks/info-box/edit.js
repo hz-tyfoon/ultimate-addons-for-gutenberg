@@ -35,7 +35,8 @@ const UAGBInfoBox = ( props ) => {
 		},
 		name,
 		clientId,
-		deviceType
+		deviceType,
+		context,
 	} = props;
 
 	useEffect( () => {
@@ -85,6 +86,10 @@ const UAGBInfoBox = ( props ) => {
 			);
 		}
 	}, [] );
+
+	useEffect( () => {
+		setAttributes( { context } );
+	}, [ context ] )
 
 	useEffect( () => {
 		responsiveConditionPreview( props );

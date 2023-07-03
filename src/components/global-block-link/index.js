@@ -16,7 +16,6 @@ import AddNewPopupStyle from './add-new-popup-style';
 import { clearCurrentAttributes, getLabel, getGlobalBlockStylesOptions, getNewAttributes, clearNumberAttributes } from './utils';
 
 const GlobalBlockStyles = ( props ) => {
-    console.log( 'GlobalBlockStyles', props );
    // Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
 		styles.use();
@@ -178,7 +177,6 @@ const GlobalBlockStyles = ( props ) => {
                 } }
                 onChange = {
                     ( value ) => {
-                        console.log( 'select value', value );
 
                         let label = '';
                         for ( let i = 0; i < globalBlockStyles.length; i++ ) {
@@ -207,7 +205,7 @@ const GlobalBlockStyles = ( props ) => {
                         } );
                         
                         updateGlobalBlockStyles( globalBlockStyles );
-                        let noneValue = "" === value;
+                        const noneValue = '' === value;
                         saveStylesToDatabase( 'bulkUpdateStyles', globalBlockStyles, noneValue );
 
                         setAttributes( 

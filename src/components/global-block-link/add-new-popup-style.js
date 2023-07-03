@@ -36,9 +36,9 @@ const AddNewPopupStyle = ( props ) => {
     return <>
         { AddNewButton }
         { 'open' === isOpen && <Modal
-            title={__('Save as a Global Block Style', 'ultimate-addons-for-gutenberg')} onRequestClose={() => {
+            title={__( 'Save as a Global Block Style', 'ultimate-addons-for-gutenberg' )} onRequestClose={() => {
                 closeModal();
-                setTempStyleName('');
+                setTempStyleName( '' );
             }}
             className="spectra-global-block-style-name-modal"
         >
