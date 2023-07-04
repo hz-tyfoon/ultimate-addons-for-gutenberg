@@ -534,16 +534,16 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 				} else {
 					$content = get_post( $post->ID )->post_content;
 				}
-				$uagb_toc_heading_content          = $this->table_of_contents_get_headings_from_content( $content );
-				$blocks                            = parse_blocks( $content );
-				$uagb_toc_reusable_heading_content = $this->toc_recursive_reusable_heading( $blocks );
-				$uagb_toc_heading_content          = array_merge( $uagb_toc_heading_content, $uagb_toc_reusable_heading_content );
-
 				if ( $attributes['allowDynamicBlock'] ) {
 					$uagb_toc_heading_content = $this->table_of_contents_get_dynamic_headings(
 						$the_post,
 						$attributes
 					);
+				} else {
+					$uagb_toc_heading_content          = $this->table_of_contents_get_headings_from_content( $content );
+					$blocks                            = parse_blocks( $content );
+					$uagb_toc_reusable_heading_content = $this->toc_recursive_reusable_heading( $blocks );
+					$uagb_toc_heading_content          = array_merge( $uagb_toc_heading_content, $uagb_toc_reusable_heading_content );
 				}
 				$meta_array = array(
 					'_uagb_toc_version'  => UAGB_ASSET_VER,
