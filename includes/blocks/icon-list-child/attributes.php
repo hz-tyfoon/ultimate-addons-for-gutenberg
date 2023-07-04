@@ -56,6 +56,6 @@ return array(
 	'childPaddingUnitMobile'   => 'px',
 	'childPaddingLink'         => '',
 	// For Global Block Styles.
-	'globalBlockStyleName'         => '',
-	'globalBlockStyleId'           => '',
+	'globalBlockStyleName'     => '',
+	'globalBlockStyleId'       => '',
 );

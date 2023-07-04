@@ -10,7 +10,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
-		block_id,
 		textColor,
 		titleColor,
 		noticeColor,

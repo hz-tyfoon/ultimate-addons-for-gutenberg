@@ -95,6 +95,6 @@ return array(
 	'subHeadLetterSpacingMobile' => '',
 	'subHeadLetterSpacingType'   => 'px',
 	// For Global Block Styles.
-	'globalBlockStyleName'         => '',
-	'globalBlockStyleId'           => '',
+	'globalBlockStyleName'       => '',
+	'globalBlockStyleId'         => '',
 );

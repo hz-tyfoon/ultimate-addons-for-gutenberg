@@ -83,6 +83,6 @@ return array(
 	'titleTopPadding'          => '',
 	'titleBottomPadding'       => '',
 	// For Global Block Styles.
-	'globalBlockStyleName'         => '',
-	'globalBlockStyleId'           => '',
+	'globalBlockStyleName'     => '',
+	'globalBlockStyleId'       => '',
 );

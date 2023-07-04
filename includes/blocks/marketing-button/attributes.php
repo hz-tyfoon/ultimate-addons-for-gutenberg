@@ -102,8 +102,8 @@ return array_merge(
 		'borderColor'               => '',
 		'borderHoverColor'          => '',
 		// For Global Block Styles.
-		'globalBlockStyleName'         => '',
-		'globalBlockStyleId'           => '',
+		'globalBlockStyleName'      => '',
+		'globalBlockStyleId'        => '',
 	),
 	$button_attribute
 );

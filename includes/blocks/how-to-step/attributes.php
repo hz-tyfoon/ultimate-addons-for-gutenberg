@@ -68,6 +68,6 @@ return array(
 	'urlLetterSpacingMobile'         => '',
 	'urlLetterSpacingType'           => 'px',
 	// For Global Block Styles.
-	'globalBlockStyleName'         => '',
-	'globalBlockStyleId'           => '',
+	'globalBlockStyleName'           => '',
+	'globalBlockStyleId'             => '',
 );
