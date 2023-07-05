@@ -57,6 +57,12 @@ function generateBackgroundCSS( backgroundAttributes ) {
 			gradient = '';
 			break;
 	}
+	
+	let backgroundSizeValue = backgroundSize;
+
+	if ( 'custom' === backgroundSize ) {
+		backgroundSizeValue = backgroundCustomSize + backgroundCustomSizeType;
+	}
 
 	if ( undefined !== backgroundType && '' !== backgroundType ) {
 		if ( 'color' === backgroundType ) {
@@ -109,9 +115,24 @@ function generateBackgroundCSS( backgroundAttributes ) {
 			if ( '' !== backgroundImage && backgroundImage && 'none' === overlayType && backgroundImage?.url ) {
 				bgCSS[ 'background-image' ] = 'url(' + backgroundImage?.url + ');';
 			}
+			bgCSS[ 'background-repeat' ] = backgroundRepeat;
+
+			if ( 'custom' !== customPosition && backgroundPosition?.x && backgroundPosition?.y ) {
+				bgCSS[ 'background-position' ] = `${ backgroundPosition?.x * 100 }% ${ backgroundPosition?.y * 100 }%`;
+			} else if ( 'custom' === customPosition ) {
+				bgCSS[
+					'background-position'
+				] = `${ xPositionValue }${ xPositionTypeValue } ${ yPositionValue }${ yPositionTypeValue }`;
+			}
+
+			bgCSS[ 'background-size' ] = backgroundSizeValue;
+			bgCSS[ 'background-attachment' ] = backgroundAttachment;
+			bgCSS[ 'background-clip' ] = 'padding-box';
+
 		} else if ( 'gradient' === backgroundType ) {
 			if ( '' !== gradient && 'unset' !== gradient ) {
-				bgCSS.background = gradient;
+				bgCSS.background = gradient;	
+				bgCSS[ 'background-clip' ] = 'padding-box';
 			}
 		} else if ( 'video' === backgroundType ) {
 			if (
@@ -126,27 +147,6 @@ function generateBackgroundCSS( backgroundAttributes ) {
 			if ( 'gradient' === overlayType && '' !== backgroundVideo && backgroundVideo && gradient ) {
 				bgCSS[ 'background-image' ] = gradient + ';';
 			}
-		}
-
-		let backgroundSizeValue = backgroundSize;
-
-		if ( 'custom' === backgroundSize ) {
-			backgroundSizeValue = backgroundCustomSize + backgroundCustomSizeType;
-		}
-
-		if ( '' !== backgroundImage ) {
-			bgCSS[ 'background-repeat' ] = backgroundRepeat;
-
-			if ( 'custom' !== customPosition && backgroundPosition?.x && backgroundPosition?.y ) {
-				bgCSS[ 'background-position' ] = `${ backgroundPosition?.x * 100 }% ${ backgroundPosition?.y * 100 }%`;
-			} else if ( 'custom' === customPosition ) {
-				bgCSS[
-					'background-position'
-				] = `${ xPositionValue }${ xPositionTypeValue } ${ yPositionValue }${ yPositionTypeValue }`;
-			}
-
-			bgCSS[ 'background-size' ] = backgroundSizeValue;
-			bgCSS[ 'background-attachment' ] = backgroundAttachment;
 		}
 	}
 
