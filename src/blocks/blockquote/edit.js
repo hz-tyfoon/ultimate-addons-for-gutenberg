@@ -8,6 +8,7 @@ import Settings from './settings';
 import Render from './render';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBBlockQuote = ( props ) => {
 	const {
@@ -57,4 +58,5 @@ const UAGBBlockQuote = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBBlockQuote );

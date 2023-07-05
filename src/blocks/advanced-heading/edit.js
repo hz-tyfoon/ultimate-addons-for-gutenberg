@@ -16,7 +16,7 @@ import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
 
-const UAGBAdvancedHeading = ( props ) => {
+const UAGBAdvancedHeading = ( props ) => {	
 	const {
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },

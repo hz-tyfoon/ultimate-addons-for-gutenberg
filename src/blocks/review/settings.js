@@ -26,6 +26,8 @@ export const removeFromArray = ( arr, removedElems ) =>
 	arr.filter( ( a ) => ( Array.isArray( removedElems ) ? ! removedElems.includes( a ) : a !== removedElems ) );
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -1179,7 +1181,9 @@ const Settings = ( props ) => {
 						{ starSettings() }
 						{ overallPadding() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>
