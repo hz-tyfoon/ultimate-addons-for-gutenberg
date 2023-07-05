@@ -1,4 +1,4 @@
-import { isEmptyObject } from '@Utils/Helpers';
+import { isEmptyObject, GBS_RANDOM_NUMBER } from '@Utils/Helpers';
 import { __ } from '@wordpress/i18n';
 
 export function getLabel( globalBlockStyleId ){
@@ -24,7 +24,8 @@ export function clearCurrentAttributes( currentBlockDefaultAttributes, setAttrib
                     value = false;
                     break;
                 case 'number':
-                    value = 0.001020304;
+                    // GBS_RANDOM_NUMBER is a placeholder kind of value which is used to identify the attribute is a GBS style attribute.
+                    value = GBS_RANDOM_NUMBER;
                     break;
                 case 'object':
                     value = {};
@@ -46,7 +47,7 @@ export function clearNumberAttributes( currentAttributes, setAttributes ){
     const saveAttr = {};
     for ( const attrKey in currentAttributes ) {
         const attrObject = currentAttributes[ attrKey ];
-        if( 0.001020304 === attrObject ){
+        if( GBS_RANDOM_NUMBER === attrObject ){
             saveAttr[ attrKey ] = undefined;
         }
     }
@@ -69,7 +70,7 @@ export function getNewAttributes( style, attributes, currentBlockDefaultAttribut
     const newAttributes = { ...defaultAttributes, ...finalAttributes };
 
     for( const attribute in newAttributes ) {
-        if( 0.001020304 === newAttributes?.[attribute] ){
+        if( GBS_RANDOM_NUMBER === newAttributes?.[attribute] ){
             newAttributes[attribute] = '';
         }
     }

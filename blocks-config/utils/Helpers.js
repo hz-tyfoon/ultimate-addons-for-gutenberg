@@ -46,3 +46,5 @@ export const uagbDeepClone = ( arrayOrObject ) => JSON.parse( JSON.stringify( ar
  * @return {boolean} - The result.
  */
 export const isEmptyObject = ( obj ) => Object.keys( obj ).length === 0 && obj.constructor === Object;
+
+export const GBS_RANDOM_NUMBER = 0.001020304;
