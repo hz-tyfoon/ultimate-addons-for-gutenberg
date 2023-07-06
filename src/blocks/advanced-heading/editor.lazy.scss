@@ -9,3 +9,10 @@
 		cursor: text;
 	}
 }
+
+// These fixes are specific to the Astra theme.
+body[class*="astra"] {
+	.uagb-desc-text {
+		line-height: normal;
+	}
+}
