@@ -12,6 +12,7 @@ import AddStaticStyles from '@Controls/AddStaticStyles';
 import Settings from './settings';
 import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBTeam = ( props ) => {
 	const {
@@ -52,4 +53,5 @@ const UAGBTeam = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBTeam );

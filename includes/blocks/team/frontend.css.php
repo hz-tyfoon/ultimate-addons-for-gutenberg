@@ -61,8 +61,8 @@ $selectors = array(
 		'margin-right' => UAGB_Helper::get_css_value( 0, 'px' ),
 	),
 	'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon' => array(
-		'margin-right' => UAGB_Helper::get_css_value( ( $attr['socialSpace'] / 2 ), 'px' ),
-		'margin-left'  => UAGB_Helper::get_css_value( ( $attr['socialSpace'] / 2 ), 'px' ),
+		'margin-right' => UAGB_Helper::get_css_value( ( $attr['socialSpace'] ? $attr['socialSpace'] / 2 : '' ), 'px' ),
+		'margin-left'  => UAGB_Helper::get_css_value( ( $attr['socialSpace'] ? $attr['socialSpace'] / 2 : '' ), 'px' ),
 	),
 	'.uagb-team__image-position-above.uagb-team__align-left .uagb-team__social-icon' => array(
 		'margin-right' => UAGB_Helper::get_css_value( $attr['socialSpace'], 'px' ),
@@ -178,8 +178,8 @@ $m_selectors = array(
 		'margin-right' => UAGB_Helper::get_css_value( 0, 'px' ),
 	),
 	'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon' => array(
-		'margin-right' => UAGB_Helper::get_css_value( ( $social_space_mobile_fallback / 2 ), 'px' ),
-		'margin-left'  => UAGB_Helper::get_css_value( ( $social_space_mobile_fallback / 2 ), 'px' ),
+		'margin-right' => UAGB_Helper::get_css_value( ( $social_space_mobile_fallback ? $social_space_mobile_fallback / 2 : '' ), 'px' ),
+		'margin-left'  => UAGB_Helper::get_css_value( ( $social_space_mobile_fallback ? $social_space_mobile_fallback / 2 : '' ), 'px' ),
 	),
 	'.uagb-team__image-position-above.uagb-team__align-left .uagb-team__social-icon' => array(
 		'margin-right' => UAGB_Helper::get_css_value( $attr['socialSpaceMobile'], 'px' ),
@@ -235,8 +235,8 @@ $t_selectors = array(
 		'margin-right' => UAGB_Helper::get_css_value( 0, 'px' ),
 	),
 	'.uagb-team__image-position-above.uagb-team__align-center .uagb-team__social-icon' => array(
-		'margin-right' => UAGB_Helper::get_css_value( ( $social_space_tablet_fallback / 2 ), 'px' ),
-		'margin-left'  => UAGB_Helper::get_css_value( ( $social_space_tablet_fallback / 2 ), 'px' ),
+		'margin-right' => UAGB_Helper::get_css_value( ( $social_space_tablet_fallback ? $social_space_tablet_fallback / 2 : '' ), 'px' ),
+		'margin-left'  => UAGB_Helper::get_css_value( ( $social_space_tablet_fallback ? $social_space_tablet_fallback / 2 : '' ), 'px' ),
 	),
 	'.uagb-team__image-position-above.uagb-team__align-left .uagb-team__social-icon' => array(
 		'margin-right' => UAGB_Helper::get_css_value( $attr['socialSpaceTablet'], 'px' ),
@@ -262,4 +262,11 @@ $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'desc', ' p.uagb-t
 
 $base_selector = ( $attr['classMigrate'] ) ? '.uagb-block-' : '#uagb-team-';
 
-return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector . $id );
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	$base_selector . $id,
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	)
+);
