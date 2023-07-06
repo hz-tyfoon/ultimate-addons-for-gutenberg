@@ -43,3 +43,9 @@
 		}
 	}
 }
+
+body[class*="astra"] {
+	.uagb-desc-text {
+		line-height: normal;
+	}
+}
