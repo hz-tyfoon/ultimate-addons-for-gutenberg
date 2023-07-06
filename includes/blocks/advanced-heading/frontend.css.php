@@ -251,7 +251,7 @@ $m_selectors['.wp-block-uagb-advanced-heading .uagb-highlight'] = array_merge(
 
 $m_selectors[ ' p.uagb-desc-text' ] = array(
 	'line-height' => UAGB_Helper::get_css_value(
-		$attr['subHeadLineHeightTablet'],
+		$attr['subHeadLineHeightMobile'],
 		$attr['subHeadLineHeightType']
 	)
 );
