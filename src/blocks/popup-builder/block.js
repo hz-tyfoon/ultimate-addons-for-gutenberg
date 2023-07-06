@@ -42,7 +42,7 @@ if ( 'spectra-popup' === window.typenow ) {
 				<Edit { ...props } />
 			)
 		),
-		save,
+		save: () => null,
 		variations,
 		example: {
 			attributes: {
