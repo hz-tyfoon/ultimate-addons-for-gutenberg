@@ -179,7 +179,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Image - Resolved an issue in which the tablet and mobile border css would not be applied as intended.
 * Fix: Forms - Reworked the e-mail sending functionality to ensure that only one e-mail is sent when CC and BCC addresses are specified.
 * Fix: Icon - Resolved an issue in which the icon's background and border color on hover would not work as intended.
-* Fix: Advance Heading - Resolved an issue in which line-height is not same as editor when astra theme is activated.
+* Fix: Heading - Resolved an issue in which the line-height would be applied incorrectly in the editor when using the Astra theme.
 
 ### 2.6.9 - TUESDAY, 27th June 2023 ###
 * Improvement: Post Grid - Added the option for normal pagination to disable Ajax-based pagination.
