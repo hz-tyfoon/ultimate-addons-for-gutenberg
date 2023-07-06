@@ -106,6 +106,12 @@ $selectors = array(
 	'.wp-block-uagb-advanced-heading .uagb-highlight:hover' => array(
 		'border-color' => $attr['highLightBorderHColor'],
 	),
+	' p.uagb-desc-text'  => array(
+		'line-height' => UAGB_Helper::get_css_value(
+			$attr['subHeadLineHeight'],
+			$attr['subHeadLineHeightType']
+		)
+	)
 );
 
 $heading_text_shadow_color = ( ! empty( $attr['headShadowColor'] ) ? UAGB_Helper::get_css_value( $attr['headShadowHOffset'], 'px' ) . ' ' . UAGB_Helper::get_css_value( $attr['headShadowVOffset'], 'px' ) . ' ' . UAGB_Helper::get_css_value( $attr['headShadowBlur'], 'px' ) . ' ' . $attr['headShadowColor'] : '' );
@@ -205,6 +211,13 @@ $t_selectors['.wp-block-uagb-advanced-heading '] = array(
 	'margin-left'    => UAGB_Helper::get_css_value( $attr['blockLeftMarginTablet'], $attr['blockMarginUnitTablet'] ),
 );
 
+$t_selectors[ ' p.uagb-desc-text' ] = array(
+	'line-height' => UAGB_Helper::get_css_value(
+		$attr['subHeadLineHeightTablet'],
+		$attr['subHeadLineHeightType']
+	)
+);
+
 $t_selectors['.wp-block-uagb-advanced-heading .uagb-highlight'] = array_merge(
 	array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['highLightTopPaddingTablet'], $attr['highLightPaddingUnitTablet'] ),
@@ -234,6 +247,13 @@ $m_selectors['.wp-block-uagb-advanced-heading .uagb-highlight'] = array_merge(
 		'padding-left'   => UAGB_Helper::get_css_value( $attr['highLightLeftPaddingMobile'], $attr['highLightPaddingUnitMobile'] ),
 	),
 	$highLight_border_css_mobile
+);
+
+$m_selectors[ ' p.uagb-desc-text' ] = array(
+	'line-height' => UAGB_Helper::get_css_value(
+		$attr['subHeadLineHeightTablet'],
+		$attr['subHeadLineHeightType']
+	)
 );
 
 $t_selectors['.wp-block-uagb-advanced-heading .uagb-desc-text'] = array(
