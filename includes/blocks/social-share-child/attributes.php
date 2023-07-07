@@ -16,4 +16,7 @@ return array(
 	'icon_hover_color'    => '',
 	'icon_bg_color'       => '',
 	'icon_bg_hover_color' => '',
+	// For Global Block Styles.
+	'globalBlockStyleName'         => '',
+	'globalBlockStyleId'           => '',
 );

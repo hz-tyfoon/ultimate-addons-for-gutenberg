@@ -15,6 +15,8 @@ import UAGTabsControl from '@Components/tabs';
 import UAGMediaPicker from '@Components/image';
 import { memo } from '@wordpress/element';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -318,7 +320,9 @@ const Settings = ( props ) => {
 			<InspectorTabs>
 				<InspectorTab { ...UAGTabs.general }>{ generalSettings() }</InspectorTab>
 				<InspectorTab { ...UAGTabs.style }>{ iconColorSettings() }</InspectorTab>
-				<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+				<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+					{ renderGBSSettings( styling, setAttributes, attributes ) }
+				</InspectorTab>
 			</InspectorTabs>
 		</InspectorControls>
 	);

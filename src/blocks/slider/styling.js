@@ -9,7 +9,7 @@ import generateBorderCSS from '@Controls/generateBorderCSS';
 import { applyFilters } from '@wordpress/hooks';
 import generateShadowCSS from '@Controls/generateShadowCSS';
 
-function styling( attributes, clientId ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	let {
 		backgroundType,
 		backgroundImageDesktop,
@@ -417,7 +417,7 @@ function styling( attributes, clientId ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper #block-${ clientId }`;
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper #block-${ clientId }`;
 
 	selectors = applyFilters( `spectra.slider.styling`, selectors, attributes );
 	tablet_selectors = applyFilters( `spectra.slider.tabletStyling`, tablet_selectors, attributes );

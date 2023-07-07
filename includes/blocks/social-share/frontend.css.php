@@ -74,16 +74,16 @@ $selectors['.uagb-social-share__layout-horizontal .uagb-ss__link']      = array(
 	'padding' => UAGB_Helper::get_css_value( $attr['bgSize'], 'px' ),
 );
 $selectors['.uagb-social-share__layout-horizontal .uagb-ss__wrapper']   = array(
-	'margin-left'  => UAGB_Helper::get_css_value( ( $attr['gap'] / 2 ), 'px' ),
-	'margin-right' => UAGB_Helper::get_css_value( ( $attr['gap'] / 2 ), 'px' ),
+	'margin-left'  => UAGB_Helper::get_css_value( ( is_numeric( $attr['gap'] ) ? $attr['gap'] / 2 : '' ), 'px' ),
+	'margin-right' => UAGB_Helper::get_css_value( ( is_numeric( $attr['gap'] ) ? $attr['gap'] / 2 : '' ), 'px' ),
 );
 $m_selectors['.uagb-social-share__layout-horizontal .uagb-ss__wrapper'] = array(
-	'margin-left'  => UAGB_Helper::get_css_value( ( $gap_mobile_fallback / 2 ), 'px' ),
-	'margin-right' => UAGB_Helper::get_css_value( ( $gap_mobile_fallback / 2 ), 'px' ),
+	'margin-left'  => UAGB_Helper::get_css_value( ( is_numeric( $gap_mobile_fallback ) ? $gap_mobile_fallback / 2 : '' ), 'px' ),
+	'margin-right' => UAGB_Helper::get_css_value( ( is_numeric( $gap_mobile_fallback ) ? $gap_mobile_fallback / 2 : '' ), 'px' ),
 );
 $t_selectors['.uagb-social-share__layout-horizontal .uagb-ss__wrapper'] = array(
-	'margin-left'  => UAGB_Helper::get_css_value( ( $gap_tablet_fallback / 2 ), 'px' ),
-	'margin-right' => UAGB_Helper::get_css_value( ( $gap_tablet_fallback / 2 ), 'px' ),
+	'margin-left'  => UAGB_Helper::get_css_value( ( is_numeric( $gap_tablet_fallback ) ? $gap_tablet_fallback / 2 : '' ), 'px' ),
+	'margin-right' => UAGB_Helper::get_css_value( ( is_numeric( $gap_tablet_fallback ) ? $gap_tablet_fallback / 2 : '' ), 'px' ),
 );
 
 $selectors[' .wp-block-uagb-social-share-child ']   = array(
@@ -318,4 +318,11 @@ $combined_selectors = array(
 
 $base_selector = ( $attr['classMigrate'] ) ? '.uagb-block-' : '#uagb-social-share-';
 
-return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector . $id );
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	$base_selector . $id,
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	)
+);

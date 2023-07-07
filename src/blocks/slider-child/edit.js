@@ -10,6 +10,7 @@ import AddStaticStyles from '@Controls/AddStaticStyles';
 import { withSelect, useDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBSlide = ( props ) => {
 	const { isSelected, setAttributes, attributes, deviceType, clientId, name } = props;
@@ -56,4 +57,5 @@ const applyWithSelect = withSelect( ( select, props ) => {
 export default compose(
 	applyWithSelect,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBSlide );

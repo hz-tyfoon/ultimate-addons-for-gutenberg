@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( attributes, clientId ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	let {
 		backgroundType,
 		backgroundImageDesktop,
@@ -248,7 +248,7 @@ function styling( attributes, clientId ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper #block-${ clientId }`;
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper #block-${ clientId }`;
 
 	let styling_css = generateCSS( selectors, base_selector );
 

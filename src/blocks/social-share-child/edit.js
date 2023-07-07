@@ -13,6 +13,8 @@ import Render from './render';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+
 const SocialShareChildComponent = ( props ) => {
 	const { isSelected, setAttributes, attributes, clientId, name, deviceType } = props;
 
@@ -46,4 +48,5 @@ const SocialShareChildComponent = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( SocialShareChildComponent );

@@ -21,6 +21,8 @@ import { boxShadowPresets, boxShadowHoverPresets } from './presets';
 import UAGPresets from '@Components/presets';
 import { createBlock } from '@wordpress/blocks';
 import { applyFilters } from '@wordpress/hooks';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -1071,7 +1073,9 @@ const Settings = ( props ) => {
 						{ ( displayArrows || displayDots ) && navigationSettings() }
 						{ afterNavigationStyleOptions }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

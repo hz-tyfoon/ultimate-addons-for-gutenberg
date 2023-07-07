@@ -12,6 +12,8 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+
 const SocialShareComponent = ( props ) => {
 	const {
 		isSelected,
@@ -62,4 +64,5 @@ const SocialShareComponent = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( SocialShareComponent );

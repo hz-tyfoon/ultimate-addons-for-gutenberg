@@ -16,6 +16,7 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { addFilter } from '@wordpress/hooks';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBSlider = ( props ) => {
 	const {
@@ -75,6 +76,7 @@ const applyWithSelect = withSelect( ( select, props ) => {
 export default compose(
 	applyWithSelect,
 	AddStaticStyles,
+	AddGBSStyles
 )( UAGBSlider );
 
 const uagbSlideClass = createHigherOrderComponent( ( BlockListBlock ) => {

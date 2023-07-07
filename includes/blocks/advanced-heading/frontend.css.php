@@ -293,5 +293,5 @@ return UAGB_Helper::generate_all_css(
 	array(
 		'globalBlockStyleName' => $attr['globalBlockStyleName'],
 		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
-	) 
+	)
 );

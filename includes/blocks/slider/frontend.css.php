@@ -338,4 +338,11 @@ $combined_selectors = UAGB_Helper::get_combined_selectors(
 	$attr
 );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, '.uagb-slider-container' );
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	'.uagb-slider-container',
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	)
+);

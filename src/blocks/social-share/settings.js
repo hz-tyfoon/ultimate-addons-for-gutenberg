@@ -17,6 +17,9 @@ import AdvancedPopColorControl from '@Components/color-control/advanced-pop-colo
 import presets from './presets';
 import UAGPresets from '@Components/presets';
 import { memo } from '@wordpress/element';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
+
 const Settings = ( props ) => {
 	props = props.parentProps;
 
@@ -321,7 +324,9 @@ const Settings = ( props ) => {
 					{ iconSettings() }
 					{ spacingSettings() }
 				</InspectorTab>
-				<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+				<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+					{ renderGBSSettings( styling, setAttributes, attributes ) }
+				</InspectorTab>
 			</InspectorTabs>
 		</InspectorControls>
 	);

@@ -32,12 +32,14 @@ const attributes = {
 	icon_color: {
 		type: 'string',
 		default: '',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'icon-color',
 		},
 	},
 	icon_hover_color: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'icon-hover-color',
 		},
@@ -45,6 +47,7 @@ const attributes = {
 	},
 	icon_bg_color: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'icon-bg-color',
 		},
@@ -52,6 +55,7 @@ const attributes = {
 	},
 	icon_bg_hover_color: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'icon-bg-hover-color',
 		},

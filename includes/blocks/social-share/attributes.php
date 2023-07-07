@@ -46,4 +46,7 @@ return array(
 	'iconHoverColor'     => '',
 	'iconBgColor'        => '',
 	'iconBgHoverColor'   => '',
+	// For Global Block Styles.
+	'globalBlockStyleName'         => '',
+	'globalBlockStyleId'           => '',
 );

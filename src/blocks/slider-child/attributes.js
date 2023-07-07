@@ -12,18 +12,21 @@ const attributes = {
 	},
 	backgroundImageDesktop: {
 		type: 'object',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-image-desktop',
 		},
 	},
 	backgroundImageTablet: {
 		type: 'object',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-image-tablet',
 		},
 	},
 	backgroundImageMobile: {
 		type: 'object',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-image-mobile',
 		},
@@ -34,18 +37,21 @@ const attributes = {
 			x: 0.5,
 			y: 0.5,
 		},
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-position-desktop',
 		},
 	},
 	backgroundPositionTablet: {
 		type: 'object',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-position-tablet',
 		},
 	},
 	backgroundPositionMobile: {
 		type: 'object',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-position-mobile',
 		},
@@ -53,18 +59,21 @@ const attributes = {
 	backgroundSizeDesktop: {
 		type: 'string',
 		default: 'cover',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-size-desktop',
 		},
 	},
 	backgroundSizeTablet: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-size-tablet',
 		},
 	},
 	backgroundSizeMobile: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-size-mobile',
 		},
@@ -72,18 +81,21 @@ const attributes = {
 	backgroundRepeatDesktop: {
 		type: 'string',
 		default: 'no-repeat',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-repeat-desktop',
 		},
 	},
 	backgroundRepeatTablet: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-repeat-tablet',
 		},
 	},
 	backgroundRepeatMobile: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-repeat-mobile',
 		},
@@ -91,36 +103,42 @@ const attributes = {
 	backgroundAttachmentDesktop: {
 		type: 'string',
 		default: 'scroll',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-attachment-desktop',
 		},
 	},
 	backgroundAttachmentTablet: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-attachment-tablet',
 		},
 	},
 	backgroundAttachmentMobile: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-attachment-mobile',
 		},
 	},
 	backgroundColor: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-color',
 		},
 	},
 	backgroundOpacity: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-opacity',
 		},
 	},
 	backgroundImageColor: {
 		type: 'string',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-image-color',
 		},
@@ -129,12 +147,14 @@ const attributes = {
 	gradientValue: {
 		type: 'string',
 		default: 'linear-gradient(90deg, rgba(6, 147, 227, 0.5) 0%, rgba(155, 81, 224, 0.5) 100%)',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bg-gradient-value',
 		},
 	},
 	topPaddingDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-top-padding-desktop',
 		},
@@ -142,6 +162,7 @@ const attributes = {
 	},
 	bottomPaddingDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bottom-padding-desktop',
 		},
@@ -149,6 +170,7 @@ const attributes = {
 	},
 	leftPaddingDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-left-padding-desktop',
 		},
@@ -156,6 +178,7 @@ const attributes = {
 	},
 	rightPaddingDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-right-padding-desktop',
 		},
@@ -163,6 +186,7 @@ const attributes = {
 	},
 	topPaddingTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-top-padding-tablet',
 		},
@@ -170,6 +194,7 @@ const attributes = {
 	},
 	bottomPaddingTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bottom-padding-tablet',
 		},
@@ -177,6 +202,7 @@ const attributes = {
 	},
 	leftPaddingTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-left-padding-tablet',
 		},
@@ -184,6 +210,7 @@ const attributes = {
 	},
 	rightPaddingTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-right-padding-tablet',
 		},
@@ -191,6 +218,7 @@ const attributes = {
 	},
 	topPaddingMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-top-padding-mobile',
 		},
@@ -198,6 +226,7 @@ const attributes = {
 	},
 	bottomPaddingMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bottom-padding-mobile',
 		},
@@ -205,6 +234,7 @@ const attributes = {
 	},
 	leftPaddingMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-left-padding-mobile',
 		},
@@ -212,6 +242,7 @@ const attributes = {
 	},
 	rightPaddingMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-right-padding-mobile',
 		},
@@ -244,72 +275,84 @@ const attributes = {
 	},
 	topMarginDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-top-margin-desktop',
 		},
 	},
 	bottomMarginDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bottom-margin-desktop',
 		},
 	},
 	leftMarginDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-left-margin-desktop',
 		},
 	},
 	rightMarginDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-right-margin-desktop',
 		},
 	},
 	topMarginTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-top-margin-tablet',
 		},
 	},
 	bottomMarginTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bottom-margin-tablet',
 		},
 	},
 	leftMarginTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-left-margin-tablet',
 		},
 	},
 	rightMarginTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-right-margin-tablet',
 		},
 	},
 	topMarginMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-top-margin-mobile',
 		},
 	},
 	bottomMarginMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-bottom-margin-mobile',
 		},
 	},
 	leftMarginMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-left-margin-mobile',
 		},
 	},
 	rightMarginMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'slider-right-margin-mobile',
 		},
@@ -345,6 +388,7 @@ const attributes = {
 	},
 	backgroundCustomSizeDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-custom-size-desktop',
 		},
@@ -352,12 +396,14 @@ const attributes = {
 	},
 	backgroundCustomSizeTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-custom-size-tablet',
 		},
 	},
 	backgroundCustomSizeMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-custom-size-mobile',
 		},
@@ -380,12 +426,14 @@ const attributes = {
 	customPosition: {
 		type: 'string',
 		default: 'default',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-image-position-type',
 		},
 	},
 	xPositionDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-image-x-position-desktop',
 		},
@@ -393,12 +441,14 @@ const attributes = {
 	},
 	xPositionTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-image-x-position-tablet',
 		},
 	},
 	xPositionMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-image-x-position-mobile',
 		},
@@ -418,6 +468,7 @@ const attributes = {
 
 	yPositionDesktop: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-image-y-position-desktop',
 		},
@@ -425,12 +476,14 @@ const attributes = {
 	},
 	yPositionTablet: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-image-y-position-tablet',
 		},
 	},
 	yPositionMobile: {
 		type: 'number',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'background-image-y-position-mobile',
 		},
@@ -450,6 +503,7 @@ const attributes = {
 	gradientColor1: {
 		type: 'string',
 		default: '#06558a',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'gradient-color-1',
 		},
@@ -457,6 +511,7 @@ const attributes = {
 	gradientColor2: {
 		type: 'string',
 		default: '#0063A1',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'gradient-color-2',
 		},
@@ -471,6 +526,7 @@ const attributes = {
 	selectGradient: {
 		type: 'string',
 		default: 'basic',
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'gradient-type',
 		},
@@ -478,6 +534,7 @@ const attributes = {
 	gradientLocation1: {
 		type: 'number',
 		default: 0,
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'gradient-location-1',
 		},
@@ -485,6 +542,7 @@ const attributes = {
 	gradientLocation2: {
 		type: 'number',
 		default: 100,
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'gradient-location-2',
 		},
@@ -492,6 +550,7 @@ const attributes = {
 	gradientAngle: {
 		type: 'number',
 		default: 0,
+		isGBSStyle : true,
 		UAGCopyPaste: {
 			styleType: 'gradient-angle',
 		},
