@@ -41,6 +41,10 @@ const ButtonsComponent = ( props ) => {
 		setAttributes( { classMigrate: true } );
 		setAttributes( { childMigrate: true } );
 
+		if ( props.attributes.align ) {
+			setAttributes( { alignment: props.attributes.align } );
+		}
+
 		prevState = props.isSelected;
 	}, [] );
 
@@ -53,16 +57,6 @@ const ButtonsComponent = ( props ) => {
 		}
 		prevState = props.isSelected;
 	}, [ attributes, deviceType ] );
-
-	console.log('true', props.attributes.align);
-
-	useEffect( () => {
-		if ( props.attributes.align === 'center' ) {
-			setAttributes( { alignment: 'center' } );
-			console.log('true', props.attributes.align);
-		  }
-		  console.log('true', attributes.align);
-	  }, [] );
 
 	useEffect( () => {
 		scrollBlockToView();
