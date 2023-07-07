@@ -23,7 +23,7 @@ const attributes = {
 	block_id: {
 		type: 'string',
 	},
-	align: {
+	alignment: {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {

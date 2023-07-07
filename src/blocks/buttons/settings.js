@@ -117,22 +117,22 @@ const Settings = ( props ) => {
 
 	const alignmentControls = [
 		{
-			alignment: 'left',
+			align: 'left',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
 			title: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
-			alignment: 'center',
+			align: 'center',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
 			title: __( 'Center', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
-			alignment: 'right',
+			align: 'right',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
 			title: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
-			alignment: 'full',
+			align: 'full',
 			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
 			title: __( 'Full', 'ultimate-addons-for-gutenberg' ),
 		},
@@ -143,7 +143,7 @@ const Settings = ( props ) => {
 			<AlignmentToolbar
 				value={ alignment }
 				onChange={ ( value ) => {
-					setAttributes( { alignment: value } );
+					setAttributes( { align: value } );
 				} }
 				alignmentControls={ alignmentControls }
 			/>

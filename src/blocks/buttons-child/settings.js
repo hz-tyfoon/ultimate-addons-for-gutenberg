@@ -186,7 +186,7 @@ const Settings = ( props ) => {
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
-				value={ parentBlockAttributes.align }
+				value={ parentBlockAttributes.alignment }
 				onChange={ ( value ) => {
 					updateParentAlignment( value );
 				} }

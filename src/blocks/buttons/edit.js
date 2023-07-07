@@ -54,12 +54,12 @@ const ButtonsComponent = ( props ) => {
 		prevState = props.isSelected;
 	}, [ attributes, deviceType ] );
 
-	console.log('true', attributes);
+	console.log('true', props.attributes.align);
 
 	useEffect( () => {
-		if ( attributes?.align === 'center' ) {
+		if ( props.attributes.align === 'center' ) {
 			setAttributes( { alignment: 'center' } );
-			console.log('true', attributes.align);
+			console.log('true', props.attributes.align);
 		  }
 		  console.log('true', attributes.align);
 	  }, [] );

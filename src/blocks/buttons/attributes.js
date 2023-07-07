@@ -40,7 +40,7 @@ const attributes = {
 	},
 	classMigrate: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
 	childMigrate: {
 		type: 'boolean',
