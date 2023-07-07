@@ -54,6 +54,16 @@ const ButtonsComponent = ( props ) => {
 		prevState = props.isSelected;
 	}, [ attributes, deviceType ] );
 
+	console.log('true', attributes);
+
+	useEffect( () => {
+		if ( attributes?.align === 'center' ) {
+			setAttributes( { alignment: 'center' } );
+			console.log('true', attributes.align);
+		  }
+		  console.log('true', attributes.align);
+	  }, [] );
+
 	useEffect( () => {
 		scrollBlockToView();
 	}, [ deviceType ] );

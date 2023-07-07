@@ -40,27 +40,27 @@ const attributes = {
 	},
 	classMigrate: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
 	childMigrate: {
 		type: 'boolean',
 		default: false,
 	},
-	align: {
+	alignment: {
 		type: 'string',
 		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
 	},
-	alignTablet: {
+	alignmentTablet: {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align-tablet',
 		},
 	},
-	alignMobile: {
+	alignmentMobile: {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {
