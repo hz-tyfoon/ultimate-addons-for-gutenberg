@@ -150,7 +150,7 @@ const Settings = ( props ) => {
 	const immediateParentClientId = parentClientIds.at( -1 );
 	const parentBlockAttributes = select( 'core/block-editor' ).getBlockAttributes( immediateParentClientId );
 
-	const updateParentAlignment = ( align ) => updateBlockAttributes( immediateParentClientId, { align } );
+	const updateParentAlignment = ( alignment ) => updateBlockAttributes( immediateParentClientId, { alignment } );
 
 	const presetSettings = () => {
 		return (
