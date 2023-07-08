@@ -228,4 +228,11 @@ $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'title', '.uagb-la
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'count', '.uagb-layout-grid .uagb-tax-link', $combined_selectors );
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'list', '.uagb-layout-list .uagb-tax-list', $combined_selectors );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, '.uagb-block-' . $id );
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	'.uagb-block-' . $id,
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	)
+);

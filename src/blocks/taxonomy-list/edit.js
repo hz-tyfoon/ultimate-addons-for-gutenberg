@@ -14,6 +14,8 @@ import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+
 const UAGBTaxonomyList = ( props ) => {
 	const {
 		isSelected,
@@ -163,4 +165,5 @@ const UAGBTaxonomyList = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBTaxonomyList );

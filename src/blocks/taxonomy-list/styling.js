@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
@@ -442,7 +442,7 @@ function styling( attributes, clientId, name ) {
 	};
 
 	let stylingCss = '';
-	const id = `.uagb-block-${ block_id }`;
+	const id = gbsSelector ? gbsSelector + ' ' : `.uagb-block-${ block_id }`;
 
 	stylingCss = generateCSS( selectors, id );
 

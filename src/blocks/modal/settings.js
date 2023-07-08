@@ -20,6 +20,8 @@ import ResponsiveBorder from '@Components/responsive-border';
 import Background from '@Components/background';
 import { buttonsPresets } from './presets';
 import UAGPresets from '@Components/presets';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 let imageSizeOptions = [
 	{
@@ -1468,7 +1470,9 @@ export default function Settings( props ) {
 						{ '' !== closeIcon && closeStylePanel }
 						{ backgroundSettings }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

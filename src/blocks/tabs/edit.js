@@ -12,6 +12,7 @@ import { compose } from '@wordpress/compose';
 import { withDispatch, dispatch, select } from '@wordpress/data';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBTabsEdit = ( props ) => {
 	const {
@@ -134,4 +135,5 @@ export default compose(
 		};
 	} ),
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBTabsEdit );

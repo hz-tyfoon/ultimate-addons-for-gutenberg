@@ -621,4 +621,11 @@ $combined_selectors = array(
 );
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'title', '  .uagb-tabs__panel .uagb-tab a', $combined_selectors );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, '.uagb-block-' . $id );
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	'.uagb-block-' . $id,
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	)
+);

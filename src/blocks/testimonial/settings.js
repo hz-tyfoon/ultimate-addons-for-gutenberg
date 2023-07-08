@@ -19,6 +19,8 @@ import { uagbDeepClone } from '@Utils/Helpers';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { memo } from '@wordpress/element';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import TestimonialStyle from './inline-styles';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -1340,7 +1342,9 @@ const Settings = ( props ) => {
 						{ borderSetting() }
 						{ spacingSettings() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( TestimonialStyle, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		);

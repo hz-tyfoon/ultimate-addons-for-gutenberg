@@ -189,6 +189,9 @@ return array_merge(
 		'setCookiesOn'                => 'close-action',
 		'modalTriggerBgType'          => 'color',
 		'modalTriggerBgHoverType'     => 'color',
+		// For Global Block Styles.
+		'globalBlockStyleName'         => '',
+		'globalBlockStyleId'           => '',
 	),
 	$btn_border_attributes,
 	array(
@@ -204,5 +207,5 @@ return array_merge(
 		'contentBorderBottomLeftRadius'  => 3,
 		'contentBorderBottomRightRadius' => 3,
 	),
-	$additional_attributes
+	$additional_attributes,
 );

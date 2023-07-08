@@ -24,6 +24,9 @@ import UAGPresets from '@Components/presets';
 import UAGTextControl from '@Components/text-control';
 
 import apiFetch from '@wordpress/api-fetch';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
+
 const Settings = ( props ) => {
 	const { taxonomyList, termsList } = props;
 	props = props.parentProps;
@@ -1106,7 +1109,9 @@ const Settings = ( props ) => {
 						</p>
 					) }
 				</InspectorTab>
-				<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+				<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+					{ renderGBSSettings( styling, setAttributes, attributes ) }
+				</InspectorTab>
 			</InspectorTabs>
 		</InspectorControls>
 	);

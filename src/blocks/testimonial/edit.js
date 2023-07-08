@@ -14,6 +14,7 @@ import DynamicCSSLoader from '../../components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import { compose } from '@wordpress/compose';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBtestimonial = ( props ) => {
 	const {
@@ -136,4 +137,5 @@ const UAGBtestimonial = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBtestimonial );
