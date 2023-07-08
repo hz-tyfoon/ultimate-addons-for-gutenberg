@@ -321,24 +321,25 @@ $combined_selectors = UAGB_Helper::get_typography_css( $attr, '', ' .uagb-toc__l
 
 $base_selector = ( $attr['classMigrate'] ) ? '.uagb-block-' : '#uagb-toc-';
 
-$desktop = UAGB_Helper::generate_css( $combined_selectors['desktop'], $base_selector . $id );
+$generated_css = UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	$base_selector . $id,
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	) 
+);
 
-$tablet = UAGB_Helper::generate_css( $combined_selectors['tablet'], $base_selector . $id );
-
-$mobile = UAGB_Helper::generate_css( $combined_selectors['mobile'], $base_selector . $id );
+$desktop_extra_css = '';
 
 if ( '' !== $attr['scrollToTopColor'] ) {
-	$desktop .= '.uagb-toc__scroll-top { color: ' . $attr['scrollToTopColor'] . '; }';
+	$desktop_extra_css .= '.uagb-toc__scroll-top { color: ' . $attr['scrollToTopColor'] . '; }';
 }
 
 if ( '' !== $attr['scrollToTopBgColor'] ) {
-	$desktop .= '.uagb-toc__scroll-top.uagb-toc__show-scroll { background: ' . $attr['scrollToTopBgColor'] . '; }';
+	$desktop_extra_css .= '.uagb-toc__scroll-top.uagb-toc__show-scroll { background: ' . $attr['scrollToTopBgColor'] . '; }';
 }
 
-$generated_css = array(
-	'desktop' => $desktop,
-	'tablet'  => $tablet,
-	'mobile'  => $mobile,
-);
+$generated_css[ 'desktop' ] =  $generated_css[ 'desktop' ] . $desktop_extra_css;
 
 return $generated_css;

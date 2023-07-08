@@ -14,6 +14,7 @@ import AddStaticStyles from '@Controls/AddStaticStyles';
 import Settings from './settings';
 import Render from './render';
 import { useSelect } from '@wordpress/data';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBTableOfContentsEdit = ( props ) => {
 	const {
@@ -227,4 +228,5 @@ const UAGBTableOfContentsEdit = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBTableOfContentsEdit );
