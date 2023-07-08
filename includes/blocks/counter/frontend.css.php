@@ -410,4 +410,11 @@ $combined_selectors = array(
 
 $base_selector = '.uagb-block-';
 
-return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector . $id );
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	$base_selector . $id,
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	)
+);

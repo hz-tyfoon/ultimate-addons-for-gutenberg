@@ -25,6 +25,8 @@ import { getImageSize } from '@Utils/Helpers';
 import UAGPresets from '@Components/presets';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import defaultAttributes from './attributes';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 let imageSizeOptions = [
 	{
@@ -1696,7 +1698,9 @@ export default function Settings( props ) {
 						{ /* We will be releasing the box-shadow feature later due to some technical challenges with circle layout*/ }
 						{ /* {layout !== 'number' && boxShadowSettings} */ }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

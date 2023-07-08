@@ -9,6 +9,7 @@ import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 //  Import CSS.
 import './style.scss';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBCounterEdit = ( props ) => {
 	const {
@@ -44,4 +45,5 @@ const UAGBCounterEdit = ( props ) => {
 
 export default compose(
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBCounterEdit );

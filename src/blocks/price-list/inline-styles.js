@@ -6,7 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function RestMenuStyle( attributes, clientId, name ) {
+function RestMenuStyle( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const {
 		headingAlign,
 		priceColor,
@@ -390,7 +390,7 @@ function RestMenuStyle( attributes, clientId, name ) {
 	}
 
 	let stylingCss = '';
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	stylingCss = generateCSS( selectors, id );
 

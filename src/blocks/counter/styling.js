@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-export default function styling( attributes, clientId, name ) {
+export default function styling( attributes, clientId, name, deviceType, gbsSelector = false  ) {
 	const {
 		align,
 		alignTablet,
@@ -397,7 +397,7 @@ export default function styling( attributes, clientId, name ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	const tablet_selectors = {};
 	const mobile_selectors = {};

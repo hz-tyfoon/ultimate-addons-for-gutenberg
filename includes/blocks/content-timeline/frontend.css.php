@@ -367,4 +367,11 @@ $selectors = array(
 	$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'date', ' .uagb-timeline__date-hide.uagb-timeline__inner-date-new', $combined_selectors );
 	$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'date', ' .uagb-timeline__date-hide.uagb-timeline__date-inner', $combined_selectors );
 	$combined_selectors = UAGB_Helper::get_typography_css( $attr, 'subHead', ' .uagb-timeline-desc-content', $combined_selectors );
-	return UAGB_Helper::generate_all_css( $combined_selectors, $base_selector . $id . '.uagb-timeline__outer-wrap' );
+	return UAGB_Helper::generate_all_css( 
+		$combined_selectors,
+		$base_selector . $id . '.uagb-timeline__outer-wrap',
+		array(
+			'globalBlockStyleName' => $attr['globalBlockStyleName'],
+			'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+		)
+	);

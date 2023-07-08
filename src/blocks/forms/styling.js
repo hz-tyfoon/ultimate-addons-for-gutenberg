@@ -8,7 +8,7 @@ import getAttributeFallback, { getFallbackNumber } from '@Controls/getAttributeF
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
@@ -950,7 +950,8 @@ function styling( attributes, clientId, name ) {
 	}
 
 	let stylingCss = '';
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	
 	stylingCss = generateCSS( selectors, base_selector );
 
 	stylingCss += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );

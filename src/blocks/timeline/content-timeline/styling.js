@@ -6,7 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function contentTimelineStyle( attributes, clientId, name ) {
+function contentTimelineStyle( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
 
 	const {
@@ -605,7 +605,7 @@ function contentTimelineStyle( attributes, clientId, name ) {
 	};
 
 	let stylingCss = '';
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }.uagb-timeline__outer-wrap`;
+	const id = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }.uagb-timeline__outer-wrap`;
 
 	stylingCss = generateCSS( selectors, id );
 

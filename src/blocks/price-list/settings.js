@@ -21,6 +21,8 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { Icon, ToggleControl } from '@wordpress/components';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import RestMenuStyle from './inline-styles';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -1156,7 +1158,9 @@ const Settings = ( props ) => {
 						{ priceSettings() }
 						{ marginSettings() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( RestMenuStyle, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		);

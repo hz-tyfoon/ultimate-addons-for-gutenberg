@@ -22,6 +22,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import { uagbClassNames } from '@Utils/Helpers';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBFormsEdit = ( props ) => {
 	const {
@@ -351,4 +352,5 @@ export default compose(
 	withNotices,
 	addAdvancedClasses,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBFormsEdit );
