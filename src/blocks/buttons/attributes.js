@@ -61,14 +61,14 @@ const attributes = {
 	},
 	alignmentTablet: {
 		type: 'string',
-		default: 'center',
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align-tablet',
 		},
 	},
 	alignmentMobile: {
 		type: 'string',
-		default: 'center',
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align-mobile',
 		},
