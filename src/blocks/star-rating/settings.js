@@ -14,6 +14,8 @@ import SpacingControl from '@Components/spacing-control';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { useDeviceType } from '@Controls/getPreviewType';
 import { memo } from '@wordpress/element';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 	props = props.parentProps;
@@ -594,7 +596,9 @@ const Settings = ( props ) => {
 						{ displayTitle && '' !== title && titleStyling }
 						{ spacingStylePanel }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

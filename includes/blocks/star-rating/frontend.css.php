@@ -309,4 +309,11 @@ $combined_selectors = array(
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, '', ' .uag-star-rating__title', $combined_selectors );
 
 
-return UAGB_Helper::generate_all_css( $combined_selectors, ' .uagb-block-' . substr( $attr['block_id'], 0, 8 ) );
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	' .uagb-block-' . substr( $attr['block_id'], 0, 8 ),
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	)
+);

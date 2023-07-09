@@ -84,4 +84,7 @@ return array(
 	'starPosition'             => 'after',
 	'starPositionTablet'       => 'after',
 	'starPositionMobile'       => 'after',
+	// For Global Block Styles.
+	'globalBlockStyleName'         => '',
+	'globalBlockStyleId'           => '',
 );
