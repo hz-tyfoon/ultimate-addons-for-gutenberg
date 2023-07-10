@@ -583,6 +583,7 @@ class UAGB_Post_Assets {
 		);
 
 		do_action( 'spectra_localize_pro_block_ajax' );
+		do_action( 'spectra_localize_block_js' );
 
 	}
 
