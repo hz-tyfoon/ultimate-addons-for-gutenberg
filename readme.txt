@@ -5,7 +5,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 5.6
 Tested up to: 6.2.2
-Stable tag: 2.6.5
+Stable tag: 2.6.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,28 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 = x.x.x =
 * New: Motion Effects - Some smooth, scroll and mouse track based animations to add new life to your page.
+
+= 2.6.9 - TUESDAY, 27th June 2023 =
+* Improvement: Post Grid - Added the option for normal pagination to disable Ajax-based pagination.
+* Fix: Info Box - Removed the line-height inherit CSS to resolve an issue with extra spacing in the editor.
+* Fix: Info Box - Resolved an issue in which the bottom margin for the title would not work as intended on the frontend.
+* Fix: Forms - Resolved an issue in which the overall alignment would not work as intended when three forms are placed with different alignments.
+* Fix: Popup Builder - Resolved an edge case issue with Astra global page layout.
+* Fix: Testimonial - Resolved an issue in which the arrows would overlap the content on mobile devices.
+
+= 2.6.8 - WEDNESDAY, 21st JUNE 2023 =
+* Fix: Buttons - Resolved an issue in which the background color would appear transparent after installing the WooCommerce plugin.
+* Fix: Call To Action - Resolved an issue wherein an extra margin would appear above the heading of the Call To Action block in the Spectra One theme.
+* Fix: Form - Resolved an issue in which the submit button would appear differently on the frontend when no preset from the variation picker was selected.
+* Fix: Popup Builder - Resolved a conflict with Elementor that prevented users from opening a page in the Elementor page builder.
+
+= 2.6.7 - WEDNESDAY, 14th JUNE 2023 =
+* Improvement: Tightened the security of the plugin.
+
+= 2.6.6 - MONDAY, 12th JUNE 2023 =
+* Improvement: Global - Added support for Spectra One's preview options.
+* Fix: Table Of Contents - Fixed the improper HTML markup/structure for the heading list.
+* Fix: Testimonial - Resolved an issue in which the default Testimonial blocks would share same the background image.
 
 = 2.6.5 - WEDNESDAY, 07th JUNE 2023 =
 * Fix: Buttons - Resolved an issue in which an error was thrown when the background color was set to gradient.
