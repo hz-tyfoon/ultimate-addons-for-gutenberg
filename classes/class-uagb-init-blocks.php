@@ -900,17 +900,12 @@ class UAGB_Init_Blocks {
 			return $block_content;
 		}
 		
-		$block_name          = $block['blockName'];
-		$style_name          = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
-		$style_class_name    = 'spectra-gbs-' . $style_name;
-		$wp_block_class_name = str_replace( '/', '-', $block_name );
+		$style_name       = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
+		$style_class_name = 'spectra-gbs-' . $style_name;
+		$block_id         = 'uagb-block-' . $block['attrs']['block_id'];
 
-		$html = preg_replace(
-			'/<div class="wp-block-' . $wp_block_class_name . '/',
-			'<div class="wp-block-' . $wp_block_class_name . ' ' . $style_class_name . ' ',
-			$block_content, 
-			1
-		);
+		// Replace the block id with the block id and the style class name.
+		$html = str_replace( $block_id, $block_id . ' ' . $style_class_name, $block_content );
 
 		return $html;
 	}

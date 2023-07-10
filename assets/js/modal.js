@@ -8,7 +8,6 @@ window.UAGBModal = {
 		const modalWrapper = document_element.querySelectorAll( mainSelector );
 		const siteEditTheme = document_element.getElementsByClassName( 'edit-site' );
 		const pageTemplate = document_element.getElementsByClassName( 'block-editor-iframe__body' );
-
 		if ( modalWrapper?.length ) {
 			for ( const modalWrapperEl of modalWrapper ) {
 				const modalTrigger = modalWrapperEl.querySelector( '.uagb-modal-trigger' );

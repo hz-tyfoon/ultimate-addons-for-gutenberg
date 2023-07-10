@@ -161,6 +161,6 @@ return array(
 	'tweetBtnLetterSpacingMobile' => '',
 	'tweetBtnLetterSpacingType'   => 'px',
 	// For Global Block Styles.
-	'globalBlockStyleName'         => '',
-	'globalBlockStyleId'           => '',
+	'globalBlockStyleName'        => '',
+	'globalBlockStyleId'          => '',
 );

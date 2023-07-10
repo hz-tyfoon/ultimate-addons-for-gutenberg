@@ -160,8 +160,8 @@ return array_merge(
 		'borderRadius'               => '',
 		'borderColor'                => '',
 		// For Global Block Styles.
-		'globalBlockStyleName'         => '',
-		'globalBlockStyleId'           => '',
+		'globalBlockStyleName'       => '',
+		'globalBlockStyleId'         => '',
 	),
 	$border_attribute
 );

@@ -597,7 +597,7 @@ export default function styling( attributes, clientId, name, deviceType, gbsSele
 		};
 	}
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
 	tabletSelectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tabletSelectors, attributes );

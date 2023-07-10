@@ -127,8 +127,8 @@ return array_merge(
 		'borderRadius'             => 0,
 		'borderColor'              => '#E0E0E0',
 		// For Global Block Styles.
-		'globalBlockStyleName'         => '',
-		'globalBlockStyleId'           => '',
+		'globalBlockStyleName'     => '',
+		'globalBlockStyleId'       => '',
 	),
 	$border_attribute
 );

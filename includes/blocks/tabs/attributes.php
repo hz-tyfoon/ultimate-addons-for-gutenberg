@@ -119,8 +119,8 @@ return array_merge(
 		'borderRadius'                => '',
 		'borderStyle'                 => 'solid',
 		// For Global Block Styles.
-		'globalBlockStyleName'         => '',
-		'globalBlockStyleId'           => '',
+		'globalBlockStyleName'        => '',
+		'globalBlockStyleId'          => '',
 	),
 	$border_attribute
 );

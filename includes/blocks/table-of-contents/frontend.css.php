@@ -340,6 +340,6 @@ if ( '' !== $attr['scrollToTopBgColor'] ) {
 	$desktop_extra_css .= '.uagb-toc__scroll-top.uagb-toc__show-scroll { background: ' . $attr['scrollToTopBgColor'] . '; }';
 }
 
-$generated_css[ 'desktop' ] =  $generated_css[ 'desktop' ] . $desktop_extra_css;
+$generated_css['desktop'] = $generated_css['desktop'] . $desktop_extra_css;
 
 return $generated_css;
