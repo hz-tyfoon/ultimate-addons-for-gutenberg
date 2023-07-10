@@ -140,8 +140,8 @@ return apply_filters(
 			'minHeightTablet'             => '',
 			'minHeightMobile'             => '',
 			// For Global Block Styles.
-			'globalBlockStyleName'         => '',
-			'globalBlockStyleId'           => '',
+			'globalBlockStyleName'        => '',
+			'globalBlockStyleId'          => '',
 		),
 		$border_attribute,
 		$arrow_border_attribute

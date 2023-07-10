@@ -3,6 +3,7 @@ import { STORE_NAME as storeName } from '@Store/constants';
 import { select } from '@wordpress/data';
 import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
 import AddGBSStylesDom from './AddGBSStylesDom';
+import { GBS_RANDOM_NUMBER } from '@Utils/Helpers';
 
 const AddGBSStyles = ( ChildComponent )=> {
 	const WrapWithStyle = ( props ) => {
@@ -44,7 +45,8 @@ const AddGBSStyles = ( ChildComponent )=> {
 		const modifiedAttr = { ...attributes };
 
 		for ( const objectKey in modifiedAttr ) {
-			if( 0.001020304 === modifiedAttr?.[objectKey] ){
+			// Replace GBS_RANDOM_NUMBER with empty string.
+			if( GBS_RANDOM_NUMBER === modifiedAttr?.[objectKey] ){
 				modifiedAttr[objectKey] = '';
 			}
 		}

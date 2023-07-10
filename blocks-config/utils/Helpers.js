@@ -46,3 +46,8 @@ export const uagbDeepClone = ( arrayOrObject ) => JSON.parse( JSON.stringify( ar
  * @return {boolean} - The result.
  */
 export const isEmptyObject = ( obj ) => Object.keys( obj ).length === 0 && obj.constructor === Object;
+
+/**
+ * This variable is used as a placeholder kind of value which is used to identify the attribute is a GBS style attribute.
+ */
+export const GBS_RANDOM_NUMBER = 0.001020304;

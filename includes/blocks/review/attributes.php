@@ -125,6 +125,6 @@ return array(
 	'contentLetterSpacingMobile' => '',
 	'contentLetterSpacingType'   => 'px',
 	// For Global Block Styles.
-	'globalBlockStyleName'         => '',
-	'globalBlockStyleId'           => '',
+	'globalBlockStyleName'       => '',
+	'globalBlockStyleId'         => '',
 );
