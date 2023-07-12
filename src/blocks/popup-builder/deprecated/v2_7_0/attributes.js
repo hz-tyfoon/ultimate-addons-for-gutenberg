@@ -1,5 +1,5 @@
 /**
- * BLOCK: Popup Builder - Attributes - v2.6.8
+ * BLOCK: Popup Builder - Attributes - v2.7.0
  */
 
 import { getBorderAttributes } from '@Controls/generateAttributes';

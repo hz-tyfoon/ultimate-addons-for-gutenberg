@@ -1,10 +1,10 @@
-import attributesV2_6_8 from './deprecated/v2_6_8/attributes';
-import saveV2_6_8 from './deprecated/v2_6_8/save';
+import attributesV2_7_0 from './deprecated/v2_7_0/attributes';
+import saveV2_7_0 from './deprecated/v2_7_0/save';
 
 const deprecated = [
 	{
-		attributes: attributesV2_6_8,
-		save: saveV2_6_8,
+		attributes: attributesV2_7_0,
+		save: saveV2_7_0,
 	},
 ];
 

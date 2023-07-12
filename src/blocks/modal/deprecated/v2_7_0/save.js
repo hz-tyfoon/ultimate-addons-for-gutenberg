@@ -1,5 +1,5 @@
 /**
- * BLOCK: Modal - Save File - v2.6.8
+ * BLOCK: Modal - Save File - v2.7.0
  */
 
 import classnames from 'classnames';
