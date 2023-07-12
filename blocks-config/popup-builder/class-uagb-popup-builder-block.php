@@ -14,6 +14,8 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 
 	/**
 	 * Class UAGB_Popup_Builder_Block.
+	 * 
+	 * @since x.x.x
 	 */
 	final class UAGB_Popup_Builder_Block {
 
@@ -21,7 +23,7 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 		 * Member Variable.
 		 *
 		 * @since x.x.x
-		 * @var instance
+		 * @var object $instance  Instance of this class.
 		 */
 		private static $instance;
 
@@ -30,7 +32,7 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 		 * Initiator.
 		 *
 		 * @since x.x.x
-		 * @return void
+		 * @return object  Initialized object of this class.
 		 */
 		public static function get_instance() {
 			if ( ! isset( self::$instance ) ) {
@@ -40,7 +42,9 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 		}
 
 		/**
-		 * Constructor
+		 * Constructor.
+		 * 
+		 * @since x.x.x
 		 */
 		public function __construct() {
 			add_action( 'init', array( $this, 'register_popup_builder_block' ) );
@@ -58,7 +62,7 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 				return;
 			}
 
-			// Return Early if get_post_type() not spectra-popup
+			// Return Early if get_post_type() not spectra-popup.
 
 			$content_border_attributes = array();
 
@@ -74,177 +78,529 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 			register_block_type(
 				'uagb/popup-builder',
 				array(
+					'api_version'     => 2,
 					'attributes'      => array_merge(
 						// ------------------------- BLOCK SETTINGS.
 						array(
-							'block_id'          => '',
-							'isPreview'         => false,
-							'variationSelected' => false,
-							'variantType'       => '',							
+							'block_id'          => array(
+								'type' => 'string',
+							),
+							'isPreview'         => array(
+								'type'    => 'boolean',
+								'default' => false,
+							),
+							'variationSelected' => array(
+								'type'    => 'boolean',
+								'default' => false,
+							),
+							'variantType'       => array(
+								'type' => 'string',
+							),                      
 						),
 						// ------------------------- POPUP SETTINGS.
 						array(
-							'popupPositionH'            => '',
-							'popupPositionV'            => '',
-							'popupContentAlignmentV'    => 'flex-start',
-							'popupWidth'                => 700,
-							'popupWidthTablet'          => '',
-							'popupWidthMobile'          => '',
-							'popupWidthUnit'            => 'px',
-							'popupWidthUnitTablet'      => 'px',
-							'popupWidthUnitMobile'      => 'px',
-							'popupHeight'               => '',
-							'popupHeightTablet'         => '',
-							'popupHeightMobile'         => '',
-							'popupMaxHeight'            => '',
-							'popupMaxHeightTablet'      => '',
-							'popupMaxHeightMobile'      => '',
-							'popupHeightUnit'           => 'px',
-							'popupHeightUnitTablet'     => 'px',
-							'popupHeightUnitMobile'     => 'px',
-							'hasFixedHeight'            => false,
-							'popupBehaviour'            => 'overlay',
-							'hasOverlay'                => true,
-							'isDismissable'             => true,
-							'haltBackgroundInteraction' => true,
+							'popupPositionH'            => array(
+								'type' => 'string',
+							),
+							'popupPositionV'            => array(
+								'type' => 'string',
+							),
+							'popupContentAlignmentV'    => array(
+								'type'    => 'string',
+								'default' => 'flex-start',
+							),
+							'popupWidth'                => array(
+								'type'    => 'number',
+								'default' => 700,
+							),
+							'popupWidthTablet'          => array(
+								'type' => 'number',
+							),
+							'popupWidthMobile'          => array(
+								'type' => 'number',
+							),
+							'popupWidthUnit'            => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupWidthUnitTablet'      => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupWidthUnitMobile'      => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupHeight'               => array(
+								'type' => 'number',
+							),
+							'popupHeightTablet'         => array(
+								'type' => 'number',
+							),
+							'popupHeightMobile'         => array(
+								'type' => 'number',
+							),
+							'popupMaxHeight'            => array(
+								'type' => 'number',
+							),
+							'popupMaxHeightTablet'      => array(
+								'type' => 'number',
+							),
+							'popupMaxHeightMobile'      => array(
+								'type' => 'number',
+							),
+							'popupHeightUnit'           => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupHeightUnitTablet'     => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupHeightUnitMobile'     => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'hasFixedHeight'            => array(
+								'type'    => 'boolean',
+								'default' => false,
+							),
+							'popupBehaviour'            => array(
+								'type'    => 'number',
+								'default' => 'overlay',
+							),
+							'hasOverlay'                => array(
+								'type'    => 'boolean',
+								'default' => true,
+							),
+							'isDismissable'             => array(
+								'type'    => 'boolean',
+								'default' => true,
+							),
+							'haltBackgroundInteraction' => array(
+								'type'    => 'boolean',
+								'default' => true,
+							),
 						),
 						// ------------------------- CLOSE SETTINGS.
 						array(
-							'closeIcon'         => 'xmark',
-							'closeIconPosition' => 'top-right',
-							'closeOverlayClick' => true,
+							'closeIcon'         => array(
+								'type'    => 'string',
+								'default' => 'xmark',
+							),
+							'closeIconPosition' => array(
+								'type'    => 'string',
+								'default' => 'top-right',
+							),
+							'closeOverlayClick' => array(
+								'type'    => 'boolean',
+								'default' => true,
+							),
 						),
 						// ------------------------- POPUP STYLING ( BACKGROUND ).
 						array(
-							'selectGradient'              => 'basic',
-							'gradientValue'               => 'linear-gradient(90deg, rgb(149, 201, 242) 0%, rgb(206, 168, 240) 100%)',
-							'gradientColor1'              => '#06558a',
-							'gradientColor2'              => '#0063a1',
-							'gradientType'                => 'linear',
-							'gradientType'                => 'linear',
-							'gradientLocation1'           => 0,
-							'gradientLocation2'           => 100,
-							'gradientAngle'               => 0,
-							'backgroundImageColor'        => '#ffffff75',
-							'backgroundSizeDesktop'       => 'cover',
-							'backgroundSizeTablet'        => '',
-							'backgroundSizeMobile'        => '',
-							'backgroundCustomSizeDesktop' => 100,
-							'backgroundCustomSizeTablet'  => '',
-							'backgroundCustomSizeMobile'  => '',
-							'backgroundCustomSizeType'    => '%',
-							'backgroundRepeatDesktop'     => 'no-repeat',
-							'backgroundRepeatTablet'      => '',
-							'backgroundRepeatMobile'      => '',
-							'backgroundAttachmentDesktop' => 'scroll',
-							'backgroundAttachmentTablet'  => '',
-							'backgroundAttachmentMobile'  => '',
-							'backgroundPositionDesktop'   => array(
-								'x' => 0.5,
-								'y' => 0.5,
+							'selectGradient'              => array(
+								'type'    => 'string',
+								'default' => 'basic',
 							),
-							'backgroundPositionTablet'    => '',
-							'backgroundPositionMobile'    => '',
-							'backgroundImageDesktop'      => '',
-							'backgroundImageTablet'       => '',
-							'backgroundImageMobile'       => '',
-							'backgroundColor'             => '#ffffff',
-							'backgroundType'              => 'none',
-							'overlayType'                 => 'none',
-							'customPosition'              => 'default',
-							'xPositionDesktop'            => '',
-							'xPositionTablet'             => '',
-							'xPositionMobile'             => '',
-							'xPositionType'               => 'px',
-							'xPositionTypeTablet'         => 'px',
-							'xPositionTypeMobile'         => 'px',
-							'yPositionDesktop'            => '',
-							'yPositionTablet'             => '',
-							'yPositionMobile'             => '',
-							'yPositionType'               => 'px',
-							'yPositionTypeTablet'         => 'px',
-							'yPositionTypeMobile'         => 'px',
+							'gradientValue'               => array(
+								'type'    => 'string',
+								'default' => 'linear-gradient(90deg, rgb(149, 201, 242) 0%, rgb(206, 168, 240) 100%)',
+							),
+							'gradientColor1'              => array(
+								'type'    => 'string',
+								'default' => '#06558a',
+							),
+							'gradientColor2'              => array(
+								'type'    => 'string',
+								'default' => '#0063a1',
+							),
+							'gradientType'                => array(
+								'type'    => 'string',
+								'default' => 'linear',
+							),
+							'gradientLocation1'           => array(
+								'type'    => 'number',
+								'default' => 0,
+							),
+							'gradientLocation2'           => array(
+								'type'    => 'number',
+								'default' => 100,
+							),
+							'gradientAngle'               => array(
+								'type'    => 'number',
+								'default' => 0,
+							),
+							'backgroundImageColor'        => array(
+								'type'    => 'string',
+								'default' => '#ffffff75',
+							),
+							'backgroundSizeDesktop'       => array(
+								'type'    => 'string',
+								'default' => 'cover',
+							),
+							'backgroundSizeTablet'        => array(
+								'type' => 'string',
+							),
+							'backgroundSizeMobile'        => array(
+								'type' => 'string',
+							),
+							'backgroundCustomSizeDesktop' => array(
+								'type'    => 'number',
+								'default' => 100,
+							),
+							'backgroundCustomSizeTablet'  => array(
+								'type' => 'number',
+							),
+							'backgroundCustomSizeMobile'  => array(
+								'type' => 'number',
+							),
+							'backgroundCustomSizeType'    => array(
+								'type'    => 'string',
+								'default' => '%',
+							),
+							'backgroundRepeatDesktop'     => array(
+								'type'    => 'string',
+								'default' => 'no-repeat',
+							),
+							'backgroundRepeatTablet'      => array(
+								'type' => 'string',
+							),
+							'backgroundRepeatMobile'      => array(
+								'type' => 'string',
+							),
+							'backgroundAttachmentDesktop' => array(
+								'type'    => 'string',
+								'default' => 'scroll',
+							),
+							'backgroundAttachmentTablet'  => array(
+								'type' => 'string',
+							),
+							'backgroundAttachmentMobile'  => array(
+								'type' => 'string',
+							),
+							'backgroundPositionDesktop'   => array(
+								'type'    => 'object',
+								'default' => array(
+									'x' => 0.5,
+									'y' => 0.5,
+								),
+							),
+							'backgroundPositionTablet'    => array(
+								'type' => 'object',
+							),
+							'backgroundPositionMobile'    => array(
+								'type' => 'object',
+							),
+							'backgroundImageDesktop'      => array(
+								'type' => 'object',
+							),
+							'backgroundImageTablet'       => array(
+								'type' => 'object',
+							),
+							'backgroundImageMobile'       => array(
+								'type' => 'object',
+							),
+							'backgroundColor'             => array(
+								'type'    => 'string',
+								'default' => '#ffffff',
+							),
+							'backgroundType'              => array(
+								'type'    => 'string',
+								'default' => 'none',
+							),
+							'overlayType'                 => array(
+								'type'    => 'string',
+								'default' => 'none',
+							),
+							'customPosition'              => array(
+								'type'    => 'string',
+								'default' => 'default',
+							),
+							'xPositionDesktop'            => array(
+								'type'    => 'number',
+								'default' => '',
+							),
+							'xPositionTablet'             => array(
+								'type' => 'number',
+							),
+							'xPositionMobile'             => array(
+								'type' => 'number',
+							),
+							'xPositionType'               => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'xPositionTypeTablet'         => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'xPositionTypeMobile'         => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'yPositionDesktop'            => array(
+								'type'    => 'number',
+								'default' => '',
+							),
+							'yPositionTablet'             => array(
+								'type' => 'number',
+							),
+							'yPositionMobile'             => array(
+								'type' => 'number',
+							),
+							'yPositionType'               => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'yPositionTypeTablet'         => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'yPositionTypeMobile'         => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
 						),
 						// ------------------------- POPUP STYLING.
 						array(
-							'popupOverlayColor' => 'rgba(0,0,0,0.75)',
+							'popupOverlayColor' => array(
+								'type'    => 'string',
+								'default' => 'rgba(0,0,0,0.75)',
+							),
 						),
 						// ------------------------- CLOSE STYLING.
 						array(
-							'closeIconSize'       => 25,
-							'closeIconSizeTablet' => '',
-							'closeIconSizeMobile' => '',
-							'closeIconColor'      => '',
+							'closeIconSize'       => array(
+								'type'    => 'number',
+								'default' => 25,
+							),
+							'closeIconSizeTablet' => array(
+								'type' => 'number',
+							),
+							'closeIconSizeMobile' => array(
+								'type' => 'number',
+							),
+							'closeIconColor'      => array(
+								'type'    => 'string',
+								'default' => '',
+							),
 						),
 						// ------------------------- BOX SHADOW STYLING.
 						array(
-							'useSeparateBoxShadows'  => false,
-							'boxShadowColor'         => '#00000070',
-							'boxShadowHOffset'       => 0,
-							'boxShadowVOffset'       => 0,
-							'boxShadowBlur'          => '',
-							'boxShadowSpread'        => '',
-							'boxShadowPosition'      => 'outset',
-							'boxShadowColorHo'       => '',
-							'boxShadowHOffsetHover'  => 0,
-							'boxShadowVOffsetHover'  => 0,
-							'boxShadowBlurHov'       => '',
-							'boxShadowSpreadH'       => '',
-							'boxShadowPositionHover' => 'outset',
+							'useSeparateBoxShadows'  => array(
+								'type'    => 'boolean',
+								'default' => false,
+							),
+							'boxShadowColor'         => array(
+								'type'    => 'string',
+								'default' => '#00000070',
+							),
+							'boxShadowHOffset'       => array(
+								'type'    => 'number',
+								'default' => 0,
+							),
+							'boxShadowVOffset'       => array(
+								'type'    => 'number',
+								'default' => 0,
+							),
+							'boxShadowBlur'          => array(
+								'type' => 'number',
+							),
+							'boxShadowSpread'        => array(
+								'type' => 'number',
+							),
+							'boxShadowPosition'      => array(
+								'type'    => 'string',
+								'default' => 'outset',
+							),
+							'boxShadowColorHover'    => array(
+								'type' => 'string',
+							),
+							'boxShadowHOffsetHover'  => array(
+								'type'    => 'number',
+								'default' => 0,
+							),
+							'boxShadowVOffsetHover'  => array(
+								'type'    => 'number',
+								'default' => 0,
+							),
+							'boxShadowBlurHover'     => array(
+								'type' => 'number',
+							),
+							'boxShadowSpreadHover'   => array(
+								'type' => 'number',
+							),
+							'boxShadowPositionHover' => array(
+								'type'    => 'string',
+								'default' => 'outset',
+							),
 						),
 						// ------------------------- SPACE STYLING ( POPUP ).
 						array(
-							'popupPaddingTop'          => 32,
-							'popupPaddingRight'        => 32,
-							'popupPaddingBottom'       => 32,
-							'popupPaddingLeft'         => 32,
-							'popupPaddingTopTablet'    => '',
-							'popupPaddingRightTablet'  => '',
-							'popupPaddingBottomTablet' => '',
-							'popupPaddingLeftTablet'   => '',
-							'popupPaddingTopMobile'    => '',
-							'popupPaddingRightMobile'  => '',
-							'popupPaddingBottomMobile' => '',
-							'popupPaddingLeftMobile'   => '',
-							'popupPaddingUnit'         => 'px',
-							'popupPaddingUnitTablet'   => 'px',
-							'popupPaddingUnitMobile'   => 'px',
-							'popupPaddingLink'         => true,
-							'popupMarginTop'           => '',
-							'popupMarginRight'         => '',
-							'popupMarginBottom'        => '',
-							'popupMarginLeft'          => '',
-							'popupMarginTopTablet'     => '',
-							'popupMarginRightTablet'   => '',
-							'popupMarginBottomTablet'  => '',
-							'popupMarginLeftTablet'    => '',
-							'popupMarginTopMobile'     => '',
-							'popupMarginRightMobile'   => '',
-							'popupMarginBottomMobile'  => '',
-							'popupMarginLeftMobile'    => '',
-							'popupMarginUnit'          => 'px',
-							'popupMarginUnitTablet'    => 'px',
-							'popupMarginUnitMobile'    => 'px',
-							'popupMarginLink'          => true,
+							'popupPaddingTop'          => array(
+								'type'    => 'number',
+								'default' => 32,
+							),
+							'popupPaddingRight'        => array(
+								'type'    => 'number',
+								'default' => 32,
+							),
+							'popupPaddingBottom'       => array(
+								'type'    => 'number',
+								'default' => 32,
+							),
+							'popupPaddingLeft'         => array(
+								'type'    => 'number',
+								'default' => 32,
+							),
+							'popupPaddingTopTablet'    => array(
+								'type' => 'number',
+							),
+							'popupPaddingRightTablet'  => array(
+								'type' => 'number',
+							),
+							'popupPaddingBottomTablet' => array(
+								'type' => 'number',
+							),
+							'popupPaddingLeftTablet'   => array(
+								'type' => 'number',
+							),
+							'popupPaddingTopMobile'    => array(
+								'type' => 'number',
+							),
+							'popupPaddingRightMobile'  => array(
+								'type' => 'number',
+							),
+							'popupPaddingBottomMobile' => array(
+								'type' => 'number',
+							),
+							'popupPaddingLeftMobile'   => array(
+								'type' => 'number',
+							),
+							'popupPaddingUnit'         => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupPaddingUnitTablet'   => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupPaddingUnitMobile'   => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupPaddingLink'         => array(
+								'type'    => 'boolean',
+								'default' => true,
+							),
+							'popupMarginTop'           => array(
+								'type' => 'number',
+							),
+							'popupMarginRight'         => array(
+								'type' => 'number',
+							),
+							'popupMarginBottom'        => array(
+								'type' => 'number',
+							),
+							'popupMarginLeft'          => array(
+								'type' => 'number',
+							),
+							'popupMarginTopTablet'     => array(
+								'type' => 'number',
+							),
+							'popupMarginRightTablet'   => array(
+								'type' => 'number',
+							),
+							'popupMarginBottomTablet'  => array(
+								'type' => 'number',
+							),
+							'popupMarginLeftTablet'    => array(
+								'type' => 'number',
+							),
+							'popupMarginTopMobile'     => array(
+								'type' => 'number',
+							),
+							'popupMarginRightMobile'   => array(
+								'type' => 'number',
+							),
+							'popupMarginBottomMobile'  => array(
+								'type' => 'number',
+							),
+							'popupMarginLeftMobile'    => array(
+								'type' => 'number',
+							),
+							'popupMarginUnit'          => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupMarginUnitTablet'    => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupMarginUnitMobile'    => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'popupMarginLink'          => array(
+								'type'    => 'boolean',
+								'default' => true,
+							),
 						),
 						// ------------------------- SPACE STYLING ( CLOSE BUTTON ).
 						array(
-							'closePaddingTop'          => '',
-							'closePaddingRight'        => '',
-							'closePaddingBottom'       => '',
-							'closePaddingLeft'         => '',
-							'closePaddingTopTablet'    => '',
-							'closePaddingRightTablet'  => '',
-							'closePaddingBottomTablet' => '',
-							'closePaddingLeftTablet'   => '',
-							'closePaddingTopMobile'    => '',
-							'closePaddingRightMobile'  => '',
-							'closePaddingBottomMobile' => '',
-							'closePaddingLeftMobile'   => '',
-							'closePaddingUnit'         => 'px',
-							'closePaddingUnitTablet'   => 'px',
-							'closePaddingUnitMobile'   => 'px',
-							'closePaddingLink'         => true,
+							'closePaddingTop'          => array(
+								'type' => 'number',
+							),
+							'closePaddingRight'        => array(
+								'type' => 'number',
+							),
+							'closePaddingBottom'       => array(
+								'type' => 'number',
+							),
+							'closePaddingLeft'         => array(
+								'type' => 'number',
+							),
+							'closePaddingTopTablet'    => array(
+								'type' => 'number',
+							),
+							'closePaddingRightTablet'  => array(
+								'type' => 'number',
+							),
+							'closePaddingBottomTablet' => array(
+								'type' => 'number',
+							),
+							'closePaddingLeftTablet'   => array(
+								'type' => 'number',
+							),
+							'closePaddingTopMobile'    => array(
+								'type' => 'number',
+							),
+							'closePaddingRightMobile'  => array(
+								'type' => 'number',
+							),
+							'closePaddingBottomMobile' => array(
+								'type' => 'number',
+							),
+							'closePaddingLeftMobile'   => array(
+								'type' => 'number',
+							),
+							'closePaddingUnit'         => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'closePaddingUnitTablet'   => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'closePaddingUnitMobile'   => array(
+								'type'    => 'string',
+								'default' => 'px',
+							),
+							'closePaddingLink'         => array(
+								'type'    => 'boolean',
+								'default' => true,
+							),
 						),
 						// Responsive Borders.
 						$content_border_attributes
