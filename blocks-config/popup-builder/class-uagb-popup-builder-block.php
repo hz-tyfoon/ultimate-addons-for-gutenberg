@@ -140,8 +140,8 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 							'backgroundAttachmentTablet'  => '',
 							'backgroundAttachmentMobile'  => '',
 							'backgroundPositionDesktop'   => array(
-								x => 0.5,
-								y => 0.5,
+								'x' => 0.5,
+								'y' => 0.5,
 							),
 							'backgroundPositionTablet'    => '',
 							'backgroundPositionMobile'    => '',
@@ -257,12 +257,43 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 		/**
 		 * Renders the Popup Builder Block.
 		 *
-		 * @param array $attributes Array of block attributes.
+		 * @param array $attributes The block attributes.
+		 * @param array $content    The saved content.
+		 * @param array $block      The parsed block.
 		 * @since x.x.x
-		 * @return string
+		 * @return string           The formatted Popup Builder block, or empty if no innerblocks are added.
 		 */
-		public function render_popup_builder_block( $attributes ) {
-			
+		public function render_popup_builder_block( $attributes, $content, $block ) {
+			if ( empty( $block->inner_blocks ) || empty( $attributes['variationSelected'] ) ) {
+				return '';
+			}
+
+			$inner_blocks_html = '';
+			foreach ( $block->inner_blocks as $inner_block ) {
+				$inner_blocks_html .= $inner_block->render();
+			}
+
+			ob_start();
+			?>
+				<div class="uagb-popup-builder__wrapper uagb-popup-builder__wrapper--<?php echo esc_attr( $attributes['variantType'] ); ?>">
+					<div class="uagb-popup-builder__container uagb-popup-builder__container--<?php echo esc_attr( $attributes['variantType'] ); ?>">
+						<?php echo wp_kses_post( $inner_blocks_html ); ?>
+					</div>
+					<?php if ( $attributes['isDismissable'] && $attributes['closeIcon'] ) : ?>
+						<div class="uagb-popup-builder__close">
+							This is a string to be replaced { renderSVG( closeIcon ) }
+						</div>
+					<?php endif; ?>
+				</div>
+			<?php
+
+			$output = ob_get_clean();
+			if ( ! is_string( $output ) ) {
+				return '';
+			}
+
+			return $output;
+
 		}
 	}
 
