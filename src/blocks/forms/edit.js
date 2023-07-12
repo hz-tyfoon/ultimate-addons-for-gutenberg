@@ -311,7 +311,7 @@ const UAGBFormsEdit = ( props ) => {
 
 	if ( ! hasInnerBlocks ) {
 		return (
-			<div className="uagb-forms-variations">
+			<div className="uagb-variation-picker">
 				<__experimentalBlockVariationPicker
 					icon={ UAGB_Block_Icons.forms }
 					label={ __( 'Forms', 'ultimate-addons-for-gutenberg' ) }
