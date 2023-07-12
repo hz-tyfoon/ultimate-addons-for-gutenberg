@@ -41,6 +41,7 @@
 				-moz-transition-property: stroke;
 				-o-transition-property: stroke;
 				transition-property: stroke;
+				stroke-width: 0;
 
 				@include transitionSpeeds();
 			}
@@ -101,6 +102,7 @@
 		text-align: center;
 		color: $spectra-color-body;
 		line-height: 20px;
+		width: 100%;
 	}
 
 	.block-editor-block-variation-picker__variations {
