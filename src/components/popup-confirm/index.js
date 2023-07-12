@@ -16,6 +16,7 @@ const UAGConfirmPopup = ( props ) => {
 		processingLabel = __( 'Processing…', 'ultimate-addons-for-gutenberg' ),
 		icon = '',
 		executable = false,
+		additionalClass = '',
 	} = props;
 
 	// Add and remove the CSS on the drop and remove of the component.
@@ -48,7 +49,7 @@ const UAGConfirmPopup = ( props ) => {
 				<Modal
 					onRequestClose={ closeModal }
 					className="uag-confirm-popup-wrapper"
-					overlayClassName="uag-confirm-popup-overlay"
+					overlayClassName={ `uag-confirm-popup-overlay ${additionalClass}` }
 				>
 					<div className="uag-confirm-popup-icon">
 						{ icon !== '' ? (
