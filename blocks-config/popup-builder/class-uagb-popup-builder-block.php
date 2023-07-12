@@ -261,17 +261,19 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 		 * @param array $content    The saved content.
 		 * @param array $block      The parsed block.
 		 * @since x.x.x
-		 * @return string           The formatted Popup Builder block, or empty if no innerblocks are added.
+		 * @return string           The formatted Popup Builder block or existing content.
 		 */
 		public function render_popup_builder_block( $attributes, $content, $block ) {
 			if ( empty( $block->inner_blocks ) || empty( $attributes['variationSelected'] ) ) {
-				return '';
+				return $content;
 			}
 
 			$inner_blocks_html = '';
 			foreach ( $block->inner_blocks as $inner_block ) {
 				$inner_blocks_html .= $inner_block->render();
 			}
+
+			$aria_label = ( 'popup' === $attributes['variantType'] ) ? __( 'Close Popup', 'ultimate-addons-for-gutenberg' ) : __( 'Close Info Bar', 'ultimate-addons-for-gutenberg' );
 
 			ob_start();
 			?>
@@ -280,8 +282,8 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 						<?php echo wp_kses_post( $inner_blocks_html ); ?>
 					</div>
 					<?php if ( $attributes['isDismissable'] && $attributes['closeIcon'] ) : ?>
-						<div class="uagb-popup-builder__close">
-							This is a string to be replaced { renderSVG( closeIcon ) }
+						<div class="uagb-popup-builder__close" aria-label="<?php echo esc_attr( $aria_label ); ?>">
+							<?php UAGB_Helper::render_svg_html( $attributes['closeIcon'] ); ?>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -289,7 +291,7 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 
 			$output = ob_get_clean();
 			if ( ! is_string( $output ) ) {
-				return '';
+				return $content;
 			}
 
 			return $output;
