@@ -48,6 +48,34 @@
 	width: inherit;
 }
 .wp-block-uagb-image {
+
+	.components-placeholder.block-editor-media-placeholder {
+
+		.components-placeholder__label {
+			margin-left: auto;
+			margin-right: auto;
+
+			.block-editor-block-icon {
+
+				svg.uagb-editor-icons {
+
+					path {
+						stroke: #0063a1;
+					}
+				}
+			}
+		}
+
+		.components-placeholder__fieldset {
+			justify-content: center;
+
+			.components-placeholder__instructions {
+				width: 100%;
+				text-align: center;
+			}
+		}
+	}
+
 	.components-resizable-box__container {
 		max-width: 100% !important;
 		height: auto !important;
