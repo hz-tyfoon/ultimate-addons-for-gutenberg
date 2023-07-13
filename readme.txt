@@ -5,7 +5,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 5.6
 Tested up to: 6.2.2
-Stable tag: 2.6.9
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -165,6 +165,26 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 1. /assets/screenshots/1.png
 
 == Changelog ==
+
+= 2.7.0 - MONDAY, 10th July 2023 =
+* Feature: Popup Builder - Added a new `Push Content` feature for info bars.
+* Improvement: Performance - Significantly reduced the plugin zip size by over 1 MB after optimizing the Font Awesome v6 assets.
+* Improvement: Forms - Added a full-width alignment option to the submit button.
+* Improvement: Table Of Contents - Added the ability to expand and collapse the entire box by clicking the top portion or the title of the box.
+* Improvement: Global - Added new compatibility with Spectra Pro. 
+* Fix: Container - Resolved an issue wherein the text color of the Container was at a higher priority than those set for headings of blocks inside it.
+* Fix: Image - Resolved an issue in which the tablet and mobile border styles would not be applied as intended.
+* Fix: Buttons - Resolved an issue wherein the child responsive padding would not work as expected on the frontend.
+* Fix: Buttons - Resolved an issue in which the text color would not work as intended in FSE themes.
+* Fix: Buttons - Resolved an issue in which the space between the icon and text would not apply in RTL sites.
+* Fix: Call To Action - Resolved an issue wherein without inherit from theme for buttons, the mobile and tablet selectors styles would not work as intended on the frontend.
+* Fix: Icon - Resolved an issue in which the icon's background and border color on hover would not work as intended.
+* Fix: Content Timeline - Resolved an issue in which the user-defined icon would not appear on new timeline items in the editor.
+* Fix: Forms - Resolved an issue in which the padding for input fields would not work as expected when the form style was set to underline.
+* Fix: Forms - Reworked the e-mail sending functionality to ensure that only one e-mail is sent when CC and BCC addresses are specified.
+* Fix: Marketing Button - Resolved an issue wherein the border-width and padding would not work as intended in the editor's tablet & mobile view.
+* Fix: Table Of Contents - Resolved an issue in which the collapsible option would not work as intended in Astra's Custom Layouts.
+* Fix: Testimonial - Resolved an issue with equal height on the frontend when 2 columns per slide were set.
 
 = 2.6.9 - TUESDAY, 27th June 2023 =
 * Improvement: Post Grid - Added the option for normal pagination to disable Ajax-based pagination.
