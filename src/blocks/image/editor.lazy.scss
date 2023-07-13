@@ -50,6 +50,8 @@
 .wp-block-uagb-image {
 
 	.components-placeholder.block-editor-media-placeholder {
+		box-shadow: none;
+		border: 1px dashed #d5dadf;
 
 		.components-placeholder__label {
 			margin-left: auto;
