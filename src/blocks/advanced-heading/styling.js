@@ -154,6 +154,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		headingDescToggle
 	} = attributes;
 
+	console.log( 'styling attributes', attributes );
+
 	let tablet_selectors = {};
 	let mobile_selectors = {};
 
