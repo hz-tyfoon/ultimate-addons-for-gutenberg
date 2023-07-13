@@ -41,7 +41,6 @@
 				-moz-transition-property: stroke;
 				-o-transition-property: stroke;
 				transition-property: stroke;
-				stroke-width: 0;
 
 				@include transitionSpeeds();
 			}
@@ -140,6 +139,40 @@
 			padding: 6px 12px;
 			text-decoration: none;
 			color: $spectra-color-primary;
+		}
+	}
+
+	// Variations for stroke-fill.
+	&--fill {
+
+		.components-button,
+		.components-button.is-secondary,
+		.components-button.is-tertiary,
+		.components-button:hover:not(:disabled) {
+	
+			svg {
+
+				path,
+				rect,
+				circle {
+					stroke-width: 0;
+					fill: $spectra-color-heading;
+					-webkit-transition-property: fill;
+					-moz-transition-property: fill;
+					-o-transition-property: fill;
+					transition-property: fill;
+				}
+			}
+
+			&:hover svg {
+
+				path,
+				rect,
+				circle {
+					fill: $spectra-color-primary;
+				}
+			}
+
 		}
 	}
 }
