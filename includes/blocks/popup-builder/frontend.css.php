@@ -153,6 +153,26 @@ $selectors = array(
 			$attr['popupMarginLeft']
 		),
 	),
+	// Backward Compatibility Selectors for v2.7.0 --- Start.
+	' div.uagb-popup-builder__close'           => array(
+		'left'    => ( ( 'top-left' === $attr['closeIconPosition'] && ! is_rtl() ) || ( 'top-right' === $attr['closeIconPosition'] && is_rtl() ) ) ? 0 : '',
+		'right'   => ( ( 'top-right' === $attr['closeIconPosition'] && ! is_rtl() ) || ( 'top-left' === $attr['closeIconPosition'] && is_rtl() ) ) ? 0 : '',
+		'padding' => UAGB_Block_Helper::generate_spacing(
+			$attr['closePaddingUnit'],
+			$attr['closePaddingTop'],
+			$attr['closePaddingRight'],
+			$attr['closePaddingBottom'],
+			$attr['closePaddingLeft']
+		),
+	),
+	' div.uagb-popup-builder__close svg'       => array(
+		'width'       => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
+		'height'      => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
+		'line-height' => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
+		'font-size'   => UAGB_Helper::get_css_value( $attr['closeIconSize'], 'px' ),
+		'fill'        => $attr['closeIconColor'],
+	),
+	// Backward Compatibility Selectors for v2.7.0 --- End.
 	' button.uagb-popup-builder__close'           => array(
 		'left'    => ( ( 'top-left' === $attr['closeIconPosition'] && ! is_rtl() ) || ( 'top-right' === $attr['closeIconPosition'] && is_rtl() ) ) ? 0 : '',
 		'right'   => ( ( 'top-right' === $attr['closeIconPosition'] && ! is_rtl() ) || ( 'top-left' === $attr['closeIconPosition'] && is_rtl() ) ) ? 0 : '',
