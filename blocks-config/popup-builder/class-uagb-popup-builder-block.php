@@ -605,6 +605,12 @@ if ( ! class_exists( 'UAGB_Popup_Builder_Block' ) ) {
 						// Responsive Borders.
 						$content_border_attributes
 					),
+					'supports'        => array(
+						'anchor'   => true,
+						'multiple' => false,
+						'reusable' => false,
+						'lock'     => false,
+					),
 					'render_callback' => array( $this, 'render_popup_builder_block' ),
 				)
 			);
