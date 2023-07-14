@@ -7,7 +7,6 @@ import { GBS_RANDOM_NUMBER } from '@Utils/Helpers';
 
 const AddGBSStyles = ( ChildComponent )=> {
 	const WrapWithStyle = ( props ) => {
-		console.log( 'AddGBSStyles props 1', props);
 		const globalBlockStyles = select( storeName ).getGlobalBlockStyles();
 		const initialStateFlag = select( storeName ).getState()?.initialStateSetFlag;
 		

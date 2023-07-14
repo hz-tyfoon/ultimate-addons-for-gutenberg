@@ -17,7 +17,6 @@ import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBAdvancedHeading = ( props ) => {
-	console.log( 'UAGBAdvancedHeading props', props );
 	const {
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },

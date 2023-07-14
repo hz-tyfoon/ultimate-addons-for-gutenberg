@@ -154,7 +154,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		headingDescToggle
 	} = attributes;
 
-	console.log( 'styling attributes', attributes );
 
 	let tablet_selectors = {};
 	let mobile_selectors = {};
@@ -188,7 +187,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'padding-left': generateCSSUnit( blockLeftPadding, blockPaddingUnit ),
 		},
 		' p.uagb-desc-text': {
-			'margin': 0,
 			'font-family': subHeadFontFamily,
 			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
