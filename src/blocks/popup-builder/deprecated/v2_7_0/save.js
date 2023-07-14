@@ -6,7 +6,7 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { uagbClassNames } from '@Utils/Helpers';
 import renderSVG from '@Controls/renderIcon';
 
-export default function save( props ) {
+const save = ( props ) => {
 	const {
 		attributes,
 	} = props;
@@ -52,3 +52,5 @@ export default function save( props ) {
 		</div>
 	);
 }
+
+export default save;
