@@ -8,14 +8,21 @@ import attributes from './attributes';
 import Edit from './edit';
 import save from './save';
 import variations from './variations';
+import deprecated from './deprecated';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { addFilter } from '@wordpress/hooks';
+import { addFilter, applyFilters } from '@wordpress/hooks';
 import PreviewImage from '@Controls/previewImage';
 import { addSidebarPopupMenu } from './sidebar-settings/popup-sidebar';
+import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
 
 if ( 'spectra-popup' === window.typenow ) {
+
+	let popupCommonData = {};
+	popupCommonData = applyFilters( 'uagb/popup-builder', addCommonDataToSpectraBlocks( popupCommonData ) );
+
 	registerBlockType( 'uagb/popup-builder', {
+		...popupCommonData,
 		apiVersion: 2,
 		title: __( 'Popup Builder', 'ultimate-addons-for-gutenberg' ),
 		description: __(
@@ -44,11 +51,7 @@ if ( 'spectra-popup' === window.typenow ) {
 		),
 		save: () => null,
 		variations,
-		example: {
-			attributes: {
-				isPreview: true,
-			}
-		},
+		deprecated,
 	} );
 
 	addFilter(
