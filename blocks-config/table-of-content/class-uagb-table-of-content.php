@@ -450,12 +450,8 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 			// Get the current post.
 			$post = get_post();
 
-			// Verify if the retrieved post is an instance of WP_Post.
-			if ( $post instanceof WP_Post ) {
-				return $post;
-			} else {
-				return null;
-			}
+			// Return the post if it is an instance of WP_Post, otherwise return null.
+			return $post instanceof WP_Post ? $post : null;
 		}
 		/**
 		 * Renders blocks to allow dynamic blocks that bring in headings to be accounted for.
