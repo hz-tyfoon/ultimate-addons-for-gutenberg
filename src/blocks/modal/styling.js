@@ -259,7 +259,7 @@ export default function styling( attributes, clientId, name ) {
 			'fill': iconColor,
 		},
 		' .uagb-modal-text.uagb-modal-trigger': {
-			'color': textColor,
+			'color': textColor + ' !important',
 			'font-family': textFontFamily,
 			'font-style': textFontStyle,
 			'text-decoration': textDecoration,
@@ -288,6 +288,12 @@ export default function styling( attributes, clientId, name ) {
 			'color': btnLinkColor,
 			'background-color': modalTriggerBgType === 'color' ? btnBgColor : 'transparent',
 			...borderCSS,
+		},
+		' .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-trigger .block-editor-rich-text__editable': {
+			'color': btnLinkColor + ' !important',
+		},
+		' .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-trigger:hover .block-editor-rich-text__editable': {
+			'color': btnLinkHoverColor + ' !important',
 		},
 		' .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-trigger svg': {
 			'font-size': generateCSSUnit( btnFontSize, btnFontSizeType ),

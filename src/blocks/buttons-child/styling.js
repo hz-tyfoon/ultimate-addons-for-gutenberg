@@ -162,13 +162,13 @@ function styling( attributes, clientId, name ) {
 				'letter-spacing': generateCSSUnit( letterSpacing, letterSpacingType ),
 			},
 			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover .uagb-button__link': {
-				'color': hColor,
+				'color': hColor + ' !important',
 			},
 			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover': {
 				'color': hColor,
 			},
 			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__link': {
-				'color': color,
+				'color': color + ' !important',
 			},
 		};
 		selectors[ ' .wp-block-button__link.uagb-buttons-repeater' ] = borderCSS;
@@ -331,6 +331,11 @@ function styling( attributes, clientId, name ) {
 		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover .uagb-button__icon > svg'
 	] = {
 		'fill': iconHColor || hColor,
+	};
+	selectors[
+		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__icon > svg'
+	] = {
+		'fill': iconColor || color,
 	};
 	if ( ! removeText ) {
         const iconMargin = generateCSSUnit( getFallbackNumber( iconSpace, 'iconSpace', blockName ), 'px' );

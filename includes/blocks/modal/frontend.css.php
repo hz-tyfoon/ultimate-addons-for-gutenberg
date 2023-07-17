@@ -95,10 +95,16 @@ $selectors               = array(
 		'color'            => $attr['btnLinkColor'],
 		'background-color' => ( 'color' === $attr['modalTriggerBgType'] ) ? $attr['btnBgColor'] : 'transparent',
 	),
+	'.uagb-modal-wrapper .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-trigger .uagb-inline-editing' => array(
+		'color'            => $attr['btnLinkColor'],
+	),
 	' .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-trigger:hover' => array(
 		'color'            => $attr['btnLinkHoverColor'] ? $attr['btnLinkHoverColor'] : $attr['btnLinkColor'],
 		'background-color' => ( 'color' === $attr['modalTriggerBgHoverType'] ) ? $attr['btnBgHoverColor'] : 'transparent',
 		'border-color'     => $attr['btnBorderHColor'],
+	),
+	' .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-trigger:hover .uagb-inline-editing' => array(
+		'color'            => $attr['btnLinkHoverColor'] ? $attr['btnLinkHoverColor'] : $attr['btnLinkColor'],
 	),
 	' .uagb-spectra-button-wrapper .uagb-modal-button-link.uagb-modal-trigger:focus' => array(
 		'color'            => $attr['btnLinkHoverColor'] ? $attr['btnLinkHoverColor'] : $attr['btnLinkColor'],

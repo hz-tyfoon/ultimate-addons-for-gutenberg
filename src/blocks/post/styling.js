@@ -521,7 +521,7 @@ function styling( attributes, clientId ) {
 		' .uagb-post__inner-wrap .uagb-post__text .wp-block-button.uagb-post__cta:not(.is-style-outline) .uagb-text-link.wp-block-button__link:not(.has-background) '
 	] = {
 		'pointer-events': 'visible',
-		'color': ctaColor,
+		'color': ctaColor + ' !important',
 		'font-size': generateCSSUnit( ctaFontSize, ctaFontSizeType ),
 		'font-family': ctaFontFamily,
 		'font-weight': ctaFontWeight,
@@ -540,7 +540,7 @@ function styling( attributes, clientId ) {
 	selectors[
 		' .uagb-post__inner-wrap .uagb-post__text .wp-block-button.uagb-post__cta:not(.is-style-outline) .uagb-text-link.wp-block-button__link:not(.has-background):hover'
 	] = {
-		'color': ctaHColor,
+		'color': ctaHColor + ' !important',
 		'background': ctaBgHType === 'color' ? ctaBgHColor : 'transparent',
 		'border-color': btnBorderHColor,
 	};

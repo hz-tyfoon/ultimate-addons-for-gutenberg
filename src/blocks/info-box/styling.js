@@ -803,7 +803,10 @@ function styling( attributes, clientId, name ) {
 			'line-height': generateCSSUnit( ctaLineHeight, ctaLineHeightType ),
 			'color': ctaLinkColor,
 		};
-		selectors[' div.uagb-ifb-cta a.uagb-infobox-cta-link:hover'] = {
+		selectors[' div.uagb-ifb-cta a.uagb-infobox-cta-link .block-editor-rich-text__editable'] = {
+			'color': ctaLinkColor,
+		};
+		selectors[' div.uagb-ifb-cta a.uagb-infobox-cta-link:hover .block-editor-rich-text__editable'] = {
 			'color': ctaLinkHoverColor,
 		};
 		selectors[' .uagb-infobox-cta-link svg'] = {
@@ -832,10 +835,19 @@ function styling( attributes, clientId, name ) {
 			'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
 			'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
 		};
+		selectors['.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link:hover .block-editor-rich-text__editable'] = {
+			'color': ctaLinkHoverColor + ' !important',
+		};
 		selectors['.uagb-infobox__content-wrap .uagb-ifb-cta .uagb-ifb-button-wrapper.wp-block-button a.uagb-infobox-cta-link.wp-block-button__link:hover'] = {
 			'color': ctaLinkHoverColor,
 			'background-color': ctaBgHoverType === 'color' ? ctaBgHoverColor : 'transparent',
 			'border-color': btnBorderHColor,
+		};
+		selectors[' .uagb-ifb-button-wrapper .uagb-infobox-cta-link .block-editor-rich-text__editable'] = {
+			'color': ctaBtnLinkColor + ' !important',
+		};
+		selectors[' .uagb-ifb-button-wrapper .uagb-infobox-cta-link:hover .block-editor-rich-text__editable'] = {
+			'color': ctaLinkHoverColor + ' !important',
 		};
 		selectors[' .uagb-ifb-button-wrapper .uagb-infobox-cta-link:hover'] = {
 			'color': ctaLinkHoverColor,

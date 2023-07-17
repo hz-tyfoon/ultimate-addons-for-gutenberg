@@ -648,7 +648,12 @@ function CtaStyle( attributes, clientId, name ) {
 			...ctaBorderCSS,
 			'letter-spacing': generateCSSUnit( ctaLetterSpacing, ctaLetterSpacingType ),
 		};
-
+		selectors['.uagb-cta__outer-wrap a.uagb-cta__button-link-wrapper .block-editor-rich-text__editable'] = {
+			'color': ctaBtnLinkColor,
+		};
+		selectors['.uagb-cta__outer-wrap a.uagb-cta__button-link-wrapper:hover .block-editor-rich-text__editable'] = {
+			'color': ctaLinkHoverColor,
+		};
 		// Core Theme CSS
 		selectors[
 			'.uagb-cta__outer-wrap.wp-block-button:not(.is-style-outline) a.uagb-cta__button-link-wrapper.wp-block-button__link:not(.has-background)'
@@ -668,11 +673,21 @@ function CtaStyle( attributes, clientId, name ) {
 			...ctaBorderCSS,
 		};
 		selectors[
-			'.uagb-cta__outer-wrap.wp-block-button:not(.is-style-outline) a.uagb-cta__button-link-wrapper.wp-block-button__link:not(.has-background):hover'
+			'.uagb-cta__outer-wrap.wp-block-button:not(.is-style-outline) a.uagb-cta__button-link-wrapper.wp-block-button__link:not(.has-background) .block-editor-rich-text__editable'
+		] = {
+			'color': ctaBtnLinkColor,
+		};
+		selectors[
+			'.uagb-cta__outer-wrap.wp-block-button:not(.is-style-outline) a.uagb-cta__button-link-wrapper.wp-block-button__link:not(.has-background):hover .block-editor-rich-text__editable'
 		] = {
 			'color': ctaLinkHoverColor,
 			'background-color': ctaBgHoverType === 'color' ? ctaBgHoverColor : 'transparent',
 			'border-color': btnBorderHColor,
+		};
+		selectors[
+			'.uagb-cta__outer-wrap.wp-block-button:not(.is-style-outline) a.uagb-cta__button-link-wrapper.wp-block-button__link:not(.has-background):hover .block-editor-rich-text__editable'
+		] = {
+			'color': ctaLinkHoverColor,
 		};
 		tabletSelectors[
 			'.uagb-cta__outer-wrap.wp-block-button:not(.is-style-outline) a.uagb-cta__button-link-wrapper.wp-block-button__link:not(.has-background)'
@@ -734,16 +749,16 @@ function CtaStyle( attributes, clientId, name ) {
 			...secondCtaBorderCSS,
 			'letter-spacing': generateCSSUnit( secondCtaLetterSpacing, secondCtaLetterSpacingType ),
 		};
+		selectors['.uagb-cta__outer-wrap a.uagb-cta-second__button .block-editor-rich-text__editable'] = { 
+			'color': secondCtaColor,
+		};
 		selectors[ '.uagb-cta__outer-wrap a.uagb-cta-second__button:hover' ] = {
 			'color': secondCtaHoverColor,
 			'background-color': secondCtaBgHoverType === 'color' ? secondCtaHoverBackground : 'transparent',
 			'border-color': secondCtaBorderHColor,
 		};
-
-		selectors[ '.uagb-cta__outer-wrap a.uagb-cta__button-link-wrapper:hover' ] = {
-			'color': ctaLinkHoverColor,
-			'background-color': ctaBgHoverType === 'color' ? ctaBgHoverColor : 'transparent',
-			'border-color': btnBorderHColor,
+		selectors[ '.uagb-cta__outer-wrap a.uagb-cta-second__button:hover .block-editor-rich-text__editable' ] = {
+			'color': secondCtaHoverColor,
 		};
 		tabletSelectors['.uagb-cta__outer-wrap a.uagb-cta-second__button'] = {
 			'font-size': generateCSSUnit( secondCtaFontSizeTablet, secondCtaFontSizeType ),
