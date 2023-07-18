@@ -34,6 +34,7 @@ const UAGBCallToAction = ( props ) => {
 			ctaBorderColor,
 			ctaBorderhoverColor,
 			ctaBorderRadius,
+			globalBlockStyleId,
 		},
 		clientId,
 		name,
@@ -54,6 +55,10 @@ const UAGBCallToAction = ( props ) => {
 			setAttributes( { stack: 'none' } );
 		} else if ( stack === 'none' && 'below-title' === ctaPosition ) {
 			setAttributes( { stack: 'desktop' } );
+		}
+
+		if( globalBlockStyleId ) {
+			return;
 		}
 
 		if ( ctaLeftSpace ) {

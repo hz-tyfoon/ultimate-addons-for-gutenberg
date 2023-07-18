@@ -346,7 +346,6 @@ const attributes = {
 	showIcon: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-show-icon',
 		},
@@ -354,7 +353,6 @@ const attributes = {
 	showSecondIcon: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-second-show-icon',
 		},

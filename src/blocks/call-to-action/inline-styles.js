@@ -749,7 +749,7 @@ function CtaStyle( attributes, clientId, name, deviceType, gbsSelector = false )
 		};
 	}
 
-	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper #block-${ clientId } .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = gbsSelector ? '.editor-styles-wrapper ' + gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	let stylingCss = generateCSS( selectors, `${ base_selector }` );
 

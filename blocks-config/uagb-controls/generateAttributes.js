@@ -115,7 +115,6 @@ export const getBorderAttributes = ( prefix ) => {
 		attributes[ prefix + 'BorderRadiusUnit' + item.devicePrefix ] = {
 			type: 'string',
 			default: defaults[ `borderRadiusUnit${ item.devicePrefix }` ],
-			isGBSStyle: true,
 			UAGCopyPaste: {
 				styleType: prefix + '-border-radius-unit' + item.copyPastePrefix,
 			},
@@ -125,7 +124,6 @@ export const getBorderAttributes = ( prefix ) => {
 	attributes[ prefix + 'BorderLink' ] = {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: prefix + '-border-link',
 		},
@@ -134,7 +132,6 @@ export const getBorderAttributes = ( prefix ) => {
 	attributes[ prefix + 'BorderRadiusLink' ] = {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: prefix + '-border-radius-link',
 		},
