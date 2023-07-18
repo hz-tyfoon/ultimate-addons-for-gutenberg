@@ -43,6 +43,8 @@ function styling( attributes, clientId, name ) {
 		headFontWeight,
 		headFontSize,
 		headFontSizeType,
+		headFontSizeTypeMobile,
+		headFontSizeTypeTablet,
 		headFontSizeMobile,
 		headFontSizeTablet,
 		headLineHeight,
@@ -313,7 +315,7 @@ function styling( attributes, clientId, name ) {
 	};
 
 	tablet_selectors[ ' ' + headingTag + '.uagb-heading-text' ] = {
-		'font-size': generateCSSUnit( headFontSizeTablet, headFontSizeType ),
+		'font-size': generateCSSUnit( headFontSizeTablet, headFontSizeTypeTablet ),
 		'line-height': generateCSSUnit( headLineHeightTablet, headLineHeightType ),
 		'letter-spacing': generateCSSUnit( headLetterSpacingTablet, headLetterSpacingType ),
 	};
@@ -360,7 +362,7 @@ function styling( attributes, clientId, name ) {
 	};
 
 	mobile_selectors[ ' ' + headingTag + '.uagb-heading-text' ] = {
-		'font-size': generateCSSUnit( headFontSizeMobile, headFontSizeType ),
+		'font-size': generateCSSUnit( headFontSizeMobile, headFontSizeTypeMobile ),
 		'line-height': generateCSSUnit( headLineHeightMobile, headLineHeightType ),
 		'letter-spacing': generateCSSUnit( headLetterSpacingMobile, headLetterSpacingType ),
 	};

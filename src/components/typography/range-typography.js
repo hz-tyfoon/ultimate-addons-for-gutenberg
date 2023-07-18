@@ -20,6 +20,8 @@ export default function RangeTypographyControl( props ) {
 		size,
 		min,
 		type,
+		mobileType,
+		tabletType,
 		setAttributes,
 		sizeLabel,
 		sizeTabletText,
@@ -59,7 +61,7 @@ export default function RangeTypographyControl( props ) {
 				value={ sizeTablet.value }
 				min={ min }
 				max={ 200 }
-				unit={ type }
+				unit={ tabletType }
 				responsive={ true }
 				setAttributes={ setAttributes }
 				data={ {
@@ -78,7 +80,7 @@ export default function RangeTypographyControl( props ) {
 				value={ sizeMobile.value }
 				min={ min }
 				max={ 200 }
-				unit={ type }
+				unit={ mobileType }
 				responsive={ true }
 				setAttributes={ setAttributes }
 				data={ {

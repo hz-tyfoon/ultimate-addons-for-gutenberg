@@ -157,12 +157,22 @@ function FontFamilyControl( props ) {
 	}
 
 	let fontSize;
-	const fontSizeStepsVal = 'em' === props.fontSizeType.value ? 0.1 : 1; // fractional value when unit is em.
+	const fontSizeType = props.fontSizeType.value;
+const fontSizeMobileType = props.fontSizeMobileType.value;
+const fontSizeTabletType = props.fontSizeTabletType.value;
+
+const fontSizeStepsVal = fontSizeType === 'em' || fontSizeMobileType === 'em' || fontSizeTabletType === 'em' ? 0.1 : 1;
+
+
 	if ( true !== props.disableFontSize ) {
 		fontSize = (
 			<RangeTypographyControl
 				type={ props.fontSizeType }
 				typeLabel={ props.fontSizeType.label }
+				typeMobile={ props.fontSizeMobileType }
+				typeMobileLabel={ props.fontSizeMobileType.label }
+				typeTablet={ props.fontSizeTabletType }
+				typeTabletLabel={ props.fontSizeTabletType.label }
 				sizeMobile={ props.fontSizeMobile }
 				sizeMobileLabel={ props.fontSizeMobile.label }
 				sizeTablet={ props.fontSizeTablet }

@@ -272,6 +272,20 @@ const attributes = {
 			styleType: 'main-title-font-size-type',
 		},
 	},
+	headFontSizeTypeMobile: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'main-title-font-size-type-mobile',
+		},
+	},
+	headFontSizeTypeTablet: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'main-title-font-size-type-tablet',
+		},
+	},
 	headLineHeightType: {
 		type: 'string',
 		default: 'em',

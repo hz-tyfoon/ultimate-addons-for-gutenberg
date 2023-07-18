@@ -46,6 +46,8 @@ const Settings = ( props ) => {
 		headFontWeight,
 		headFontStyle,
 		headFontSizeType,
+		headFontSizeTypeMobile,
+		headFontSizeTypeTablet,
 		headFontSize,
 		headFontSizeMobile,
 		headFontSizeTablet,
@@ -455,6 +457,14 @@ const Settings = ( props ) => {
 					fontSizeType={ {
 						value: headFontSizeType,
 						label: 'headFontSizeType',
+					} }
+					fontSizeMobileType={ {
+						value: headFontSizeTypeMobile,
+						label: 'headFontSizeTypeMobile',
+					} }
+					fontSizeTabletType={ {
+						value: headFontSizeTypeTablet,
+						label: 'headFontSizeTypeTablet',
 					} }
 					fontSize={ {
 						value: headFontSize,
