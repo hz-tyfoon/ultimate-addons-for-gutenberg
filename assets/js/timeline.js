@@ -1,6 +1,14 @@
 window.addEventListener( 'DOMContentLoaded', uagbTimelineInit );
 window.addEventListener( 'resize', uagbTimelineInit );
-window.addEventListener( 'scroll', uagbTimelineInit );
+let scrollTimeoutId;
+// Attach the function to the scroll event
+window.addEventListener( 'scroll', function () {
+	// Clear the previous timeout
+	clearTimeout( scrollTimeoutId );
+
+	// Set a new timeout to delay the function execution
+	scrollTimeoutId = setTimeout( uagbTimelineInit, 100 );
+} );
 document.addEventListener( 'UAGTimelineEditor', uagbTimelineInit );
 // Callback function for all event listeners.
 function uagbTimelineInit() {
