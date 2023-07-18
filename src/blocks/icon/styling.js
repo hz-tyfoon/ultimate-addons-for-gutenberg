@@ -167,6 +167,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	if ( useSeparateBoxShadows ) {
 		selectors['.uagb-icon-wrapper .uagb-svg-wrapper:hover'] = {
 			'box-shadow' : boxShadowHoverCSS,
+			'background': hoverBackground,
+			'border-color': iconBorderHColor,
 		}
 	}
 
