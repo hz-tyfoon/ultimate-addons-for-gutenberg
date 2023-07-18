@@ -49,7 +49,7 @@ if ( 'spectra-popup' === window.typenow ) {
 				<Edit { ...props } />
 			)
 		),
-		save: () => null,
+		save,
 		variations,
 		deprecated,
 	} );
