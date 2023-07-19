@@ -16,8 +16,8 @@ const RepetitionSettings = () => {
 	// Once the panel loads, update the Default Repetition after Infinite Repeat has been set.
 	useEffect( () => {
 		if ( -1 === repetition ) {
-			setInfiniteRepeat( true );
 			setRepetition( 1 );
+			setInfiniteRepeat( true );
 		}
 	}, [] );
 
