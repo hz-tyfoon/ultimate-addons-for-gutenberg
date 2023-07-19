@@ -218,6 +218,10 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ### x.x.x ###
 * Improvement: Modal - Improved the accessibility of the opened Modal.
 * Improvement: Popup Builder - Added a setting for close icon hover color and improved accessibility.
+* Fix: Separator - Resolved an issue in which the separator mobile width would not work as intended in the frontend.
+* Fix: Heading - Resolved an issue in which the font-family would not render as required for highlighted headings.
+* Fix: Call To Action - Resolved an issue wherein additional button padding is not working responsively as intended in frontend. 
+* Fix: Global - Resolved an issue in which the font-family would not render as required on the frontend for certain blocks.
 
 ### 2.7.0 - THURSDAY, 13th July 2023 ###
 * Feature: Popup Builder - Added a new `Push Content` feature for info bars.
