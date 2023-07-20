@@ -363,7 +363,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
             [ leftSideMargin ]: mobileIconMargin,
         };
     }
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 
 	let stylingCss = generateCSS( selectors, base_selector );

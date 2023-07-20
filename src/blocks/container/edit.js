@@ -37,6 +37,7 @@ const UAGBContainer = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId,
 		},
 		clientId,
 		setAttributes,
@@ -159,6 +160,15 @@ const UAGBContainer = ( props ) => {
 			variationPicker.insertBefore( closeButton, variationPickerLabel );
 		}
 
+		if ( 0 !== select( 'core/block-editor' ).getBlockParents( clientId ).length ) {
+			// if there is no parent for container when child container moved outside root then do not show variations.
+			setAttributes( { variationSelected: true } );
+		}
+
+		if( globalBlockStyleId ) {
+			return;
+		}
+		
 		// border
 		if ( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ) {
 			migrateBorderAttributes(
@@ -186,11 +196,6 @@ const UAGBContainer = ( props ) => {
 				setAttributes,
 				attributes
 			);
-		}
-
-		if ( 0 !== select( 'core/block-editor' ).getBlockParents( clientId ).length ) {
-			// if there is no parent for container when child container moved outside root then do not show variations.
-			setAttributes( { variationSelected: true } );
 		}
 	}, [] );
 

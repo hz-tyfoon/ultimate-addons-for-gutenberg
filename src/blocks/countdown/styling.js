@@ -197,7 +197,7 @@ export default function styling( attributes, clientId, name, deviceType, gbsSele
 		? internalBoxSpacingTablet
 		: internalBoxSpacingMobile;
 
-	let separatorRightSpacingFallback = getFallbackNumber(
+	const separatorRightSpacingFallback = getFallbackNumber(
 		separatorRightSpacing,
 		'separatorRightSpacing',
 		blockName

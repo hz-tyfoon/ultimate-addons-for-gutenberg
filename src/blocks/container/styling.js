@@ -397,10 +397,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'padding-bottom': generateCSSUnit( bottomPaddingDesktop, paddingType ),
 		'padding-left': generateCSSUnit( leftPaddingDesktop, paddingType ),
 		'padding-right': generateCSSUnit( rightPaddingDesktop, paddingType ),
-		'margin-top': generateCSSUnit( topMarginDesktop, marginType ) + ' !important',
-		'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType ) + ' !important',
-		'margin-left': generateCSSUnit( leftMarginDesktop, marginType ) + ' !important',
-		'margin-right': generateCSSUnit( rightMarginDesktop, marginType ) + ' !important',
+		'margin-top': generateCSSUnit( topMarginDesktop, marginType, true ),
+		'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType, true ),
+		'margin-left': generateCSSUnit( leftMarginDesktop, marginType, true ),
+		'margin-right': generateCSSUnit( rightMarginDesktop, marginType, true ),
 		'box-shadow':
 			generateCSSUnit( boxShadowHOffset, 'px' ) +
 			' ' +
@@ -572,11 +572,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'padding-bottom': generateCSSUnit( bottomPaddingDesktop, paddingType ),
 			'padding-left': generateCSSUnit( leftPaddingDesktop, paddingType ),
 			'padding-right': generateCSSUnit( rightPaddingDesktop, paddingType ),
-			'margin-top': generateCSSUnit( topMarginDesktop, marginType ) + ' !important',
-			'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType ) + ' !important',
+			'margin-top': generateCSSUnit( topMarginDesktop, marginType, true ),
+			'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType, true ),
 			// For avoiding the margin collapse issue between themes style and our style we are adding !important.
-			'margin-left': generateCSSUnit( leftMarginDesktop, marginType ) + ' !important',
-			'margin-right': generateCSSUnit( rightMarginDesktop, marginType ) + ' !important',
+			'margin-left': generateCSSUnit( leftMarginDesktop, marginType, true ),
+			'margin-right': generateCSSUnit( rightMarginDesktop, marginType, true ),
 			'box-shadow':
 				generateCSSUnit( boxShadowHOffset, 'px' ) +
 				' ' +
@@ -597,10 +597,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'padding-bottom': generateCSSUnit( bottomPaddingTablet, paddingTypeTablet ),
 			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
 			'padding-right': generateCSSUnit( rightPaddingTablet, paddingTypeTablet ),
-			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ) + ' !important',
+			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet, true ),
+			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet, true ),
+			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet, true ),
+			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet, true ),
 			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet ),
 		};
 		mobile_selectors[ '.wp-block-uagb-container' ] = {
@@ -608,10 +608,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'padding-bottom': generateCSSUnit( bottomPaddingMobile, paddingTypeMobile ),
 			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
 			'padding-right': generateCSSUnit( rightPaddingMobile, paddingTypeMobile ),
-			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ) + ' !important',
+			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile, true ),
+			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile, true ),
+			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile, true ),
+			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile, true ),
 			'min-height': generateCSSUnit( minHeightMobile, minHeightTypeMobile ),
 		};
 		selectors[ '.wp-block-uagb-container:hover .uagb-container__video-wrap' ] = {
@@ -642,11 +642,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'padding-bottom': generateCSSUnit( bottomPaddingTablet, paddingTypeTablet ),
 			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
 			'padding-right': generateCSSUnit( rightPaddingTablet, paddingTypeTablet ),
-			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ) + ' !important',
-			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet ) + ' !important',
+			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet, true ),
+			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet, true ),
+			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet, true ),
+			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet, true ),
+			'min-height': generateCSSUnit( minHeightTablet, minHeightTypeTablet, true ),
 			...borderCSSTablet,
 			...containerBackgroundCSSTablet,
 		};
@@ -655,10 +655,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'padding-bottom': generateCSSUnit( bottomPaddingMobile, paddingTypeMobile ),
 			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
 			'padding-right': generateCSSUnit( rightPaddingMobile, paddingTypeMobile ),
-			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ) + ' !important',
+			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile, true ),
+			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile, true ),
+			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile, true ),
+			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile, true ),
 			'min-height': generateCSSUnit( minHeightMobile, minHeightTypeMobile ),
 			...borderCSSMobile,
 			...containerBackgroundCSSMobile
@@ -703,7 +703,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		);
 	}
 
-	const base_selector = gbsSelector ? gbsSelector : `.editor-styles-wrapper #block-${ clientId }`;
+	const base_selector = gbsSelector ? '.editor-styles-wrapper ' + gbsSelector : `.editor-styles-wrapper #block-${ clientId }`;
 
 	let styling_css = generateCSS( selectors, base_selector );
 
