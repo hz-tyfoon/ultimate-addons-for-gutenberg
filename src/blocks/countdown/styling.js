@@ -197,7 +197,7 @@ export default function styling( attributes, clientId, name, deviceType, gbsSele
 		? internalBoxSpacingTablet
 		: internalBoxSpacingMobile;
 
-	const separatorRightSpacingFallback = getFallbackNumber(
+	let separatorRightSpacingFallback = getFallbackNumber(
 		separatorRightSpacing,
 		'separatorRightSpacing',
 		blockName
@@ -415,7 +415,7 @@ export default function styling( attributes, clientId, name, deviceType, gbsSele
 	// Separator.
 	if ( showSeparator ) {
 		selectors[ separatorSelector ] = {
-			'content': "'" + separatorType + "'",
+			'content': separatorType ? "'" + separatorType + "'" : '',
 			'font-family': separatorFontFamily,
 			'font-style': separatorFontStyle,
 			'font-weight': separatorFontWeight,
@@ -423,21 +423,21 @@ export default function styling( attributes, clientId, name, deviceType, gbsSele
 			'line-height': generateCSSUnit( separatorLineHeight, separatorLineHeightType ),
 			'color': separatorColor,
 
-			'right': generateCSSUnit( -separatorRightSpacingFallback, 'px' ),
+			'right': separatorRightSpacingFallback ? generateCSSUnit( -separatorRightSpacingFallback, 'px' ) : '',
 			'top': generateCSSUnit( separatorTopSpacingFallback, 'px' ),
 		};
 
 		tabletSelectors[ separatorSelector ] = {
 			'font-size': generateCSSUnit( separatorFontSizeTablet, separatorFontSizeType ),
 			'line-height': generateCSSUnit( separatorLineHeightTablet, separatorLineHeightType ),
-			'right': generateCSSUnit( -separatorRightSpacingTabletFallback, 'px' ),
+			'right': separatorRightSpacingTabletFallback ? generateCSSUnit( -separatorRightSpacingTabletFallback, 'px' ) : '',
 			'top': generateCSSUnit( separatorTopSpacingTabletFallback, 'px' ),
 		};
 
 		mobileSelectors[ separatorSelector ] = {
 			'font-size': generateCSSUnit( separatorFontSizeMobile, separatorFontSizeType ),
 			'line-height': generateCSSUnit( separatorLineHeightMobile, separatorLineHeightType ),
-			'right': generateCSSUnit( -separatorRightSpacingMobileFallback, 'px' ),
+			'right': separatorRightSpacingMobileFallback ? generateCSSUnit( -separatorRightSpacingMobileFallback, 'px' ) : '',
 			'top': generateCSSUnit( separatorTopSpacingMobileFallback, 'px' ),
 		};
 	}

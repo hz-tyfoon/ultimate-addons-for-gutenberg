@@ -76,7 +76,6 @@ $selectors = array(
 		'display'         => 'inline-flex',
 		'align-items'     => 'center',
 		'justify-content' => 'center',
-		'line-height'     => 0,
 		'box-sizing'      => 'content-box',
 		'width'           => $icon_size,
 		'height'          => $icon_size,

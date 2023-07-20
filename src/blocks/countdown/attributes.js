@@ -77,7 +77,6 @@ const attributes = {
 	showSeparator: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'countdown-show-separator',
 		},

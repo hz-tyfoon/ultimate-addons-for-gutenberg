@@ -921,17 +921,13 @@ class UAGB_Init_Blocks {
 		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs']['globalBlockStyleName'] ) || empty( $block['attrs']['block_id'] ) ) {
 			return $block_content;
 		}
-		
-		$block_name          = $block['blockName'];
-		$style_name          = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
-		$style_class_name    = 'spectra-gbs-' . $style_name;
-		$wp_block_class_name = str_replace( '/', '-', $block_name );
-		
-		$html = str_replace(
-			'<div class="wp-block-' . $wp_block_class_name,
-			'<div class="wp-block-' . $wp_block_class_name . ' ' . $style_class_name . ' ',
-			$block_content
-		);
+
+		$style_name       = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
+		$style_class_name = 'spectra-gbs-' . $style_name;
+		$block_id         = 'uagb-block-' . $block['attrs']['block_id'];
+
+		// Replace the block id with the block id and the style class name.
+		$html = str_replace( $block_id, $block_id . ' ' . $style_class_name, $block_content );
 
 		return $html;
 	}

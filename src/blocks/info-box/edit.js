@@ -32,6 +32,7 @@ const UAGBInfoBox = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			globalBlockStyleId,
 		},
 		name,
 		clientId,
@@ -44,6 +45,10 @@ const UAGBInfoBox = ( props ) => {
 		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 
 		setAttributes( { classMigrate: true } );
+
+		if( globalBlockStyleId ) {
+			return;
+		}
 
 		if ( ctaBgType === undefined ) {
 			setAttributes( { ctaBgType: 'color' } );

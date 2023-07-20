@@ -559,7 +559,6 @@ const attributes = {
 	showCtaIcon: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-show-icon',
 		},
@@ -674,7 +673,6 @@ const attributes = {
 	ctaBgType: {
 		type: 'string',
 		default: 'color',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-background-type',
 		},
@@ -682,7 +680,6 @@ const attributes = {
 	ctaBgHoverType: {
 		type: 'string',
 		default: 'color',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-hbackground-type',
 		},
@@ -862,13 +859,25 @@ const attributes = {
 	ctaBorderColor: {
 		type: 'string',
 		default: '#333',
+		isGBSStyle: true,
+		UAGCopyPaste: {
+			styleType: 'cta-btn-border-color',
+		},
 	},
 	ctaBorderhoverColor: {
 		type: 'string',
+		isGBSStyle: true,
+		UAGCopyPaste: {
+			styleType: 'cta-btn-border-hover-color',
+		},
 	},
 	ctaBorderStyle: {
 		type: 'string',
 		default: 'solid',
+		isGBSStyle: true,
+		UAGCopyPaste: {
+			styleType: 'cta-btn-border-style',
+		},
 	},
 	ctaBtnVertPadding: {
 		type: 'number',
@@ -889,10 +898,18 @@ const attributes = {
 	ctaBorderWidth: {
 		type: 'number',
 		default: 1,
+		isGBSStyle: true,
+		UAGCopyPaste: {
+			styleType: 'cta-btn-border-width',
+		},
 	},
 	ctaBorderRadius: {
 		type: 'number',
 		default: 0,
+		isGBSStyle: true,
+		UAGCopyPaste: {
+			styleType: 'cta-btn-border-radius',
+		},
 	},
 	iconLeftMargin: {
 		type: 'number',

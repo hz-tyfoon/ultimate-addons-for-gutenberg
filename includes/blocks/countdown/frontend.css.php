@@ -230,28 +230,28 @@ $m_selectors['.wp-block-uagb-countdown div.wp-block-uagb-countdown__label'] = ar
 if ( true === $attr['showSeparator'] ) {
 
 	$selectors[ $separator_selector ] = array(
-		'content'     => "'" . $attr['separatorType'] . "'",
+		'content'     => $attr['separatorType'] ? "'" . $attr['separatorType'] . "'" : '',
 		'font-family' => $attr['separatorFontFamily'],
 		'font-style'  => $attr['separatorFontStyle'],
 		'font-weight' => $attr['separatorFontWeight'],
 		'font-size'   => UAGB_Helper::get_css_value( $attr['separatorFontSize'], $attr['separatorFontSizeType'] ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['separatorLineHeight'], $attr['separatorLineHeightType'] ),
 		'color'       => $attr['separatorColor'],
-		'right'       => UAGB_Helper::get_css_value( -$attr['separatorRightSpacing'], 'px' ),
+		'right'       => is_int( $attr['separatorRightSpacing'] ) ? UAGB_Helper::get_css_value( -$attr['separatorRightSpacing'], 'px' ) : '',
 		'top'         => UAGB_Helper::get_css_value( $attr['separatorTopSpacing'], 'px' ),
 	);
 
 	$t_selectors[ $separator_selector ] = array(
 		'font-size'   => UAGB_Helper::get_css_value( $attr['separatorFontSizeTablet'], $attr['separatorFontSizeType'] ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['separatorLineHeightTablet'], $attr['separatorLineHeightType'] ),
-		'right'       => UAGB_Helper::get_css_value( -$attr['separatorRightSpacingTablet'], 'px' ),
+		'right'       => is_int( $attr['separatorRightSpacingTablet'] ) ? UAGB_Helper::get_css_value( -$attr['separatorRightSpacingTablet'], 'px' ) : '',
 		'top'         => UAGB_Helper::get_css_value( $attr['separatorTopSpacingTablet'], 'px' ),
 	);
 
 	$m_selectors[ $separator_selector ] = array(
 		'font-size'   => UAGB_Helper::get_css_value( $attr['separatorFontSizeMobile'], $attr['separatorFontSizeType'] ),
 		'line-height' => UAGB_Helper::get_css_value( $attr['separatorLineHeightMobile'], $attr['separatorLineHeightType'] ),
-		'right'       => UAGB_Helper::get_css_value( -$attr['separatorRightSpacingMobile'], 'px' ),
+		'right'       => is_int( $attr['separatorRightSpacingMobile'] ) ? UAGB_Helper::get_css_value( -$attr['separatorRightSpacingMobile'], 'px' ) : '',
 		'top'         => UAGB_Helper::get_css_value( $attr['separatorTopSpacingMobile'], 'px' ),
 	);
 }
