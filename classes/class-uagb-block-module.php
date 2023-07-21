@@ -259,6 +259,16 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 						'dep'  => array(),
 						'type' => 'css',
 					),
+					'uagb-glide-js'     => array(
+						'src'  => UAGB_URL . 'assets/js/glide.min.js',
+						'dep'  => array(),
+						'type' => 'js',
+					),
+					'uagb-glide-css'    => array(
+						'src'  => UAGB_URL . 'assets/css/glide-core.min.css',
+						'dep'  => array(),
+						'type' => 'css',
+					),
 				);
 			}
 

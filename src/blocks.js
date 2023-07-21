@@ -43,6 +43,7 @@ uagLocalStorage.setItem( 'uagSvgConfirmation', JSON.stringify( uagb_blocks_info?
 
 // CPT Specific Blocks.
 import './blocks/popup-builder/block.js';
+import './blocks/slider-prototype/block.js';
 // Core Spectra Blocks.
 import './blocks/container/block.js';
 import './blocks/advanced-heading/block.js';
