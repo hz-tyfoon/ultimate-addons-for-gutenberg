@@ -138,6 +138,9 @@ export const initAutoBlockRecovery = () => {
 			autoBlockRecovery();
 		} );
 	}
+	if (uagb_blocks_info.is_site_editor){
+		autoBlockRecovery();
+	}
 };
 
 if ( 'disabled' !== uagb_blocks_info.auto_block_recovery ) {
