@@ -25,13 +25,7 @@ const attributes = {
 	},
 	align: {
 		type: 'string',
-		UAGCopyPaste: {
-			styleType: 'btn-align',
-		},
-	},
-	alignment: {
-		type: 'string',
-		default: 'left',
+		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
@@ -655,11 +649,11 @@ const attributes = {
 	},
 	borderRadius: {
 		type: 'number',
-		default: 0,
+		default: 2,
 	},
 	borderStyle: {
 		type: 'string',
-		default: 'none',
+		default: 'solid',
 	},
 	borderColor: {
 		type: 'string',
