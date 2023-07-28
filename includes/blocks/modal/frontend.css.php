@@ -75,8 +75,7 @@ $selectors               = array(
 		'fill'        => $attr['closeIconColor'],
 	),
 	' .uagb-modal-popup-close:focus svg'         => array(
-		'transform' => 'scale(1.2)',
-		'filter'    => 'drop-shadow(0 0 1px ' . $attr['closeIconColor'] . ')',
+		'filter' => 'drop-shadow(0 0 1px ' . $attr['closeIconColor'] . ')',
 	),
 	'.uagb-modal-popup.active'                   => array(
 		'background' => $attr['overlayColor'],

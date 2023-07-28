@@ -46,6 +46,10 @@ body {
 				-o-transition-duration: 250ms;
 				transition-duration: 250ms;
 			}
+			
+			&:focus svg {
+				transform: scale(1.2);
+			}
 		}
 	}
 
