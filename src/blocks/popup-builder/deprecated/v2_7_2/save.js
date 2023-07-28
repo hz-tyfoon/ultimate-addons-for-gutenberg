@@ -1,5 +1,5 @@
 /**
- * BLOCK: Popup Builder - Render Block on the Front-end - v2.7.0
+ * BLOCK: Popup Builder - Render Block on the Front-end - v2.7.2
  */
 
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';

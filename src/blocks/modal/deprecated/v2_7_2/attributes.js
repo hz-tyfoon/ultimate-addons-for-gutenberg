@@ -1,5 +1,5 @@
 /**
- * BLOCK: Modal - Attributes - v2.7.0
+ * BLOCK: Modal - Attributes - v2.7.2
  */
 
 import { getBorderAttributes } from '@Controls/generateAttributes';

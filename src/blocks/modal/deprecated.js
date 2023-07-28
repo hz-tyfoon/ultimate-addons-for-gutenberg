@@ -2,8 +2,8 @@ import attributes from './attributes';
 import classnames from 'classnames';
 import renderSVG from '@Controls/renderIcon';
 import { RichText, InnerBlocks } from '@wordpress/block-editor';
-import attributesV2_7_0 from './deprecated/v2_7_0/attributes';
-import saveV2_7_0 from './deprecated/v2_7_0/save';
+import attributesV2_7_2 from './deprecated/v2_7_2/attributes';
+import saveV2_7_2 from './deprecated/v2_7_2/save';
 
 const deprecated = [
 	{
@@ -113,8 +113,8 @@ const deprecated = [
 		},
 	},
 	{
-		attributes: attributesV2_7_0,
-		save: saveV2_7_0,
+		attributes: attributesV2_7_2,
+		save: saveV2_7_2,
 	},
 ];
 

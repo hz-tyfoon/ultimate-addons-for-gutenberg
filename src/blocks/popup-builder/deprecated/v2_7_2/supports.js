@@ -1,6 +1,6 @@
 
 /**
- * BLOCK: Popup Builder - Supported Features - v2.7.0
+ * BLOCK: Popup Builder - Supported Features - v2.7.2
  */
 
 
