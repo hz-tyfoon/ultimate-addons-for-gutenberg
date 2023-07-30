@@ -169,6 +169,7 @@ const Settings = ( props ) => {
 		imgmobilePaddingUnit,
 		imgtabletPaddingUnit,
 		equalHeight,
+		vAlignContent,
 
 		// letter spacing
 		nameLetterSpacing,
@@ -1193,6 +1194,32 @@ const Settings = ( props ) => {
 									) }
 								/>
 							) }
+							{ columns > 1 && equalHeight && (
+								<MultiButtonsControl
+								setAttributes={ setAttributes }
+								label={ __( 'Vertical Alignment', 'ultimate-addons-for-gutenberg' ) }
+								data={ {
+									value: vAlignContent,
+									label: 'vAlignContent',
+								} }
+								className="uagb-multi-button-alignment-control"
+								options={ [
+									{
+										value: 'flex-start',
+										label: 'Top',
+									},
+									{
+										value: 'center',
+										label: 'Middle',
+									},
+									{
+										value: 'end',
+										label: 'Bottom',
+									},
+								] }
+								showIcons={ false }
+							/>
+							)}
 						</UAGAdvancedPanelBody>
 						<UAGAdvancedPanelBody
 							title={ __( 'Image', 'ultimate-addons-for-gutenberg' ) }

@@ -221,7 +221,8 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Improvement: Forms - Safely removed older style implementation for child blocks.
 * Improvement: Code - Improved Performance by optimizing apiFetch across the plugin.
 * Improvement: Code - Improved code quality for passing React props.
-
+* Improvement: Testimonial - Added vertical alignment option for content when equal height is enabled.
+###
 ### 2.7.2 - THURSDAY, 27th JULY 2023 ###
 * Fix: Forms - Resolved an issue in which some phone country-code colors would not work as intended in the editor.
 * Fix: Table Of Contents - Resolved an issue wherein the default padding not same in the editor and on the frontend.
