@@ -179,8 +179,6 @@ const Render = ( props ) => {
 		// Reset the dimension attributes if changing to a different image.
 		if ( ! media.id || media.id !== id ) {
 			additionalAttributes = {
-				width: undefined,
-				height: undefined,
 				// Fallback to size "full" if there's no default image size.
 				// It means the image is smaller, and the block will use a full-size URL.
 				sizeSlug: hasDefaultSize( media, imageDefaultSize ) ? imageDefaultSize : 'full',
@@ -244,8 +242,6 @@ const Render = ( props ) => {
 			setAttributes( {
 				url: newURL,
 				id: undefined,
-				width: undefined,
-				height: undefined,
 				sizeSlug: imageDefaultSize,
 				sizeSlugTablet: imageDefaultSize,
 				sizeSlugMobile: imageDefaultSize,

@@ -7,15 +7,11 @@ export const pickRelevantMediaFiles = ( image, size ) => {
 	if ( image?.sizes && image?.sizes[ size ] ) {
 		return {
 			...imageProps,
-			width: image?.sizes[ size ]?.width,
-			height: image?.sizes[ size ]?.height,
 			url: image?.sizes[ size ]?.url,
 		};
 	} else if ( image?.media_details && image?.media_details?.sizes[ size ] ) {
 		return {
 			...imageProps,
-			width: image?.media_details?.sizes[ size ]?.width,
-			height: image?.media_details?.sizes[ size ]?.height,
 			url: image?.media_details?.sizes[ size ]?.source_url,
 		};
 	}
