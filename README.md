@@ -5,7 +5,7 @@
 **Requires at least:** 5.6  
 **Requires PHP:** 5.6  
 **Tested up to:** 6.2.2  
-**Stable tag:** 2.7.2  
+**Stable tag:** 2.7.3  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -218,6 +218,11 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ### x.x.x ###
 * Improvement: Modal - Improved the accessibility of the opened Modal.
 * Improvement: Popup Builder - Added a setting for close icon hover color and improved accessibility.
+
+### 2.7.3 - MONDAY, 31st JULY 2023 ###
+* Improvement: Core Blocks - Enhanced the reusable block functionality for all Core Blocks, with the exception of the Container.
+* Improvement: Global - Optimized the editor performance and stability.
+* Fix: Global - Prevented a fatal error for non-block-based themes in WordPress versions below 5.9.0.
 
 ### 2.7.2 - THURSDAY, 27th JULY 2023 ###
 * Fix: Forms - Resolved an issue in which some phone country-code colors would not work as intended in the editor.
@@ -1506,3 +1511,8 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ### 0.0.1 ###
 * Initial release
+
+## Upgrade Notice ##
+
+### 2.7.3 ###
+We've optimized the internal structure of Spectra in this update. To ensure your website's safety, We recommend that you backup your website before updating.
