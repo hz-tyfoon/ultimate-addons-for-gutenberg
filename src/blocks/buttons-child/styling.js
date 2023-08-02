@@ -9,10 +9,12 @@ import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateShadowCSS from '@Controls/generateShadowCSS';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType  ) {
 	const blockName = name.replace( 'uagb/', '' );
+	const previewType = deviceType.toLowerCase();
 
 	const {
+		block_id,
 		fontFamily,
 		fontWeight,
 		size,
@@ -133,13 +135,13 @@ function styling( attributes, clientId, name ) {
 		'position': boxShadowPositionHover,
 		'altColor': boxShadowColor,
 	} );
-	
+
 	if ( ! inheritFromTheme ) {
-		
+
 		const borderCSS = generateBorderCSS( attributes, 'btn' );
 		const borderCSSTablet = generateBorderCSS( attributes, 'btn', 'tablet' );
 		const borderCSSMobile = generateBorderCSS( attributes, 'btn', 'mobile' );
-	
+
 		selectors = {
 			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater': {
 				'font-size': generateCSSUnit( size, sizeType ),
@@ -160,8 +162,11 @@ function styling( attributes, clientId, name ) {
 				'color': color,
 				'box-shadow': boxShadowCSS,
 				'letter-spacing': generateCSSUnit( letterSpacing, letterSpacingType ),
-			},		
+			},
 			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover .uagb-button__link': {
+				'color': hColor,
+			},
+			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover': {
 				'color': hColor,
 			},
 			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__link': {
@@ -242,7 +247,6 @@ function styling( attributes, clientId, name ) {
 				'gradientAngle': gradientAngle,
 				'selectGradient': selectGradient,
 			};
-
 			const btnBackground = generateBackgroundCSS( backgroundAttributes );
 			selectors[ '.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater' ] = btnBackground;
 		} else if ( 'color' === backgroundType ) {
@@ -250,6 +254,7 @@ function styling( attributes, clientId, name ) {
 				'background': background,
 			};
 		}
+
 
 		if ( 'transparent' === hoverbackgroundType ) {
 			selectors[ '.uagb-buttons__outer-wrap.wp-block-button .wp-block-button__link.uagb-buttons-repeater:hover' ] = {
@@ -327,38 +332,59 @@ function styling( attributes, clientId, name ) {
 	selectors[
 		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover .uagb-button__icon > svg'
 	] = {
-		'fill': iconHColor,
+		'fill': iconHColor || hColor,
 	};
 	if ( ! removeText ) {
-		selectors[ ' .uagb-button__icon-position-after' ] = {
-			'margin-left': generateCSSUnit( getFallbackNumber( iconSpace, 'iconSpace', blockName ), 'px' ),
-		};
+        const iconMargin = generateCSSUnit( getFallbackNumber( iconSpace, 'iconSpace', blockName ), 'px' );
+        const tabletIconMargin = generateCSSUnit( iconSpaceTablet, 'px' );
+        const mobileIconMargin = generateCSSUnit( iconSpaceMobile, 'px' );
+        let rightSideMargin = 'margin-right';
+        let leftSideMargin = 'margin-left';
 
-		tabletSelectors[ ' .uagb-button__icon-position-before' ] = {
-			'margin-right': generateCSSUnit( iconSpaceTablet, 'px' ),
-		};
-		tabletSelectors[ ' .uagb-button__icon-position-after' ] = {
-			'margin-left': generateCSSUnit( iconSpaceTablet, 'px' ),
-		};
+		if( '1' !== uagb_blocks_info.is_rtl ) {
+			rightSideMargin = 'margin-left';
+			leftSideMargin = 'margin-right';
+		}
 
-		mobileSelectors[ ' .uagb-button__icon-position-before' ] = {
-			'margin-right': generateCSSUnit( iconSpaceMobile, 'px' ),
-		};
-		mobileSelectors[ ' .uagb-button__icon-position-after' ] = {
-			'margin-left': generateCSSUnit( iconSpaceMobile, 'px' ),
-		};
-
-		selectors[ ' .uagb-button__icon-position-before' ] = {
-			'margin-right': generateCSSUnit( getFallbackNumber( iconSpace, 'iconSpace', blockName ), 'px' ),
-		};
-	}
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+        selectors[ ' .uagb-button__icon-position-after' ] = {
+            [ rightSideMargin ]: iconMargin,
+        };
+        selectors[ ' .uagb-button__icon-position-before' ] = {
+            [ leftSideMargin ]: iconMargin,
+        };
+        tabletSelectors[ ' .uagb-button__icon-position-before' ] = {
+            [ rightSideMargin ]: tabletIconMargin,
+        };
+        tabletSelectors[ ' .uagb-button__icon-position-after' ] = {
+            [ leftSideMargin ]: tabletIconMargin,
+        };
+        mobileSelectors[ ' .uagb-button__icon-position-before' ] = {
+            [ rightSideMargin ]: mobileIconMargin,
+        };
+        mobileSelectors[ ' .uagb-button__icon-position-after' ] = {
+            [ leftSideMargin ]: mobileIconMargin,
+        };
+    }
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 	let stylingCss = generateCSS( selectors, id );
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

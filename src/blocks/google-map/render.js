@@ -13,28 +13,27 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-
-	const blockName = props.name.replace( 'uagb/', '' );
-
 	const {
 		className,
 		attributes: { zoom, address, language, height },
-		deviceType
+		deviceType,
+		name,
+		clientId
 	} = props;
+
+	const blockName = name.replace( 'uagb/', '' );
 
 	const encoded_address = encodeURI( address );
 	const lang_par = language ? language : 'en';
 
-	const url = `https://www.google.com/maps/embed/v1/place?key=${
-		wp.uagb_google_api_key
-	}&q=${ encoded_address }&zoom=${ getFallbackNumber( zoom, 'zoom', blockName ) }&language=${ lang_par }`;
+	const url = `https://maps.google.com/maps?q=${ encoded_address }&z=${ getFallbackNumber( zoom, 'zoom', blockName ) }&hl=${ lang_par }&t=m&output=embed&iwloc=near`;
+
 	return (
 		<div
 			className={ classnames(
 				className,
 				'uagb-google-map__wrap',
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
+				`uagb-block-${ clientId.substr( 0, 8 ) }`,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
 			) }
 		>

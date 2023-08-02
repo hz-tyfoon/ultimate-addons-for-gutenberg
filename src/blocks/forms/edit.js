@@ -10,17 +10,20 @@ import Render from './render';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { compose, createHigherOrderComponent } from '@wordpress/compose';
-import { createBlock } from '@wordpress/blocks';
+import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
 import { __experimentalBlockVariationPicker } from '@wordpress/block-editor';
 import { withNotices } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import apiFetch from '@wordpress/api-fetch';
-import { migrateBorderAttributes } from '@Controls/generateAttributes';
+import {migrateBorderAttributes} from '@Controls/generateAttributes';
 import styles from './editor.lazy.scss';
 import { addFilter } from '@wordpress/hooks';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
+import { uagbClassNames } from '@Utils/Helpers';
+
+import getApiData from '@Controls/getApiData';
 
 const UAGBFormsEdit = ( props ) => {
 	const {
@@ -55,23 +58,17 @@ const UAGBFormsEdit = ( props ) => {
 	} = props;
 
 	const {
-		innerBlocks, // eslint-disable-line no-unused-vars
-		blockType, // eslint-disable-line no-unused-vars
 		variations,
 		hasInnerBlocks,
 		defaultVariation,
 	} = useSelect( ( select ) => {
-		const { getBlocks } = select( 'core/block-editor' );
-		const { getBlockType, getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
+		const { getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
 
 		return {
-			innerBlocks: getBlocks( clientId ),
 			hasInnerBlocks: select( 'core/block-editor' ).getBlocks( clientId ).length > 0,
-
-			blockType: getBlockType( props.name ),
 			defaultVariation:
-				typeof getDefaultBlockVariation === 'undefined' ? null : getDefaultBlockVariation( props.name ),
-			variations: typeof getBlockVariations === 'undefined' ? null : getBlockVariations( props.name ),
+				typeof getDefaultBlockVariation === 'undefined' ? null : getDefaultBlockVariation( name ),
+			variations: typeof getBlockVariations === 'undefined' ? null : getBlockVariations( name ),
 		};
 	} );
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
@@ -84,9 +81,6 @@ const UAGBFormsEdit = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
 		if ( bgColor ) {
 			if ( undefined === toggleColor ) {
 				setAttributes( { toggleColor: bgColor } );
@@ -118,18 +112,21 @@ const UAGBFormsEdit = ( props ) => {
 				keys.reCaptchaSecretKeyV3 = reCaptchaSecretKeyV3;
 			}
 
-			const formData = new window.FormData();
-
-			formData.append( 'action', 'uagb_forms_recaptcha' );
-			formData.append( 'nonce', uagb_blocks_info.uagb_ajax_nonce );
-			formData.append( 'value', JSON.stringify( keys ) );
+			// Create an object with the nonce and value properties
+			const data = {
+				nonce: uagb_blocks_info.uagb_ajax_nonce,
+				value: JSON.stringify( keys ),
+			};
 
 			if ( Object.keys( keys ).length !== 0 ) {
-				apiFetch( {
+				// Call the getApiData function with the specified parameters
+				const getApiFetchData = getApiData( {
 					url: uagb_blocks_info.ajax_url,
-					method: 'POST',
-					body: formData,
-				} ).then( () => {} );
+					action: 'uagb_forms_recaptcha',
+					data,
+				} );
+				// Wait for the API call to complete, but perform no actions after it finishes
+				getApiFetchData.then( () => {} );
 			}
 		}
 
@@ -242,11 +239,6 @@ const UAGBFormsEdit = ( props ) => {
 			replaceInnerBlocks( clientId, createBlocksFromInnerBlocksTemplate( nextVariation.innerBlocks ) );
 		}
 	} );
-	const createBlocksFromInnerBlocksTemplate = useCallback( ( innerBlocksTemplate ) => {
-		return innerBlocksTemplate.map( (
-			[ name, attributes, innerBlocks = [] ] // eslint-disable-line no-shadow
-		) => createBlock( name, attributes, createBlocksFromInnerBlocksTemplate( innerBlocks ) ) );
-	} );
 
 	const renderReadyClasses = useCallback( ( id ) => {
 		const iframeEl = document.querySelector( `iframe[name='editor-canvas']` );
@@ -268,8 +260,8 @@ const UAGBFormsEdit = ( props ) => {
 
 			for ( let index = 0; index < sibling.length; index++ ) {
 				if (
-					sibling[ index ].classList.contains( 'uag-col-2' ) &&
-					sibling[ index + 1 ].classList.contains( 'uag-col-2' )
+					sibling[ index ]?.classList.contains( 'uag-col-2' ) &&
+					sibling[ index + 1 ]?.classList.contains( 'uag-col-2' )
 				) {
 					const div = document.createElement( 'div' );
 					div.className = 'uag-col-2-wrap uag-col-wrap-' + index;
@@ -278,9 +270,9 @@ const UAGBFormsEdit = ( props ) => {
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 				} else if (
-					sibling[ index ].classList.contains( 'uag-col-3' ) &&
-					sibling[ index + 1 ].classList.contains( 'uag-col-3' ) &&
-					sibling[ index + 2 ].classList.contains( 'uag-col-3' )
+					sibling[ index ]?.classList.contains( 'uag-col-3' ) &&
+					sibling[ index + 1 ]?.classList.contains( 'uag-col-3' ) &&
+					sibling[ index + 2 ]?.classList.contains( 'uag-col-3' )
 				) {
 					const div = document.createElement( 'div' );
 					div.className = 'uag-col-3-wrap uag-col-wrap-' + index;
@@ -290,10 +282,10 @@ const UAGBFormsEdit = ( props ) => {
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 				} else if (
-					sibling[ index ].classList.contains( 'uag-col-4' ) &&
-					sibling[ index + 1 ].classList.contains( 'uag-col-4' ) &&
-					sibling[ index + 2 ].classList.contains( 'uag-col-4' ) &&
-					sibling[ index + 3 ].classList.contains( 'uag-col-4' )
+					sibling[ index ]?.classList.contains( 'uag-col-4' ) &&
+					sibling[ index + 1 ]?.classList.contains( 'uag-col-4' ) &&
+					sibling[ index + 2 ]?.classList.contains( 'uag-col-4' ) &&
+					sibling[ index + 3 ]?.classList.contains( 'uag-col-4' )
 				) {
 					const div = document.createElement( 'div' );
 					div.className = 'uag-col-4-wrap uag-col-wrap-' + index;
@@ -327,15 +319,20 @@ const UAGBFormsEdit = ( props ) => {
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
 			<DynamicFontLoader { ...{ attributes } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 const addAdvancedClasses = createHigherOrderComponent( ( BlockListBlock ) => {
 	return ( props ) => {
-		return <BlockListBlock { ...props } className={ props.attributes.className } />;
+		// First we add any existing classes, then we add our classes if needed.
+		const addClassNames = uagbClassNames( [
+			props?.className || '',
+			props?.attributes?.className || '',
+		] );
+		return <BlockListBlock { ...props } className={ addClassNames ? addClassNames : null } />
 	};
 }, 'addAdvancedClasses' );
 
@@ -344,5 +341,6 @@ addFilter( 'editor.BlockListBlock', 'uagb/forms', addAdvancedClasses );
 export default compose(
 	withNotices,
 	addAdvancedClasses,
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBFormsEdit );

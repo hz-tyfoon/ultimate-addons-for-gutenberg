@@ -18,10 +18,6 @@ export default function save( props ) {
 		iconPosition,
 		removeText,
 		noFollow,
-		backgroundType,
-		btnBorderStyle,
-		background,
-		color,
 		showIcon,
 		dynamicContent
 	} = attributes;
@@ -30,7 +26,7 @@ export default function save( props ) {
 		if ( ! removeText ) {
 			return (
 				<RichText.Content
-					value={ label.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+					value={ label }
 					tagName="div"
 					className="uagb-button__link"
 				/>
@@ -49,28 +45,23 @@ export default function save( props ) {
 		return null;
 	};
 	const openNewWindow = opensInNewTab ? '_blank' : '_self';
-	const hasBackground =
-		background !== '' || backgroundType === 'transparent' || 'gradient' === backgroundType ? 'has-background' : '';
-
+	
 	return (
 		<div
 			className={ classnames(
 				className,
 				'uagb-buttons__outer-wrap',
 				`uagb-block-${ block_id }`,
-				'wp-block-button',
-				btnBorderStyle !== 'none' && btnBorderStyle !== 'default' ? 'is-style-outline' : ''
+				'wp-block-button'
 			) }
 		>
 			<div className="uagb-button__wrapper">
-				<a
+				<a // eslint-disable-line jsx-a11y/anchor-is-valid
 					className={ classnames(
 						'uagb-buttons-repeater',
-						'wp-block-button__link',
-						hasBackground,
-						color !== '' ? 'has-text-color' : ''
+						'wp-block-button__link'
 					) }
-					href={ '' === link || '#' === link ? '#' : link }
+					href={ ( '' === link || dynamicContent?.link?.enable ) ? '#' : link }
 					onClick={ ( '' === link || '#' === link ) && ( ! dynamicContent?.link?.enable ) ? 'return false;' : 'return true;' }
 					rel={ noFollow ? 'nofollow noopener' : 'follow noopener' }
 					target={ openNewWindow }

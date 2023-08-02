@@ -15,19 +15,20 @@ import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.j
 import { InspectorControls } from '@wordpress/block-editor';
 import { ToggleControl, Icon } from '@wordpress/components';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
+import { uagbDeepClone } from '@Utils/Helpers';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { memo } from '@wordpress/element';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
-	const blockName = props.name.replace( 'uagb/', '' );
-	const { setAttributes, attributes, deviceType } = props;
+
+	const { setAttributes, attributes, deviceType, name } = props;
+	
+	const blockName = name.replace( 'uagb/', '' );
 
 	// Setup the attributes.
 	const {
 		test_item_count,
-		test_block,
 		headingAlign,
 		headingAlignTablet,
 		headingAlignMobile,
@@ -185,6 +186,7 @@ const Settings = ( props ) => {
 	} = attributes;
 
 	const testItemCountFallback = getFallbackNumber( test_item_count, 'test_item_count', blockName );
+	const test_block = uagbDeepClone( attributes.test_block );
 
 	/*
 	 * Event to set Image as while adding.

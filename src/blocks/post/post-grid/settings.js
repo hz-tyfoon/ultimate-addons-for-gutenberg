@@ -33,7 +33,7 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 const Settings = ( props ) => {
 	const { categoriesList, latestPosts, taxonomyList } = props;
 	// Caching all Props
-	const { attributes, setAttributes, deviceType } = props.parentProps;
+	const { attributes, setAttributes, deviceType } = props;
 
 	// Caching all attributes.
 	const {
@@ -252,6 +252,7 @@ const Settings = ( props ) => {
 		equalHeightInlineButtons,
 		imageRatio,
 		imgEqualHeight,
+		paginationType,
 	} = attributes;
 	
 	const setImgEqualheight = ( value ) => {
@@ -604,6 +605,25 @@ const Settings = ( props ) => {
 
 		return (
 			<UAGAdvancedPanelBody title={ __( 'Pagination', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
+				<MultiButtonsControl
+					setAttributes={ setAttributes }
+					label={ __( 'Pagination Type', 'ultimate-addons-for-gutenberg' ) }
+					data={ {
+						value: paginationType,
+						label: 'paginationType',
+					} }
+					options={ [
+						{
+							value: 'ajax',
+							label: __( 'Ajax', 'ultimate-addons-for-gutenberg' ),
+						},
+						{
+							value: 'normal',
+							label: __( 'Normal', 'ultimate-addons-for-gutenberg' ),
+						},
+					] }
+					showIcons={ false }
+				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
 					label={ __( 'Pagination Alignment', 'ultimate-addons-for-gutenberg' ) }

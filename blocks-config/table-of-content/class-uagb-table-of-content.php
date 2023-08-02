@@ -210,8 +210,8 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 
 			$string = preg_replace( '/[\x00-\x1F\x7F]*/u', '', $string );
 			$string = str_replace( array( '&amp;', '&nbsp;' ), ' ', $string );
-			// Remove all except alphbets, space, `-` and `_`.
-			$string = preg_replace( '/[^A-Za-z0-9 _-]/', '', $string );
+			// Remove all except alphbets, space, `-`,`_` and latin characters.
+			$string = preg_replace( '/[^a-zA-Z0-9\p{L} _-]/u', '', $string );
 			// Convert space characters to an `_` (underscore).
 			$string = preg_replace( '/\s+/', '_', $string );
 			// Replace multiple `_` (underscore) with a single `-` (hyphen).
@@ -295,10 +295,9 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 
 			foreach ( $nested_heading_list as $anchor => $heading ) {
 
-				$level    = $heading['heading']['level'];
-				$title    = $heading['heading']['content'];
-				$id       = $heading['heading']['id'];
-				$li_added = false;
+				$level = $heading['heading']['level'];
+				$title = $heading['heading']['content'];
+				$id    = $heading['heading']['id'];
 
 				if ( 0 === $anchor ) {
 					$first_level = $level;
@@ -324,7 +323,6 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 
 						$toc                  .= '<li class="uagb-toc__list">';
 						$depth_array[ $level ] = $current_depth;
-						$li_added              = true;
 
 					} elseif ( $level < $last_level ) {
 
@@ -343,11 +341,7 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 					}
 				}
 
-				if ( $li_added ) {
-					$toc .= sprintf( '<a href="#%s">%s</a></li>', esc_attr( $id ), esc_html( $title ) );
-				} else {
-					$toc .= sprintf( '<li class="uagb-toc__list"><a href="#%s">%s</a></li>', esc_attr( $id ), esc_html( $title ) );
-				}
+				$toc .= sprintf( '<li class="uagb-toc__list"><a href="#%s">%s</a>', esc_attr( $id ), esc_html( $title ) );
 
 				$last_level = $level;
 			}

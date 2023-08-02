@@ -8,25 +8,31 @@ import renderSVG from '@Controls/renderIcon';
 import { __ } from '@wordpress/i18n';
 import { RichText } from '@wordpress/block-editor';
 import { memo } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks';
 
 const Render = ( props ) => {
-	props = props.parentProps;
 
-	const { attributes, setAttributes, deviceType } = props;
+	const { attributes, setAttributes, deviceType, context } = props;
 
 	const {
 		className,
-		label,
 		icon,
 		iconPosition,
 		removeText,
 		noFollow,
-		backgroundType,
-		btnBorderStyle,
-		background,
-		color,
 		showIcon,
+		block_id,
 	} = attributes;
+
+	let { label } = attributes;
+
+	// Check if this has dynamic content.
+	if ( label && -1 !== label.indexOf( '<span data-spectra-dc-field="' ) ) {
+		const renderedMarkup = applyFilters( `uag_render_text_loop_data`, label, context );
+		if ( renderedMarkup !== '' ) {
+			label = renderedMarkup;
+		}
+	}
 
 	const iconHtml = ( curr_position ) => {
 		if ( showIcon && '' !== icon && curr_position === iconPosition ) {
@@ -38,12 +44,13 @@ const Render = ( props ) => {
 		}
 		return null;
 	};
+	const btnAllowedFormats = uagb_blocks_info.spectra_pro_status ? ['uagb/dynamic-content'] : [];
 	const btnText = () => {
 		if ( ! removeText ) {
 			return (
 				<RichText
 					placeholder={ __( 'Add text…', 'ultimate-addons-for-gutenberg' ) }
-					value={ label.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+					value={ label }
 					tagName="div"
 					onChange={ ( value ) => {
 						setAttributes( { label: value } );
@@ -51,15 +58,12 @@ const Render = ( props ) => {
 					className="uagb-button__link"
 					rel={ noFollow ? 'nofollow noopener' : 'follow noopener' }
 					keepPlaceholderOnFocus
-					allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
+					allowedFormats={ btnAllowedFormats } // Removed the WP default link/bold/italic from the toolbar for button.
 				/>
 			);
 		}
 		return '';
 	};
-
-	const hasBackground =
-		background !== '' || backgroundType === 'transparent' || 'gradient' === backgroundType ? 'has-background' : '';
 
 	return (
 		<div
@@ -67,18 +71,15 @@ const Render = ( props ) => {
 				className,
 				'uagb-buttons__outer-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
-				'wp-block-button',
-				btnBorderStyle !== 'none' && btnBorderStyle !== 'default' ? 'is-style-outline' : ''
+				`uagb-block-${ block_id }`,
+				'wp-block-button'
 			) }
 		>
 			<div className="uagb-button__wrapper">
 				<div
 					className={ classnames(
 						'uagb-buttons-repeater',
-						'wp-block-button__link',
-						hasBackground,
-						color !== '' ? 'has-text-color' : ''
+						'wp-block-button__link'
 					) }
 				>
 					{ iconHtml( 'before' ) }

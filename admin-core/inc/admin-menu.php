@@ -126,6 +126,7 @@ class Admin_Menu {
 
 		$icon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDcwIDcwIiBmaWxsPSJub25lIiBjbGFzcz0ic3BlY3RyYS1wYWdlLXNldHRpbmdzLWJ1dHRvbiIgYXJpYS1oaWRkZW49InRydWUiIGZvY3VzYWJsZT0iZmFsc2UiPiA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTM1IDcwQzU0LjMzIDcwIDcwIDU0LjMzIDcwIDM1QzcwIDE1LjY3IDU0LjMzIDAgMzUgMEMxNS42NyAwIDAgMTUuNjcgMCAzNUMwIDU0LjMzIDE1LjY3IDcwIDM1IDcwWk0yNC40NDcxIDIzLjUxMTJDMTguOTcyMiAyNi43NDAzIDIwLjI4NTIgMzUuMzc1OSAyNi41MDMyIDM3LjAzNTFMMzYuODg3NSAzOS44MDZDMzcuNzUzMyA0MC4wMzcgMzcuOTEgNDEuMjI0IDM3LjEzNSA0MS42ODExTDI3LjA5NzIgNDcuNTc5OUwyNi4wMzYgNThMNDUuNTUyOSA0Ni40ODg4QzUxLjAyNzggNDMuMjU5NyA0OS43MTQ4IDM0LjYyNDEgNDMuNDk2OCAzMi45NjQ5TDMzLjExMjUgMzAuMTk0MUMzMi4yNDY3IDI5Ljk2MyAzMi4wOSAyOC43NzYgMzIuODY1IDI4LjMxODlMNDIuOTAyOCAyMi40MjAyTDQzLjk2NCAxMkwyNC40NDcxIDIzLjUxMTJaIj48L3BhdGg+IDwvc3ZnPg==';
 
+		// Add the Spectra Menu.
 		add_menu_page(
 			__( 'Spectra', 'ultimate-addons-for-gutenberg' ),
 			__( 'Spectra', 'ultimate-addons-for-gutenberg' ),
@@ -133,9 +134,10 @@ class Admin_Menu {
 			$menu_slug,
 			array( $this, 'render' ),
 			$icon,
-			3
+			30
 		);
 
+		// Add the Dashboard Submenu.
 		add_submenu_page(
 			$menu_slug,
 			__( 'Spectra', 'ultimate-addons-for-gutenberg' ),
@@ -145,9 +147,28 @@ class Admin_Menu {
 			array( $this, 'render' )
 		);
 
+		// Add the Blocks / Extensions Submenu.
+		add_submenu_page(
+			$menu_slug,
+			__( 'Spectra', 'ultimate-addons-for-gutenberg' ),
+			__( 'Blocks', 'ultimate-addons-for-gutenberg' ),
+			$capability,
+			$menu_slug . '&path=blocks',
+			array( $this, 'render' )
+		);
+
 		// Use this action hook to add sub menu to above menu.
 		do_action( 'spectra_after_menu_register' );
 
+		// Finally, add the Settings Submenu.
+		add_submenu_page(
+			$menu_slug,
+			__( 'Spectra', 'ultimate-addons-for-gutenberg' ),
+			__( 'Settings', 'ultimate-addons-for-gutenberg' ),
+			$capability,
+			$menu_slug . '&path=settings',
+			array( $this, 'render' )
+		);
 	}
 
 	/**
@@ -213,7 +234,6 @@ class Admin_Menu {
 				'uag_base_url'             => admin_url( 'admin.php?page=' . $this->menu_slug ),
 				'plugin_dir'               => UAGB_URL,
 				'plugin_ver'               => UAGB_VER,
-				'logo_url'                 => UAGB_URL . 'admin-core/assets/images/dashboard-uag-logo.svg',
 				'admin_url'                => admin_url( 'admin.php' ),
 				'ajax_url'                 => admin_url( 'admin-ajax.php' ),
 				'wp_pages_url'             => admin_url( 'post-new.php?post_type=page' ),

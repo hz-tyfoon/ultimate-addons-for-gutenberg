@@ -14,16 +14,18 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const {
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		isSelected,
-		setAttributes,
 		clientId,
 		name,
 		deviceType,
+		context,
+		setAttributes,
 	} = props;
 
 	useEffect( () => {
@@ -31,10 +33,10 @@ const UAGBAdvancedHeading = ( props ) => {
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-		setAttributes( { classMigrate: true } );
-	}, [] );
+		if( ! attributes?.context ){
+			setAttributes( { context } );
+		}
+	}, [ context ] )
 
 	useEffect( () => {
 		scrollBlockToView();
@@ -46,12 +48,13 @@ const UAGBAdvancedHeading = ( props ) => {
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
 			<DynamicFontLoader { ...{ attributes } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	AddInitialAttr,
 	AddStaticStyles,
 )( UAGBAdvancedHeading );
