@@ -5,7 +5,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 5.6
 Tested up to: 6.2.2
-Stable tag: 2.7.1
+Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -218,7 +218,24 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 = x.x.x =
 * Improvement: Buttons - Reduced the default number of buttons to 1 and updated the default styling.
 * Improvement: Buttons - Added alignment options to both the child and parent blocks in the block controls toolbar. 
+* Improvement: Core Blocks - Implemented responsive typography font-size units.
+* Improvement: Popup Builder - Moved page-level settings into block-level panels.
+* Improvement: Testimonial - Added a vertical alignment option for equal-height content.
+* Fix: Forms - Resolved an issue wherein the submit button would not take the padding set in the customizer.
+* Fix: Call To Action - Resolved an issue wherein the line-height of the title would not appear responsive in the frontend.
+* Fix: Inline Notice - Updated inconsistent default padding and removed unwanted top-margin in the editor and the frontend.
 * Fix: Buttons - Resolved an issue in which the button color would appear different from the theme color in FSE templates.
+
+= 2.7.3 - MONDAY, 31st JULY 2023 =
+* Improvement: Core Blocks - Enhanced the reusable block functionality for all Core Blocks, with the exception of the Container.
+* Improvement: Global - Optimized the editor performance and stability.
+* Fix: Global - Prevented a fatal error for non-block-based themes in WordPress versions below 5.9.0.
+
+= 2.7.2 - THURSDAY, 27th JULY 2023 =
+* Fix: Forms - Resolved an issue in which some phone country-code colors would not work as intended in the editor.
+* Fix: Table Of Contents - Resolved an issue wherein the default padding not same in the editor and on the frontend.
+* Fix: Social Share - Converted anchor tags to span tags and removed unwanted attributes from the social links.
+* Fix: Display Conditions - Resolved an issue wherein the `UAGDay` attribute would persist in the code view after turning off display conditions.
 
 = 2.7.1 - TUESDAY, 25th JULY 2023 =
 * Improvement: Global - Added auto-cleaning for archived assets.
@@ -231,6 +248,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 = 2.7.0 - THURSDAY, 13th July 2023 =
 * Feature: Popup Builder - Added a new `Push Content` feature for info bars.
+* Improvement: Global - Updated the variation picker and media placeholder UI.
 * Improvement: Performance - Significantly reduced the plugin zip size by over 1 MB after optimizing the Font Awesome v6 assets.
 * Improvement: Forms - Added a full-width alignment option to the submit button.
 * Improvement: Table Of Contents - Added the ability to expand and collapse the entire box by clicking the top portion or the title of the box.
@@ -1501,3 +1519,8 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 = 0.0.1 =
 * Initial release
+
+== Upgrade Notice ==
+
+= 2.7.3 =
+We've optimized the internal structure of Spectra in this update. To ensure your website's safety, We recommend that you backup your website before updating.

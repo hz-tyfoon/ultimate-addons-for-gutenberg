@@ -21,9 +21,10 @@ import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { memo } from '@wordpress/element';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
-	const blockName = props.name.replace( 'uagb/', '' );
-	const { setAttributes, attributes, deviceType } = props;
+
+	const { setAttributes, attributes, deviceType, name } = props;
+	
+	const blockName = name.replace( 'uagb/', '' );
 
 	// Setup the attributes.
 	const {
@@ -168,6 +169,7 @@ const Settings = ( props ) => {
 		imgmobilePaddingUnit,
 		imgtabletPaddingUnit,
 		equalHeight,
+		vAlignContent,
 
 		// letter spacing
 		nameLetterSpacing,
@@ -1192,6 +1194,32 @@ const Settings = ( props ) => {
 									) }
 								/>
 							) }
+							{ columns > 1 && equalHeight && (
+								<MultiButtonsControl
+								setAttributes={ setAttributes }
+								label={ __( 'Vertical Alignment', 'ultimate-addons-for-gutenberg' ) }
+								data={ {
+									value: vAlignContent,
+									label: 'vAlignContent',
+								} }
+								className="uagb-multi-button-alignment-control"
+								options={ [
+									{
+										value: 'flex-start',
+										label: __( 'Top', 'ultimate-addons-for-gutenberg' ),
+									},
+									{
+										value: 'center',
+										label: __( 'Middle', 'ultimate-addons-for-gutenberg' ),
+									},
+									{
+										value: 'end',
+										label: __( 'Bottom', 'ultimate-addons-for-gutenberg' ),
+									},
+								] }
+								showIcons={ false }
+							/>
+							)}
 						</UAGAdvancedPanelBody>
 						<UAGAdvancedPanelBody
 							title={ __( 'Image', 'ultimate-addons-for-gutenberg' ) }

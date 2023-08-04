@@ -14,14 +14,12 @@ import UAGTabsControl from '@Components/tabs';
 import UAGSelectControl from '@Components/select-control';
 import GradientSettings from '@Components/gradient-settings';
 import { ToggleControl, Icon } from '@wordpress/components';
-
 import formsPresets, { buttonsPresets } from './presets';
 import UAGPresets from '@Components/presets';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import UAGTextControl from '@Components/text-control';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 
 	const { attributes, setAttributes, deviceType } = props;
 	const {
@@ -1109,6 +1107,10 @@ const Settings = ( props ) => {
 				setAttributes={ setAttributes }
 				options={ [
 					{
+						value: 'default',
+						label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
+					},
+					{
 						value: 'small',
 						label: __( 'Small', 'ultimate-addons-for-gutenberg' ),
 					},
@@ -1674,13 +1676,13 @@ const Settings = ( props ) => {
 				{ reCaptchaEnable && (
 					<>
 						<p className="uagb-form-notice">
-							Please configure the Google reCAPTCHA Site & Secret key from{ ' ' }
+							{ __( 'Please configure the Google reCAPTCHA Site & Secret key from', 'ultimate-addons-for-gutenberg' ) }
 							<a
 								target="_blank"
 								href={ `${ uagb_blocks_info.uagb_home_url }/wp-admin/admin.php?page=spectra&path=settings&settings=block-settings` }
 								rel="noreferrer"
 							>
-								here.
+								{ __( 'here.', 'ultimate-addons-for-gutenberg' ) }
 							</a>
 						</p>
 						<MultiButtonsControl

@@ -30,7 +30,6 @@ import boxShadowPresets, { boxShadowHoverPresets, buttonsPresets } from './prese
 import UAGPresets from '@Components/presets';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 
 	const { attributes, setAttributes, deviceType, clientId } = props;
 
@@ -61,6 +60,8 @@ const Settings = ( props ) => {
 		hColor,
 		hBackground,
 		sizeType,
+		sizeTypeMobile,
+		sizeTypeTablet,
 		sizeMobile,
 		sizeTablet,
 		lineHeight,
@@ -308,6 +309,14 @@ const Settings = ( props ) => {
 					fontSizeType={ {
 						value: sizeType,
 						label: 'sizeType',
+					} }
+					fontSizeTypeTablet={ {
+						value: sizeTypeTablet,
+						label: 'sizeTypeTablet',
+					} }
+					fontSizeTypeMobile={ {
+						value: sizeTypeMobile,
+						label: 'sizeTypeMobile',
 					} }
 					fontSize={ {
 						value: size,

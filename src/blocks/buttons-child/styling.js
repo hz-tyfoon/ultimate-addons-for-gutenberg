@@ -9,10 +9,12 @@ import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateShadowCSS from '@Controls/generateShadowCSS';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType  ) {
 	const blockName = name.replace( 'uagb/', '' );
+	const previewType = deviceType.toLowerCase();
 
 	const {
+		block_id,
 		fontFamily,
 		fontWeight,
 		size,
@@ -39,6 +41,8 @@ function styling( attributes, clientId, name ) {
 		hColor,
 		hBackground,
 		sizeType,
+		sizeTypeTablet,
+		sizeTypeMobile,
 		sizeMobile,
 		sizeTablet,
 		lineHeight,
@@ -198,7 +202,7 @@ function styling( attributes, clientId, name ) {
 		mobileSelectors[
 			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = {
-			'font-size': generateCSSUnit( sizeMobile, sizeType ),
+			'font-size': generateCSSUnit( sizeMobile, sizeTypeMobile ),
 			'line-height': generateCSSUnit( lineHeightMobile, lineHeightType ),
 			'letter-spacing': generateCSSUnit( letterSpacingMobile, letterSpacingType ),
 			'padding-left': generateCSSUnit( leftMobilePadding, mobilePaddingUnit ),
@@ -215,7 +219,7 @@ function styling( attributes, clientId, name ) {
 		tabletSelectors[
 			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = {
-			'font-size': generateCSSUnit( sizeTablet, sizeType ),
+			'font-size': generateCSSUnit( sizeTablet, sizeTypeTablet ),
 			'line-height': generateCSSUnit( lineHeightTablet, lineHeightType ),
 			'letter-spacing': generateCSSUnit( letterSpacingTablet, letterSpacingType ),
 			'padding-left': generateCSSUnit( leftTabletPadding, tabletPaddingUnit ),
@@ -363,13 +367,26 @@ function styling( attributes, clientId, name ) {
             [ leftSideMargin ]: mobileIconMargin,
         };
     }
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 	let stylingCss = generateCSS( selectors, id );
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

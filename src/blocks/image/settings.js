@@ -14,16 +14,9 @@ import { __ } from '@wordpress/i18n';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import UAGSelectControl from '@Components/select-control';
 import UAGTextControl from '@Components/text-control';
-import { useDeviceType } from '@Controls/getPreviewType';
+import { store as blockEditorStore, InspectorControls } from '@wordpress/block-editor';
+import { Icon, ToggleControl } from '@wordpress/components';
 import UAGTabsControl from '@Components/tabs';
-import {
-	store as blockEditorStore,
-	InspectorControls,
-} from '@wordpress/block-editor';
-import {
-	Icon,
-	ToggleControl
-} from '@wordpress/components';
 import renderSVG from '@Controls/renderIcon';
 import ImageSizeControl from '@Components/image-size-control';
 import ResponsiveBorder from '@Components/responsive-border';
@@ -36,9 +29,8 @@ import UAGPresets from '@Components/presets';
 import { pickRelevantMediaFiles } from './utils';
 
 export default function Settings( props ) {
-	const deviceType = useDeviceType();
-	props = props.parentProps;
-	const { attributes, setAttributes, context, isSelected, clientId } = props;
+
+	const { attributes, setAttributes, context, isSelected, clientId, deviceType } = props;
 	const {
 		block_id,
 		objectFit,
@@ -94,6 +86,8 @@ export default function Settings( props ) {
 		captionTransform,
 		captionDecoration,
 		captionFontSizeType,
+		captionFontSizeTypeMobile,
+		captionFontSizeTypeTablet,
 		captionFontSizeMobile,
 		captionFontSizeTablet,
 		captionLineHeight,
@@ -128,6 +122,8 @@ export default function Settings( props ) {
 		headingTransform,
 		headingDecoration,
 		headingFontSizeType,
+		headingFontSizeTypeMobile,
+		headingFontSizeTypeTablet,
 		headingFontSizeMobile,
 		headingFontSizeTablet,
 		headingLineHeight,
@@ -1027,6 +1023,14 @@ export default function Settings( props ) {
 					value: headingFontSizeType,
 					label: 'headingFontSizeType',
 				} }
+				fontSizeTypeTablet={ {
+					value: headingFontSizeTypeTablet,
+					label: 'headingFontSizeTypeTablet',
+				} }
+				fontSizeTypeMobile={ {
+					value: headingFontSizeTypeMobile,
+					label: 'headingFontSizeTypeMobile',
+				} }
 				fontSize={ {
 					value: headingFontSize,
 					label: 'headingFontSize',
@@ -1194,6 +1198,14 @@ export default function Settings( props ) {
 				fontSizeType={ {
 					value: captionFontSizeType,
 					label: 'captionFontSizeType',
+				} }
+				fontSizeTypeTablet={ {
+					value: captionFontSizeTypeTablet,
+					label: 'captionFontSizeTypeTablet',
+				} }
+				fontSizeTypeMobile={ {
+					value: captionFontSizeTypeMobile,
+					label: 'captionFontSizeTypeMobile',
 				} }
 				fontSize={ {
 					value: captionFontSize,

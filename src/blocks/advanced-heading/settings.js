@@ -21,7 +21,6 @@ import UAGSelectControl from '@Components/select-control';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 	const { attributes, deviceType, setAttributes } = props;
 	const {
 		block_id,
@@ -46,6 +45,8 @@ const Settings = ( props ) => {
 		headFontWeight,
 		headFontStyle,
 		headFontSizeType,
+		headFontSizeTypeMobile,
+		headFontSizeTypeTablet,
 		headFontSize,
 		headFontSizeMobile,
 		headFontSizeTablet,
@@ -69,6 +70,8 @@ const Settings = ( props ) => {
 		subHeadFontStyle,
 		subHeadFontSize,
 		subHeadFontSizeType,
+		subHeadFontSizeTypeMobile,
+		subHeadFontSizeTypeTablet,
 		subHeadFontSizeMobile,
 		subHeadFontSizeTablet,
 		subHeadLineHeight,
@@ -148,6 +151,8 @@ const Settings = ( props ) => {
 		highLightTransform,
 		highLightDecoration,
 		highLightFontSizeType,
+		highLightFontSizeTypeMobile,
+		highLightFontSizeTypeTablet,
 		highLightLineHeightType,
 		highLightFontSize,
 		highLightFontSizeTablet,
@@ -456,6 +461,14 @@ const Settings = ( props ) => {
 						value: headFontSizeType,
 						label: 'headFontSizeType',
 					} }
+					fontSizeTypeMobile={ {
+						value: headFontSizeTypeMobile,
+						label: 'headFontSizeTypeMobile',
+					} }
+					fontSizeTypeTablet={ {
+						value: headFontSizeTypeTablet,
+						label: 'headFontSizeTypeTablet',
+					} }
 					fontSize={ {
 						value: headFontSize,
 						label: 'headFontSize',
@@ -614,6 +627,14 @@ const Settings = ( props ) => {
 					fontSizeType={ {
 						value: subHeadFontSizeType,
 						label: 'subHeadFontSizeType',
+					} }
+					fontSizeTypeMobile={ {
+						value: subHeadFontSizeTypeMobile,
+						label: 'subHeadFontSizeTypeMobile',
+					} }
+					fontSizeTypeTablet={ {
+						value: subHeadFontSizeTypeTablet,
+						label: 'subHeadFontSizeTypeTablet',
 					} }
 					fontSize={ {
 						value: subHeadFontSize,
@@ -1064,6 +1085,14 @@ const Settings = ( props ) => {
 					fontSizeType={ {
 						value: highLightFontSizeType,
 						label: 'highLightFontSizeType',
+					} }
+					fontSizeTypeMobile={ {
+						value: highLightFontSizeTypeMobile,
+						label: 'highLightFontSizeTypeMobile',
+					} }
+					fontSizeTypeTablet={ {
+						value: highLightFontSizeTypeTablet,
+						label: 'highLightFontSizeTypeTablet',
 					} }
 					fontSize={ {
 						value: highLightFontSize,
