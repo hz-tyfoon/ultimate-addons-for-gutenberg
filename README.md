@@ -216,8 +216,14 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ## Changelog ##
 
 ### x.x.x ###
+* Improvement: Core Blocks - Implemented responsive typography font-size units.
 * Improvement: Modal - Improved the accessibility of the opened Modal.
 * Improvement: Popup Builder - Added a setting for close icon hover color and improved accessibility.
+* Improvement: Popup Builder - Moved page-level settings into block-level panels.
+* Improvement: Testimonial - Added a vertical alignment option for equal-height content.
+* Fix: Forms - Resolved an issue wherein the submit button would not take the padding set in the customizer.
+* Fix: Call To Action - Resolved an issue wherein the line-height of the title would not appear responsive in the frontend.
+* Fix: Inline Notice - Updated inconsistent default padding and removed unwanted top-margin in the editor and the frontend.
 
 ### 2.7.3 - MONDAY, 31st JULY 2023 ###
 * Improvement: Core Blocks - Enhanced the reusable block functionality for all Core Blocks, with the exception of the Container.
@@ -241,6 +247,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ### 2.7.0 - THURSDAY, 13th July 2023 ###
 * Feature: Popup Builder - Added a new `Push Content` feature for info bars.
+* Improvement: Global - Updated the variation picker and media placeholder UI.
 * Improvement: Performance - Significantly reduced the plugin zip size by over 1 MB after optimizing the Font Awesome v6 assets.
 * Improvement: Forms - Added a full-width alignment option to the submit button.
 * Improvement: Table Of Contents - Added the ability to expand and collapse the entire box by clicking the top portion or the title of the box.
