@@ -12,25 +12,17 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBIcon = ( props ) => {
 	const {
-		clientId,
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		isSelected,
 		name,
-		deviceType
+		deviceType,
+		clientId,
 	} = props;
-	const blockId = clientId.substr( 0, 8 );
-
-	props = { ...props, deviceType };
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: blockId } );
-		props.attributes.block_id = blockId;
-	}, [] );
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
@@ -52,6 +44,7 @@ const UAGBIcon = ( props ) => {
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 	AddGBSStyles
 )( UAGBIcon );

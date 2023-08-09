@@ -8,9 +8,9 @@ import getAttributeFallback, { getFallbackNumber } from '@Controls/getAttributeF
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	const previewType = deviceType.toLowerCase();
 	const {
 		formPaddingTop,
 		formPaddingRight,
@@ -423,6 +423,9 @@ function styling( attributes, clientId, name ) {
 			'border': '2px solid ' + fieldBorderHColor,
 			'background-color': `${ bgActiveColor } !important`,
 		},
+		' .uagb-forms-main-form .components-select-control__input:focus':{
+			'background-color': `${ bgActiveColor } !important`,
+		},
 		' .uagb-forms-main-form .uagb-forms-input:focus::placeholder': {
 			'color': `${ inputplaceholderActiveColor } !important`,
 		},
@@ -573,8 +576,11 @@ function styling( attributes, clientId, name ) {
 		' .uagb-forms-field-set:hover .uagb-forms-input::placeholder': {
 			'color': inputplaceholderHoverColor,
 		},
-		' .uagb-forms-field-set:hover .uagb-forms-input select': {
-			'color': inputplaceholderHoverColor,
+		' .uagb-forms-field-set .uagb-forms-input select': {
+			'color': inputColor,
+		},
+		' .uagb-forms-phone-flex:hover .components-base-control__field .components-select-control__input': {
+			'background-color': bgHoverColor,
 		},
 	};
 
@@ -978,10 +984,23 @@ function styling( attributes, clientId, name ) {
 	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
 	stylingCss = generateCSS( selectors, base_selector );
 
-	stylingCss += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ base_selector }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

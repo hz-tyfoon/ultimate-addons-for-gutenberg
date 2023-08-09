@@ -914,12 +914,18 @@ class UAGB_Post_Assets {
 
 		if ( strpos( $name, 'uagb/' ) !== false ) {
 			$_block_slug = str_replace( 'uagb/', '', $name );
+<<<<<<< HEAD
 
 			$is_gbs = ! empty( $blockattr['globalBlockStyleId'] );
 			
 			$_block_css = UAGB_Block_Module::get_frontend_css( $_block_slug, $blockattr, $block_id, $is_gbs );
 			$_block_js  = UAGB_Block_Module::get_frontend_js( $_block_slug, $blockattr, $block_id, 'js' );
 			$css        = array_merge( $css, $_block_css );
+=======
+			$_block_css  = UAGB_Block_Module::get_frontend_css( $_block_slug, $blockattr, $block_id );
+			$_block_js   = UAGB_Block_Module::get_frontend_js( $_block_slug, $blockattr, $block_id, 'js' );
+			$css         = $this->merge_array_string_values( $css, $_block_css );
+>>>>>>> 3ce1259061086712be6165b58259834a122ad915
 			if ( ! empty( $_block_js ) ) {
 				$js .= $_block_js;
 			}
@@ -935,14 +941,14 @@ class UAGB_Post_Assets {
 					$id = ( isset( $inner_block['attrs']['ref'] ) ) ? $inner_block['attrs']['ref'] : 0;
 					if ( $id ) {
 						$assets = $this->get_assets_using_post_content( $id );
-						if ( wp_is_block_theme() ) {
+						if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
 							$reuse_block_css             = array(
 								'desktop' => '',
 								'tablet'  => '',
 								'mobile'  => '',
 							);
 							$reuse_block_css['desktop'] .= $assets['css'];
-							$css                         = array_merge( $css, $reuse_block_css );
+							$css                         = $this->merge_array_string_values( $css, $reuse_block_css );
 							$js                         .= $assets['js'];
 						} else {
 							$this->stylesheet .= $assets['css'];
@@ -1147,7 +1153,7 @@ class UAGB_Post_Assets {
 					if ( $id ) {
 						$assets = $this->get_assets_using_post_content( $id );
 
-						if ( wp_is_block_theme() ) {
+						if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
 							$block_css .= $assets['css'];
 							$js        .= $assets['js'];
 						} else {
@@ -1230,6 +1236,16 @@ class UAGB_Post_Assets {
 		$file_path      = $uploads_dir['path'] . 'assets/' . $folder_name . '/' . $file_name;
 
 		$result = false;
+
+		// Remove if any old file exists for same post.
+		$old_assets = glob( $base_file_path . 'uag-' . $type . '-' . $this->post_id . '-*' );
+		if ( ! empty( $old_assets ) && is_array( $old_assets ) ) {
+			foreach ( $old_assets as $old_asset ) {
+				if ( file_exists( $old_asset ) ) {
+					$file_system->delete( $old_asset );
+				}
+			}
+		}
 
 		if ( wp_mkdir_p( $base_file_path ) ) {
 
@@ -1372,5 +1388,24 @@ class UAGB_Post_Assets {
 		array_push( $this->static_css_blocks, $block_name );
 
 		return apply_filters( 'spectra_frontend_static_style', $css, $block_name );
+	}
+
+	/**
+	 * Merge two arrays with string values.
+	 *
+	 * @param array $array1 First array.
+	 * @param array $array2 Second array.
+	 * @since 2.7.3
+	 * @return array
+	 */
+	public function merge_array_string_values( $array1, $array2 ) {
+		foreach ( $array1 as $key => $value ) {
+			if ( isset( $array2[ $key ] ) ) {
+				$array1[ $key ] = $value . $array2[ $key ];
+			}
+			unset( $array2[ $key ] );
+		}
+	
+		return array_merge( $array1, $array2 );
 	}
 }

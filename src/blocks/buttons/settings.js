@@ -17,7 +17,6 @@ import renderGBSSettings from '@Controls/renderGBSSettings';
 import styling from './styling';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 
 	const { attributes, setAttributes } = props;
 
@@ -37,6 +36,8 @@ const Settings = ( props ) => {
 		alignTablet,
 		alignMobile,
 		fontSizeType,
+		fontSizeTypeMobile,
+		fontSizeTypeTablet,
 		fontSize,
 		fontSizeMobile,
 		fontSizeTablet,
@@ -264,6 +265,14 @@ const Settings = ( props ) => {
 					fontSizeType={ {
 						value: fontSizeType,
 						label: 'fontSizeType',
+					} }
+					fontSizeTypeTablet={ {
+						value: fontSizeTypeTablet,
+						label: 'fontSizeTypeTablet',
+					} }
+					fontSizeTypeMobile={ {
+						value: fontSizeTypeMobile,
+						label: 'fontSizeTypeMobile',
 					} }
 					fontSize={ {
 						value: fontSize,

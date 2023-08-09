@@ -10,7 +10,7 @@ import generateBorderCSS from '@Controls/generateBorderCSS';
 
 function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
-	 
+	const previewType = deviceType.toLowerCase();
 	let {
 		widthDesktop,
 		widthTablet,
@@ -499,7 +499,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
-		
+
 	}
 
 	const tablet_selectors = {
@@ -709,13 +709,28 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	styling_css += generateCSS( widthSelectorsDesktop, '.editor-styles-wrapper ' );
 
-	styling_css += generateCSS( tablet_selectors, `${ base_selector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
+		styling_css += generateCSS(
+			tablet_selectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	styling_css += generateCSS( widthSelectorsTablet, '.editor-styles-wrapper ', true, 'tablet' );
+		styling_css += generateCSS( widthSelectorsTablet, '.editor-styles-wrapper ', true, 'tablet' );
 
-	styling_css += generateCSS( mobile_selectors, `${ base_selector }`, true, 'mobile' );
+		if( 'mobile' === previewType || gbsSelector ){
+			styling_css += generateCSS(
+				mobile_selectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
 
-	styling_css += generateCSS( widthSelectorsMobile, '.editor-styles-wrapper ', true, 'mobile' );
+			styling_css += generateCSS( widthSelectorsMobile, '.editor-styles-wrapper ', true, 'mobile' );
+
+		}
+	}
 
 	return styling_css;
 }
