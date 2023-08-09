@@ -187,7 +187,15 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 						if ( 'font-family' === $j ) {
 							$css .= $j . ': "' . $val . '";';
 						} else {
-							$css .= $j . ': ' . $val . ';';
+							if ( is_array( $val ) ) {
+								// Convert $val array property to string.
+								foreach ( $val as $index => $property ) {
+									$properties = is_string( $property ) ? $property : (string) $property;
+									$css       .= $j . ': ' . $properties . ';';
+								}
+							} else {
+								$css .= $j . ': ' . $val . ';';
+							}
 						}
 					}
 				}
@@ -841,7 +849,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			);
 
 			$typo_css_tablet[ $selector ] = array(
-				'font-size'      => ( isset( $attr[ $f_sz_slug . 'Tablet' ] ) ) ? self::get_css_value( $attr[ $f_sz_slug . 'Tablet' ], $attr[ $f_sz_type_t_slug ] ? $attr[ $f_sz_type_t_slug ] : $attr[ $f_sz_type_slug ] ) : '',
+				'font-size'      => ( isset( $attr[ $f_sz_slug . 'Tablet' ] ) ) ? self::get_css_value( $attr[ $f_sz_slug . 'Tablet' ], ( isset( $attr[ $f_sz_type_t_slug ] ) ) ? $attr[ $f_sz_type_t_slug ] : $attr[ $f_sz_type_slug ] ) : '',
 				'line-height'    => ( isset( $attr[ $l_ht_slug . 'Tablet' ] ) ) ? self::get_css_value( $attr[ $l_ht_slug . 'Tablet' ], $attr[ $l_ht_type_slug ] ) : '',
 				'letter-spacing' => ( isset( $attr[ $l_sp_slug . 'Tablet' ] ) ) ? self::get_css_value( $attr[ $l_sp_slug . 'Tablet' ], $attr[ $l_sp_type_slug ] ) : '',
 			);
@@ -852,7 +860,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			);
 
 			$typo_css_mobile[ $selector ] = array(
-				'font-size'      => ( isset( $attr[ $f_sz_slug . 'Mobile' ] ) ) ? self::get_css_value( $attr[ $f_sz_slug . 'Mobile' ], $attr[ $f_sz_type_m_slug ] ? $attr[ $f_sz_type_m_slug ] : $attr[ $f_sz_type_slug ] ) : '',
+				'font-size'      => ( isset( $attr[ $f_sz_slug . 'Mobile' ] ) ) ? self::get_css_value( $attr[ $f_sz_slug . 'Mobile' ], ( isset( $attr[ $f_sz_type_m_slug ] ) ) ? $attr[ $f_sz_type_m_slug ] : $attr[ $f_sz_type_slug ] ) : '',
 				'line-height'    => ( isset( $attr[ $l_ht_slug . 'Mobile' ] ) ) ? self::get_css_value( $attr[ $l_ht_slug . 'Mobile' ], $attr[ $l_ht_type_slug ] ) : '',
 				'letter-spacing' => ( isset( $attr[ $l_sp_slug . 'Mobile' ] ) ) ? self::get_css_value( $attr[ $l_sp_slug . 'Mobile' ], $attr[ $l_sp_type_slug ] ) : '',
 			);
