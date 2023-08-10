@@ -37,7 +37,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * UAG File Generation Flag
 		 *
 		 * @since 1.14.0
-		 * @var file_generation
+		 * @var string
 		 */
 		public static $file_generation = 'disabled';
 
@@ -221,8 +221,8 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 *
 		 *  get_css_value( VALUE, 'em' );
 		 *
-		 * @param string $value  CSS value.
-		 * @param string $unit  CSS unit.
+		 * @param string|int|float $value  CSS value.
+		 * @param string           $unit  CSS unit.
 		 * @since 1.13.4
 		 */
 		public static function get_css_value( $value = '', $unit = '' ) {
@@ -230,16 +230,22 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				return '';
 			}
 
-			return esc_attr( $value ) . $unit;
+			$unit = sanitize_text_field( $unit );
+
+			if ( empty( $unit ) ) {
+				return $value;
+			}
+
+			return esc_attr( $value . $unit );
 		}
 
 
 		/**
 		 * Adds Google fonts all blocks.
 		 *
-		 * @param array $load_google_font the blocks attr.
+		 * @param bool $load_google_font the blocks attr.
 		 * @param array $font_family the blocks attr.
-		 * @param array $font_weight the blocks attr.
+		 * @param int|string $font_weight the blocks attr.
 		 */
 		public static function blocks_google_font( $load_google_font, $font_family, $font_weight ) {
 
@@ -925,12 +931,11 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * @param string $id The selector ID.
 		 * @param array  $gbs_attributes The GBS attributes array.
 		 * 
-		 * @return array Responsive CSS.
 		 * @since 1.15.0
 		 */
-		public static function generate_all_css( $combined_selectors, $id, $gbs_attributes = false ) {
+		public static function generate_all_css( $combined_selectors, $id, $gbs_attributes = [] ) {
 
-			if ( $gbs_attributes ) {
+			if ( ! empty( $gbs_attributes ) ) {
 				$id = self::add_gbs_selector_if_applicable( $id, $gbs_attributes );
 			}
 
@@ -1485,8 +1490,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			$post_content = get_post_field( 'post_content', $post_id, 'raw' );
 			$tag          = '<!-- wp:block';
 			$flag         = strpos( $post_content, $tag );
-
-			return ! false === strpos( $post_content, $tag );
+			return 0 === $flag || is_numeric( $flag ) ? true : false;
 		}
 	}
 

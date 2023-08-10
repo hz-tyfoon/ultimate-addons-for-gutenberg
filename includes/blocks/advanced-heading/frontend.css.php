@@ -289,7 +289,7 @@ return UAGB_Helper::generate_all_css(
 	$combined_selectors,
 	$base_selector . $id,
 	array(
-		'globalBlockStyleName' => $attr['globalBlockStyleName'],
-		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+		'globalBlockStyleName' => isset( $attr['globalBlockStyleName'] ) ? $attr['globalBlockStyleName'] : '',
+		'globalBlockStyleId'   => isset( $attr['globalBlockStyleId'] ) ? $attr['globalBlockStyleId'] : '',
 	) 
 );

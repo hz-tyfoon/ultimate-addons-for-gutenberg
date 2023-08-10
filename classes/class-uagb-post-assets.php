@@ -42,7 +42,7 @@ class UAGB_Post_Assets {
 	 * UAG File Generation Flag
 	 *
 	 * @since 1.14.0
-	 * @var file_generation
+	 * @var string
 	 */
 	public $file_generation = 'disabled';
 
@@ -314,7 +314,7 @@ class UAGB_Post_Assets {
 			if ( is_array( $style ) ) {
 				foreach ( $style as $family ) {
 					if ( ! in_array( $family, $families, true ) ) {
-						UAGB_Helper::blocks_google_font( true, $family, false );
+						UAGB_Helper::blocks_google_font( true, $family, '' );
 						$families[] = $family;
 					}
 				}
@@ -915,6 +915,8 @@ class UAGB_Post_Assets {
 		if ( strpos( $name, 'uagb/' ) !== false ) {
 			$_block_slug = str_replace( 'uagb/', '', $name );
 
+			$blockattr = isset( $blockattr ) && is_array( $blockattr ) ? $blockattr : array();
+
 			$is_gbs = ! empty( $blockattr['globalBlockStyleId'] );
 			
 			$_block_css = UAGB_Block_Module::get_frontend_css( $_block_slug, $blockattr, $block_id, $is_gbs );
@@ -1259,11 +1261,11 @@ class UAGB_Post_Assets {
 	 * Creates css and js files.
 	 *
 	 * @param  var $file_data    Gets the CSS\JS for the current Page.
-	 * @param  var $type    Gets the CSS\JS type.
-	 * @param  var $post_id Post ID.
+	 * @param  string $type    Gets the CSS\JS type.
+	 * @param  int $post_id Post ID.
 	 * @since  1.14.0
 	 */
-	public function file_write( $file_data, $type = 'css', $post_id = '' ) {
+	public function file_write( $file_data, $type = 'css', $post_id = 0 ) {
 
 		if ( ! $this->post_id ) {
 			return false;

@@ -7,6 +7,8 @@
  * @package uagb
  */
 
+$attr = isset( $attr ) ? $attr : array();
+
 UAGB_Block_JS::blocks_countdown_gfont( $attr );
 
 $is_rtl = is_rtl();
@@ -286,7 +288,7 @@ return UAGB_Helper::generate_all_css(
 	$combined_selectors,
 	$base_selector . $id,
 	array(
-		'globalBlockStyleName' => $attr['globalBlockStyleName'],
-		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+		'globalBlockStyleName' => isset( $attr['globalBlockStyleName'] ) ? $attr['globalBlockStyleName'] : '',
+		'globalBlockStyleId'   => isset( $attr['globalBlockStyleId'] ) ? $attr['globalBlockStyleId'] : '',
 	) 
 );

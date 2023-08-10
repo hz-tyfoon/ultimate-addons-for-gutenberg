@@ -207,14 +207,12 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 		}
 
 		/**
-		 * Get Editor Store Initial STate from DB.
+		 * Get Editor Store Initial State from DB.
 		 *
-		 * @since x.x.x
-		 * @return array $initial_state Initial Store State.
-		 * @access public
+		 * @since X.X.X
+		 * @return array
 		 */
 		public function get_editor_store_initial_state() {
-
 			$spectra_global_block_styles     = get_option(
 				'spectra_global_block_styles',
 				array(
@@ -224,6 +222,7 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 					),
 				) 
 			);
+			
 			$spectra_gbs_google_fonts_editor = get_option(
 				'spectra_gbs_google_fonts_editor',
 				array() 
@@ -237,12 +236,13 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 					),
 				);
 			}
-			$inital_state = array(
+
+			$initial_state = array(
 				'spectra_global_block_styles'     => $spectra_global_block_styles,
 				'spectra_gbs_google_fonts_editor' => $spectra_gbs_google_fonts_editor,
 			);
 
-			return $inital_state;
+			return $initial_state;
 		}
 
 		/**

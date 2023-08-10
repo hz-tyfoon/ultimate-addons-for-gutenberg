@@ -119,22 +119,19 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		 *
 		 * @param array $attributes Block attributes.
 		 * @since x.x.x
-		 * @return array
+		 * @return array $attributes Block attributes by removing 0.001020304.
 		 */
 		public static function gbs_filter_placeholder_attributes( $attributes ) {
-			
-			if ( empty( $attributes ) || ! is_array( $attributes ) ) {
+			if ( ! empty( $attributes ) && is_array( $attributes ) ) {
+				foreach ( $attributes as $key => $attribute ) {
+					// Replace 0.001020304 with empty string.
+					if ( 0.001020304 === $attribute ) {
+						$attributes[ $key ] = '';
+					}
+				}
 				return $attributes;
 			}
-
-			foreach ( $attributes as $key => $attribute ) {
-				// Replace 0.001020304 with empty string.
-				if ( 0.001020304 === $attribute ) {
-					$attributes[ $key ] = '';
-				}
-			}
-
-			return $attributes;
+			return [];
 		}
 		
 		/**

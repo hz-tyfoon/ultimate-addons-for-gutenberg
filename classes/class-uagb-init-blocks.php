@@ -968,13 +968,17 @@ class UAGB_Init_Blocks {
 		}
 	
 		$post_id = sanitize_text_field( $_POST['postId'] );
+
+		$block_attr = [];
+
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
 		foreach ( $global_block_styles as $key => $style ) {
 			if ( ! empty( $_POST['globalBlockStyleId'] ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
-				$block_attr = $style['attributes'];
+				$block_attr = isset( $style['attributes'] ) && is_array( $style['attributes'] ) ? $style['attributes'] : [];
 				
-				if ( ! $block_attr ) {
+				if ( empty( $block_attr ) ) {
 					wp_send_json_error( $response_data );
+					break;
 				}
 				
 				$_block_slug = str_replace( 'uagb/', '', sanitize_text_field( $_POST['blockName'] ) );
@@ -1019,18 +1023,22 @@ class UAGB_Init_Blocks {
 		}
 		
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
-		
+		$spectra_gbs_google_fonts = is_array( $spectra_gbs_google_fonts ) ? $spectra_gbs_google_fonts : array();
+
 		// Global Font Families.
 		$font_families = array();
 		foreach ( $block_attr as $name => $attribute ) {
-			if ( false !== strpos( $name, 'Family' ) && '' !== $attribute ) {
+			if ( is_string( $name ) && false !== strpos( $name, 'Family' ) && '' !== $attribute ) {
 				
 				$font_families[] = $attribute;
 			}
 		}
-		$spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] = $font_families;
-		if ( isset( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) && is_array( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) ) {
-			$spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] = array_unique( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] );
+
+		$globalBlockStyleId = is_array( $block_attr ) && isset( $block_attr['globalBlockStyleId'] ) ? $block_attr['globalBlockStyleId'] : '';
+
+		$spectra_gbs_google_fonts[ $globalBlockStyleId ] = $font_families;
+		if ( isset( $spectra_gbs_google_fonts[ $globalBlockStyleId ] ) ) {
+			$spectra_gbs_google_fonts[ $globalBlockStyleId ] = array_unique( $spectra_gbs_google_fonts[ $globalBlockStyleId ] );
 		}
 		
 		update_option( 'spectra_gbs_google_fonts', $spectra_gbs_google_fonts );

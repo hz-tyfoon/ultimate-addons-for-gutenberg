@@ -8,7 +8,7 @@
  */
 
 // For Global Block Styles.
-$base_selector = $is_gbs ? $gbs_class : '.uagb-block-' . $id;
+$base_selector = ! empty( $is_gbs ) && ! empty( $gbs_class ) ? $gbs_class : '.uagb-block-' . $id;
 
 $inner_content_custom_width_tablet_fallback = is_numeric( $attr['innerContentCustomWidthTablet'] ) ? $attr['innerContentCustomWidthTablet'] : $attr['innerContentCustomWidthDesktop'];
 $inner_content_custom_width_mobile_fallback = is_numeric( $attr['innerContentCustomWidthMobile'] ) ? $attr['innerContentCustomWidthMobile'] : $inner_content_custom_width_tablet_fallback;
