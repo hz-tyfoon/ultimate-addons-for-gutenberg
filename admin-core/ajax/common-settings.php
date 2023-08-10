@@ -152,7 +152,6 @@ class Common_Settings extends Ajax_Base {
 
 		$response_data = array(
 			'messsage' => __( 'Successfully saved data!', 'ultimate-addons-for-gutenberg' ),
-			'option'   => \UAGB_Admin_Helper::get_admin_settings_option( $option, '' ),
 		);
 		wp_send_json_success( $response_data );
 	}

@@ -32,7 +32,6 @@ import InheritFromTheme from '@DashboardApp/pages/settings/InheritFromTheme';
 import OpenAISettings from '@DashboardApp/pages/settings/block-settings/OpenAISettings';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useEffect } from '@wordpress/element';
-import { withFilters } from '@wordpress/components';
 import { uagbClassNames } from '@Utils/Helpers';
 
 const Settings = () => {
@@ -165,7 +164,6 @@ const Settings = () => {
                         }
                         { 'block-settings' === activeSettingsNavigationTab &&
 							<>
-								{ withFilters( 'spectra.admin.settings.integrations' )( <></> ) }
 								{
 									uag_react.spectra_pro_status && (
 										<>
