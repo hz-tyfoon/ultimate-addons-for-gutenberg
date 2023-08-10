@@ -243,8 +243,8 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		/**
 		 * Adds Google fonts all blocks.
 		 *
-		 * @param bool $load_google_font the blocks attr.
-		 * @param array $font_family the blocks attr.
+		 * @param bool       $load_google_font the blocks attr.
+		 * @param array      $font_family the blocks attr.
 		 * @param int|string $font_weight the blocks attr.
 		 */
 		public static function blocks_google_font( $load_google_font, $font_family, $font_weight ) {
@@ -933,7 +933,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * 
 		 * @since 1.15.0
 		 */
-		public static function generate_all_css( $combined_selectors, $id, $gbs_attributes = [] ) {
+		public static function generate_all_css( $combined_selectors, $id, $gbs_attributes = array() ) {
 
 			if ( ! empty( $gbs_attributes ) ) {
 				$id = self::add_gbs_selector_if_applicable( $id, $gbs_attributes );

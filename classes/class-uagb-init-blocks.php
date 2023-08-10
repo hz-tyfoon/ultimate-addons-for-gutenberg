@@ -913,8 +913,8 @@ class UAGB_Init_Blocks {
 	/**
 	 * Add Global Block Styles Class.
 	 *
-	 * @param mixed $block_content The block content.
-	 * @param array $block The block data.
+	 * @param string $block_content The block content.
+	 * @param array  $block The block data.
 	 * @since x.x.x
 	 * @return mixed Returns the new block content.
 	 */
@@ -966,15 +966,17 @@ class UAGB_Init_Blocks {
 		if ( empty( $_POST ) || empty( $_POST['attributes'] ) || empty( $_POST['blockName'] ) || empty( $_POST['postId'] ) || empty( $_POST['spectraGlobalStyles'] ) || ! is_array( $global_block_styles ) ) {
 			wp_send_json_error( $response_data );
 		}
+
+		$global_block_styles = is_array( $global_block_styles ) ? $global_block_styles : array();
 	
 		$post_id = sanitize_text_field( $_POST['postId'] );
 
-		$block_attr = [];
+		$block_attr = array();
 
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
 		foreach ( $global_block_styles as $key => $style ) {
-			if ( ! empty( $_POST['globalBlockStyleId'] ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
-				$block_attr = isset( $style['attributes'] ) && is_array( $style['attributes'] ) ? $style['attributes'] : [];
+			if ( ! empty( $_POST['globalBlockStyleId'] ) && is_array( $style ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
+				$block_attr = isset( $style['attributes'] ) && is_array( $style['attributes'] ) ? $style['attributes'] : array();
 				
 				if ( empty( $block_attr ) ) {
 					wp_send_json_error( $response_data );
@@ -1004,18 +1006,20 @@ class UAGB_Init_Blocks {
 					$mob_styling_css .= $mobile;
 					$mob_styling_css .= '}';
 				}
-				$_block_css                                    = $desktop . $tab_styling_css . $mob_styling_css;
-				$global_block_styles[ $key ]['frontendStyles'] = $_block_css;
-				$gbs_stored                                    = get_option( 'spectra_global_block_styles', array() );
+				$global_block_styles_key                   = ! empty( $global_block_styles[ $key ] ) && is_array( $global_block_styles[ $key ] ) ? $global_block_styles[ $key ] : array();
+				$_block_css                                = $desktop . $tab_styling_css . $mob_styling_css;
+				$global_block_styles_key['frontendStyles'] = $_block_css;
+				$gbs_stored                                = get_option( 'spectra_global_block_styles', array() );
+				$gbs_stored_key                            = is_array( $gbs_stored ) && isset( $gbs_stored[ $key ] ) ? $gbs_stored[ $key ] : array();
 
-				if ( ! empty( $gbs_stored[ $key ]['post_ids'] ) ) {
-					$global_block_styles[ $key ]['post_ids'] = array_merge( $global_block_styles[ $key ]['post_ids'], $gbs_stored[ $key ]['post_ids'] );
+				if ( isset( $gbs_stored_key['post_ids'] ) && isset( $global_block_styles_key['post_ids'] ) && is_array( $gbs_stored_key['post_ids'] ) && is_array( $global_block_styles_key['post_ids'] ) ) {
+					$global_block_styles_key['post_ids'] = array_merge( $global_block_styles_key['post_ids'], $gbs_stored_key['post_ids'] );
 				}
 
 				update_option( 'spectra_global_block_styles', $global_block_styles );
 
-				if ( ! empty( $global_block_styles[ $key ]['post_ids'] ) && is_array( $global_block_styles[ $key ]['post_ids'] ) ) {
-					foreach ( $global_block_styles[ $key ]['post_ids'] as $post_id ) {
+				if ( ! empty( $global_block_styles_key['post_ids'] ) && is_array( $global_block_styles_key['post_ids'] ) ) {
+					foreach ( $global_block_styles_key['post_ids'] as $post_id ) {
 						UAGB_Helper::delete_page_assets( $post_id );
 					}
 				}

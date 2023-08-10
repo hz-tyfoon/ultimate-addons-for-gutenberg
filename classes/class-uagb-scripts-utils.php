@@ -187,7 +187,7 @@ final class UAGB_Scripts_Utils {
 	 * of the current post.
 	 *
 	 * @param  string $type    Gets the CSS\JS type.
-	 * @param  int $post_id Post ID.
+	 * @param  int    $post_id Post ID.
 	 * @since 1.14.0
 	 * @return array
 	 */

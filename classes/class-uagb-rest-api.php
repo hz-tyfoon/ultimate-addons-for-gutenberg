@@ -213,7 +213,7 @@ if ( ! class_exists( 'UAGB_Rest_API' ) ) {
 		 * @return array
 		 */
 		public function get_editor_store_initial_state() {
-			$spectra_global_block_styles     = get_option(
+			$spectra_global_block_styles = get_option(
 				'spectra_global_block_styles',
 				array(
 					array(

@@ -1260,9 +1260,9 @@ class UAGB_Post_Assets {
 	/**
 	 * Creates css and js files.
 	 *
-	 * @param  var $file_data    Gets the CSS\JS for the current Page.
+	 * @param  var    $file_data    Gets the CSS\JS for the current Page.
 	 * @param  string $type    Gets the CSS\JS type.
-	 * @param  int $post_id Post ID.
+	 * @param  int    $post_id Post ID.
 	 * @since  1.14.0
 	 */
 	public function file_write( $file_data, $type = 'css', $post_id = 0 ) {

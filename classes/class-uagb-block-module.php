@@ -131,7 +131,7 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 				}
 				return $attributes;
 			}
-			return [];
+			return array();
 		}
 		
 		/**
