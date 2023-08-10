@@ -899,7 +899,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		tabletSelectors[ ' .uagb-infobox-cta-link.wp-block-button__link' ] = ctaBorderCSSTablet;
 	}
 
-	const base_selector = ".editor-styles-wrapper " + ( gbsSelector ? gbsSelector + ' ' : `#block-${ clientId } .uagb-block-${ block_id }` );
+	const base_selector = '.editor-styles-wrapper ' + ( gbsSelector ? gbsSelector + ' ' : `#block-${ clientId } .uagb-block-${ block_id }` );
 	let stylingCss = generateCSS( selectors, base_selector );
 
 	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
