@@ -80,7 +80,7 @@ const InstagramUsers = () => {
 				setInstaLinkUserLabel( __( 'Linking', 'ultimate-addons-for-gutenberg' ) );
 				break;
 			case 'invalid':
-				setInstaLinkUserLabel( __( 'Inavalid Token' , 'ultimate-addons-for-gutenberg' ) );
+				setInstaLinkUserLabel( __( 'Invalid Token' , 'ultimate-addons-for-gutenberg' ) );
 				break;
 			case 'exists':
 				setInstaLinkUserLabel( __( 'Account Exists!', 'ultimate-addons-for-gutenberg' ) );
