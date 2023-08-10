@@ -4,7 +4,6 @@ import ReactHtmlParser from 'react-html-parser';
 import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
-import { uagbClassNames } from '@Utils/Helpers';
 
 const OpenAISettings = () => {
 	// Decleration of all the states needed
