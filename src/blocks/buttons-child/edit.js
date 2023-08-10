@@ -21,7 +21,7 @@ const ButtonsChildComponent = ( props ) => {
 		isSelected,
 		clientId,
 		attributes,
-		attributes: { borderStyle, borderWidth, borderRadius, borderHColor, borderColor },
+		attributes: { borderStyle, borderWidth, borderRadius, borderHColor, borderColor, globalBlockStyleId },
 		setAttributes,
 		name,
 		deviceType,
@@ -35,6 +35,11 @@ const ButtonsChildComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
+
+		if( globalBlockStyleId ) {
+			return;
+		}
+		
 		// border migration
 		if ( borderWidth || borderRadius || borderColor || borderHColor || borderStyle ) {
 			migrateBorderAttributes(
