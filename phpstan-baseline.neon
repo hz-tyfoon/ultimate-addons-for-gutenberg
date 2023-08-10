@@ -153,7 +153,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$str of function stripslashes expects string, mixed given\\.$#"
-			count: 6
+			count: 7
 			path: admin-core/ajax/common-settings.php
 
 		-
