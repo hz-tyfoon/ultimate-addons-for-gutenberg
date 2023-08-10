@@ -256,7 +256,7 @@ const globalDataReducer = ( state = {}, action ) => {
 		case 'UPDATE_OPEN_AI_OPTIONS':
 			return {
 				...state,
-				openAIOptions: action.payload,
+				spectraOpenAIOptions: action.payload,
 			};
         default:
             return state;

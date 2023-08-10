@@ -791,7 +791,7 @@ class Common_Settings extends Ajax_Base {
 	}
 
 	/**
-	 * Save setting - Updates the OpenAI Key.
+	 * Save setting - Update the OpenAI Options.
 	 *
 	 * @since x.x.x
 	 * @return void

@@ -29,7 +29,7 @@ const OpenAISettings = () => {
 				setOpenAIKeyLabel( __( 'Saving', 'ultimate-addons-for-gutenberg' ) );
 				break;
 			case 'invalid':
-				setOpenAIKeyLabel( __( 'Inavalid Key' , 'ultimate-addons-for-gutenberg' ) );
+				setOpenAIKeyLabel( __( 'Invalid Key' , 'ultimate-addons-for-gutenberg' ) );
 				break;
 			case 'success':
 				setOpenAIKeyLabel( __( 'Saved!', 'ultimate-addons-for-gutenberg' ) );
