@@ -60,7 +60,7 @@ const initialState = {
 	spectraFSEFonts: [],
 	themeFonts: [],
 	spectraIsBlockTheme: false,
-	openAISavedKey: '',
+	openAIOptions: {},
 };
 
 const globalDataStore = createStore(

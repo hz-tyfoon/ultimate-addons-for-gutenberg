@@ -8,7 +8,8 @@ import getApiData from '@Controls/getApiData';
 const OpenAISettings = () => {
 	// Decleration of all the states needed
 	const dispatch = useDispatch();
-	const existingKey = uag_react.open_ai_saved_key || '';
+	const openAIOptions = uag_react.open_ai_options || {};
+	const existingKey = openAIOptions?.key || '';
 	const [ openAIKey, setOpenAIKey ] = useState( existingKey );
 	const [ openAIKeyLabel, setOpenAIKeyLabel ] = useState( __( 'Save Key', 'ultimate-addons-for-gutenberg' ) );
 	const [ linkingKey, setLinkingKey ] = useState( false );
@@ -46,19 +47,24 @@ const OpenAISettings = () => {
 	const authenticateOpenAIKey = ( clickedButton ) => {
 		// First escape the user's input.
 		const finalAPIKey = escapeHTML( openAIKey );
+		const updatedOpenAIOptions = { ...openAIOptions, key: finalAPIKey };
+		// If the key was set to empty, remove it from the updated options.
+		if ( ! finalAPIKey ) {
+			delete updatedOpenAIOptions.key;
+		}
 		setOpenAIKey( finalAPIKey );
 		const theButton = clickedButton.target;
 		setLinkingKey( true );
 		theButton.disabled = true;
 		updateAPIButtonLabel( 'saving' );
-		dispatch( { type: 'UPDATE_OPEN_AI_KEY', payload: finalAPIKey } );
+		dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: updatedOpenAIOptions } );
 		const formData = {
-			security: uag_react.open_ai_saved_key_nonce,
-			value: finalAPIKey,
+			security: uag_react.open_ai_options_nonce,
+			value: JSON.stringify( updatedOpenAIOptions ),
 		};
 		const getApiDataFetch = getApiData( {
 			url: uag_react.ajax_url,
-			action: 'uag_open_ai_saved_key',
+			action: 'uag_open_ai_options',
 			data : formData,	
 		} );
 		getApiDataFetch.then( ( responseData ) => {
@@ -83,7 +89,7 @@ const OpenAISettings = () => {
 			}
 		} ).catch( () => {
 			dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: __( 'Failed to Save Key', 'ultimate-addons-for-gutenberg' ), messageType: 'error' } } );
-			dispatch( { type: 'UPDATE_OPEN_AI_KEY', payload: 'fence' } );
+			dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: [] } );
 			setLinkingKey( false );
 			updateAPIButtonLabel( 'failed' );
 			setTimeout( () => {
