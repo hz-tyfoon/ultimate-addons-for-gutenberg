@@ -48,6 +48,7 @@ const setInitialState = ( store ) => {
             spectraIsBlockTheme: data.wp_is_block_theme,
             themeFonts: data.theme_fonts,
             btnInheritFromTheme: data.uag_btn_inherit_from_theme,
+			openAISavedKey: data?.open_ai_saved_key,
         };
 
         store.dispatch( {type: 'UPDATE_INITIAL_STATE', payload: initialState} );

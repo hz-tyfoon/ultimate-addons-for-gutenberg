@@ -27,10 +27,12 @@ import AutoBlockRecovery from '@DashboardApp/pages/settings/AutoBlockRecovery';
 import ContainerGlobalPadding from '@DashboardApp/pages/settings/ContainerGlobalPadding';
 import ContainerGlobalElementsGap from '@DashboardApp/pages/settings/ContainerGlobalElementsGap';
 import MyAccount from '@DashboardApp/pages/settings/MyAccount';
-import InstagramUsers from '@DashboardApp/pages/settings/block-settings/InstagramUsers';
+import InstagramUsers from '@DashboardApp/pages/settings/integrations/InstagramUsers';
 import InheritFromTheme from '@DashboardApp/pages/settings/InheritFromTheme';
+import OpenAISettings from '@DashboardApp/pages/settings/integrations/OpenAISettings';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useEffect } from '@wordpress/element';
+import { withFilters } from '@wordpress/components';
 import { uagbClassNames } from '@Utils/Helpers';
 
 const Settings = () => {
@@ -163,9 +165,11 @@ const Settings = () => {
                         }
                         { 'block-settings' === activeSettingsNavigationTab &&
 							<>
+								{ withFilters( 'spectra.admin.settings.integrations' )( <></> ) }
 								{
 									uag_react.spectra_pro_status && (
 										<>
+											<OpenAISettings/>
 											<InstagramUsers/>
 											{/* SOCIAL MARKER */}
 										</>

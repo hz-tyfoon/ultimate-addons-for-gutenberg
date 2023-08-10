@@ -253,6 +253,11 @@ const globalDataReducer = ( state = {}, action ) => {
                 ...state,
                 btnInheritFromTheme: action.payload,
                 };
+		case 'UPDATE_OPEN_AI_KEY':
+			return {
+				...state,
+				openAISavedKey: action.payload,
+			};
         default:
             return state;
     }

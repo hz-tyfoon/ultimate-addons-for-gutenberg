@@ -249,6 +249,7 @@ class Admin_Menu {
 				'spectra_custom_fonts'     => apply_filters( 'spectra_system_fonts', array() ),
 				'is_allow_registration'    => (bool) get_option( 'users_can_register' ),
 				'theme_fonts'              => $theme_font_families,
+				'open_ai_saved_key'        => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_open_ai_saved_key', '' ),
 			)
 		);
 

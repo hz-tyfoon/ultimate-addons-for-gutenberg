@@ -93,6 +93,7 @@ class Common_Settings extends Ajax_Base {
 			'insta_all_users_media',
 			'insta_refresh_all_tokens',
 			'btn_inherit_from_theme',
+			'open_ai_saved_key',
 		);
 
 		$this->init_ajax_events( $ajax_events );
@@ -151,6 +152,7 @@ class Common_Settings extends Ajax_Base {
 
 		$response_data = array(
 			'messsage' => __( 'Successfully saved data!', 'ultimate-addons-for-gutenberg' ),
+			'option'   => \UAGB_Admin_Helper::get_admin_settings_option( $option, '' ),
 		);
 		wp_send_json_success( $response_data );
 	}
@@ -787,5 +789,17 @@ class Common_Settings extends Ajax_Base {
 			wp_send_json_success( array( 'messsage' => __( 'Successfully refreshed tokens!', 'ultimate-addons-for-gutenberg' ) ) );
 		}
 		wp_send_json_error( array( 'messsage' => __( 'Failed to refresh tokens', 'ultimate-addons-for-gutenberg' ) ) );
+	}
+
+	/**
+	 * Save setting - Updates the OpenAI Key.
+	 *
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function open_ai_saved_key() {
+		$this->check_permission_nonce( 'uag_open_ai_saved_key' );
+		$value = $this->check_post_value();
+		$this->save_admin_settings( 'uag_open_ai_saved_key', sanitize_text_field( $value ) );
 	}
 }
