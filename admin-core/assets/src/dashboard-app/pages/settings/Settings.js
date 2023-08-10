@@ -171,7 +171,6 @@ const Settings = () => {
 										<>
 											<OpenAISettings/>
 											<InstagramUsers/>
-											{/* SOCIAL MARKER */}
 										</>
 									)
 								}

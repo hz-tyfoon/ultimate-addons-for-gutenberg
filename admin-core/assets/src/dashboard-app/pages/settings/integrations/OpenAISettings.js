@@ -109,11 +109,8 @@ const OpenAISettings = () => {
 				/>
 				<button
 					type='button'
-					className={ uagbClassNames( [
-						! openAIKey ? 'cursor-not-allowed bg-slate-200 text-slate-400' : 'bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover',
-						'flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
-					] ) }
-					disabled={ ( '' === openAIKey ) ? true : false }
+					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
+					disabled={ linkingKey }
 					onClick={ ( event ) => authenticateOpenAIKey( event ) }
 				>
 					{ openAIKeyLabel }
