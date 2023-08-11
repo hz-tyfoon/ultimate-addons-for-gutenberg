@@ -348,66 +348,60 @@ const UAGCopyPasteStyles = () => {
 };
 
 const displayUAGCopyPasteSettingConditionally = createHigherOrderComponent( ( BlockEdit ) => {
-	return ( props ) => {
-		const { getSelectedBlock, getMultiSelectedBlocks } = select( 'core/block-editor' );
-		const excludeBlocks = [
-			'core/missing',
-			'uagb/faq-child',
-			'uagb/restaurant-menu-child',
-			'uagb/google-map',
-			'uagb/content-timeline-child',
-			'uagb/tabs-child',
-		];
-		const selectedBlock = getSelectedBlock();
-		const multiSelectedBlock = getMultiSelectedBlocks();
-		let singleSelectBlockFlag = false;
-		let multiSelectBlockFlag = false;
+		return ( props ) => {
+			const { getSelectedBlock, getMultiSelectedBlocks } = select( 'core/block-editor' );
+			const excludeBlocks = [
+				'core/missing',
+				'uagb/faq-child',
+				'uagb/restaurant-menu-child',
+				'uagb/google-map',
+				'uagb/content-timeline-child',
+				'uagb/tabs-child',
+			];
+			const selectedBlock = getSelectedBlock();
+			const multiSelectedBlock = getMultiSelectedBlocks();
+			let singleSelectBlockFlag = false;
+			let multiSelectBlockFlag = false;
 
-		if ( selectedBlock ) {
-			const singleSelectedBlockName = selectedBlock.name;
-
-			if (
-				( singleSelectedBlockName.includes( 'uagb/' ) || singleSelectedBlockName.includes( 'core/' ) ) &&
-				'core/missing' !== singleSelectedBlockName &&
-				! excludeBlocks.includes( singleSelectedBlockName )
-			) {
-				singleSelectBlockFlag = true;
-			}
-		}
-
-		if ( multiSelectedBlock && 0 !== multiSelectedBlock.length ) {
-			multiSelectedBlock.map( ( value ) => {
-				const singleSelectedBlockName = value.name;
+			if ( selectedBlock ) {
+				const singleSelectedBlockName = selectedBlock.name;
 
 				if (
 					( singleSelectedBlockName.includes( 'uagb/' ) || singleSelectedBlockName.includes( 'core/' ) ) &&
 					'core/missing' !== singleSelectedBlockName &&
 					! excludeBlocks.includes( singleSelectedBlockName )
 				) {
-					multiSelectBlockFlag = true;
+					singleSelectBlockFlag = true;
 				}
+			}
 
-				return value;
-			} );
-		}
+			if ( multiSelectedBlock && 0 !== multiSelectedBlock.length ) {
+				multiSelectedBlock.map( ( value ) => {
+					const singleSelectedBlockName = value.name;
 
-		if ( singleSelectBlockFlag || multiSelectBlockFlag ) {
-			return (
-				<>
-					<BlockEdit { ...props } />
-					<UAGCopyPasteStyles />
-				</>
-			);
-		}
+					if (
+						( singleSelectedBlockName.includes( 'uagb/' ) || singleSelectedBlockName.includes( 'core/' ) ) &&
+						'core/missing' !== singleSelectedBlockName &&
+						! excludeBlocks.includes( singleSelectedBlockName )
+					) {
+						multiSelectBlockFlag = true;
+					}
 
-		if ( ! singleSelectBlockFlag && ! multiSelectBlockFlag ) {
-			return (
-				<>
-					<BlockEdit { ...props } />
-				</>
-			);
-		}
-	};
+					return value;
+				} );
+			}
+
+			const { isSelected } = props;
+			if ( isSelected ) {
+				return (
+					<>
+						<BlockEdit { ...props } />
+						{( singleSelectBlockFlag || multiSelectBlockFlag ) && <UAGCopyPasteStyles />}
+					</>
+				);
+			}
+			return  <BlockEdit {...props} />;
+		};
 }, 'displayUAGCopyPasteSettingConditionally' );
 
 if ( 'enabled' === uagb_blocks_info.copy_paste ) {
