@@ -3,6 +3,7 @@
  */
 
 import { useEffect, useMemo } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks';
 import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
@@ -19,7 +20,7 @@ import AddInitialAttr from '@Controls/addInitialAttr';
 const UAGBAdvancedHeading = ( props ) => {
 	const {
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, headingTitle },
 		isSelected,
 		clientId,
 		name,
@@ -46,6 +47,7 @@ const UAGBAdvancedHeading = ( props ) => {
 
 	return (
 		<>
+			{ applyFilters( 'spectra.open_ai.modal_trigger.block_control', '', headingTitle, 'headingTitle', setAttributes ) }
 			<DynamicCSSLoader { ...{ blockStyling } } />
 			<DynamicFontLoader { ...{ attributes } } />
 			{ isSelected && <Settings { ...props } /> }
