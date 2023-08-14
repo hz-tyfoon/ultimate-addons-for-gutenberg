@@ -213,6 +213,9 @@ return array_merge(
 		'iconMarginUnit'             => 'px',
 		'iconMarginUnitTablet'       => 'px',
 		'iconMarginUnitMobile'       => 'px',
+		// For Global Block Styles.
+		'globalBlockStyleName'         => '',
+		'globalBlockStyleId'           => '',
 	),
 	$icon_wrap_border_attribute
 );

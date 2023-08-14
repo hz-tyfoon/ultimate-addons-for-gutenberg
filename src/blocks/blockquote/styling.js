@@ -8,8 +8,7 @@
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
-
-function styling( attributes, clientId, name, deviceType ) {
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
 	const previewType = deviceType.toLowerCase();
 
@@ -507,11 +506,11 @@ function styling( attributes, clientId, name, deviceType ) {
 		},
 	};
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
+	const baseSelector = gbsSelector ? gbsSelector + ' ' :`.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	let stylingCss = generateCSS( selectors, baseSelector );
 
-	if( 'tablet' === previewType || 'mobile' === previewType ) {
+	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
 		stylingCss += generateCSS(
 			tabletSelectors,
 			`${ baseSelector }`,
@@ -519,7 +518,7 @@ function styling( attributes, clientId, name, deviceType ) {
 			'tablet'
 		);
 
-		if( 'mobile' === previewType ){
+		if( 'mobile' === previewType || gbsSelector ){
 			stylingCss += generateCSS(
 				mobileSelectors,
 				`${ baseSelector }`,

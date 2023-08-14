@@ -14,6 +14,7 @@ import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import addInitialAttr from '@Controls/addInitialAttr';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBIconList = ( props ) => {
 	const {
@@ -60,4 +61,5 @@ const UAGBIconList = ( props ) => {
 export default compose(
 	addInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBIconList );

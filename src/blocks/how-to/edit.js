@@ -16,6 +16,7 @@ import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import addInitialAttr from '@Controls/addInitialAttr';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const HowToComponent = ( props ) => {
 	const {
@@ -199,4 +200,5 @@ const HowToComponent = ( props ) => {
 export default compose(
 	addInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles,
 )( HowToComponent );

@@ -12,6 +12,7 @@ import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import addInitialAttr from '@Controls/addInitialAttr';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBImageGallery = ( props ) => {
 	const {
@@ -69,4 +70,5 @@ const UAGBImageGallery = ( props ) => {
 export default compose(
 	addInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBImageGallery );

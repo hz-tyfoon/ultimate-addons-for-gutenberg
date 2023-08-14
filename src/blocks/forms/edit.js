@@ -25,6 +25,7 @@ import { uagbClassNames } from '@Utils/Helpers';
 import ReactHtmlParser from 'react-html-parser';
 
 import getApiData from '@Controls/getApiData';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBFormsEdit = ( props ) => {
 	const {
@@ -355,4 +356,5 @@ export default compose(
 	addAdvancedClasses,
 	addInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBFormsEdit );

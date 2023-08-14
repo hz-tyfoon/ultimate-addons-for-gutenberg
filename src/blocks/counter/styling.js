@@ -7,7 +7,7 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-export default function styling( attributes, clientId, name, deviceType ) {
+export default function styling( attributes, clientId, name, deviceType, gbsSelector = false  ) {
 	const previewType = deviceType.toLowerCase();
 	const {
 		block_id,
@@ -399,8 +399,6 @@ export default function styling( attributes, clientId, name, deviceType ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
-
 	const tablet_selectors = {};
 	const mobile_selectors = {};
 
@@ -671,9 +669,11 @@ export default function styling( attributes, clientId, name, deviceType ) {
 		}
 	}
 
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ block_id }`;
+	
 	let styling_css = generateCSS( selectors, base_selector );
 
-	if( 'tablet' === previewType || 'mobile' === previewType ) {
+	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
 		styling_css += generateCSS(
 			tablet_selectors,
 			`${ base_selector }`,
@@ -681,7 +681,7 @@ export default function styling( attributes, clientId, name, deviceType ) {
 			'tablet'
 		);
 
-		if( 'mobile' === previewType ){
+		if( 'mobile' === previewType || gbsSelector ){
 			styling_css += generateCSS(
 				mobile_selectors,
 				`${ base_selector }`,

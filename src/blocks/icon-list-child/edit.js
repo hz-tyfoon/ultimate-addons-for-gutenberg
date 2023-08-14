@@ -12,14 +12,15 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import addInitialAttr from '@Controls/addInitialAttr';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 let hideLabel;
 
 const UAGBIconListChild = ( props ) => {
 
-	const { isSelected, clientId, attributes, deviceType } = props;
+	const { isSelected, clientId, attributes, deviceType, name } = props;
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, deviceType ), [ attributes, deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
@@ -37,4 +38,5 @@ const UAGBIconListChild = ( props ) => {
 export default compose(
 	addInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBIconListChild );

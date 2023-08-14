@@ -10,6 +10,7 @@ import AddStaticStyles from '@Controls/AddStaticStyles';
 import addInitialAttr from '@Controls/addInitialAttr';
 //  Import CSS.
 import './style.scss';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBCounterEdit = ( props ) => {
 	const {
@@ -40,4 +41,5 @@ const UAGBCounterEdit = ( props ) => {
 export default compose(
 	addInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBCounterEdit );

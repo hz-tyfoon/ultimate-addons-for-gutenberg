@@ -246,6 +246,9 @@ return array_merge(
 		'imageBoxShadowBlurHover'            => '',
 		'imageBoxShadowSpreadHover'          => '',
 		'imageBoxShadowPositionHover'        => 'outset',
+		// For Global Block Styles.
+		'globalBlockStyleName'         => '',
+		'globalBlockStyleId'           => '',
 	),
 	$arrow_border_attributes,
 	$btn_border_attributes,

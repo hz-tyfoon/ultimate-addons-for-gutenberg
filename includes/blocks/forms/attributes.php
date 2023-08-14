@@ -214,6 +214,9 @@ return array_merge(
 		'gradientHLocation2'             => 100,
 		'gradientHAngle'                 => 0,
 		'selectHGradient'                => 'default',
+		// For Global Block Styles.
+		'globalBlockStyleName'         => '',
+		'globalBlockStyleId'           => '',
 	),
 	$success_message_border_attribute,
 	$failed_message_border_attribute,

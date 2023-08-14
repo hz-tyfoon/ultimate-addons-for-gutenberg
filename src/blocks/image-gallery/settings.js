@@ -27,6 +27,8 @@ import { store as blockEditorStore, InspectorControls } from '@wordpress/block-e
 import { ToggleControl, Icon } from '@wordpress/components';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import { boxShadowPresets, boxShadowHoverPresets } from './presets';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const MAX_IMAGE_COLUMNS = 8;
 
@@ -2126,7 +2128,9 @@ const Settings = ( props ) => {
 						{ readyToRender && boxShadow() }
 						{ readyToRender && spacing() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

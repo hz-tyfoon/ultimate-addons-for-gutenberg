@@ -9,6 +9,7 @@ import Render from './render';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddInitialAttr from '@Controls/addInitialAttr';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBBlockQuote = ( props ) => {
 	const {
@@ -53,4 +54,5 @@ const UAGBBlockQuote = ( props ) => {
 export default compose(
 	AddInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBBlockQuote );

@@ -24,6 +24,8 @@ import { ToggleControl, Icon } from '@wordpress/components';
 import { select } from '@wordpress/data';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 
@@ -1159,7 +1161,9 @@ const Settings = ( props ) => {
 						{ displayPostDate && dateColorSettings() }
 						{ connectorColorSettings() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

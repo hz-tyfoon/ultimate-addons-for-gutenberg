@@ -12,12 +12,13 @@ import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import addInitialAttr from '@Controls/addInitialAttr';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBHowToStepEdit = ( props ) => {
 
-	const { isSelected, attributes, clientId, deviceType } = props;
+	const { isSelected, attributes, clientId, deviceType, name } = props;
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, deviceType ), [ attributes, deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
@@ -36,4 +37,5 @@ const UAGBHowToStepEdit = ( props ) => {
 export default compose(
 	addInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles,
 )( UAGBHowToStepEdit );

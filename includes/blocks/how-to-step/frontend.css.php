@@ -34,4 +34,11 @@ $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'url', ' .uagb-ste
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'title', ' .uagb-how-to-step-name', $combined_selectors );
 $combined_selectors = UAGB_Helper::get_typography_css( $attr, 'description', ' .uagb-how-to-step-description', $combined_selectors );
 
-return UAGB_Helper::generate_all_css( $combined_selectors, ' .uagb-block-' . $id );
+return UAGB_Helper::generate_all_css( 
+	$combined_selectors,
+	' .uagb-block-' . $id,
+	array(
+		'globalBlockStyleName' => $attr['globalBlockStyleName'],
+		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+	)
+);
