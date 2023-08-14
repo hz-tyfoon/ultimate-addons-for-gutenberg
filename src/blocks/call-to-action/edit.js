@@ -13,6 +13,7 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 const UAGBCallToAction = ( props ) => {
@@ -34,6 +35,7 @@ const UAGBCallToAction = ( props ) => {
 			ctaBorderColor,
 			ctaBorderhoverColor,
 			ctaBorderRadius,
+			globalBlockStyleId,
 		},
 		clientId,
 		name,
@@ -41,19 +43,14 @@ const UAGBCallToAction = ( props ) => {
 	} = props;
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
-		setAttributes( { classMigrate: true } );
-
-		if ( stack === 'tablet' ) {
-			setAttributes( { stack: 'tablet' } );
-		} else if ( stack === 'mobile' ) {
-			setAttributes( { stack: 'mobile' } );
-		} else if ( stack === 'none' && ctaPosition === 'right' ) {
+		if ( stack === 'none' && ctaPosition === 'right' ) {
 			setAttributes( { stack: 'none' } );
 		} else if ( stack === 'none' && 'below-title' === ctaPosition ) {
 			setAttributes( { stack: 'desktop' } );
+		}
+
+		if( globalBlockStyleId ) {
+			return;
 		}
 
 		if ( ctaLeftSpace ) {
@@ -109,13 +106,14 @@ const UAGBCallToAction = ( props ) => {
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
 			<DynamicFontLoader { ...{ attributes } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 	AddGBSStyles
 )( UAGBCallToAction );

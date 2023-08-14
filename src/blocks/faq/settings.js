@@ -26,9 +26,8 @@ import renderGBSSettings from '@Controls/renderGBSSettings';
 import styling from './styling';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
-
-	const { attributes, setAttributes, deviceType } = props;
+	
+	const { attributes, setAttributes, deviceType, clientId } = props;
 	const {
 		layout,
 		inactiveOtherItems,
@@ -148,7 +147,7 @@ const Settings = ( props ) => {
 	} = attributes;
 
 	const onchangeIcon = ( value ) => {
-		const getChildBlocks = select( 'core/block-editor' ).getBlocks( props.clientId );
+		const getChildBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 		getChildBlocks.forEach( ( faqChild ) => {
 			faqChild.attributes.icon = value;
 		} );
@@ -156,7 +155,7 @@ const Settings = ( props ) => {
 		setAttributes( { icon: value } );
 	};
 	const onchangeActiveIcon = ( value ) => {
-		const getChildBlocks = select( 'core/block-editor' ).getBlocks( props.clientId );
+		const getChildBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 
 		getChildBlocks.forEach( ( faqChild ) => {
 			faqChild.attributes.iconActive = value;
@@ -165,7 +164,7 @@ const Settings = ( props ) => {
 		setAttributes( { iconActive: value } );
 	};
 	const onchangeLayout = ( value ) => {
-		const getChildBlocks = select( 'core/block-editor' ).getBlocks( props.clientId );
+		const getChildBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 
 		getChildBlocks.forEach( ( faqChild ) => {
 			faqChild.attributes.layout = value;
@@ -174,7 +173,7 @@ const Settings = ( props ) => {
 		setAttributes( { layout: value } );
 	};
 	const onchangeTag = ( value ) => {
-		const getChildBlocks = select( 'core/block-editor' ).getBlocks( props.clientId );
+		const getChildBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 
 		getChildBlocks.forEach( ( faqChild ) => {
 			faqChild.attributes.headingTag = value;
@@ -187,7 +186,7 @@ const Settings = ( props ) => {
 		return (
 			<UAGAdvancedPanelBody
 				title={ __( 'General', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
+				initialOpen={ true }
 				className="uagb__url-panel-body"
 			>
 				<MultiButtonsControl
@@ -1134,7 +1133,7 @@ const Settings = ( props ) => {
 
 	const presetSettings = () => {
 		return (
-			<UAGAdvancedPanelBody title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) } initialOpen={ true }>
+			<UAGAdvancedPanelBody title={ __( 'Presets', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<UAGPresets setAttributes={ setAttributes } presets={ presets } presetInputType="radioImage" />
 			</UAGAdvancedPanelBody>
 		);
@@ -1145,9 +1144,9 @@ const Settings = ( props ) => {
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
-						{ presetSettings() }
 						{ faqGeneralSettings() }
 						{ 'accordion' === layout && faqIconSettings() }
+						{ presetSettings() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
 						{ commonStyle() }

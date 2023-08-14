@@ -10,7 +10,7 @@ import generateShadowCSS from '@Controls/generateShadowCSS';
 
 function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	const previewType = deviceType.toLowerCase();
 	const {
 		block_id,
 		// Size
@@ -167,6 +167,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	if ( useSeparateBoxShadows ) {
 		selectors['.uagb-icon-wrapper .uagb-svg-wrapper:hover'] = {
 			'box-shadow' : boxShadowHoverCSS,
+			'background': hoverBackground,
+			'border-color': iconBorderHColor,
 		}
 	}
 
@@ -219,10 +221,23 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	
 	stylingCss = generateCSS( selectors, base_selector );
 
-	stylingCss += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ base_selector }`, true, 'mobile' );
-
+		if( 'mobile' === previewType || gbsSelector ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

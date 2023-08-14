@@ -23,7 +23,6 @@ import renderGBSSettings from '@Controls/renderGBSSettings';
 import styling from './styling';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 
 	const { attributes, setAttributes } = props;
 

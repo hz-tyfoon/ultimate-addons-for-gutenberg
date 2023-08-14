@@ -16,6 +16,7 @@ import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const HowToComponent = ( props ) => {
 	const {
@@ -117,7 +118,7 @@ const HowToComponent = ( props ) => {
 			} );
 		}
 
-		const getChildBlocks = select( 'core/block-editor' ).getBlocks( props.clientId );
+		const getChildBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 
 		getChildBlocks.forEach( ( steps, key ) => {
 			stepsData = {
@@ -137,10 +138,6 @@ const HowToComponent = ( props ) => {
 
 	useEffect( () => {
 		// Replacement for componentDidMount.
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
 		setAttributes( {
 			schema: JSON.stringify( schemaJsonData ),
 		} );
@@ -194,13 +191,14 @@ const HowToComponent = ( props ) => {
 				materials={ materials }
 				clientId={ clientId }
 			/>
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 	AddGBSStyles,
 )( HowToComponent );

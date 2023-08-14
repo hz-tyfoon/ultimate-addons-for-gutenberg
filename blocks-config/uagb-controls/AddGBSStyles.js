@@ -51,12 +51,12 @@ const AddGBSStyles = ( ChildComponent )=> {
 			}
 		}
 		
-		const updatedAtributes = {
+		const updatedAttributes = {
 			...attributes,
 			...modifiedAttr
 		};
 
-		props = { ...props, ...{ attributes: updatedAtributes } };
+		props = { ...props, ...{ attributes: updatedAttributes } };
 
 		return <ChildComponent { ...props }/>
 	}

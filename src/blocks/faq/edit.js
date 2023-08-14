@@ -15,6 +15,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const FaqComponent = ( props ) => {
 	const {
@@ -79,9 +80,7 @@ const FaqComponent = ( props ) => {
 	};
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
+		
 		if ( 10 === questionBottomPaddingDesktop && 10 !== vquestionPaddingDesktop ) {
 			setAttributes( {
 				questionBottomPaddingDesktop: vquestionPaddingDesktop,
@@ -251,13 +250,14 @@ const FaqComponent = ( props ) => {
 		<>
 			<DynamicFontLoader { ...{ attributes } } />
 			<DynamicCSSLoader { ...{ blockStyling } } />
-			{ isSelected && <Settings parentProps={ props } deviceType={ deviceType } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 	AddGBSStyles,
 )( FaqComponent );

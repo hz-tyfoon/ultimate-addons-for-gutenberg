@@ -10,6 +10,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 //  Import CSS.
 import './style.scss';
 
@@ -69,13 +70,6 @@ const UAGBCountdownEdit = ( props ) => {
 				timeModified: true,
 			} );
 		}
-
-		// editorInnerblocksPreview: This attribute is used to display innerblocks preview for 'Replace with Content' mode.
-		// block_id: Assigning block_id in the attribute.
-		setAttributes( {
-			editorInnerblocksPreview: false,
-			block_id: clientId.substr( 0, 8 ),
-		} );
 	}, [] );
 
 	const countdownRef = useRef( null );
@@ -83,7 +77,7 @@ const UAGBCountdownEdit = ( props ) => {
 	useEffect( () => {
 		if ( countdownRef ) {
 			setTimeout( () => {
-				UAGBCountdown.editorInit( '.uagb-block-' + clientId.substr( 0, 8 ), attributes, countdownRef.current ); // eslint-disable-line no-undef
+				UAGBCountdown.editorInit( '.uagb-block-' + block_id, attributes, countdownRef.current );
 			} );
 		}
 	}, [ countdownRef ] );
@@ -92,7 +86,7 @@ const UAGBCountdownEdit = ( props ) => {
 
 	useEffect( () => {
 		if ( block_id && timeChanged === 1 ) {
-			UAGBCountdown.changeEndTime( '.uagb-block-' + block_id, attributes, countdownRef.current ); // eslint-disable-line no-undef
+			UAGBCountdown.changeEndTime( '.uagb-block-' + block_id, attributes, countdownRef.current );
 		}
 		setTimeChanged( 1 );
 	}, [ endDateTime, showDays, showHours, showMinutes ] );
@@ -102,21 +96,22 @@ const UAGBCountdownEdit = ( props ) => {
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	// Hooks cannot be applied within conditional renders, so we pre-fetch the value.
-	const countdownToolbar = applyFilters( 'spectra.countdown.toolbar-hook', '', props.name );
+	const countdownToolbar = applyFilters( 'spectra.countdown.toolbar-hook', '', name );
 
 	return (
 		<>
 			{ /* Countdown Toolbar options for Pro (Replace feature) */ }
-			{ props.attributes.timerEndAction === 'content' && countdownToolbar }
+			{ attributes.timerEndAction === 'content' && countdownToolbar }
 			<DynamicFontLoader { ...{ attributes } } />
 			<DynamicCSSLoader { ...{ blockStyling } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render countdownRef={ countdownRef } parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render countdownRef={ countdownRef } { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 	AddGBSStyles
 )( UAGBCountdownEdit );

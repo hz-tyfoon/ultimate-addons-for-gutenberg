@@ -35,9 +35,7 @@ export function getPanelIdFromRef( ref ) {
 	return null;
 }
 
-export const uagbClassNames = ( classes ) => classes.filter( Boolean ).join( ' ' );
-
-export const uagbDeepClone = ( arrayOrObject ) => JSON.parse( JSON.stringify( arrayOrObject ) );
+export const uagbClassNames = ( classes ) => ( classes.filter( Boolean ).join( ' ' ) );
 
 /**
  * Check if object is empty.
@@ -51,3 +49,27 @@ export const isEmptyObject = ( obj ) => Object.keys( obj ).length === 0 && obj.c
  * This variable is used as a placeholder kind of value which is used to identify the attribute is a GBS style attribute.
  */
 export const GBS_RANDOM_NUMBER = 0.001020304;
+
+/**
+ * A function to check if an object is not empty.
+ *
+ * @function
+ *
+ * @param {Object} obj - The object to check.
+ *
+ * @return {boolean} Returns true if the object is not empty, otherwise returns false.
+ */
+export const isObjectNotEmpty = ( obj ) => {
+	return (
+		obj &&
+		Object.keys( obj ).length > 0 &&
+		Object.getPrototypeOf( obj ) === Object.prototype
+	);
+}
+
+export const uagbDeepClone = ( arrayOrObject ) => JSON.parse( JSON.stringify( arrayOrObject ) );
+
+export const updateUAGDay = ( UAGDay, value ) => {
+	const filteredArray = UAGDay.filter( ( i ) => i !== value );
+	return filteredArray?.length > 0 ? filteredArray : undefined;
+};

@@ -91,7 +91,9 @@ $selectors['.uagb-icon-wrapper .uagb-svg-wrapper:hover']     = array(
 // If using separate box shadow hover settings, then generate CSS for it.
 if ( $attr['useSeparateBoxShadows'] ) {
 	$selectors['.uagb-icon-wrapper .uagb-svg-wrapper:hover'] = array(
-		'box-shadow' => $box_shadow_hover_css,
+		'box-shadow'   => $box_shadow_hover_css,
+		'border-color' => $attr['iconBorderHColor'],
+		'background'   => $hover_background,
 	);
 
 };
@@ -154,7 +156,7 @@ return UAGB_Helper::generate_all_css(
 	$combined_selectors,
 	' .uagb-block-' . $id,
 	array(
-		'globalBlockStyleName' => $attr['globalBlockStyleName'],
-		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+		'globalBlockStyleName' => isset( $attr['globalBlockStyleName'] ) ? $attr['globalBlockStyleName'] : '',
+		'globalBlockStyleId'   => isset( $attr['globalBlockStyleId'] ) ? $attr['globalBlockStyleId'] : '',
 	) 
 );

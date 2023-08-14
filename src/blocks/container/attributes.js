@@ -958,7 +958,6 @@ const attributes = {
 	backgroundCustomSizeType: {
 		type: 'string',
 		default: '%',
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'background-custom-size-type',
 		},

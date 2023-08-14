@@ -14,22 +14,17 @@ import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBInlineNoticeEdit = ( props ) => {
 	const {
 		isSelected,
-		setAttributes,
 		clientId,
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		name,
 		deviceType
 	} = props;
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-	}, [] );
 
 	useEffect( () => {
 		scrollBlockToView();
@@ -45,13 +40,14 @@ const UAGBInlineNoticeEdit = ( props ) => {
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
 			<DynamicFontLoader { ...{ attributes } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 	AddGBSStyles,
 )( UAGBInlineNoticeEdit );

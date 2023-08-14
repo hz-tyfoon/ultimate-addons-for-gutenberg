@@ -9,8 +9,9 @@ import generateBorderCSS from '@Controls/generateBorderCSS';
 
 function styling( attributes, clientId, name, deviceType, gbsSelector = false  ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	const previewType = deviceType.toLowerCase();
 	const {
+		block_id,
 		layout,
 		inactiveOtherItems,
 		expandFirstItem,
@@ -422,14 +423,27 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false  )
 
 	let stylingCss = '';
 
-	const id = gbsSelector ? gbsSelector + ' ' : `.uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = gbsSelector ? gbsSelector + ' ' : `.uagb-block-${ block_id }`;
 
 	stylingCss = generateCSS( selectors, id );
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
-
+		if( 'mobile' === previewType || gbsSelector ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

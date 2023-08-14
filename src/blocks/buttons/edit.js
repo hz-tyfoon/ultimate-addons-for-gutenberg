@@ -13,6 +13,7 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 let prevState;
 
@@ -21,7 +22,6 @@ const ButtonsComponent = ( props ) => {
 		isSelected,
 		attributes,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
-		setAttributes,
 		clientId,
 		name,
 		deviceType
@@ -35,24 +35,17 @@ const ButtonsComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
-		// Assigning block_id in the attribute.
-		setAttributes( { classMigrate: true } );
-		setAttributes( { childMigrate: true } );
-
-		prevState = props.isSelected;
+		prevState = isSelected;
 	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
-		if ( ! props.isSelected && prevState && state.isFocused ) {
+		if ( ! isSelected && prevState && state.isFocused ) {
 			setStateValue( {
 				isFocused: 'false',
 			} );
 		}
-		prevState = props.isSelected;
+		prevState = isSelected;
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
@@ -69,13 +62,14 @@ const ButtonsComponent = ( props ) => {
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
 			<DynamicFontLoader { ...{ attributes } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
 	AddGBSStyles,
+	addInitialAttr,
 	AddStaticStyles,
 )( ButtonsComponent );

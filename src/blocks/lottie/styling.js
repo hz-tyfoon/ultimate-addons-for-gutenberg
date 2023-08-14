@@ -15,7 +15,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		backgroundColor,
 		backgroundHColor,
 	} = attributes;
-
+	const previewType = deviceType.toLowerCase();
 	const widthFallback = isNaN( width ) ? 'auto' : `${ width }px`;
 	const heightFallback = isNaN( height ) ? 'auto' : `${ height }px`;
 
@@ -62,10 +62,23 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	let styling_css = generateCSS( selectors, base_selector );
 
-	styling_css += generateCSS( tablet_selectors, `${ base_selector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		styling_css += generateCSS(
+			tablet_selectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	styling_css += generateCSS( mobile_selectors, `${ base_selector }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			styling_css += generateCSS(
+				mobile_selectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return styling_css;
 }
 

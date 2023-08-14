@@ -11,8 +11,10 @@ import generateShadowCSS from '@Controls/generateShadowCSS';
 
 function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'uagb/', '' );
+	const previewType = deviceType.toLowerCase();
 
 	const {
+		block_id,
 		fontFamily,
 		fontWeight,
 		size,
@@ -39,6 +41,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		hColor,
 		hBackground,
 		sizeType,
+		sizeTypeTablet,
+		sizeTypeMobile,
 		sizeMobile,
 		sizeTablet,
 		lineHeight,
@@ -198,7 +202,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		mobileSelectors[
 			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = {
-			'font-size': generateCSSUnit( sizeMobile, sizeType ),
+			'font-size': generateCSSUnit( sizeMobile, sizeTypeMobile ),
 			'line-height': generateCSSUnit( lineHeightMobile, lineHeightType ),
 			'letter-spacing': generateCSSUnit( letterSpacingMobile, letterSpacingType ),
 			'padding-left': generateCSSUnit( leftMobilePadding, mobilePaddingUnit ),
@@ -215,7 +219,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		tabletSelectors[
 			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = {
-			'font-size': generateCSSUnit( sizeTablet, sizeType ),
+			'font-size': generateCSSUnit( sizeTablet, sizeTypeTablet ),
 			'line-height': generateCSSUnit( lineHeightTablet, lineHeightType ),
 			'letter-spacing': generateCSSUnit( letterSpacingTablet, letterSpacingType ),
 			'padding-left': generateCSSUnit( leftTabletPadding, tabletPaddingUnit ),
@@ -333,36 +337,57 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'fill': iconHColor || hColor,
 	};
 	if ( ! removeText ) {
-		selectors[ ' .uagb-button__icon-position-after' ] = {
-			'margin-left': generateCSSUnit( getFallbackNumber( iconSpace, 'iconSpace', blockName ), 'px' ),
-		};
+        const iconMargin = generateCSSUnit( getFallbackNumber( iconSpace, 'iconSpace', blockName ), 'px' );
+        const tabletIconMargin = generateCSSUnit( iconSpaceTablet, 'px' );
+        const mobileIconMargin = generateCSSUnit( iconSpaceMobile, 'px' );
+        let rightSideMargin = 'margin-right';
+        let leftSideMargin = 'margin-left';
 
-		tabletSelectors[ ' .uagb-button__icon-position-before' ] = {
-			'margin-right': generateCSSUnit( iconSpaceTablet, 'px' ),
-		};
-		tabletSelectors[ ' .uagb-button__icon-position-after' ] = {
-			'margin-left': generateCSSUnit( iconSpaceTablet, 'px' ),
-		};
+		if( '1' !== uagb_blocks_info.is_rtl ) {
+			rightSideMargin = 'margin-left';
+			leftSideMargin = 'margin-right';
+		}
 
-		mobileSelectors[ ' .uagb-button__icon-position-before' ] = {
-			'margin-right': generateCSSUnit( iconSpaceMobile, 'px' ),
-		};
-		mobileSelectors[ ' .uagb-button__icon-position-after' ] = {
-			'margin-left': generateCSSUnit( iconSpaceMobile, 'px' ),
-		};
+        selectors[ ' .uagb-button__icon-position-after' ] = {
+            [ rightSideMargin ]: iconMargin,
+        };
+        selectors[ ' .uagb-button__icon-position-before' ] = {
+            [ leftSideMargin ]: iconMargin,
+        };
+        tabletSelectors[ ' .uagb-button__icon-position-before' ] = {
+            [ rightSideMargin ]: tabletIconMargin,
+        };
+        tabletSelectors[ ' .uagb-button__icon-position-after' ] = {
+            [ leftSideMargin ]: tabletIconMargin,
+        };
+        mobileSelectors[ ' .uagb-button__icon-position-before' ] = {
+            [ rightSideMargin ]: mobileIconMargin,
+        };
+        mobileSelectors[ ' .uagb-button__icon-position-after' ] = {
+            [ leftSideMargin ]: mobileIconMargin,
+        };
+    }
 
-		selectors[ ' .uagb-button__icon-position-before' ] = {
-			'margin-right': generateCSSUnit( getFallbackNumber( iconSpace, 'iconSpace', blockName ), 'px' ),
-		};
-	}
-	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
-
+	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ block_id }`;
 	let stylingCss = generateCSS( selectors, base_selector );
 
-	stylingCss += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ base_selector }`, true, 'mobile' );
-
+		if( 'mobile' === previewType || gbsSelector ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

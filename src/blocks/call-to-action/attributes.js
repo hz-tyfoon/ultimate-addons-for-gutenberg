@@ -81,6 +81,20 @@ const attributes = {
 			styleType: 'main-title-font-size-type',
 		},
 	},
+	titleFontSizeTypeTablet: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'main-title-font-size-type-tablet',
+		},
+	},
+	titleFontSizeTypeMobile: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'main-title-font-size-type-mobile',
+		},
+	},
 	titleFontSizeMobile: {
 		type: 'number',
 		isGBSStyle: true,
@@ -180,6 +194,20 @@ const attributes = {
 		default: 'px',
 		UAGCopyPaste: {
 			styleType: 'desc-font-size-type',
+		},
+	},
+	descFontSizeTypeTablet: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'desc-font-size-type-tablet',
+		},
+	},
+	descFontSizeTypeMobile: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'desc-font-size-type-mobile',
 		},
 	},
 	descFontSizeMobile: {
@@ -346,7 +374,6 @@ const attributes = {
 	showIcon: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-show-icon',
 		},
@@ -354,7 +381,6 @@ const attributes = {
 	showSecondIcon: {
 		type: 'boolean',
 		default: true,
-		isGBSStyle: true,
 		UAGCopyPaste: {
 			styleType: 'btn-second-show-icon',
 		},
@@ -414,6 +440,20 @@ const attributes = {
 		default: 'px',
 		UAGCopyPaste: {
 			styleType: 'btn-font-size-type',
+		},
+	},
+	ctaFontSizeTypeTablet: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'btn-font-size-type-tablet',
+		},
+	},
+	ctaFontSizeTypeMobile: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'btn-font-size-type-mobile',
 		},
 	},
 	ctaFontSizeMobile: {
@@ -937,6 +977,20 @@ const attributes = {
 		default: 'px',
 		UAGCopyPaste: {
 			styleType: 'btn-size-unit',
+		},
+	},
+	secondCtaFontSizeTypeTablet: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'btn-size-unit-tablet',
+		},
+	},
+	secondCtaFontSizeTypeMobile: {
+		type: 'string',
+		default: 'px',
+		UAGCopyPaste: {
+			styleType: 'btn-size-unit-mobile',
 		},
 	},
 	secondCtaFontSizeMobile: {

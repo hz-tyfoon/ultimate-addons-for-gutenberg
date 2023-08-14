@@ -11,26 +11,24 @@ import { compose } from '@wordpress/compose';
 import { getLoopImage } from './getLoopImage';
 import AddStaticStyles from '@Controls/AddStaticStyles';
 import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 function UAGBImageEdit( props ) {
 	const {
-		setAttributes,
 		isSelected,
-		clientId,
 		attributes,
 		name,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		deviceType,
 		context,
+		setAttributes,
+		clientId,
 	} = props;
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-	}, [] );
-
-	useEffect( () => {
-		setAttributes( { context } );
+		if( ! attributes?.context ){
+			setAttributes( { context } );
+		}
 	}, [ context ] )
 
 	useEffect( () => {
@@ -46,9 +44,14 @@ function UAGBImageEdit( props ) {
 	return (
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 }
-export default compose( getLoopImage, AddStaticStyles, AddGBSStyles )( UAGBImageEdit );
+export default compose( 
+	getLoopImage, 
+	addInitialAttr, 
+	AddStaticStyles,
+	AddGBSStyles,
+	)( UAGBImageEdit );

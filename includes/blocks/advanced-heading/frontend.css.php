@@ -268,9 +268,7 @@ if ( $attr['headingDescToggle'] || 'none' !== $attr['seperatorStyle'] ) {
 		),
 	);
 }
-/**
- * Get Combined selectors with filters.
- */
+
 $combined_selectors = UAGB_Helper::get_combined_selectors(
 	'advanced-heading',
 	array(
@@ -291,7 +289,7 @@ return UAGB_Helper::generate_all_css(
 	$combined_selectors,
 	$base_selector . $id,
 	array(
-		'globalBlockStyleName' => $attr['globalBlockStyleName'],
-		'globalBlockStyleId'   => $attr['globalBlockStyleId'],
+		'globalBlockStyleName' => isset( $attr['globalBlockStyleName'] ) ? $attr['globalBlockStyleName'] : '',
+		'globalBlockStyleId'   => isset( $attr['globalBlockStyleId'] ) ? $attr['globalBlockStyleId'] : '',
 	) 
 );

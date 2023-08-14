@@ -102,7 +102,7 @@ class UAGB_Init_Blocks {
 
 		$labels = array(
 			'name'               => _x( 'Popup Builder', 'plural', 'ultimate-addons-for-gutenberg' ),
-			'singular_name'      => _x( 'Popup', 'singular', 'ultimate-addons-for-gutenberg' ),
+			'singular_name'      => _x( 'Spectra Popup', 'singular', 'ultimate-addons-for-gutenberg' ),
 			'view_item'          => __( 'View Popup', 'ultimate-addons-for-gutenberg' ),
 			'add_new_item'       => __( 'Create New Popup', 'ultimate-addons-for-gutenberg' ),
 			'add_new'            => __( 'Create Popup', 'ultimate-addons-for-gutenberg' ),
@@ -115,17 +115,18 @@ class UAGB_Init_Blocks {
 		);
 
 		$type_args = array(
-			'supports'      => $supports,
-			'labels'        => $labels,
-			'public'        => false,
-			'show_in_menu'  => false,
-			'show_ui'       => true,
-			'show_in_rest'  => true,
-			'template_lock' => 'all',
-			'template'      => array(
+			'supports'          => $supports,
+			'labels'            => $labels,
+			'public'            => false,
+			'show_in_menu'      => false,
+			'show_in_admin_bar' => true,
+			'show_ui'           => true,
+			'show_in_rest'      => true,
+			'template_lock'     => 'all',
+			'template'          => array(
 				array( 'uagb/popup-builder', array() ),
 			),
-			'rewrite'       => array(
+			'rewrite'           => array(
 				'slug'       => 'spectra-popup',
 				'with-front' => false,
 				'pages'      => false,
@@ -166,8 +167,9 @@ class UAGB_Init_Blocks {
 		$spectra_popup_dashboard = UAGB_Popup_Builder::create_for_admin();
 
 		add_action( 'admin_enqueue_scripts', array( $spectra_popup_dashboard, 'popup_toggle_scripts' ) );
-
 		add_action( 'wp_ajax_uag_update_popup_status', array( $spectra_popup_dashboard, 'update_popup_status' ) );
+
+		do_action( 'spectra_pro_popup_dashboard' );
 
 		add_filter( 'manage_spectra-popup_posts_columns', array( $spectra_popup_dashboard, 'popup_builder_admin_headings' ) );
 		add_action( 'manage_spectra-popup_posts_custom_column', array( $spectra_popup_dashboard, 'popup_builder_admin_content' ), 10, 2 );
@@ -563,6 +565,24 @@ class UAGB_Init_Blocks {
 	}
 
 	/**
+	 * Localize SVG icon scripts in chunks.
+	 * Ex - if 1800 icons available so we will localize 4 variables for it.
+	 *
+	 * @since 2.7.0
+	 * @return void
+	 */
+	public function add_svg_icon_assets() {
+		$localize_icon_chunks = UAGB_Helper::backend_load_font_awesome_icons();
+		if ( ! $localize_icon_chunks ) {
+			return;
+		}
+
+		foreach ( $localize_icon_chunks as $chunk_index => $value ) {
+			wp_localize_script( 'uagb-block-editor-js', "uagb_svg_icons_{$chunk_index}", $value );
+		}
+	}
+
+	/**
 	 * Enqueue Gutenberg block assets for backend editor.
 	 *
 	 * @since 1.0.0
@@ -727,7 +747,7 @@ class UAGB_Init_Blocks {
 				'enableMasonryGallery'                    => apply_filters( 'uag_enable_masonry_gallery', UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_masonry_gallery', 'enabled' ) ),
 				'enableAnimationsExtension'               => apply_filters( 'uag_enable_animations_extension', UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_animations_extension', 'enabled' ) ),
 				'enableResponsiveConditions'              => apply_filters( 'enable_block_responsive', UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_block_responsive', 'enabled' ) ),
-				'uagb_svg_icons'                          => UAGB_Helper::backend_load_font_awesome_icons(),
+				'number_of_icon_chunks'                   => UAGB_Helper::$number_of_icon_chunks,
 				'uagb_enable_extensions_for_blocks'       => apply_filters( 'uagb_enable_extensions_for_blocks', array() ),
 				'uagb_exclude_blocks_from_extension'      => $uagb_exclude_blocks_from_extension,
 				'uag_load_select_font_globally'           => $enable_selected_fonts,
@@ -744,7 +764,7 @@ class UAGB_Init_Blocks {
 				'recaptcha_site_key_v3'                   => UAGB_Admin_Helper::get_admin_settings_option( 'uag_recaptcha_site_key_v3', '' ),
 				'recaptcha_secret_key_v2'                 => UAGB_Admin_Helper::get_admin_settings_option( 'uag_recaptcha_secret_key_v2', '' ),
 				'recaptcha_secret_key_v3'                 => UAGB_Admin_Helper::get_admin_settings_option( 'uag_recaptcha_secret_key_v3', '' ),
-				'blocks_editor_spacing'                   => UAGB_Admin_Helper::get_admin_settings_option( 'uag_blocks_editor_spacing', 0 ),
+				'blocks_editor_spacing'                   => apply_filters( 'uagb_default_blocks_editor_spacing', UAGB_Admin_Helper::get_admin_settings_option( 'uag_blocks_editor_spacing', 0 ) ),
 				'load_font_awesome_5'                     => UAGB_Admin_Helper::get_admin_settings_option( 'uag_load_font_awesome_5', ( 'yes' === get_option( 'uagb-old-user-less-than-2' ) ) ? 'enabled' : 'disabled' ),
 				'auto_block_recovery'                     => UAGB_Admin_Helper::get_admin_settings_option( 'uag_auto_block_recovery', ( 'yes' === get_option( 'uagb-old-user-less-than-2' ) ) ? 'enabled' : 'disabled' ),
 				'font_awesome_5_polyfill'                 => array(),
@@ -752,7 +772,7 @@ class UAGB_Init_Blocks {
 				'spectra_pro_status'                      => is_plugin_active( 'spectra-pro/spectra-pro.php' ),
 				'spectra_custom_css_example'              => __(
 					'Use custom class added in block\'s advanced settings to target your desired block. Examples:
-				.my-class {text-align: center;} // my-class is a custom selector',
+			.my-class {text-align: center;} // my-class is a custom selector',
 					'ultimate-addons-for-gutenberg'
 				),
 				'is_rtl'                                  => is_rtl(),
@@ -761,6 +781,7 @@ class UAGB_Init_Blocks {
 				'is_site_editor'                          => $screen->id,
 				'current_post_id'                         => get_the_ID(),
 				'btn_inherit_from_theme'                  => UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' ),
+				'wp_version'                              => get_bloginfo( 'version' ),
 			)
 		);
 		// To match the editor with frontend.
@@ -770,6 +791,9 @@ class UAGB_Init_Blocks {
 		UAGB_Scripts_Utils::enqueue_blocks_styles();
 		// RTL Styles.
 		UAGB_Scripts_Utils::enqueue_blocks_rtl_styles();
+
+		// Add svg icons in chunks.
+		$this->add_svg_icon_assets();
 	}
 
 	/**
@@ -889,8 +913,8 @@ class UAGB_Init_Blocks {
 	/**
 	 * Add Global Block Styles Class.
 	 *
-	 * @param mixed $block_content The block content.
-	 * @param array $block The block data.
+	 * @param string $block_content The block content.
+	 * @param array  $block The block data.
 	 * @since x.x.x
 	 * @return mixed Returns the new block content.
 	 */
@@ -899,18 +923,13 @@ class UAGB_Init_Blocks {
 		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs']['globalBlockStyleName'] ) || empty( $block['attrs']['block_id'] ) ) {
 			return $block_content;
 		}
-		
-		$block_name          = $block['blockName'];
-		$style_name          = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
-		$style_class_name    = 'spectra-gbs-' . $style_name;
-		$wp_block_class_name = str_replace( '/', '-', $block_name );
 
-		$html = preg_replace(
-			'/<div class="wp-block-' . $wp_block_class_name . '/',
-			'<div class="wp-block-' . $wp_block_class_name . ' ' . $style_class_name . ' ',
-			$block_content, 
-			1
-		);
+		$style_name       = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
+		$style_class_name = 'spectra-gbs-' . $style_name;
+		$block_id         = 'uagb-block-' . $block['attrs']['block_id'];
+
+		// Replace the block id with the block id and the style class name.
+		$html = str_replace( $block_id, $block_id . ' ' . $style_class_name, $block_content );
 
 		return $html;
 	}
@@ -947,15 +966,21 @@ class UAGB_Init_Blocks {
 		if ( empty( $_POST ) || empty( $_POST['attributes'] ) || empty( $_POST['blockName'] ) || empty( $_POST['postId'] ) || empty( $_POST['spectraGlobalStyles'] ) || ! is_array( $global_block_styles ) ) {
 			wp_send_json_error( $response_data );
 		}
+
+		$global_block_styles = is_array( $global_block_styles ) ? $global_block_styles : array();
 	
 		$post_id = sanitize_text_field( $_POST['postId'] );
+
+		$block_attr = array();
+
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
 		foreach ( $global_block_styles as $key => $style ) {
-			if ( ! empty( $_POST['globalBlockStyleId'] ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
-				$block_attr = $style['attributes'];
+			if ( ! empty( $_POST['globalBlockStyleId'] ) && is_array( $style ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
+				$block_attr = isset( $style['attributes'] ) && is_array( $style['attributes'] ) ? $style['attributes'] : array();
 				
-				if ( ! $block_attr ) {
+				if ( empty( $block_attr ) ) {
 					wp_send_json_error( $response_data );
+					break;
 				}
 				
 				$_block_slug = str_replace( 'uagb/', '', sanitize_text_field( $_POST['blockName'] ) );
@@ -981,18 +1006,20 @@ class UAGB_Init_Blocks {
 					$mob_styling_css .= $mobile;
 					$mob_styling_css .= '}';
 				}
-				$_block_css                                    = $desktop . $tab_styling_css . $mob_styling_css;
-				$global_block_styles[ $key ]['frontendStyles'] = $_block_css;
-				$gbs_stored                                    = get_option( 'spectra_global_block_styles', array() );
+				$global_block_styles_key                   = ! empty( $global_block_styles[ $key ] ) && is_array( $global_block_styles[ $key ] ) ? $global_block_styles[ $key ] : array();
+				$_block_css                                = $desktop . $tab_styling_css . $mob_styling_css;
+				$global_block_styles_key['frontendStyles'] = $_block_css;
+				$gbs_stored                                = get_option( 'spectra_global_block_styles', array() );
+				$gbs_stored_key                            = is_array( $gbs_stored ) && isset( $gbs_stored[ $key ] ) ? $gbs_stored[ $key ] : array();
 
-				if ( ! empty( $gbs_stored[ $key ]['post_ids'] ) ) {
-					$global_block_styles[ $key ]['post_ids'] = array_merge( $global_block_styles[ $key ]['post_ids'], $gbs_stored[ $key ]['post_ids'] );
+				if ( isset( $gbs_stored_key['post_ids'] ) && isset( $global_block_styles_key['post_ids'] ) && is_array( $gbs_stored_key['post_ids'] ) && is_array( $global_block_styles_key['post_ids'] ) ) {
+					$global_block_styles_key['post_ids'] = array_merge( $global_block_styles_key['post_ids'], $gbs_stored_key['post_ids'] );
 				}
 
 				update_option( 'spectra_global_block_styles', $global_block_styles );
 
-				if ( ! empty( $global_block_styles[ $key ]['post_ids'] ) && is_array( $global_block_styles[ $key ]['post_ids'] ) ) {
-					foreach ( $global_block_styles[ $key ]['post_ids'] as $post_id ) {
+				if ( ! empty( $global_block_styles_key['post_ids'] ) && is_array( $global_block_styles_key['post_ids'] ) ) {
+					foreach ( $global_block_styles_key['post_ids'] as $post_id ) {
 						UAGB_Helper::delete_page_assets( $post_id );
 					}
 				}
@@ -1000,18 +1027,22 @@ class UAGB_Init_Blocks {
 		}
 		
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
-		
+		$spectra_gbs_google_fonts = is_array( $spectra_gbs_google_fonts ) ? $spectra_gbs_google_fonts : array();
+
 		// Global Font Families.
 		$font_families = array();
 		foreach ( $block_attr as $name => $attribute ) {
-			if ( false !== strpos( $name, 'Family' ) && '' !== $attribute ) {
+			if ( is_string( $name ) && false !== strpos( $name, 'Family' ) && '' !== $attribute ) {
 				
 				$font_families[] = $attribute;
 			}
 		}
-		$spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] = $font_families;
-		if ( isset( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) && is_array( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) ) {
-			$spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] = array_unique( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] );
+
+		$globalBlockStyleId = is_array( $block_attr ) && isset( $block_attr['globalBlockStyleId'] ) ? $block_attr['globalBlockStyleId'] : '';
+
+		$spectra_gbs_google_fonts[ $globalBlockStyleId ] = $font_families;
+		if ( isset( $spectra_gbs_google_fonts[ $globalBlockStyleId ] ) ) {
+			$spectra_gbs_google_fonts[ $globalBlockStyleId ] = array_unique( $spectra_gbs_google_fonts[ $globalBlockStyleId ] );
 		}
 		
 		update_option( 'spectra_gbs_google_fonts', $spectra_gbs_google_fonts );
