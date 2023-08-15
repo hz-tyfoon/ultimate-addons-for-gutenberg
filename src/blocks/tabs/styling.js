@@ -321,8 +321,8 @@ function styling( attributes, clientId, name, deviceType ) {
 	}
 
 	tabletSelectors = {
-		'.uagb-tabs__hstyle1-tablet > .uagb-tabs__panel .uagb-tab': borderCSSTablet,
-		'.uagb-tabs__hstyle1-tablet > .uagb-tabs__body-wrap': borderCSSTablet,
+		'.uagb-tabs__hstyle1-desktop > .uagb-tabs__panel .uagb-tab': borderCSSTablet,
+		'.uagb-tabs__hstyle1-desktop > .uagb-tabs__body-wrap': borderCSSTablet,
 		'.uagb-tabs__hstyle2-tablet > .uagb-tabs__panel .uagb-tab': {
 			'border-width': '0px',
 			'border-style': 'none',
@@ -480,8 +480,8 @@ function styling( attributes, clientId, name, deviceType ) {
 		},
 	};
 	mobileSelectors = {
-		'.uagb-tabs__hstyle1-mobile > .uagb-tabs__panel .uagb-tab': borderCSSMobile,
-		'.uagb-tabs__hstyle1-mobile > .uagb-tabs__body-wrap': borderCSSMobile,
+		'.uagb-tabs__hstyle1-desktop > .uagb-tabs__panel .uagb-tab': borderCSSMobile,
+		'.uagb-tabs__hstyle1-desktop > .uagb-tabs__body-wrap': borderCSSMobile,
 		'.uagb-tabs__hstyle2-mobile > .uagb-tabs__panel .uagb-tab': {
 			'border-width': '0px',
 			'border-style': 'none',
