@@ -54,6 +54,8 @@ return array(
 	'alignmentTablet'         => 'left',
 	'alignmentMobile'         => 'left',
 	'fontSizeType'            => 'px',
+	'fontSizeTypeTablet'      => 'px',
+	'fontSizeTypeMobile'      => 'px',
 	'fontSize'                => '',
 	'fontSizeMobile'          => '',
 	'fontSizeTablet'          => '',

@@ -16,7 +16,6 @@ import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.j
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 
 	const { attributes, setAttributes } = props;
 
@@ -36,6 +35,8 @@ const Settings = ( props ) => {
 		alignmentTablet,
 		alignmentMobile,
 		fontSizeType,
+		fontSizeTypeMobile,
+		fontSizeTypeTablet,
 		fontSize,
 		fontSizeMobile,
 		fontSizeTablet,
@@ -305,6 +306,14 @@ const Settings = ( props ) => {
 					fontSizeType={ {
 						value: fontSizeType,
 						label: 'fontSizeType',
+					} }
+					fontSizeTypeTablet={ {
+						value: fontSizeTypeTablet,
+						label: 'fontSizeTypeTablet',
+					} }
+					fontSizeTypeMobile={ {
+						value: fontSizeTypeMobile,
+						label: 'fontSizeTypeMobile',
 					} }
 					fontSize={ {
 						value: fontSize,

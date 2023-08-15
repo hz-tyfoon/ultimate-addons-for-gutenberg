@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/BrainstormForce
 Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 5.6
-Tested up to: 6.2.2
-Stable tag: 2.7.1
+Tested up to: 6.3.0
+Stable tag: 2.7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -216,9 +216,43 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 == Changelog ==
 
 = x.x.x =
+* Improvement: Info Box - Added heading tag settings for prefix.
 * Improvement: Buttons - Reduced the default number of buttons to 1 and updated the default styling.
 * Improvement: Buttons - Added alignment options to both the child and parent blocks in the block controls toolbar. 
 * Fix: Buttons - Resolved an issue in which the button color would appear different from the theme color in FSE templates.
+* Fix: Blockquote - Resolved an issue wherein having '#' or '@' symbols in the description would result in the removal of content following them symbols when shared on Twitter.
+* Fix: Call To Action - Resolved an issue in which the bottom-margins of the title and description would not work as intended for Tablet and Mobile devices on the frontend.
+* Fix: Post Carousel - Resolved an issue wherein the carousel dots would not appear centered.
+* Fix: Social Share - Resolved an issue wherein the gap between icons would add unwanted margins to the sides of the wrapper.
+* Fix: Testimonials - Resolved an issue wherein the Testimonial dots would not appear centered.
+* Fix: Instagram - Resolved an issue in which an undefined record could appear in the admin dashboard.
+* Fix: Global - Resolved an issue that was encountered when updating to WordPress 6.3 on some websites.
+* Fix: Global - Resolved an issue wherein the color-picker default icon which would not appear in WordPress 6.3.
+
+= 2.7.4 - TUESDAY, 8th AUGUST 2023 =
+* Improvement: Core Blocks - Implemented responsive typography font-size units.
+* Improvement: Image - Added a new `Custom Size` feature, which will maintain the dimensions set when the image is replaced!
+* Improvement: Popup Builder - Moved page-level settings into block-level panels.
+* Improvement: Testimonial - Added a vertical alignment option for equal-height content.
+* Improvement: Global - Added a fresh new look for preset icons and rearranged some settings.
+* Improvement: Global - Updated the variation picker and media placeholder UI.
+* Improvement: Global - Enhanced the reusable block functionality for the following blocks: Container, Blockquote, Counter, FAQ, Forms.
+* Fix: Call To Action - Resolved an issue wherein the line-height of the title would not appear responsive in the frontend.
+* Fix: Forms - Resolved an issue wherein the submit button would not utilize the padding set in the customizer.
+* Fix: Inline Notice - Updated inconsistent default padding and removed unwanted top-margin in the editor and the frontend.
+* Fix: Testimonial - Resolved an issue in which an extra margin would appear for the content in the mobile view.
+* Fix: Global - Resolved an issue in which the spacing between the text and the icon in buttons would not be applied as intended in RTL mode for certain blocks.
+
+= 2.7.3 - MONDAY, 31st JULY 2023 =
+* Improvement: Core Blocks - Enhanced the reusable block functionality for all Core Blocks, with the exception of the Container.
+* Improvement: Global - Optimized the editor performance and stability.
+* Fix: Global - Prevented a fatal error for non-block-based themes in WordPress versions below 5.9.0.
+
+= 2.7.2 - THURSDAY, 27th JULY 2023 =
+* Fix: Forms - Resolved an issue in which some phone country-code colors would not work as intended in the editor.
+* Fix: Table Of Contents - Resolved an issue wherein the default padding not same in the editor and on the frontend.
+* Fix: Social Share - Converted anchor tags to span tags and removed unwanted attributes from the social links.
+* Fix: Display Conditions - Resolved an issue wherein the `UAGDay` attribute would persist in the code view after turning off display conditions.
 
 = 2.7.1 - TUESDAY, 25th JULY 2023 =
 * Improvement: Global - Added auto-cleaning for archived assets.
@@ -1501,3 +1535,11 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 = 0.0.1 =
 * Initial release
+
+== Upgrade Notice ==
+
+= 2.7.4 =
+With WordPress 6.3 no longer supporting older versions of PHP, the next Spectra release will also require a minimum of PHP 7.4. For websites running on older version of PHP, we strongly recommend upgrading to PHP 7.4 or above to ensure optimal performance and compatibility.
+
+= 2.7.3 =
+We've optimized the internal structure of Spectra in this update. To ensure your website's safety, We recommend that you backup your website before updating.
