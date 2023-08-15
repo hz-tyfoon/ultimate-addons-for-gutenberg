@@ -214,8 +214,7 @@ class UAGB_Init_Blocks {
 		// Check if animations extension is enabled and an animation type is selected.
 		if (
 			'enabled' === \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_animations_extension', 'enabled' ) &&
-			! empty( $block['attrs']['UAGAnimationType'] ) &&
-			$block['attrs']['UAGAnimationType']
+			! empty( $block['attrs']['UAGAnimationType'] )
 		) {
 
 			$attrs = $block['attrs'];
@@ -966,19 +965,17 @@ class UAGB_Init_Blocks {
 		if ( empty( $_POST ) || empty( $_POST['attributes'] ) || empty( $_POST['blockName'] ) || empty( $_POST['postId'] ) || empty( $_POST['spectraGlobalStyles'] ) || ! is_array( $global_block_styles ) ) {
 			wp_send_json_error( $response_data );
 		}
-
+		
 		$global_block_styles = is_array( $global_block_styles ) ? $global_block_styles : array();
-	
+		$block_attr          = array();
+
 		$post_id = sanitize_text_field( $_POST['postId'] );
-
-		$block_attr = array();
-
 		// Not sanitizing this array because $_POST['attributes'] is a very large array of different types of attributes.
 		foreach ( $global_block_styles as $key => $style ) {
-			if ( ! empty( $_POST['globalBlockStyleId'] ) && is_array( $style ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
-				$block_attr = isset( $style['attributes'] ) && is_array( $style['attributes'] ) ? $style['attributes'] : array();
+			if ( ! empty( $_POST['globalBlockStyleId'] ) && ! empty( $style['value'] ) && $style['value'] === $_POST['globalBlockStyleId'] ) {
+				$block_attr = $style['attributes'];
 				
-				if ( empty( $block_attr ) ) {
+				if ( ! $block_attr ) {
 					wp_send_json_error( $response_data );
 					break;
 				}
@@ -1006,20 +1003,19 @@ class UAGB_Init_Blocks {
 					$mob_styling_css .= $mobile;
 					$mob_styling_css .= '}';
 				}
-				$global_block_styles_key                   = ! empty( $global_block_styles[ $key ] ) && is_array( $global_block_styles[ $key ] ) ? $global_block_styles[ $key ] : array();
-				$_block_css                                = $desktop . $tab_styling_css . $mob_styling_css;
-				$global_block_styles_key['frontendStyles'] = $_block_css;
-				$gbs_stored                                = get_option( 'spectra_global_block_styles', array() );
-				$gbs_stored_key                            = is_array( $gbs_stored ) && isset( $gbs_stored[ $key ] ) ? $gbs_stored[ $key ] : array();
+				$_block_css                                    = $desktop . $tab_styling_css . $mob_styling_css;
+				$global_block_styles[ $key ]['frontendStyles'] = $_block_css;
+				$gbs_stored                                    = get_option( 'spectra_global_block_styles', array() );
+				$gbs_stored_key_value                          = is_array( $gbs_stored ) && isset( $gbs_stored[ $key ] ) ? $gbs_stored[ $key ] : array();
 
-				if ( isset( $gbs_stored_key['post_ids'] ) && isset( $global_block_styles_key['post_ids'] ) && is_array( $gbs_stored_key['post_ids'] ) && is_array( $global_block_styles_key['post_ids'] ) ) {
-					$global_block_styles_key['post_ids'] = array_merge( $global_block_styles_key['post_ids'], $gbs_stored_key['post_ids'] );
+				if ( ! empty( $gbs_stored_key_value['post_ids'] ) ) {
+					$global_block_styles[ $key ]['post_ids'] = array_merge( $global_block_styles[ $key ]['post_ids'], $gbs_stored_key_value['post_ids'] );
 				}
 
 				update_option( 'spectra_global_block_styles', $global_block_styles );
 
-				if ( ! empty( $global_block_styles_key['post_ids'] ) && is_array( $global_block_styles_key['post_ids'] ) ) {
-					foreach ( $global_block_styles_key['post_ids'] as $post_id ) {
+				if ( ! empty( $global_block_styles[ $key ]['post_ids'] ) && is_array( $global_block_styles[ $key ]['post_ids'] ) ) {
+					foreach ( $global_block_styles[ $key ]['post_ids'] as $post_id ) {
 						UAGB_Helper::delete_page_assets( $post_id );
 					}
 				}
@@ -1027,22 +1023,21 @@ class UAGB_Init_Blocks {
 		}
 		
 		$spectra_gbs_google_fonts = get_option( 'spectra_gbs_google_fonts', array() );
-		$spectra_gbs_google_fonts = is_array( $spectra_gbs_google_fonts ) ? $spectra_gbs_google_fonts : array();
-
+		
 		// Global Font Families.
 		$font_families = array();
 		foreach ( $block_attr as $name => $attribute ) {
-			if ( is_string( $name ) && false !== strpos( $name, 'Family' ) && '' !== $attribute ) {
+			if ( false !== strpos( $name, 'Family' ) && '' !== $attribute ) {
 				
 				$font_families[] = $attribute;
 			}
 		}
 
-		$globalBlockStyleId = is_array( $block_attr ) && isset( $block_attr['globalBlockStyleId'] ) ? $block_attr['globalBlockStyleId'] : '';
-
-		$spectra_gbs_google_fonts[ $globalBlockStyleId ] = $font_families;
-		if ( isset( $spectra_gbs_google_fonts[ $globalBlockStyleId ] ) ) {
-			$spectra_gbs_google_fonts[ $globalBlockStyleId ] = array_unique( $spectra_gbs_google_fonts[ $globalBlockStyleId ] );
+		if ( isset( $block_attr['globalBlockStyleId'] ) && is_array( $spectra_gbs_google_fonts ) ) {
+			$spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] = $font_families;
+			if ( isset( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) && is_array( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] ) ) {
+				$spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] = array_unique( $spectra_gbs_google_fonts[ $block_attr['globalBlockStyleId'] ] );
+			}
 		}
 		
 		update_option( 'spectra_gbs_google_fonts', $spectra_gbs_google_fonts );
