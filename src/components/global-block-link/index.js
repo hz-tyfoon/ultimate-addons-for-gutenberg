@@ -13,7 +13,14 @@ import { compose } from '@wordpress/compose';
 import UAGSelectControl from '@Components/select-control';
 import { useDeviceType } from '@Controls/getPreviewType';
 import AddNewPopupStyle from './add-new-popup-style';
-import { clearCurrentAttributes, getLabel, getGlobalBlockStylesOptions, getNewAttributes, clearNumberAttributes } from './utils';
+import { 
+    clearCurrentAttributes,
+    getLabel,
+    getGlobalBlockStylesOptions,
+    getNewAttributes,
+    clearNumberAttributes,
+    updatePostIdInGbsArray 
+} from './utils';
 
 const GlobalBlockStyles = ( props ) => {
    // Add and remove the CSS on the drop and remove of the component.
@@ -46,10 +53,13 @@ const GlobalBlockStyles = ( props ) => {
     const [ generate, setGenerate ] = useState( false );
 
     const blockNameStripped = blockName.replace( 'uagb/', '' );
-    const currentPostID = select( 'core/editor' ).getCurrentPostId()
-	const allBlocksAttributes = wp.hooks.applyFilters( 'uagb.blocksAttributes', blocksAttributes )
-    const currentBlockDefaultAttributes = allBlocksAttributes[blockNameStripped]
+    const currentPostID = select( 'core/editor' ).getCurrentPostId();
+	const allBlocksAttributes = wp.hooks.applyFilters( 'uagb.blocksAttributes', blocksAttributes );
+    const currentBlockDefaultAttributes = allBlocksAttributes[blockNameStripped];
 
+    // Check page context for FSE template.
+    const pageContext = select( 'core/edit-site' ).getPage();
+    const pageTemplateSlug = pageContext?.context?.templateSlug ? pageContext.context.templateSlug : null;
 
     useEffect( () => {
         if ( saveToDatabase ) {
@@ -113,7 +123,6 @@ const GlobalBlockStyles = ( props ) => {
         }
         
         globalBlockStyles.map( ( style ) => {
-
             if ( newStyleID && style?.value === String( newStyleID ) ) {
                 const styleNameClass = style?.label?.replace( /\s+/g, '-' )?.toLowerCase();
                 const baseSelector = `.spectra-gbs-${styleNameClass}`;
@@ -126,15 +135,19 @@ const GlobalBlockStyles = ( props ) => {
                 style.blockName = blockName;
                 
                 // Save the Post IDs of the Pages where GBS is used.
-                if ( style?.post_ids ) {
-                    style.post_ids.push( currentPostID );
-                } else {
-                    style.post_ids = [ currentPostID ];
+                style.post_ids = updatePostIdInGbsArray( style, currentPostID );
+
+                // Save block block count.
+                style.block_count = style?.block_count ? style.block_count + 1 : 1;
+
+                // Save FSE template slug.
+                if ( pageTemplateSlug ) {
+                    // Save block count in fse template.
+                    style.block_count_in_fse_template = style?.block_count_in_fse_template ? style.block_count_in_fse_template + 1 : 1;
+                    style.page_template_slugs = updatePostIdInGbsArray( style, pageTemplateSlug, 'page_template_slugs' );
                 }
-                
-                style.post_ids = [ ...new Set( style.post_ids ) ] // Make array values unique.
             }
-            return style
+            return style;
         } );
 
         updateGlobalBlockStyles( globalBlockStyles );
@@ -187,19 +200,34 @@ const GlobalBlockStyles = ( props ) => {
                         }
 
                         globalBlockStyles.map( ( style ) => {
+                            // Subtract block count.
+                            if ( style?.value === globalBlockStyleId ) {
+                                style.block_count = style?.block_count ? style.block_count - 1 : 0;
+
+                                // Subtract block count in fse template.
+                                if ( pageTemplateSlug ) {
+                                    style.block_count_in_fse_template = style?.block_count_in_fse_template ? style.block_count_in_fse_template - 1 : 0;
+                                }
+                            }
                             
                             if ( style?.value === value ) {
                                 label = style?.label;
                                 
-                                // Save the Post IDs of the Pages where GBS is used.
-                                if ( style?.post_ids ) {
-                                    style.post_ids.push( currentPostID );
-                                } else {
-                                    style.post_ids = [currentPostID];
-                                }
-                        
-                                style.post_ids = [...new Set( style.post_ids )] // Make array values unique.
+                                // Add block count.
+                                style.block_count = style?.block_count ? style.block_count + 1 : 1;
 
+                                // Add block count in fse template.
+                                if ( pageTemplateSlug ) {
+                                    style.block_count_in_fse_template = style?.block_count_in_fse_template ? style.block_count_in_fse_template + 1 : 1;
+                                }
+
+                                // Save the Post IDs of the Pages where GBS is used.
+                                style.post_ids = updatePostIdInGbsArray( style, currentPostID );
+
+                                // Save FSE template slug.
+                                if ( pageTemplateSlug ) {
+                                    style.page_template_slugs = updatePostIdInGbsArray( style, pageTemplateSlug, 'page_template_slugs' );
+                                }
                             }
                             return style;
                         } );

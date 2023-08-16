@@ -282,18 +282,32 @@ class UAGB_Post_Assets {
 	 * @return void
 	 */
 	public function spectra_gbs_load_styles() {
-
 		$spectra_global_block_styles = get_option( 'spectra_global_block_styles', array() );
 		
 		if ( empty( $spectra_global_block_styles ) || ! is_array( $spectra_global_block_styles ) ) {
 			return;
 		}
+
+		$should_render_styles_in_fse_page = wp_is_block_theme() && ! get_queried_object();
+
 		foreach ( $spectra_global_block_styles as $style ) {
-			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) && ! empty( $style['post_ids'] ) && in_array( $this->post_id, $style['post_ids'] ) ) {
-				$this->stylesheet = $style['frontendStyles'] . $this->stylesheet;
+			if ( ! empty( $style['value'] ) && ! empty( $style['frontendStyles'] ) ) {
+				$block_count = isset( $style['block_count'] ) ? intval( $style['block_count'] ) : 0;
+
+				if ( $block_count <= 0 ) {
+					continue;
+				}
+
+				if ( ! empty( $style['post_ids'] ) && in_array( $this->post_id, $style['post_ids'] ) ) {
+					$this->stylesheet = $style['frontendStyles'] . $this->stylesheet;
+				} elseif ( $should_render_styles_in_fse_page && isset( $style['block_count_in_fse_template'] ) && ! empty( $style['block_count_in_fse_template'] ) ) {
+					// Render in fse template.
+					$this->stylesheet = $style['frontendStyles'] . $this->stylesheet;
+				}           
 			}
 		}
 	}
+	
 
 	/**
 	 * Load Google Fonts for Spectra Global Block Styles.

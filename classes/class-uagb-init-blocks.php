@@ -1012,6 +1012,11 @@ class UAGB_Init_Blocks {
 					$global_block_styles[ $key ]['post_ids'] = array_merge( $global_block_styles[ $key ]['post_ids'], $gbs_stored_key_value['post_ids'] );
 				}
 
+				// For FSE template slug.
+				if ( ! empty( $gbs_stored_key_value['page_template_slugs'] ) ) {
+					$global_block_styles[ $key ]['page_template_slugs'] = array_merge( $global_block_styles[ $key ]['page_template_slugs'], $gbs_stored_key_value['page_template_slugs'] );
+				}
+
 				update_option( 'spectra_global_block_styles', $global_block_styles );
 
 				if ( ! empty( $global_block_styles[ $key ]['post_ids'] ) && is_array( $global_block_styles[ $key ]['post_ids'] ) ) {

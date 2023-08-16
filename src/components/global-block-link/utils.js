@@ -77,3 +77,14 @@ export function getNewAttributes( style, attributes, currentBlockDefaultAttribut
 
     return newAttributes;
 }
+
+export function updatePostIdInGbsArray( style, store_ids, id_or_slug = 'post_ids' ){
+    const idsArray = 'post_ids' === id_or_slug ? 'post_ids' : 'page_template_slugs';
+    let assignArray = style?.[idsArray] ? [ ...style[idsArray] ] : [];
+    assignArray.push( store_ids );
+    // Make array values unique.
+    if( style?.[idsArray] ){
+        assignArray = [ ...new Set( assignArray ) ];
+    }
+    return assignArray;
+}
