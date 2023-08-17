@@ -39,6 +39,8 @@ const UAGBContainer = ( props ) => {
 			UAGHideTab,
 			UAGHideMob,
 			globalBlockStyleId,
+			backgroundType,
+			backgroundVideoOpacity,
 		},
 		clientId,
 		setAttributes,
@@ -193,6 +195,19 @@ const UAGBContainer = ( props ) => {
 				setAttributes,
 				attributes
 			);
+		}
+
+		// If the legacy video overlay opacity for video background was set, migrate it.
+		if ( 'video' === backgroundType && backgroundVideoOpacity ) {
+			setAttributes( {
+				overlayOpacity: backgroundVideoOpacity,
+				backgroundVideoOpacity: 0,
+			} );
+		}
+
+		if ( 0 !== select( 'core/block-editor' ).getBlockParents( clientId ).length ) {
+			// if there is no parent for container when child container moved outside root then do not show variations.
+			setAttributes( { variationSelected: true } );
 		}
 	}, [] );
 

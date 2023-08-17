@@ -15,7 +15,7 @@ const attributes = {
 	},
 	prefixTitle: {
 		source: 'html',
-		selector: 'span.uagb-ifb-title-prefix',
+		selector: '.uagb-ifb-title-prefix',
 		default: __( 'Prefix', 'ultimate-addons-for-gutenberg' ),
 	},
 	classMigrate: {
@@ -261,6 +261,10 @@ const attributes = {
 		UAGCopyPaste: {
 			styleType: 'prefix-load-google-font',
 		},
+	},
+	prefixHeadingTag:{
+		type: 'string',
+		default: 'span',
 	},
 	headingTag: {
 		type: 'string',
