@@ -109,8 +109,8 @@ $btn_border        = UAGB_Block_Helper::uag_generate_deprecated_border_css(
 	( isset( $attr['submitborderColor'] ) ? $attr['submitborderColor'] : '' ),
 	( isset( $attr['submitborderStyle'] ) ? $attr['submitborderStyle'] : '' )
 );
-$btn_border_Tablet = UAGB_Block_Helper::uag_generate_border_css( $attr, 'btn', 'tablet' );
-$btn_border_Mobile = UAGB_Block_Helper::uag_generate_border_css( $attr, 'btn', 'mobile' );
+$btn_border_tablet = UAGB_Block_Helper::uag_generate_border_css( $attr, 'btn', 'tablet' );
+$btn_border_mobile = UAGB_Block_Helper::uag_generate_border_css( $attr, 'btn', 'mobile' );
 
 // fallback for forms select field.
 $forms_padding_right_mobile_fallback = (int) $attr['paddingFieldRightMobile'] + 30;
@@ -711,10 +711,10 @@ if ( ! $attr['inheritFromTheme'] ) {
 			'padding-left'   => UAGB_Helper::get_css_value( $attr['paddingBtnLeftTablet'], $attr['tabletPaddingBtnUnit'] ),
 			'padding-right'  => UAGB_Helper::get_css_value( $attr['paddingBtnRightTablet'], $attr['tabletPaddingBtnUnit'] ),
 		),
-		$btn_border_Tablet
+		$btn_border_tablet
 	);
 
-	$t_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link'] = $btn_border_Tablet;
+	$t_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link'] = $btn_border_tablet;
 
 
 	$m_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button'] = array_merge(
@@ -724,10 +724,10 @@ if ( ! $attr['inheritFromTheme'] ) {
 			'padding-left'   => UAGB_Helper::get_css_value( $attr['paddingBtnLeftMobile'], $attr['mobilePaddingBtnUnit'] ),
 			'padding-right'  => UAGB_Helper::get_css_value( $attr['paddingBtnRightMobile'], $attr['mobilePaddingBtnUnit'] ),
 		),
-		$btn_border_Mobile
+		$btn_border_mobile
 	);
 
-	$m_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link'] = $btn_border_Mobile;
+	$m_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link'] = $btn_border_mobile;
 };
 
 $combined_selectors = array(
