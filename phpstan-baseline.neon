@@ -143,7 +143,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$input_settings of method UagAdmin\\\\Ajax\\\\Common_Settings\\:\\:sanitize_form_inputs\\(\\) expects array, mixed given\\.$#"
-			count: 4
+			count: 5
 			path: admin-core/ajax/common-settings.php
 
 		-
@@ -153,7 +153,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$str of function stripslashes expects string, mixed given\\.$#"
-			count: 6
+			count: 7
 			path: admin-core/ajax/common-settings.php
 
 		-
@@ -163,7 +163,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$string of function stripslashes expects string, mixed given\\.$#"
-			count: 6
+			count: 7
 			path: admin-core/ajax/common-settings.php
 
 		-
