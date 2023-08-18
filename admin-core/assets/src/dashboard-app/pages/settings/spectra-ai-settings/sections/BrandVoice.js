@@ -1,18 +1,22 @@
-import { useState } from '@wordpress/element';
+import { useState, useRef } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import ReactHtmlParser from 'react-html-parser';
 import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
 
-const BrandVoice = () => {
-	// Decleration of all the states needed
+const BrandVoice = ( props ) => {
+	const {
+		openAIOptions,
+	} = props
+
+	// Decleration of the dispatcher, and all the states needed.
 	const dispatch = useDispatch();
-	const openAIOptions = uag_react.open_ai_options || {};
-	const existingKey = openAIOptions?.key || '';
-	const [ openAIKey, setOpenAIKey ] = useState( existingKey );
-	const [ openAIKeyLabel, setOpenAIKeyLabel ] = useState( __( 'Save Key', 'ultimate-addons-for-gutenberg' ) );
-	const [ linkingKey, setLinkingKey ] = useState( false );
+	const existingBrandVoice = openAIOptions?.brand_voice || {};
+	const [ brandTitle, setBrandTitle ] = useState( existingBrandVoice?.title );
+	const [ brandInfo, setBrandInfo ] = useState( existingBrandVoice?.info );
+	const [ brandWritingStyle, setBrandWritingStyle ] = useState( existingBrandVoice?.writing_style );
+	const [ brandAudience, setBrandAudience ] = useState( existingBrandVoice?.audience );
 
 	// SVG For Right Hand Side Spinner.
 	const svgSpinner = (
@@ -100,28 +104,84 @@ const BrandVoice = () => {
 		} );
 	};
 
+	// Render a character counter for the previous sibling element.
+	const characterCount = ( charLimit, currentVal ) => {
+		const currentCount = currentVal?.length ? charLimit - currentVal.length : charLimit;
+		return (
+			<div className='absolute text-xs text-left text-slate-400 bg-white px-2 -bottom-0.5 right-4'>
+				{ `${ currentCount } / ${ charLimit } Characters` }
+			</div>
+		);
+	};
+
+	// Prevent line breaks in the current textarea field.
+	const preventLineBreaks = ( event, setCurrentState ) => {
+		const currentValue = event.target.value?.replace(/[\r\n]+/g, '') || '';
+		setCurrentState( currentValue );
+	};
+
 	// Render API Key Settings.
-	const renderAPIKeyInput = () => (
+	const renderBrandVoiceForm = () => (
 		<>
-			<div className="mt-4 grid grid-cols-[1fr_auto] w-full">
+			{/* Buesiness Name */}
+			<div className="mt-8 relative">
+				<h4 className="font-medium text-sm text-slate-800">
+					{ __( 'Business Name', 'ultimate-addons-for-gutenberg' ) }
+				</h4>
 				<input
-					className="mr-5 h-10 text-sm placeholder-slate-400 transition spectra-admin__input-field"
+					className="mt-3 h-10 w-full text-sm placeholder-slate-400 transition spectra-admin__input-field"
+					type='text'
+					aria-label='Brand Voice Title'
+					placeholder='Site Title'
+					value={ brandTitle }
+					onChange={ ( event ) => setBrandTitle( event.target.value ) }
+				/>
+			</div>
+			{/* Buesiness Description */}
+			<div className="mt-8 relative">
+				<h4 className="font-medium text-sm text-slate-800">
+					{ __( 'Business Description', 'ultimate-addons-for-gutenberg' ) }
+				</h4>
+				<textarea
+					className="mt-3 w-full text-sm resize-none placeholder-slate-400 transition spectra-admin__input-field"
+					rows='8'
+					maxLength='500'
+					aria-label='Brand Voice Description'
+					placeholder='Write something about your business...'
+					value={ brandInfo }
+					onChange={ ( event ) => preventLineBreaks( event, setBrandInfo ) }
+				/>
+				{ characterCount( 500, brandInfo ) }
+			</div>
+			{/* Writing Style */}
+			<div className="mt-8 relative">
+				<h4 className="font-medium text-sm text-slate-800">
+					{ __( 'Writing Style', 'ultimate-addons-for-gutenberg' ) }
+				</h4>
+				<input
+					className="mt-3 h-10 w-full text-sm placeholder-slate-400 transition spectra-admin__input-field"
 					type='text'
 					aria-label='Key'
-					placeholder='sk-xxxxxxxxxxxxxxxxxx'
-					value={ openAIKey }
-					onChange={ ( event ) => setOpenAIKey( event.target.value ) }
+					placeholder='Site Title'
+					value={ brandWritingStyle }
+					onChange={ ( event ) => setBrandWritingStyle( event.target.value ) }
 				/>
-				<button
-					type='button'
-					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
-					disabled={ linkingKey }
-					onClick={ ( event ) => authenticateOpenAIKey( event ) }
-				>
-					{ openAIKeyLabel }
-					{ linkingKey && svgSpinner }
-				</button>
 			</div>
+			{/* Visitors | Audience */}
+			<div className="mt-8 relative">
+				<h4 className="font-medium text-sm text-slate-800">
+					{ __( 'Audience', 'ultimate-addons-for-gutenberg' ) }
+				</h4>
+				<input
+					className="mt-3 h-10 w-full text-sm placeholder-slate-400 transition spectra-admin__input-field"
+					type='text'
+					aria-label='Key'
+					placeholder='Site Title'
+					value={ brandAudience }
+					onChange={ ( event ) => setBrandAudience( event.target.value ) }
+				/>
+			</div>
+			
 		</>
 	);
 
@@ -141,6 +201,7 @@ const BrandVoice = () => {
 						<p className="text-sm text-slate-500">
 							{ __( 'Create a Brand Voice to make Spectra AI generate your content just the way you like it.', 'ultimate-addons-for-gutenberg' ) }
 						</p>
+						{ renderBrandVoiceForm() }
 					</div>
 				</div>
 			</section>
