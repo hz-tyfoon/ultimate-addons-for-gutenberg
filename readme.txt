@@ -215,7 +215,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 == Changelog ==
 
-= x.x.x =
+= 2.7.6 - FRIDAY, 18th AUGUST 2023 =
 * Fix: Image Gallery - Resolved an issue wherein the lightbox feature would not work after setting up pagination.
 * Fix: Forms - Resolved multiple styling issues on the frontend.
 * Fix: Global - Resolved a significant issue of multiple `_uag_page_assets` entries in the database when using an FSE theme.
