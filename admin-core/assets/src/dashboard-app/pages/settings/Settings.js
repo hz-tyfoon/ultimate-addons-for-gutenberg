@@ -29,7 +29,7 @@ import ContainerGlobalElementsGap from '@DashboardApp/pages/settings/ContainerGl
 import MyAccount from '@DashboardApp/pages/settings/MyAccount';
 import InstagramUsers from '@DashboardApp/pages/settings/block-settings/InstagramUsers';
 import InheritFromTheme from '@DashboardApp/pages/settings/InheritFromTheme';
-import OpenAISettings from '@DashboardApp/pages/settings/block-settings/OpenAISettings';
+import SpectraAISettings from '@DashboardApp/pages/settings/spectra-ai-settings/SpectraAISettings';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useEffect } from '@wordpress/element';
 import { uagbClassNames } from '@Utils/Helpers';
@@ -57,8 +57,9 @@ const Settings = () => {
     if ( spectraIsBlockTheme ) {
         navigation.push( { name: __( 'Theme Fonts', 'ultimate-addons-for-gutenberg' ), slug: 'fse-support', icon: SettingsIcons.font } );
     }
-	if( uag_react.spectra_pro_status ){
+	if ( uag_react.spectra_pro_status ) {
 		navigation.push( { name: __( 'License', 'ultimate-addons-for-gutenberg' ), slug: 'license', icon: SettingsIcons.account } );
+		navigation.splice( 5, 0, { name: __( 'Spectra AI', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['global-settings'] } );
 	}
 
 	useEffect( () => {
@@ -159,6 +160,12 @@ const Settings = () => {
                             </>
                         }
                         {
+                        	uag_react.spectra_pro_status &&  'spectra-ai' === activeSettingsNavigationTab &&
+                            <>
+                                <SpectraAISettings />
+                            </>
+                        }
+                        {
                             'fse-support' === activeSettingsNavigationTab && spectraIsBlockTheme &&
                                 <FSEFontFamilies/>
                         }
@@ -166,10 +173,7 @@ const Settings = () => {
 							<>
 								{
 									uag_react.spectra_pro_status && (
-										<>
-											<OpenAISettings/>
-											<InstagramUsers/>
-										</>
+										<InstagramUsers/>
 									)
 								}
 								<BlockSettings/>
