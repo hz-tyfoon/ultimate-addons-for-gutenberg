@@ -59,7 +59,7 @@ const Settings = () => {
     }
 	if ( uag_react.spectra_pro_status ) {
 		navigation.push( { name: __( 'License', 'ultimate-addons-for-gutenberg' ), slug: 'license', icon: SettingsIcons.account } );
-		navigation.splice( 5, 0, { name: __( 'Spectra AI', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['global-settings'] } );
+		navigation.splice( 5, 0, { name: __( 'Spectra AI', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
 	}
 
 	useEffect( () => {
