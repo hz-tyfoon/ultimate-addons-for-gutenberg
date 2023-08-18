@@ -593,7 +593,7 @@ $m_selectors[' .uagb-forms-main-form .uagb-slider:before']                      
 );
 
 if ( ! $attr['inheritFromTheme'] ) {
-	$selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link '] = array_merge(
+	$selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link'] = array_merge(
 		array(
 			'font-size'      => UAGB_Helper::get_css_value( $attr['submitTextFontSize'], $attr['submitTextFontSizeType'] ),
 			'color'          => $attr['submitColor'],
@@ -606,7 +606,7 @@ if ( ! $attr['inheritFromTheme'] ) {
 	);
 
 
-	$selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button '] = array_merge(
+	$selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button'] = array_merge(
 		array(
 			'font-size'      => UAGB_Helper::get_css_value( $attr['submitTextFontSize'], $attr['submitTextFontSizeType'] ),
 			'color'          => $attr['submitColor'],
@@ -618,7 +618,7 @@ if ( ! $attr['inheritFromTheme'] ) {
 		$btn_border
 	);
 
-	$selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:hover '] = array(
+	$selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:hover'] = array(
 		'color'        => $attr['submitColorHover'],
 		'border-color' => ! empty( $attr['btnBorderHColor'] ) ? $attr['btnBorderHColor'] : $attr['submitborderHoverColor'],
 	);
@@ -628,7 +628,7 @@ if ( ! $attr['inheritFromTheme'] ) {
 		'border-color' => ! empty( $attr['btnBorderHColor'] ) ? $attr['btnBorderHColor'] : $attr['submitborderHoverColor'],
 	);
 
-	$selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:focus '] = array(
+	$selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link:focus'] = array(
 		'color'            => $attr['submitColorHover'],
 		'background-color' => ( 'color' === $attr['submitBgHoverType'] ) ? $attr['submitBgColorHover'] : 'transparent',
 		'border-color'     => ! empty( $attr['btnBorderHColor'] ) ? $attr['btnBorderHColor'] : $attr['submitborderHoverColor'],
@@ -714,7 +714,7 @@ if ( ! $attr['inheritFromTheme'] ) {
 		$btn_border_Tablet
 	);
 
-	$t_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link '] = $btn_border_Tablet;
+	$t_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link'] = $btn_border_Tablet;
 
 
 	$m_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button'] = array_merge(
@@ -727,7 +727,7 @@ if ( ! $attr['inheritFromTheme'] ) {
 		$btn_border_Mobile
 	);
 
-	$m_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link '] = $btn_border_Mobile;
+	$m_selectors[' .uagb-forms-main-form .uagb-forms-main-submit-button-wrap.wp-block-button:not(.is-style-outline) .uagb-forms-main-submit-button.wp-block-button__link'] = $btn_border_Mobile;
 };
 
 $combined_selectors = array(
