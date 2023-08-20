@@ -2,7 +2,9 @@ const itemCount = 1;
 
 const buttons = [];
 
-const alignment = 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ? 'center' : 'left';
+const oldAlign = ( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ) ? 'center' : 'left';
+
+console.log( 'oldAlign: ', oldAlign);
 
 for ( let i = 1; i <= itemCount; i++ ) {
 	const label = 'Click Here';
@@ -56,7 +58,7 @@ const attributes = {
 	},
 	alignment: {
 		type: 'string',
-		default: alignment,
+		default: oldAlign,
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
