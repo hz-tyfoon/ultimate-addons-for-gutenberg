@@ -10,9 +10,6 @@ const vPaddingDefault =
 	'yes' === uagb_blocks_info.uagb_old_user_less_than_2 || 'yes' === uagb_blocks_info.enable_legacy_blocks ? 10 : '';
 const hPaddingDefault =
 	'yes' === uagb_blocks_info.uagb_old_user_less_than_2 || 'yes' === uagb_blocks_info.enable_legacy_blocks ? 14 : '';
-const oldalignment = ( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 )? 'center' : 'left';
-
-console.log( 'oldalignment: ', oldalignment);
 
 const attributes = {
 	isPreview: {
@@ -34,7 +31,7 @@ const attributes = {
 	},
 	alignment: {
 		type: 'string',
-		default: oldalignment,
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},

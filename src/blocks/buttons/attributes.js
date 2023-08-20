@@ -2,10 +2,6 @@ const itemCount = 1;
 
 const buttons = [];
 
-const oldAlign = ( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ) ? 'center' : 'left';
-
-console.log( 'oldAlign: ', oldAlign);
-
 for ( let i = 1; i <= itemCount; i++ ) {
 	const label = 'Click Here';
 	const link = '#';
@@ -58,21 +54,21 @@ const attributes = {
 	},
 	alignment: {
 		type: 'string',
-		default: oldAlign,
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
 	},
 	alignmentTablet: {
 		type: 'string',
-		default: 'left',
+		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align-tablet',
 		},
 	},
 	alignmentMobile: {
 		type: 'string',
-		default: 'left',
+		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align-mobile',
 		},
@@ -151,20 +147,6 @@ const attributes = {
 		default: 'px',
 		UAGCopyPaste: {
 			styleType: 'btn-font-size-type',
-		},
-	},
-	fontSizeTypeTablet: {
-		type: 'string',
-		default: 'px',
-		UAGCopyPaste: {
-			styleType: 'btn-font-size-type-tablet',
-		},
-	},
-	fontSizeTypeMobile: {
-		type: 'string',
-		default: 'px',
-		UAGCopyPaste: {
-			styleType: 'btn-font-size-type-mobile',
 		},
 	},
 	fontSize: {
