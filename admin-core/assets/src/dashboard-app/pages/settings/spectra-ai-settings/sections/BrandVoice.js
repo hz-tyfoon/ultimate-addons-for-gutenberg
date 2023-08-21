@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
-import { OpenAiResponder, getResponse } from '../../../../../../../../../spectra-pro/src/blocks/extensions/ai/open-ai/utils';
+import { OpenAiResponder, getResponse } from '@ProBlocks/extensions/ai/open-ai/utils';
 
 const BrandVoice = ( props ) => {
 	const {
@@ -58,8 +58,7 @@ const BrandVoice = ( props ) => {
 				setTimeout( () => {
 					theButton.disabled = false;
 				}, 1000 );
-			}
-			else{
+			} else {
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: __( 'Failed to Save Brand Voice', 'ultimate-addons-for-gutenberg' ), messageType: 'error' } } );
 				setTimeout( () => {
 					theButton.disabled = false;
