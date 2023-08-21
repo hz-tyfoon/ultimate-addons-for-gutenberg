@@ -226,6 +226,12 @@ class Admin_Menu {
 		$theme_settings      = $theme_data->get_settings();
 		$theme_font_families = isset( $theme_settings['typography']['fontFamilies']['theme'] ) && is_array( $theme_settings['typography']['fontFamilies']['theme'] ) ? $theme_settings['typography']['fontFamilies']['theme'] : array();
 
+		// Get the necessary site details for the admin dashboard.
+		$site_details = array(
+			'name'        => get_bloginfo( 'name' ),
+			'description' => get_bloginfo( 'description' ),
+		);
+
 		$localize = apply_filters(
 			'uag_react_admin_localize',
 			array(
@@ -250,6 +256,7 @@ class Admin_Menu {
 				'is_allow_registration'    => (bool) get_option( 'users_can_register' ),
 				'theme_fonts'              => $theme_font_families,
 				'open_ai_options'          => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_open_ai_options', array() ),
+				'site_details'             => $site_details,
 			)
 		);
 
