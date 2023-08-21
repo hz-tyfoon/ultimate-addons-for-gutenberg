@@ -1,12 +1,9 @@
-import { useState, useRef } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import ReactHtmlParser from 'react-html-parser';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
-import { applyFilters } from '@wordpress/hooks';
 import { OpenAiResponder, getResponse } from '../../../../../../../../../spectra-pro/src/blocks/extensions/ai/open-ai/utils';
-import SettingsIcons from '../../SettingsIcons';
 
 const BrandVoice = ( props ) => {
 	const {
@@ -20,9 +17,8 @@ const BrandVoice = ( props ) => {
 	const [ brandInfo, setBrandInfo ] = useState( existingBrandVoice?.description || uag_react.site_details?.description || ''  );
 	const [ brandWritingStyle, setBrandWritingStyle ] = useState( existingBrandVoice?.tone || '' );
 	const [ brandAudience, setBrandAudience ] = useState( existingBrandVoice?.visitor || '' );
-	const [ confirmDeletion, setConfirmDeletion ] = useState( false );
 	const [ generatingContent, setGeneratingContent ] = useState( false );
-	const clearRef = useRef( null );
+
 
 	// SVG For Right Hand Side Spinner.
 	const svgSpinner = () => (
@@ -78,58 +74,6 @@ const BrandVoice = ( props ) => {
 		} );
 	};
 
-	// Handle linking the API Key on button click.
-	const clearBrandVoice = ( clickedButton ) => {
-		if ( ! confirmDeletion && clearRef?.current ) {
-			setConfirmDeletion( true );
-			clearRef.current.textContent = __( 'Are You Sure?', 'ultimate-addons-for-gutenberg' );
-			return;
-		}
-		if ( clearRef?.current ) {
-			setConfirmDeletion( false );
-			clearRef.current.textContent = __( 'Clear Brand Voice', 'ultimate-addons-for-gutenberg' );
-		}
-		// First escape the user's input.
-		const updatedOpenAIOptions = {
-			...openAIOptions,
-			brand_voice: [],
-		};
-		const theButton = clickedButton.target;
-		theButton.disabled = true;
-		dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: updatedOpenAIOptions } );
-		const formData = {
-			security: uag_react.open_ai_options_nonce,
-			value: JSON.stringify( updatedOpenAIOptions ),
-		};
-		const getApiDataFetch = getApiData( {
-			url: uag_react.ajax_url,
-			action: 'uag_open_ai_options',
-			data : formData,	
-		} );
-		getApiDataFetch.then( ( responseData ) => {
-			if ( responseData.success ) {
-				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: __( 'Brand Voice Cleared', 'ultimate-addons-for-gutenberg' ) } );
-				setBrandTitle( uag_react.site_details?.name || '' );
-				setBrandInfo( uag_react.site_details?.description || '' );
-				setTimeout( () => {
-					theButton.disabled = false;
-				}, 1000 );
-			}
-			else{
-				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: __( 'Failed to Clear Brand Voice', 'ultimate-addons-for-gutenberg' ), messageType: 'error' } } );
-				setTimeout( () => {
-					theButton.disabled = false;
-				}, 1000 );
-			}
-		} ).catch( () => {
-			dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: __( 'Failed to Clear Brand Voice', 'ultimate-addons-for-gutenberg' ), messageType: 'error' } } );
-			dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: { ...openAIOptions } } );
-			setTimeout( () => {
-				theButton.disabled = false;
-			}, 1000 );
-		} );
-	};
-
 	// Render a character counter for the previous sibling element.
 	const characterCount = ( charLimit, currentVal ) => {
 		const currentCount = currentVal?.length ? charLimit - currentVal.length : charLimit;
@@ -142,7 +86,7 @@ const BrandVoice = ( props ) => {
 
 	// Prevent line breaks in the current textarea field.
 	const preventLineBreaks = ( event, setCurrentState ) => {
-		const currentValue = event.target.value?.replace(/[\r\n]+/g, '') || '';
+		const currentValue = event.target.value?.replace( /[\r\n]+/g, '' ) || '';
 		setCurrentState( currentValue );
 	};
 
@@ -187,42 +131,44 @@ const BrandVoice = ( props ) => {
 		<>
 			{/* Buesiness Name */}
 			<div className='mt-8 relative'>
-				<h4 className='font-medium text-sm text-slate-800'>
+				<h4 className='w-9/12 font-medium text-sm text-slate-800'>
 					{ __( 'Business Name', 'ultimate-addons-for-gutenberg' ) }
 				</h4>
-				<input
-					className='mt-3 h-10 w-full text-sm placeholder-slate-400 transition spectra-admin__input-field'
-					type='text'
-					aria-label='Brand Voice Title'
-					placeholder={ __( 'The name of your business…', 'ultimate-addons-for-gutenberg' ) }
-					value={ brandTitle }
-					onChange={ ( event ) => setBrandTitle( event.target.value ) }
-				/>
-				<button
-					type='button'
-					className='bg-none text-spectra hover:text-spectra-hover focus:text-spectra-hover disabled:hidden flex items-center justify-start gap-2 w-auto absolute top-8 -right-56 px-4 py-2 border border-transparent text-sm font-medium focus:outline-none transition-all'
-					onClick={ () => generateAllFields() }
-					disabled={ ! brandTitle }
-				>
-					{ generatingContent ? (
-						<>
-							{ svgSpinner() }
-							{ __( 'Generating…', 'ultimate-addons-for-gutenberg' ) }
-						</>
-					) : (
-						<>
-							<svg className='flex-shrink-0 stroke-spectra' width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-								<path d='M9.8132 15.9038L9 18.75L8.1868 15.9038C7.75968 14.4089 6.59112 13.2403 5.09619 12.8132L2.25 12L5.09619 11.1868C6.59113 10.7597 7.75968 9.59112 8.1868 8.09619L9 5.25L9.8132 8.09619C10.2403 9.59113 11.4089 10.7597 12.9038 11.1868L15.75 12L12.9038 12.8132C11.4089 13.2403 10.2403 14.4089 9.8132 15.9038Z' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'/>
-								<path d='M18.2589 8.71454L18 9.75L17.7411 8.71454C17.4388 7.50533 16.4947 6.56117 15.2855 6.25887L14.25 6L15.2855 5.74113C16.4947 5.43883 17.4388 4.49467 17.7411 3.28546L18 2.25L18.2589 3.28546C18.5612 4.49467 19.5053 5.43883 20.7145 5.74113L21.75 6L20.7145 6.25887C19.5053 6.56117 18.5612 7.50533 18.2589 8.71454Z' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'/>
-								<path d='M16.8942 20.5673L16.5 21.75L16.1058 20.5673C15.8818 19.8954 15.3546 19.3682 14.6827 19.1442L13.5 18.75L14.6827 18.3558C15.3546 18.1318 15.8818 17.6046 16.1058 16.9327L16.5 15.75L16.8942 16.9327C17.1182 17.6046 17.6454 18.1318 18.3173 18.3558L19.5 18.75L18.3173 19.1442C17.6454 19.3682 17.1182 19.8954 16.8942 20.5673Z' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'/>
-							</svg>
-							{ __( 'Generate the rest with AI', 'ultimate-addons-for-gutenberg' ) }
-						</>
-					) }
-				</button>
+				<div className='w-full flex items-center justify-start mt-3 gap-2'>
+					<input
+						className='h-10 w-9/12 text-sm placeholder-slate-400 transition spectra-admin__input-field'
+						type='text'
+						aria-label='Brand Voice Title'
+						placeholder={ __( 'The name of your business…', 'ultimate-addons-for-gutenberg' ) }
+						value={ brandTitle }
+						onChange={ ( event ) => setBrandTitle( event.target.value ) }
+					/>
+					<button
+						type='button'
+						className='bg-none text-spectra hover:text-spectra-hover focus:text-spectra-hover disabled:hidden flex-1 flex items-center justify-start text-left gap-2 w-auto p-0 border border-transparent text-sm leading-4 font-medium focus:outline-none transition-all'
+						onClick={ () => generateAllFields() }
+						disabled={ ! brandTitle }
+					>
+						{ generatingContent ? (
+							<>
+								{ svgSpinner() }
+								{ __( 'Generating…', 'ultimate-addons-for-gutenberg' ) }
+							</>
+						) : (
+							<>
+								<svg className='flex-shrink-0 stroke-spectra' width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+									<path d='M9.8132 15.9038L9 18.75L8.1868 15.9038C7.75968 14.4089 6.59112 13.2403 5.09619 12.8132L2.25 12L5.09619 11.1868C6.59113 10.7597 7.75968 9.59112 8.1868 8.09619L9 5.25L9.8132 8.09619C10.2403 9.59113 11.4089 10.7597 12.9038 11.1868L15.75 12L12.9038 12.8132C11.4089 13.2403 10.2403 14.4089 9.8132 15.9038Z' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'/>
+									<path d='M18.2589 8.71454L18 9.75L17.7411 8.71454C17.4388 7.50533 16.4947 6.56117 15.2855 6.25887L14.25 6L15.2855 5.74113C16.4947 5.43883 17.4388 4.49467 17.7411 3.28546L18 2.25L18.2589 3.28546C18.5612 4.49467 19.5053 5.43883 20.7145 5.74113L21.75 6L20.7145 6.25887C19.5053 6.56117 18.5612 7.50533 18.2589 8.71454Z' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'/>
+									<path d='M16.8942 20.5673L16.5 21.75L16.1058 20.5673C15.8818 19.8954 15.3546 19.3682 14.6827 19.1442L13.5 18.75L14.6827 18.3558C15.3546 18.1318 15.8818 17.6046 16.1058 16.9327L16.5 15.75L16.8942 16.9327C17.1182 17.6046 17.6454 18.1318 18.3173 18.3558L19.5 18.75L18.3173 19.1442C17.6454 19.3682 17.1182 19.8954 16.8942 20.5673Z' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'/>
+								</svg>
+								{ __( 'Generate the rest with AI', 'ultimate-addons-for-gutenberg' ) }
+							</>
+						) }
+					</button>
+				</div>
 			</div>
 			{/* Buesiness Description */}
-			<div className='mt-8 relative'>
+			<div className='w-9/12 mt-8 relative'>
 				<h4 className='font-medium text-sm text-slate-800'>
 					{ __( 'Business Description', 'ultimate-addons-for-gutenberg' ) }
 				</h4>
@@ -239,7 +185,7 @@ const BrandVoice = ( props ) => {
 				{ characterCount( 500, brandInfo ) }
 			</div>
 			{/* Writing Style */}
-			<div className='mt-8 relative'>
+			<div className='w-9/12 mt-8 relative'>
 				<h4 className='font-medium text-sm text-slate-800'>
 					{ __( 'Writing Style', 'ultimate-addons-for-gutenberg' ) }
 				</h4>
@@ -254,7 +200,7 @@ const BrandVoice = ( props ) => {
 				/>
 			</div>
 			{/* Visitors | Audience */}
-			<div className='mt-8 relative'>
+			<div className='w-9/12 mt-8 relative'>
 				<h4 className='font-medium text-sm text-slate-800'>
 					{ __( 'Ideal Website Visitor', 'ultimate-addons-for-gutenberg' ) }
 				</h4>
@@ -273,21 +219,10 @@ const BrandVoice = ( props ) => {
 				<button
 					type='button'
 					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover disabled:opacity-25 disabled:hover:bg-spectra flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
-					disabled={ ! ( brandTitle && brandInfo && brandWritingStyle && brandAudience ) }
 					onClick={ ( event ) => saveBrandVoice( event ) }
 				>
 					{ __( 'Save Brand Voice', 'ultimate-addons-for-gutenberg' ) }
 				</button>
-				{ ( existingBrandVoice || brandTitle || brandInfo || brandWritingStyle || brandAudience ) && (
-					<button
-						type='button'
-						className='text-red-500 hover:text-red-600 focus:text-red-600 flex items-center w-auto py-2 border border-transparent text-sm font-medium focus:outline-none transition-all'
-						ref={ clearRef }
-						onClick={ ( event ) => clearBrandVoice( event ) }
-					>
-						{ __( 'Clear Brand Voice', 'ultimate-addons-for-gutenberg' ) }
-					</button>
-				) }
 			</div>
 		</>
 	);
@@ -300,7 +235,7 @@ const BrandVoice = ( props ) => {
 						{ __( 'Brand Voice', 'ultimate-addons-for-gutenberg' ) }
 					</h3>
 				</div>
-				<div className='mr-16 mt-2 w-full flex items-start'>
+				<div className='mr-16 mt-2 w-full'>
 					<div className='w-9/12'>
 						<p className='text-sm text-slate-500'>
 							{ __( 'Give your Spectra AI a personal touch!', 'ultimate-addons-for-gutenberg' ) }
@@ -308,8 +243,8 @@ const BrandVoice = ( props ) => {
 						<p className='text-sm text-slate-500'>
 							{ __( 'Create a Brand Voice to make Spectra AI generate your content just the way you like it.', 'ultimate-addons-for-gutenberg' ) }
 						</p>
-						{ renderBrandVoiceForm() }
 					</div>
+					{ renderBrandVoiceForm() }
 				</div>
 			</section>
 		</>
