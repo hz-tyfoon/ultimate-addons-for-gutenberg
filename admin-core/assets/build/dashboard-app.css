@@ -655,6 +655,8 @@ select {
   bottom: -0px;
 }.-bottom-0\.5 {
   bottom: -0.125rem;
+}.-right-56 {
+  right: -14rem;
 }.left-3 {
   left: 0.75rem;
 }.right-0 {
@@ -665,6 +667,8 @@ select {
   top: 0px;
 }.top-1\/2 {
   top: 50%;
+}.top-8 {
+  top: 2rem;
 }.z-0 {
   z-index: 0;
 }.z-10 {
@@ -823,6 +827,8 @@ select {
   height: 2rem;
 }.h-9 {
   height: 2.25rem;
+}.h-\[18px\] {
+  height: 18px;
 }.h-\[36rem\] {
   height: 36rem;
 }.h-full {
@@ -859,6 +865,8 @@ select {
   width: 2rem;
 }.w-9\/12 {
   width: 75%;
+}.w-\[18px\] {
+  width: 18px;
 }.w-\[2\.4rem\] {
   width: 2.4rem;
 }.w-\[78\%\] {
@@ -956,6 +964,8 @@ select {
   justify-content: center;
 }.justify-between {
   justify-content: space-between;
+}.gap-2 {
+  gap: 0.5rem;
 }.gap-4 {
   gap: 1rem;
 }.gap-5 {
@@ -1105,6 +1115,8 @@ select {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }.bg-opacity-75 {
   --tw-bg-opacity: 0.75;
+}.bg-none {
+  background-image: none;
 }.bg-contain {
   background-size: contain;
 }.bg-center {
@@ -1464,6 +1476,9 @@ select {
 }.hover\:text-red-500:hover {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}.hover\:text-red-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }.hover\:text-slate-500:hover {
   --tw-text-opacity: 1;
   color: rgb(100 116 139 / var(--tw-text-opacity));
@@ -1514,6 +1529,9 @@ select {
 }.focus\:text-red-500:focus {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}.focus\:text-red-600:focus {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }.focus\:text-slate-400:focus {
   --tw-text-opacity: 1;
   color: rgb(148 163 184 / var(--tw-text-opacity));
@@ -1586,6 +1604,10 @@ select {
 }.active\:text-spectra-hover:active {
   --tw-text-opacity: 1;
   color: rgb(83 0 224 / var(--tw-text-opacity));
+}.disabled\:hidden:disabled {
+  display: none;
+}.disabled\:cursor-wait:disabled {
+  cursor: wait;
 }.disabled\:opacity-25:disabled {
   opacity: 0.25;
 }.disabled\:hover\:bg-spectra:hover:disabled {
