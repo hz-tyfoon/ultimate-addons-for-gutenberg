@@ -226,6 +226,10 @@
 					border-color: $slate-400;
 					box-shadow: none;
 				}
+
+				& + .spectra-admin__input-field--border-stats {
+					color: $slate-400;
+				}
 			}
 		}
 

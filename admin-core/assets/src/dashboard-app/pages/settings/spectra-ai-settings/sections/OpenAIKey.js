@@ -5,10 +5,13 @@ import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
 
-const OpenAISettings = () => {
+const OpenAIKey = ( props ) => {
+	const {
+		openAIOptions,
+	} = props;
+
 	// Decleration of all the states needed
 	const dispatch = useDispatch();
-	const openAIOptions = uag_react.open_ai_options || {};
 	const existingKey = openAIOptions?.key || '';
 	const [ openAIKey, setOpenAIKey ] = useState( existingKey );
 	const [ openAIKeyLabel, setOpenAIKeyLabel ] = useState( __( 'Save Key', 'ultimate-addons-for-gutenberg' ) );
@@ -158,4 +161,4 @@ const OpenAISettings = () => {
 	);
 };
 
-export default OpenAISettings;
+export default OpenAIKey;
