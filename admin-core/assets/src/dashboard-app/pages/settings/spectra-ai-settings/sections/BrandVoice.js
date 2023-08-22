@@ -1,9 +1,10 @@
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
 import { OpenAiResponder, getResponse } from '@ProBlocks/extensions/ai/open-ai/utils';
+import { uagbClassNames } from '@Utils/Helpers';
 
 const BrandVoice = ( props ) => {
 	const {
@@ -12,6 +13,7 @@ const BrandVoice = ( props ) => {
 
 	// Decleration of the dispatcher, and all the states needed.
 	const dispatch = useDispatch();
+	const existingKey = openAIOptions?.key || '';
 	const existingBrandVoice = openAIOptions?.brand_voice || {};
 	const [ brandTitle, setBrandTitle ] = useState( existingBrandVoice?.title || uag_react.site_details?.name || '' );
 	const [ brandInfo, setBrandInfo ] = useState( existingBrandVoice?.description || uag_react.site_details?.description || ''  );
@@ -19,7 +21,15 @@ const BrandVoice = ( props ) => {
 	const [ brandAudience, setBrandAudience ] = useState( existingBrandVoice?.visitor || '' );
 	const [ generatingContent, setGeneratingContent ] = useState( false );
 
-
+	useEffect( () => {
+		if ( ! existingKey ) {
+			setBrandTitle( '' );
+			setBrandInfo( '' );
+			setBrandWritingStyle( '' );
+			setBrandAudience( '' );
+		}
+	}, [] );
+	
 	// SVG For Right Hand Side Spinner.
 	const svgSpinner = () => (
 		<svg className='animate-spin h-[18px] w-[18px] text-spectra' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -228,8 +238,11 @@ const BrandVoice = ( props ) => {
 
 	return (
 		<>
-			<section className='block border-b border-solid border-slate-200 px-12 py-8 justify-between'>  
-				<div className='mr-16 w-full flex items-center'>
+			<section className={ uagbClassNames( [
+				'block border-b border-solid border-slate-200 px-12 py-8 justify-between',
+				! existingKey && 'opacity-50 pointer-events-none'
+			] ) }>  
+				<div className='mr-16 w-full flex items-center '>
 					<h3 className='p-0 flex-1 justify-right inline-flex text-lg leading-8 font-medium text-gray-900'>
 						{ __( 'Brand Voice', 'ultimate-addons-for-gutenberg' ) }
 					</h3>
