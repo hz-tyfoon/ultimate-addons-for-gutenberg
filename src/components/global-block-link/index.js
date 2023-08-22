@@ -58,7 +58,7 @@ const GlobalBlockStyles = ( props ) => {
     const currentBlockDefaultAttributes = allBlocksAttributes[blockNameStripped];
 
     // Check page context for FSE template.
-    const pageContext = select( 'core/edit-site' ).getPage();
+    const pageContext = select( 'core/edit-site' )?.getPage();
     const pageTemplateSlug = pageContext?.context?.templateSlug ? pageContext.context.templateSlug : null;
 
     useEffect( () => {
