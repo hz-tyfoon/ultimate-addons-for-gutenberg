@@ -321,8 +321,8 @@ function styling( attributes, clientId, name, deviceType ) {
 	}
 
 	tabletSelectors = {
-		'.uagb-tabs__hstyle1-desktop > .uagb-tabs__panel .uagb-tab': borderCSSTablet,
-		'.uagb-tabs__hstyle1-desktop > .uagb-tabs__body-wrap': borderCSSTablet,
+		'.uagb-tabs__hstyle1-tablet > .uagb-tabs__panel .uagb-tab': borderCSSTablet,
+		'.uagb-tabs__hstyle1-tablet > .uagb-tabs__body-wrap': borderCSSTablet,
 		'.uagb-tabs__hstyle2-tablet > .uagb-tabs__panel .uagb-tab': {
 			'border-width': '0px',
 			'border-style': 'none',
@@ -480,8 +480,8 @@ function styling( attributes, clientId, name, deviceType ) {
 		},
 	};
 	mobileSelectors = {
-		'.uagb-tabs__hstyle1-desktop > .uagb-tabs__panel .uagb-tab': borderCSSMobile,
-		'.uagb-tabs__hstyle1-desktop > .uagb-tabs__body-wrap': borderCSSMobile,
+		'.uagb-tabs__hstyle1-mobile > .uagb-tabs__panel .uagb-tab': borderCSSMobile,
+		'.uagb-tabs__hstyle1-mobile > .uagb-tabs__body-wrap': borderCSSMobile,
 		'.uagb-tabs__hstyle2-mobile > .uagb-tabs__panel .uagb-tab': {
 			'border-width': '0px',
 			'border-style': 'none',
@@ -592,23 +592,23 @@ function styling( attributes, clientId, name, deviceType ) {
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
-		'.uagb-tabs__stack11-mobile > .uagb-tabs__panel .uagb-tab': borderCSSMobile,
-		'.uagb-tabs__stack11-mobile > .uagb-tabs__body-wrap': borderCSSMobile,
-		'.uagb-tabs__stack12-mobile .uagb-tab': {
+		'.uagb-tabs__stack1-mobile > .uagb-tabs__panel .uagb-tab': borderCSSMobile,
+		'.uagb-tabs__stack1-mobile > .uagb-tabs__body-wrap': borderCSSMobile,
+		'.uagb-tabs__stack2-mobile .uagb-tab': {
 			'border-bottom-width': '0px',
 			'border-bottom': 0,
 			'outline': 0,
 			'border-radius': 0,
 			...borderCSSMobile,
 		},
-		'.uagb-tabs__stack12-mobile > .uagb-tabs__body-wrap': borderCSSMobile,
-		'.uagb-tabs__stack13-mobile .uagb-tab': {
+		'.uagb-tabs__stack2-mobile > .uagb-tabs__body-wrap': borderCSSMobile,
+		'.uagb-tabs__stack3-mobile .uagb-tab': {
 			'border-radius': '30px',
 			...borderCSSMobile,
 		},
-		'.uagb-tabs__stack13-mobile > .uagb-tabs__body-wrap': borderCSSMobile,
-		'.uagb-tabs__stack14-mobile': borderCSSMobile,
-		'.uagb-tabs__stack14-mobile .uagb-tab': {
+		'.uagb-tabs__stack3-mobile > .uagb-tabs__body-wrap': borderCSSMobile,
+		'.uagb-tabs__stack4-mobile': borderCSSMobile,
+		'.uagb-tabs__stack4-mobile .uagb-tab': {
 			'border-top-width': '0px',
 			'border-right-width': '0px',
 			'border-left-width': '0px',
@@ -620,7 +620,7 @@ function styling( attributes, clientId, name, deviceType ) {
 			'outline': 0,
 			'border-radius': 0,
 		},
-		'.uagb-tabs__stack14-mobile .uagb-tab.uagb-tabs__active': {
+		'.uagb-tabs__stack4-mobile .uagb-tab.uagb-tabs__active': {
 			'border-top-width': '0px',
 			'border-right-width': '0px',
 			'border-left-width': '0px',
