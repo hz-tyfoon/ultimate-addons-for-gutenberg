@@ -68,6 +68,7 @@ const BrandVoice = ( props ) => {
 				setTimeout( () => {
 					theButton.disabled = false;
 				}, 1000 );
+				location.reload();
 			} else {
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: __( 'Failed to Save Brand Voice', 'ultimate-addons-for-gutenberg' ), messageType: 'error' } } );
 				setTimeout( () => {
