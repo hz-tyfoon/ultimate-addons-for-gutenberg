@@ -68,6 +68,8 @@ const ButtonsChildComponent = ( props ) => {
 		}
 	}, [] );
 
+	console.log('child',props.attributes.align);
+
 	useEffect( () => {
 		if( ! attributes?.context ){
 			setAttributes( { context } );

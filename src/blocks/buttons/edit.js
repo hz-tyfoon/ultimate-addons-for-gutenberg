@@ -33,7 +33,7 @@ const ButtonsComponent = ( props ) => {
 	};
 
 	const [ state, setStateValue ] = useState( initialState );
-
+	console.log('button',props.attributes.align);
 	useEffect( () => {
 		if ( props.attributes.align ) {
 			setAttributes( { alignment: props.attributes.align } );
