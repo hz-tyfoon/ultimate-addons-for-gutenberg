@@ -2,7 +2,6 @@ import { useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import ReactHtmlParser from 'react-html-parser';
 import { useDispatch } from 'react-redux';
-import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
 import { uagbClassNames } from '@Utils/Helpers';
 
@@ -61,13 +60,7 @@ const OpenAIKey = ( props ) => {
 	// Handle linking the API Key on button click.
 	const authenticateOpenAIKey = ( clickedButton ) => {
 		// First escape the user's input.
-		const finalAPIKey = escapeHTML( openAIKey );
-		const updatedOpenAIOptions = { ...openAIOptions, key: finalAPIKey };
-		// If the key was set to empty, remove it from the updated options.
-		if ( ! finalAPIKey ) {
-			delete updatedOpenAIOptions.key;
-		}
-		setOpenAIKey( finalAPIKey );
+		const updatedOpenAIOptions = { ...openAIOptions, key: openAIKey };
 		const theButton = clickedButton.target;
 		setLinkingKey( true );
 		theButton.disabled = true;
@@ -183,10 +176,8 @@ const OpenAIKey = ( props ) => {
 				/>
 				<button
 					type='button'
-					className={ uagbClassNames( [
-						'bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
-					] ) }
-					disabled={ linkingKey }
+					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
+					disabled={ linkingKey || ! openAIKey }
 					onClick={ ( event ) => existingKey ? revokeOpenAIKey( event ) : authenticateOpenAIKey( event ) }
 				>
 					{ openAIKeyLabel }
