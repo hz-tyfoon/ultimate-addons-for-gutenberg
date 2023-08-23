@@ -227,8 +227,9 @@ const BrandVoice = ( props ) => {
 			<div className='mt-8 relative flex gap-4'>
 				<button
 					type='button'
-					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover disabled:opacity-25 disabled:hover:bg-spectra flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
+					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
 					onClick={ ( event ) => saveBrandVoice( event ) }
+					disabled={ ! existingKey || generatingContent }
 				>
 					{ __( 'Save Brand Voice', 'ultimate-addons-for-gutenberg' ) }
 				</button>

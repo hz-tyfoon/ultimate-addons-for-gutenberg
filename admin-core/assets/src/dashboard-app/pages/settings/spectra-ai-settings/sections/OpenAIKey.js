@@ -176,7 +176,7 @@ const OpenAIKey = ( props ) => {
 				/>
 				<button
 					type='button'
-					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
+					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
 					disabled={ linkingKey || ! openAIKey }
 					onClick={ ( event ) => existingKey ? revokeOpenAIKey( event ) : authenticateOpenAIKey( event ) }
 				>

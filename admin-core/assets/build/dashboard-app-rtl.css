@@ -1600,13 +1600,16 @@ select {
   color: rgb(83 0 224 / var(--tw-text-opacity));
 }.disabled\:hidden:disabled {
   display: none;
+}.disabled\:cursor-not-allowed:disabled {
+  cursor: not-allowed;
 }.disabled\:cursor-wait:disabled {
   cursor: wait;
-}.disabled\:opacity-25:disabled {
-  opacity: 0.25;
-}.disabled\:hover\:bg-spectra:hover:disabled {
+}.disabled\:bg-slate-200:disabled {
   --tw-bg-opacity: 1;
-  background-color: rgb(97 4 255 / var(--tw-bg-opacity));
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}.disabled\:text-slate-400:disabled {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
 }@media (min-width: 640px) {
 
   .sm\:static {
