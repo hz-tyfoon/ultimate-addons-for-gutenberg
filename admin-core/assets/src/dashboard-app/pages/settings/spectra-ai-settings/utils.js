@@ -7,7 +7,7 @@ export const svgSpinner = (
 );
 
 export async function authentiCateApiKey( openAiKey ) {
-	const messageArray = [{ role: 'user', content: "Spectra Testing" }];
+	const messageArray = [{ role: 'user', content: 'Spectra Testing' }];
 
 	const response = await fetch( 'https://api.openai.com/v1/chat/completions', {
 	method: 'POST',

@@ -800,10 +800,11 @@ class Common_Settings extends Ajax_Base {
 		$this->check_permission_nonce( 'uag_open_ai_options' );
 		$value = $this->check_post_value();
 		$value = json_decode( stripslashes( $value ), true );
+		$value = is_array( $value ) ? $value : array();
 
 		// Encrypt ai key.
-		if( isset( $value[ 'key' ] ) && !empty( $value[ 'key' ] ) ){
-			$value[ 'key' ] = \UAGB_Admin_Helper::encrypt( $value[ 'key' ] );
+		if ( isset( $value['key'] ) && ! empty( $value['key'] ) ) {
+			$value['key'] = \UAGB_Admin_Helper::encrypt( $value['key'] );
 		}
 
 		// The previous $value is not sanitized, as the array sanitization is handled in the class method used below.
