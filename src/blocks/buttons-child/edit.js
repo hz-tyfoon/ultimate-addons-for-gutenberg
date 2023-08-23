@@ -62,13 +62,7 @@ const ButtonsChildComponent = ( props ) => {
 				attributes
 			);
 		}
-
-		if ( props.attributes.align ) {
-			setAttributes( { alignment: props.attributes.align } );
-		}
 	}, [] );
-
-	console.log('child',props.attributes.align);
 
 	useEffect( () => {
 		if( ! attributes?.context ){

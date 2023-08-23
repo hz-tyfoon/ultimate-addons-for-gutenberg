@@ -24,7 +24,6 @@ const ButtonsComponent = ( props ) => {
 		clientId,
 		name,
 		deviceType,
-		setAttributes,
 	} = props;
 
 	const initialState = {
@@ -33,11 +32,8 @@ const ButtonsComponent = ( props ) => {
 	};
 
 	const [ state, setStateValue ] = useState( initialState );
-	console.log('button',props.attributes.align);
+
 	useEffect( () => {
-		if ( props.attributes.align ) {
-			setAttributes( { alignment: props.attributes.align } );
-		}
 		prevState = isSelected;
 	}, [] );
 

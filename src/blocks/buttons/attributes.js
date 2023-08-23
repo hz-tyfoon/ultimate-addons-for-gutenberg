@@ -26,6 +26,8 @@ for ( let i = 1; i <= itemCount; i++ ) {
 	} );
 }
 
+const alignmentDefault = 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ? 'center' : 'left';
+
 const attributes = {
 	block_id: {
 		type: 'string',
@@ -48,25 +50,19 @@ const attributes = {
 	},
 	align: {
 		type: 'string',
+		default: alignmentDefault,
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
 	},
-	alignment: {
-		type: 'string',
-		default: 'left',
-		UAGCopyPaste: {
-			styleType: 'btn-align',
-		},
-	},
-	alignmentTablet: {
+	alignTablet: {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align-tablet',
 		},
 	},
-	alignmentMobile: {
+	alignMobile: {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {

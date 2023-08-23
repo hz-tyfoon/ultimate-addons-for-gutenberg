@@ -20,7 +20,7 @@ const Settings = ( props ) => {
 	const { attributes, setAttributes } = props;
 
 	const {
-		alignment,
+		align,
 		gap,
 		gapTablet,
 		gapMobile,
@@ -32,8 +32,8 @@ const Settings = ( props ) => {
 		fontTransform,
 		fontDecoration,
 
-		alignmentTablet,
-		alignmentMobile,
+		alignTablet,
+		alignMobile,
 		fontSizeType,
 		fontSizeTypeMobile,
 		fontSizeTypeTablet,
@@ -142,9 +142,9 @@ const Settings = ( props ) => {
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
-				value={ alignment }
+				value={ align }
 				onChange={ ( value ) => {
-					setAttributes( { alignment: value } );
+					setAttributes( { align: value } );
 				} }
 				alignmentControls={ alignmentControls }
 			/>
@@ -159,16 +159,16 @@ const Settings = ( props ) => {
 					label={ __( 'Overall Alignment', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						desktop: {
-							value: alignment,
-							label: 'alignment',
+							value: align,
+							label: 'align',
 						},
 						tablet: {
-							value: alignmentTablet,
-							label: 'alignmentTablet',
+							value: alignTablet,
+							label: 'alignTablet',
 						},
 						mobile: {
-							value: alignmentMobile,
-							label: 'alignmentMobile',
+							value: alignMobile,
+							label: 'alignMobile',
 						},
 					} }
 					options={ [

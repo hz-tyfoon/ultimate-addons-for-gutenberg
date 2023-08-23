@@ -151,7 +151,7 @@ const Settings = ( props ) => {
 	const immediateParentClientId = parentClientIds.at( -1 );
 	const parentBlockAttributes = select( 'core/block-editor' ).getBlockAttributes( immediateParentClientId );
 
-	const updateParentAlignment = ( alignment ) => updateBlockAttributes( immediateParentClientId, { alignment } );
+	const updateParentAlignment = ( align ) => updateBlockAttributes( immediateParentClientId, { align } );
 
 	const presetSettings = () => {
 		return (
@@ -187,7 +187,7 @@ const Settings = ( props ) => {
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
-				value={ parentBlockAttributes.alignment }
+				value={ parentBlockAttributes.align }
 				onChange={ ( value ) => {
 					updateParentAlignment( value );
 				} }
