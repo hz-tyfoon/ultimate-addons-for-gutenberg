@@ -4,8 +4,10 @@ import ReactHtmlParser from 'react-html-parser';
 import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
-import { svgSpinner, authenticateApiKey } from '../utils';
+import { authenticateApiKey } from '../utils';
 import { uagbClassNames } from '@Utils/Helpers';
+import SettingsIcons from '../../SettingsIcons';
+
 
 const OpenAIKey = ( props ) => {
 	const { openAIOptions } = props;
@@ -200,7 +202,7 @@ const OpenAIKey = ( props ) => {
 					onClick={ ( event ) => existingKey ? revokeOpenAIKey( event ) : authenticateKey( event ) }
 				>
 					{ openAIKeyLabel }
-					{ linkingKey && svgSpinner }
+					{ linkingKey && SettingsIcons[ 'svg-spinner' ] }
 				</button>
 			</div>
 		</>
