@@ -4,26 +4,17 @@ import ReactHtmlParser from 'react-html-parser';
 import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
+import { svgSpinner, authentiCateApiKey } from '../utils';
 
 const OpenAIKey = ( props ) => {
-	const {
-		openAIOptions,
-	} = props;
+	const { openAIOptions } = props;
 
-	// Decleration of all the states needed
+	// Deceleration of all the states needed
 	const dispatch = useDispatch();
 	const existingKey = openAIOptions?.key || '';
 	const [ openAIKey, setOpenAIKey ] = useState( existingKey );
 	const [ openAIKeyLabel, setOpenAIKeyLabel ] = useState( __( 'Save Key', 'ultimate-addons-for-gutenberg' ) );
 	const [ linkingKey, setLinkingKey ] = useState( false );
-
-	// SVG For Right Hand Side Spinner.
-	const svgSpinner = (
-		<svg className="animate-spin -mr-1 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-			<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-			<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-		</svg>
-	);
 
 	// Update the Label of the API Key Button. 
 	const updateAPIButtonLabel = ( type = null ) => {
@@ -45,31 +36,24 @@ const OpenAIKey = ( props ) => {
 		}
 	};
 
-
 	// Handle linking the API Key on button click.
-	const authenticateOpenAIKey = ( clickedButton ) => {
-		// First escape the user's input.
-		const finalAPIKey = escapeHTML( openAIKey );
+	const saveOpenAiOptions = ( theButton, finalAPIKey ) => {
 		const updatedOpenAIOptions = { ...openAIOptions, key: finalAPIKey };
-		// If the key was set to empty, remove it from the updated options.
-		if ( ! finalAPIKey ) {
-			delete updatedOpenAIOptions.key;
-		}
 		setOpenAIKey( finalAPIKey );
-		const theButton = clickedButton.target;
 		setLinkingKey( true );
-		theButton.disabled = true;
-		updateAPIButtonLabel( 'saving' );
 		dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: updatedOpenAIOptions } );
+
 		const formData = {
 			security: uag_react.open_ai_options_nonce,
 			value: JSON.stringify( updatedOpenAIOptions ),
 		};
+
 		const getApiDataFetch = getApiData( {
 			url: uag_react.ajax_url,
 			action: 'uag_open_ai_options',
 			data : formData,	
 		} );
+
 		getApiDataFetch.then( ( responseData ) => {
 			if ( responseData.success ) {
 				setLinkingKey( false );
@@ -103,6 +87,32 @@ const OpenAIKey = ( props ) => {
 		} );
 	};
 
+	const authenticateKey = ( clickedButton ) => {
+		// First escape the user's input.
+		const finalAPIKey = escapeHTML( openAIKey );
+
+		const theButton = clickedButton.target;
+
+		setLinkingKey( true );
+		theButton.disabled = true;
+		updateAPIButtonLabel( 'saving' );
+
+		authentiCateApiKey( finalAPIKey ).then( ( responseData ) => {
+			if( ! responseData?.error?.code || "invalid_api_key" === responseData?.error?.code ) {
+				updateAPIButtonLabel();
+
+				const errorMessage = responseData?.error?.message || __( 'Invalid Key', 'ultimate-addons-for-gutenberg' );
+
+				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: errorMessage, messageType: 'error' } } );
+				dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: [] } );
+				setLinkingKey( false );
+				return;
+			}
+
+			saveOpenAiOptions( theButton, finalAPIKey );
+		} );
+	};
+
 	// Render API Key Settings.
 	const renderAPIKeyInput = () => (
 		<>
@@ -119,7 +129,7 @@ const OpenAIKey = ( props ) => {
 					type='button'
 					className='bg-spectra text-white hover:bg-spectra-hover focus:bg-spectra-hover flex items-center w-auto px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm focus:outline-none transition-all'
 					disabled={ linkingKey }
-					onClick={ ( event ) => authenticateOpenAIKey( event ) }
+					onClick={ ( event ) => authenticateKey( event ) }
 				>
 					{ openAIKeyLabel }
 					{ linkingKey && svgSpinner }
