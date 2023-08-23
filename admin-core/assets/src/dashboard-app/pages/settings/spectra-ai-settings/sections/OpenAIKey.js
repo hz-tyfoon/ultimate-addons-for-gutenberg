@@ -4,12 +4,12 @@ import ReactHtmlParser from 'react-html-parser';
 import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
-import { svgSpinner, authentiCateApiKey } from '../utils';
+import { svgSpinner, authenticateApiKey } from '../utils';
 
 const OpenAIKey = ( props ) => {
 	const { openAIOptions } = props;
 
-	// Deceleration of all the states needed
+	// Declaration of all the states needed
 	const dispatch = useDispatch();
 	const existingKey = openAIOptions?.key || '';
 	const [ openAIKey, setOpenAIKey ] = useState( existingKey );
@@ -97,7 +97,7 @@ const OpenAIKey = ( props ) => {
 		theButton.disabled = true;
 		updateAPIButtonLabel( 'saving' );
 
-		authentiCateApiKey( finalAPIKey ).then( ( responseData ) => {
+		authenticateApiKey( finalAPIKey ).then( ( responseData ) => {
 			if( ! responseData?.error?.code || 'invalid_api_key' === responseData?.error?.code ) {
 				updateAPIButtonLabel();
 

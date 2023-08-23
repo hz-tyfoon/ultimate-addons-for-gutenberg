@@ -6,10 +6,10 @@ export const svgSpinner = (
     </svg>
 );
 
-export async function authentiCateApiKey( openAiKey ) {
+export async function authenticateApiKey( openAiKey ) {
 	const messageArray = [{ role: 'user', content: 'Spectra Testing' }];
 
-	const response = await fetch( 'https://api.openai.com/v1/chat/completions', {
+	const response = await fetch( 'https://api.openai.com/v1/usage', {
 	method: 'POST',
 	headers: {
 		'Content-Type': 'application/json',

@@ -418,13 +418,13 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 		 */
 		public static function get_open_ai_data() {
 			$open_ai_options = self::get_admin_settings_option( 'uag_open_ai_options', array() );
-			
+			$open_ai_options = is_array( $open_ai_options ) ? $open_ai_options : array();
 			// Decrypt the key.
-			if ( is_array( $open_ai_options ) && ! empty( $open_ai_options['key'] ) ) {
+			if ( ! empty( $open_ai_options['key'] ) ) {
 				$open_ai_options['key'] = self::decrypt( $open_ai_options['key'] );
 			}
 
-			return is_array( $open_ai_options ) ? $open_ai_options : array();
+			return $open_ai_options;
 		}
 
 		/**

@@ -803,7 +803,7 @@ class Common_Settings extends Ajax_Base {
 		$value = is_array( $value ) ? $value : array();
 
 		// Encrypt ai key.
-		if ( isset( $value['key'] ) && ! empty( $value['key'] ) ) {
+		if ( ! empty( $value['key'] ) ) {
 			$value['key'] = \UAGB_Admin_Helper::encrypt( $value['key'] );
 		}
 
