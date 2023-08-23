@@ -113,7 +113,7 @@ const OpenAIKey = ( props ) => {
 		updateAPIButtonLabel( 'saving' );
 
 		authenticateApiKey( finalAPIKey ).then( ( responseData ) => {
-			if( ! responseData?.error?.code || 'invalid_api_key' === responseData?.error?.code ) {
+			if( responseData?.error ) {
 				updateAPIButtonLabel();
 
 				const errorMessage = responseData?.error?.message || __( 'Invalid Key', 'ultimate-addons-for-gutenberg' );
