@@ -72,7 +72,7 @@ const OpenAIKey = ( props ) => {
 			if ( responseData.success ) {
 				setLinkingKey( false );
 				updateAPIButtonLabel( 'success' );
-				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: __( 'Saved!', 'ultimate-addons-for-gutenberg' ) } );
+				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: __( 'Successfully saved!', 'ultimate-addons-for-gutenberg' ) } );
 				setTimeout( () => {
 					updateAPIButtonLabel();
 					theButton.disabled = false;
