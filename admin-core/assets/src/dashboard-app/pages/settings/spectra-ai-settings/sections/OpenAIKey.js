@@ -4,9 +4,9 @@ import ReactHtmlParser from 'react-html-parser';
 import { useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
-import { authenticateApiKey } from '../utils';
 import { uagbClassNames } from '@Utils/Helpers';
 import SettingsIcons from '../../SettingsIcons';
+import { OpenAiResponder } from '@ProBlocks/extensions/ai/open-ai/utils';
 
 
 const OpenAIKey = ( props ) => {
@@ -112,7 +112,7 @@ const OpenAIKey = ( props ) => {
 		theButton.disabled = true;
 		updateAPIButtonLabel( 'saving' );
 
-		authenticateApiKey( finalAPIKey ).then( ( responseData ) => {
+		OpenAiResponder( "User validation", "", finalAPIKey ).then( ( responseData ) => {
 			if( responseData?.error ) {
 				updateAPIButtonLabel();
 
