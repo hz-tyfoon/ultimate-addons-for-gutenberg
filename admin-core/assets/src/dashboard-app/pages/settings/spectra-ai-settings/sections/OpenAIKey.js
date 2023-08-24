@@ -1,7 +1,7 @@
 import { useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import ReactHtmlParser from 'react-html-parser';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
 import { uagbClassNames } from '@Utils/Helpers';
@@ -9,17 +9,16 @@ import SettingsIcons from '../../SettingsIcons';
 import { OpenAiResponder } from '@ProBlocks/extensions/ai/open-ai/utils';
 
 
-const OpenAIKey = ( props ) => {
-	const { openAIOptions } = props;
-
+const OpenAIKey = () => {
 	// Declaration of all the states needed
 	const dispatch = useDispatch();
+	const openAIOptions = useSelector( ( state ) => state.spectraOpenAIOptions );
 	const existingKey = openAIOptions?.key || '';
 	const [ openAIKey, setOpenAIKey ] = useState( existingKey );
 	const [ openAIKeyLabel, setOpenAIKeyLabel ] = useState( existingKey ? __( 'Revoke Key', 'ultimate-addons-for-gutenberg' ) :  __( 'Save Key', 'ultimate-addons-for-gutenberg' ) );
 	const [ linkingKey, setLinkingKey ] = useState( false );
 
-	// Update the Label of the API Key Button. 
+	// Update the Label of the API Key Button.
 	const updateAPIButtonLabel = ( type = null ) => {
 		switch ( type ) {
 			case 'saving':
@@ -46,7 +45,8 @@ const OpenAIKey = ( props ) => {
 			default:
 				setOpenAIKeyLabel( existingKey
 					? __( 'Revoke Key', 'ultimate-addons-for-gutenberg' )
-					: __( 'Save Key', 'ultimate-addons-for-gutenberg' ) );
+					: __( 'Save Key', 'ultimate-addons-for-gutenberg' )
+				);
 		}
 	};
 
@@ -55,7 +55,6 @@ const OpenAIKey = ( props ) => {
 		const updatedOpenAIOptions = { ...openAIOptions, key: finalAPIKey };
 		setOpenAIKey( finalAPIKey );
 		setLinkingKey( true );
-		dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: updatedOpenAIOptions } );
 
 		const formData = {
 			security: uag_react.open_ai_options_nonce,
@@ -65,19 +64,20 @@ const OpenAIKey = ( props ) => {
 		const getApiDataFetch = getApiData( {
 			url: uag_react.ajax_url,
 			action: 'uag_open_ai_options',
-			data : formData,	
+			data : formData,
 		} );
 
 		getApiDataFetch.then( ( responseData ) => {
 			if ( responseData.success ) {
 				setLinkingKey( false );
-				updateAPIButtonLabel( 'success' );
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: __( 'Successfully saved!', 'ultimate-addons-for-gutenberg' ) } );
+				dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: updatedOpenAIOptions } );
+				updateAPIButtonLabel( 'success' );
 				setTimeout( () => {
 					updateAPIButtonLabel();
 					theButton.disabled = false;
 				}, 1000 );
-				location.reload();
+				// location.reload();
 			} else {
 				setLinkingKey( false );
 				updateAPIButtonLabel( 'failed' );
@@ -114,12 +114,11 @@ const OpenAIKey = ( props ) => {
 
 		OpenAiResponder( 'User validation', '', finalAPIKey ).then( ( responseData ) => {
 			if( responseData?.error ) {
-				updateAPIButtonLabel();
-
 				const errorMessage = responseData?.error?.message || __( 'Invalid Key', 'ultimate-addons-for-gutenberg' );
 
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: errorMessage, messageType: 'error' } } );
 				dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: [] } );
+				updateAPIButtonLabel();
 				setLinkingKey( false );
 				return;
 			}
@@ -137,7 +136,6 @@ const OpenAIKey = ( props ) => {
 		setLinkingKey( true );
 		theButton.disabled = true;
 		updateAPIButtonLabel( 'saving' );
-		dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: updatedOpenAIOptions } );
 		const formData = {
 			security: uag_react.open_ai_options_nonce,
 			value: JSON.stringify( updatedOpenAIOptions ),
@@ -145,19 +143,20 @@ const OpenAIKey = ( props ) => {
 		const getApiDataFetch = getApiData( {
 			url: uag_react.ajax_url,
 			action: 'uag_open_ai_options',
-			data : formData,	
+			data : formData,
 		} );
 		getApiDataFetch.then( ( responseData ) => {
 			if ( responseData.success ) {
 				setLinkingKey( false );
-				updateAPIButtonLabel( 'success' );
 				setOpenAIKey( '' );
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: __( 'Revoked Successfully', 'ultimate-addons-for-gutenberg' ) } );
+				dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: updatedOpenAIOptions } );
+				updateAPIButtonLabel( 'success' );
 				setTimeout( () => {
 					updateAPIButtonLabel();
 					theButton.disabled = false;
 				}, 1000 );
-				location.reload();
+				// location.reload();
 			} else {
 				setLinkingKey( false );
 				updateAPIButtonLabel( 'failed' );
@@ -210,7 +209,7 @@ const OpenAIKey = ( props ) => {
 
 	return (
 		<>
-			<section className='block border-b border-solid border-slate-200 px-12 py-8 justify-between'>  
+			<section className='block border-b border-solid border-slate-200 px-12 py-8 justify-between'>
 				<div className='mr-16 w-full flex items-center'>
 					<h3 className='p-0 flex-1 justify-right inline-flex text-lg leading-8 font-medium text-gray-900'>
 						{ __( 'OpenAI API Key', 'ultimate-addons-for-gutenberg' ) }

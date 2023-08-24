@@ -1,18 +1,15 @@
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
 import { OpenAiResponder, getResponse } from '@ProBlocks/extensions/ai/open-ai/utils';
 import { uagbClassNames } from '@Utils/Helpers';
 
-const BrandVoice = ( props ) => {
-	const {
-		openAIOptions,
-	} = props
-
+const BrandVoice = () => {
 	// Decleration of the dispatcher, and all the states needed.
 	const dispatch = useDispatch();
+	const openAIOptions = useSelector( ( state ) => state.spectraOpenAIOptions );
 	const existingKey = openAIOptions?.key || '';
 	const existingBrandVoice = openAIOptions?.brand_voice || {};
 	const [ brandTitle, setBrandTitle ] = useState( existingBrandVoice?.title || uag_react.site_details?.name || '' );
@@ -29,7 +26,7 @@ const BrandVoice = ( props ) => {
 			setBrandAudience( '' );
 		}
 	}, [] );
-	
+
 	// SVG For Right Hand Side Spinner.
 	const svgSpinner = () => (
 		<svg className='animate-spin h-[18px] w-[18px] text-spectra' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
@@ -60,7 +57,7 @@ const BrandVoice = ( props ) => {
 		const getApiDataFetch = getApiData( {
 			url: uag_react.ajax_url,
 			action: 'uag_open_ai_options',
-			data : formData,	
+			data : formData,
 		} );
 		getApiDataFetch.then( ( responseData ) => {
 			if ( responseData.success ) {
@@ -68,7 +65,6 @@ const BrandVoice = ( props ) => {
 				setTimeout( () => {
 					theButton.disabled = false;
 				}, 1000 );
-				location.reload();
 			} else {
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: __( 'Failed to Save Brand Voice', 'ultimate-addons-for-gutenberg' ), messageType: 'error' } } );
 				setTimeout( () => {
@@ -243,7 +239,7 @@ const BrandVoice = ( props ) => {
 			<section className={ uagbClassNames( [
 				'block border-b border-solid border-slate-200 px-12 py-8 justify-between',
 				! existingKey && 'opacity-50 pointer-events-none'
-			] ) }>  
+			] ) }>
 				<div className='mr-16 w-full flex items-center '>
 					<h3 className='p-0 flex-1 justify-right inline-flex text-lg leading-8 font-medium text-gray-900'>
 						{ __( 'Brand Voice', 'ultimate-addons-for-gutenberg' ) }
