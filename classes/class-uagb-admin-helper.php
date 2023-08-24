@@ -409,6 +409,57 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 
 			return '' === $content_width ? 1140 : $content_width;
 		}
+
+		/**
+		 * Get open ai data.
+		 *
+		 * @since X.X.X
+		 * @return array
+		 */
+		public static function get_open_ai_data() {
+			$open_ai_options = self::get_admin_settings_option( 'uag_open_ai_options', array() );
+			$open_ai_options = is_array( $open_ai_options ) ? $open_ai_options : array();
+			// Decrypt the key.
+			if ( ! empty( $open_ai_options['key'] ) ) {
+				$open_ai_options['key'] = self::decrypt( $open_ai_options['key'] );
+			}
+
+			return $open_ai_options;
+		}
+
+		/**
+		 * Encrypt data using base64.
+		 *
+		 * @param string $input Input string which needs to be encrypted.
+		 * @since X.X.X
+		 * @return string
+		 */
+		public static function encrypt( $input ) {
+			if ( empty( $input ) || ! is_string( $input ) ) {
+				return '';
+			}
+
+			$base_64 = base64_encode( $input );
+			$encode  = rtrim( $base_64, '=' );
+			return $encode;
+		}
+		
+		/**
+		 * Decrypt data using base64.
+		 *
+		 * @param string $input Input string which needs to be decrypted.
+		 * @since X.X.X
+		 * @return string
+		 */
+		public static function decrypt( $input ) {
+			if ( empty( $input ) || ! is_string( $input ) ) {
+				return '';
+			}
+
+			$base_64 = $input . str_repeat( '=', strlen( $input ) % 4 );
+			$decode  = base64_decode( $base_64 );
+			return $decode;
+		}
 	}
 
 	/**
