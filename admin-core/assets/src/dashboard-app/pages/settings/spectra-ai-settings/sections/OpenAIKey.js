@@ -112,7 +112,7 @@ const OpenAIKey = ( props ) => {
 		theButton.disabled = true;
 		updateAPIButtonLabel( 'saving' );
 
-		OpenAiResponder( "User validation", "", finalAPIKey ).then( ( responseData ) => {
+		OpenAiResponder( 'User validation', '', finalAPIKey ).then( ( responseData ) => {
 			if( responseData?.error ) {
 				updateAPIButtonLabel();
 
