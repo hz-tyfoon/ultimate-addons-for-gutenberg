@@ -78,7 +78,6 @@ const OpenAIKey = () => {
 					updateAPIButtonLabel( '', true );
 					theButton.disabled = false;
 				}, 1000 );
-				// location.reload();
 			} else {
 				setLinkingKey( false );
 				updateAPIButtonLabel( 'failed' );
@@ -91,7 +90,6 @@ const OpenAIKey = () => {
 			}
 		} ).catch( () => {
 			dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: __( 'Failed to Save Key', 'ultimate-addons-for-gutenberg' ), messageType: 'error' } } );
-			dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: [] } );
 			setLinkingKey( false );
 			updateAPIButtonLabel( 'failed' );
 			setTimeout( () => {
@@ -113,12 +111,11 @@ const OpenAIKey = () => {
 		theButton.disabled = true;
 		updateAPIButtonLabel( 'saving' );
 
-		OpenAiResponder( 'User validation', '', finalAPIKey ).then( ( responseData ) => {
+		OpenAiResponder( 'User validation', '', finalAPIKey, false ).then( ( responseData ) => {
 			if( responseData?.error ) {
 				const errorMessage = responseData?.error?.message || __( 'Invalid Key', 'ultimate-addons-for-gutenberg' );
 
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: errorMessage, messageType: 'error' } } );
-				dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: [] } );
 				updateAPIButtonLabel();
 				setLinkingKey( false );
 				return;
@@ -147,16 +144,11 @@ const OpenAIKey = () => {
 		getApiDataFetch.then( ( responseData ) => {
 			if ( responseData.success ) {
 				setLinkingKey( false );
-				setOpenAIKey( '' );
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: __( 'Revoked Successfully', 'ultimate-addons-for-gutenberg' ) } );
 				dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: updatedOpenAIOptions } );
-				updateAPIButtonLabel( 'success', true );
-				setTimeout( () => {
-					// Switch the label to the Saved variants.
-					updateAPIButtonLabel();
-					theButton.disabled = false;
-				}, 1000 );
-				// location.reload();
+				// Switch the label to the Saved variants.
+				updateAPIButtonLabel();
+				setOpenAIKey( '' );
 			} else {
 				setLinkingKey( false );
 				updateAPIButtonLabel( 'failed', true );
@@ -168,7 +160,6 @@ const OpenAIKey = () => {
 			}
 		} ).catch( () => {
 			dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: __( 'Failed to Revoke Key', 'ultimate-addons-for-gutenberg' ), messageType: 'error' } } );
-			dispatch( { type: 'UPDATE_OPEN_AI_OPTIONS', payload: [] } );
 			setLinkingKey( false );
 			updateAPIButtonLabel( 'failed', true );
 			setTimeout( () => {
