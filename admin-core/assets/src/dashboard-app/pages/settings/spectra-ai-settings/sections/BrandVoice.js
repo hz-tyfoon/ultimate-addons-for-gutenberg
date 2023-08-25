@@ -13,19 +13,26 @@ const BrandVoice = () => {
 	const existingKey = openAIOptions?.key || '';
 	const existingBrandVoice = openAIOptions?.brand_voice || {};
 	const [ brandTitle, setBrandTitle ] = useState( existingBrandVoice?.title || uag_react.site_details?.name || '' );
-	const [ brandInfo, setBrandInfo ] = useState( existingBrandVoice?.description || uag_react.site_details?.description || ''  );
+	const [ brandInfo, setBrandInfo ] = useState( existingBrandVoice?.description || uag_react.site_details?.description || '' );
 	const [ brandWritingStyle, setBrandWritingStyle ] = useState( existingBrandVoice?.tone || '' );
 	const [ brandAudience, setBrandAudience ] = useState( existingBrandVoice?.visitor || '' );
 	const [ generatingContent, setGeneratingContent ] = useState( false );
 
+	// Set the brand voice to display whenever the existing key is updated.
 	useEffect( () => {
-		if ( ! existingKey ) {
-			setBrandTitle( '' );
-			setBrandInfo( '' );
-			setBrandWritingStyle( '' );
-			setBrandAudience( '' );
-		}
-	}, [] );
+		setBrandTitle( existingKey ? (
+			existingBrandVoice?.title || uag_react.site_details?.name || ''
+		) : '' );
+		setBrandInfo( existingKey ? (
+			existingBrandVoice?.description || uag_react.site_details?.description || ''
+		) : '' );
+		setBrandWritingStyle( existingKey ? (
+			existingBrandVoice?.tone || ''
+		) : '' );
+		setBrandAudience( existingKey ? (
+			existingBrandVoice?.visitor || ''
+		) : '' );
+	}, [ existingKey ] );
 
 	// SVG For Right Hand Side Spinner.
 	const svgSpinner = () => (
@@ -107,7 +114,7 @@ const BrandVoice = () => {
 		setBrandInfo( '' );
 		setBrandWritingStyle( '' );
 		setBrandAudience( '' );
-		const generatedResponse = await OpenAiResponder( '', systemMessage, uag_react.open_ai_options?.key )
+		const generatedResponse = await OpenAiResponder( '', systemMessage, existingKey )
 		.then( ( data ) => {
 			const response = getResponse( data );
 			if ( response.success ) {
