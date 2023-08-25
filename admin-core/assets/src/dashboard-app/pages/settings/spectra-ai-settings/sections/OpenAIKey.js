@@ -130,9 +130,7 @@ const OpenAIKey = () => {
 
 	// Handle the API Key removal on button click.
 	const revokeOpenAIKey = ( clickedButton ) => {
-		const updatedOpenAIOptions = openAIOptions;
-		// If the key was set to empty, remove it from the updated options.
-		delete updatedOpenAIOptions.key;
+		const updatedOpenAIOptions = { ...openAIOptions, key: '' };
 		const theButton = clickedButton.target;
 		setLinkingKey( true );
 		theButton.disabled = true;
@@ -209,7 +207,6 @@ const OpenAIKey = () => {
 		</>
 	);
 
-	console.log( { existingKey, openAIOptions } );
 	return (
 		<>
 			<section className='block border-b border-solid border-slate-200 px-12 py-8 justify-between'>
