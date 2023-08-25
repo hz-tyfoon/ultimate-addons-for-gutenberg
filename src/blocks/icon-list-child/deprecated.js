@@ -9,6 +9,7 @@ import newrenderSVG from '@Controls/renderIcon';
 import newAttributesV2_0_13 from './attributes';
 import newAttributesV2_0_14 from './deprecated/v2_0_14/attributes';
 import newSaveV2_0_14 from './deprecated/v2_0_14/save';
+import newSaveV2_7_6 from './deprecated/v2_7_6/save';
 
 const attributes = {
 	block_id: {
@@ -289,6 +290,10 @@ const deprecated = [
 		attributes: newAttributesV2_0_14,
 		save: newSaveV2_0_14,
 	},
+	{
+		attributes: newAttributesV2_0_13,
+		save: newSaveV2_7_6,
+	}
 ];
 
 export default deprecated;

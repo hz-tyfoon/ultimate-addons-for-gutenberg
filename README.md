@@ -1,5 +1,5 @@
 # Spectra - WordPress Gutenberg Blocks #
-**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce/)  
+**Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)  
 **Donate link:** https://www.paypal.me/BrainstormForce  
 **Tags:** gutenberg, blocks, gutenberg blocks, editor, block  
 **Requires at least:** 5.6  
@@ -218,6 +218,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ### x.x.x ###
 * Fix: Modal - Resolved an issue in which the Modal would not open in Astra's quick-view popup for WooCommerce products.
 * Fix: Separator - Resolved an edge-case issue in which the responsive alignment would not work as intended.
+* Fix: Icon List - Resolved an alignment issue of Icon and list has due to the line height.
 
 ### 2.7.6 - FRIDAY, 18th AUGUST 2023 ###
 * Fix: Form - Resolved multiple styling issues on the frontend.

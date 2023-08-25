@@ -62,7 +62,7 @@ export default function save( props ) {
 					{ ' ' }
 				</a>
 			) }
-			{ imageIconHtml && <span className="uagb-icon-list__source-wrap">{ imageIconHtml }</span> }
+			{imageIconHtml && <span className="uagb-icon-list__source-wrap">&nbsp;{ imageIconHtml }</span> }
 			{ ! hideLabel && '' !== label && (
 				<RichText.Content tagName="span" value={ label } className="uagb-icon-list__label" />
 			) }
