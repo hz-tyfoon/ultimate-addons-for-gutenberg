@@ -114,7 +114,7 @@ const BrandVoice = () => {
 		setBrandInfo( '' );
 		setBrandWritingStyle( '' );
 		setBrandAudience( '' );
-		const generatedResponse = await OpenAiResponder( '', systemMessage, uag_react.open_ai_options?.key )
+		const generatedResponse = await OpenAiResponder( '', systemMessage, existingKey )
 		.then( ( data ) => {
 			const response = getResponse( data );
 			if ( response.success ) {
