@@ -1780,12 +1780,12 @@ const Settings = ( props ) => {
 		<>
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
+					<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 						{ layouts() }
 						{ ctaSettings() }
 						{ 'button' === ctaType && secBtnSettings() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
+					<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 						{ headingSettings() }
 						{ descriptionSettings() }
 						{ ctaType !== 'all' && ctaType !== 'none' && ! inheritFromTheme && ctaStyleSettings() }

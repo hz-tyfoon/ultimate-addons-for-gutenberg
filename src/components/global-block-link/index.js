@@ -260,7 +260,7 @@ const GlobalBlockStyles = ( props ) => {
                             } }
                             variant="primary"
                         >
-                            { __( 'Update Globally!', 'ultimate-addons-for-gutenberg' ) }
+                            { __( 'Update Style', 'ultimate-addons-for-gutenberg' ) }
                         </Button>
                         <Button
                                 className="spectra-gbs-button components-base-control"

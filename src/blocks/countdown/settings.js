@@ -1351,7 +1351,7 @@ function Settings( props ) {
 		<>
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
+					<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 						{ generalPanel }
 						{ labelGeneralPanel }
 						{ separatorGeneralPanel }
@@ -1359,7 +1359,7 @@ function Settings( props ) {
 						{ applyFilters( 'spectra.countdown.expiry-settings' ) }
 						{ presetsPanel }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
+					<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 						{ boxStylePanel }
 						{ digitStylePanel }
 						{ showLabels && labelStylePanel }

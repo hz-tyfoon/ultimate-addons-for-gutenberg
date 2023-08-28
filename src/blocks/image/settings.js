@@ -1826,7 +1826,7 @@ export default function Settings( props ) {
 		<>
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
+					<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 						{ generalPanel }
 						{ shapeGeneralPanel }
 						{ layout === 'overlay' && (
@@ -1837,7 +1837,7 @@ export default function Settings( props ) {
 							</>
 						) }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
+					<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 						{ ImageStylePanel }
 						{ 'static' === imageHoverEffect && imageBoxShadowStylePanel }
 						{ layout === 'overlay' && (

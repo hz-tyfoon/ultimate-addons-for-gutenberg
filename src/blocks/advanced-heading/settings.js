@@ -1247,12 +1247,12 @@ const Settings = ( props ) => {
 		<div>
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
+					<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 						{ generalPanel() }
 						{ subHeadingPanel() }
 						{ separatorPanel() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
+					<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 						{ headingTitleToggle && headingStylePanel() }
 						{ 'none' !== seperatorStyle && seperatorSettings() }
 						{ headingDescToggle && subHeadingStylePanel() }

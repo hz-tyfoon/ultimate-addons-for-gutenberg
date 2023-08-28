@@ -1844,10 +1844,10 @@ const Settings = ( props ) => {
 	return (
 		<InspectorControls>
 			<InspectorTabs>
-				<InspectorTab { ...UAGTabs.general }>
+				<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 					{ generalSettings() }
 				</InspectorTab>
-				<InspectorTab { ...UAGTabs.style }>
+				<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 					{ backgroundSettings() }
 					{ colorSettings() }
 					{ borderSettings() }

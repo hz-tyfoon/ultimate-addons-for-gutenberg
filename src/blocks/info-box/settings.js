@@ -2241,14 +2241,14 @@ const Settings = ( props ) => {
 		<>
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
+					<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 						{ imageIconPanel() }
 						{ typographySettings() }
 						{ seperatorSettings() }
 						{ ctaSettings() }
 						{ presetSettings() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
+					<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 						{ styleSettings() }
 						{ spacingStylePanel() }
 					</InspectorTab>

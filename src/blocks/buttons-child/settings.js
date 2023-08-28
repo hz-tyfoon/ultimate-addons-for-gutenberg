@@ -1000,11 +1000,11 @@ const Settings = ( props ) => {
 		<>
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
+					<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 						{ ! inheritFromTheme && presetSettings() }
 						{ buttonSettings() }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
+					<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 						{ ! removeText && ! inheritFromTheme && textSettings() }
 						{ showIcon && '' !== icon && IconSettings() }
 						{ ! inheritFromTheme && 

@@ -1,4 +1,4 @@
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { STORE_NAME as storeName } from '@Store/constants';
 import { select } from '@wordpress/data';
 import getGBSEditorStyles from '@Controls/getGBSEditorStyles';
@@ -21,15 +21,15 @@ const AddGBSStyles = ( ChildComponent )=> {
 		
 		const editorStyles = getGBSEditorStyles( globalBlockStyles, globalBlockStyleId, globalBlockStyleName );
 
+		const isGBSPresent = useMemo( () => globalBlockStyles?.find( style => {
+			return globalBlockStyleId && style?.value === globalBlockStyleId;
+		} ), [ globalBlockStyleId, globalBlockStyles ] );
+
 		useEffect( () => {
 			AddGBSStylesDom( globalBlockStyleId, editorStyles );
 		}, [editorStyles] );
 
 		useEffect( () => {
-			const isGBSPresent = globalBlockStyles?.find( style => {
-				return globalBlockStyleId && style?.value === globalBlockStyleId;
-			} );
-
 			if( initialStateFlag && ! isGBSPresent ){
 				setAttributes( 
 					{ 
@@ -56,7 +56,7 @@ const AddGBSStyles = ( ChildComponent )=> {
 			...modifiedAttr
 		};
 
-		props = { ...props, ...{ attributes: updatedAttributes } };
+		props = { ...props, ...{ attributes: updatedAttributes, isGBSPresent } };
 
 		return <ChildComponent { ...props }/>
 	}

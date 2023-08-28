@@ -15,10 +15,10 @@ const Settings = ( props ) => {
 	return (
 		<InspectorControls>
 			<InspectorTabs>
-				<InspectorTab { ...UAGTabs.general }>
+				<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 					<GeneralSettings { ...props } />
 				</InspectorTab>
-				<InspectorTab { ...UAGTabs.style }>
+				<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 					<StyleSettings { ...props } />
 				</InspectorTab>
 				<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
