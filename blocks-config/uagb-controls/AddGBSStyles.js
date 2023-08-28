@@ -20,6 +20,7 @@ const AddGBSStyles = ( ChildComponent )=> {
 		} = props;
 		
 		const editorStyles = getGBSEditorStyles( globalBlockStyles, globalBlockStyleId, globalBlockStyleName );
+		const modifiedAttr = { ...attributes };
 
 		const isGBSPresent = useMemo( () => globalBlockStyles?.find( style => {
 			return globalBlockStyleId && style?.value === globalBlockStyleId;
@@ -27,22 +28,24 @@ const AddGBSStyles = ( ChildComponent )=> {
 
 		useEffect( () => {
 			AddGBSStylesDom( globalBlockStyleId, editorStyles );
-		}, [editorStyles] );
+		}, [ editorStyles ] );
 
 		useEffect( () => {
 			if( initialStateFlag && ! isGBSPresent ){
-				setAttributes( 
-					{ 
-						globalBlockStyleId: '',
-						globalBlockStyleName: ''
-					} 
-				);
+				const resetObject = { ...attributes, globalBlockStyleId : '', globalBlockStyleName : '' };
+				for ( const objectKeyReset in modifiedAttr ) {
+					// Replace GBS_RANDOM_NUMBER with empty string.
+					if( GBS_RANDOM_NUMBER === modifiedAttr?.[objectKeyReset] ){
+						modifiedAttr[objectKeyReset] = undefined;
+					}
+				}
+				
+				setAttributes( resetObject );
 			}
-		}, [globalBlockStyles] );
+		}, [ globalBlockStyles ] );
 
 		// Filter the placeholder attribute.
 
-		const modifiedAttr = { ...attributes };
 
 		for ( const objectKey in modifiedAttr ) {
 			// Replace GBS_RANDOM_NUMBER with empty string.
