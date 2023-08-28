@@ -48,42 +48,39 @@ const attributes = {
 	},
 	align: {
 		type: 'string',
-		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
 	},
 	alignTablet: {
 		type: 'string',
-		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align-tablet',
 		},
 	},
 	alignMobile: {
 		type: 'string',
-		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align-mobile',
 		},
 	},
 	alignment: {
 		type: 'string',
-		default: 'center',
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
 	},
 	alignmentTablet: {
 		type: 'string',
-		default: 'center',
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align-tablet',
 		},
 	},
 	alignmentMobile: {
 		type: 'string',
-		default: 'center',
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align-mobile',
 		},

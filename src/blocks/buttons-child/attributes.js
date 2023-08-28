@@ -25,14 +25,13 @@ const attributes = {
 	},
 	align: {
 		type: 'string',
-		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
 	},
 	alignment: {
 		type: 'string',
-		default: 'center',
+		default: 'left',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},

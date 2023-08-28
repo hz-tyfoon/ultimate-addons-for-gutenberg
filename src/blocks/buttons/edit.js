@@ -38,6 +38,7 @@ const ButtonsComponent = ( props ) => {
 		if ( props.attributes.align ) {
 			setAttributes( { alignment: props.attributes.align } );
 		}
+		console.log(props.attributes.align);
 		prevState = isSelected;
 	}, [] );
 
