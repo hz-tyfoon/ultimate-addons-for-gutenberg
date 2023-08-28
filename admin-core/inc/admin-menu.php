@@ -255,7 +255,6 @@ class Admin_Menu {
 				'spectra_custom_fonts'     => apply_filters( 'spectra_system_fonts', array() ),
 				'is_allow_registration'    => (bool) get_option( 'users_can_register' ),
 				'theme_fonts'              => $theme_font_families,
-				'open_ai_options'          => \UAGB_Admin_Helper::get_open_ai_data(),
 				'site_details'             => $site_details,
 			)
 		);
