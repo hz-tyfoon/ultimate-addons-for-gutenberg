@@ -30,6 +30,13 @@ const attributes = {
 			styleType: 'btn-align',
 		},
 	},
+	alignment: {
+		type: 'string',
+		default: 'center',
+		UAGCopyPaste: {
+			styleType: 'btn-align',
+		},
+	},
 	gap: {
 		type: 'number',
 		default: 10,

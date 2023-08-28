@@ -67,27 +67,6 @@ const attributes = {
 			styleType: 'btn-align-mobile',
 		},
 	},
-	alignment: {
-		type: 'string',
-		default: 'center',
-		UAGCopyPaste: {
-			styleType: 'btn-align',
-		},
-	},
-	alignmentTablet: {
-		type: 'string',
-		default: 'center',
-		UAGCopyPaste: {
-			styleType: 'btn-align-tablet',
-		},
-	},
-	alignmentMobile: {
-		type: 'string',
-		default: 'center',
-		UAGCopyPaste: {
-			styleType: 'btn-align-mobile',
-		},
-	},
 	gap: {
 		type: 'number',
 		default: 10,

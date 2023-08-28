@@ -18,13 +18,13 @@ function styling( attributes, clientId, name, deviceType ) {
 		gapTablet,
 		gapMobile,
 		stack,
-		align,
+		alignment,
 		fontStyle,
 		fontTransform,
 		fontDecoration,
 
-		alignTablet,
-		alignMobile,
+		alignmentTablet,
+		alignmentMobile,
 		fontSizeType,
 		fontSizeTypeTablet,
 		fontSizeTypeMobile,
@@ -173,9 +173,9 @@ function styling( attributes, clientId, name, deviceType ) {
 		};
 	}
 
-	if ( align !== 'full' ) {
+	if ( alignment !== 'full' ) {
 		selectors[ '.uagb-editor-preview-mode-desktop .block-editor-inner-blocks' ] = {
-			'text-align': align,
+			'text-align': alignment,
 		};
 	} else {
 		selectors[ '.uagb-editor-preview-mode-desktop .block-editor-block-list__layout' ] = {
@@ -185,9 +185,9 @@ function styling( attributes, clientId, name, deviceType ) {
 			'width': '100%',
 		};
 	}
-	if ( alignTablet !== 'full' ) {
+	if ( alignmentTablet !== 'full' ) {
 		tabletSelectors[ '.uagb-editor-preview-mode-tablet .block-editor-inner-blocks' ] = {
-			'text-align': alignTablet,
+			'text-align': alignmentTablet,
 		};
 	} else {
 		tabletSelectors[ '.uagb-editor-preview-mode-tablet .block-editor-block-list__layout' ] = {
@@ -201,9 +201,9 @@ function styling( attributes, clientId, name, deviceType ) {
 			'width': '100%',
 		};
 	}
-	if ( alignMobile !== 'full' ) {
+	if ( alignmentMobile !== 'full' ) {
 		mobileSelectors[ '.uagb-editor-preview-mode-mobile .block-editor-inner-blocks' ] = {
-			'text-align': alignMobile,
+			'text-align': alignmentMobile,
 		};
 	} else {
 		mobileSelectors[ '.uagb-editor-preview-mode-mobile .block-editor-block-list__layout' ] = {

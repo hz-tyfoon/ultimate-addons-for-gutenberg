@@ -25,7 +25,7 @@ registerBlockType( 'uagb/buttons', {
 		anchor: true,
 	},
 	getEditWrapperProps( attribute ) {
-		return { 'data-btn-width': attribute.align };
+		return { 'data-btn-width': attribute.alignment };
 	},
 	attributes,
 	category: uagb_blocks_info.category,

@@ -6,6 +6,8 @@ import classnames from 'classnames';
 import attributes from './attributes';
 import { __ } from '@wordpress/i18n';
 import { RichText } from '@wordpress/block-editor';
+import saveV2_7_7 from './deprecated/save';
+import attributesV2_7_7 from './deprecated/attributes'; 
 
 import { InnerBlocks } from '@wordpress/block-editor';
 
@@ -127,6 +129,11 @@ const deprecated = [
 			);
 		},
 	},
+	{
+		attributes:attributesV2_7_7,
+		save: saveV2_7_7
+
+	}
 ];
 
 export default deprecated;

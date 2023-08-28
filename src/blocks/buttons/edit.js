@@ -23,7 +23,8 @@ const ButtonsComponent = ( props ) => {
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
 		clientId,
 		name,
-		deviceType
+		deviceType,
+		setAttributes,
 	} = props;
 
 	const initialState = {
@@ -34,6 +35,9 @@ const ButtonsComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
+		if ( props.attributes.align ) {
+			setAttributes( { alignment: props.attributes.align } );
+		}
 		prevState = isSelected;
 	}, [] );
 
