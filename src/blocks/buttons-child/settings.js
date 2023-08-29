@@ -149,8 +149,11 @@ const Settings = ( props ) => {
 
 	const parentClientIds = select( 'core/block-editor' ).getBlockParents( clientId );
 	const immediateParentClientId = parentClientIds.at( -1 );
+
+	
 	const parentBlockAttributes = select( 'core/block-editor' ).getBlockAttributes( immediateParentClientId );
 
+	// eslint-disable-next-line no-shadow
 	const updateParentAlignment = ( align ) => updateBlockAttributes( immediateParentClientId, { align } );
 
 	const presetSettings = () => {
@@ -189,7 +192,8 @@ const Settings = ( props ) => {
 			<AlignmentToolbar
 				value={ parentBlockAttributes.align }
 				onChange={ ( value ) => {
-					updateParentAlignment( value );
+					setAttributes( { align: value } )
+					updateParentAlignment( value )
 				} }
 				alignmentControls={ alignmentControls }
 			/>
