@@ -48,6 +48,7 @@ const attributes = {
 	},
 	align: {
 		type: 'string',
+		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},

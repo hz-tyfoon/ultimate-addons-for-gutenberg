@@ -35,10 +35,10 @@ const ButtonsComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
-		if ( align ) {
-			setAttributes( { alignment: align } );
+		if ( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ) {
+			setAttributes( { alignment: 'center' } );
 		}
-		console.log(props.attributes.align);
+		console.log('yes' === uagb_blocks_info.uagb_old_user_less_than_2);
 		prevState = isSelected;
 	}, [] );
 
