@@ -26,8 +26,6 @@ for ( let i = 1; i <= itemCount; i++ ) {
 	} );
 }
 
-const alignmentDefault = 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ? 'center' : 'left';
-
 const attributes = {
 	block_id: {
 		type: 'string',
@@ -50,7 +48,7 @@ const attributes = {
 	},
 	align: {
 		type: 'string',
-		default: alignmentDefault,
+		default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
