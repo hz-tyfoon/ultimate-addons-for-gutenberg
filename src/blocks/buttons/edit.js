@@ -20,7 +20,7 @@ const ButtonsComponent = ( props ) => {
 	const {
 		isSelected,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, align },
 		clientId,
 		name,
 		deviceType,
@@ -35,8 +35,8 @@ const ButtonsComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
-		if ( props.attributes.align ) {
-			setAttributes( { alignment: props.attributes.align } );
+		if ( align ) {
+			setAttributes( { alignment: align } );
 		}
 		console.log(props.attributes.align);
 		prevState = isSelected;
