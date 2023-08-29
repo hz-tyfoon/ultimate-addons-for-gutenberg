@@ -33,7 +33,7 @@ return array_merge(
 		'hPadding'               => $h_padding_default,
 		'topTabletPadding'       => '',
 		'rightTabletPadding'     => '',
-		'bottomTabletPadding'    => '', 
+		'bottomTabletPadding'    => '',
 		'leftTabletPadding'      => '',
 		'topMobilePadding'       => '',
 		'rightMobilePadding'     => '',
