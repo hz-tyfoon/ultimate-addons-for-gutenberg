@@ -1497,7 +1497,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * Set alignment css function.
 		 *
 		 * @param string $align passed.
-		 * @since x.x.x
+		 * @since 2.7.7
 		 * @return array
 		 */
 		public static function alignment_css( $align ) {
