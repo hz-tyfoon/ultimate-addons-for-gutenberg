@@ -96,7 +96,7 @@ const addInitialAttr = ( ChildComponent ) => {
 			 */
 			const REUSABLE_BLOCK_ISSUE_RESOLVED_BLOCKS = [
 				'uagb/gf-styler',
-				'uagb/google-map',
+				// 'uagb/google-map',
 				'uagb/how-to',
 				'uagb/how-to-step',
 				'uagb/icon-list',
