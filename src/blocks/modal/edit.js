@@ -14,7 +14,7 @@ const UAGBModalEdit = ( props ) => {
 	const {
 		isSelected,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, block_id },
 		clientId,
 		name,
 		deviceType
@@ -25,7 +25,7 @@ const UAGBModalEdit = ( props ) => {
 		const blockDetails = applyFilters(
 			`spectra.modal.edit.jsdetails`,
 			{
-				block_id: clientId.substr( 0, 8 ),
+				block_id: block_id,
 				device_type: deviceType,
 			},
 			props?.attributes
