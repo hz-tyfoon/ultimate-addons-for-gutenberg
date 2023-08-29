@@ -3,9 +3,9 @@ Contributors: brainstormforce
 Donate link: https://www.paypal.me/BrainstormForce
 Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
-Requires PHP: 5.6
+Requires PHP: 7.4
 Tested up to: 6.3.0
-Stable tag: 2.7.4
+Stable tag: 2.7.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -216,18 +216,40 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 == Changelog ==
 
 = x.x.x =
-* Improvement: Info Box - Added heading tag settings for prefix.
 * Improvement: Buttons - Reduced the default number of buttons to 1 and updated the default styling.
 * Improvement: Buttons - Added alignment options to both the child and parent blocks in the block controls toolbar. 
-* Fix: Buttons - Resolved an issue in which the button color would appear different from the theme color in FSE templates.
-* Fix: Blockquote - Resolved an issue wherein having '#' or '@' symbols in the description would result in the removal of content following them symbols when shared on Twitter.
-* Fix: Call To Action - Resolved an issue in which the bottom-margins of the title and description would not work as intended for Tablet and Mobile devices on the frontend.
+
+= 2.7.7 - TUESDAY, 29th AUGUST 2023 =
+* Improvement: Container - Added an image overlay option for the background.
+* Fix: Container - Resolved an issue wherein the blocks inside Containers would appear underneath the Container's overlay when set.
+* Fix: Container - Resolved an issue in which the flex properties would not work as intended in the frontend for the Image and Heading blocks in nested Containers.
+* Fix: Modal - Resolved an issue in which the Modal would not open in Astra's quick-view popup for WooCommerce products.
+* Fix: Post Blocks - Resolved an issue wherein taxonomies were not accessible to the Shop Manager role.
+* Fix: Separator - Resolved an edge-case issue in which the responsive alignment would not work as intended.
+* Fix: Table Of Contents - Resolved an issue in which Latin characters in a heading would prevent the links for that specific heading from working.
+* Fix: Table Of Contents - Resolved an issue wherein the collapsible setting would not work in the editor when enabled.
+* Fix: Table Of Contents - Resolved an issue wherein regenerating assets would cause the Table Of Contents to appear empty in FSE.
+* Fix: Global - Resolved an issue wherein a PHP warning could occurred in a few cases on some websites.
+
+= 2.7.6 - FRIDAY, 18th AUGUST 2023 =
+* Fix: Form - Resolved multiple styling issues on the frontend.
+* Fix: Image Gallery - Resolved an issue wherein the lightbox feature would not work after setting up pagination.
+* Fix: Global - Resolved a significant issue of multiple `_uag_page_assets` entries in the database when using an FSE theme.
+
+= 2.7.5 - WEDNESDAY, 16th AUGUST 2023 =
+* Improvement: Container - Added an opacity setting for the overlay of the image and video background types.
+* Improvement: Info Box - Added heading tag settings for the prefix.
+* Improvement: Info Box - Added an inherit-from-theme option for the text-type CTA.
+* Improvement: Form - Added an inherit-from-theme option for the submit button styling.
+* Improvement: Global - Enhanced the reusable block functionality for the following blocks: Review, Content Timeline, Post Timeline, Price List, Separator, Social Share, Star Rating, Table Of Contents, Taxonomy List, Team, Testimonials.
+* Fix: Call To Action - Resolved an issue in which the bottom margins of the title and description would not work as intended for Tablet and Mobile devices on the frontend.
+* Fix: Blockquote - Resolved an issue wherein having '#' or '@' symbols in the description would result in the removal of content following the symbols when shared on Twitter.
 * Fix: Post Carousel - Resolved an issue wherein the carousel dots would not appear centered.
 * Fix: Social Share - Resolved an issue wherein the gap between icons would add unwanted margins to the sides of the wrapper.
 * Fix: Testimonials - Resolved an issue wherein the Testimonial dots would not appear centered.
-* Fix: Instagram - Resolved an issue in which an undefined record could appear in the admin dashboard.
 * Fix: Global - Resolved an issue that was encountered when updating to WordPress 6.3 on some websites.
-* Fix: Global - Resolved an issue wherein the color-picker default icon which would not appear in WordPress 6.3.
+* Fix: Global - Resolved an issue wherein the color-picker default icon would not appear in WordPress 6.3.
+* Fix: Admin - Resolved an issue in which an undefined record could appear on the Instagram integrations page.
 
 = 2.7.4 - TUESDAY, 8th AUGUST 2023 =
 * Improvement: Core Blocks - Implemented responsive typography font-size units.

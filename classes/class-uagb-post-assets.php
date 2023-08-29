@@ -355,6 +355,12 @@ class UAGB_Post_Assets {
 		// If version is updated, return true.
 		if ( $version_updated ) {
 			// Delete cached meta.
+			$unique_ids = get_option( '_uagb_fse_uniqids' );
+			if ( ! empty( $unique_ids ) && is_array( $unique_ids ) ) {
+				foreach ( $unique_ids as $id ) {
+					delete_post_meta( (int) $id, '_uag_page_assets' );
+				}
+			}
 			delete_post_meta( $this->post_id, '_uag_page_assets' );
 			return true;
 		}
@@ -362,7 +368,7 @@ class UAGB_Post_Assets {
 		// Set required varibled from stored data.
 		$this->current_block_list  = $page_assets['current_block_list'];
 		$this->uag_flag            = $page_assets['uag_flag'];
-		$this->stylesheet          = $page_assets['css'];
+		$this->stylesheet          = apply_filters( 'uag_page_assets_css', $page_assets['css'] );
 		$this->script              = $page_assets['js'];
 		$this->gfonts              = $page_assets['gfonts'];
 		$this->gfonts_files        = $page_assets['gfonts_files'];
