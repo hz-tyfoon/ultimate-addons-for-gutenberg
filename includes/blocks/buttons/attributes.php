@@ -33,13 +33,11 @@ for ( $i = 1; $i <= 2; $i++ ) {
 	);
 }
 
-$button_alignment_default = ( 'yes' === get_option( 'uagb-old-user-less-than-2' ) ) ? 'center' : 'left';
-
 return array(
 	'classMigrate'            => false,
 	'childMigrate'            => false,
 	'block_id'                => '',
-	'align'               => $button_alignment_default,
+	'align'                   => 'center',
 	'btn_count'               => '1',
 	'buttons'                 => $default_buttons_child,
 	'gap'                     => 10,
@@ -52,8 +50,8 @@ return array(
 	'fontStyle'               => '',
 	'fontTransform'           => '',
 	'fontDecoration'          => '',
-	'alignTablet'         => 'left',
-	'alignMobile'         => 'left',
+	'alignTablet'             => 'center',
+	'alignMobile'             => 'center',
 	'fontSizeType'            => 'px',
 	'fontSizeTypeTablet'      => 'px',
 	'fontSizeTypeMobile'      => 'px',
