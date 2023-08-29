@@ -12,6 +12,7 @@ import generateShadowCSS from '@Controls/generateShadowCSS';
 
 function styling( attributes, clientId, deviceType ) {
 	const {
+		block_id,
 		blockName,
 		btnBorderHColor,
 		align,
@@ -989,14 +990,15 @@ function styling( attributes, clientId, deviceType ) {
 		};
 	}
 
+	const base_selector = `.uagb-block-${ block_id }`;
 	let stylingCss = '';
 
-	stylingCss = generateCSS( selectors, `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }` );
+	stylingCss = generateCSS( selectors, `.editor-styles-wrapper ${ base_selector }` );
 
 	if( 'tablet' === previewType || 'mobile' === previewType ) {
 		stylingCss += generateCSS(
 			tabletSelectors,
-			`.uagb-block-${ clientId.substr( 0, 8 ) }`,
+			base_selector,
 			true,
 			'tablet'
 		);
@@ -1004,7 +1006,7 @@ function styling( attributes, clientId, deviceType ) {
 		if( 'mobile' === previewType ){
 			stylingCss += generateCSS(
 				mobileSelectors,
-				`.uagb-block-${ clientId.substr( 0, 8 ) }`,
+				base_selector,
 				true,
 				'mobile'
 			);
