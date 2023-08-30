@@ -31,21 +31,19 @@ const AddGBSStyles = ( ChildComponent )=> {
 		}, [ editorStyles ] );
 
 		useEffect( () => {
-			if( initialStateFlag && ! isGBSPresent ){
-				const resetObject = { ...attributes, globalBlockStyleId : '', globalBlockStyleName : '' };
+			if( initialStateFlag && ! isGBSPresent && globalBlockStyleId ){
+				const resetObject = { globalBlockStyleId : '', globalBlockStyleName : '' };
 				for ( const objectKeyReset in modifiedAttr ) {
 					// Replace GBS_RANDOM_NUMBER with empty string.
 					if( GBS_RANDOM_NUMBER === modifiedAttr?.[objectKeyReset] ){
-						modifiedAttr[objectKeyReset] = undefined;
+						resetObject[objectKeyReset] = undefined;
 					}
 				}
-				
 				setAttributes( resetObject );
 			}
 		}, [ globalBlockStyles ] );
 
 		// Filter the placeholder attribute.
-
 
 		for ( const objectKey in modifiedAttr ) {
 			// Replace GBS_RANDOM_NUMBER with empty string.
