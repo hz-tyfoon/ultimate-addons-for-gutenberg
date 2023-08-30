@@ -95,7 +95,6 @@ const addInitialAttr = ( ChildComponent ) => {
 			 * After tested few blocks we will implement this is all blocks.
 			 */
 			const REUSABLE_BLOCK_ISSUE_RESOLVED_BLOCKS = [
-				'uagb/gf-styler',
 				'uagb/image-gallery',
 				'uagb/popup-builder',
 				'uagb/slider',
