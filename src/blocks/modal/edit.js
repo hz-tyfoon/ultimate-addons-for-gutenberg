@@ -25,10 +25,10 @@ const UAGBModalEdit = ( props ) => {
 		const blockDetails = applyFilters(
 			`spectra.modal.edit.jsdetails`,
 			{
-				block_id: block_id,
+				block_id,
 				device_type: deviceType,
 			},
-			props?.attributes
+			attributes
 		);
 		const loadModalBlockEditor = new CustomEvent( 'UAGModalEditor', {
 			// eslint-disable-line no-undef

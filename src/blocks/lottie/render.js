@@ -15,7 +15,7 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	const { className, attributes, setAttributes, deviceType, lottieplayer, name, clientId } = props;
+	const { className, attributes, setAttributes, deviceType, lottieplayer, name } = props;
 
 	const blockName = name.replace( 'uagb/', '' );
 

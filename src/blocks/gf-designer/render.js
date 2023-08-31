@@ -12,7 +12,7 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	const { className, attributes, setAttributes, deviceType, clientId } = props;
+	const { className, attributes, setAttributes, deviceType } = props;
 	// Setup the attributes.
 	const {
 		formId,
