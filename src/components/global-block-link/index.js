@@ -21,6 +21,7 @@ import {
     clearNumberAttributes,
     updatePostIdInGbsArray 
 } from './utils';
+import { applyFilters } from '@wordpress/hooks';
 
 const GlobalBlockStyles = ( props ) => {
    // Add and remove the CSS on the drop and remove of the component.
@@ -173,15 +174,16 @@ const GlobalBlockStyles = ( props ) => {
         }
         updateGlobalBlockStylesFontFamilies( output );
     };
+
+	const manageGbsOptions = applyFilters( `spectra.manage.gbs.options`, '', props );
     
     return (
         <UAGAdvancedPanelBody
             title={ __( 'Global Block Styles', 'ultimate-addons-for-gutenberg' ) }
-            initialOpen={ false }
+            initialOpen={ true }
             className={ panelLoader ? 'loading' : '' }
-        >
-            <AddNewPopupStyle { ...{ ...props, setGenerate, uniqueID, setUniqueID } } />
-            
+        >            
+            { manageGbsOptions }
             <UAGSelectControl
                 label={ getLabel( globalBlockStyleId ) }
                 data={ {
@@ -249,37 +251,41 @@ const GlobalBlockStyles = ( props ) => {
                 options={ getGlobalBlockStylesOptions( globalBlockStyles, blockName ) }
                 layout="stack"
             />
-            {
-                ( globalBlockStyleId && '' !== globalBlockStyleId ) && (
-                    <div className='spectra-gbs-buttons-wrap'>
-                        <Button
-                            className={`spectra-gbs-button ${updateLoader ? 'loading' : ''} components-base-control`}
-                            onClick={ () => {
-                                setUpdateLoader( true );
-                                generateBlockStyles();
-                            } }
-                            variant="primary"
-                        >
-                            { __( 'Update Style', 'ultimate-addons-for-gutenberg' ) }
-                        </Button>
-                        <Button
-                                className="spectra-gbs-button components-base-control"
+            
+            <div className='spectra-gbs-buttons-wrap'>
+                <AddNewPopupStyle { ...{ ...props, setGenerate, uniqueID, setUniqueID } } />
+                {
+                    ( globalBlockStyleId && '' !== globalBlockStyleId ) && (
+                        <div className='gbs-update-save-btn'>
+                            <Button
+                                className={`spectra-gbs-button ${updateLoader ? 'loading' : ''} components-base-control`}
                                 onClick={ () => {
-                                    setAttributes( 
-                                        { 
-                                            globalBlockStyleId: '',
-                                            globalBlockStyleName: '' 
-                                        } 
-                                    );
-                                    setUniqueID( false );
+                                    setUpdateLoader( true );
+                                    generateBlockStyles();
                                 } }
                                 variant="primary"
-                        >
-                            { __( 'Unlink Style', 'ultimate-addons-for-gutenberg' ) }
-                        </Button>
-                    </div>
-                )
-            }
+                            >
+                                { __( 'Update Style', 'ultimate-addons-for-gutenberg' ) }
+                            </Button>
+                            <Button
+                                    className="spectra-gbs-button components-base-control"
+                                    onClick={ () => {
+                                        setAttributes( 
+                                            { 
+                                                globalBlockStyleId: '',
+                                                globalBlockStyleName: '' 
+                                            } 
+                                        );
+                                        setUniqueID( false );
+                                    } }
+                                    variant="primary"
+                            >
+                                { __( 'Unlink Style', 'ultimate-addons-for-gutenberg' ) }
+                            </Button>
+                        </div>
+                    )
+                }
+            </div>
         </UAGAdvancedPanelBody>
     );
 };
