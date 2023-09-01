@@ -4,7 +4,7 @@
 
 import classnames from 'classnames';
 
-import { InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 export default function save( props ) {
 	const { className } = props;
@@ -20,10 +20,13 @@ export default function save( props ) {
 
 	const equalHeightClass = equalHeight ? 'uagb-faq-equal-height' : '';
 
+	const blockProps = useBlockProps.save();
+	const innerBlocksProps = useInnerBlocksProps.save();
+
 	return (
 		<div
 			className={ classnames(
-				className,
+				blockProps.className,
 				'uagb-faq__outer-wrap',
 				`uagb-block-${ block_id }`,
 				`uagb-faq-icon-${ props.attributes.iconAlign }`,
@@ -34,11 +37,13 @@ export default function save( props ) {
 				'uagb-buttons-layout-wrap',
 				equalHeightClass
 			) }
+			// {...blockProps}
 			data-faqtoggle={ props.attributes.enableToggle }
 			role="tablist"
+			{...innerBlocksProps}
 		>
 			{ renderSchema() }
-			<InnerBlocks.Content />
+			{/* <InnerBlocks.Content /> */}
 		</div>
 	);
 }

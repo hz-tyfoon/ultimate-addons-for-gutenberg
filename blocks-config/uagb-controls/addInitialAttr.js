@@ -66,6 +66,7 @@ const addInitialAttr = ( ChildComponent ) => {
 			const listOfAllTaxonomyStore = [ 'uagb/post-carousel', 'uagb/post-grid', 'uagb/post-masonry' ];
 
 			const attributeObject = { block_id: clientId.substr( 0, 8 ) };
+			// let attributeObject;
 
 			if ( listOfAllTaxonomyStore.includes( name ) ) {
 				attributeObject.allTaxonomyStore = undefined;
@@ -131,7 +132,7 @@ const addInitialAttr = ( ChildComponent ) => {
 			}
 
 		}, [ clientId ] );
-
+		// return props;
 		return <ChildComponent { ...props } />;
 	};
 
