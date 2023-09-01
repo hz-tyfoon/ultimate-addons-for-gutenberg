@@ -90,22 +90,22 @@
 		opacity: 0.4;
 		pointer-events: none;
 	}
-	&.components-panel__body.is-opened{
-		h2.components-panel__body-title{
+	&.components-panel__body.is-opened {
+		h2.components-panel__body-title {
 			margin-bottom: 0;
 		}
 	}
 	.spectra-gbs-buttons-wrap {
 		display: flex;
 		padding-top: 10px;
-		button.components-button{
+		button.components-button {
 			margin: 0;
 		}
-		.gbs-update-save-btn{
+		.gbs-update-save-btn {
 			display: flex;
 			gap: 10px;
 			width: 100%;
-			> button.components-button{
+			> button.components-button {
 				flex: 1;
 				justify-content: center;
 			}
