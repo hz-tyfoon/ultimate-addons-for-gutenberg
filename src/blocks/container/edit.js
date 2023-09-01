@@ -47,22 +47,18 @@ const UAGBContainer = ( props ) => {
 		name,
 		deviceType,
 		context,
+		hasDynamicContent
 	} = props;
 
 	const {
-		innerBlocks, // eslint-disable-line no-unused-vars
-		blockType, // eslint-disable-line no-unused-vars
 		isParentOfSelectedBlock,
 		variations,
 		defaultVariation,
 		// eslint-disable-next-line no-shadow
 	} = useSelect( ( select ) => {
-		const { getBlocks } = select( 'core/block-editor' );
-		const { getBlockType, getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
+		const { getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
 
 		return {
-			innerBlocks: getBlocks( clientId ),
-			blockType: getBlockType( name ),
 			defaultVariation:
 				typeof getDefaultBlockVariation === 'undefined' ? null : getDefaultBlockVariation( name ),
 			variations: typeof getBlockVariations === 'undefined' ? null : getBlockVariations( name ),
@@ -212,7 +208,7 @@ const UAGBContainer = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		if ( !attributes?.context ) {
+		if ( hasDynamicContent && ! attributes?.context ) {
 			setAttributes( { context } );
 		}
 	}, [ context ] )

@@ -34,6 +34,12 @@ const ButtonsChildComponent = ( props ) => {
 
 	const [ state, setStateValue ] = useState( initialState );
 
+	// Check label has dynamic content.
+	const labelHasDynamicContent = label && -1 !== label.indexOf( '<span data-spectra-dc-field="' );
+	
+	// Including condition in props for child component.
+	props = { ...props, labelHasDynamicContent };
+
 	useEffect( () => {
 
 		if( globalBlockStyleId ) {
@@ -71,7 +77,7 @@ const ButtonsChildComponent = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		if( ! attributes?.context ){
+		if( labelHasDynamicContent && ! attributes?.context ){
 			setAttributes( { context } );
 		}
 	}, [ context ] )

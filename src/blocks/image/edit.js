@@ -23,10 +23,11 @@ function UAGBImageEdit( props ) {
 		context,
 		setAttributes,
 		clientId,
+		hasDynamicContent,
 	} = props;
 
 	useEffect( () => {
-		if( ! attributes?.context ){
+		if ( hasDynamicContent && ! attributes?.context ) {
 			setAttributes( { context } );
 		}
 	}, [ context ] )
