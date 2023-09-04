@@ -98,7 +98,7 @@ const Render = ( props ) => {
 			attributes={ attributes }
 			className={ className }
 			latestPosts={ latestPosts }
-			block_id={ attributes.block_id }
+			block_id={ clientId.substr( 0, 8 ) }
 			categoriesList={ categoriesList }
 			deviceType={ deviceType }
 			name={ name }

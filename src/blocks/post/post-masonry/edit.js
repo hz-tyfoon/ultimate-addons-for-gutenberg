@@ -3,7 +3,7 @@
  */
 import { useEffect, useState, useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import styling from '.././styling';
+import styling from '.././styling-post-masonry';
 import TypographyControl from '@Components/typography';
 import ResponsiveBorder from '@Components/responsive-border';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';

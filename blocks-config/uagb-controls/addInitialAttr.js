@@ -99,6 +99,7 @@ const addInitialAttr = ( ChildComponent ) => {
 				'uagb/popup-builder',
 				'uagb/slider',
 				'uagb/slider-child',
+				'uagb/post-masonry',
 			];
 
 			if( ! REUSABLE_BLOCK_ISSUE_RESOLVED_BLOCKS.includes( name ) ){
