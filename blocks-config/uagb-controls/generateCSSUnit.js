@@ -1,4 +1,4 @@
-function generateCSSUnit( value, unit , isImportant = false ) {
+function generateCSSUnit( value, unit = '', isImportant = false ) {
 	if ( isNaN( value ) || value === '' ) {
 		return '';
 	}
