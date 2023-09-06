@@ -35,6 +35,7 @@ const ButtonsComponent = ( props ) => {
 
 	useEffect( () => {
 		prevState = isSelected;
+		console.log('prevState', attributes );
 	}, [] );
 
 	useEffect( () => {
@@ -45,6 +46,7 @@ const ButtonsComponent = ( props ) => {
 			} );
 		}
 		prevState = isSelected;
+		console.log('componentDidUpdate', attributes);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
