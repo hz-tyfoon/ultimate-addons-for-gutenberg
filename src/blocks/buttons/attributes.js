@@ -25,6 +25,7 @@ for ( let i = 1; i <= itemCount; i++ ) {
 		lineHeightTablet: '',
 	} );
 }
+const buttonsAlignmentDefault = 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 ? 'center' : 'left';
 
 const attributes = {
 	block_id: {
@@ -59,6 +60,26 @@ const attributes = {
 		},
 	},
 	alignMobile: {
+		type: 'string',
+		UAGCopyPaste: {
+			styleType: 'btn-align-mobile',
+		},
+	},
+
+	alignment: {
+		type: 'string',
+		default: buttonsAlignmentDefault,
+		UAGCopyPaste: {
+			styleType: 'btn-align',
+		},
+	},
+	alignmentTablet: {
+		type: 'string',
+		UAGCopyPaste: {
+			styleType: 'btn-align-tablet',
+		},
+	},
+	alignmentMobile: {
 		type: 'string',
 		UAGCopyPaste: {
 			styleType: 'btn-align-mobile',

@@ -20,10 +20,11 @@ const ButtonsComponent = ( props ) => {
 	const {
 		isSelected,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, align, alignment, classMigrate },
 		clientId,
 		name,
 		deviceType,
+		setAttributes
 	} = props;
 
 	const initialState = {
@@ -35,7 +36,28 @@ const ButtonsComponent = ( props ) => {
 
 	useEffect( () => {
 		prevState = isSelected;
-		console.log('prevState', attributes );
+		console.log('prevState', prevState );
+		console.log('prev align', attributes.align);
+		if ( align === 'right') {
+			setAttributes({
+				alignment: align,
+			});
+		} 
+		if ( align === 'left') {
+			setAttributes({
+				alignment: align,
+			});
+		} 
+		if ( align === 'full') {
+			setAttributes({
+				alignment: align,
+			});
+		} 
+		if ( undefined === align && ! prevState ) {
+			setAttributes({
+				alignment: 'center',
+			});
+		}
 	}, [] );
 
 	useEffect( () => {
@@ -46,7 +68,6 @@ const ButtonsComponent = ( props ) => {
 			} );
 		}
 		prevState = isSelected;
-		console.log('componentDidUpdate', attributes);
 	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
