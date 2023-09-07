@@ -144,7 +144,7 @@ const Settings = ( props ) => {
 			<AlignmentToolbar
 				value={alignment }
 				onChange={ ( value ) => {
-					setAttributes({ alignment: value } );
+					setAttributes( { alignment: value } );
 				} }
 				alignmentControls={ alignmentControls }
 			/>
