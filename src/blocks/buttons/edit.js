@@ -33,19 +33,21 @@ const ButtonsComponent = ( props ) => {
 	};
 
 	const [ state, setStateValue ] = useState( initialState );
-
+	
 	useEffect( () => {
 		prevState = isSelected;
-		if ( align === 'right' || align === 'left' || align === 'full' || ( 'center' === align && !prevState ) ) {
-			setAttributes( { alignment: align } );
-		}
-		if ( alignTablet === 'right' || alignTablet === 'left' || alignTablet === 'full' || ( 'center' === alignTablet && !prevState ) ) {
-			setAttributes( { alignmentTablet: alignTablet } );
-		}
-		if ( alignMobile === 'right' || alignMobile === 'left' || alignMobile === 'full' || ( 'center' === alignMobile && !prevState ) ) {
-			setAttributes( { alignmentMobile: alignMobile } );
-		}
-	}, [] );
+		if ( align || alignTablet || alignMobile ){
+				if ( align === 'right' || align === 'left' || align === 'full' || undefined === align ) {
+					setAttributes( { alignment: align || 'center' } );
+				}
+				if ( alignTablet === 'right' || alignTablet === 'left' || alignTablet === 'full' || undefined === alignTablet ) {
+					setAttributes( { alignmentTablet: alignTablet || 'center' } );
+				}
+				if ( alignMobile === 'right' || alignMobile === 'left' || alignMobile === 'full' || undefined === alignMobile ) {
+					setAttributes( { alignmentMobile: alignMobile || 'center' } );
+				}
+			}
+		}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.

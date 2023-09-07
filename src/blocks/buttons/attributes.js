@@ -48,21 +48,21 @@ const attributes = {
 	},
 	align: {
 		type: 'string',
-		default: 'center',
+		// default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align',
 		},
 	},
 	alignTablet: {
 		type: 'string',
-		default: 'center',
+		// default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align-tablet',
 		},
 	},
 	alignMobile: {
 		type: 'string',
-		default: 'center',
+		// default: 'center',
 		UAGCopyPaste: {
 			styleType: 'btn-align-mobile',
 		},
