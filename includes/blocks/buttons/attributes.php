@@ -33,8 +33,6 @@ for ( $i = 1; $i <= 2; $i++ ) {
 	);
 }
 
-$buttons_alignment_default = ( 'yes' === get_option( 'uagb-old-user-less-than-2' ) ) ? 'center' : 'left';
-
 return array(
 	'classMigrate'            => false,
 	'childMigrate'            => false,
@@ -52,9 +50,6 @@ return array(
 	'fontStyle'               => '',
 	'fontTransform'           => '',
 	'fontDecoration'          => '',
-	'alignment'               => $buttons_alignment_default,
-	'alignmentTablet'         => '',
-	'alignmentMobile'         => '',
 	'alignTablet'             => 'center',
 	'alignMobile'             => 'center',
 	'fontSizeType'            => 'px',

@@ -69,56 +69,100 @@ if ( 'desktop' === $attr['stack'] ) {
 		'column-gap' => UAGB_Helper::get_css_value( $attr['gapMobile'], 'px' ),
 	);
 }
-$alignment       = ( 'left' === $attr['align'] ) ? 'flex-start' : ( ( 'right' === $attr['align'] ) ? 'flex-end' : 'center' );
-$alignmentTablet = ( 'left' === $attr['alignTablet'] ) ? 'flex-start' : ( ( 'right' === $attr['alignTablet'] ) ? 'flex-end' : 'center' );
-$alignmentMobile = ( 'left' === $attr['alignMobile'] ) ? 'flex-start' : ( ( 'right' === $attr['alignMobile'] ) ? 'flex-end' : 'center' );
+// Backword case.
+if ( empty( $attr['alignment'] ) && empty( $attr['alignmentTablet'] ) && empty( $attr['alignmentMobile'] ) ) {
+	$alignment       = ( 'left' === $attr['align'] ) ? 'flex-start' : ( ( 'right' === $attr['align'] ) ? 'flex-end' : 'center' );
+	$alignmentTablet = ( 'left' === $attr['alignTablet'] ) ? 'flex-start' : ( ( 'right' === $attr['alignTablet'] ) ? 'flex-end' : 'center' );
+	$alignmentMobile = ( 'left' === $attr['alignMobile'] ) ? 'flex-start' : ( ( 'right' === $attr['alignMobile'] ) ? 'flex-end' : 'center' );
 
-$alignment       = ( 'left' === $attr['alignment'] ) ? 'flex-start' : ( ( 'right' === $attr['alignment'] ) ? 'flex-end' : $alignment );
-$alignmentTablet = ( 'left' === $attr['alignmentTablet'] ) ? 'flex-start' : ( ( 'right' === $attr['alignmentTablet'] ) ? 'flex-end' : $alignmentTablet );
-$alignmentMobile = ( 'left' === $attr['alignmentMobile'] ) ? 'flex-start' : ( ( 'right' === $attr['alignmentMobile'] ) ? 'flex-end' : $alignmentMobile );
+	if ( 'full' !== $attr['align'] ) {
+		$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
+			'justify-content' => $attr['align'],
+			'align-items'     => $alignment,
+		);
+	} else {
+		$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
+			'width' => '100%',
+		);
+		$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
+			'width' => '100%',
+		);
+	}
 
-if ( 'full' !== $attr['alignment'] ) {
-	$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
-		'justify-content' => $attr['alignment'],
-		'align-items'     => $alignment,
-	);
-} else {
-	$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
-		'width' => '100%',
-	);
-	$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
-		'width' => '100%',
-	);
+	if ( 'full' !== $attr['alignTablet'] ) {
+		$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
+			'justify-content' => $attr['alignTablet'],
+			'align-items'     => $alignmentTablet,
+		);
+	} else {
+		$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
+			'width' => '100%',
+		);
+		$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
+			'width' => '100%',
+		);
+	}
+
+	if ( 'full' !== $attr['alignMobile'] ) {
+		$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
+			'justify-content' => $attr['alignMobile'],
+			'align-items'     => $alignmentMobile,
+		);
+	} else {
+		$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
+			'width' => '100%',
+		);
+		$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
+			'width' => '100%',
+		);
+	}
+} else { // New user case.
+	$alignment       = ( ! empty( $attr['alignment'] ) && 'left' === $attr['alignment'] ) ? 'flex-start' : ( ( ! empty( $attr['alignment'] ) && 'right' === $attr['alignment'] ) ? 'flex-end' : 'left' );
+	$alignmentTablet = ( ! empty( $attr['alignmentTablet'] ) && 'left' === $attr['alignmentTablet'] ) ? 'flex-start' : ( ( ! empty( $attr['alignmentTablet'] ) && 'right' === $attr['alignmentTablet'] ) ? 'flex-end' : 'left' );
+	$alignmentMobile = ( ! empty( $attr['alignmentMobile'] ) && 'left' === $attr['alignmentMobile'] ) ? 'flex-start' : ( ( ! empty( $attr['alignmentMobile'] ) && 'right' === $attr['alignmentMobile'] ) ? 'flex-end' : 'left' );
+
+	if ( 'full' !== $attr['alignment'] ) {
+		$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
+			'justify-content' => $attr['alignment'],
+			'align-items'     => $alignment,
+		);
+	} else {
+		$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
+			'width' => '100%',
+		);
+		$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
+			'width' => '100%',
+		);
+	}
+
+	if ( ! empty( $attr['alignmentTablet'] ) && 'full' !== $attr['alignmentTablet'] ) {
+		$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
+			'justify-content' => $attr['alignmentTablet'],
+			'align-items'     => $alignmentTablet,
+		);
+	} else {
+		$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
+			'width' => '100%',
+		);
+		$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
+			'width' => '100%',
+		);
+	}
+
+	if ( ! empty( $attr['alignmentMobile'] ) && 'full' !== $attr['alignmentMobile'] ) {
+		$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
+			'justify-content' => $attr['alignmentMobile'],
+			'align-items'     => $alignmentMobile,
+		);
+	} else {
+		$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
+			'width' => '100%',
+		);
+		$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
+			'width' => '100%',
+		);
+	}
 }
-
-if ( 'full' !== $attr['alignmentTablet'] ) {
-	$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
-		'justify-content' => $attr['alignmentTablet'],
-		'align-items'     => $alignmentTablet,
-	);
-} else {
-	$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
-		'width' => '100%',
-	);
-	$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
-		'width' => '100%',
-	);
-}
-
-if ( 'full' !== $attr['alignmentMobile'] ) {
-	$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
-		'justify-content' => $attr['alignmentMobile'],
-		'align-items'     => $alignmentMobile,
-	);
-} else {
-	$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap']                   = array(
-		'width' => '100%',
-	);
-	$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap .wp-block-button '] = array(
-		'width' => '100%',
-	);
-}
-
 if ( $attr['childMigrate'] ) {
 
 	$button_desktop_style = array( // For Backword user.
