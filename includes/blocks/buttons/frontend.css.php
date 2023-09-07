@@ -121,7 +121,7 @@ if ( empty( $attr['alignment'] ) && empty( $attr['alignmentTablet'] ) && empty( 
 	$alignmentTablet = ( ! empty( $attr['alignmentTablet'] ) && 'left' === $attr['alignmentTablet'] ) ? 'flex-start' : ( ( ! empty( $attr['alignmentTablet'] ) && 'right' === $attr['alignmentTablet'] ) ? 'flex-end' : 'left' );
 	$alignmentMobile = ( ! empty( $attr['alignmentMobile'] ) && 'left' === $attr['alignmentMobile'] ) ? 'flex-start' : ( ( ! empty( $attr['alignmentMobile'] ) && 'right' === $attr['alignmentMobile'] ) ? 'flex-end' : 'left' );
 
-	if ( 'full' !== $attr['alignment'] ) {
+	if ( ! empty( $attr['alignment'] ) && 'full' !== $attr['alignment'] ) {
 		$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
 			'justify-content' => $attr['alignment'],
 			'align-items'     => $alignment,

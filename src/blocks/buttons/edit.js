@@ -37,13 +37,13 @@ const ButtonsComponent = ( props ) => {
 	useEffect( () => {
 		prevState = isSelected;
 
-		if ( align === 'right' || align === 'left' || align === 'full' || ( undefined === align && ! prevState ) ) {
+		if ( align === 'right' || align === 'left' || align === 'full' || ( undefined === align && !prevState ) ) {
 			setAttributes( { alignment: align || 'center' } );
 		}
-		if ( alignTablet === 'right' || alignTablet === 'left' || alignTablet === 'full' || ( undefined === alignTablet && ! prevState ) ) {
+		if ( alignTablet === 'right' || alignTablet === 'left' || alignTablet === 'full' || ( undefined === alignTablet && !prevState ) ) {
 			setAttributes( { alignmentTablet: alignTablet || 'center' } );
 		}
-		if ( alignMobile === 'right' || alignMobile === 'left' || alignMobile === 'full' || ( undefined === alignMobile && ! prevState ) ) {
+		if ( alignMobile === 'right' || alignMobile === 'left' || alignMobile === 'full' || ( undefined === alignMobile && !prevState ) ) {
 			setAttributes( { alignmentMobile: alignMobile || 'center' } );
 		}
 	}, [] );
