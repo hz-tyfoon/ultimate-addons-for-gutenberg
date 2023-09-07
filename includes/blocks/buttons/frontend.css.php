@@ -69,13 +69,13 @@ if ( 'desktop' === $attr['stack'] ) {
 		'column-gap' => UAGB_Helper::get_css_value( $attr['gapMobile'], 'px' ),
 	);
 }
-$alignment       = ( 'left' === $attr['align'] ) ? 'flex-start' : ( ( 'right' === $attr['align'] ) ? 'flex-end' : 'center' );
-$alignmentTablet = ( 'left' === $attr['alignTablet'] ) ? 'flex-start' : ( ( 'right' === $attr['alignTablet'] ) ? 'flex-end' : 'center' );
-$alignmentMobile = ( 'left' === $attr['alignMobile'] ) ? 'flex-start' : ( ( 'right' === $attr['alignMobile'] ) ? 'flex-end' : 'center' );
+$alignment       = ( 'left' === $attr['alignment'] ) ? 'flex-start' : ( ( 'right' === $attr['alignment'] ) ? 'flex-end' : 'center' );
+$alignmentTablet = ( 'left' === $attr['alignmentTablet'] ) ? 'flex-start' : ( ( 'right' === $attr['alignmentTablet'] ) ? 'flex-end' : 'center' );
+$alignmentMobile = ( 'left' === $attr['alignmentMobile'] ) ? 'flex-start' : ( ( 'right' === $attr['alignmentMobile'] ) ? 'flex-end' : 'center' );
 
-if ( 'full' !== $attr['align'] ) {
+if ( 'full' !== $attr['alignment'] ) {
 	$selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
-		'justify-content' => $attr['align'],
+		'justify-content' => $attr['alignment'],
 		'align-items'     => $alignment,
 	);
 } else {
@@ -87,9 +87,9 @@ if ( 'full' !== $attr['align'] ) {
 	);
 }
 
-if ( 'full' !== $attr['alignTablet'] ) {
+if ( 'full' !== $attr['alignmentTablet'] ) {
 	$t_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
-		'justify-content' => $attr['alignTablet'],
+		'justify-content' => $attr['alignmentTablet'],
 		'align-items'     => $alignmentTablet,
 	);
 } else {
@@ -101,9 +101,9 @@ if ( 'full' !== $attr['alignTablet'] ) {
 	);
 }
 
-if ( 'full' !== $attr['alignMobile'] ) {
+if ( 'full' !== $attr['alignmentMobile'] ) {
 	$m_selectors['.uagb-buttons__outer-wrap .uagb-buttons__wrap '] = array(
-		'justify-content' => $attr['alignMobile'],
+		'justify-content' => $attr['alignmentMobile'],
 		'align-items'     => $alignmentMobile,
 	);
 } else {
