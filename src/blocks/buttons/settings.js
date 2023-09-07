@@ -142,7 +142,7 @@ const Settings = ( props ) => {
 	const getBlockControls = () => (
 		<BlockControls>
 			<AlignmentToolbar
-				value={alignment }
+				value={ alignment }
 				onChange={ ( value ) => {
 					setAttributes( { alignment: value } );
 				} }
