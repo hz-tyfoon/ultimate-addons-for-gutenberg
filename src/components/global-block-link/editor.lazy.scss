@@ -9,26 +9,26 @@
 	.components-modal__header {
 		display: none !important;
 	}
-	.gbs-add-new-style-head{
+	.gbs-add-new-style-head {
 		display: flex;
 		justify-content: space-between;
-		.popup-close-btn{
+		.popup-close-btn {
 			cursor: pointer;
 		}
-		>div{
+		>div {
 			display: flex;
 			flex-direction: column;
 			gap: 5px;
 			h3,
-			p{
+			p {
 				margin: 0;
 			}
-			h3{
+			h3 {
 				font-size: 18px;
 				font-weight: 600;
 				line-height: 28px;
 			}
-			p{
+			p {
 				font-size: 14px;
 				font-weight: 400;
 				line-height: 20px;
@@ -38,13 +38,13 @@
 
 	.input-wrap {
 		margin: 20px 0;
-		.components-base-control__label{
+		.components-base-control__label {
 			font-size: 14px;
 			font-weight: 500;
 			line-height: 20px;
 			text-transform: none;
 		}
-		
+
 		.components-text-control__input {
 			padding: 12px 14px;
 			border: 1px solid #e6e7e9;
@@ -53,17 +53,17 @@
 			font-size: 16px;
 		}
 
-		&.gbs-error{
+		&.gbs-error {
 			.components-text-control__input {
-				border-color: #DC2626;
+				border-color: #dc2626;
 			}
-			.gbs-error-msg{
-				color: #DC2626;
+			.gbs-error-msg {
+				color: #dc2626;
 				margin: 8px 0 0 0;
 			}
 		}
 	}
-	.button-wrap{
+	.button-wrap {
 		display: flex;
 		gap: 12px;
 		button {
@@ -117,10 +117,10 @@
 	-webkit-transition: opacity 0.5s ease-out;
 	-o-transition: opacity 0.5s ease-out;
 	border-bottom: 1px solid #e0e0e0 !important;
-	
+
 	display: flex;
-    flex-direction: column;
-    gap: 15px;
+	flex-direction: column;
+	gap: 15px;
 
 	&.loading {
 		position: relative;
@@ -142,17 +142,17 @@
 				margin: 0;
 				flex: 1;
 				justify-content: center;
-				box-shadow: inset 0 0 0 1px var(--wp-components-color-accent,var(--wp-admin-theme-color,#3858e9));
+				box-shadow: inset 0 0 0 1px var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
 			}
 		}
 	}
 }
 .spectra-gbs-notice {
 	padding: 16px;
-    background: #EFF6FF;
-    font-size: 12px;
-    font-style: italic;
-    font-weight: 500;
+	background: #eff6ff;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: 500;
 }
 
 @keyframes button-loading-spinner {
