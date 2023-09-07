@@ -21,7 +21,7 @@ const ButtonsChildComponent = ( props ) => {
 		isSelected,
 		clientId,
 		attributes,
-		attributes: { borderStyle, borderWidth, borderRadius, borderHColor, borderColor, globalBlockStyleId },
+		attributes: { borderStyle, borderWidth, borderRadius, borderHColor, borderColor, label, globalBlockStyleId },
 		setAttributes,
 		name,
 		deviceType,

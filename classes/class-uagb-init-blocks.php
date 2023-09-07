@@ -919,11 +919,11 @@ class UAGB_Init_Blocks {
 	 */
 	public function add_gbs_class( $block_content, $block ) {
 		
-		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs']['globalBlockStyleName'] ) || empty( $block['attrs']['block_id'] ) ) {
+		if ( empty( $block['blockName'] ) || false === strpos( $block['blockName'], 'uagb/' ) || empty( $block['attrs']['globalBlockStyleId'] ) || empty( $block['attrs']['block_id'] ) ) {
 			return $block_content;
 		}
 
-		$style_name       = str_replace( ' ', '-', strtolower( $block['attrs']['globalBlockStyleName'] ) );
+		$style_name       = $block['attrs']['globalBlockStyleId'];
 		$style_class_name = 'spectra-gbs-' . $style_name;
 		$block_id         = 'uagb-block-' . $block['attrs']['block_id'];
 

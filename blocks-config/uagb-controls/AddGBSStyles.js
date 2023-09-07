@@ -13,13 +13,12 @@ const AddGBSStyles = ( ChildComponent )=> {
 		const { 
 			attributes,
 			attributes : {
-				globalBlockStyleId,
-				globalBlockStyleName
+				globalBlockStyleId
 			},
 			setAttributes
 		} = props;
 		
-		const editorStyles = getGBSEditorStyles( globalBlockStyles, globalBlockStyleId, globalBlockStyleName );
+		const editorStyles = getGBSEditorStyles( globalBlockStyles, globalBlockStyleId );
 		const modifiedAttr = { ...attributes };
 
 		const isGBSPresent = useMemo( () => globalBlockStyles?.find( style => {

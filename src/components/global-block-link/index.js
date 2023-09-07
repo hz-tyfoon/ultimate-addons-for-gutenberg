@@ -19,7 +19,7 @@ import {
     getGlobalBlockStylesOptions,
     getNewAttributes,
     clearNumberAttributes,
-    updatePostIdInGbsArray 
+    updatePostIdInGbsArray,
 } from './utils';
 import { applyFilters } from '@wordpress/hooks';
 
@@ -125,7 +125,7 @@ const GlobalBlockStyles = ( props ) => {
         
         globalBlockStyles.map( ( style ) => {
             if ( newStyleID && style?.value === String( newStyleID ) ) {
-                const styleNameClass = style?.label?.replace( /\s+/g, '-' )?.toLowerCase();
+                const styleNameClass = style?.value;
                 const baseSelector = `.spectra-gbs-${styleNameClass}`;
 
                 const newAttributes = getNewAttributes( style, attributes, currentBlockDefaultAttributes );
@@ -176,7 +176,7 @@ const GlobalBlockStyles = ( props ) => {
     };
 
 	const manageGbsOptions = applyFilters( `spectra.manage.gbs.options`, '', props );
-    
+
     return (
         <UAGAdvancedPanelBody
             title={ __( 'Global Block Styles', 'ultimate-addons-for-gutenberg' ) }
@@ -184,7 +184,7 @@ const GlobalBlockStyles = ( props ) => {
             className={ panelLoader ? 'loading' : '' }
         >            
             { manageGbsOptions }
-            <UAGSelectControl
+            { getGlobalBlockStylesOptions( globalBlockStyles, blockName ).length ? ( <UAGSelectControl
                 label={ getLabel( globalBlockStyleId ) }
                 data={ {
                     value: globalBlockStyleId,
@@ -250,20 +250,21 @@ const GlobalBlockStyles = ( props ) => {
                 }
                 options={ getGlobalBlockStylesOptions( globalBlockStyles, blockName ) }
                 layout="stack"
-            />
+            /> ) : '' }
+            
             
             <div className='spectra-gbs-buttons-wrap'>
                 <AddNewPopupStyle { ...{ ...props, setGenerate, uniqueID, setUniqueID } } />
                 {
                     ( globalBlockStyleId && '' !== globalBlockStyleId ) && (
-                        <div className='gbs-update-save-btn'>
+                        <div className='gbs-update-save-add-btn'>
                             <Button
                                 className={`spectra-gbs-button ${updateLoader ? 'loading' : ''} components-base-control`}
                                 onClick={ () => {
                                     setUpdateLoader( true );
                                     generateBlockStyles();
                                 } }
-                                variant="primary"
+                                variant="secondary"
                             >
                                 { __( 'Update Style', 'ultimate-addons-for-gutenberg' ) }
                             </Button>
@@ -278,7 +279,7 @@ const GlobalBlockStyles = ( props ) => {
                                         );
                                         setUniqueID( false );
                                     } }
-                                    variant="primary"
+                                    variant="secondary"
                             >
                                 { __( 'Unlink Style', 'ultimate-addons-for-gutenberg' ) }
                             </Button>

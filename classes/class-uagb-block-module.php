@@ -190,8 +190,8 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 						
 						$attr = self::get_fallback_values( $default_attr, $attr );
 						
-						if ( ! empty( $attr['globalBlockStyleName'] ) && $is_gbs ) {
-							$gbs_class = UAGB_Helper::get_gbs_selector( $attr['globalBlockStyleName'] );
+						if ( ! empty( $attr['globalBlockStyleId'] ) && $is_gbs ) {
+							$gbs_class = UAGB_Helper::get_gbs_selector( $attr['globalBlockStyleId'] );
 						}
 					}
 

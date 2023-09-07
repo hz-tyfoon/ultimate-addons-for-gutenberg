@@ -902,7 +902,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 */
 		public static function add_gbs_selector_if_applicable( $selector, $gbs_attributes ) {
 			if ( ! empty( $gbs_attributes['globalBlockStyleName'] ) && ! empty( $gbs_attributes['globalBlockStyleId'] ) ) {
-				return self::get_gbs_selector( $gbs_attributes['globalBlockStyleName'] );
+				return self::get_gbs_selector( $gbs_attributes['globalBlockStyleId'] );
 			}
 			return $selector;
 		}
@@ -918,7 +918,6 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		public static function get_gbs_selector( $style_name ) {
 
 			if ( $style_name ) {
-				$style_name = str_replace( ' ', '-', strtolower( $style_name ) );
 				return '.spectra-gbs-' . $style_name;
 			}
 			return '';

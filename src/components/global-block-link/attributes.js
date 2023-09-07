@@ -6,7 +6,7 @@ import { addFilter } from '@wordpress/hooks';
  * @param {Object} block Block data.
  * @return {Object} block Modified block data.
  */
- function addAttributes( block ) {
+function addAttributes( block ) {
 	if ( block?.attributes && block?.name?.includes( 'uagb/' ) ) {
 		block.attributes = Object.assign( block.attributes, {
 			globalBlockStyleName: {
