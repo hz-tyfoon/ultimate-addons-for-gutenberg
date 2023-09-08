@@ -6,6 +6,7 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
+import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 
 function testimonialStyle( attributes, clientId, name, deviceType ) {
 	const blockName = name.replace( 'uagb/', '' );
@@ -66,9 +67,6 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 		backgroundType,
 		backgroundColor,
 		backgroundImage,
-		backgroundPosition,
-		backgroundSize,
-		backgroundRepeat,
 		backgroundImageColor,
 		arrowColor,
 		test_item_count,
@@ -171,7 +169,23 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 		imgAlign = 'flex-end';
 	}
 
-	const position = backgroundPosition.replace( '-', ' ' );
+	const backgroundAttributesDesktop = {
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImage,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'gradientColor1': gradientColor1,
+		'gradientColor2': gradientColor2,
+		'gradientLocation1': gradientLocation1,
+		'gradientLocation2': gradientLocation2,
+		'gradientType': gradientType,
+		'gradientAngle': gradientAngle,
+		'selectGradient': selectGradient,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
+	};
+
+	const containerBackgroundCSSDesktop = generateBackgroundCSS( backgroundAttributesDesktop );
 
 	const selectors = {
 		' .uagb-testimonial__wrap': {
@@ -199,6 +213,7 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 			'padding-bottom': generateCSSUnit( paddingBottom, paddingUnit ),
 			'padding-left': generateCSSUnit( paddingLeft, paddingUnit ),
 			'padding-right': generateCSSUnit( paddingRight, paddingUnit ),
+			...containerBackgroundCSSDesktop,
 		},
 		// Prefix Style
 		' .uagb-tm__author-name': {
@@ -363,57 +378,6 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 			'font-size': generateCSSUnit( nameFontSizeTablet, nameFontSizeType ),
 			'line-height': generateCSSUnit( nameLineHeightTablet, nameLineHeightType ),
 		},
-	};
-	if ( 'gradient' === backgroundType ) {
-		let gradient;
-		switch ( selectGradient ) {
-			case 'basic':
-				gradient = gradientValue;
-				break;
-			case 'advanced':
-				switch ( gradientType ) {
-					case 'linear':
-						gradient = `linear-gradient(${ gradientAngle }deg, ${ gradientColor1 } ${ gradientLocation1 }%, ${ gradientColor2 } ${ gradientLocation2 }%)`;
-						break;
-					case 'radial':
-						gradient = `radial-gradient( at center center, ${ gradientColor1 } ${ gradientLocation1 }%, ${ gradientColor2 } ${ gradientLocation2 }%)`;
-						break;
-					default:
-						gradient = '';
-						break;
-				}
-				break;
-			default:
-				gradient = '';
-				break;
-		}
-
-		selectors[ ' .uagb-tm__content' ][ 'background-image' ] = gradient;
-	}
-
-	if ( 'image' === backgroundType ) {
-		if ( 'color' === overlayType ) {
-			selectors[ ' .uagb-testimonial__wrap.uagb-tm__bg-type-image .uagb-tm__overlay' ] = {
-				'background-color': backgroundImageColor,
-			};
-		} else if ( 'gradient' === overlayType ) {
-			if ( gradientValue ) {
-				selectors[ ' .uagb-testimonial__wrap.uagb-tm__bg-type-image .uagb-tm__overlay' ] = {
-					'background-image': gradientValue,
-				};
-			}
-		}
-	} else {
-		selectors[ ' .uagb-testimonial__wrap.uagb-tm__bg-type-color .uagb-tm__content' ] = {
-			'background-color': backgroundColor,
-		};
-	}
-
-	selectors[ ' .uagb-testimonial__wrap.uagb-tm__bg-type-image .uagb-tm__content' ] = {
-		'background-image': backgroundImage ? `url(${ backgroundImage.url })` : null,
-		'background-position': position,
-		'background-repeat': backgroundRepeat,
-		'background-size': backgroundSize,
 	};
 
 	let stylingCss = '';
