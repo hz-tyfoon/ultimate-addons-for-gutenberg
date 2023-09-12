@@ -244,9 +244,9 @@ if ( ! class_exists( 'UAGB_Forms' ) ) {
 					'users'     => 'ast-advanced-hook-users',
 				);
 				
-				$result = Astra_Target_Rules_Fields::get_instance()->get_posts_by_conditions( ASTRA_ADVANCED_HOOKS_POST_TYPE, $option );
+				$result =Astra_Target_Rules_Fields::get_instance()->get_posts_by_conditions( ASTRA_ADVANCED_HOOKS_POST_TYPE, $option );
 
-				if ( ! empty( $result ) && is_array( $result ) ) {
+				if (is_array( $result )) {
 					$post_ids = array_keys( $result );
 					
 					foreach ( $post_ids as $post_id ) {
