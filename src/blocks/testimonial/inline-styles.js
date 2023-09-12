@@ -66,7 +66,6 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 		columnGapMobile,
 		backgroundType,
 		backgroundColor,
-		backgroundImage,
 		backgroundImageColor,
 		arrowColor,
 		test_item_count,
@@ -135,15 +134,50 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 		companyLetterSpacingTablet,
 		companyLetterSpacingMobile,
 		companyLetterSpacingType,
-		overlayType,
 		gradientColor1,
 		gradientColor2,
 		gradientLocation1,
 		gradientLocation2,
+		gradientType,
 		gradientAngle,
 		selectGradient,
-		gradientType,
+		backgroundImageDesktop,
+		backgroundImageTablet,
+		backgroundImageMobile,
+		backgroundPositionDesktop,
+		backgroundPositionTablet,
+		backgroundPositionMobile,
+		backgroundAttachmentDesktop,
+		backgroundAttachmentTablet,
+		backgroundAttachmentMobile,
+		backgroundRepeatDesktop,
+		backgroundRepeatTablet,
+		backgroundRepeatMobile,
+		backgroundSizeDesktop,
+		backgroundSizeTablet,
+		backgroundSizeMobile,
+		backgroundCustomSizeDesktop,
+		backgroundCustomSizeTablet,
+		backgroundCustomSizeMobile,
+		backgroundCustomSizeType,
+		overlayType,
+		customPosition,
+		xPositionDesktop,
+		xPositionTablet,
+		xPositionMobile,
+		xPositionType,
+		xPositionTypeTablet,
+		xPositionTypeMobile,
+		yPositionDesktop,
+		yPositionTablet,
+		yPositionMobile,
+		yPositionType,
+		yPositionTypeTablet,
+		yPositionTypeMobile,
 	} = attributes;
+
+	console.log(backgroundImageMobile);
+	console.log(backgroundImageTablet);
 
 	const arrowSizeFallback = getFallbackNumber( arrowSize, 'arrowSize', blockName );
 	const testItemCountFallback = getFallbackNumber( test_item_count, 'test_item_count', blockName );
@@ -171,7 +205,7 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 
 	const backgroundAttributesDesktop = {
 		'backgroundType': backgroundType,
-		'backgroundImage': backgroundImage,
+		'backgroundImage': backgroundImageDesktop,
 		'backgroundColor': backgroundColor,
 		'gradientValue': gradientValue,
 		'gradientColor1': gradientColor1,
@@ -181,8 +215,19 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 		'gradientType': gradientType,
 		'gradientAngle': gradientAngle,
 		'selectGradient': selectGradient,
+		'backgroundRepeat': backgroundRepeatDesktop,
+		'backgroundPosition': backgroundPositionDesktop,
+		'backgroundSize': backgroundSizeDesktop,
+		'backgroundAttachment': backgroundAttachmentDesktop,
+		'backgroundCustomSize': backgroundCustomSizeDesktop,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
 		'backgroundImageColor': backgroundImageColor,
 		'overlayType': overlayType,
+		'customPosition': customPosition,
+		'xPosition': xPositionDesktop,
+		'xPositionType': xPositionType,
+		'yPosition': yPositionDesktop,
+		'yPositionType': yPositionType,
 	};
 
 	const containerBackgroundCSSDesktop = generateBackgroundCSS( backgroundAttributesDesktop );
@@ -288,6 +333,35 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 		};
 	}
 
+	const backgroundAttributesMobile = {
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageDesktop,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'gradientColor1': gradientColor1,
+		'gradientColor2': gradientColor2,
+		'gradientLocation1': gradientLocation1,
+		'gradientLocation2': gradientLocation2,
+		'gradientType': gradientType,
+		'gradientAngle': gradientAngle,
+		'selectGradient': selectGradient,
+		'backgroundRepeat': backgroundRepeatMobile,
+		'backgroundPosition': backgroundPositionMobile,
+		'backgroundSize': backgroundSizeMobile,
+		'backgroundAttachment': backgroundAttachmentMobile,
+		'backgroundCustomSize': backgroundCustomSizeMobile,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
+		'customPosition': customPosition,
+		'xPosition': xPositionMobile,
+		'xPositionType': xPositionTypeMobile,
+		'yPosition': yPositionMobile,
+		'yPositionType': yPositionTypeMobile,
+	};
+
+	const containerBackgroundCSSMobile = generateBackgroundCSS( backgroundAttributesMobile );
+
 	const mobileSelectors = {
 		' .uagb-tm__image img': {
 			'width': generateCSSUnit( imageWidthMobile, imageWidthType ),
@@ -331,8 +405,38 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 			'padding-bottom': generateCSSUnit( paddingBottomMobile, mobilePaddingUnit ),
 			'padding-left': generateCSSUnit( paddingLeftMobile, mobilePaddingUnit ),
 			'padding-right': generateCSSUnit( paddingRightMobile, mobilePaddingUnit ),
+			...containerBackgroundCSSMobile,
 		},
 	};
+
+	const backgroundAttributesTablet = {
+		'backgroundType': backgroundType,
+		'backgroundImage': backgroundImageDesktop,
+		'backgroundColor': backgroundColor,
+		'gradientValue': gradientValue,
+		'gradientColor1': gradientColor1,
+		'gradientColor2': gradientColor2,
+		'gradientLocation1': gradientLocation1,
+		'gradientLocation2': gradientLocation2,
+		'gradientType': gradientType,
+		'gradientAngle': gradientAngle,
+		'selectGradient': selectGradient,
+		'backgroundRepeat': backgroundRepeatTablet,
+		'backgroundPosition': backgroundPositionTablet,
+		'backgroundSize': backgroundSizeTablet,
+		'backgroundAttachment': backgroundAttachmentTablet,
+		'backgroundCustomSize': backgroundCustomSizeTablet,
+		'backgroundCustomSizeType': backgroundCustomSizeType,
+		'backgroundImageColor': backgroundImageColor,
+		'overlayType': overlayType,
+		'customPosition': customPosition,
+		'xPosition': xPositionTablet,
+		'xPositionType': xPositionTypeTablet,
+		'yPosition': yPositionTablet,
+		'yPositionType': yPositionTypeTablet,
+	};
+
+	const containerBackgroundCSSTablet = generateBackgroundCSS( backgroundAttributesTablet );
 
 	const tabletSelectors = {
 		' .uagb-tm__image img': {
@@ -362,6 +466,7 @@ function testimonialStyle( attributes, clientId, name, deviceType ) {
 			'padding-bottom': generateCSSUnit( paddingBottomTablet, tabletPaddingUnit ),
 			'padding-left': generateCSSUnit( paddingLeftTablet, tabletPaddingUnit ),
 			'padding-right': generateCSSUnit( paddingRightTablet, tabletPaddingUnit ),
+			...containerBackgroundCSSTablet,
 		},
 		' .uagb-tm__desc': {
 			'margin-bottom': generateCSSUnit( descSpaceTablet, descSpaceType ),

@@ -76,7 +76,6 @@ const Settings = ( props ) => {
 		descSpaceMobile,
 		iconimgStyle,
 		imagePosition,
-		imageAlignment,
 		nameSpace,
 		nameSpaceTablet,
 		nameSpaceMobile,
@@ -107,12 +106,26 @@ const Settings = ( props ) => {
 		columnGapMobile,
 		backgroundType,
 		backgroundColor,
-		backgroundImage,
-		backgroundPosition,
-		backgroundSize,
-		backgroundRepeat,
 		backgroundImageColor,
 		stack,
+		backgroundCustomSizeDesktop,
+		backgroundCustomSizeTablet,
+		backgroundCustomSizeMobile,
+		backgroundCustomSizeType,
+		overlayType,
+		customPosition,
+		xPositionDesktop,
+		xPositionTablet,
+		xPositionMobile,
+		xPositionType,
+		xPositionTypeTablet,
+		xPositionTypeMobile,
+		yPositionDesktop,
+		yPositionTablet,
+		yPositionMobile,
+		yPositionType,
+		yPositionTypeTablet,
+		yPositionTypeMobile,
 
 		imageWidthType,
 		arrowSizeType,
@@ -120,8 +133,21 @@ const Settings = ( props ) => {
 		columnGapType,
 		descSpaceType,
 		nameSpaceType,
-		overlayType,
-		backgroundAttachment,
+		backgroundImageDesktop,
+		backgroundImageTablet,
+		backgroundImageMobile,
+		backgroundPositionDesktop,
+		backgroundPositionTablet,
+		backgroundPositionMobile,
+		backgroundAttachmentDesktop,
+		backgroundAttachmentTablet,
+		backgroundAttachmentMobile,
+		backgroundRepeatDesktop,
+		backgroundRepeatTablet,
+		backgroundRepeatMobile,
+		backgroundSizeDesktop,
+		backgroundSizeTablet,
+		backgroundSizeMobile,
 		gradientValue,
 		gradientColor1,
 		gradientColor2,
@@ -552,7 +578,7 @@ const Settings = ( props ) => {
 			</UAGAdvancedPanelBody>
 		);
 	};
-	const backgroundStyle = () => {
+	const backgroundSettings = () => {
 		return (
 			<UAGAdvancedPanelBody title={ __( 'Background', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<Background
@@ -593,33 +619,95 @@ const Settings = ( props ) => {
 						value: backgroundImageColor,
 						label: 'backgroundImageColor',
 					} }
-					overlayType={ {
-						value: overlayType,
-						label: 'overlayType',
-					} }
-					gradientOverlay={ {
-						value: true,
-					} }
 					backgroundSize={ {
-						value: backgroundSize,
-						label: 'backgroundSize',
+						desktop: {
+							value: backgroundSizeDesktop,
+							label: 'backgroundSizeDesktop',
+						},
+						tablet: {
+							value: backgroundSizeTablet,
+							label: 'backgroundSizeTablet',
+						},
+						mobile: {
+							value: backgroundSizeMobile,
+							label: 'backgroundSizeMobile',
+						},
+					} }
+					backgroundCustomSize={ {
+						desktop: {
+							value: backgroundCustomSizeDesktop,
+							label: 'backgroundCustomSizeDesktop',
+						},
+						tablet: {
+							value: backgroundCustomSizeTablet,
+							label: 'backgroundCustomSizeTablet',
+						},
+						mobile: {
+							value: backgroundCustomSizeMobile,
+							label: 'backgroundCustomSizeMobile',
+						},
+					} }
+					backgroundCustomSizeType={ {
+						value: backgroundCustomSizeType,
+						label: 'backgroundCustomSizeType',
 					} }
 					backgroundRepeat={ {
-						value: backgroundRepeat,
-						label: 'backgroundRepeat',
+						desktop: {
+							value: backgroundRepeatDesktop,
+							label: 'backgroundRepeatDesktop',
+						},
+						tablet: {
+							value: backgroundRepeatTablet,
+							label: 'backgroundRepeatTablet',
+						},
+						mobile: {
+							value: backgroundRepeatMobile,
+							label: 'backgroundRepeatMobile',
+						},
 					} }
 					backgroundAttachment={ {
-						value: backgroundAttachment,
-						label: 'backgroundAttachment',
+						desktop: {
+							value: backgroundAttachmentDesktop,
+							label: 'backgroundAttachmentDesktop',
+						},
+						tablet: {
+							value: backgroundAttachmentTablet,
+							label: 'backgroundAttachmentTablet',
+						},
+						mobile: {
+							value: backgroundAttachmentMobile,
+							label: 'backgroundAttachmentMobile',
+						},
 					} }
 					backgroundPosition={ {
-						value: backgroundPosition,
-						label: 'backgroundPosition',
+						desktop: {
+							value: backgroundPositionDesktop,
+							label: 'backgroundPositionDesktop',
+						},
+						tablet: {
+							value: backgroundPositionTablet,
+							label: 'backgroundPositionTablet',
+						},
+						mobile: {
+							value: backgroundPositionMobile,
+							label: 'backgroundPositionMobile',
+						},
 					} }
 					backgroundImage={ {
-						value: backgroundImage,
-						label: 'backgroundImage',
+						desktop: {
+							value: backgroundImageDesktop,
+							label: 'backgroundImageDesktop',
+						},
+						tablet: {
+							value: backgroundImageTablet,
+							label: 'backgroundImageTablet',
+						},
+						mobile: {
+							value: backgroundImageMobile,
+							label: 'backgroundImageMobile',
+						},
 					} }
+					imageResponsive={ true }
 					backgroundColor={ {
 						value: backgroundColor,
 						label: 'backgroundColor',
@@ -627,6 +715,65 @@ const Settings = ( props ) => {
 					backgroundType={ {
 						value: backgroundType,
 						label: 'backgroundType',
+					} }
+					overlayType={ {
+						value: overlayType,
+						label: 'overlayType',
+					} }
+					gradientOverlay={ {
+						value: true,
+					} }
+					customPosition={ {
+						value: customPosition,
+						label: 'customPosition',
+					} }
+					xPositionDesktop={ {
+						value: xPositionDesktop,
+						label: 'xPositionDesktop',
+					} }
+					xPositionTablet={ {
+						value: xPositionTablet,
+						label: 'xPositionTablet',
+					} }
+					xPositionMobile={ {
+						value: xPositionMobile,
+						label: 'xPositionMobile',
+					} }
+					xPositionType={ {
+						value: xPositionType,
+						label: 'xPositionType',
+					} }
+					xPositionTypeTablet={ {
+						value: xPositionTypeTablet,
+						label: 'xPositionTypeTablet',
+					} }
+					xPositionTypeMobile={ {
+						value: xPositionTypeMobile,
+						label: 'xPositionTypeMobile',
+					} }
+					yPositionDesktop={ {
+						value: yPositionDesktop,
+						label: 'yPositionDesktop',
+					} }
+					yPositionTablet={ {
+						value: yPositionTablet,
+						label: 'yPositionTablet',
+					} }
+					yPositionMobile={ {
+						value: yPositionMobile,
+						label: 'yPositionMobile',
+					} }
+					yPositionType={ {
+						value: yPositionType,
+						label: 'yPositionType',
+					} }
+					yPositionTypeTablet={ {
+						value: yPositionTypeTablet,
+						label: 'yPositionTypeTablet',
+					} }
+					yPositionTypeMobile={ {
+						value: yPositionTypeMobile,
+						label: 'yPositionTypeMobile',
 					} }
 					backgroundVideoType={ {
 						value: false,
@@ -1226,52 +1373,8 @@ const Settings = ( props ) => {
 							{ getImageData() }
 							{ cnt > 0 && (
 								<>
-									<MultiButtonsControl
-										setAttributes={ setAttributes }
-										label={ __( 'Position', 'ultimate-addons-for-gutenberg' ) }
-										data={ {
-											value: imagePosition,
-											label: 'imagePosition',
-										} }
-										options={ [
-											{
-												value: 'top',
-												label: __( 'Top', 'ultimate-addons-for-gutenberg' ),
-											},
-											{
-												value: 'bottom',
-												label: __( 'Bottom', 'ultimate-addons-for-gutenberg' ),
-											},
-											{
-												value: 'left',
-												label: __( 'Left', 'ultimate-addons-for-gutenberg' ),
-											},
-											{
-												value: 'right',
-												label: __( 'Right', 'ultimate-addons-for-gutenberg' ),
-											},
-										] }
-									/>
 									{ ( imagePosition === 'left' || imagePosition === 'right' ) && (
 										<>
-											<MultiButtonsControl
-												setAttributes={ setAttributes }
-												label={ __( 'Vertical Alignment', 'ultimate-addons-for-gutenberg' ) }
-												data={ {
-													value: imageAlignment,
-													label: 'imageAlignment',
-												} }
-												options={ [
-													{
-														value: 'top',
-														label: __( 'Top', 'ultimate-addons-for-gutenberg' ),
-													},
-													{
-														value: 'middle',
-														label: __( 'Middle', 'ultimate-addons-for-gutenberg' ),
-													},
-												] }
-											/>
 											<MultiButtonsControl
 												setAttributes={ setAttributes }
 												label={ __( 'Stack On', 'ultimate-addons-for-gutenberg' ) }
@@ -1362,7 +1465,7 @@ const Settings = ( props ) => {
 						{ companyStyle() }
 						{ imageStyle() }
 						{ carouselStyle() }
-						{ backgroundStyle() }
+						{ backgroundSettings() }
 						{ borderSetting() }
 						{ spacingSettings() }
 					</InspectorTab>
