@@ -24,6 +24,7 @@ const defaultProps = {
 	onChange: null,
 	isSearchable: false,
 	isMulti: true,
+	isOpen : false,
 	setAttributes: () => {},
 };
 
@@ -35,7 +36,8 @@ export default function UAGMultiSelectControl( props ) {
 		isSearchable,
 		onChange,
 		isMulti,
-		setAttributes
+		setAttributes,
+		isOpen,
 	} = props;
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
 	const panelRef = useRef( null );
@@ -70,6 +72,7 @@ export default function UAGMultiSelectControl( props ) {
 		<div ref={ panelRef } className="components-base-control">
 			{ controlBeforeDomElement }
 			<Select
+			defaultMenuIsOpen={ isOpen }
 				options={ allOptions }
 				defaultValue={ allOptionsFlat.filter( ( item ) => data.value.includes( item.value ) ) }
 				onChange={ ( option ) => onChange ? onChange( option ) :
