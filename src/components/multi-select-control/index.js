@@ -10,6 +10,7 @@ const propTypes = {
 	options: PropTypes.array,
 	data: PropTypes.object,
 	isSearchable: PropTypes.bool,
+	onChange: PropTypes.func,
 	setAttributes: PropTypes.func,
 };
 
@@ -20,7 +21,9 @@ const defaultProps = {
 		label: '',
 		value: [],
 	},
+	onChange: null,
 	isSearchable: false,
+	isMulti: true,
 	setAttributes: () => {},
 };
 
@@ -30,6 +33,8 @@ export default function UAGMultiSelectControl( props ) {
 		options,
 		data,
 		isSearchable,
+		onChange,
+		isMulti,
 		setAttributes
 	} = props;
 	const [ panelNameForHook, setPanelNameForHook ] = useState( null );
@@ -67,7 +72,7 @@ export default function UAGMultiSelectControl( props ) {
 			<Select
 				options={ allOptions }
 				defaultValue={ allOptionsFlat.filter( ( item ) => data.value.includes( item.value ) ) }
-				onChange={ ( option ) =>
+				onChange={ ( option ) => onChange ? onChange( option ) :
 					setAttributes( {
 						[ data.label ]: option.reduce( ( acc, current ) => {
 							acc.push( current.value );
@@ -78,7 +83,7 @@ export default function UAGMultiSelectControl( props ) {
 				classNamePrefix={ 'spectra-multi-select' }
 				className={ 'spectra-multi-select' }
 				isSearchable={ isSearchable }
-				isMulti
+				isMulti={ isMulti }
 			/>
 			{ controlAfterDomElement }
 		</div>
