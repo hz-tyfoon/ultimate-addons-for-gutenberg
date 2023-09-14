@@ -10,8 +10,8 @@ import generateShadowCSS from '@Controls/generateShadowCSS';
 import generateSpacing from '@Controls/generateSpacing';
 import { applyFilters } from '@wordpress/hooks';
 
-export default function styling( attributes, clientId, name ) {
-
+export default function styling( attributes, clientId, name, deviceType ) {
+	const previewType = deviceType.toLowerCase();
 	const {
 		// ------------------------- BLOCK SETTINGS.
 		variantType,
@@ -150,6 +150,7 @@ export default function styling( attributes, clientId, name ) {
 		closePaddingUnitMobile,
 		// ------------------------- BORDER EXTRACTED STYLING.
 		contentBorderHColor,
+		block_id
 	} = attributes;
 
 	const blockName = name.replace( 'uagb/', '' );
@@ -254,7 +255,7 @@ export default function styling( attributes, clientId, name ) {
 	const popupBackgroundStyles = generateBackgroundCSS( backgroundAttributes.desktop );
 	const popupBackgroundStylesTablet = generateBackgroundCSS( backgroundAttributes.tablet );
 	const popupBackgroundStylesMobile = generateBackgroundCSS( backgroundAttributes.mobile );
-	
+
 	const popupBorderStyles = generateBorderCSS( attributes, 'content' );
 	const popupBorderStylesTablet = generateBorderCSS( attributes, 'content', 'tablet' );
 	const popupBorderStylesMobile = generateBorderCSS( attributes, 'content', 'mobile' );
@@ -480,7 +481,7 @@ export default function styling( attributes, clientId, name ) {
 		};
 	}
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
 	tabletSelectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tabletSelectors, attributes );
@@ -488,9 +489,22 @@ export default function styling( attributes, clientId, name ) {
 
 	let stylingCss = generateCSS( selectors, baseSelector );
 
-	stylingCss += generateCSS( tabletSelectors, baseSelector, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			baseSelector,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, baseSelector, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				baseSelector,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }

@@ -5,11 +5,36 @@
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
+const alignmentCSS = ( align ) => {
+	let alignCSS = {};
+	switch ( align ) {
+		case 'left':
+			alignCSS = {
+				'margin-left': 0,
+				'margin-right': 'auto',
+			};
+			break;
+		case 'center':
+			alignCSS = {
+				'margin-left': 'auto',
+				'margin-right': 'auto',
+			};
+			break;
+		case 'right':
+			alignCSS = {
+				'margin-right': 0,
+				'margin-left': 'auto',
+			};
+			break;
+	}
+	return alignCSS;
+};
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	const previewType = deviceType.toLowerCase();
 	const {
+		block_id,
 		//separator
 		separatorAlign,
 		separatorAlignTablet,
@@ -107,17 +132,7 @@ function styling( attributes, clientId, name ) {
 			},
 		};
 	} else {
-		let alignCSS = {};
-		if ( separatorAlign === 'left' ) {
-			alignCSS = {
-				'margin-left': 0,
-			};
-		}
-		if ( separatorAlign === 'right' ) {
-			alignCSS = {
-				'margin-right': 0,
-			};
-		}
+		const alignCSS = alignmentCSS( separatorAlign );
 		borderStyle = {
 			'.wp-block-uagb-separator .wp-block-uagb-separator__inner': {
 				'width': generateCSSUnit( separatorWidthFallback, separatorWidthType ),
@@ -213,17 +228,7 @@ function styling( attributes, clientId, name ) {
 			},
 		};
 	} else {
-		let alignCSS = {};
-		if ( separatorAlignTablet === 'left' ) {
-			alignCSS = {
-				'margin-left': 0,
-			};
-		}
-		if ( separatorAlignTablet === 'right' ) {
-			alignCSS = {
-				'margin-right': 0,
-			};
-		}
+		const alignCSS = alignmentCSS( separatorAlignTablet );
 		borderStyleTablet = {
 			'.wp-block-uagb-separator .wp-block-uagb-separator__inner': {
 				'width': generateCSSUnit( separatorWidthFallbackTablet, separatorWidthType ),
@@ -319,17 +324,7 @@ function styling( attributes, clientId, name ) {
 			},
 		};
 	} else {
-		let alignCSS = {};
-		if ( separatorAlignMobile === 'left' ) {
-			alignCSS = {
-				'margin-left': 0,
-			};
-		}
-		if ( separatorAlignMobile === 'right' ) {
-			alignCSS = {
-				'margin-right': 0,
-			};
-		}
+		const alignCSS = alignmentCSS( separatorAlignMobile );
 		borderStyleMobile = {
 			'.wp-block-uagb-separator .wp-block-uagb-separator__inner': {
 				'width': generateCSSUnit( separatorWidthFallbackMobile, separatorWidthType ),
@@ -405,24 +400,27 @@ function styling( attributes, clientId, name ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	let styling_css = generateCSS( selectors, base_selector );
 
-	styling_css += generateCSS(
-		tablet_selectors,
-		`${ base_selector }`,
-		true,
-		'tablet'
-	);
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		styling_css += generateCSS(
+			tablet_selectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	styling_css += generateCSS(
-		mobile_selectors,
-		`${ base_selector }`,
-		true,
-		'mobile'
-	);
-
+		if( 'mobile' === previewType ){
+			styling_css += generateCSS(
+				mobile_selectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return styling_css;
 }
 

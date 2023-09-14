@@ -5,7 +5,8 @@
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 
-function styling( attributes, clientId ) {
+function styling( attributes, clientId, deviceType ) {
+	const previewType = deviceType.toLowerCase();
 	const {
 		icon_color,
 		label_color,
@@ -47,6 +48,7 @@ function styling( attributes, clientId ) {
 		childPaddingUnit,
 		childPaddingUnitTablet,
 		childPaddingUnitMobile,
+		block_id
 	} = attributes;
 
 	const selectors = {
@@ -114,14 +116,27 @@ function styling( attributes, clientId ) {
 	};
 
 	let stylingCss = '';
-	const id = `.uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = `.uagb-block-${ block_id }`;
 
 	stylingCss = generateCSS( selectors, id );
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

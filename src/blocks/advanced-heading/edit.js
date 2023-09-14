@@ -14,31 +14,37 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const {
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, headingTitle, headingDesc },
 		isSelected,
-		setAttributes,
 		clientId,
 		name,
 		deviceType,
 		context,
+		setAttributes,
 	} = props;
+
+	// Check dynamic content in heading and description.
+	const headingHasDynamicContent = -1 !== headingTitle.indexOf( '<span data-spectra-dc-field="' );
+	const descriptionHasDynamicContent = headingDesc && -1 !== headingDesc.indexOf( '<span data-spectra-dc-field="' );
+
+	// Including condition in props for child component.
+	props = { ...props, headingHasDynamicContent, descriptionHasDynamicContent };
+
 
 	useEffect( () => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-		setAttributes( { classMigrate: true } );
-	}, [] );
-
-	useEffect( () => {
-		setAttributes( { context } );
+		// Check if block has dynamic content and context is not set.
+		if ( ( headingHasDynamicContent || descriptionHasDynamicContent ) && ! attributes?.context ) {
+			setAttributes( { context } );
+		}
 	}, [ context ] )
 
 	useEffect( () => {
@@ -51,12 +57,13 @@ const UAGBAdvancedHeading = ( props ) => {
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
 			<DynamicFontLoader { ...{ attributes } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	AddInitialAttr,
 	AddStaticStyles,
 )( UAGBAdvancedHeading );

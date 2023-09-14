@@ -13,13 +13,14 @@ import Settings from './settings';
 import Render from './render';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const ButtonsChildComponent = ( props ) => {
 	const {
 		isSelected,
 		clientId,
 		attributes,
-		attributes: { borderStyle, borderWidth, borderRadius, borderHColor, borderColor },
+		attributes: { borderStyle, borderWidth, borderRadius, borderHColor, borderColor, label },
 		setAttributes,
 		name,
 		deviceType,
@@ -32,10 +33,13 @@ const ButtonsChildComponent = ( props ) => {
 
 	const [ state, setStateValue ] = useState( initialState );
 
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
+	// Check label has dynamic content.
+	const labelHasDynamicContent = label && -1 !== label.indexOf( '<span data-spectra-dc-field="' );
+	
+	// Including condition in props for child component.
+	props = { ...props, labelHasDynamicContent };
 
+	useEffect( () => {
 		// border migration
 		if ( borderWidth || borderRadius || borderColor || borderHColor || borderStyle ) {
 			migrateBorderAttributes(
@@ -67,7 +71,9 @@ const ButtonsChildComponent = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		setAttributes( { context } );
+		if( labelHasDynamicContent && ! attributes?.context ){
+			setAttributes( { context } );
+		}
 	}, [ context ] )
 
 	useEffect( () => {
@@ -82,17 +88,17 @@ const ButtonsChildComponent = ( props ) => {
 			<DynamicFontLoader { ...{ attributes } } />
 			{ isSelected && (
 				<Settings
-					parentProps={ props }
+					{ ...props }
 					state={ state }
 					setStateValue={ setStateValue }
-					deviceType={ deviceType }
 				/>
 			) }
-			<Render parentProps={ props } />
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( ButtonsChildComponent );

@@ -7,8 +7,9 @@ import generateSpacing from '@Controls/generateSpacing';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import { applyFilters } from '@wordpress/hooks';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType ) {
 	const blockName = name.replace( 'uagb/', '' );
+	const previewType = deviceType.toLowerCase();
 	const {
 		// Tile Calcualtion
 		tileSize,
@@ -203,6 +204,7 @@ function styling( attributes, clientId, name ) {
 		mainTitleBorderColor,
 		mainTitleBorderHColor,
 		imageBorderHColor,
+		block_id
 	} = attributes;
 
 	// Arrow & Dots Default Color Fallback ( Not from Theme ).
@@ -500,7 +502,7 @@ function styling( attributes, clientId, name ) {
 			'border-color':
 				'antiHover' === captionVisibility
 					? 'rgba(0,0,0,0)'
-					: 'antiHover' !== captionVisibility 
+					: 'antiHover' !== captionVisibility
 					? mainTitleBorderHColor
 					: mainTitleBorderColor,
 		},
@@ -950,7 +952,7 @@ function styling( attributes, clientId, name ) {
 		};
 	}
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	selectors = applyFilters( `spectra.image-gallery.styling`, selectors, attributes );
 	tabletSelectors = applyFilters( `spectra.image-gallery.tabletStyling`, tabletSelectors, attributes );
@@ -962,10 +964,23 @@ function styling( attributes, clientId, name ) {
 
 	let stylingCss = generateCSS( selectors, baseSelector );
 
-	stylingCss += generateCSS( tabletSelectors, `${ baseSelector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ baseSelector }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ baseSelector }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ baseSelector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

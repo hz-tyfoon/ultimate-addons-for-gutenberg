@@ -191,7 +191,7 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 				$selectors['.wp-block-button.is-style-outline .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater:hover'] = array(
 					'border-color' => ! empty( $attr['btnBorderHColor'] ) ? $attr['btnBorderHColor'] : $attr['borderHColor'],
 				);
-				$selectors[ $wrapper . ' .uagb-button__link' ]                                  = array(
+				$selectors[ $wrapper . ' .uagb-button__link' ]       = array(
 					'color'           => $attr['color'],
 					'font-family'     => $attr['fontFamily'],
 					'font-weight'     => $attr['fontWeight'],
@@ -201,21 +201,21 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 					'font-size'       => UAGB_Helper::get_css_value( $attr['size'], $attr['sizeType'] ),
 					'line-height'     => UAGB_Helper::get_css_value( $attr['lineHeight'], $attr['lineHeightType'] ),
 				);
-				$selectors[ $wrapper . ':hover .uagb-button__link' ]                            = array(
+				$selectors[ $wrapper . ':hover .uagb-button__link' ] = array(
 					'color' => $attr['hColor'],
 				);
-				$selectors[ $wrapper . ':focus .uagb-button__link' ]                            = array(
+				$selectors[ $wrapper . ':focus .uagb-button__link' ] = array(
 					'color' => $attr['hColor'],
 				);
-				$m_selectors[ $wrapper . ' .uagb-button__link' ]                                = array(
+				$m_selectors[ $wrapper . ' .uagb-button__link' ]     = array(
 					'font-size'   => UAGB_Helper::get_css_value( $attr['sizeMobile'], $attr['sizeType'] ),
 					'line-height' => UAGB_Helper::get_css_value( $attr['lineHeightMobile'], $attr['lineHeightType'] ),
 				);
-				$t_selectors[ $wrapper . ' .uagb-button__link' ]                                = array(
+				$t_selectors[ $wrapper . ' .uagb-button__link' ]     = array(
 					'font-size'   => UAGB_Helper::get_css_value( $attr['sizeTablet'], $attr['sizeType'] ),
 					'line-height' => UAGB_Helper::get_css_value( $attr['lineHeightTablet'], $attr['lineHeightType'] ),
 				);
-				$m_selectors[ ' .uagb-button__wrapper ' . $wrapper . '.wp-block-button__link' ] = array(
+				$m_selectors[ $wrapper . '.wp-block-button__link' ]  = array(
 					'padding-top'    => UAGB_Helper::get_css_value( $attr['topMobilePadding'], $attr['mobilePaddingUnit'] ),
 					'padding-bottom' => UAGB_Helper::get_css_value( $attr['bottomMobilePadding'], $attr['mobilePaddingUnit'] ),
 					'padding-left'   => UAGB_Helper::get_css_value( $attr['leftMobilePadding'], $attr['mobilePaddingUnit'] ),
@@ -227,7 +227,7 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 
 				);
 
-				$t_selectors[ ' .uagb-button__wrapper ' . $wrapper . '.wp-block-button__link' ] = array(
+				$t_selectors[ $wrapper . '.wp-block-button__link' ] = array(
 					'padding-top'    => UAGB_Helper::get_css_value( $attr['topTabletPadding'], $attr['tabletPaddingUnit'] ),
 					'padding-bottom' => UAGB_Helper::get_css_value( $attr['bottomTabletPadding'], $attr['tabletPaddingUnit'] ),
 					'padding-left'   => UAGB_Helper::get_css_value( $attr['leftTabletPadding'], $attr['tabletPaddingUnit'] ),
@@ -276,26 +276,39 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 				'fill' => ! empty( $attr['iconHColor'] ) ? $attr['iconHColor'] : $attr['hColor'],
 			);
 			if ( ! $attr['removeText'] ) {
+				$icon_margin        = UAGB_Helper::get_css_value( self::get_fallback_number( $attr['iconSpace'], 'iconSpace', $block_name ), 'px' );
+				$tablet_icon_margin = UAGB_Helper::get_css_value( $attr['iconSpaceTablet'], 'px' );
+				$mobile_icon_margin = UAGB_Helper::get_css_value( $attr['iconSpaceMobile'], 'px' );
+
+				$right_side_margin = 'margin-right';
+				$left_side_margin  = 'margin-left';
+
+				if ( ! is_rtl() ) {
+					$right_side_margin = 'margin-left';
+					$left_side_margin  = 'margin-right';
+				}
+
 				$selectors[ $wrapper . ' .uagb-button__icon-position-after' ]   = array(
-					'margin-left' => UAGB_Helper::get_css_value( self::get_fallback_number( $attr['iconSpace'], 'iconSpace', $block_name ), 'px' ),
+					$right_side_margin => $icon_margin,
 				);
 				$t_selectors[ $wrapper . ' .uagb-button__icon-position-after' ] = array(
-					'margin-left' => UAGB_Helper::get_css_value( $attr['iconSpaceTablet'], 'px' ),
+					$right_side_margin => $tablet_icon_margin,
 				);
 				$m_selectors[ $wrapper . ' .uagb-button__icon-position-after' ] = array(
-					'margin-left' => UAGB_Helper::get_css_value( $attr['iconSpaceMobile'], 'px' ),
+					$right_side_margin => $mobile_icon_margin,
 				);
 
 				$selectors[ $wrapper . ' .uagb-button__icon-position-before' ]   = array(
-					'margin-right' => UAGB_Helper::get_css_value( self::get_fallback_number( $attr['iconSpace'], 'iconSpace', $block_name ), 'px' ),
+					$left_side_margin => $icon_margin,
 				);
 				$t_selectors[ $wrapper . ' .uagb-button__icon-position-before' ] = array(
-					'margin-right' => UAGB_Helper::get_css_value( $attr['iconSpaceTablet'], 'px' ),
+					$left_side_margin => $tablet_icon_margin,
 				);
 				$m_selectors[ $wrapper . ' .uagb-button__icon-position-before' ] = array(
-					'margin-right' => UAGB_Helper::get_css_value( $attr['iconSpaceMobile'], 'px' ),
+					$left_side_margin => $mobile_icon_margin,
 				);
 			}
+
 			return array(
 				'selectors'   => $selectors,
 				'm_selectors' => $m_selectors,
@@ -316,19 +329,34 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 
 			$wrapper = ( ! $childMigrate ) ? ' .uagb-ss-repeater-' . $id : '.uagb-ss-repeater';
 
-			$selectors[ $wrapper . ' a.uagb-ss__link' ]           = array(
+			$selectors[ $wrapper . ' span.uagb-ss__link' ]           = array(
 				'color' => $attr['icon_color'],
 			);
-			$selectors[ $wrapper . ' a.uagb-ss__link' ]           = array(
+			$selectors[ $wrapper . ' a.uagb-ss__link' ]              = array( // Backward user case.
 				'color' => $attr['icon_color'],
 			);
-			$selectors[ $wrapper . ' a.uagb-ss__link svg' ]       = array(
+			$selectors[ $wrapper . ' span.uagb-ss__link' ]           = array(
+				'color' => $attr['icon_color'],
+			);
+			$selectors[ $wrapper . ' a.uagb-ss__link' ]              = array( // Backward user case.
+				'color' => $attr['icon_color'],
+			);
+			$selectors[ $wrapper . ' span.uagb-ss__link svg' ]       = array(
 				'fill' => $attr['icon_color'],
 			);
-			$selectors[ $wrapper . ':hover a.uagb-ss__link' ]     = array(
+			$selectors[ $wrapper . ' a.uagb-ss__link svg' ]          = array( // Backward user case.
+				'fill' => $attr['icon_color'],
+			);
+			$selectors[ $wrapper . ':hover span.uagb-ss__link' ]     = array(
 				'color' => $attr['icon_hover_color'],
 			);
-			$selectors[ $wrapper . ':hover a.uagb-ss__link svg' ] = array(
+			$selectors[ $wrapper . ':hover a.uagb-ss__link' ]        = array( // Backward user case.
+				'color' => $attr['icon_hover_color'],
+			);
+			$selectors[ $wrapper . ':hover span.uagb-ss__link svg' ] = array(
+				'fill' => $attr['icon_hover_color'],
+			);
+			$selectors[ $wrapper . ':hover a.uagb-ss__link svg' ]    = array( // Backward user case.
 				'fill' => $attr['icon_hover_color'],
 			);
 
@@ -1380,16 +1408,95 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 
 			return $desktop . $tab_styling_css . $mob_styling_css;
 		}
+
+		/**
+		 * Generates background CSS for a specific device type.
+		 *
+		 * This function takes attributes for styling and a device type, and returns
+		 * the corresponding background object and overlay CSS for that device type.
+		 *
+		 * @param array  $attr         The array of attributes containing styling options.
+		 * @param string $device_type   The device type ('Desktop', 'Tablet', 'Mobile') for which to generate background CSS.
+		 * @param string $overlay      The overlay option ('no' or 'yes') to determine whether to include overlay CSS.
+		 *
+		 * @since 2.7.8
+		 * @return array               The background CSS object for the specified device type.
+		 */
+		public static function get_background_css_by_device( $attr, $device_type = 'Desktop', $overlay = 'no' ) {
+
+			switch ( $device_type ) {
+				case 'tablet':
+				case 'Tablet':
+					$device_type = 'Tablet';
+					break;
+				case 'mobile':
+				case 'Mobile':
+					$device_type = 'Mobile';
+					break;
+				default:
+					$device_type = 'Desktop';
+			}
+
+			$bg_obj = array(
+				'backgroundType'                  => $attr['backgroundType'],
+				'backgroundImage'                 => $attr[ 'backgroundImage' . $device_type ],
+				'backgroundColor'                 => $attr['backgroundColor'],
+				'gradientValue'                   => $attr['gradientValue'],
+				'gradientColor1'                  => $attr['gradientColor1'],
+				'gradientColor2'                  => $attr['gradientColor2'],
+				'gradientType'                    => $attr['gradientType'],
+				'gradientLocation1'               => $attr['gradientLocation1'],
+				'gradientLocation2'               => $attr['gradientLocation2'],
+				'gradientAngle'                   => $attr['gradientAngle'],
+				'selectGradient'                  => $attr['selectGradient'],
+				'backgroundRepeat'                => $attr[ 'backgroundRepeat' . $device_type ],
+				'backgroundPosition'              => $attr[ 'backgroundPosition' . $device_type ],
+				'backgroundSize'                  => $attr[ 'backgroundSize' . $device_type ],
+				'backgroundAttachment'            => $attr[ 'backgroundAttachment' . $device_type ],
+				'backgroundImageColor'            => $attr['backgroundImageColor'],
+				'overlayType'                     => $attr['overlayType'],
+				'overlayOpacity'                  => $attr['overlayOpacity'],
+				'backgroundCustomSize'            => $attr[ 'backgroundCustomSize' . $device_type ],
+				'backgroundCustomSizeType'        => $attr['backgroundCustomSizeType'],
+				'backgroundVideo'                 => $attr['backgroundVideo'],
+				'backgroundVideoColor'            => $attr['backgroundVideoColor'],
+				'customPosition'                  => $attr['customPosition'],
+				'xPosition'                       => $attr[ 'xPosition' . $device_type ],
+				'xPositionType'                   => $attr['xPositionType'],
+				'yPosition'                       => $attr[ 'yPosition' . $device_type ],
+				'yPositionType'                   => $attr['yPositionType'],
+				'backgroundOverlayImage'          => $attr[ 'backgroundOverlayImage' . $device_type ],
+				'backgroundOverlayRepeat'         => $attr[ 'backgroundRepeatOverlay' . $device_type ],
+				'backgroundOverlayPosition'       => $attr[ 'backgroundPositionOverlay' . $device_type ],
+				'backgroundOverlaySize'           => $attr[ 'backgroundSizeOverlay' . $device_type ],
+				'backgroundOverlayAttachment'     => $attr[ 'backgroundAttachmentOverlay' . $device_type ],
+				'backgroundOverlayCustomSize'     => $attr[ 'backgroundCustomSizeOverlay' . $device_type ],
+				'backgroundOverlayCustomSizeType' => $attr['backgroundCustomOverlaySizeType'],
+				'customOverlayPosition'           => $attr['customOverlayPosition'],
+				'xOverlayPosition'                => $attr[ 'xPositionOverlay' . $device_type ],
+				'xOverlayPositionType'            => $attr['xPositionOverlayType'],
+				'yOverlayPosition'                => $attr[ 'yPositionOverlay' . $device_type ],
+				'yOverlayPositionType'            => $attr['yPositionOverlayType'],
+				'blendMode'                       => $attr['overlayBlendMode'],
+			);
+
+			$container_bg_css = self::uag_get_background_obj( $bg_obj, $overlay );
+
+			return $container_bg_css;
+		}
+
 		/**
 		 * Background Control CSS Generator Function.
 		 *
-		 * @param  array $bg_obj   Color code in HEX.
+		 * @param array  $bg_obj          The background object with all CSS properties.
+		 * @param string $css_for_pseudo  A string indicating whether the pseudo-element CSS is required or not. Default is an empty string for elements that don't use the pseudo-element.
 		 *
-		 * @return array         Color code in HEX.
+		 * @return array                  The formatted CSS properties for the background.
 		 */
-		public static function uag_get_background_obj( $bg_obj ) {
+		public static function uag_get_background_obj( $bg_obj, $css_for_pseudo = '' ) {
 
-			$gen_bg_css = array();
+			$gen_bg_css         = array();
+			$gen_bg_overlay_css = array();
 
 			$bg_type             = isset( $bg_obj['backgroundType'] ) ? $bg_obj['backgroundType'] : '';
 			$bg_img              = isset( $bg_obj['backgroundImage'] ) && isset( $bg_obj['backgroundImage']['url'] ) ? $bg_obj['backgroundImage']['url'] : '';
@@ -1407,6 +1514,7 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 			$size                = isset( $bg_obj['backgroundSize'] ) ? $bg_obj['backgroundSize'] : '';
 			$attachment          = isset( $bg_obj['backgroundAttachment'] ) ? $bg_obj['backgroundAttachment'] : '';
 			$overlay_type        = isset( $bg_obj['overlayType'] ) ? $bg_obj['overlayType'] : '';
+			$overlay_opacity     = isset( $bg_obj['overlayOpacity'] ) ? $bg_obj['overlayOpacity'] : '';
 			$bg_image_color      = isset( $bg_obj['backgroundImageColor'] ) ? $bg_obj['backgroundImageColor'] : '';
 			$bg_custom_size      = isset( $bg_obj['backgroundCustomSize'] ) ? $bg_obj['backgroundCustomSize'] : '';
 			$bg_custom_size_type = isset( $bg_obj['backgroundCustomSizeType'] ) ? $bg_obj['backgroundCustomSizeType'] : '';
@@ -1419,6 +1527,22 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 			$y_position      = isset( $bg_obj['yPosition'] ) ? $bg_obj['yPosition'] : '';
 			$y_position_type = isset( $bg_obj['yPositionType'] ) ? $bg_obj['yPositionType'] : '';
 
+			$bg_overlay_img              = isset( $bg_obj['backgroundOverlayImage']['url'] ) ? $bg_obj['backgroundOverlayImage']['url'] : '';
+			$overlay_repeat              = isset( $bg_obj['backgroundOverlayRepeat'] ) ? $bg_obj['backgroundOverlayRepeat'] : '';
+			$overlay_position            = isset( $bg_obj['backgroundOverlayPosition'] ) ? $bg_obj['backgroundOverlayPosition'] : '';
+			$overlay_size                = isset( $bg_obj['backgroundOverlaySize'] ) ? $bg_obj['backgroundOverlaySize'] : '';
+			$overlay_attachment          = isset( $bg_obj['backgroundOverlayAttachment'] ) ? $bg_obj['backgroundOverlayAttachment'] : '';
+			$blend_mode                  = isset( $bg_obj['blendMode'] ) ? $bg_obj['blendMode'] : '';
+			$bg_overlay_custom_size      = isset( $bg_obj['backgroundOverlayCustomSize'] ) ? $bg_obj['backgroundOverlayCustomSize'] : '';
+			$bg_overlay_custom_size_type = isset( $bg_obj['backgroundOverlayCustomSizeType'] ) ? $bg_obj['backgroundOverlayCustomSizeType'] : '';
+
+			$custom_overlay__position = isset( $bg_obj['customOverlayPosition'] ) ? $bg_obj['customOverlayPosition'] : '';
+			$x_overlay_position       = isset( $bg_obj['xOverlayPosition'] ) ? $bg_obj['xOverlayPosition'] : '';
+			$x_overlay_position_type  = isset( $bg_obj['xOverlayPositionType'] ) ? $bg_obj['xOverlayPositionType'] : '';
+			$y_overlay_position       = isset( $bg_obj['yOverlayPosition'] ) ? $bg_obj['yOverlayPosition'] : '';
+			$y_overlay_position_type  = isset( $bg_obj['yOverlayPositionType'] ) ? $bg_obj['yOverlayPositionType'] : '';
+
+			$gradient = '';
 			if ( 'custom' === $size ) {
 				$size = $bg_custom_size . $bg_custom_size_type;
 			}
@@ -1460,12 +1584,24 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 							$gen_bg_css['background-attachment'] = esc_attr( $attachment );
 						}
 						if ( 'color' === $overlay_type && '' !== $bg_img && '' !== $bg_image_color ) {
-							$gen_bg_css['background-image'] = 'linear-gradient(to right, ' . $bg_image_color . ', ' . $bg_image_color . '), url(' . $bg_img . ');';
+							if ( ! empty( $css_for_pseudo ) ) {
+								$gen_bg_css['background-image']   = 'url(' . $bg_img . ');';
+								$gen_bg_overlay_css['background'] = $bg_image_color;
+								$gen_bg_overlay_css['opacity']    = $overlay_opacity;
+							} else {
+								$gen_bg_css['background-image'] = 'linear-gradient(to right, ' . $bg_image_color . ', ' . $bg_image_color . '), url(' . $bg_img . ');';
+							}
 						}
 						if ( 'gradient' === $overlay_type && '' !== $bg_img && '' !== $gradient ) {
-							$gen_bg_css['background-image'] = $gradient . ', url(' . $bg_img . ');';
+							if ( ! empty( $css_for_pseudo ) ) {
+								$gen_bg_css['background-image']         = 'url(' . $bg_img . ');';
+								$gen_bg_overlay_css['background-image'] = $gradient;
+								$gen_bg_overlay_css['opacity']          = $overlay_opacity;
+							} else {
+								$gen_bg_css['background-image'] = $gradient . ', url(' . $bg_img . ');';
+							}
 						}
-						if ( 'none' === $overlay_type && '' !== $bg_img ) {
+						if ( ( 'none' === $overlay_type || 'image' === $overlay_type ) && '' !== $bg_img ) {
 							$gen_bg_css['background-image'] = 'url(' . $bg_img . ');';
 						}
 						$gen_bg_css['background-clip'] = 'padding-box';
@@ -1492,9 +1628,44 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 			} elseif ( '' !== $bg_color ) {
 				$gen_bg_css['background-color'] = $bg_color . ';';
 			}
+			
+			// image overlay.
+			if ( 'image' === $overlay_type ) {
+				if ( 'custom' === $overlay_size ) {
+					$overlay_size = $bg_overlay_custom_size . $bg_overlay_custom_size_type;
+				}
 
-			return $gen_bg_css;
+				if ( $overlay_repeat ) {
+					$gen_bg_overlay_css['background-repeat'] = esc_attr( $overlay_repeat );
+				}
+				if ( 'custom' !== $custom_overlay__position && $overlay_position && isset( $overlay_position['x'] ) && isset( $overlay_position['y'] ) ) {
+					$position_overlay_value                    = $overlay_position['x'] * 100 . '% ' . $overlay_position['y'] * 100 . '%';
+					$gen_bg_overlay_css['background-position'] = $position_overlay_value;
+				} elseif ( 'custom' === $custom_overlay__position && $x_overlay_position && $y_overlay_position && $x_overlay_position_type && $y_overlay_position_type ) {
+					$position_overlay_value                    = $x_overlay_position . $x_overlay_position_type . ' ' . $y_overlay_position . $y_overlay_position_type;
+					$gen_bg_overlay_css['background-position'] = $position_overlay_value;
+				}
+
+				if ( $overlay_size ) {
+					$gen_bg_overlay_css['background-size'] = esc_attr( $overlay_size );
+				}
+
+				if ( $overlay_attachment ) {
+					$gen_bg_overlay_css['background-attachment'] = esc_attr( $overlay_attachment );
+				}
+				if ( $blend_mode ) {
+					$gen_bg_overlay_css['mix-blend-mode'] = esc_attr( $blend_mode );
+				}
+				if ( '' !== $bg_overlay_img ) {
+					$gen_bg_overlay_css['background-image'] = 'url(' . $bg_overlay_img . ');';
+				}
+				$gen_bg_overlay_css['background-clip'] = 'padding-box';
+				$gen_bg_overlay_css['opacity']         = $overlay_opacity;
+			};
+			
+			return 'yes' === $css_for_pseudo ? $gen_bg_overlay_css : $gen_bg_css;
 		}
+
 		/**
 		 * Border attribute generation Function.
 		 *
@@ -1560,6 +1731,7 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 
 			return $border_attr;
 		}
+
 		/**
 		 * Border attribute generation Function.
 		 *
