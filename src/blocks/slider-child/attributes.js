@@ -1,7 +1,6 @@
 const attributes = {
 	block_id: {
 		type: 'string',
-		default: '0',
 	},
 	backgroundType: {
 		type: 'string',

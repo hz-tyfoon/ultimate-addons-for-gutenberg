@@ -77,7 +77,6 @@ const attributes = {
 	},
 	block_id: {
 		type: 'string',
-		default: 'not_set',
 	},
 	imgVrPadding: {
 		type: 'number',

@@ -138,7 +138,6 @@ const attributes = {
 	},
 	block_id: {
 		type: 'string',
-		default: 'not_set',
 	},
 	categories: {
 		type: 'string',

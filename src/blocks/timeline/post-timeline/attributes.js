@@ -743,7 +743,6 @@ const attributes = {
 	},
 	block_id: {
 		type: 'string',
-		default: 'not_set',
 	},
 	icon: {
 		type: 'string',

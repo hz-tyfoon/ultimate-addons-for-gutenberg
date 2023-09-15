@@ -85,7 +85,6 @@ const attributes = {
 	},
 	block_id: {
 		type: 'string',
-		default: '0',
 	},
 	timelineItem: {
 		type: 'number',
@@ -93,7 +92,6 @@ const attributes = {
 	},
 	tm_client_id: {
 		type: 'string',
-		default: 'not_set',
 	},
 	iconSize: {
 		type: 'number',
