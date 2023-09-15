@@ -6,7 +6,6 @@ const overallBorderAttributes = getBorderAttributes( 'overall' );
 const attributes = {
 	block_id: {
 		type: 'string',
-		default: 'not_set',
 	},
 	classMigrate: {
 		type: 'boolean',
