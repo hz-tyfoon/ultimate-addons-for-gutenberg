@@ -221,6 +221,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Image - Resolved an issue in which the updated responsive images would not appear as intended.
 * Fix: Testimonial - Resolved an issue wherein the gradient background  styles would not work as intended.
 * Fix: Content Timeline - Resolved an issue in which the icons would appear over-sized and the content styling would break on the frontend.
+* Fix: Global - Removed the Block Editor Spacing setting for FSE themes.
 
 ### 2.7.9 - WEDNESDAY, 13th SEPTEMBER 2023 ###
 * Improvement: Info Box - Changed the Info Box icon position dropdown to a multi-control.
