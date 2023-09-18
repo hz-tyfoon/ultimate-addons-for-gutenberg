@@ -216,10 +216,13 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 == Changelog ==
 
 = x.x.x =
+* Fix: Image - Resolved an issue in which the updated responsive images would not appear as intended.
+* Fix: Global - Resolved an issue in which non-FSE themes running on PHP 8.1 would encounter PHP issues regarding the `preg_match` and `strlen` functions.
 * Fix: Global - Resolved an issue wherein a PHP error could occur in the Widget Editor.
 * Fix: Forms - Resolved an issue wherein the country-code background color would not match in the editor and the front-end.
 * Fix: Image - Resolved an issue in which the updated responsive images would not appear as intended.
 * Fix: Testimonial - Resolved an issue wherein the gradient background  styles would not work as intended.
+* Fix: Forms - Resolved an issue wherein the Forms block would not work inside Containers in Astra's Custom Layout.
 * Fix: Content Timeline - Resolved an issue in which the icons would appear over-sized and the content styling would break on the frontend.
 * Fix: Global - Removed the Block Editor Spacing setting for FSE themes.
 
