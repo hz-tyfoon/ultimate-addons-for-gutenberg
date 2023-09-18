@@ -216,12 +216,12 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ## Changelog ##
 
 ### x.x.x ###
+* Fix: Container - Resolved an issue wherein the left and right margin of inner container would not work as intended.
 * Fix: Global - Resolved an issue wherein a PHP error could occur in the Widget Editor.
 * Fix: Forms - Resolved an issue wherein the country-code background color would not match in the editor and the front-end.
 * Fix: Image - Resolved an issue in which the updated responsive images would not appear as intended.
 * Fix: Testimonial - Resolved an issue wherein the gradient background  styles would not work as intended.
 * Fix: Global - Removed the Block Editor Spacing setting for FSE themes.
-
 
 ### 2.7.9 - WEDNESDAY, 13th SEPTEMBER 2023 ###
 * Improvement: Info Box - Changed the Info Box icon position dropdown to a multi-control.
