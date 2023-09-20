@@ -75,6 +75,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			add_action( 'plugins_loaded', array( $this, 'load_plugin' ) );
 
 			add_action( 'init', array( $this, 'init_actions' ) );
+			add_action( 'init', array( $this, 'get_regenerate_assets_on_migration' ) );
 		}
 
 		/**
@@ -453,6 +454,41 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 
 			// If either parameter is not an array, return the original excerpt blocks.
 			return $excerpt_blocks;
+		}
+
+		/**
+		 * Generate assets on migration.
+		 *
+		 * @return void
+		 */
+		public function get_regenerate_assets_on_migration() {
+			// Parse the host (domain/hostname) from the site URL.
+			$site_host = wp_parse_url( site_url(), PHP_URL_HOST );
+
+			// Check if $site_host is empty or not a string. If true, return and exit the function.
+			if ( empty( $site_host ) || ! is_string( $site_host ) ) {
+				return;
+			}
+
+			// Remove 'www.' from the domain.
+			$domain = str_replace( 'www.', '', $site_host );
+
+			// Replace dots (.) with dashes (-) in the domain to create $site_domain.
+			$site_domain = str_replace( '.', '-', $domain );
+
+			// Retrieve the stored domain from admin settings.
+			$stored_domain = \UAGB_Admin_Helper::get_admin_settings_option( 'uagb_site_url', '' );
+
+			// If the stored domain is empty, update the 'uagb_site_url' option in admin settings with the modified site domain and return.
+			if ( empty( $stored_domain ) ) {
+				\UAGB_Admin_Helper::update_admin_settings_option( 'uagb_site_url', $site_domain );
+				return;
+			}
+
+			// If the stored domain is different from the current site domain, update the '__uagb_asset_version' option with the current timestamp.
+			if ( $stored_domain !== $site_domain ) {
+				\UAGB_Admin_Helper::update_admin_settings_option( '__uagb_asset_version', time() );
+			}
 		}
 	}
 }
