@@ -112,8 +112,8 @@ const OpenAIKey = () => {
 		updateAPIButtonLabel( 'saving' );
 
 		OpenAiResponder( 'User validation', '', finalAPIKey, false ).then( ( responseData ) => {
-			if( responseData?.error ) {
-				const errorMessage = responseData?.error?.message || __( 'Invalid Key', 'ultimate-addons-for-gutenberg' );
+			if( false === responseData.success ) {
+				const errorMessage = responseData?.data?.message || __( 'Invalid Key', 'ultimate-addons-for-gutenberg' );
 
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: { message: errorMessage, messageType: 'error' } } );
 				updateAPIButtonLabel();

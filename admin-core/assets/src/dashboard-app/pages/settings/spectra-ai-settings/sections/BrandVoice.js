@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useSelector, useDispatch } from 'react-redux';
 import { escapeHTML } from '@wordpress/escape-html';
 import getApiData from '@Controls/getApiData';
-import { OpenAiResponder, getResponse } from '@ProBlocks/extensions/ai/open-ai/utils';
+import { OpenAiResponder } from '@ProBlocks/extensions/ai/open-ai/utils';
 import { uagbClassNames } from '@Utils/Helpers';
 
 const BrandVoice = () => {
@@ -115,10 +115,9 @@ const BrandVoice = () => {
 		setBrandWritingStyle( '' );
 		setBrandAudience( '' );
 		const generatedResponse = await OpenAiResponder( '', systemMessage, existingKey )
-		.then( ( data ) => {
-			const response = getResponse( data );
+		.then( ( response ) => {
 			if ( response.success ) {
-				return JSON.parse( response.message );
+				return JSON.parse( response?.data?.message );
 			}
 		} )
 		.catch( () => {
