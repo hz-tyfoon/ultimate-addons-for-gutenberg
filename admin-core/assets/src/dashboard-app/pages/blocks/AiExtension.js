@@ -3,12 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Switch } from '@headlessui/react'
 import UAGB_Block_Icons from '@Common/block-icons';
 import { useEffect } from 'react';
+import { uagbClassNames } from '@Helpers/Helpers';
 
 import getApiData from '@Controls/getApiData';
-
-function classNames( ...classes ) {
-    return classes.filter( Boolean ).join( ' ' )
-}
 
 const AiExtension = () => {
 
@@ -54,7 +51,7 @@ const AiExtension = () => {
     return (
         <div
         key={'ai'}
-        className={ classNames(
+        className={ uagbClassNames(
             ( aiStatus && uag_react.spectra_pro_status )
                 ? 'border-white bg-white shadow hover:shadow-hover hover:z-50'
                 : 'border-slate-200 spectra-disabled-icon',
@@ -86,14 +83,14 @@ const AiExtension = () => {
                 <Switch
                     checked={aiStatus}
                     onChange={AiStatus}
-                    className={classNames(
+                    className={uagbClassNames(
                         aiStatus ? 'bg-spectra' : 'bg-slate-200',
                         'relative inline-flex flex-shrink-0 h-5 w-[2.4rem] items-center border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none'
                     )}
                     >
                     <span
                         aria-hidden="true"
-                        className={classNames(
+                        className={uagbClassNames(
                         aiStatus ? 'translate-x-5' : 'translate-x-0',
                         'pointer-events-none inline-block h-3.5 w-3.5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
                         )}
