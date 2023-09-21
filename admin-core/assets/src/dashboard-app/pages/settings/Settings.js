@@ -43,6 +43,7 @@ const Settings = () => {
 	const activeSettingsNavigationTab = useSelector( ( state ) => state.activeSettingsNavigationTab );
     const initialStateSetFlag = useSelector( ( state ) => state.initialStateSetFlag );
     const spectraIsBlockTheme = useSelector( ( state ) => state.spectraIsBlockTheme );
+	const enableAi = useSelector( ( state ) => state.enableAiExtension );
 
 	const navigation = [
 		{ name: __( 'Editor Options', 'ultimate-addons-for-gutenberg' ), slug: 'global-settings', icon: SettingsIcons['global-settings'] },
@@ -59,7 +60,9 @@ const Settings = () => {
     }
 	if ( uag_react.spectra_pro_status ) {
 		navigation.push( { name: __( 'License', 'ultimate-addons-for-gutenberg' ), slug: 'license', icon: SettingsIcons.account } );
-		navigation.splice( 5, 0, { name: __( 'Spectra AI', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
+		if( 'enabled' === enableAi ) {
+			navigation.splice( 5, 0, { name: __( 'Spectra AI', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
+		}
 	}
 
 	useEffect( () => {
@@ -160,7 +163,7 @@ const Settings = () => {
                             </>
                         }
                         {
-                        	uag_react.spectra_pro_status &&  'spectra-ai' === activeSettingsNavigationTab &&
+                        	uag_react.spectra_pro_status && 'enabled' === enableAi &&  'spectra-ai' === activeSettingsNavigationTab &&
                             <>
                                 <SpectraAISettings />
                             </>

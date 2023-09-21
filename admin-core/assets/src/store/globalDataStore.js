@@ -30,6 +30,7 @@ const initialState = {
 		facebookAppSecret: ''
 	},
 	enableDynamicContentExtension: '',
+	enableAiExtension: '',
 	dynamicContentMode: 'popup',
 	enableResponsiveConditions : '',
 	contentWidth: '',

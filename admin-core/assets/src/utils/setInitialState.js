@@ -4,7 +4,7 @@ const setInitialState = ( store ) => {
     apiFetch( {
         path: '/uag/v1/admin/commonsettings/',
     } ).then( ( data ) => {
-        
+
         const initialState = {
             initialStateSetFlag : true,
             activeBlocksFilterTab : 'all',
@@ -49,6 +49,7 @@ const setInitialState = ( store ) => {
             themeFonts: data.theme_fonts,
             btnInheritFromTheme: data.uag_btn_inherit_from_theme,
 			spectraOpenAIOptions: data?.open_ai_options,
+			enableAiExtension: data.enable_ai,
         };
 
         store.dispatch( {type: 'UPDATE_INITIAL_STATE', payload: initialState} );
