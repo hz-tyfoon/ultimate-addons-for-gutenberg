@@ -75,7 +75,6 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			add_action( 'plugins_loaded', array( $this, 'load_plugin' ) );
 
 			add_action( 'init', array( $this, 'init_actions' ) );
-			add_action( 'init', array( $this, 'get_regenerate_assets_on_migration' ) );
 		}
 
 		/**
@@ -407,6 +406,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			add_filter( 'excerpt_allowed_blocks', array( $this, 'add_blocks_to_excerpt' ), 20 );
 			add_filter( 'excerpt_allowed_wrapper_blocks', array( $this, 'add_wrapper_blocks_to_excerpt' ), 20 );
 			add_filter( 'uagb_blocks_allowed_in_excerpt', array( $this, 'add_uagb_blocks_to_excerpt' ), 20, 2 );
+			$this->get_regenerate_assets_on_migration();
 		}
 
 		/**
@@ -459,6 +459,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 		/**
 		 * Generate assets on migration.
 		 *
+		 * @since x.x.x
 		 * @return void
 		 */
 		public function get_regenerate_assets_on_migration() {
