@@ -258,6 +258,11 @@ const globalDataReducer = ( state = {}, action ) => {
 				...state,
 				spectraOpenAIOptions: action.payload,
 			};
+		case 'UPDATE_ENABLE_AI_EXTENSION':
+			return {
+				...state,
+				enableAiExtension: action.payload,
+			};
         default:
             return state;
     }
