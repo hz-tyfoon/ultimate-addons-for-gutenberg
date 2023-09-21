@@ -1354,14 +1354,14 @@ const Settings = ( props ) => {
 								</>
 							) }
 						</UAGAdvancedPanelBody>
-						{ carousalSettings() }
+						{ test_item_count > 1 && carousalSettings() }
 					</InspectorTab>
 					<InspectorTab { ...UAGTabs.style }>
 						{ nameStyle() }
 						{ contentStyle() }
 						{ companyStyle() }
 						{ imageStyle() }
-						{ carouselStyle() }
+						{ test_item_count > 1 && carouselStyle() }
 						{ backgroundStyle() }
 						{ borderSetting() }
 						{ spacingSettings() }

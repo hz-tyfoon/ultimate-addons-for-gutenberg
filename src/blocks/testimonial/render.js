@@ -166,70 +166,127 @@ const Render = ( props ) => {
 				isGridLayoutMobile
 			) }
 		>
-			<Slider
-				className={ classnames(
-					'is-carousel',
-					`uagb-tm__columns-${ getFallbackNumber( columns, 'columns', blockName ) }`,
-					'uagb-tm__items'
-				) }
-				{ ...settings }
-				ref={ sliderRef }
-			>
-				{ test_block.map( ( test, index ) => (
-					<div
-						className={ classnames( 'uagb-testimonial__wrap', ...PositionClasses( attributes ) ) }
-						key={ 'wrap-' + index }
-					>
-						<div className="uagb-tm__content" key={ 'tm_content-' + index }>
-							<div className="uagb-tm__overlay"></div>
-							{ ( imagePosition === 'top' || imagePosition === 'left' ) && (
-								<TestimonialImage attributes={ attributes } index_value={ index } />
-							) }
+			{ test_item_count === 1 ? (
+				// Render the provided code block when test_item_count is equal to 1
+				<div
+					className={ classnames( 'uagb-testimonial__wrap', ...PositionClasses( attributes ) ) }
+					key={ 'wrap-' }
+				>
+					<div className="uagb-tm__content" key={ 'tm_content-' }>
+						<div className="uagb-tm__overlay"></div>
+						{ ( imagePosition === 'top' || imagePosition === 'left' ) && (
+							<TestimonialImage attributes={ attributes } index_value={ 0 } />
+						) }
 
-							<div className="uagb-tm__text-wrap">
+						<div className="uagb-tm__text-wrap">
+							{
+								// Get description.
+								<>
+									<Description
+										attributes={ attributes }
+										setAttributes={ setAttributes }
+										props={ props }
+										index_value={ 0 }
+									/>
+								</>
+							}
+							<div className="uagb-tm__meta-inner">
+								{ imagePosition === 'bottom' && (
+									<TestimonialImage attributes={ attributes } index_value={ 0 } />
+								) }
+
 								{
-									// Get description.
 									<>
-										<Description
-											attributes={ attributes }
-											setAttributes={ setAttributes }
-											props={ props }
-											index_value={ index }
-										/>
+										<div className="uagb-testimonial-details" key={ 'tm_wraps-' }>
+											<AuthorName
+												attributes={ attributes }
+												setAttributes={ setAttributes }
+												props={ props }
+												index_value={ 0 }
+											/>
+											<Company
+												attributes={ attributes }
+												setAttributes={ setAttributes }
+												props={ props }
+												index_value={ 0 }
+											/>
+										</div>
 									</>
 								}
-								<div className="uagb-tm__meta-inner">
-									{ imagePosition === 'bottom' && (
-										<TestimonialImage attributes={ attributes } index_value={ index } />
-									) }
+							</div>
+						</div>
+						{ imagePosition === 'right' && (
+							<TestimonialImage attributes={ attributes } index_value={ 0 } />
+						) }
+					</div>
+				</div>
+			) : (
+				// Render Slider and related elements when test_item_count is greater than 1
+				<Slider
+					className={ classnames(
+						'is-carousel',
+						`uagb-tm__columns-${ getFallbackNumber( columns, 'columns', blockName ) }`,
+						'uagb-tm__items'
+					) }
+					{ ...settings }
+					ref={ sliderRef }
+				>
+					{ test_block.map( ( test, index ) => (
+						<div
+							className={ classnames( 'uagb-testimonial__wrap', ...PositionClasses( attributes ) ) }
+							key={ 'wrap-' + index }
+						>
+							<div className="uagb-tm__content" key={ 'tm_content-' + index }>
+								<div className="uagb-tm__overlay"></div>
+								{ ( imagePosition === 'top' || imagePosition === 'left' ) && (
+									<TestimonialImage attributes={ attributes } index_value={ index } />
+								) }
 
+								<div className="uagb-tm__text-wrap">
 									{
+										// Get description.
 										<>
-											<div className="uagb-testimonial-details" key={ 'tm_wraps-' + index }>
-												<AuthorName
-													attributes={ attributes }
-													setAttributes={ setAttributes }
-													props={ props }
-													index_value={ index }
-												/>
-												<Company
-													attributes={ attributes }
-													setAttributes={ setAttributes }
-													props={ props }
-													index_value={ index }
-												/>
-											</div>
+											<Description
+												attributes={ attributes }
+												setAttributes={ setAttributes }
+												props={ props }
+												index_value={ index }
+											/>
 										</>
 									}
+									<div className="uagb-tm__meta-inner">
+										{ imagePosition === 'bottom' && (
+											<TestimonialImage attributes={ attributes } index_value={ index } />
+										) }
+
+										{
+											<>
+												<div className="uagb-testimonial-details" key={ 'tm_wraps-' + index }>
+													<AuthorName
+														attributes={ attributes }
+														setAttributes={ setAttributes }
+														props={ props }
+														index_value={ index }
+													/>
+													<Company
+														attributes={ attributes }
+														setAttributes={ setAttributes }
+														props={ props }
+														index_value={ index }
+													/>
+												</div>
+											</>
+										}
+									</div>
 								</div>
+								{ imagePosition === 'right' && (
+									<TestimonialImage attributes={ attributes } index_value={ index } />
+								) }
 							</div>
-							{ imagePosition === 'right' && (
-								<TestimonialImage attributes={ attributes } index_value={ index } />
-							) }
 						</div>
-					</div>
-				) ) }
-			</Slider>
+					) ) }
+				</Slider>
+			) }
 		</div>
 	);
 };

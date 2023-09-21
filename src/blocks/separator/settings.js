@@ -324,7 +324,7 @@ const Settings = ( props ) => {
 						},
 					} }
 					min={ 0 }
-					max={ '%' === separatorHeightType ? 100 : 500 }
+					max={ 100 }
 					unit={ {
 						value: separatorHeightType,
 						label: 'separatorHeightType',
