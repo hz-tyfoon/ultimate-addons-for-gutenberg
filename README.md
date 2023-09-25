@@ -5,7 +5,7 @@
 **Requires at least:** 5.6  
 **Requires PHP:** 7.4  
 **Tested up to:** 6.3.1  
-**Stable tag:** 2.7.9  
+**Stable tag:** 2.7.10  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -227,6 +227,12 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Global - Removed the Block Editor Spacing setting for FSE themes.
 * Fix: Image - Resolved an issue in which masked images would get cut-off when the zoom-in hover effect was used.
 * Fix: Forms - Added an error message when the confirmation type is set to "URL text".
+* Fix: Global - Resolved an console error issue for Social Share and Image gallery block.
+
+### 2.7.10 - FRIDAY, 22nd SEPTEMBER 2023 ###
+* Improvement: Global - Improved the security for the title tags of the PHP rendered blocks. Props to Patchstack for reporting it privately to our team.
+* Fix: Container - Resolved an issue wherein container background images would not render as intended during site migration.
+* Fix: Admin - Resolved an issue in which a deprecation notice would be shown on PHP v8.2 and above.
 
 ### 2.7.9 - WEDNESDAY, 13th SEPTEMBER 2023 ###
 * Improvement: Info Box - Changed the Info Box icon position dropdown to a multi-control.
