@@ -181,6 +181,7 @@ const OpenAIKey = () => {
 					type='text'
 					aria-label='Key'
 					placeholder='sk-xxxxxxxxxxxxxxxxxx'
+					readOnly={ !! existingKey }
 					value={ existingKey ? __( 'OpenAI Key Linked!', 'ultimate-addons-for-gutenberg' ) : openAIKey }
 					onChange={ ( event ) => setOpenAIKey( event.target.value ) }
 					disabled={ linkingKey }
