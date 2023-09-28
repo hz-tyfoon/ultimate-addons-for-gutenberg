@@ -254,10 +254,10 @@ const BrandVoice = () => {
 				<div className='mr-16 mt-2 w-full'>
 					<div className='w-9/12'>
 						<p className='text-sm text-slate-500'>
-							{ __( 'Give your Spectra AI a personal touch!', 'ultimate-addons-for-gutenberg' ) }
+							{ __( 'Give Spec a personal touch!', 'ultimate-addons-for-gutenberg' ) }
 						</p>
 						<p className='text-sm text-slate-500'>
-							{ __( 'Create a Brand Voice to make Spectra AI generate your content just the way you like it.', 'ultimate-addons-for-gutenberg' ) }
+							{ __( 'Create a Brand Voice to make Spec generate your content just the way you like it.', 'ultimate-addons-for-gutenberg' ) }
 						</p>
 					</div>
 					{ renderBrandVoiceForm() }

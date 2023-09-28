@@ -311,21 +311,37 @@
 	svg,
 	path,
 	rect,
-	circle {
-		transition-property: stroke;
+	circle,
+	ellipse {
+		transition-property: stroke, fill;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 		transition-duration: 150ms;
 	}
 }
 
-.spectra-disabled-icon {
+.spectra-disabled-icon svg {
+		
+		&:not(.spectra-filled-icon) {
+			stroke: $slate-400;
 
-	svg,
-	path,
-	rect,
-	circle {
-		stroke: $slate-400;
-	}
+			path:not(.spectra-icon__color--excluded),
+			rect:not(.spectra-icon__color--excluded),
+			circle:not(.spectra-icon__color--excluded),
+			ellipse:not(.spectra-icon__color--excluded) {
+				stroke: $slate-400;
+			}
+		}
+	
+		&.spectra-filled-icon {
+			fill: $slate-400;
+
+			path:not(.spectra-icon__color--excluded),
+			rect:not(.spectra-icon__color--excluded),
+			circle:not(.spectra-icon__color--excluded),
+			ellipse:not(.spectra-icon__color--excluded) {
+				fill: $slate-400;
+			}
+		}
 }
 
 // Changelog Styling.

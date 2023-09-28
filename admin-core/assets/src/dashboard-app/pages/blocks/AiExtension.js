@@ -59,11 +59,11 @@ const AiExtension = () => {
 		] ) }
         >
             <div className="flex-shrink-0">
-                { UAGB_Block_Icons.artificial_intelligence }
+                { UAGB_Block_Icons.spec }
             </div>
             <div className="uagb-admin-block__extension-title flex-1 min-w-0">
                 <p className="text-base font-medium text-slate-800">
-                    { __( 'AI Assistant', 'ultimate-addons-for-gutenberg' ) }
+                    { __( 'Spec', 'ultimate-addons-for-gutenberg' ) }
                     <div className="inline-block align-text-bottom max-h-4 px-1.5 py-[3px] ml-1.5 text-[10px] leading-[10px] border border-slate-400 text-slate-500 rounded spectra-admin__block-label">
                         { __( 'Extension', 'ultimate-addons-for-gutenberg' ) }
                     </div>
