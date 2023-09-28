@@ -125,9 +125,11 @@ const Settings = () => {
 								{
 									uag_react.spectra_pro_status && (
 										<DynamicContent />
-									)
-								}
-                                <BlocksEditorSpacing/>
+								) }
+								{ 
+									! uag_react.is_block_theme && (
+										<BlocksEditorSpacing />
+								) }
 								<OnPageCSS/>
                                 <CollapsePanels/>
                                 <CopyPasteStyles/>
