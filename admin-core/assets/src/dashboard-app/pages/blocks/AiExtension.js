@@ -9,11 +9,15 @@ import { uagbClassNames } from '@Helpers/Helpers';
 import getApiData from '@Controls/getApiData';
 
 const AiExtension = () => {
+	
+	const isPro = uag_react?.spectra_pro_status;
+	const isLicensed = uag_react?.license_status;
+	const isFreeOrLicensedPro = ! isPro || isLicensed;
 
     const enableAiExtension = useSelector( ( state ) => state.enableAiExtension );
     const dispatch = useDispatch();
 
-    const aiStatus = 'disabled' === enableAiExtension ? false : true;
+    const aiStatus = ( ! isLicensed || 'disabled' === enableAiExtension ) ? false : true;
 
     useEffect( () => {
 
@@ -49,15 +53,16 @@ const AiExtension = () => {
 
     };
 
-    return (
+	// The Spec AI Assistant Card.
+    const SpecExtensionCard = () => (
         <div
-        key={'ai'}
-        className={ uagbClassNames( [
-            ( aiStatus && uag_react.spectra_pro_status && uag_react?.license_status )
-                ? 'border-white bg-white shadow hover:shadow-hover hover:z-50'
-                : 'border-slate-200 spectra-disabled-icon',
-            'box-border relative border rounded-md h-20 p-4 flex items-center gap-x-4 snap-start transition spectra-icon-transition',
-		] ) }
+			key={'ai'}
+			className={ uagbClassNames( [
+				( aiStatus && isPro && isLicensed )
+					? 'border-white bg-white shadow hover:shadow-hover hover:z-50'
+					: 'border-slate-200 spectra-disabled-icon',
+				'box-border relative border rounded-md h-20 p-4 flex items-center gap-x-4 snap-start transition spectra-icon-transition',
+			] ) }
         >
             <div className='flex-shrink-0'>
                 { UAGB_Block_Icons.spec }
@@ -68,7 +73,7 @@ const AiExtension = () => {
                     <div className='inline-block align-text-bottom max-h-4 px-1.5 py-[3px] ml-1.5 text-[10px] leading-[10px] border border-slate-400 text-slate-500 rounded spectra-admin__block-label'>
                         { __( 'Extension', 'ultimate-addons-for-gutenberg' ) }
                     </div>
-                    { uag_react.spectra_pro_status && (
+                    { isPro && (
                         <div className='inline-block align-text-bottom max-h-4 px-1.5 py-[3px] ml-1.5 text-[10px] leading-[10px] border border-slate-800 bg-slate-800 text-white rounded spectra-admin__block-label'>
                             { __( 'Pro', 'ultimate-addons-for-gutenberg' ) }
                         </div>
@@ -78,41 +83,32 @@ const AiExtension = () => {
 				{/* <a className='focus-visible:text-slate-500 active:text-slate-500 hover:text-slate-500 focus:text-slate-400 text-slate-400 text-sm truncate' href='https://wpspectra.com/docs/how-to-use-ai/' target='_blank'rel='noreferrer'>
 					{ __( 'Documentation', 'ultimate-addons-for-gutenberg' ) }
 				</a> */}
-				<span className='text-slate-400 text-sm truncate'></span>{ __( 'Currently in beta', 'ultimate-addons-for-gutenberg' ) }
+				<span className={ uagbClassNames( [
+					isFreeOrLicensedPro ? 'text-slate-400' : 'text-red-400',
+					'text-sm truncate',
+				] ) }>
+					{ isFreeOrLicensedPro ? __( 'Currently in beta', 'ultimate-addons-for-gutenberg' ) : __( 'Activate License to Use', 'ultimate-addons-for-gutenberg' ) }
+				</span>
             </div>
-            { ( uag_react?.spectra_pro_status ) ? (
+            { isPro ? (
 				<>
-					{ uag_react?.license_status ? (
-						<Switch
-							checked={ aiStatus }
-							onChange={ AiStatus }
+					<Switch
+						checked={ aiStatus }
+						onChange={ AiStatus }
+						className={ uagbClassNames( [
+							aiStatus ? 'bg-spectra' : 'bg-slate-200',
+							'relative inline-flex flex-shrink-0 h-5 w-[2.4rem] items-center border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none disabled:pointer-events-none',
+						] ) }
+						disabled={ ! isLicensed }
+					>
+						<span
+							aria-hidden='true'
 							className={ uagbClassNames( [
-								aiStatus ? 'bg-spectra' : 'bg-slate-200',
-								'relative inline-flex flex-shrink-0 h-5 w-[2.4rem] items-center border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none',
+								aiStatus ? 'translate-x-5' : 'translate-x-0',
+								'pointer-events-none inline-block h-3.5 w-3.5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
 							] ) }
-							>
-							<span
-								aria-hidden='true'
-								className={ uagbClassNames( [
-									aiStatus ? 'translate-x-5' : 'translate-x-0',
-									'pointer-events-none inline-block h-3.5 w-3.5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
-								] ) }
-							/>
-						</Switch>
-					) : (
-						<Link
-							className='inline-block align-text-bottom max-h-4 px-1.5 py-[3px] ml-1.5 text-[10px] leading-[10px] border border-red-500 bg-red-500 text-white hover:text-white rounded spectra-admin__block-label'
-							to={ {
-								pathname: 'admin.php',
-								search: '?page=spectra&path=settings&settings=license',
-							} }
-							onClick={ () => {
-								dispatch( { type:'UPDATE_SETTINGS_ACTIVE_NAVIGATION_TAB', payload: 'license' } )
-							} }
-						>
-							{ __( 'Use', 'ultimate-addons-for-gutenberg' ) }
-						</Link>
-					) }
+						/>
+					</Switch>
 				</>
             ) : (
 				<div className='inline-block align-text-bottom max-h-4 px-1.5 py-[3px] ml-1.5 text-[10px] leading-[10px] border border-slate-800 bg-slate-800 text-white rounded spectra-admin__block-label'>
@@ -121,6 +117,20 @@ const AiExtension = () => {
             ) }
         </div>
     );
+
+	return ( isFreeOrLicensedPro ) ? <SpecExtensionCard /> : (
+		<Link
+			to={ {
+				pathname: 'admin.php',
+				search: '?page=spectra&path=settings&settings=license',
+			} }
+			onClick={ () => {
+				dispatch( { type:'UPDATE_SETTINGS_ACTIVE_NAVIGATION_TAB', payload: 'license' } )
+			} }
+		>
+			<SpecExtensionCard />
+		</Link>
+	);
 };
 
 export default AiExtension;
