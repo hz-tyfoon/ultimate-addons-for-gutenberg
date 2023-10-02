@@ -320,28 +320,28 @@
 }
 
 .spectra-disabled-icon svg {
-		
-		&:not(.spectra-filled-icon) {
+
+	&:not(.spectra-filled-icon) {
+		stroke: $slate-400;
+
+		path:not(.spectra-icon__color--excluded),
+		rect:not(.spectra-icon__color--excluded),
+		circle:not(.spectra-icon__color--excluded),
+		ellipse:not(.spectra-icon__color--excluded) {
 			stroke: $slate-400;
-
-			path:not(.spectra-icon__color--excluded),
-			rect:not(.spectra-icon__color--excluded),
-			circle:not(.spectra-icon__color--excluded),
-			ellipse:not(.spectra-icon__color--excluded) {
-				stroke: $slate-400;
-			}
 		}
-	
-		&.spectra-filled-icon {
+	}
+
+	&.spectra-filled-icon {
+		fill: $slate-400;
+
+		path:not(.spectra-icon__color--excluded),
+		rect:not(.spectra-icon__color--excluded),
+		circle:not(.spectra-icon__color--excluded),
+		ellipse:not(.spectra-icon__color--excluded) {
 			fill: $slate-400;
-
-			path:not(.spectra-icon__color--excluded),
-			rect:not(.spectra-icon__color--excluded),
-			circle:not(.spectra-icon__color--excluded),
-			ellipse:not(.spectra-icon__color--excluded) {
-				fill: $slate-400;
-			}
 		}
+	}
 }
 
 // Changelog Styling.
