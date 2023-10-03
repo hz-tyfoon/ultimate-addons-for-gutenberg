@@ -204,27 +204,45 @@ const OpenAIKey = () => {
 			<section className='block border-b border-solid border-slate-200 px-12 py-8 justify-between'>
 				<div className='mr-16 w-full flex items-center'>
 					<h3 className='p-0 flex-1 justify-right inline-flex text-lg leading-8 font-medium text-gray-900'>
-						{ __( 'OpenAI API Key', 'ultimate-addons-for-gutenberg' ) }
+						{ uag_react?.license_status ? __( 'OpenAI API Key', 'ultimate-addons-for-gutenberg' ) : __( 'Activate Spec - Your AI Assistant', 'ultimate-addons-for-gutenberg' ) }
 					</h3>
 				</div>
 				<div className='mr-16 mt-2 w-full flex items-start'>
 					<div className='w-9/12'>
-						<p className='text-sm text-slate-500'>
-						{ ReactHtmlParser(
-							sprintf(
-								// translators: %1$s: opening anchor tag for login, %2$s: closing anchor tag for login, %3$s: opening anchor for register, %4$s: closing anchor tag for register.
-								__(
-									'Connect your OpenAI account to Spectra to enhance your writing capabilities. You can get your API keys from your %1$sOpenAI account%2$s. If you don\'t have an account yet, you can %3$screate it for free%4$s in less than a minute.',
-									'ultimate-addons-for-gutenberg'
-								),
-								'<a href="https://platform.openai.com/account/api-keys" class="text-spectra focus:text-spectra-hover active:text-spectra-hover hover:text-spectra-hover" target="_blank" rel="noreferrer">',
-								'</a>',
-								'<a href="https://platform.openai.com/signup" class="text-spectra focus:text-spectra-hover active:text-spectra-hover hover:text-spectra-hover" target="_blank" rel="noreferrer">',
-								'</a>'
-							)
+						{ uag_react?.license_status ? (
+							<>
+								<p className='text-sm text-slate-500'>
+									{ ReactHtmlParser(
+										sprintf(
+											// translators: %1$s: opening anchor tag for login, %2$s: closing anchor tag for login, %3$s: opening anchor for register, %4$s: closing anchor tag for register.
+											__(
+												'Connect your OpenAI account to Spec to enhance your writing capabilities. You can get your API keys from your %1$sOpenAI account%2$s. If you don\'t have an account yet, you can %3$screate it for free%4$s in less than a minute.',
+												'ultimate-addons-for-gutenberg'
+											),
+											'<a href="https://platform.openai.com/account/api-keys" class="text-spectra focus:text-spectra-hover active:text-spectra-hover hover:text-spectra-hover" target="_blank" rel="noreferrer">',
+											'</a>',
+											'<a href="https://platform.openai.com/signup" class="text-spectra focus:text-spectra-hover active:text-spectra-hover hover:text-spectra-hover" target="_blank" rel="noreferrer">',
+											'</a>'
+										)
+									) }
+								</p>
+								{ renderAPIKeyInput() }
+							</>
+						) : (
+							<p className='text-sm text-slate-500'>
+								{ ReactHtmlParser(
+									sprintf(
+										// translators: %1$s: opening anchor tag, %2$s: closing anchor tag.
+										__(
+											'Please activate your copy of Spectra Pro to enlist Spec\'s assistance. You can do so by visiting the %1$sLicense%2$s tab.',
+											'ultimate-addons-for-gutenberg'
+										),
+										'<a href="JavaScript:void(0);" class="text-spectra focus:text-spectra-hover active:text-spectra-hover hover:text-spectra-hover" target="_blank" rel="noreferrer">',
+										'</a>',
+									)
+								) }
+							</p>
 						) }
-						</p>
-						{ renderAPIKeyInput() }
 					</div>
 				</div>
 			</section>
