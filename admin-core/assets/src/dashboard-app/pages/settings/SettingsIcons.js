@@ -26,7 +26,7 @@ const SettingsIcons = {
             <path d="M8.32463 2.31731C8.75103 0.560897 11.249 0.560897 11.6754 2.31731C11.9508 3.45193 13.2507 3.99038 14.2478 3.38285C15.7913 2.44239 17.5576 4.2087 16.6172 5.75218C16.0096 6.74925 16.5481 8.04918 17.6827 8.32463C19.4391 8.75103 19.4391 11.249 17.6827 11.6754C16.5481 11.9508 16.0096 13.2507 16.6172 14.2478C17.5576 15.7913 15.7913 17.5576 14.2478 16.6172C13.2507 16.0096 11.9508 16.5481 11.6754 17.6827C11.249 19.4391 8.75103 19.4391 8.32463 17.6827C8.04918 16.5481 6.74926 16.0096 5.75219 16.6172C4.2087 17.5576 2.44239 15.7913 3.38285 14.2478C3.99038 13.2507 3.45193 11.9508 2.31731 11.6754C0.560897 11.249 0.560897 8.75103 2.31731 8.32463C3.45193 8.04918 3.99037 6.74926 3.38285 5.75218C2.44239 4.2087 4.2087 2.44239 5.75219 3.38285C6.74926 3.99037 8.04918 3.45193 8.32463 2.31731Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M13 10C13 11.6569 11.6569 13 10 13C8.34315 13 7 11.6569 7 10C7 8.34315 8.34315 7 10 7C11.6569 7 13 8.34315 13 10Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
-        
+
     ),
 	'block-settings' : (
 		<svg className="flex-shrink-0 mr-4 stroke-inherit" fill="none" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
@@ -36,9 +36,10 @@ const SettingsIcons = {
             <path d="M11 13C11 11.8954 11.8954 11 13 11H15C16.1046 11 17 11.8954 17 13V15C17 16.1046 16.1046 17 15 17H13C11.8954 17 11 16.1046 11 15V13Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
     ),
-	'coming-soon': (
-		<svg className="flex-shrink-0 mr-4 stroke-inherit" fill="none" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 6V10L13 13M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+	'visibility-mode' : (
+		<svg className="flex-shrink-0 mr-4 stroke-inherit" fill="none" width="20" height="20" viewBox="0 0 26 19" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.0002 13.2034C15.2468 13.2034 17.068 11.3821 17.068 9.13556C17.068 6.88897 15.2468 5.06775 13.0002 5.06775C10.7536 5.06775 8.93237 6.88897 8.93237 9.13556C8.93237 11.3821 10.7536 13.2034 13.0002 13.2034Z" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M24.5546 7.87297C25.1485 8.60711 25.1485 9.66413 24.5546 10.3983C22.7059 12.6835 18.0611 17.2712 13 17.2712C7.93888 17.2712 3.29405 12.6835 1.44539 10.3983C0.851538 9.66413 0.851538 8.60711 1.44539 7.87297C3.29405 5.58773 7.93888 1 13 1C18.0611 1 22.7059 5.58773 24.5546 7.87297Z" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
 	),
     'account': (
@@ -48,7 +49,7 @@ const SettingsIcons = {
         </svg>
     ),
     'font': (
-        <svg className="flex-shrink-0 mr-4 fill-inherit" width="18" height="22" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M254 52.8C249.3 40.3 237.3 32 224 32s-25.3 8.3-30 20.8L57.8 416H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32h-1.8l18-48H303.8l18 48H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H390.2L254 52.8zM279.8 304H168.2L224 155.1 279.8 304z"/></svg> 
+        <svg className="flex-shrink-0 mr-4 fill-inherit" width="18" height="22" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M254 52.8C249.3 40.3 237.3 32 224 32s-25.3 8.3-30 20.8L57.8 416H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32h-1.8l18-48H303.8l18 48H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H390.2L254 52.8zM279.8 304H168.2L224 155.1 279.8 304z"/></svg>
     ),
 	'spectra-ai': (
 		<svg className='flex-shrink-0 mr-4 fill-inherit' width='18' height='24' viewBox='0 0 35 62' fill='none' xmlns='http://www.w3.org/2000/svg'>
