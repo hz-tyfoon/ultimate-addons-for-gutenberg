@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Switch } from '@headlessui/react'
 import UAGB_Block_Icons from '@Common/block-icons';
 import { useEffect } from 'react';
@@ -10,14 +9,15 @@ import getApiData from '@Controls/getApiData';
 
 const AiExtension = () => {
 	
+	// Constants to identify the user's license status.
 	const isPro = uag_react?.spectra_pro_status;
-	const isLicensed = uag_react?.license_status;
-	const isFreeOrLicensedPro = ! isPro || isLicensed;
+	const isAuthorized = !! uag_react?.spec_auth_token;
+	const isFreeOrAuthorized = ! isPro || isAuthorized;
 
     const enableAiExtension = useSelector( ( state ) => state.enableAiExtension );
     const dispatch = useDispatch();
 
-    const aiStatus = ( ! isLicensed || 'disabled' === enableAiExtension ) ? false : true;
+    const aiStatus = ( ! isAuthorized || 'disabled' === enableAiExtension ) ? false : true;
 
     useEffect( () => {
 
@@ -58,7 +58,7 @@ const AiExtension = () => {
         <div
 			key={'ai'}
 			className={ uagbClassNames( [
-				( aiStatus && isPro && isLicensed )
+				( aiStatus && isPro && isAuthorized )
 					? 'border-white bg-white shadow hover:shadow-hover hover:z-50'
 					: 'border-slate-200 spectra-disabled-icon',
 				'box-border relative border rounded-md h-20 p-4 flex items-center gap-x-4 snap-start transition spectra-icon-transition',
@@ -84,10 +84,10 @@ const AiExtension = () => {
 					{ __( 'Documentation', 'ultimate-addons-for-gutenberg' ) }
 				</a> */}
 				<span className={ uagbClassNames( [
-					isFreeOrLicensedPro ? 'text-slate-400' : 'text-red-400',
+					isFreeOrAuthorized ? 'text-slate-400' : 'text-red-400',
 					'text-sm truncate',
 				] ) }>
-					{ isFreeOrLicensedPro ? __( 'Currently in beta', 'ultimate-addons-for-gutenberg' ) : __( 'Activate License to Use', 'ultimate-addons-for-gutenberg' ) }
+					{ isFreeOrAuthorized ? __( 'Currently in beta', 'ultimate-addons-for-gutenberg' ) : __( 'Authorize to Use', 'ultimate-addons-for-gutenberg' ) }
 				</span>
             </div>
             { isPro ? (
@@ -99,7 +99,7 @@ const AiExtension = () => {
 							aiStatus ? 'bg-spectra' : 'bg-slate-200',
 							'relative inline-flex flex-shrink-0 h-5 w-[2.4rem] items-center border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none disabled:pointer-events-none',
 						] ) }
-						disabled={ ! isLicensed }
+						disabled={ ! isAuthorized }
 					>
 						<span
 							aria-hidden='true'
@@ -118,18 +118,14 @@ const AiExtension = () => {
         </div>
     );
 
-	return ( isFreeOrLicensedPro ) ? <SpecExtensionCard /> : (
-		<Link
-			to={ {
-				pathname: 'admin.php',
-				search: '?page=spectra&path=settings&settings=license',
-			} }
-			onClick={ () => {
-				dispatch( { type:'UPDATE_SETTINGS_ACTIVE_NAVIGATION_TAB', payload: 'license' } )
-			} }
+	return ( isFreeOrAuthorized ) ? <SpecExtensionCard /> : (
+		<a
+			href={ `https://store.brainstormforce.com/auth/?redirect=${ uag_react.admin_url }&connectNonce=${ uag_react.spec_auth_nonce }&sc-authorize=true` }
+			target='_blank'
+			rel='noreferrer noopener'
 		>
 			<SpecExtensionCard />
-		</Link>
+		</a>
 	);
 };
 
