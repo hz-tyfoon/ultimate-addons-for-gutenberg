@@ -10,17 +10,14 @@ import Settings from './settings';
 import Render from './render';
 //  Import CSS.
 import './style.scss';
-import { __, sprintf } from '@wordpress/i18n';
-import { useSelect, useDispatch, select } from '@wordpress/data';
-import { __experimentalBlockVariationPicker as BlockVariationPicker } from '@wordpress/block-editor';
-import { createBlock } from '@wordpress/blocks';
+import { useSelect } from '@wordpress/data';
 import styles from './editor.lazy.scss';
-import UAGB_Block_Icons from '@Controls/block-icons';
-import ReactHtmlParser from 'react-html-parser';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 import { containerWrapper } from './containerWrapper';
+import { VariationPicker } from './variationPicker';
 
 const UAGBContainer = ( props ) => {
 	const {
@@ -36,35 +33,70 @@ const UAGBContainer = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			backgroundType,
+			backgroundVideoOpacity,
 		},
 		clientId,
 		setAttributes,
 		name,
 		deviceType,
 		context,
+		hasDynamicContent
 	} = props;
-
+	
 	const {
-		innerBlocks, // eslint-disable-line no-unused-vars
-		blockType, // eslint-disable-line no-unused-vars
 		isParentOfSelectedBlock,
 		variations,
 		defaultVariation,
-		// eslint-disable-next-line no-shadow
+		getBlockParents,
+		parentBlocks,
 	} = useSelect( ( select ) => {
-		const { getBlocks } = select( 'core/block-editor' );
-		const { getBlockType, getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
+		const coreBlocks = select( 'core/blocks' );
+		const coreBlockEditor = select( 'core/block-editor' );
+		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
 
 		return {
-			innerBlocks: getBlocks( clientId ),
-			blockType: getBlockType( props.name ),
-			defaultVariation:
-				typeof getDefaultBlockVariation === 'undefined' ? null : getDefaultBlockVariation( props.name ),
-			variations: typeof getBlockVariations === 'undefined' ? null : getBlockVariations( props.name ),
-			isParentOfSelectedBlock: select( 'core/block-editor' ).hasSelectedInnerBlock( clientId, true ),
+			defaultVariation: coreBlocks?.getDefaultBlockVariation( name ),
+			variations: coreBlocks?.getBlockVariations( name ),
+			isParentOfSelectedBlock: coreBlockEditor?.hasSelectedInnerBlock( clientId, true ),
+			getBlockParents : getBlockParentStore,
+			parentBlocks : coreBlockEditor?.getBlocksByClientId( getBlockParentStore ),
 		};
 	} );
-	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
+
+	// Check if a parent of this container is one of these special blocks with useMemo.
+	const checkSpecialBlockAvailability = useMemo( ()=> {
+		const attributesToUpdate = {
+			hasSliderParent: false,
+			hasPopupParent: false,
+		};
+
+		// Add the lists of special block cases.
+		const specialBlocks = {
+			sliderBlocks: [ 'uagb/slider', 'uagb/slider-child' ],
+			popupBlocks: [ 'uagb/modal', 'uagb/popup-builder' ],
+		};
+
+		if ( parentBlocks?.length ) {
+			for ( const parent in parentBlocks ) {
+				const parentName = parentBlocks[parent]?.name;
+				// For Slider.
+				if ( specialBlocks.sliderBlocks.includes( parentName ) ) {
+					attributesToUpdate.hasSliderParent = true;
+				}
+
+				// For Modal and Popup Builder.
+				if ( specialBlocks.popupBlocks.includes( parentName ) ) {
+					attributesToUpdate.hasPopupParent = true;
+				}
+			}
+		}
+
+		return attributesToUpdate;
+	}, [] );
+
+	props = { ...props, ...checkSpecialBlockAvailability };
+
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
 		styles.use();
@@ -81,81 +113,23 @@ const UAGBContainer = ( props ) => {
 	}
 
 	useEffect( () => {
-		const isBlockRootParentID = select( 'core/block-editor' ).getBlockParents( clientId );
-
-		const parentBlocks = select( 'core/block-editor' ).getBlocksByClientId( isBlockRootParentID );
-
 		// Check if a parent of this container is one of these special blocks.
-		const blockParents = {
-			hasSliderParent: false,
-			hasPopupParent: false,
-		};
+		const attributesToUpdate = {};
 
-		// Add the lists of special block cases.
-		const specialBlocks = {
-			sliderBlocks: [ 'uagb/slider', 'uagb/slider-child' ],
-			popupBlocks: [ 'uagb/modal', 'uagb/popup-builder' ],
-		};
-
-		const parentBlocksNames = [];
-
-		if ( parentBlocks?.length ) {
-
-			for ( const parent in parentBlocks ) {
-				const parentName = parentBlocks[parent]?.name;
-				// For Slider.
-				if ( specialBlocks.sliderBlocks.includes( parentName ) ) {
-					blockParents.hasSliderParent = true;
-				}
-
-				// For Modal and Popup Builder.
-				if ( specialBlocks.popupBlocks.includes( parentName ) ) {
-					blockParents.hasPopupParent = true;
-				}
-
-				// For Container Root.
-				parentBlocksNames.push( parentName );
-			}
-
-			if ( ! parentBlocksNames.includes( 'uagb/container' ) ) {
-				setAttributes( { isBlockRootParent: true } );
-			} else {
-				setAttributes( { isBlockRootParent: false } );
-			}
-		} else {
-			setAttributes( { isBlockRootParent: true } );
+		// Conditionally set the isBlockRootParent attribute
+		if ( ! parentBlocks || parentBlocks.length === 0 || ! parentBlocks.some( parent => parent.name === 'uagb/container' ) ) {
+			attributesToUpdate.isBlockRootParent = true;
 		}
-		
-		setAttributes( {
-			hasSliderParent: blockParents.hasSliderParent,
-			hasPopupParent: blockParents.hasPopupParent
-		} );
 
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
-		const iframeEl = document.querySelector( `iframe[name='editor-canvas']` );
-		let element;
-		if ( iframeEl ) {
-			element = iframeEl.contentDocument.getElementById( 'block-' + clientId );
-		} else {
-			element = document.getElementById( 'block-' + clientId );
+		// If the legacy video overlay opacity for video background was set, migrate it.
+		if ( 'video' === backgroundType && backgroundVideoOpacity ) {
+			attributesToUpdate.overlayOpacity = backgroundVideoOpacity;
+			attributesToUpdate.backgroundVideoOpacity = 0;
 		}
-		// Add Close Button for Variation Selector.
-		const variationPicker = element?.querySelector(
-			'.uagb-container-variation-picker .block-editor-block-variation-picker'
-		);
-		const closeButton = document.createElement( 'button' );
-		closeButton.onclick = function () {
-			if ( defaultVariation.attributes ) {
-				setAttributes( defaultVariation.attributes );
-			}
-		};
-		closeButton.setAttribute( 'class', 'uagb-variation-close' );
-		closeButton.innerHTML = '×';
-		if ( variationPicker ) {
-			const variationPickerLabel = variationPicker.querySelector( '.components-placeholder__label' );
-			variationPicker.insertBefore( closeButton, variationPickerLabel );
+
+		// Compare with attribute and attributeToUpdate and update only if there is a change.
+		if( attributesToUpdate.isBlockRootParent !== attributes.isBlockRootParent || attributesToUpdate.hasPopupParent !== attributes.hasPopupParent || attributesToUpdate.hasSliderParent !== attributes.hasSliderParent ) {
+			setAttributes( attributesToUpdate );
 		}
 
 		// border
@@ -186,15 +160,12 @@ const UAGBContainer = ( props ) => {
 				attributes
 			);
 		}
-
-		if ( 0 !== select( 'core/block-editor' ).getBlockParents( clientId ).length ) {
-			// if there is no parent for container when child container moved outside root then do not show variations.
-			setAttributes( { variationSelected: true } );
-		}
 	}, [] );
 
 	useEffect( () => {
-		setAttributes( { context } );
+		if ( hasDynamicContent && ! attributes?.context ) {
+			setAttributes( { context } );
+		}
 	}, [ context ] )
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
@@ -207,57 +178,21 @@ const UAGBContainer = ( props ) => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-	const blockVariationPickerOnSelect = ( nextVariation = defaultVariation ) => {
-		if ( nextVariation.attributes ) {
-			setAttributes( nextVariation.attributes );
-		}
-
-		if ( nextVariation.innerBlocks && 'one-column' !== nextVariation.name ) {
-			replaceInnerBlocks( clientId, createBlocksFromInnerBlocksTemplate( nextVariation.innerBlocks ) );
-		}
-	};
-
-	const createBlocksFromInnerBlocksTemplate = ( innerBlocksTemplate ) => {
-		return innerBlocksTemplate.map(
-			(
-				[ name, attributes, innerBlocks = [] ] // eslint-disable-line no-shadow
-			) => createBlock( name, attributes, createBlocksFromInnerBlocksTemplate( innerBlocks ) )
-		);
-	};
-
-	if ( ! variationSelected && 0 === select( 'core/block-editor' ).getBlockParents( clientId ).length ) {
-		return (
-			<div className="uagb-container-variation-picker">
-				<BlockVariationPicker
-					icon={ UAGB_Block_Icons.container }
-					label={ __( 'Container', 'ultimate-addons-for-gutenberg' ) }
-					instructions={ ReactHtmlParser(
-						sprintf(
-							// translators: %s: closing </br> tag.
-							__(
-								'Customizable containers with endless creation possibilities.%sSelect a container layout to start with.',
-								'ultimate-addons-for-gutenberg'
-							),
-							`</br>` 
-						)
-					) }
-					variations={ variations }
-					onSelect={ ( nextVariation ) => blockVariationPickerOnSelect( nextVariation ) }
-				/>
-			</div>
-		);
+	if ( ! variationSelected && 0 === getBlockParents?.length ) {
+		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
 	return (
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
 	containerWrapper,
+	addInitialAttr,
 	AddStaticStyles,
 )( UAGBContainer );

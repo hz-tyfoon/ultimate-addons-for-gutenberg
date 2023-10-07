@@ -6,8 +6,9 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function RestMenuStyle( attributes, clientId, name ) {
+function RestMenuStyle( attributes, clientId, name, deviceType ) {
 	const {
+		block_id,
 		headingAlign,
 		priceColor,
 		descColor,
@@ -123,7 +124,7 @@ function RestMenuStyle( attributes, clientId, name ) {
 		imageAlignment,
 		stack,
 	} = attributes;
-
+	const previewType = deviceType.toLowerCase();
 	const blockName = name.replace( 'uagb/', '' );
 
 	const seperatorThicknessFallback = getFallbackNumber( seperatorThickness, 'seperatorThickness', blockName );
@@ -219,7 +220,7 @@ function RestMenuStyle( attributes, clientId, name ) {
 			'width': generateCSSUnit( imageWidthTabletFallback, imageWidthType ),
 			'max-width': generateCSSUnit( imageWidthTabletFallback, imageWidthType ),
 		},
-		'.wp-block-uagb-restaurant-menu': {
+		' .block-editor-block-list__layout': {
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapType ),
 			'row-gap': generateCSSUnit( rowGapTabletFallback, rowGapType ),
 		},
@@ -259,7 +260,7 @@ function RestMenuStyle( attributes, clientId, name ) {
 			'width': generateCSSUnit( imageWidthMobileFallback, imageWidthType ),
 			'max-width': generateCSSUnit( imageWidthMobileFallback, imageWidthType ),
 		},
-		'.wp-block-uagb-restaurant-menu': {
+		' .block-editor-block-list__layout': {
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapType ),
 			'row-gap': generateCSSUnit( rowGapMobileFallback, rowGapType ),
 		},
@@ -390,14 +391,27 @@ function RestMenuStyle( attributes, clientId, name ) {
 	}
 
 	let stylingCss = '';
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	stylingCss = generateCSS( selectors, id );
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

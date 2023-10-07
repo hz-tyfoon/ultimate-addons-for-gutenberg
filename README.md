@@ -3,9 +3,9 @@
 **Donate link:** https://www.paypal.me/BrainstormForce  
 **Tags:** gutenberg, blocks, gutenberg blocks, editor, block  
 **Requires at least:** 5.6  
-**Requires PHP:** 5.6  
-**Tested up to:** 6.2.2  
-**Stable tag:** 2.7.0  
+**Requires PHP:** 7.4  
+**Tested up to:** 6.3.1  
+**Stable tag:** 2.7.11  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -30,9 +30,9 @@ Most helpful links
 
 <a href="https://bsf.io/spectra-demo" target="_blank" rel="">Try it out on a free dummy site</a>
 
-Our mission is to empower web designers like you with an end-to-end solution for building stunning websites. 
+Our mission is to empower web designers like you with an end-to-end solution for building stunning websites.
 
-We aim to simplify the website creation process by providing a versatile toolkit within a single plugin, eliminating the need to install multiple plugins for various functionalities. 
+We aim to simplify the website creation process by providing a versatile toolkit within a single plugin, eliminating the need to install multiple plugins for various functionalities.
 
 With Spectra, we strive to make it extremely easy to use for beginners and feature-rich for experienced designers.
 
@@ -62,11 +62,11 @@ Users of page builders like Elementor and Beaver Builder absolutely LOVE Spectra
 
 With Spectra, you can power up the block editor with advanced and powerful blocks that simplify the entire process. Say goodbye to the hassle of coding and say hello to effortless website creation.
 
-Spectra provides a wide range of unique and creative blocks on top of the default WordPress page editor, enabling you to build and design pages or posts without writing a single line of code. 
+Spectra provides a wide range of unique and creative blocks on top of the default WordPress page editor, enabling you to build and design pages or posts without writing a single line of code.
 
 It offers an easy-to-use interface, customization options, and a library of pre-built Starter Templates to help you build awesome websites in minutes.
 
-Whether you need to launch an online store or promote your services, Spectra empowers you to build pixel-perfect websites that captivate your audience. 
+Whether you need to launch an online store or promote your services, Spectra empowers you to build pixel-perfect websites that captivate your audience.
 
 Don't let coding complexities hold you back – unlock the potential of block editor with Spectra and build faster, better-performing websites today!
 
@@ -216,14 +216,116 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ## Changelog ##
 
 ### x.x.x ###
-* New: Motion Effects - Some smooth, scroll and mouse track based animations to add new life to your page.
+* New: Motion Effects - Some smooth, scroll and mouse-track based animations to add new life to your page.
+* Improvement: Global - Added the Maintenance Mode feature.
+
+### 2.7.11 - WEDNESDAY, 27th SEPTEMBER 2023 ###
+* Fix: Image - Resolved an issue in which the updated responsive images would not appear as intended.
+* Fix: Image - Resolved an issue in which masked images would get cut off when the zoom-in hover effect was used.
+* Fix: Form - Resolved an issue wherein the country-code background color would not match in the editor and the front-end.
+* Fix: Form - Added an error message when the confirmation type is set to "URL text".
+* Fix: Form - Resolved an issue wherein the Forms block would not work inside Containers in Astra's Custom Layout.
+* Fix: Google Maps - Resolved an issue in which the custom classes would not appear on the frontend.
+* Fix: Image Gallery - Resolved an issue in the carousel type wherein the arrow positions would revert from percentage to pixels after reloading.
+* Fix: Marketing Button - Resolved an issue in which the default border-radius would not match in the editor and the front-end.
+* Fix: Post Timeline - Resolved an issue in which the notice links would not redirect users as intended.
+* Fix: Table Of Contents - Resolved an issue wherein headings containing some uppercase latin characters would not function as intended.
+* Fix: Testimonials - Resolved an issue wherein the gradient background  styles would not work as intended.
+* Fix: Global - Resolved an issue wherein a PHP error could occur in the Widget Editor.
+* Fix: Global - Resolved an issue in which non-FSE themes running on PHP 8.1 would encounter PHP issues regarding the `preg_match` and `strlen` functions.
+* Fix: Global - Removed the Block Editor Spacing setting for FSE themes.
+
+### 2.7.10 - FRIDAY, 22nd SEPTEMBER 2023 ###
+* Security Fix: Hardened the security of the plugin. Props: Patchstack
+* Fix: Container - Resolved an issue wherein container background images would not render as intended during site migration.
+* Fix: Admin - Resolved an issue in which a deprecation notice would be shown on PHP v8.2 and above.
+
+### 2.7.9 - WEDNESDAY, 13th SEPTEMBER 2023 ###
+* Improvement: Info Box - Changed the Info Box icon position dropdown to a multi-control.
+* Fix: Call To Action - Resolved an issue wherein the buttons would not be aligned as intended.
+* Fix: How To - Resolved an issue in which the responsive heading font-sizes would not work as intended.
+* Fix: Image Gallery - Resolved an issue wherein the lightbox would not work as intended within Containers.
+* Fix: Post Blocks - Resolved an issue wherein text-formatting for buttons would appear as HTML tags on the front-end.
+* Fix: Price List - Resolved an issue in which the title bottom margin, row, and column gaps would not work as intended in the responsive editor.
+
+### 2.7.8 - TUESDAY, 5th SEPTEMBER 2023 ###
+* Improvement: Global - Enhanced the reusable block functionality for the following blocks: Google Maps, How To, Icon List, Inline Notice, Lottie, Marketing Button, Modal, Popup Builder, Post Grid and Post Carousel.
+* Fix: Container - Resolved an issue in which the link tag would not work as intended on the front-end.
+* Fix: How To - Resolved an issue in which the minimum minutes setting would be unskippable.
+* Fix: Post Blocks - Resolved an issue in which the responsive styling would not work as intended in the editor.
+
+### 2.7.7 - TUESDAY, 29th AUGUST 2023 ###
+* Improvement: Container - Added an image overlay option for the background.
+* Fix: Container - Resolved an issue wherein the blocks inside Containers would appear underneath the Container's overlay when set.
+* Fix: Container - Resolved an issue in which the flex properties would not work as intended in the frontend for the Image and Heading blocks in nested Containers.
+* Fix: Modal - Resolved an issue in which the Modal would not open in Astra's quick-view popup for WooCommerce products.
+* Fix: Post Blocks - Resolved an issue wherein taxonomies were not accessible to the Shop Manager role.
+* Fix: Separator - Resolved an edge-case issue in which the responsive alignment would not work as intended.
+* Fix: Table Of Contents - Resolved an issue in which Latin characters in a heading would prevent the links for that specific heading from working.
+* Fix: Table Of Contents - Resolved an issue wherein the collapsible setting would not work in the editor when enabled.
+* Fix: Table Of Contents - Resolved an issue wherein regenerating assets would cause the Table Of Contents to appear empty in FSE.
+* Fix: Global - Resolved an issue wherein a PHP warning could occurred in a few cases on some websites.
+
+### 2.7.6 - FRIDAY, 18th AUGUST 2023 ###
+* Fix: Form - Resolved multiple styling issues on the frontend.
+* Fix: Image Gallery - Resolved an issue wherein the lightbox feature would not work after setting up pagination.
+* Fix: Global - Resolved a significant issue of multiple `_uag_page_assets` entries in the database when using an FSE theme.
+
+### 2.7.5 - WEDNESDAY, 16th AUGUST 2023 ###
+* Improvement: Container - Added an opacity setting for the overlay of the image and video background types.
+* Improvement: Info Box - Added heading tag settings for the prefix.
+* Improvement: Info Box - Added an inherit-from-theme option for the text-type CTA.
+* Improvement: Form - Added an inherit-from-theme option for the submit button styling.
+* Improvement: Global - Enhanced the reusable block functionality for the following blocks: Review, Content Timeline, Post Timeline, Price List, Separator, Social Share, Star Rating, Table Of Contents, Taxonomy List, Team, Testimonials.
+* Fix: Call To Action - Resolved an issue in which the bottom margins of the title and description would not work as intended for Tablet and Mobile devices on the frontend.
+* Fix: Blockquote - Resolved an issue wherein having '#' or '@' symbols in the description would result in the removal of content following the symbols when shared on Twitter.
+* Fix: Post Carousel - Resolved an issue wherein the carousel dots would not appear centered.
+* Fix: Social Share - Resolved an issue wherein the gap between icons would add unwanted margins to the sides of the wrapper.
+* Fix: Testimonials - Resolved an issue wherein the Testimonial dots would not appear centered.
+* Fix: Global - Resolved an issue that was encountered when updating to WordPress 6.3 on some websites.
+* Fix: Global - Resolved an issue wherein the color-picker default icon would not appear in WordPress 6.3.
+* Fix: Admin - Resolved an issue in which an undefined record could appear on the Instagram integrations page.
+
+### 2.7.4 - TUESDAY, 8th AUGUST 2023 ###
+* Improvement: Core Blocks - Implemented responsive typography font-size units.
+* Improvement: Image - Added a new `Custom Size` feature, which will maintain the dimensions set when the image is replaced!
+* Improvement: Popup Builder - Moved page-level settings into block-level panels.
+* Improvement: Testimonial - Added a vertical alignment option for equal-height content.
+* Improvement: Global - Added a fresh new look for preset icons and rearranged some settings.
+* Improvement: Global - Updated the variation picker and media placeholder UI.
+* Improvement: Global - Enhanced the reusable block functionality for the following blocks: Container, Blockquote, Counter, FAQ, Forms.
+* Fix: Call To Action - Resolved an issue wherein the line-height of the title would not appear responsive in the frontend.
+* Fix: Forms - Resolved an issue wherein the submit button would not utilize the padding set in the customizer.
+* Fix: Inline Notice - Updated inconsistent default padding and removed unwanted top-margin in the editor and the frontend.
+* Fix: Testimonial - Resolved an issue in which an extra margin would appear for the content in the mobile view.
+* Fix: Global - Resolved an issue in which the spacing between the text and the icon in buttons would not be applied as intended in RTL mode for certain blocks.
+
+### 2.7.3 - MONDAY, 31st JULY 2023 ###
+* Improvement: Core Blocks - Enhanced the reusable block functionality for all Core Blocks, with the exception of the Container.
+* Improvement: Global - Optimized the editor performance and stability.
+* Fix: Global - Prevented a fatal error for non-block-based themes in WordPress versions below 5.9.0.
+
+### 2.7.2 - THURSDAY, 27th JULY 2023 ###
+* Fix: Forms - Resolved an issue in which some phone country-code colors would not work as intended in the editor.
+* Fix: Table Of Contents - Resolved an issue wherein the default padding not same in the editor and on the frontend.
+* Fix: Social Share - Converted anchor tags to span tags and removed unwanted attributes from the social links.
+* Fix: Display Conditions - Resolved an issue wherein the `UAGDay` attribute would persist in the code view after turning off display conditions.
+
+### 2.7.1 - TUESDAY, 25th JULY 2023 ###
+* Improvement: Global - Added auto-cleaning for archived assets.
+* Fix: Heading - Resolved an issue in which the font-family would not render as required for highlighted headings.
+* Fix: Call To Action - Resolved an issue wherein additional button padding is not working responsively as intended in frontend.
+* Fix: Image Gallery - Resolved an issue wherein the "Load More" button would not appear on the frontend for the masonry layout with the button pagination type.
+* Fix: Separator - Resolved an issue in which the separator mobile width would not work as intended in the frontend.
+* Fix: Table Of Contents - Added support for Latin characters.
+* Fix: Global - Resolved an issue in which the font-family would not render as required on the frontend for certain blocks.
 
 ### 2.7.0 - THURSDAY, 13th July 2023 ###
 * Feature: Popup Builder - Added a new `Push Content` feature for info bars.
 * Improvement: Performance - Significantly reduced the plugin zip size by over 1 MB after optimizing the Font Awesome v6 assets.
 * Improvement: Forms - Added a full-width alignment option to the submit button.
 * Improvement: Table Of Contents - Added the ability to expand and collapse the entire box by clicking the top portion or the title of the box.
-* Improvement: Global - Added new compatibility with Spectra Pro. 
+* Improvement: Global - Added new compatibility with Spectra Pro.
 * Fix: Container - Resolved an issue wherein the text color of the Container was at a higher priority than those set for headings of blocks inside it.
 * Fix: Image - Resolved an issue in which the tablet and mobile border styles would not be applied as intended.
 * Fix: Buttons - Resolved an issue wherein the child responsive padding would not work as expected on the frontend.
@@ -1490,3 +1592,11 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ### 0.0.1 ###
 * Initial release
+
+## Upgrade Notice ##
+
+### 2.7.4 ###
+With WordPress 6.3 no longer supporting older versions of PHP, the next Spectra release will also require a minimum of PHP 7.4. For websites running on older version of PHP, we strongly recommend upgrading to PHP 7.4 or above to ensure optimal performance and compatibility.
+
+### 2.7.3 ###
+We've optimized the internal structure of Spectra in this update. To ensure your website's safety, We recommend that you backup your website before updating.

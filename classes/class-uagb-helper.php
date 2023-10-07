@@ -187,7 +187,15 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 						if ( 'font-family' === $j ) {
 							$css .= $j . ': "' . $val . '";';
 						} else {
-							$css .= $j . ': ' . $val . ';';
+							if ( is_array( $val ) ) {
+								// Convert $val array property to string.
+								foreach ( $val as $index => $property ) {
+									$properties = is_string( $property ) ? $property : (string) $property;
+									$css       .= $j . ': ' . $properties . ';';
+								}
+							} else {
+								$css .= $j . ': ' . $val . ';';
+							}
 						}
 					}
 				}
@@ -213,7 +221,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 *
 		 *  get_css_value( VALUE, 'em' );
 		 *
-		 * @param string $value  CSS value.
+		 * @param mixed  $value  CSS value.
 		 * @param string $unit  CSS unit.
 		 * @since 1.13.4
 		 */
@@ -222,7 +230,13 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				return '';
 			}
 
-			return esc_attr( $value ) . $unit;
+			$unit = sanitize_text_field( $unit );
+
+			if ( empty( $unit ) ) {
+				return $value;
+			}
+
+			return esc_attr( $value . $unit );
 		}
 
 
@@ -257,13 +271,13 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * @return array
 		 */
 		public static function backend_load_font_awesome_icons() {
-			
+
 			if ( null !== self::$icon_json ) {
 				return self::$icon_json;
 			}
 
 			$icons_chunks = array();
-			for ( $i = 0; $i < self::$number_of_icon_chunks; $i++ ) { 
+			for ( $i = 0; $i < self::$number_of_icon_chunks; $i++ ) {
 				$json_file = UAGB_DIR . "blocks-config/uagb-controls/spectra-icons-v6-{$i}.php";
 				if ( file_exists( $json_file ) ) {
 					$icons_chunks[] = include $json_file;
@@ -273,7 +287,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			if ( empty( $icons_chunks ) ) {
 				return array();
 			}
-			
+
 			self::$icon_json = $icons_chunks;
 			return self::$icon_json;
 		}
@@ -676,7 +690,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * @since  1.14.0
 		 */
 		public static function allow_file_generation() {
-			return get_option( '_uagb_allow_file_generation', 'disabled' );
+			return apply_filters( 'uagb_allow_file_generation', get_option( '_uagb_allow_file_generation', 'disabled' ) );
 		}
 
 		/**
@@ -793,7 +807,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * @param  string $selector The selector array.
 		 * @param  array  $combined_selectors The combined selector array.
 		 * @since  1.15.0
-		 * @return bool|string
+		 * @return array
 		 */
 		public static function get_typography_css( $attr, $slug, $selector, $combined_selectors ) {
 
@@ -811,12 +825,14 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			$decoration_slug = ( '' === $slug ) ? 'fontDecoration' : $slug . 'Decoration';
 			$style_slug      = ( '' === $slug ) ? 'fontStyle' : $slug . 'FontStyle';
 
-			$l_ht_slug      = ( '' === $slug ) ? 'lineHeight' : $slug . 'LineHeight';
-			$f_sz_slug      = ( '' === $slug ) ? 'fontSize' : $slug . 'FontSize';
-			$l_ht_type_slug = ( '' === $slug ) ? 'lineHeightType' : $slug . 'LineHeightType';
-			$f_sz_type_slug = ( '' === $slug ) ? 'fontSizeType' : $slug . 'FontSizeType';
-			$l_sp_slug      = ( '' === $slug ) ? 'letterSpacing' : $slug . 'LetterSpacing';
-			$l_sp_type_slug = ( '' === $slug ) ? 'letterSpacingType' : $slug . 'LetterSpacingType';
+			$l_ht_slug        = ( '' === $slug ) ? 'lineHeight' : $slug . 'LineHeight';
+			$f_sz_slug        = ( '' === $slug ) ? 'fontSize' : $slug . 'FontSize';
+			$l_ht_type_slug   = ( '' === $slug ) ? 'lineHeightType' : $slug . 'LineHeightType';
+			$f_sz_type_slug   = ( '' === $slug ) ? 'fontSizeType' : $slug . 'FontSizeType';
+			$f_sz_type_t_slug = ( '' === $slug ) ? 'fontSizeTypeTablet' : $slug . 'FontSizeTypeTablet';
+			$f_sz_type_m_slug = ( '' === $slug ) ? 'fontSizeTypeMobile' : $slug . 'FontSizeTypeMobile';
+			$l_sp_slug        = ( '' === $slug ) ? 'letterSpacing' : $slug . 'LetterSpacing';
+			$l_sp_type_slug   = ( '' === $slug ) ? 'letterSpacingType' : $slug . 'LetterSpacingType';
 
 			$text_transform  = isset( $attr[ $transform_slug ] ) ? $attr[ $transform_slug ] : 'normal';
 			$text_decoration = isset( $attr[ $decoration_slug ] ) ? $attr[ $decoration_slug ] : 'none';
@@ -839,7 +855,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			);
 
 			$typo_css_tablet[ $selector ] = array(
-				'font-size'      => ( isset( $attr[ $f_sz_slug . 'Tablet' ] ) ) ? self::get_css_value( $attr[ $f_sz_slug . 'Tablet' ], $attr[ $f_sz_type_slug ] ) : '',
+				'font-size'      => ( isset( $attr[ $f_sz_slug . 'Tablet' ] ) ) ? self::get_css_value( $attr[ $f_sz_slug . 'Tablet' ], ( isset( $attr[ $f_sz_type_t_slug ] ) ) ? $attr[ $f_sz_type_t_slug ] : $attr[ $f_sz_type_slug ] ) : '',
 				'line-height'    => ( isset( $attr[ $l_ht_slug . 'Tablet' ] ) ) ? self::get_css_value( $attr[ $l_ht_slug . 'Tablet' ], $attr[ $l_ht_type_slug ] ) : '',
 				'letter-spacing' => ( isset( $attr[ $l_sp_slug . 'Tablet' ] ) ) ? self::get_css_value( $attr[ $l_sp_slug . 'Tablet' ], $attr[ $l_sp_type_slug ] ) : '',
 			);
@@ -850,7 +866,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			);
 
 			$typo_css_mobile[ $selector ] = array(
-				'font-size'      => ( isset( $attr[ $f_sz_slug . 'Mobile' ] ) ) ? self::get_css_value( $attr[ $f_sz_slug . 'Mobile' ], $attr[ $f_sz_type_slug ] ) : '',
+				'font-size'      => ( isset( $attr[ $f_sz_slug . 'Mobile' ] ) ) ? self::get_css_value( $attr[ $f_sz_slug . 'Mobile' ], ( isset( $attr[ $f_sz_type_m_slug ] ) ) ? $attr[ $f_sz_type_m_slug ] : $attr[ $f_sz_type_slug ] ) : '',
 				'line-height'    => ( isset( $attr[ $l_ht_slug . 'Mobile' ] ) ) ? self::get_css_value( $attr[ $l_ht_slug . 'Mobile' ], $attr[ $l_ht_type_slug ] ) : '',
 				'letter-spacing' => ( isset( $attr[ $l_sp_slug . 'Mobile' ] ) ) ? self::get_css_value( $attr[ $l_sp_slug . 'Mobile' ], $attr[ $l_sp_type_slug ] ) : '',
 			);
@@ -1137,7 +1153,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				 * @param string $name             The block name.
 				 */
 				$blockattr = apply_filters( 'uagb_block_attributes_for_css_and_js', $block['attrs'], $name );
-				if ( isset( $blockattr['block_id'] ) ) {
+				if ( is_array( $blockattr ) && ! empty( $blockattr['block_id'] ) && is_int( $blockattr['block_id'] ) ) {
 					$block_id = $blockattr['block_id'];
 				}
 			}
@@ -1344,7 +1360,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 		 * @since 2.4.0
 		 */
 		public static function get_combined_selectors( $block_name, $selectors, $attr ) {
-			if ( ! is_array( $selectors ) ) { 
+			if ( ! is_array( $selectors ) ) {
 				return $selectors;
 			}
 
@@ -1356,6 +1372,51 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 			}
 
 			return $combined_selectors;
+		}
+
+		/**
+		 * Set alignment css function.
+		 *
+		 * @param string $align passed.
+		 * @since 2.7.7
+		 * @return array
+		 */
+		public static function alignment_css( $align ) {
+			$align_css = array();
+			switch ( $align ) {
+				case 'left':
+					$align_css = array(
+						'margin-left'  => 0,
+						'margin-right' => 'auto',
+					);
+					break;
+				case 'center':
+					$align_css = array(
+						'margin-left'  => 'auto',
+						'margin-right' => 'auto',
+					);
+					break;
+				case 'right':
+					$align_css = array(
+						'margin-right' => 0,
+						'margin-left'  => 'auto',
+					);
+					break;
+			}
+			return $align_css;
+		}
+
+		/**
+		 * Get allowed HTML title tag.
+		 *
+		 * @param string $title_Tag HTML tag of title.
+		 * @param array  $allowed_array Array of allowed HTML tags.
+		 * @param string $default_tag Default HTML tag.
+		 * @since 2.7.10
+		 * @return string $title_Tag | $default_tag.
+		 */
+		public static function title_tag_allowed_html( $title_Tag, $allowed_array, $default_tag ) {
+			return in_array( $title_Tag, $allowed_array, true ) ? sanitize_key( $title_Tag ) : $default_tag;
 		}
 	}
 

@@ -5,7 +5,7 @@ import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import apiFetch from '@wordpress/api-fetch';
+import getApiData from '@Controls/getApiData';
 
 const PluginStats = () => {
 
@@ -16,22 +16,25 @@ const PluginStats = () => {
 
 		if ( '' === isThisNull ){
 
-			const formData = new window.FormData();
+			// Create an object with the required data to activate the 'spectra' Pro feature
+			const data = {
+				security: uag_react.pro_activate_nonce,
+				value: 'spectra',
+			};
 
-			formData.append( 'action', 'uag_pro_activate' );
-			formData.append( 'security', uag_react.pro_activate_nonce );
-			formData.append( 'value', 'spectra' );
-
-			apiFetch( {
+			// Call the getApiData function with the specified parameters
+			const getApiFetchData = getApiData( {
 				url: uag_react.ajax_url,
-				method: 'POST',
-				body: formData,
-			} ).then( () => {
+				action: 'uag_pro_activate',
+				data,
+			} );
+
+			// Wait for the API call to complete, update the state to show a notification, and reload the page
+			getApiFetchData.then( () => {
 				dispatch( { type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: 'Spectra Pro Activated!' } );
 				setTimeout( ()=>{
 					window.location.reload();
-				  }, 500 );
-
+				}, 500 );
 			} );
 		}
 	};
@@ -64,7 +67,7 @@ const PluginStats = () => {
 						} }
                     >
 						{ __( 'Licensed', 'ultimate-addons-for-gutenberg' ) }
-					</Link>					
+					</Link>
 				) : (
                     <Link
 						className='mr-8 ml-2 text-sm text-red-500 active:text-red-500 hover:text-red-500 focus:text-red-500 cursor-pointer'
@@ -93,7 +96,7 @@ const PluginStats = () => {
 		) : (
 			<a
 				className='mr-8 ml-2 text-sm text-spectra active:text-spectra hover:text-spectra focus:text-spectra cursor-pointer'
-				href='https://wpspectra.com/pro'
+				href={ uag_react.spectra_pro_url }
 				rel='noreferrer noopener'
 				target='_blank'
 			>

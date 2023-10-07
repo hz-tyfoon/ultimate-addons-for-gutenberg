@@ -9,7 +9,8 @@ import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateBackgroundCSS from '@Controls/generateBackgroundCSS';
 import { applyFilters } from '@wordpress/hooks';
 
-export default function styling( attributes, clientId, name ) {
+export default function styling( attributes, clientId, name, deviceType ) {
+	const previewType = deviceType.toLowerCase();
 	const {
 		modalTrigger,
 		buttonIconPosition,
@@ -172,7 +173,8 @@ export default function styling( attributes, clientId, name ) {
 		contentBorderTopRightRadius,
 		contentBorderBottomLeftRadius,
 		contentBorderBottomRightRadius,
-		contentBorderRadiusUnit
+		contentBorderRadiusUnit,
+		block_id
 	} = attributes;
 
 	const blockName = name.replace( 'uagb/', '' );
@@ -597,7 +599,7 @@ export default function styling( attributes, clientId, name ) {
 		};
 	}
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
 	tabletSelectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tabletSelectors, attributes );
@@ -605,9 +607,22 @@ export default function styling( attributes, clientId, name ) {
 
 	let styling_css = generateCSS( selectors, base_selector );
 
-	styling_css += generateCSS( tabletSelectors, `${ base_selector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		styling_css += generateCSS(
+			tabletSelectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	styling_css += generateCSS( mobileSelectors, `${ base_selector }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			styling_css += generateCSS(
+				mobileSelectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return styling_css;
 }

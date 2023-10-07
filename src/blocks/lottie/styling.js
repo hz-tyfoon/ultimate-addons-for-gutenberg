@@ -4,7 +4,7 @@
 
 import generateCSS from '@Controls/generateCSS';
 
-function styling( attributes, clientId ) {
+function styling( attributes, clientId, deviceType ) {
 	const {
 		width,
 		widthTablet,
@@ -14,8 +14,9 @@ function styling( attributes, clientId ) {
 		heightMob,
 		backgroundColor,
 		backgroundHColor,
+		block_id,
 	} = attributes;
-
+	const previewType = deviceType.toLowerCase();
 	const widthFallback = isNaN( width ) ? 'auto' : `${ width }px`;
 	const heightFallback = isNaN( height ) ? 'auto' : `${ height }px`;
 
@@ -58,14 +59,27 @@ function styling( attributes, clientId ) {
 		},
 	};
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const base_selector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	let styling_css = generateCSS( selectors, base_selector );
 
-	styling_css += generateCSS( tablet_selectors, `${ base_selector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		styling_css += generateCSS(
+			tablet_selectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	styling_css += generateCSS( mobile_selectors, `${ base_selector }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			styling_css += generateCSS(
+				mobile_selectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return styling_css;
 }
 

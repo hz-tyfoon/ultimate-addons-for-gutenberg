@@ -6,9 +6,9 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	const previewType = deviceType.toLowerCase();
 	const {
 		overallAlignment,
 		headingTag,
@@ -74,6 +74,7 @@ function styling( attributes, clientId, name ) {
 		subHeadLetterSpacingTablet,
 		subHeadLetterSpacingMobile,
 		subHeadLetterSpacingType,
+		block_id,
 	} = attributes;
 
 	let tabletSelectors = {};
@@ -286,7 +287,7 @@ function styling( attributes, clientId, name ) {
 		'display': 'block',
 	};
 
-	selectors[ ' ' + headingTag + '.block-editor-rich-text__editable.uagb-howto-heading-text' ] = {
+	selectors[ ` ${ headingTag }.block-editor-rich-text__editable.uagb-howto-heading-text`] = {
 		'font-family': headFontFamily,
 		'font-style': headFontStyle,
 		'text-decoration': headDecoration,
@@ -384,6 +385,12 @@ function styling( attributes, clientId, name ) {
 		},
 	};
 
+	mobileSelectors[ ` ${ headingTag }.block-editor-rich-text__editable.uagb-howto-heading-text` ] = {
+		'font-size': generateCSSUnit( headFontSizeMobile, headFontSizeType ),
+		'line-height': generateCSSUnit( headLineHeightMobile, headLineHeightType ),
+		'letter-spacing': generateCSSUnit( headLetterSpacingMobile, headLetterSpacingType ),
+	};
+
 	tabletSelectors = {
 		' .block-editor-rich-text__editable.uagb-howto-heading-text': {
 			'font-size': generateCSSUnit( headFontSizeTablet, headFontSizeType ),
@@ -469,14 +476,33 @@ function styling( attributes, clientId, name ) {
 		},
 	};
 
-	const baseSelector = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	tabletSelectors[ ` ${ headingTag }.block-editor-rich-text__editable.uagb-howto-heading-text` ] = {
+		'font-size': generateCSSUnit( headFontSizeTablet, headFontSizeType ),
+		'line-height': generateCSSUnit( headLineHeightTablet, headLineHeightType ),
+		'letter-spacing': generateCSSUnit( headLetterSpacingTablet, headLetterSpacingType ),
+	};
+
+	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	let stylingCss = generateCSS( selectors, baseSelector );
 
-	stylingCss += generateCSS( tabletSelectors, `${ baseSelector }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ baseSelector }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ baseSelector }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ baseSelector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

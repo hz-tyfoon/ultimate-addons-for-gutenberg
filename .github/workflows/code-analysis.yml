@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         node: [ 14.17 ]
-        php: ['7.4']
+        php: ['7.4', '8.1']
 
     steps:
       - name: Checkout
@@ -55,6 +55,10 @@ jobs:
       - name: Show PHPCS results in PR
         if: ${{ always() && steps.phpcs.outcome == 'failure' }}
         run: cs2pr ./phpcs-report.xml
+
+      - name: PHP static analysis
+        if: always()
+        run: composer run phpstan
 
       - name: Lint JS
         if: always()
