@@ -6,9 +6,9 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( attributes, clientId, name ) {
+function styling( attributes, clientId, name, deviceType ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	const previewType = deviceType.toLowerCase();
 	const {
 		titleSpace,
 		titleSpaceTablet,
@@ -93,6 +93,7 @@ function styling( attributes, clientId, name ) {
 		prefixLetterSpacingTablet,
 		prefixLetterSpacingMobile,
 		prefixLetterSpacingType,
+		block_id
 	} = attributes;
 
 	const gradientLocation1Fallback = getFallbackNumber( gradientLocation1, 'gradientLocation1', blockName );
@@ -206,7 +207,12 @@ function styling( attributes, clientId, name ) {
 		}
 	}
 
-	const marginType = 'after' === iconPosition ? 'margin-left' : 'margin-right';
+	let marginType;
+	if ( uagb_blocks_info.is_rtl !== '1' ) {
+		marginType = 'after' === iconPosition ? 'margin-left' : 'margin-right';
+	} else {
+		marginType = 'after' === iconPosition ? 'margin-right' : 'margin-left';
+	}
 
 	selectors[ ' svg' ][ marginType ] = generateCSSUnit( iconSpaceFallback, 'px' );
 
@@ -268,14 +274,27 @@ function styling( attributes, clientId, name ) {
 
 	mobileSelectors[ ' svg' ][ marginType ] = generateCSSUnit( iconSpaceMobile, 'px' );
 
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	let stylingCss = generateCSS( selectors, id );
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

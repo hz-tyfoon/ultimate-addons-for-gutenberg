@@ -90,9 +90,9 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		 *
 		 * @since 2.0.0
 		 *
-		 * @param string $slug Block slug.
-		 * @param array  $attr Block attributes.
-		 * @param string $id   Block id.
+		 * @param string     $slug Block slug.
+		 * @param array      $attr Block attributes.
+		 * @param int|string $id   Block id.
 		 * @return array
 		 */
 		public static function get_frontend_css( $slug, $attr, $id ) {
@@ -104,9 +104,9 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		 *
 		 * @since 2.0.0
 		 *
-		 * @param string $slug Block slug.
-		 * @param array  $attr Block attributes.
-		 * @param string $id   Block id.
+		 * @param string     $slug Block slug.
+		 * @param array      $attr Block attributes.
+		 * @param int|string $id   Block id.
 		 * @return array
 		 */
 		public static function get_frontend_js( $slug, $attr, $id ) {
@@ -118,10 +118,10 @@ if ( ! class_exists( 'UAGB_Block_Module' ) ) {
 		 *
 		 * @since 2.0.0
 		 *
-		 * @param string $slug Block slug.
-		 * @param array  $attr Block attributes.
-		 * @param string $id   Block id.
-		 * @param string $type Asset Type.
+		 * @param string     $slug Block slug.
+		 * @param array      $attr Block attributes.
+		 * @param int|string $id   Block id.
+		 * @param string     $type Asset Type.
 		 * @return array
 		 */
 		public static function get_frontend_assets( $slug, $attr, $id, $type = 'css' ) {

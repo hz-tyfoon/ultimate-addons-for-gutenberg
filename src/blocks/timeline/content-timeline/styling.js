@@ -6,10 +6,11 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function contentTimelineStyle( attributes, clientId, name ) {
+function contentTimelineStyle( attributes, clientId, name, deviceType ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	const previewType = deviceType.toLowerCase();
 	const {
+		block_id,
 		dateBottomspace,
 		dateBottomspaceTablet,
 		dateBottomspaceMobile,
@@ -235,7 +236,7 @@ function contentTimelineStyle( attributes, clientId, name ) {
 			'min-height': generateCSSUnit( connectorBgsizeFallback, 'px' ),
 			'min-width': generateCSSUnit( connectorBgsizeFallback, 'px' ),
 			'line-height': generateCSSUnit( connectorBgsizeFallback, 'px' ),
-			'border': borderWidthFallback + 'px solid' + separatorBorder,
+			'border': borderWidthFallback + 'px solid ' + separatorBorder,
 		},
 		'.uagb-timeline__left-block .uagb-timeline__left .uagb-timeline__arrow': {
 			'height': generateCSSUnit( connectorBgsizeFallback, 'px' ),
@@ -605,14 +606,27 @@ function contentTimelineStyle( attributes, clientId, name ) {
 	};
 
 	let stylingCss = '';
-	const id = `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }.uagb-timeline__outer-wrap`;
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }.uagb-timeline__outer-wrap`;
 
 	stylingCss = generateCSS( selectors, id );
 
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

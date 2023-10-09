@@ -11,9 +11,8 @@ import { memo } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks';
 
 const Render = ( props ) => {
-	props = props.parentProps;
 
-	const { attributes, setAttributes, deviceType, context } = props;
+	const { attributes, setAttributes, deviceType, context, labelHasDynamicContent } = props;
 
 	const {
 		className,
@@ -22,12 +21,13 @@ const Render = ( props ) => {
 		removeText,
 		noFollow,
 		showIcon,
+		block_id,
 	} = attributes;
 
 	let { label } = attributes;
 
 	// Check if this has dynamic content.
-	if ( label && -1 !== label.indexOf( '<span data-spectra-dc-field="' ) ) {
+	if ( labelHasDynamicContent ) {
 		const renderedMarkup = applyFilters( `uag_render_text_loop_data`, label, context );
 		if ( renderedMarkup !== '' ) {
 			label = renderedMarkup;
@@ -71,7 +71,7 @@ const Render = ( props ) => {
 				className,
 				'uagb-buttons__outer-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
+				`uagb-block-${ block_id }`,
 				'wp-block-button'
 			) }
 		>

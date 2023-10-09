@@ -7,10 +7,11 @@ import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 
-function testimonialStyle( attributes, clientId, name ) {
+function testimonialStyle( attributes, clientId, name, deviceType ) {
 	const blockName = name.replace( 'uagb/', '' );
-
+	const previewType = deviceType.toLowerCase();
 	const {
+		block_id,
 		headingAlign,
 		headingAlignTablet,
 		headingAlignMobile,
@@ -363,8 +364,7 @@ function testimonialStyle( attributes, clientId, name ) {
 			'line-height': generateCSSUnit( nameLineHeightTablet, nameLineHeightType ),
 		},
 	};
-	if ( 'gradient' === backgroundType ) {
-		let gradient;
+	let gradient;
 		switch ( selectGradient ) {
 			case 'basic':
 				gradient = gradientValue;
@@ -386,7 +386,7 @@ function testimonialStyle( attributes, clientId, name ) {
 				gradient = '';
 				break;
 		}
-
+	if ( 'gradient' === backgroundType ) {
 		selectors[ ' .uagb-tm__content' ][ 'background-image' ] = gradient;
 	}
 
@@ -396,11 +396,9 @@ function testimonialStyle( attributes, clientId, name ) {
 				'background-color': backgroundImageColor,
 			};
 		} else if ( 'gradient' === overlayType ) {
-			if ( gradientValue ) {
-				selectors[ ' .uagb-testimonial__wrap.uagb-tm__bg-type-image .uagb-tm__overlay' ] = {
-					'background-image': gradientValue,
-				};
-			}
+			selectors[ ' .uagb-testimonial__wrap.uagb-tm__bg-type-image .uagb-tm__overlay' ] = {
+				'background-image': gradient,
+			};
 		}
 	} else {
 		selectors[ ' .uagb-testimonial__wrap.uagb-tm__bg-type-color .uagb-tm__content' ] = {
@@ -416,12 +414,27 @@ function testimonialStyle( attributes, clientId, name ) {
 	};
 
 	let stylingCss = '';
-	const id = `.uagb-block-${ clientId.substr( 0, 8 ) }`;
+	const id = `.uagb-block-${ block_id }`;
 
 	stylingCss = generateCSS( selectors, id );
-	stylingCss += generateCSS( tabletSelectors, `${ id }`, true, 'tablet' );
-	stylingCss += generateCSS( mobileSelectors, `${ id }`, true, 'mobile' );
 
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
+
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

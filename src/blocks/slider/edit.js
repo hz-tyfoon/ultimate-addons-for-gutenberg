@@ -16,16 +16,16 @@ import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { addFilter } from '@wordpress/hooks';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBSlider = ( props ) => {
 	const {
 		isSelected,
-		setAttributes,
 		attributes,
 		clientId,
-		name,
 		deviceType,
 		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		setAttributes
 	} = props;
 
 	// Add and remove the CSS on the drop and remove of the component.
@@ -39,34 +39,19 @@ const UAGBSlider = ( props ) => {
 	useEffect( () => {
 		// Assigning block_id in the attribute.
 		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		// Backward Compatibility - Consecutive Slides Width is now removed and the gap between slides was fixed to 10 before.
-		if ( attributes.consecutiveSlidesWidth || attributes.consecutiveSlidesWidthTablet || attributes.consecutiveSlidesWidthMobile ) {
-			setAttributes( {
-				inactiveSlideVisibility: attributes.consecutiveSlidesWidth * 0.333,
-				inactiveSlideVisibilityTablet: attributes.consecutiveSlidesWidthTablet * 0.333,
-				inactiveSlideVisibilityMobile: attributes.consecutiveSlidesWidthMobile * 0.333,
-				consecutiveSlidesWidth: false,
-				consecutiveSlidesWidthTablet: false,
-				consecutiveSlidesWidthMobile: false,
-				gapBetweenSlides: 10,
-				gapBetweenSlidesTablet: 10,
-				gapBetweenSlidesMobile: 10,
-			} );
-		}
 	}, [] );
 
 	useEffect( () => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, deviceType ), [ attributes, deviceType ] );
 
 	return (
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
@@ -88,6 +73,7 @@ const applyWithSelect = withSelect( ( select, props ) => {
 } );
 
 export default compose(
+	addInitialAttr,
 	applyWithSelect,
 	AddStaticStyles,
 )( UAGBSlider );

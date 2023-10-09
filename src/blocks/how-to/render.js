@@ -23,10 +23,6 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-
-	const blockName = props.name.replace( 'uagb/', '' );
-
 	// Setup the attributes
 	const {
 		className,
@@ -61,9 +57,13 @@ const Render = ( props ) => {
 			timeInYears,
 			imgTagHeight,
 			imgTagWidth,
+			block_id,
 		},
-		deviceType
+		deviceType,
+		name,
 	} = props;
+
+	const blockName = name.replace( 'uagb/', '' );
 
 	const splitBlock = ( before, after, ...blocks ) => {
 		if ( after ) {
@@ -221,7 +221,7 @@ const Render = ( props ) => {
 			className={ classnames(
 				className,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
+				`uagb-block-${ block_id }`,
 				'uagb-how-to-main-wrap'
 			) }
 		>

@@ -132,7 +132,7 @@ const attributes = {
 	},
 	nameFontWeight: {
 		type: 'string',
-		default: '500',
+		default: 'Default',
 		UAGCopyPaste: {
 			styleType: 'author-font-weight',
 		},
@@ -935,12 +935,14 @@ const attributes = {
 	},
 	gradientColor1: {
 		type: 'string',
+		default: '#06558a',
 		UAGCopyPaste: {
 			styleType: 'column-gradient-color-1',
 		},
 	},
 	gradientColor2: {
 		type: 'string',
+		default: '#0063a1',
 		UAGCopyPaste: {
 			styleType: 'column-gradient-color-2',
 		},
@@ -989,6 +991,13 @@ const attributes = {
 		default: false,
 		UAGCopyPaste: {
 			styleType: 'post-equal-height',
+		},
+	},
+	vAlignContent: {
+		type: 'string',
+		default: 'flex-start',
+		UAGCopyPaste: {
+			styleType: 'post-valign-content',
 		},
 	},
 	...overallBorderAttributes,

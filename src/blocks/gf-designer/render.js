@@ -12,7 +12,6 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
 	const { className, attributes, setAttributes, deviceType } = props;
 	// Setup the attributes.
 	const {
@@ -28,6 +27,7 @@ const Render = ( props ) => {
 		enableLabel,
 		enableOveride,
 		advancedValidationSettings,
+		block_id,
 	} = attributes;
 
 	/*
@@ -61,7 +61,7 @@ const Render = ( props ) => {
 				className,
 				'uagb-gf-styler__outer-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`
+				`uagb-block-${ block_id }`
 			) }
 		>
 			<div

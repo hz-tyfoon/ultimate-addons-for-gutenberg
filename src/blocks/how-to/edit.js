@@ -15,6 +15,7 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const HowToComponent = ( props ) => {
 	const {
@@ -32,7 +33,6 @@ const HowToComponent = ( props ) => {
 			mainimage,
 			headingTitle,
 			headingDesc,
-			time,
 			cost,
 			timeInMins,
 			timeInHours,
@@ -42,6 +42,7 @@ const HowToComponent = ( props ) => {
 			UAGHideDesktop,
 			UAGHideTab,
 			UAGHideMob,
+			schema,
 		},
 		clientId,
 		name,
@@ -82,6 +83,13 @@ const HowToComponent = ( props ) => {
 		const d = attributes.timeInDays ? attributes.timeInDays : 0;
 		const h = attributes.timeInHours ? attributes.timeInHours : 0;
 
+		if( y || m || d || h !== 0 ) {
+			attributes.time = '';
+		}
+		else {
+			attributes.time = '30';
+		}	
+
 		const minutes = attributes.timeInMins ? attributes.timeInMins : attributes.time;
 
 		if ( attributes.showTotaltime ) {
@@ -116,7 +124,7 @@ const HowToComponent = ( props ) => {
 			} );
 		}
 
-		const getChildBlocks = select( 'core/block-editor' ).getBlocks( props.clientId );
+		const getChildBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 
 		getChildBlocks.forEach( ( steps, key ) => {
 			stepsData = {
@@ -136,15 +144,13 @@ const HowToComponent = ( props ) => {
 
 	useEffect( () => {
 		// Replacement for componentDidMount.
+		if( ! schema ){
+			setAttributes( {
+				schema: JSON.stringify( schemaJsonData ),
+			} );
 
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
-
-		setAttributes( {
-			schema: JSON.stringify( schemaJsonData ),
-		} );
-
-		setPrevState( schemaJsonData );
+			setPrevState( schemaJsonData );
+		}
 	}, [] );
 
 	useEffect( () => {
@@ -168,8 +174,6 @@ const HowToComponent = ( props ) => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-	const minsValue = timeInMins ? timeInMins : time;
-
 	return (
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
@@ -180,7 +184,7 @@ const HowToComponent = ( props ) => {
 				mainimage={ mainimage }
 				showTotaltime={ showTotaltime }
 				timeNeeded={ timeNeeded }
-				minsValue={ minsValue }
+				minsValue={ timeInMins }
 				timeInHours={ timeInHours }
 				timeInDays={ timeInDays }
 				timeInMonths={ timeInMonths }
@@ -193,12 +197,13 @@ const HowToComponent = ( props ) => {
 				materials={ materials }
 				clientId={ clientId }
 			/>
-			{ isSelected && <Settings parentProps={ props } /> }
-			<Render parentProps={ props } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
 export default compose(
+	addInitialAttr,
 	AddStaticStyles,
 )( HowToComponent );
