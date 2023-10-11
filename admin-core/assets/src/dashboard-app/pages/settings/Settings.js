@@ -29,7 +29,7 @@ import ContainerGlobalElementsGap from '@DashboardApp/pages/settings/ContainerGl
 import MyAccount from '@DashboardApp/pages/settings/MyAccount';
 import InstagramUsers from '@DashboardApp/pages/settings/block-settings/InstagramUsers';
 import InheritFromTheme from '@DashboardApp/pages/settings/InheritFromTheme';
-import SpectraAISettings from '@DashboardApp/pages/settings/spectra-ai-settings/SpectraAISettings';
+// import SpectraAISettings from '@DashboardApp/pages/settings/spectra-ai-settings/SpectraAISettings';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useEffect } from '@wordpress/element';
 import { uagbClassNames } from '@Utils/Helpers';
@@ -43,7 +43,7 @@ const Settings = () => {
 	const activeSettingsNavigationTab = useSelector( ( state ) => state.activeSettingsNavigationTab );
     const initialStateSetFlag = useSelector( ( state ) => state.initialStateSetFlag );
     const spectraIsBlockTheme = useSelector( ( state ) => state.spectraIsBlockTheme );
-	const enableAi = useSelector( ( state ) => state.enableAiExtension );
+	// const enableAi = useSelector( ( state ) => state.enableAiExtension );
 
 	const navigation = [
 		{ name: __( 'Editor Options', 'ultimate-addons-for-gutenberg' ), slug: 'global-settings', icon: SettingsIcons['global-settings'] },
@@ -60,9 +60,9 @@ const Settings = () => {
     }
 	if ( uag_react.spectra_pro_status ) {
 		navigation.push( { name: __( 'License', 'ultimate-addons-for-gutenberg' ), slug: 'license', icon: SettingsIcons.account } );
-		if( 'enabled' === enableAi ) {
-			navigation.splice( 5, 0, { name: __( 'Spec - AI Assistant', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
-		}
+		// if( 'enabled' === enableAi ) {
+		// 	navigation.splice( 5, 0, { name: __( 'Spec - AI Assistant', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
+		// }
 	}
 
 	useEffect( () => {
@@ -126,7 +126,7 @@ const Settings = () => {
 									uag_react.spectra_pro_status && (
 										<DynamicContent />
 								) }
-								{ 
+								{
 									! uag_react.is_block_theme && (
 										<BlocksEditorSpacing />
 								) }
@@ -164,12 +164,13 @@ const Settings = () => {
                                 <SelectedFontFamilies/>
                             </>
                         }
-                        {
+						{/* TODO: We need to have this settings back when we add any functionality in this tab, hence commenting out temporarily. */}
+                        {/* {
                         	uag_react.spectra_pro_status && 'enabled' === enableAi &&  'spectra-ai' === activeSettingsNavigationTab &&
                             <>
                                 <SpectraAISettings />
                             </>
-                        }
+                        } */}
                         {
                             'fse-support' === activeSettingsNavigationTab && spectraIsBlockTheme &&
                                 <FSEFontFamilies/>
