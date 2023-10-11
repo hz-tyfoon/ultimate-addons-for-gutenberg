@@ -54,6 +54,8 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			// Activation hook.
 			add_action( 'admin_init', array( $this, 'activation_redirect' ) );
 
+			add_action( 'admin_init', array( $this, 'verify_spec_authorization' ) );
+
 			add_action( 'admin_init', array( $this, 'update_old_user_option_by_url_params' ) );
 
 			add_action( 'admin_post_uag_rollback', array( $this, 'post_uagb_rollback' ) );
@@ -134,6 +136,52 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				)
 			);
 		}
+
+		/**
+		 * Verify if the user was given authorization to use Spec AI.
+		 * 
+		 * @since x.x.x
+		 * @return void
+		 */
+		public function verify_spec_authorization() {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			if ( isset( $_GET['revoke_spec_authorization_token'] ) && 'definitely' === $_GET['revoke_spec_authorization_token'] ) {
+				UAGB_Admin_Helper::delete_admin_settings_option( 'uagb_spec_auth_token' );
+				wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=blocks&filterTab=pro' ) );
+				exit;
+			}
+
+			// Get the urls for the middleware and the referrer.
+			$middleware_url = wp_parse_url( SPEC_AI_MIDDLEWARE );
+			// $referrer_url   = wp_parse_url( $_SERVER['HTTP_REFERER'] ); phpcs:ignore Squiz.PHP.CommentedOutCode.Found
+			
+			// For Staging, use this.
+			$referrer_url = array( 'host' => 'storestaging.brainstormforce.com' );
+
+			// If the middleware and referrer are not the same, then bail.
+			if ( ! is_array( $middleware_url )
+				|| ! is_array( $referrer_url )
+				|| $middleware_url['host'] !== $referrer_url['host']
+			) {
+				return;
+			}
+
+			// Get the nonce.
+			$nonce = ( isset( $_GET['nonce'] ) ) ? sanitize_key( $_GET['nonce'] ) : '';
+
+			// If the nonce is not valid, or if there's no token, then bail.
+			if ( false === wp_verify_nonce( $nonce, 'uagb_spec_auth_nonce' ) || ! isset( $_GET['token'] ) ) {
+				return;
+			}
+
+			UAGB_Admin_Helper::update_admin_settings_option( 'uagb_spec_auth_token', sanitize_text_field( $_GET['token'] ) );
+			wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=blocks&filterTab=pro' ) );
+			exit;
+		}
+
 		/**
 		 * Activation Reset
 		 */
