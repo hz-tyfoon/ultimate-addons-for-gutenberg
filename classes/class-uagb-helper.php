@@ -1153,7 +1153,7 @@ if ( ! class_exists( 'UAGB_Helper' ) ) {
 				 * @param string $name             The block name.
 				 */
 				$blockattr = apply_filters( 'uagb_block_attributes_for_css_and_js', $block['attrs'], $name );
-				if ( is_array( $blockattr ) && ! empty( $blockattr['block_id'] ) && is_int( $blockattr['block_id'] ) ) {
+				if ( is_array( $blockattr ) && ! empty( $blockattr['block_id'] ) && is_string( $blockattr['block_id'] ) ) {
 					$block_id = $blockattr['block_id'];
 				}
 			}

@@ -1212,8 +1212,8 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 		 * Get Masonry Gallery CSS.
 		 *
 		 * @since 1.24.0
-		 * @param array $attr The block attributes.
-		 * @param int   $id The selector ID.
+		 * @param array  $attr The block attributes.
+		 * @param string $id The selector ID.
 		 */
 		public static function get_gallery_css( $attr, $id ) {
 
