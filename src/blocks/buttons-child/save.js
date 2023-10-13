@@ -19,8 +19,11 @@ export default function save( props ) {
 		removeText,
 		noFollow,
 		showIcon,
-		dynamicContent
+		dynamicContent,
+		buttonType
 	} = attributes;
+
+	const buttonTypeClass = buttonType === 'secondary' ? 'ast-outline-button' : '';
 
 	const btnText = () => {
 		if ( ! removeText ) {
@@ -59,6 +62,7 @@ export default function save( props ) {
 				<a // eslint-disable-line jsx-a11y/anchor-is-valid
 					className={ classnames(
 						'uagb-buttons-repeater',
+						`${ buttonTypeClass }`,
 						'wp-block-button__link'
 					) }
 					href={ ( '' === link || dynamicContent?.link?.enable ) ? '#' : link }

@@ -22,9 +22,12 @@ const Render = ( props ) => {
 		noFollow,
 		showIcon,
 		block_id,
+		buttonType,
 	} = attributes;
 
 	let { label } = attributes;
+
+	const buttonTypeClass = buttonType === 'secondary' ? 'ast-outline-button' : '';
 
 	// Check if this has dynamic content.
 	if ( labelHasDynamicContent ) {
@@ -79,6 +82,7 @@ const Render = ( props ) => {
 				<div
 					className={ classnames(
 						'uagb-buttons-repeater',
+						`${ buttonTypeClass }`,
 						'wp-block-button__link'
 					) }
 				>

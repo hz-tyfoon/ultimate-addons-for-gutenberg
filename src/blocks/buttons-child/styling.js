@@ -113,7 +113,7 @@ function styling( attributes, clientId, name, deviceType  ) {
 		letterSpacingTablet,
 		letterSpacingMobile,
 		letterSpacingType,
-		inheritFromTheme
+		inheritFromTheme,
 	} = attributes;
 
 	const tabletSelectors = {};

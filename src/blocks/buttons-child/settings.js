@@ -30,7 +30,6 @@ import boxShadowPresets, { boxShadowHoverPresets, buttonsPresets } from './prese
 import UAGPresets from '@Components/presets';
 
 const Settings = ( props ) => {
-
 	const { attributes, setAttributes, deviceType, clientId } = props;
 
 	const {
@@ -143,6 +142,7 @@ const Settings = ( props ) => {
 
 		showIcon,
 		inheritFromTheme,
+		buttonType,
 	} = attributes;
 
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
@@ -150,7 +150,6 @@ const Settings = ( props ) => {
 	const parentClientIds = select( 'core/block-editor' ).getBlockParents( clientId );
 	const immediateParentClientId = parentClientIds.at( -1 );
 
-	
 	const parentBlockAttributes = select( 'core/block-editor' ).getBlockAttributes( immediateParentClientId );
 
 	const updateParentAlignment = ( align ) => updateBlockAttributes( immediateParentClientId, { align } );
@@ -191,8 +190,8 @@ const Settings = ( props ) => {
 			<AlignmentToolbar
 				value={ parentBlockAttributes.align }
 				onChange={ ( value ) => {
-					setAttributes( { align: value } )
-					updateParentAlignment( value )
+					setAttributes( { align: value } );
+					updateParentAlignment( value );
 				} }
 				alignmentControls={ alignmentControls }
 			/>
@@ -207,6 +206,26 @@ const Settings = ( props ) => {
 					onChange={ () => setAttributes( { inheritFromTheme: ! inheritFromTheme } ) }
 					label={ __( 'Inherit From Theme', 'ultimate-addons-for-gutenberg' ) }
 				/>
+				{ inheritFromTheme && (
+					<MultiButtonsControl
+						setAttributes={ setAttributes }
+						label={ __( `Button Type`, 'ultimate-addons-for-gutenberg' ) }
+						data={ {
+							value: buttonType,
+							label: 'buttonType',
+						} }
+						options={ [
+							{
+								value: 'primary',
+								label: __( 'Primary', 'ultimate-addons-for-gutenberg' ),
+							},
+							{
+								value: 'secondary',
+								label: __( 'Secondary', 'ultimate-addons-for-gutenberg' ),
+							},
+						] }
+					/>
+				) }
 				<ToggleControl
 					label={ __( 'Enable Icon', 'ultimate-addons-for-gutenberg' ) }
 					checked={ showIcon }
