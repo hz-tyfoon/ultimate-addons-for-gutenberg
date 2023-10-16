@@ -150,7 +150,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 
 			if ( isset( $_GET['revoke_spec_authorization_token'] ) && 'definitely' === $_GET['revoke_spec_authorization_token'] ) {
 				UAGB_Admin_Helper::delete_admin_settings_option( 'uagb_spec_auth_token' );
-				wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=blocks&filterTab=pro' ) );
+				wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' ) );
 				exit;
 			}
 
@@ -178,7 +178,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			}
 
 			UAGB_Admin_Helper::update_admin_settings_option( 'uagb_spec_auth_token', sanitize_text_field( $_GET['token'] ) );
-			wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=blocks&filterTab=pro' ) );
+			wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' ) );
 			exit;
 		}
 
