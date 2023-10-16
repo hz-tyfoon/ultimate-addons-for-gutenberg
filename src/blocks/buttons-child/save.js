@@ -20,10 +20,11 @@ export default function save( props ) {
 		noFollow,
 		showIcon,
 		dynamicContent,
-		buttonType
+		buttonType,
+		inheritFromTheme
 	} = attributes;
 
-	const buttonTypeClass = buttonType === 'secondary' ? 'ast-outline-button' : '';
+	const buttonTypeClass = ( inheritFromTheme && buttonType === 'secondary' ) ? 'ast-outline-button' : 'wp-block-button__link';
 
 	const btnText = () => {
 		if ( ! removeText ) {

@@ -23,11 +23,12 @@ const Render = ( props ) => {
 		showIcon,
 		block_id,
 		buttonType,
+		inheritFromTheme,
 	} = attributes;
 
 	let { label } = attributes;
 
-	const buttonTypeClass = buttonType === 'secondary' ? 'ast-outline-button' : '';
+	const buttonTypeClass = ( inheritFromTheme && buttonType === 'secondary' ) ? 'ast-outline-button' : 'wp-block-button__link';
 
 	// Check if this has dynamic content.
 	if ( labelHasDynamicContent ) {
@@ -83,7 +84,6 @@ const Render = ( props ) => {
 					className={ classnames(
 						'uagb-buttons-repeater',
 						`${ buttonTypeClass }`,
-						'wp-block-button__link'
 					) }
 				>
 					{ iconHtml( 'before' ) }
