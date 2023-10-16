@@ -145,7 +145,7 @@ const Settings = ( props ) => {
 		buttonType,
 	} = attributes;
 
-	const currentTheme = uagb_blocks_info.currentcurrent_theme;
+	const currentTheme = uagb_blocks_info.current_theme;
 
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
