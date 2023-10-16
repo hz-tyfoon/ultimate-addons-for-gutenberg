@@ -145,6 +145,8 @@ const Settings = ( props ) => {
 		buttonType,
 	} = attributes;
 
+	const currentTheme = uagb_blocks_info.currentcurrent_theme;
+
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
 	const parentClientIds = select( 'core/block-editor' ).getBlockParents( clientId );
@@ -206,7 +208,7 @@ const Settings = ( props ) => {
 					onChange={ () => setAttributes( { inheritFromTheme: ! inheritFromTheme } ) }
 					label={ __( 'Inherit From Theme', 'ultimate-addons-for-gutenberg' ) }
 				/>
-				{ inheritFromTheme && (
+				{ inheritFromTheme && currentTheme === 'Astra' && (
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
 						label={ __( `Button Type`, 'ultimate-addons-for-gutenberg' ) }

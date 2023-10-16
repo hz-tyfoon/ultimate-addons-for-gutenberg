@@ -777,6 +777,7 @@ class UAGB_Init_Blocks {
 				'btn_inherit_from_theme'                  => UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' ),
 				'wp_version'                              => get_bloginfo( 'version' ),
 				'is_block_theme'                          => UAGB_Admin_Helper::is_block_theme(),
+				'current_theme'                           => wp_get_theme()->get( 'Name' ),
 			)
 		);
 		// To match the editor with frontend.
