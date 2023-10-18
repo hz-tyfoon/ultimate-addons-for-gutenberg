@@ -5,7 +5,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 7.4
 Tested up to: 6.3.1
-Stable tag: 2.7.9
+Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -214,6 +214,44 @@ When you use the Spectra along with the free Astra theme, you get a huge library
 Our external packages use [Rating Star Component](https://github.com/n49/react-stars) that are distributed under the terms of the ISC. While [Slick](https://github.com/akiran/react-slick), [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT.
 
 == Changelog ==
+
+= 2.8.0 - THURSDAY, 12th OCTOBER 2023 =
+* Feature: Container - Added a new Sticky-Container setting in the Advanced tab.
+* Feature: Visibility Mode - Improved the Coming-Soon Mode by adding the Maintenance Mode feature.
+* Improvement: Container - Updated responsive padding settings to inherit from bigger devices by default.
+* Improvement: Buttons - Added alignment options to both the child and parent blocks in the block controls toolbar.
+* Improvement: Buttons - Reduced the default number of buttons to 1.
+* Improvement: Form - Made the default recipient as the current user's WordPress email address when the `To` field is left empty in submitted forms.
+* Improvement: Global - Enhanced the reusable block functionality for the following blocks: Tabs and Slider.
+* Fix: Container - Resolved an issue wherein the left and right margins of inner-containers would not work as intended.
+* Fix: Content Timeline - Resolved an issue in which the icons would appear over-sized and the content styling would break on the frontend.
+* Fix: Image Gallery - Resolved an issue with the masonry type wherein the loader would not be hidden after all the images have been loaded.
+* Fix: Post Carousel - Resolved an issue in which the responsive columns would not work as intended in the editor.
+* Fix: Post Grid - Resolved an issue wherein the post meta responsive font-size would not work as intended in the editor.
+* Fix: Separator - Resolved an issue wherein the height would revert from percentage to pixels after reloading the editor.
+* Fix: Global - Removed responsive conditions for core PHP-rendered blocks.
+* Fix: Global - Resolved an issue in which the font-family that was set would not appear as intended in the FSE template editor.
+
+= 2.7.11 - WEDNESDAY, 27th SEPTEMBER 2023 =
+* Fix: Image - Resolved an issue in which the updated responsive images would not appear as intended.
+* Fix: Image - Resolved an issue in which masked images would get cut off when the zoom-in hover effect was used.
+* Fix: Form - Resolved an issue wherein the country-code background color would not match in the editor and the front-end.
+* Fix: Form - Added an error message when the confirmation type is set to "URL text".
+* Fix: Form - Resolved an issue wherein the Forms block would not work inside Containers in Astra's Custom Layout.
+* Fix: Google Maps - Resolved an issue in which the custom classes would not appear on the frontend.
+* Fix: Image Gallery - Resolved an issue in the carousel type wherein the arrow positions would revert from percentage to pixels after reloading.
+* Fix: Marketing Button - Resolved an issue in which the default border-radius would not match in the editor and the front-end.
+* Fix: Post Timeline - Resolved an issue in which the notice links would not redirect users as intended.
+* Fix: Table Of Contents - Resolved an issue wherein headings containing some uppercase latin characters would not function as intended.
+* Fix: Testimonials - Resolved an issue wherein the gradient background  styles would not work as intended.
+* Fix: Global - Resolved an issue wherein a PHP error could occur in the Widget Editor.
+* Fix: Global - Resolved an issue in which non-FSE themes running on PHP 8.1 would encounter PHP issues regarding the `preg_match` and `strlen` functions.
+* Fix: Global - Removed the Block Editor Spacing setting for FSE themes.
+
+= 2.7.10 - FRIDAY, 22nd SEPTEMBER 2023 =
+* Security Fix: Hardened the security of the plugin. Props: Patchstack
+* Fix: Container - Resolved an issue wherein container background images would not render as intended during site migration.
+* Fix: Admin - Resolved an issue in which a deprecation notice would be shown on PHP v8.2 and above.
 
 = 2.7.9 - WEDNESDAY, 13th SEPTEMBER 2023 =
 * Improvement: Info Box - Changed the Info Box icon position dropdown to a multi-control.
