@@ -144,10 +144,11 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 		 * @return void
 		 */
 		public function verify_spec_authorization() {
-			if ( ! current_user_can( 'manage_options' ) ) {
+			if ( ! current_user_can( 'manage_options' ) || empty( $_SERVER['HTTP_REFERER'] ) ) {
 				return;
 			}
 
+			// Redirect to the settings page if the user is trying to revoke the token.
 			if ( isset( $_GET['revoke_spec_authorization_token'] ) && 'definitely' === $_GET['revoke_spec_authorization_token'] ) {
 				UAGB_Admin_Helper::delete_admin_settings_option( 'uagb_spec_auth_token' );
 				wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' ) );
@@ -155,11 +156,11 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			}
 
 			// Get the urls for the middleware and the referrer.
-			$middleware_url = wp_parse_url( SPEC_AI_MIDDLEWARE );
-			// $referrer_url   = wp_parse_url( $_SERVER['HTTP_REFERER'] ); phpcs:ignore Squiz.PHP.CommentedOutCode.Found
+			$middleware_url = wp_parse_url( UAGB_SPEC_AI_MIDDLEWARE );
+			$referrer_url   = wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) );
 			
 			// For Staging, use this.
-			$referrer_url = array( 'host' => 'storestaging.brainstormforce.com' );
+			// $referrer_url = array( 'host' => 'storestaging.brainstormforce.com' ); phpcs:ignore Squiz.PHP.CommentedOutCode.Found.
 
 			// If the middleware and referrer are not the same, then bail.
 			if ( ! is_array( $middleware_url )
@@ -177,8 +178,11 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				return;
 			}
 
+			// Set the redirect url.
+			$redirect_url = ( isset( $_GET['requested_from'] ) ) ? esc_url_raw( $_GET['requested_from'] ) : admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' );
+
 			UAGB_Admin_Helper::update_admin_settings_option( 'uagb_spec_auth_token', sanitize_text_field( $_GET['token'] ) );
-			wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' ) );
+			wp_safe_redirect( $redirect_url );
 			exit;
 		}
 

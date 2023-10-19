@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n';
 const SCSAuthorization = () => {
 	const [ isWorking, setIsWorking ] = useState( false );
 	const isAuthorized = !! uag_react?.spec_auth_token;
-	const specAuthURL = `https://store.brainstormforce.com/auth/?redirect_url=${ uag_react.admin_url }?nonce=${ uag_react.spec_auth_nonce }&scs-authorize=true`;
+	const specAuthURL = `${ uag_react.spec_auth_middleware }?redirect_url=${ uag_react.admin_url }?nonce=${ uag_react.spec_auth_nonce }&scs-authorize=true`;
 	const specRevokeURL = `${ uag_react.admin_url }?revoke_spec_authorization_token=definitely`;
 
 	// SVG For Right Hand Side Spinner.
@@ -28,6 +28,13 @@ const SCSAuthorization = () => {
 		setIsWorking( true );
 		window.location.assign( specRevokeURL );
 	};
+
+	// Set the localstorage if authorized, else remove it.
+	if ( isAuthorized ) {
+		localStorage.setItem( 'specAiAuthorizationStatus', true );
+	} else {
+		localStorage.removeItem( 'specAiAuthorizationStatus' );
+	}
 
 	return (
 		<section className='block border-b border-solid border-slate-200 px-12 py-8 justify-between'>  
