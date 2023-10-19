@@ -258,6 +258,9 @@ class Admin_Menu {
 				'is_block_theme'           => \UAGB_Admin_Helper::is_block_theme(),
 				'spectra_pro_url'          => \UAGB_Admin_Helper::get_spectra_pro_url(),
 				'site_details'             => $site_details,
+				'spec_auth_middleware'     => SPEC_AI_MIDDLEWARE,
+				'is_spec_authorized'       => ! empty( \UAGB_Admin_Helper::get_admin_settings_option( 'uagb_spec_auth_token', '' ) ) ? true : false,
+				'spec_auth_nonce'          => wp_create_nonce( 'uagb_spec_auth_nonce' ),
 			)
 		);
 

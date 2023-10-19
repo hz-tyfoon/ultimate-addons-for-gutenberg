@@ -1312,9 +1312,6 @@ select {
 }.text-green-400 {
   --tw-text-opacity: 1;
   color: rgb(74 222 128 / var(--tw-text-opacity));
-}.text-red-400 {
-  --tw-text-opacity: 1;
-  color: rgb(248 113 113 / var(--tw-text-opacity));
 }.text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
@@ -1601,8 +1598,6 @@ select {
 }.active\:text-spectra-hover:active {
   --tw-text-opacity: 1;
   color: rgb(83 0 224 / var(--tw-text-opacity));
-}.disabled\:pointer-events-none:disabled {
-  pointer-events: none;
 }.disabled\:hidden:disabled {
   display: none;
 }.disabled\:cursor-not-allowed:disabled {
