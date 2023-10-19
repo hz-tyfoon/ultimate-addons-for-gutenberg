@@ -7506,25 +7506,7 @@ parameters:
 			count: 1
 			path: includes/blocks/wp-search/attributes.php
 
-		-
-			message: "#^Parameter \\#1 \\$combined_selectors of static method UAGB_Helper\\:\\:generate_all_css\\(\\) expects array, bool\\|string given\\.$#"
-			count: 1
-			path: includes/blocks/wp-search/frontend.css.php
-
-		-
-			message: "#^Parameter \\#4 \\$combined_selectors of static method UAGB_Helper\\:\\:get_typography_css\\(\\) expects array, bool\\|string given\\.$#"
-			count: 1
-			path: includes/blocks/wp-search/frontend.css.php
-
-		-
-			message: "#^Variable \\$attr might not be defined\\.$#"
-			count: 71
-			path: includes/blocks/wp-search/frontend.css.php
-
-		-
-			message: "#^Variable \\$id might not be defined\\.$#"
-			count: 1
-			path: includes/blocks/wp-search/frontend.css.php
+		
 
 		#common errors
 

@@ -7,6 +7,13 @@
  * @package uagb
  */
 
+/**
+ * Adding this comment to avoid PHPStan errors of undefined variable as these variables are defined elsewhere.
+ *
+ * @var mixed[] $attr
+ * @var int $id
+ */
+
 // Adds Fonts.
 UAGB_Block_JS::blocks_wp_search_gfont( $attr );
 
