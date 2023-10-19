@@ -61,7 +61,6 @@ const Settings = () => {
 	if ( uag_react.spectra_pro_status ) {
 		navigation.push( { name: __( 'Spec - AI Assistant', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
 		navigation.push( { name: __( 'License', 'ultimate-addons-for-gutenberg' ), slug: 'license', icon: SettingsIcons.account } );
-		// navigation.splice( 5, 0, { name: __( 'Spec - AI Assistant', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
 	}
 
 	useEffect( () => {

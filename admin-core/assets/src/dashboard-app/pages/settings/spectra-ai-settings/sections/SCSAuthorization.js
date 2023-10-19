@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 
 const SCSAuthorization = () => {
 	const [ isWorking, setIsWorking ] = useState( false );
-	const isAuthorized = !! uag_react?.spec_auth_token;
+	const isAuthorized = uag_react?.is_spec_authorized;
 	const specAuthURL = `${ uag_react.spec_auth_middleware }?redirect_url=${ uag_react.admin_url }?nonce=${ uag_react.spec_auth_nonce }&scs-authorize=true`;
 	const specRevokeURL = `${ uag_react.admin_url }?revoke_spec_authorization_token=definitely`;
 

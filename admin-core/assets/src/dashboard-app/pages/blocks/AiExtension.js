@@ -11,7 +11,7 @@ const AiExtension = () => {
 	
 	// Constants to identify the user's license status.
 	const isPro = uag_react?.spectra_pro_status;
-	const isAuthorized = !! uag_react?.spec_auth_token;
+	const isAuthorized = uag_react?.is_spec_authorized;
 	const isFreeOrAuthorized = ! isPro || isAuthorized;
 
     const enableAiExtension = useSelector( ( state ) => state.enableAiExtension );
@@ -53,51 +53,6 @@ const AiExtension = () => {
 		dispatch( {type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: 'Successfully saved!' } );
 
     };
-
-	// the message listener for the auth window.
-	const messageListener = ( event ) => {
-		if ( ! event?.origin?.startsWith( 'https://store.brainstormforce.com' ) ){
-			return;
-		}
-		window.removeEventListener( 'message', messageListener );
-		if ( 'successfulkeyword' === event?.data?.type ) {
-			// ----------- Do stuff here. ----------- //
-			event.source.close();
-		}
-	};
-
-	// Function to open the auth window.
-	const displayAuthWindow = () => { // eslint-disable-line no-unused-vars
-		const positioning = {
-			left: ( screen.width - 480 ) / 2,
-			top: ( screen.height - 720 ) / 2,
-		};
-		/*
-		https://store.brainstormforce.com/auth/?redirect=${ uag_react.admin_url }&connectNonce=${ uag_react.spec_auth_nonce }&sc-authorize=true
-		 */
-		// const popupAuth = window.open(
-		// 	`https://store.brainstormforce.com/auth/?redirect=${
-		// 		uag_react.admin_url
-		// 	}&connectNonce=${
-		// 		uag_react.spec_auth_nonce
-		// 	}&sc-authorize=true`,
-		// 	'SpecAIAuth',
-		// 	`width=480,height=720,top=${ positioning.top },left=${ positioning.left },scrollbars=0`
-		// );
-
-		const popupAuth = window.open(
-			`https://store.brainstormforce.com/auth/?redirect_url=${
-				uag_react.admin_url
-			}?nonce=${
-				uag_react.spec_auth_nonce
-			}&scs-authorize=true`,
-			'SpecAIAuth',
-			`width=480,height=720,top=${ positioning.top },left=${ positioning.left },scrollbars=0`
-		);
-
-		window.addEventListener( 'message', messageListener, false );
-		popupAuth.postMessage( { message: 'authorizeSpecForSpectra' }, '*' );
-	};
 
 	// The Spec AI Assistant Card.
     const SpecExtensionCard = () => (
@@ -165,13 +120,9 @@ const AiExtension = () => {
     );
 
 	return ( isFreeOrAuthorized ) ? <SpecExtensionCard /> : (
-		// <button
-		// 	onClick={ () => { displayAuthWindow(); } }
-		// >
 		<a href={ `https://store.brainstormforce.com/auth/?redirect_url=${ uag_react.admin_url }?nonce=${ uag_react.spec_auth_nonce }&scs-authorize=true` }>
 			<SpecExtensionCard />
 		</a>
-		// </button>
 	);
 };
 
