@@ -156,12 +156,9 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			}
 
 			// Get the urls for the middleware and the referrer.
-			$middleware_url = wp_parse_url( UAGB_SPEC_AI_MIDDLEWARE );
+			$middleware_url = wp_parse_url( SPEC_AI_MIDDLEWARE );
 			$referrer_url   = wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) );
 			
-			// For Staging, use this.
-			// $referrer_url = array( 'host' => 'storestaging.brainstormforce.com' ); phpcs:ignore Squiz.PHP.CommentedOutCode.Found.
-
 			// If the middleware and referrer are not the same, then bail.
 			if ( ! is_array( $middleware_url )
 				|| ! is_array( $referrer_url )
