@@ -7492,16 +7492,6 @@ parameters:
 			path: includes/blocks/testimonial/frontend.css.php
 
 		-
-			message: "#^Variable \\$attr might not be defined\\.$#"
-			count: 24
-			path: includes/blocks/testimonial/frontend.js.php
-
-		-
-			message: "#^Variable \\$id might not be defined\\.$#"
-			count: 3
-			path: includes/blocks/testimonial/frontend.js.php
-
-		-
 			message: "#^Parameter \\#1 \\$prefix of static method UAGB_Block_Helper\\:\\:uag_generate_border_attribute\\(\\) expects array, string given\\.$#"
 			count: 1
 			path: includes/blocks/wp-search/attributes.php
