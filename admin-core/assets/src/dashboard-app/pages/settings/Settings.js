@@ -43,7 +43,6 @@ const Settings = () => {
 	const activeSettingsNavigationTab = useSelector( ( state ) => state.activeSettingsNavigationTab );
     const initialStateSetFlag = useSelector( ( state ) => state.initialStateSetFlag );
     const spectraIsBlockTheme = useSelector( ( state ) => state.spectraIsBlockTheme );
-	// const enableAi = useSelector( ( state ) => state.enableAiExtension );
 
 	const navigation = [
 		{ name: __( 'Editor Options', 'ultimate-addons-for-gutenberg' ), slug: 'global-settings', icon: SettingsIcons['global-settings'] },

@@ -93,7 +93,6 @@ class Common_Settings extends Ajax_Base {
 			'insta_refresh_all_tokens',
 			'btn_inherit_from_theme',
 			'open_ai_options',
-			'enable_ai',
 		);
 
 		$this->init_ajax_events( $ajax_events );
@@ -804,20 +803,5 @@ class Common_Settings extends Ajax_Base {
 
 		// The previous $value is not sanitized, as the array sanitization is handled in the class method used below.
 		$this->save_admin_settings( 'uag_open_ai_options', $this->sanitize_form_inputs( $value ) );
-	}
-
-	/**
-	 * Save user input to toggle Ai Extension.
-	 *
-	 * @since x.x.x
-	 * @return void
-	 */
-	public function enable_ai() {
-		$this->check_permission_nonce( 'uag_enable_ai' );
-		$value = $this->check_post_value();
-		if ( is_string( $value ) ) {
-			$this->save_admin_settings( 'uag_enable_ai', sanitize_text_field( $value ) );
-		}
-
 	}
 }

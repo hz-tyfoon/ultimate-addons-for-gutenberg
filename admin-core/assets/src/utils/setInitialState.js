@@ -49,7 +49,6 @@ const setInitialState = ( store ) => {
             themeFonts: data.theme_fonts,
             btnInheritFromTheme: data.uag_btn_inherit_from_theme,
 			spectraOpenAIOptions: data?.open_ai_options,
-			enableAiExtension: data.enable_ai,
         };
 
         store.dispatch( {type: 'UPDATE_INITIAL_STATE', payload: initialState} );
