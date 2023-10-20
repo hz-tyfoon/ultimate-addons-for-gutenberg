@@ -62,7 +62,7 @@ jQuery( document ).ready( function() {
 	if( jQuery( '<?php echo esc_html( $selector ); ?>' ).length > 0 ){
 	jQuery( '<?php echo esc_html( $selector ); ?>' ).find( ".is-carousel" ).slick( <?php echo $settings; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> );
 	}
-	var $scope = jQuery('.uagb-block-<?php echo esc_html( strval( $id ) ); ?>');
+	var $scope = jQuery( '.uagb-block-<?php echo esc_html( $id ); ?>' );
 	var enableEqualHeight = ( '<?php echo esc_html( $equal_height ); ?>' );
 			if( enableEqualHeight ){
 				$scope.imagesLoaded( function() {
