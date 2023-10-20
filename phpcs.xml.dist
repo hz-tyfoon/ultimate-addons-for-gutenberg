@@ -47,6 +47,7 @@
 	<arg value="sp"/>
 	<arg value="s"/>
 
+	<exclude-pattern>*/spec-ai/admin/dashboard-app/build/*</exclude-pattern>
 	<exclude-pattern>*/src/*</exclude-pattern>
 	<exclude-pattern>*/dist/*</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
