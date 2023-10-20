@@ -1736,7 +1736,7 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 		 * Border attribute generation Function.
 		 *
 		 * @since 2.0.0
-		 * @param  array $prefix   Attribute Prefix.
+		 * @param  string $prefix   Attribute Prefix.
 		 * @return array
 		 */
 		public static function uag_generate_border_attribute( $prefix ) {
