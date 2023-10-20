@@ -7411,20 +7411,6 @@ parameters:
 			count: 1
 			path: includes/blocks/taxonomy-list/frontend.css.php
 
-		-
-			message: "#^Parameter \\#4 \\$combined_selectors of static method UAGB_Helper\\:\\:get_typography_css\\(\\) expects array, bool\\|string given\\.$#"
-			count: 5
-			path: includes/blocks/taxonomy-list/frontend.css.php
-
-		-
-			message: "#^Variable \\$attr might not be defined\\.$#"
-			count: 105
-			path: includes/blocks/taxonomy-list/frontend.css.php
-
-		-
-			message: "#^Variable \\$id might not be defined\\.$#"
-			count: 1
-			path: includes/blocks/taxonomy-list/frontend.css.php
 
 
 		
