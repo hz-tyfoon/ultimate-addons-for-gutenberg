@@ -188,12 +188,10 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				return;
 			}
 
-			// Set the redirect url.
-			$redirect_url = ( isset( $_GET['requested_from'] ) ) ? esc_url_raw( $_GET['requested_from'] ) : admin_url( 'tools.php?page=spec-ai' );
 
 			// Get the existing options, and update the auth token before updating the option.
-			$existing_spec_options = UAGB_Admin_Helper::get_admin_settings_option( 'spec_ai_settings' );
-
+			$existing_spec_options = UAGB_Admin_Helper::get_admin_settings_option( 'spec_ai_settings', array() );
+			
 			// If the spec options are not set, then bail.
 			if ( ! is_array( $existing_spec_options ) ) {
 				return;
@@ -202,7 +200,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			// Update the auth token and redirect.
 			$existing_spec_options['auth_token'] = sanitize_text_field( $_GET['token'] );
 			UAGB_Admin_Helper::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );
-			wp_safe_redirect( $redirect_url );
+			wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
 			exit;
 		}
 

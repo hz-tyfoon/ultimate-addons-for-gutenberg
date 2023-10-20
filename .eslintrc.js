@@ -66,5 +66,6 @@ module.exports = {
 		imagesLoaded: true,
 		screen: true,
 		UAGBTabs: true,
+		spec_ai_react: true,
 	},
 };

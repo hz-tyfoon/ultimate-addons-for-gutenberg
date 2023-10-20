@@ -55,18 +55,14 @@ class Admin_Configurations {
 	 * @return void
 	 */
 	public function __construct() {
-
-		if ( ! Admin_Helpers::is_spec_authorized() ) {
-			// The Auth Screen should be full screen for all users.
-			show_admin_bar( false ); // phpcs:ignore WordPressVIPMinimum.UserExperience.AdminBarRemoval.RemovalDetected
-		}
+		// Setup the Admin Scripts.
+		add_action( 'admin_init', array( $this, 'settings_admin_scripts' ) );
 
 		// Setup the Admin Menu.
-		add_action( 'admin_init', array( $this, 'settings_admin_scripts' ) );
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 
-		// Render admin content view.
-		add_action( 'spec_ai_render_admin_page_settings', array( $this, 'render_content' ), 10, 1 );
+		// Render admin dashboard app view.
+		add_action( 'spec_ai_render_dashboard_app', array( $this, 'render_dashboard_app' ), 10, 1 );
 	}
 
 	/**
@@ -144,6 +140,7 @@ class Admin_Configurations {
 
 		register_setting( 'spec-ai-admin-settings', 'spec_ai_enable_toggle' );
 
+		// Register the Spec AI Settings Section.
 		add_settings_section(
 			'spec-ai-general-settings', // The ID.
 			'Spec AI Settings', // The Title.
@@ -151,6 +148,7 @@ class Admin_Configurations {
 			'spec-ai' // The Page.
 		);
  
+		// Register the Spec AI Enable Toggle.
 		add_settings_field(
 			'spec_ai_enable_toggle', // The ID.
 			'Enable Spec AI', // The Title.
@@ -204,6 +202,7 @@ class Admin_Configurations {
 		$localize = apply_filters(
 			'spec_ai_admin_localize',
 			array(
+				'admin_url'            => admin_url(),
 				'spec_auth_middleware' => SPEC_AI_MIDDLEWARE,
 				'is_spec_authorized'   => Admin_Helpers::is_spec_authorized(),
 				'spec_auth_nonce'      => wp_create_nonce( 'spec_ai_auth_nonce' ),
@@ -292,7 +291,7 @@ class Admin_Configurations {
 	 * @since x.x.x
 	 * @return void
 	 */
-	public function render_content( $menu_page_slug ) {
+	public function render_dashboard_app( $menu_page_slug ) {
 
 		if ( $this->menu_slug === $menu_page_slug ) {
 			include_once SPEC_AI_DIR . 'admin/core/views/dashboard-app.php';

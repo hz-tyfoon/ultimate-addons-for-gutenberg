@@ -8,7 +8,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				spectra: {
+				spec: {
 					DEFAULT: '#6104FF',
 					hover: '#5300E0',
 				},
@@ -17,6 +17,7 @@ module.exports = {
 				inter: ['"Inter"', 'sans-serif'],
 			},
 			boxShadow: {
+				'overlay': '0px 10px 40px 0px rgba(0, 0, 0, 0.12)',
 				'overlay-left': '-16px 0px 80px -24px rgba(0, 0, 0, 0.16)',
 				'overlay-right': '16px 0px 80px -24px rgba(0, 0, 0, 0.16)',
 				'hover': '0px 12px 24px -12px rgba(0, 0, 0, 0.12)',

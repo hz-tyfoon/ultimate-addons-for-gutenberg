@@ -8,6 +8,7 @@ const commonConfig = {
 	resolve: {
 		alias: {
 			...defaultConfig.resolve.alias,
+			'@Scripts': path.resolve( __dirname, 'scripts/' ),
 			'@DashboardApp': path.resolve( __dirname, 'admin/dashboard-app/src/' ),
 		},
 	},
