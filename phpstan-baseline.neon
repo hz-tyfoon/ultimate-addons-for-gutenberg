@@ -7426,40 +7426,6 @@ parameters:
 			count: 1
 			path: includes/blocks/taxonomy-list/frontend.css.php
 
-		-
-			message: "#^Parameter \\#1 \\$combined_selectors of static method UAGB_Helper\\:\\:generate_all_css\\(\\) expects array, bool\\|string given\\.$#"
-			count: 1
-			path: includes/blocks/team/frontend.css.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of static method UAGB_Helper\\:\\:get_css_value\\(\\) expects string, \\(float\\|int\\) given\\.$#"
-			count: 6
-			path: includes/blocks/team/frontend.css.php
-
-		-
-			message: "#^Parameter \\#1 \\$value of static method UAGB_Helper\\:\\:get_css_value\\(\\) expects string, int given\\.$#"
-			count: 12
-			path: includes/blocks/team/frontend.css.php
-
-		-
-			message: "#^Parameter \\#4 \\$combined_selectors of static method UAGB_Helper\\:\\:get_typography_css\\(\\) expects array, bool\\|string given\\.$#"
-			count: 2
-			path: includes/blocks/team/frontend.css.php
-
-		-
-			message: "#^Variable \\$attr might not be defined\\.$#"
-			count: 112
-			path: includes/blocks/team/frontend.css.php
-
-		-
-			message: "#^Variable \\$id might not be defined\\.$#"
-			count: 1
-			path: includes/blocks/team/frontend.css.php
-
-		-
-			message: "#^Parameter \\#1 \\$prefix of static method UAGB_Block_Helper\\:\\:uag_generate_border_attribute\\(\\) expects array, string given\\.$#"
-			count: 1
-			path: includes/blocks/testimonial/attributes.php
 
 		
 
