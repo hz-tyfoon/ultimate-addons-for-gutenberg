@@ -66,4 +66,47 @@ class Admin_Helpers {
 			delete_option( $key );
 		}
 	}
+
+	/**
+	 * Check if the Spec AI plugin is authorized.
+	 *
+	 * @since x.x.x
+	 * @return boolean True if the Spec AI plugin is authorized, false otherwise.
+	 */
+	public static function is_spec_authorized() {
+		// Get the Spec AI settings.
+		$spec_options = self::get_admin_settings_option( 'spec_ai_settings' );
+
+		// If the Spec AI settings are empty, return false.
+		if ( empty( $spec_options ) || ! is_array( $spec_options ) ) {
+			return false;
+		}
+
+		// Return true if the auth token is set and is a string.
+		return (
+			! empty( $spec_options['auth_token'] )
+			&& is_string( $spec_options['auth_token'] )
+			&& ! empty( trim( $spec_options['auth_token'] ) )
+		);
+	}
+
+	/**
+	 * Get a specific Spec AI setting.
+	 * 
+	 * @param string $key The setting key.
+	 * @since x.x.x
+	 * @return mixed The setting value.
+	 */
+	public static function get_spec_ai_setting( $key ) {
+		// Get the Spec AI settings.
+		$spec_options = self::get_admin_settings_option( 'spec_ai_settings' );
+
+		// If the Spec AI settings are empty, return false.
+		if ( empty( $spec_options ) || ! is_array( $spec_options ) ) {
+			return false;
+		}
+
+		// Return the setting if it exists.
+		return isset( $spec_options[ $key ] ) ? $spec_options[ $key ] : false;
+	}
 }

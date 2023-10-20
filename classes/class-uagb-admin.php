@@ -150,8 +150,21 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 
 			// Redirect to the settings page if the user is trying to revoke the token.
 			if ( isset( $_GET['revoke_spec_authorization_token'] ) && 'definitely' === $_GET['revoke_spec_authorization_token'] ) {
-				UAGB_Admin_Helper::delete_admin_settings_option( 'uagb_spec_auth_token' );
-				wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' ) );
+				
+				// Get the Spec AI settings.
+				$existing_spec_options = UAGB_Admin_Helper::get_admin_settings_option( 'spec_ai_settings' );
+
+				// If the spec options are not set, then bail.
+				if ( ! is_array( $existing_spec_options ) ) {
+					return;
+				}
+				
+				// Remove the auth token from the Spec AI settings.
+				unset( $existing_spec_options['auth_token'] );
+				UAGB_Admin_Helper::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );              
+
+				// Redirect to the settings page.
+				wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
 				exit;
 			}
 
@@ -171,14 +184,24 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			$nonce = ( isset( $_GET['nonce'] ) ) ? sanitize_key( $_GET['nonce'] ) : '';
 
 			// If the nonce is not valid, or if there's no token, then bail.
-			if ( false === wp_verify_nonce( $nonce, 'uagb_spec_auth_nonce' ) || ! isset( $_GET['token'] ) ) {
+			if ( false === wp_verify_nonce( $nonce, 'spec_ai_auth_nonce' ) || ! isset( $_GET['token'] ) ) {
 				return;
 			}
 
 			// Set the redirect url.
-			$redirect_url = ( isset( $_GET['requested_from'] ) ) ? esc_url_raw( $_GET['requested_from'] ) : admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' );
+			$redirect_url = ( isset( $_GET['requested_from'] ) ) ? esc_url_raw( $_GET['requested_from'] ) : admin_url( 'tools.php?page=spec-ai' );
 
-			UAGB_Admin_Helper::update_admin_settings_option( 'uagb_spec_auth_token', sanitize_text_field( $_GET['token'] ) );
+			// Get the existing options, and update the auth token before updating the option.
+			$existing_spec_options = UAGB_Admin_Helper::get_admin_settings_option( 'spec_ai_settings' );
+
+			// If the spec options are not set, then bail.
+			if ( ! is_array( $existing_spec_options ) ) {
+				return;
+			}
+
+			// Update the auth token and redirect.
+			$existing_spec_options['auth_token'] = sanitize_text_field( $_GET['token'] );
+			UAGB_Admin_Helper::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );
 			wp_safe_redirect( $redirect_url );
 			exit;
 		}

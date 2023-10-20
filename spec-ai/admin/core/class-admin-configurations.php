@@ -56,9 +56,14 @@ class Admin_Configurations {
 	 */
 	public function __construct() {
 
+		if ( ! Admin_Helpers::is_spec_authorized() ) {
+			// The Auth Screen should be full screen for all users.
+			show_admin_bar( false ); // phpcs:ignore WordPressVIPMinimum.UserExperience.AdminBarRemoval.RemovalDetected
+		}
+
 		// Setup the Admin Menu.
-		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 		add_action( 'admin_init', array( $this, 'settings_admin_scripts' ) );
+		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 
 		// Render admin content view.
 		add_action( 'spec_ai_render_admin_page_settings', array( $this, 'render_content' ), 10, 1 );
@@ -104,12 +109,7 @@ class Admin_Configurations {
 		$menu_page_slug = $this->menu_slug;
 
 		// If Spec is not authorized, render the auth screen.
-		if ( empty( $spec_options )
-			|| ! is_array( $spec_options )
-			|| empty( $spec_options['auth_token'] )
-			|| ! is_string( $spec_options['auth_token'] )
-			|| empty( trim( $spec_options['auth_token'] ) )
-		) {
+		if ( ! Admin_Helpers::is_spec_authorized() ) {
 			include_once SPEC_AI_DIR . 'admin/core/views/admin-auth.php';
 			return;
 		}
@@ -124,18 +124,68 @@ class Admin_Configurations {
 	 * @return void
 	 */
 	public function settings_admin_scripts() {
-
 		// Bail if the current page is not the Spec AI Settings page.
-		if ( empty( $_GET['page'] ) //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			|| ( $this->menu_slug !== $_GET['page'] //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			|| false === strpos( sanitize_text_field( $_GET['page'] ), $this->menu_slug . '_' ) ) //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		) {
+		if ( empty( $_GET['page'] ) || ( $this->menu_slug !== $_GET['page'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'styles_scripts' ) );
+		$this->register_spec_ai_settings();
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
 		add_filter( 'admin_footer_text', array( $this, 'add_footer_link' ), 99 );
 	}
+
+	/**
+	 * Register the settings for Spec AI.
+	 * 
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function register_spec_ai_settings() {
+
+		register_setting( 'spec-ai-admin-settings', 'spec_ai_enable_toggle' );
+
+		add_settings_section(
+			'spec-ai-general-settings', // The ID.
+			'Spec AI Settings', // The Title.
+			array( $this, 'render_spec_ai_general_settings' ), // The Callback.
+			'spec-ai' // The Page.
+		);
+ 
+		add_settings_field(
+			'spec_ai_enable_toggle', // The ID.
+			'Enable Spec AI', // The Title.
+			'render_spec_ai_enable_toggle', // The Callback.
+			'spec-ai', // The Page.
+			'spec-ai-general-settings' // The Section.
+		);
+	}
+
+	/**
+	 * Render the Spec AI General Settings Page.
+	 * 
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function render_spec_ai_general_settings() {
+		echo esc_html__( 'General Settings', 'ultimate-addons-for-gutenberg' );
+	}
+ 
+	/**
+	 * Render the Spec AI Enable Toggle.
+	 * 
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function render_spec_ai_enable_toggle() {
+		$spec_ai_options = Admin_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
+		?>
+		<label for="render_spec_ai_options">
+			<input type="checkbox" id="render_spec_ai_options" name="render_spec_ai_options" value="1" <?php checked( 1, $spec_ai_options['enable_spec_ai'], true ); ?> />
+			<?php echo esc_html__( 'Enable Spec AI', 'ultimate-addons-for-gutenberg' ); ?>
+		</label>
+		<?php
+	}
+
 
 	/**
 	 * Enqueues the needed CSS/JS for Spec AI's admin settings page.
@@ -143,48 +193,36 @@ class Admin_Configurations {
 	 * @since x.x.x
 	 * @return void
 	 */
-	public function styles_scripts() {
+	public function enqueue_styles_and_scripts() {
 
+		// Enqueue the admin Google Fonts and WP Components.
 		$admin_slug = 'spec-ai-admin';
-
-		// Enqueue the admin styles.
 		wp_enqueue_style( $admin_slug . '-font', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap', array(), SPEC_AI_VERSION );
 		wp_enqueue_style( 'wp-components' );
 
-		// Get the current theme and theme settings.
-		$theme               = wp_get_theme();
-		$theme_data          = \WP_Theme_JSON_Resolver::get_theme_data();
-		$theme_settings      = $theme_data->get_settings();
-		$theme_font_families = isset( $theme_settings['typography']['fontFamilies']['theme'] ) && is_array( $theme_settings['typography']['fontFamilies']['theme'] ) ? $theme_settings['typography']['fontFamilies']['theme'] : array();
-
-		// Get the Spec AI settings.
-		$spec_options = Admin_Helpers::get_admin_settings_option( 'spec_ai_settings' );
-
-		// If the Spec AI settings are empty, set them to an empty array.
-		if ( empty( $spec_options ) || ! is_array( $spec_options ) ) {
-			$spec_options = array();
-		}
-
+		// Add the data to localize.
 		$localize = apply_filters(
 			'spec_ai_admin_localize',
 			array(
 				'spec_auth_middleware' => SPEC_AI_MIDDLEWARE,
-				'is_spec_authorized'   => ( ! empty( $spec_options['auth_token'] ) && is_string( $spec_options['auth_token'] ) && ! empty( trim( $spec_options['auth_token'] ) ) ),
+				'is_spec_authorized'   => Admin_Helpers::is_spec_authorized(),
 				'spec_auth_nonce'      => wp_create_nonce( 'spec_ai_auth_nonce' ),
 			)
 		);
 
-		$this->settings_app_scripts( $localize );
+		// Enqueue the admin scripts.
+		$this->localize_and_enqueue_admin_scripts( $localize );
 	}
 
 	/**
-	 * Settings app scripts
+	 * Localize and Enqueue the Admin Scripts.
 	 *
 	 * @param array $localize The data to localize.
 	 * @since x.x.x
 	 * @return void
 	 */
-	public function settings_app_scripts( $localize ) {
+	public function localize_and_enqueue_admin_scripts( $localize ) {
+		// Set the required variables.
 		$handle            = 'spec-ai-admin-settings';
 		$build_path        = SPEC_AI_DIR . 'admin/dashboard-app/build/';
 		$build_url         = SPEC_AI_URL . 'admin/dashboard-app/build/';
@@ -197,7 +235,7 @@ class Admin_Configurations {
 			);
 		$script_dep        = array_merge( $script_info['dependencies'], array( 'updates' ) );
 
-		// Enqueue the admin scripts.
+		// Register the admin scripts.
 		wp_register_script(
 			$handle,
 			$build_url . 'dashboard-app.js',
@@ -206,7 +244,7 @@ class Admin_Configurations {
 			true
 		);
 
-		// Enqueue the admin styles.
+		// Register the admin styles.
 		wp_register_style(
 			$handle,
 			$build_url . 'dashboard-app.css',
@@ -214,7 +252,7 @@ class Admin_Configurations {
 			SPEC_AI_VERSION
 		);
 
-		// Enqueue the admin Google Fonts.
+		// Register the admin Google Fonts.
 		wp_register_style(
 			'spec-ai-admin-google-fonts',
 			'https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap',
