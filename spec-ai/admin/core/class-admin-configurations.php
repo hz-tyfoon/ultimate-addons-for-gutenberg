@@ -126,8 +126,13 @@ class Admin_Configurations {
 		}
 
 		$this->register_spec_ai_settings();
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
-		add_filter( 'admin_footer_text', array( $this, 'add_footer_link' ), 99 );
+
+		// Enqueue the Admin Styles and Scripts for the React App if Spec is not authorized.
+		if ( ! Admin_Helpers::is_spec_authorized() ) {
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
+		} else {
+			add_filter( 'admin_footer_text', array( $this, 'add_footer_link' ), 99 );
+		}
 	}
 
 	/**

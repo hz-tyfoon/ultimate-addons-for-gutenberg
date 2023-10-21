@@ -164,7 +164,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				UAGB_Admin_Helper::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );              
 
 				// Redirect to the settings page.
-				wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
+				wp_safe_redirect( admin_url() );
 				exit;
 			}
 
