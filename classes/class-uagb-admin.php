@@ -144,7 +144,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 		 * @return void
 		 */
 		public function verify_spec_authorization() {
-			if ( ! current_user_can( 'manage_options' ) || empty( $_SERVER['HTTP_REFERER'] ) ) {
+			if ( ! current_user_can( 'manage_options' ) || empty( $_SERVER['HTTP_REFERER'] ) || ! defined( 'SPEC_AI_MIDDLEWARE' ) ) {
 				return;
 			}
 
@@ -161,6 +161,11 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				
 				// Remove the auth token from the Spec AI settings.
 				unset( $existing_spec_options['auth_token'] );
+
+				// Ensure that Spec is always visible after unauthorizing.
+				$existing_spec_options['enabled'] = 1;
+
+				// Update the Spec AI settings.
 				UAGB_Admin_Helper::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );              
 
 				// Redirect to the settings page.
@@ -188,13 +193,12 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				return;
 			}
 
-
 			// Get the existing options, and update the auth token before updating the option.
 			$existing_spec_options = UAGB_Admin_Helper::get_admin_settings_option( 'spec_ai_settings', array() );
 			
-			// If the spec options are not set, then bail.
+			// If the spec options is not an array, then rectify it.
 			if ( ! is_array( $existing_spec_options ) ) {
-				return;
+				$existing_spec_options = array();
 			}
 
 			// Update the auth token, enable Spec and redirect.

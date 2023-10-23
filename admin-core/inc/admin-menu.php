@@ -268,7 +268,7 @@ class Admin_Menu {
 				'is_block_theme'           => \UAGB_Admin_Helper::is_block_theme(),
 				'spectra_pro_url'          => \UAGB_Admin_Helper::get_spectra_pro_url(),
 				'site_details'             => $site_details,
-				'spec_auth_middleware'     => SPEC_AI_MIDDLEWARE,
+				'spec_auth_middleware'     => defined( 'SPEC_AI_MIDDLEWARE' ) ? SPEC_AI_MIDDLEWARE : null,
 				'is_spec_authorized'       => $is_spec_authorized,
 				'spec_auth_nonce'          => wp_create_nonce( 'spec_ai_auth_nonce' ),
 			)

@@ -61,6 +61,9 @@ class Admin_Configurations {
 
 		// Setup the Admin Menu.
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
+
+		// Setup the Admin Ajax Actions.
+		add_action( 'wp_ajax_spec_ai_admin_settings_ajax', array( $this, 'admin_settings_ajax' ) );
 	}
 
 	/**
@@ -84,8 +87,36 @@ class Admin_Configurations {
 			'Spec - AI Assistant', // The menu title.
 			$capability, // The capability required for access to this page.
 			$this->menu_slug, // The menu slug.
-			array( $this, 'render_dashboard' ) // The rendered output function.
+			array( $this, 'render_dashboard' ), // The rendered output function.
+			1 // The position of this menu item in the menu.
 		);
+	}
+
+	/**
+	 * Setup the Admin Settings Ajax.
+	 *
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function admin_settings_ajax() {
+		// Verify wp_nonce_field( 'spec_ai_settings', 'spec_ai_admin_settings_nonce' ) in the admin settings page.
+		check_ajax_referer( 'spec_ai_settings', 'spec_ai_admin_settings_nonce' );
+
+		$spec_options = Admin_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
+
+		// If spec_ai_settings was not posted, then abandon ship.
+		if ( empty( $_POST['spec_ai_settings']['enabled'] ) ) {
+			$spec_options['enabled'] = false;
+		} else {
+			$spec_options['enabled'] = true;
+		}
+
+		// Update the spec_ai_settings option.
+		Admin_Helpers::update_admin_settings_option( 'spec_ai_settings', $spec_options );
+
+		// Redirect to the Spec AI Settings page.
+		wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
+		exit;
 	}
 
 	/**
@@ -125,24 +156,11 @@ class Admin_Configurations {
 		if ( ! Admin_Helpers::is_spec_authorized() ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
 		} else {
-			$this->register_spec_ai_settings();
+			// Add the footer link.
 			add_filter( 'admin_footer_text', array( $this, 'add_footer_link' ), 99 );
 		}
 	}
 
-	/**
-	 * Register the settings for Spec AI.
-	 * 
-	 * @since x.x.x
-	 * @return void
-	 */
-	public function register_spec_ai_settings() {
-
-		register_setting(
-			'spec_ai_admin_settings', // The settings group name.
-			'spec_ai_settings' // The option name.
-		);
-	}
 
 	/**
 	 * Enqueues the needed CSS/JS for Spec AI's admin settings page.
