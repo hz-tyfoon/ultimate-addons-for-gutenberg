@@ -145,33 +145,6 @@ class Admin_Configurations {
 	}
 
 	/**
-	 * Render the Spec AI General Settings Page.
-	 * 
-	 * @since x.x.x
-	 * @return void
-	 */
-	public function render_spec_ai_general_settings() {
-		echo esc_html__( 'General Settings', 'ultimate-addons-for-gutenberg' );
-	}
- 
-	/**
-	 * Render the Spec AI Enable Toggle.
-	 * 
-	 * @since x.x.x
-	 * @return void
-	 */
-	public function render_spec_ai_enable_toggle() {
-		$spec_ai_options = Admin_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
-		?>
-		<label for="render_spec_ai_options">
-			<input type="checkbox" id="render_spec_ai_options" name="render_spec_ai_options" value="1" <?php checked( 1, $spec_ai_options['enable_spec_ai'], true ); ?> />
-			<?php echo esc_html__( 'Enable Spec AI', 'ultimate-addons-for-gutenberg' ); ?>
-		</label>
-		<?php
-	}
-
-
-	/**
 	 * Enqueues the needed CSS/JS for Spec AI's admin settings page.
 	 *
 	 * @since x.x.x
@@ -268,5 +241,5 @@ class Admin_Configurations {
 	public function add_footer_link() {
 		// translators: HTML entities.
 		return '<span id="footer-thankyou">' . sprintf( __( 'Thank you for using %1$sSpec AI.%2$s', 'ultimate-addons-for-gutenberg' ), '<a href="https://wpspectra.com/" class="focus:text-spectra-hover active:text-spectra-hover hover:text-spectra-hover">', '</a>' ) . '</span>';
-	} 
+	}
 }

@@ -105,6 +105,7 @@ class Spec_AI {
 		define( 'SPEC_AI_URL', plugins_url( '/', SPEC_AI_FILE ) );
 		define( 'SPEC_AI_VERSION', '0.0.1' );
 		define( 'SPEC_AI_MENU_SLUG', 'spec-ai' );
+		define( 'SPEC_AI_MIDDLEWARE', 'https://store.brainstormforce.com/auth/' );
 	}
 
 	/**

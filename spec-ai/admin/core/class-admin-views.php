@@ -55,13 +55,18 @@ class Admin_Views {
 
 		// Render the settings page.
 		?>
+		<style>
+			#wpbody-content .notice{
+				display: none !important;
+			}
+			#wpbody-content .error{
+				display: none !important;
+			}
+		</style>
 		<div class="wrap">
 			<h1>
 				<?php echo esc_html__( 'Spec AI Assistant Settings', 'ultimate-addons-for-gutenberg' ); ?>
 			</h1>
-			<p>
-				<?php echo esc_html__( 'Enable/Disable and Credits will come here.', 'ultimate-addons-for-gutenberg' ); ?>
-			</p>
 			<form method="post" action="options.php">
 				<?php
 					// Render the settings for Spec AI.
@@ -70,19 +75,42 @@ class Admin_Views {
 				<table class="form-table">
 					<tr valign="top">
 						<th scope="row">
-							<?php echo esc_html__( 'Enable Spec AI Assistant', 'ultimate-addons-for-gutenberg' ); ?>
+							<?php echo esc_html__( 'Spec - AI Assistant', 'ultimate-addons-for-gutenberg' ); ?>
 						</th>
 						<td>
-							<input type="checkbox" name="spec_ai_settings[enabled]" value="1" <?php checked( Admin_Helpers::get_spec_ai_setting( 'enabled', 0 ), 1 ); ?> />
+							<label>
+								<input type="checkbox" name="spec_ai_settings[enabled]" value="1" <?php checked( Admin_Helpers::get_spec_ai_setting( 'enabled', 0 ), 1 ); ?> />
+								<?php echo esc_html__( 'Enable Spec in the Editor', 'ultimate-addons-for-gutenberg' ); ?>
+							</label>
 						</td>
 					</tr>
+					<tr valign="top">
+						<th>
+							<?php echo esc_html__( 'Revoke Authorization Token', 'ultimate-addons-for-gutenberg' ); ?>
+						</th>
+						<td>
+							<button type="button" class="button button-secondary spec-ai__button--revoke">
+								<?php echo esc_html__( 'Revoke', 'ultimate-addons-for-gutenberg' ); ?>
+							</button>
+							<p>
+								<?php echo esc_html__( 'This will revoke the authorization token for Spec - You will need to re-authorize Spec to use it again.', 'ultimate-addons-for-gutenberg' ); ?>
+							</p>
+						</td>
 				</table>
 				<?php
 					// Render the submit button.
-					submit_button();
+					submit_button( __( 'Update Spec Settings', 'ultimate-addons-for-gutenberg' ) );
 				?>
 			</form>
 		</div>
+		<?php // Render the revoke token script. ?>
+		<script type="text/javascript">
+			document.querySelector( '.spec-ai__button--revoke' ).addEventListener( 'click', () => {
+				if ( confirm( '<?php echo esc_html__( 'Are you sure you wish to revoke the authorization token?', 'ultimate-addons-for-gutenberg' ); ?>' ) ) {
+					window.location.assign( '<?php echo esc_url( admin_url( '?revoke_spec_authorization_token=definitely' ) ); ?>' );
+				}
+			} );
+		</script>
 		<?php
 	}
 }
