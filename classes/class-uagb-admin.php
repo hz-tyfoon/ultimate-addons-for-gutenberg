@@ -197,8 +197,9 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				return;
 			}
 
-			// Update the auth token and redirect.
+			// Update the auth token, enable Spec and redirect.
 			$existing_spec_options['auth_token'] = sanitize_text_field( $_GET['token'] );
+			$existing_spec_options['enabled']    = 1;
 			UAGB_Admin_Helper::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );
 			wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
 			exit;

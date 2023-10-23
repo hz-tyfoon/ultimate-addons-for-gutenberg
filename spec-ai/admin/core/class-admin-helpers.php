@@ -94,19 +94,20 @@ class Admin_Helpers {
 	 * Get a specific Spec AI setting.
 	 * 
 	 * @param string $key The setting key.
+	 * @param mixed  $default The default value if the setting is not set.
 	 * @since x.x.x
 	 * @return mixed The setting value.
 	 */
-	public static function get_spec_ai_setting( $key ) {
+	public static function get_spec_ai_setting( $key, $default = false ) {
 		// Get the Spec AI settings.
 		$spec_options = self::get_admin_settings_option( 'spec_ai_settings' );
 
 		// If the Spec AI settings are empty, return false.
 		if ( empty( $spec_options ) || ! is_array( $spec_options ) ) {
-			return false;
+			return $default;
 		}
 
 		// Return the setting if it exists.
-		return isset( $spec_options[ $key ] ) ? $spec_options[ $key ] : false;
+		return isset( $spec_options[ $key ] ) ? $spec_options[ $key ] : $default;
 	}
 }

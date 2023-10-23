@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use SpecAI\Admin\Core\Admin_Helpers;
+use SpecAI\Admin\Core\Admin_Views;
 
 /**
  * The Admin_Configurations Class.
@@ -25,7 +26,7 @@ class Admin_Configurations {
 	 * @since x.x.x
 	 * @var string Menu slug.
 	 */
-	private $menu_slug = 'spec-ai';
+	private $menu_slug = SPEC_AI_MENU_SLUG;
 
 	/**
 	 * Instance of this class.
@@ -60,9 +61,6 @@ class Admin_Configurations {
 
 		// Setup the Admin Menu.
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
-
-		// Render admin dashboard app view.
-		add_action( 'spec_ai_render_dashboard_app', array( $this, 'render_dashboard_app' ), 10, 1 );
 	}
 
 	/**
@@ -77,8 +75,6 @@ class Admin_Configurations {
 			return;
 		}
 
-		// Set the required variables.
-		$menu_slug  = $this->menu_slug;
 		$capability = 'manage_options';
 
 		// Add the Spec AI Submenu.
@@ -87,7 +83,7 @@ class Admin_Configurations {
 			'Spec - AI Assistant', // The page title.
 			'Spec - AI Assistant', // The menu title.
 			$capability, // The capability required for access to this page.
-			$menu_slug, // The menu slug.
+			$this->menu_slug, // The menu slug.
 			array( $this, 'render_dashboard' ) // The rendered output function.
 		);
 	}
@@ -104,13 +100,13 @@ class Admin_Configurations {
 		$spec_options   = Admin_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
 		$menu_page_slug = $this->menu_slug;
 
-		// If Spec is not authorized, render the auth screen.
 		if ( ! Admin_Helpers::is_spec_authorized() ) {
-			include_once SPEC_AI_DIR . 'admin/core/views/admin-auth.php';
-			return;
+			// If Spec is not authorized, render the auth screen.
+			Admin_Views::render_admin_auth_markup( $menu_page_slug );
+		} else {
+			// If Spec is authorized, render the settings page.
+			Admin_Views::render_admin_settings_markup( $menu_page_slug );
 		}
-
-		include_once SPEC_AI_DIR . 'admin/core/views/admin-base.php';
 	}
 
 	/**
@@ -125,12 +121,11 @@ class Admin_Configurations {
 			return;
 		}
 
-		$this->register_spec_ai_settings();
-
 		// Enqueue the Admin Styles and Scripts for the React App if Spec is not authorized.
 		if ( ! Admin_Helpers::is_spec_authorized() ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
 		} else {
+			$this->register_spec_ai_settings();
 			add_filter( 'admin_footer_text', array( $this, 'add_footer_link' ), 99 );
 		}
 	}
@@ -143,23 +138,9 @@ class Admin_Configurations {
 	 */
 	public function register_spec_ai_settings() {
 
-		register_setting( 'spec-ai-admin-settings', 'spec_ai_enable_toggle' );
-
-		// Register the Spec AI Settings Section.
-		add_settings_section(
-			'spec-ai-general-settings', // The ID.
-			'Spec AI Settings', // The Title.
-			array( $this, 'render_spec_ai_general_settings' ), // The Callback.
-			'spec-ai' // The Page.
-		);
- 
-		// Register the Spec AI Enable Toggle.
-		add_settings_field(
-			'spec_ai_enable_toggle', // The ID.
-			'Enable Spec AI', // The Title.
-			'render_spec_ai_enable_toggle', // The Callback.
-			'spec-ai', // The Page.
-			'spec-ai-general-settings' // The Section.
+		register_setting(
+			'spec_ai_admin_settings', // The settings group name.
+			'spec_ai_settings' // The option name.
 		);
 	}
 
@@ -287,19 +268,5 @@ class Admin_Configurations {
 	public function add_footer_link() {
 		// translators: HTML entities.
 		return '<span id="footer-thankyou">' . sprintf( __( 'Thank you for using %1$sSpec AI.%2$s', 'ultimate-addons-for-gutenberg' ), '<a href="https://wpspectra.com/" class="focus:text-spectra-hover active:text-spectra-hover hover:text-spectra-hover">', '</a>' ) . '</span>';
-	}
-
-	/**
-	 * Renders the admin settings content.
-	 *
-	 * @param string $menu_page_slug current page name.
-	 * @since x.x.x
-	 * @return void
-	 */
-	public function render_dashboard_app( $menu_page_slug ) {
-
-		if ( $this->menu_slug === $menu_page_slug ) {
-			include_once SPEC_AI_DIR . 'admin/core/views/dashboard-app.php';
-		}
-	}
+	} 
 }

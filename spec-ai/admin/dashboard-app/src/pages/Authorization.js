@@ -6,7 +6,7 @@ import {
 	SmileyIcon,
 	TranslateIcon,
 	CodeBlockIcon
-} from '@Scripts/icon-components';
+} from '@Scripts/IconComponents';
 import {
 	SpectraLogo,
 	AstraLogo,
@@ -14,7 +14,7 @@ import {
 	StarterTemplatesLogo,
 	PrestoPlayerLogo,
 	ProjectHuddleLogo,
-} from '@DashboardApp/common/components/product-logos';
+} from '@DashboardApp/common/components/ProductLogos';
 
 const Authorization = () => {
 	const specAuthURL = `${ spec_ai_react.spec_auth_middleware }?redirect_url=${ spec_ai_react.admin_url }?nonce=${ spec_ai_react.spec_auth_nonce }&scs-authorize=true`;
