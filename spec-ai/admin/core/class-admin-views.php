@@ -56,7 +56,9 @@ class Admin_Views {
 
 		// Set the default values.
 		$credits_remaining = 0;
-		$credit_threshold  = 25;
+		$credits_max       = 500;
+		$credit_threshold  = SPEC_AI_CREDIT_THRESHOLD;
+		$credit_percentage = 0;
 
 		// Get the response from the endpoint.
 		$response = Spec_Helpers::get_scs_response( 'usage' );
@@ -67,7 +69,9 @@ class Admin_Views {
 			&& ! empty( $response['total_remaining_credits'] )
 			&& ! empty( $response['total_credits'] )
 		) {
-			$credits_remaining = intval( ( $response['total_remaining_credits'] / $response['total_credits'] ) * 100 );
+			$credits_remaining = $response['total_remaining_credits'];
+			$credits_max       = $response['total_credits'];
+			$credit_percentage = intval( ( $credits_remaining / $credits_max ) * 100 );         
 		}
 
 		// Render the settings page.
@@ -130,7 +134,7 @@ class Admin_Views {
 						<td>
 							<p>
 								<?php
-									echo esc_html__( 'Credit Balance: ', 'ultimate-addons-for-gutenberg' ) . esc_html( $credits_remaining ) . '%';
+									echo esc_html__( 'Credit Balance: ', 'ultimate-addons-for-gutenberg' ) . esc_html( $credits_remaining ) . '/' . esc_html( $credits_max );
 								if ( $credits_remaining < $credit_threshold ) :
 									?>
 									<a href="https://store.brainstormforce.com/downloads/spec-ai/" target="_blank" rel="noopener noreferrer" class="spec-ai__credits--link">
@@ -141,7 +145,7 @@ class Admin_Views {
 							</p>
 							<div class="spec-ai__credits--wrapper">
 								<div class="spec-ai__credits--bar">
-									<div class="spec-ai__credits--filled" style="width: <?php echo esc_attr( $credits_remaining ); ?>%;"></div>
+									<div class="spec-ai__credits--filled" style="width: <?php echo esc_attr( $credit_percentage ); ?>%;"></div>
 								</div>
 							</div>
 						</td>
@@ -167,12 +171,16 @@ class Admin_Views {
 		</div>
 		<?php // Render the revoke token script. ?>
 		<script type="text/javascript">
-			console.log( <?php echo wp_json_encode( $response ); ?> );
 			document.querySelector( '.spec-ai__button--revoke' ).addEventListener( 'click', () => {
 				if ( confirm( '<?php echo esc_html__( 'Are you sure you wish to revoke the authorization token?', 'ultimate-addons-for-gutenberg' ); ?>' ) ) {
+					localStorage.removeItem( 'specAiAuthorizationStatus' );
 					window.location.assign( '<?php echo esc_url( admin_url( '?revoke_spec_authorization_token=definitely' ) ); ?>' );
 				}
 			} );
+			// Add to Local Storage if Spec is authorized.
+			if ( <?php echo Admin_Helpers::is_spec_authorized() ? true : false; ?> ) {
+				localStorage.setItem( 'specAiAuthorizationStatus', true );
+			}
 		</script>
 		<?php
 	}

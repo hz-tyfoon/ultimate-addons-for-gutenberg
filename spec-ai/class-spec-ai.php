@@ -106,6 +106,7 @@ class Spec_AI {
 		define( 'SPEC_AI_VERSION', '0.0.1' );
 		define( 'SPEC_AI_MENU_SLUG', 'spec-ai' );
 		define( 'SPEC_AI_MIDDLEWARE', 'https://store.brainstormforce.com/auth/' );
+		define( 'SPEC_AI_CREDIT_THRESHOLD', 100 );
 	}
 
 	/**
