@@ -167,16 +167,13 @@ class Admin_Views {
 						<td>
 							<div class="spec-ai__auth-status--wrapper">
 								<strong class="spec-ai__auth-status--valid">
-									<!-- <span class="dashicons dashicons-check"></span> -->
+									<span class="dashicons dashicons-yes"></span>
 									<?php echo esc_html__( 'Authorized', 'ultimate-addons-for-gutenberg' ); ?>
 								</strong>
 								<button type="button" class="button button-link spec-ai__auth-status--revoke">
 									<?php echo esc_html__( 'Revoke', 'ultimate-addons-for-gutenberg' ); ?>
 								</button>
 							</div>
-							<p>
-								<?php echo esc_html__( 'This will revoke the authorization token for Spec - You will need to re-authorize Spec to use it again.', 'ultimate-addons-for-gutenberg' ); ?>
-							</p>
 						</td>
 				</table>
 				<?php
@@ -188,7 +185,7 @@ class Admin_Views {
 		<?php // Render the revoke token script. ?>
 		<script type="text/javascript">
 			document.querySelector( '.spec-ai__auth-status--revoke' ).addEventListener( 'click', () => {
-				if ( confirm( '<?php echo esc_html__( 'Are you sure you wish to revoke the authorization token?', 'ultimate-addons-for-gutenberg' ); ?>' ) ) {
+				if ( confirm( '<?php echo esc_html__( 'Are you sure you wish to revoke the authorization token?\nYou will need to re-authorize Spec to use it again.', 'ultimate-addons-for-gutenberg' ); ?>' ) ) {
 					localStorage.removeItem( 'specAiAuthorizationStatus' );
 					window.location.assign( '<?php echo esc_url( admin_url( '?revoke_spec_authorization_token=definitely' ) ); ?>' );
 				}
