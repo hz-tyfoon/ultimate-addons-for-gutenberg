@@ -29,7 +29,7 @@ import ContainerGlobalElementsGap from '@DashboardApp/pages/settings/ContainerGl
 import MyAccount from '@DashboardApp/pages/settings/MyAccount';
 import InstagramUsers from '@DashboardApp/pages/settings/block-settings/InstagramUsers';
 import InheritFromTheme from '@DashboardApp/pages/settings/InheritFromTheme';
-import SpectraAISettings from '@DashboardApp/pages/settings/spectra-ai-settings/SpectraAISettings';
+// import SpectraAISettings from '@DashboardApp/pages/settings/spectra-ai-settings/SpectraAISettings';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useEffect } from '@wordpress/element';
 import { uagbClassNames } from '@Utils/Helpers';
@@ -58,7 +58,7 @@ const Settings = () => {
         navigation.push( { name: __( 'Theme Fonts', 'ultimate-addons-for-gutenberg' ), slug: 'fse-support', icon: SettingsIcons.font } );
     }
 	if ( uag_react.spectra_pro_status ) {
-		navigation.push( { name: __( 'Spec - AI Assistant', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
+		// navigation.push( { name: __( 'Spec - AI Assistant', 'ultimate-addons-for-gutenberg' ), slug: 'spectra-ai', icon: SettingsIcons['spectra-ai'] } );
 		navigation.push( { name: __( 'License', 'ultimate-addons-for-gutenberg' ), slug: 'license', icon: SettingsIcons.account } );
 	}
 
@@ -161,10 +161,10 @@ const Settings = () => {
                                 <SelectedFontFamilies/>
                             </>
                         }
-						{
-                        	uag_react.spectra_pro_status && 'spectra-ai' === activeSettingsNavigationTab &&
-                                <SpectraAISettings />
-                        }
+						{/*
+							uag_react.spectra_pro_status && 'spectra-ai' === activeSettingsNavigationTab &&
+							<SpectraAISettings />
+						*/}
                         {
                             'fse-support' === activeSettingsNavigationTab && spectraIsBlockTheme &&
                                 <FSEFontFamilies/>
