@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SpecAI\Classes\Spec_Configurations;
 use SpecAI\Admin\Admin_Loader;
 
 /**
@@ -116,6 +117,7 @@ class Spec_AI {
 	 * @return void
 	 */
 	public function setup_classes() {
+		Spec_Configurations::get_instance();
 
 		if ( is_admin() ) {
 			// Kickin' off the Admin Loader.
