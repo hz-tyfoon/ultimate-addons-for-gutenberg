@@ -111,4 +111,5 @@ return array(
 	// For Global Block Styles.
 	'globalBlockStyleName'    => '',
 	'globalBlockStyleId'      => '',
+	'verticalAlignment'       => '',
 );
