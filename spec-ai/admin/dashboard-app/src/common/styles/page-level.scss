@@ -1,24 +1,12 @@
 // This style file contains all the CSS that alters elements outside the React App.
 
-// Remove the adminbar padding on this page.
-html.wp-toolbar {
-	padding: 0 !important;
-}
-
-// Hide the default WordPress adminbar, admin sidebar menu, and footer.
-#wpadminbar,
-#adminmenumain,
-#wpfooter {
-	display: none !important;
-}
-
 // Remove the padding from the body content
 #wpbody-content {
 	padding: 0 !important;
 
 	// Disable all notices and errors.
-	& > .notice,
-	& > .error {
+	.notice,
+	.error {
 		display: none !important;
 	}
 }
@@ -26,7 +14,11 @@ html.wp-toolbar {
 // Remove the content area padding and margin.
 #wpcontent {
 	padding: 0;
-	margin: 0;
+}
+
+// Update the background color.
+#wpwrap {
+	background-color: $slate-100;
 }
 
 

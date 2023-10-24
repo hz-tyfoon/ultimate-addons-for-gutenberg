@@ -253,3 +253,23 @@ export const CodeBlockIcon = ( svgParams = {}, childParams = {} ) => el(
 		},
 	),
 );
+
+// The External Link Icon.
+export const ExternalLinkIcon = ( svgParams = {}, childParams = {} ) => el(
+	'svg',
+	{
+		width: commonProperties.size.small,
+		height: commonProperties.size.small,
+		viewBox: '0 0 12 12',
+		fill: commonProperties.color.none,
+		...svgParams,
+	},
+	el(
+		'path',
+		{
+			d: 'M5 3H3C2.44772 3 2 3.44772 2 4V9C2 9.55228 2.44772 10 3 10H8C8.55228 10 9 9.55228 9 9V7M7 2H10M10 2V5M10 2L5 7',
+			...format.outlined,
+			...childParams,
+		},
+	),
+);

@@ -99,24 +99,25 @@ class Admin_Configurations {
 	 * @return void
 	 */
 	public function admin_settings_ajax() {
-		// Verify wp_nonce_field( 'spec_ai_settings', 'spec_ai_admin_settings_nonce' ) in the admin settings page.
-		check_ajax_referer( 'spec_ai_settings', 'spec_ai_admin_settings_nonce' );
+		// Verify the nonce.
+		check_ajax_referer( 'spec_ai_admin_settings_nonce', 'nonce' );
 
 		$spec_options = Spec_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
 
-		// If spec_ai_settings was not posted, then abandon ship.
-		if ( empty( $_POST['spec_ai_settings']['enabled'] ) ) {
-			$spec_options['enabled'] = false;
-		} else {
-			$spec_options['enabled'] = true;
+		// Check if the enable_spec_ai is set.
+		if ( ! empty( $_POST['enable_spec_ai'] ) && is_string( $_POST['enable_spec_ai'] ) ) {
+			$spec_options['enabled'] = ( 'yes' === $_POST['enable_spec_ai'] ) ? true : false;
+
+			// Update the spec_ai_settings option.
+			Spec_Helpers::update_admin_settings_option( 'spec_ai_settings', $spec_options );
 		}
 
-		// Update the spec_ai_settings option.
-		Spec_Helpers::update_admin_settings_option( 'spec_ai_settings', $spec_options );
-
-		// Redirect to the Spec AI Settings page.
-		wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
-		exit;
+		// Send the status.
+		wp_send_json_success(
+			array(
+				'enabled' => $spec_options['enabled'],
+			)
+		);
 	}
 
 	/**
@@ -136,7 +137,7 @@ class Admin_Configurations {
 			Admin_Views::render_admin_auth_markup( $menu_page_slug );
 		} else {
 			// If Spec is authorized, render the settings page.
-			Admin_Views::render_admin_settings_markup( $menu_page_slug );
+			Admin_Views::render_dashboard_app_markup( $menu_page_slug );
 		}
 	}
 
@@ -152,10 +153,11 @@ class Admin_Configurations {
 			return;
 		}
 
-		// Enqueue the Admin Styles and Scripts for the React App if Spec is not authorized.
-		if ( ! Spec_Helpers::is_spec_authorized() ) {
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
-		} else {
+		// Enqueue the Admin Styles and Scripts for the React App.
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
+		
+		// Add the footer link if needed.
+		if ( Spec_Helpers::is_spec_authorized() ) {
 			// Add the footer link.
 			add_filter( 'admin_footer_text', array( $this, 'add_footer_link' ), 99 );
 		}
@@ -175,14 +177,42 @@ class Admin_Configurations {
 		wp_enqueue_style( $admin_slug . '-font', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap', array(), SPEC_AI_VERSION );
 		wp_enqueue_style( 'wp-components' );
 
+		// Set the default credit details.
+		$credit_details = array(
+			'remaining'  => 0,
+			'total'      => 500,
+			'threshold'  => SPEC_AI_CREDIT_THRESHOLD,
+			'percentage' => 0,
+		);
+
+		// Get the response from the endpoint.
+		$response = Spec_Helpers::get_scs_response( 'usage' );
+
+		// If the response is not an error, then update the credit details.
+		if (
+			empty( $response['error'] )
+			&& ! empty( $response['total_remaining_credits'] )
+			&& ! empty( $response['total_credits'] )
+		) {
+			$credit_details['remaining']  = $response['total_remaining_credits'];
+			$credit_details['total']      = $response['total_credits'];
+			$credit_details['percentage'] = intval( ( $credit_details['remaining'] / $credit_details['total'] ) * 100 );  
+		}
+
 		// Add the data to localize.
 		$localize = apply_filters(
 			'spec_ai_admin_localize',
 			array(
-				'admin_url'            => admin_url(),
-				'spec_auth_middleware' => SPEC_AI_MIDDLEWARE,
-				'is_spec_authorized'   => Spec_Helpers::is_spec_authorized(),
-				'spec_auth_nonce'      => wp_create_nonce( 'spec_ai_auth_nonce' ),
+				'admin_url'             => admin_url(),
+				'ajax_url'              => admin_url( 'admin-ajax.php' ),
+				'spec_auth_middleware'  => SPEC_AI_MIDDLEWARE,
+				'spec_credit_topup_url' => SPEC_AI_CREDIT_TOPUP_URL,
+				'is_spec_authorized'    => Spec_Helpers::is_spec_authorized(),
+				'is_spec_enabled'       => Spec_Helpers::get_spec_ai_setting( 'enabled' ),
+				'spec_auth_nonce'       => wp_create_nonce( 'spec_ai_auth_nonce' ),
+				'spec_settings_nonce'   => wp_create_nonce( 'spec_ai_admin_settings_nonce' ),
+				'page_slug'             => $this->menu_slug,
+				'spec_credit_details'   => $credit_details,
 			)
 		);
 
