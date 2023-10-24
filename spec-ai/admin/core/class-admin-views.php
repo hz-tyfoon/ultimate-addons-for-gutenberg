@@ -8,7 +8,6 @@
 namespace SpecAI\Admin\Core;
 
 use SpecAI\Classes\Spec_Helpers;
-use SpecAI\Admin\Core\Admin_Helpers;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -107,6 +106,17 @@ class Admin_Views {
 				border-radius: 4px;
 				background-color: <?php echo ( $credits_remaining > $credit_threshold ) ? '#6104ff' : '#dc2626'; ?>;
 			}
+			.spec-ai__auth-status--wrapper {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+			}
+			.spec-ai__auth-status--valid {
+				color: #16a34a;
+			}
+			.spec-ai__auth-status--revoke {
+				font-size: 12px !important;
+			}
 		</style>
 		<div class="wrap">
 			<h1>
@@ -122,7 +132,7 @@ class Admin_Views {
 						</th>
 						<td>
 							<label>
-								<input type="checkbox" name="spec_ai_settings[enabled]" value="1" <?php checked( Admin_Helpers::get_spec_ai_setting( 'enabled', 1 ), 1 ); ?> />
+								<input type="checkbox" name="spec_ai_settings[enabled]" value="1" <?php checked( Spec_Helpers::get_spec_ai_setting( 'enabled', 1 ), 1 ); ?> />
 								<?php echo esc_html__( 'Enable Spec in the Editor', 'ultimate-addons-for-gutenberg' ); ?>
 							</label>
 						</td>
@@ -152,12 +162,18 @@ class Admin_Views {
 					</tr>
 					<tr valign="top">
 						<th>
-							<?php echo esc_html__( 'Revoke Authorization Token', 'ultimate-addons-for-gutenberg' ); ?>
+							<?php echo esc_html__( 'Authorization Status', 'ultimate-addons-for-gutenberg' ); ?>
 						</th>
 						<td>
-							<button type="button" class="button button-secondary spec-ai__button--revoke">
-								<?php echo esc_html__( 'Revoke', 'ultimate-addons-for-gutenberg' ); ?>
-							</button>
+							<div class="spec-ai__auth-status--wrapper">
+								<strong class="spec-ai__auth-status--valid">
+									<!-- <span class="dashicons dashicons-check"></span> -->
+									<?php echo esc_html__( 'Authorized', 'ultimate-addons-for-gutenberg' ); ?>
+								</strong>
+								<button type="button" class="button button-link spec-ai__auth-status--revoke">
+									<?php echo esc_html__( 'Revoke', 'ultimate-addons-for-gutenberg' ); ?>
+								</button>
+							</div>
 							<p>
 								<?php echo esc_html__( 'This will revoke the authorization token for Spec - You will need to re-authorize Spec to use it again.', 'ultimate-addons-for-gutenberg' ); ?>
 							</p>
@@ -171,14 +187,14 @@ class Admin_Views {
 		</div>
 		<?php // Render the revoke token script. ?>
 		<script type="text/javascript">
-			document.querySelector( '.spec-ai__button--revoke' ).addEventListener( 'click', () => {
+			document.querySelector( '.spec-ai__auth-status--revoke' ).addEventListener( 'click', () => {
 				if ( confirm( '<?php echo esc_html__( 'Are you sure you wish to revoke the authorization token?', 'ultimate-addons-for-gutenberg' ); ?>' ) ) {
 					localStorage.removeItem( 'specAiAuthorizationStatus' );
 					window.location.assign( '<?php echo esc_url( admin_url( '?revoke_spec_authorization_token=definitely' ) ); ?>' );
 				}
 			} );
 			// Add to Local Storage if Spec is authorized.
-			if ( <?php echo Admin_Helpers::is_spec_authorized() ? true : false; ?> ) {
+			if ( <?php echo Spec_Helpers::is_spec_authorized() ? true : false; ?> ) {
 				localStorage.setItem( 'specAiAuthorizationStatus', true );
 			}
 		</script>

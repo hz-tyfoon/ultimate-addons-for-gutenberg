@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use SpecAI\Admin\Core\Admin_Helpers;
+use SpecAI\Classes\Spec_Helpers;
 use SpecAI\Admin\Core\Admin_Views;
 
 /**
@@ -102,7 +102,7 @@ class Admin_Configurations {
 		// Verify wp_nonce_field( 'spec_ai_settings', 'spec_ai_admin_settings_nonce' ) in the admin settings page.
 		check_ajax_referer( 'spec_ai_settings', 'spec_ai_admin_settings_nonce' );
 
-		$spec_options = Admin_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
+		$spec_options = Spec_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
 
 		// If spec_ai_settings was not posted, then abandon ship.
 		if ( empty( $_POST['spec_ai_settings']['enabled'] ) ) {
@@ -112,7 +112,7 @@ class Admin_Configurations {
 		}
 
 		// Update the spec_ai_settings option.
-		Admin_Helpers::update_admin_settings_option( 'spec_ai_settings', $spec_options );
+		Spec_Helpers::update_admin_settings_option( 'spec_ai_settings', $spec_options );
 
 		// Redirect to the Spec AI Settings page.
 		wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
@@ -128,10 +128,10 @@ class Admin_Configurations {
 	public function render_dashboard() {
 
 		// Check if Spec is Authorized, then either render the settings page or the auth screen.
-		$spec_options   = Admin_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
+		$spec_options   = Spec_Helpers::get_admin_settings_option( 'spec_ai_settings', array() );
 		$menu_page_slug = $this->menu_slug;
 
-		if ( ! Admin_Helpers::is_spec_authorized() ) {
+		if ( ! Spec_Helpers::is_spec_authorized() ) {
 			// If Spec is not authorized, render the auth screen.
 			Admin_Views::render_admin_auth_markup( $menu_page_slug );
 		} else {
@@ -153,7 +153,7 @@ class Admin_Configurations {
 		}
 
 		// Enqueue the Admin Styles and Scripts for the React App if Spec is not authorized.
-		if ( ! Admin_Helpers::is_spec_authorized() ) {
+		if ( ! Spec_Helpers::is_spec_authorized() ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
 		} else {
 			// Add the footer link.
@@ -181,7 +181,7 @@ class Admin_Configurations {
 			array(
 				'admin_url'            => admin_url(),
 				'spec_auth_middleware' => SPEC_AI_MIDDLEWARE,
-				'is_spec_authorized'   => Admin_Helpers::is_spec_authorized(),
+				'is_spec_authorized'   => Spec_Helpers::is_spec_authorized(),
 				'spec_auth_nonce'      => wp_create_nonce( 'spec_ai_auth_nonce' ),
 			)
 		);

@@ -139,20 +139,28 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 
 		/**
 		 * Verify if the user was given authorization to use Spec AI.
-		 * 
+		 *
 		 * @since x.x.x
 		 * @return void
 		 */
 		public function verify_spec_authorization() {
-			if ( ! current_user_can( 'manage_options' ) || empty( $_SERVER['HTTP_REFERER'] ) || ! defined( 'SPEC_AI_MIDDLEWARE' ) ) {
+			if (
+				! current_user_can( 'manage_options' )
+				|| empty( $_SERVER['HTTP_REFERER'] )
+				|| ! defined( 'SPEC_AI_MIDDLEWARE' )
+				|| ! class_exists( 'SpecAI\Classes\Spec_Helpers' )
+			) {
 				return;
 			}
+
+			// Use Spec_Helpers.
+			$spec_helpers = new \SpecAI\Classes\Spec_Helpers();
 
 			// Redirect to the settings page if the user is trying to revoke the token.
 			if ( isset( $_GET['revoke_spec_authorization_token'] ) && 'definitely' === $_GET['revoke_spec_authorization_token'] ) {
 				
 				// Get the Spec AI settings.
-				$existing_spec_options = UAGB_Admin_Helper::get_admin_settings_option( 'spec_ai_settings' );
+				$existing_spec_options = $spec_helpers::get_admin_settings_option( 'spec_ai_settings' );
 
 				// If the spec options are not set, then bail.
 				if ( ! is_array( $existing_spec_options ) ) {
@@ -166,7 +174,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				$existing_spec_options['enabled'] = 1;
 
 				// Update the Spec AI settings.
-				UAGB_Admin_Helper::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );              
+				$spec_helpers::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );              
 
 				// Redirect to the settings page.
 				wp_safe_redirect( admin_url() );
@@ -176,7 +184,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			// Get the urls for the middleware and the referrer.
 			$middleware_url = wp_parse_url( SPEC_AI_MIDDLEWARE );
 			$referrer_url   = wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) );
-			
+
 			// If the middleware and referrer are not the same, then bail.
 			if ( ! is_array( $middleware_url )
 				|| ! is_array( $referrer_url )
@@ -194,7 +202,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			}
 
 			// Get the existing options, and update the auth token before updating the option.
-			$existing_spec_options = UAGB_Admin_Helper::get_admin_settings_option( 'spec_ai_settings', array() );
+			$existing_spec_options = $spec_helpers::get_admin_settings_option( 'spec_ai_settings', array() );
 			
 			// If the spec options is not an array, then rectify it.
 			if ( ! is_array( $existing_spec_options ) ) {
@@ -202,9 +210,10 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			}
 
 			// Update the auth token, enable Spec and redirect.
-			$existing_spec_options['auth_token'] = sanitize_text_field( $_GET['token'] );
+			$existing_spec_options['auth_token'] = $spec_helpers::encrypt( sanitize_text_field( $_GET['token'] ) );
 			$existing_spec_options['enabled']    = 1;
-			UAGB_Admin_Helper::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );
+			$spec_helpers::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );
+			
 			wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
 			exit;
 		}
