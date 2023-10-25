@@ -109,4 +109,7 @@ return array(
 	'fontLetterSpacingMobile' => '',
 	'fontLetterSpacingType'   => 'px',
 	'verticalAlignment'       => '',
+	// For Global Block Styles.
+	'globalBlockStyleName'    => '',
+	'globalBlockStyleId'      => '',
 );

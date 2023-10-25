@@ -227,6 +227,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Lottie - Resolved an issue in which the width of the block would be adopted from the parent Container.
 * Fix: Container - Resolved an issue wherein the core Social Share block would get centered by default inside Containers.
 * Fix: Global - Resolved an issue wherein the normal text-transformation option would not work as intended.
+* New: Core Blocks - Added Global Block Style support for core blocks.
 
 ### 2.8.0 - THURSDAY, 12th OCTOBER 2023 ###
 * Feature: Container - Added a new Sticky-Container setting in the Advanced tab.
