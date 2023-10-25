@@ -252,6 +252,7 @@ const Settings = ( props ) => {
 		gradientType,
 		gradientAngle,
 		selectGradient,
+		display = 'flex',
 	} = attributes;
 
 	const isPro = uagb_blocks_info.spectra_pro_status;
@@ -477,7 +478,7 @@ const Settings = ( props ) => {
 		return (
 			<>
 				<UAGAdvancedPanelBody
-					title={ __( 'Layout', 'ultimate-addons-for-gutenberg' ) }
+					title={ __( 'Sizing', 'ultimate-addons-for-gutenberg' ) }
 					initialOpen={ true }
 				>
 					{ isBlockRootParent && (
@@ -777,130 +778,152 @@ const Settings = ( props ) => {
 					/>
 				</UAGAdvancedPanelBody>
 				<UAGAdvancedPanelBody
-					title={ __( 'Flex Properties', 'ultimate-addons-for-gutenberg' ) }
+					title={ __( 'Layout', 'ultimate-addons-for-gutenberg' ) }
 					initialOpen={ false }
 				>
-					<MultiButtonsControl
-						setAttributes={ setAttributes }
-						label={ __( 'Direction', 'ultimate-addons-for-gutenberg' ) }
+					<UAGSelectControl
+						label={ __( 'Display', 'ultimate-addons-for-gutenberg' ) }
 						data={ {
-							desktop: {
-								value: directionDesktop,
-								label: 'directionDesktop',
-							},
-							tablet: {
-								value: directionTablet,
-								label: 'directionTablet',
-							},
-							mobile: {
-								value: directionMobile,
-								label: 'directionMobile',
-							},
+							value: display,
+							label: 'display',
 						} }
-						options={ directionOptions }
-						showIcons={ true }
-						responsive={ true }
-						help={ __(
-							'Define the direction in which blocks inside this container will be placed one after the other.',
-							'ultimate-addons-for-gutenberg'
-						) }
+						setAttributes={ setAttributes }
+						options={ [
+							{
+								value: 'inline',
+								label: __( 'Inline', 'ultimate-addons-for-gutenberg' ),
+							},
+							{
+								value: 'flex',
+								label: __( 'Flex', 'ultimate-addons-for-gutenberg' ),
+							},
+						] }
 					/>
+					{ 'flex' === display && (
+						<>
+							<MultiButtonsControl
+								setAttributes={ setAttributes }
+								label={ __( 'Direction', 'ultimate-addons-for-gutenberg' ) }
+								data={ {
+									desktop: {
+										value: directionDesktop,
+										label: 'directionDesktop',
+									},
+									tablet: {
+										value: directionTablet,
+										label: 'directionTablet',
+									},
+									mobile: {
+										value: directionMobile,
+										label: 'directionMobile',
+									},
+								} }
+								options={ directionOptions }
+								showIcons={ true }
+								responsive={ true }
+								help={ __(
+									'Define the direction in which blocks inside this container will be placed one after the other.',
+									'ultimate-addons-for-gutenberg'
+								) }
+							/>
 
-					<MultiButtonsControl
-						setAttributes={ setAttributes }
-						label={ __( 'Align Items', 'ultimate-addons-for-gutenberg' ) }
-						data={ {
-							desktop: {
-								value: alignItemsDesktop,
-								label: 'alignItemsDesktop',
-							},
-							tablet: {
-								value: alignItemsTablet,
-								label: 'alignItemsTablet',
-							},
-							mobile: {
-								value: alignItemsMobile,
-								label: 'alignItemsMobile',
-							},
-						} }
-						options={ alignItemsOptions }
-						showIcons={ true }
-						onChange={ onChangeAlign( alignItemsDesktop ) }
-						responsive={ true }
-						help={ 'row' === currentOppAxisDirection ? horizontalAlignmentHint : verticalAlignmentHint }
-					/>
-					<MultiButtonsControl
-						setAttributes={ setAttributes }
-						label={ __( 'Justify Content', 'ultimate-addons-for-gutenberg' ) }
-						data={ {
-							desktop: {
-								value: justifyContentDesktop,
-								label: 'justifyContentDesktop',
-							},
-							tablet: {
-								value: justifyContentTablet,
-								label: 'justifyContentTablet',
-							},
-							mobile: {
-								value: justifyContentMobile,
-								label: 'justifyContentMobile',
-							},
-						} }
-						options={ justifyContentOptions }
-						showIcons={ true }
-						responsive={ true }
-						help={ 'row' === currentDirection ? horizontalAlignmentHint : verticalAlignmentHint }
-					/>
-					<MultiButtonsControl
-						setAttributes={ setAttributes }
-						label={ __( 'Wrap', 'ultimate-addons-for-gutenberg' ) }
-						data={ {
-							desktop: {
-								value: wrapDesktop,
-								label: 'wrapDesktop',
-							},
-							tablet: {
-								value: wrapTablet,
-								label: 'wrapTablet',
-							},
-							mobile: {
-								value: wrapMobile,
-								label: 'wrapMobile',
-							},
-						} }
-						options={ wrapOptions }
-						showIcons={ true }
-						responsive={ true }
-						help={ __(
-							'Define whether the items are forced in a single line (No Wrap) or can be flowed into multiple lines (Wrap).',
-							'ultimate-addons-for-gutenberg'
-						) }
-					/>
-					{ ( 'wrap' === attributes[ 'wrap' + deviceType ] ||
-						'wrap-reverse' === attributes[ 'wrap' + deviceType ] ) && (
-						<MultiButtonsControl
-							setAttributes={ setAttributes }
-							label={ __( 'Align Content', 'ultimate-addons-for-gutenberg' ) }
-							data={ {
-								desktop: {
-									value: alignContentDesktop,
-									label: 'alignContentDesktop',
-								},
-								tablet: {
-									value: alignContentTablet,
-									label: 'alignContentTablet',
-								},
-								mobile: {
-									value: alignContentMobile,
-									label: 'alignContentMobile',
-								},
-							} }
-							options={ alignContentOptions }
-							showIcons={ true }
-							responsive={ true }
-							help={ alignContentHint }
-						/>
-					) }
+							<MultiButtonsControl
+								setAttributes={ setAttributes }
+								label={ __( 'Align Items', 'ultimate-addons-for-gutenberg' ) }
+								data={ {
+									desktop: {
+										value: alignItemsDesktop,
+										label: 'alignItemsDesktop',
+									},
+									tablet: {
+										value: alignItemsTablet,
+										label: 'alignItemsTablet',
+									},
+									mobile: {
+										value: alignItemsMobile,
+										label: 'alignItemsMobile',
+									},
+								} }
+								options={ alignItemsOptions }
+								showIcons={ true }
+								onChange={ onChangeAlign( alignItemsDesktop ) }
+								responsive={ true }
+								help={ 'row' === currentOppAxisDirection ? horizontalAlignmentHint : verticalAlignmentHint }
+							/>
+							<MultiButtonsControl
+								setAttributes={ setAttributes }
+								label={ __( 'Justify Content', 'ultimate-addons-for-gutenberg' ) }
+								data={ {
+									desktop: {
+										value: justifyContentDesktop,
+										label: 'justifyContentDesktop',
+									},
+									tablet: {
+										value: justifyContentTablet,
+										label: 'justifyContentTablet',
+									},
+									mobile: {
+										value: justifyContentMobile,
+										label: 'justifyContentMobile',
+									},
+								} }
+								options={ justifyContentOptions }
+								showIcons={ true }
+								responsive={ true }
+								help={ 'row' === currentDirection ? horizontalAlignmentHint : verticalAlignmentHint }
+							/>
+							<MultiButtonsControl
+								setAttributes={ setAttributes }
+								label={ __( 'Wrap', 'ultimate-addons-for-gutenberg' ) }
+								data={ {
+									desktop: {
+										value: wrapDesktop,
+										label: 'wrapDesktop',
+									},
+									tablet: {
+										value: wrapTablet,
+										label: 'wrapTablet',
+									},
+									mobile: {
+										value: wrapMobile,
+										label: 'wrapMobile',
+									},
+								} }
+								options={ wrapOptions }
+								showIcons={ true }
+								responsive={ true }
+								help={ __(
+									'Define whether the items are forced in a single line (No Wrap) or can be flowed into multiple lines (Wrap).',
+									'ultimate-addons-for-gutenberg'
+								) }
+							/>
+							{ ( 'wrap' === attributes[ 'wrap' + deviceType ] ||
+								'wrap-reverse' === attributes[ 'wrap' + deviceType ] ) && (
+								<MultiButtonsControl
+									setAttributes={ setAttributes }
+									label={ __( 'Align Content', 'ultimate-addons-for-gutenberg' ) }
+									data={ {
+										desktop: {
+											value: alignContentDesktop,
+											label: 'alignContentDesktop',
+										},
+										tablet: {
+											value: alignContentTablet,
+											label: 'alignContentTablet',
+										},
+										mobile: {
+											value: alignContentMobile,
+											label: 'alignContentMobile',
+										},
+									} }
+									options={ alignContentOptions }
+									showIcons={ true }
+									responsive={ true }
+									help={ alignContentHint }
+								/>
+							) }
+						</>
+					)}
 				</UAGAdvancedPanelBody>
 			</>
 		);
