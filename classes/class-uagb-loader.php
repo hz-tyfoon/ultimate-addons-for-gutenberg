@@ -131,7 +131,6 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 				return;
 			}
 
-			require_once UAGB_DIR . 'spec-ai/class-spec-ai.php';
 			require_once UAGB_DIR . 'classes/utils.php';
 			require_once UAGB_DIR . 'classes/class-spectra-block-prioritization.php';
 			require_once UAGB_DIR . 'classes/class-uagb-install.php';
