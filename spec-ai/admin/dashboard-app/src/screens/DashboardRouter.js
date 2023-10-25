@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AdminHeader from '@DashboardApp/common/components/AdminHeader';
-// import MainNav from '@DashboardApp/common/components/MainNav';
+// import MainNav from '@DashboardApp/common/components/header/MainNav';
 import DashRoutes from '@DashboardApp/common/components/DashRoutes';
 
 const DashboardRouter = () => {

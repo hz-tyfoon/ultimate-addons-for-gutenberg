@@ -5,7 +5,8 @@ import {
 	ClipboardIcon,
 	SmileyIcon,
 	TranslateIcon,
-	CodeBlockIcon
+	CodeBlockIcon,
+	SparklyGearIcon,
 } from '@Scripts/IconComponents';
 import {
 	SpectraLogo,
@@ -115,7 +116,7 @@ const Authorization = () => {
 				description: __( 'Generate custom CSS codes, shortcodes and HTML directly inside Spec to create any effect or function you desire', 'ultimate-addons-for-gutenberg' ),
 			} ) }
 			{ renderInfoCard( {
-				icon: WandIcon,
+				icon: SparklyGearIcon,
 				title: __( 'AI-Guided WordPress Settings', 'ultimate-addons-for-gutenberg' ),
 				description: __( 'Not a WordPress expert? Let Spec AI help you manage WordPress settings and optimize your site effortlessly', 'ultimate-addons-for-gutenberg' ),
 			} ) }

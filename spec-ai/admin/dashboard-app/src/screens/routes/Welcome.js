@@ -4,6 +4,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import { Switch } from '@headlessui/react';
 import { ExternalLinkIcon } from '@Scripts/IconComponents';
 import { specClassNames, formatNumber } from '@Scripts/Helpers';
+import ConfirmationPopup from '../../common/components/ConfirmationPopup';
 
 const Welcome = () => {
 
@@ -14,8 +15,9 @@ const Welcome = () => {
 		}
 	}, [] );
 
-	// Get the enable status of Spec AI
+	// Get the enable status of Spec AI, and set a state for the popup.
 	const [ isSpecEnabled, setIsSpecEnabled ] = useState( spec_ai_react?.is_spec_enabled ? 'yes' : 'no' );
+	const [ showPopup, setShowPopup ] = useState( false );
 
 	// Set the credit details.
 	const creditDetails = spec_ai_react.spec_credit_details;
@@ -199,16 +201,7 @@ const Welcome = () => {
 
 		// Function to revoke access.
 		const revokeAccess = () => {
-			if ( window.confirm( // eslint-disable-line no-alert
-				`${
-					__( 'Are you sure you wish to revoke the authorization token?', 'ultimate-addons-for-gutenberg' )
-				}\n${
-					__( 'You will need to re-authorize Spec to use it again.', 'ultimate-addons-for-gutenberg' )
-				}` )
-			) {
-				localStorage.removeItem( 'specAiAuthorizationStatus' );
-				window.location.assign( `${ spec_ai_react.admin_url }?revoke_spec_authorization_token=definitely` );
-			}
+			setShowPopup( true );
 		};
 
 		return (
@@ -243,24 +236,52 @@ const Welcome = () => {
 
 	// Return the Welcome Page.
 	return (
-		<main className='py-[2.43rem]'>
-			<div className='max-w-3xl mx-auto px-6 lg:max-w-7xl'>
-				<div className='grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-5 xl:gap-10'>
-					{/* Left column */}
-					<div className='grid grid-cols-1 gap-4 lg:col-span-2 h-full'>
-						{ renderWelcomeCard() }
-					</div>
+		<>
+			<main className='py-[2.43rem]'>
+				<div className='max-w-3xl mx-auto px-6 lg:max-w-7xl'>
+					<div className='grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-5 xl:gap-10'>
+						{/* Left column */}
+						<div className='grid grid-cols-1 gap-4 lg:col-span-2 h-full'>
+							{ renderWelcomeCard() }
+						</div>
 
-					{/* Right column */}
-					<div className='space-y-4 flex h-full flex-col justify-start lg:space-y-5 xl:space-y-10'>
-						{ renderCreditsCard() }
-						{ renderKnowledgeBaseCard() }
-						{ renderCommunityCard() }
-						{ renderRevokeCard() }
+						{/* Right column */}
+						<div className='space-y-4 flex h-full flex-col justify-start lg:space-y-5 xl:space-y-10'>
+							{ renderCreditsCard() }
+							{ renderKnowledgeBaseCard() }
+							{ renderCommunityCard() }
+							{ renderRevokeCard() }
+						</div>
 					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+			{/* The Revoke Access Confirmation Popup */}
+			<ConfirmationPopup { ...{
+				showPopup,
+				setShowPopup,
+				popupContent: {
+					title: __( 'Revoke Access', 'ultimate-addons-for-gutenberg' ),
+					description: `${
+						__( 'Are you sure you wish to revoke the authorization token?', 'ultimate-addons-for-gutenberg' )
+					}\n${
+						__( 'You will need to re-authorize Spec to use it again.', 'ultimate-addons-for-gutenberg' )
+					}`,
+				},
+				popupAccept: {
+					label: __( 'Revoke', 'ultimate-addons-for-gutenberg' ),
+					callback: () => {
+						localStorage.removeItem( 'specAiAuthorizationStatus' );
+						window.location.assign( `${ spec_ai_react.admin_url }?revoke_spec_authorization_token=definitely` );
+					},
+				},
+				popupCancel: {
+					label: __( 'Cancel', 'ultimate-addons-for-gutenberg' ),
+					callback: () => {
+						setShowPopup( false );
+					}
+				},
+			} } />
+		</>
 	);
 };
 

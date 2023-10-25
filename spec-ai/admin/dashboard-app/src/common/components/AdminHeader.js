@@ -1,3 +1,6 @@
+/**
+ * The Admin Header Bar.
+ */
 import { __ } from '@wordpress/i18n';
 import { Disclosure } from '@headlessui/react'
 import { Link } from 'react-router-dom';

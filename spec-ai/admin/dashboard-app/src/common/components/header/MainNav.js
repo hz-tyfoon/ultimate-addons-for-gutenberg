@@ -1,3 +1,6 @@
+/**
+ * The Main Navigation Tabs.
+ */
 import { Link, useLocation } from 'react-router-dom';
 import { __ } from '@wordpress/i18n';
 
