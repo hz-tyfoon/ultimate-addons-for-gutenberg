@@ -52,6 +52,9 @@ const GBSExtension = () => {
                 'box-border relative border rounded-md h-20 p-4 flex items-center gap-x-4 snap-start transition spectra-icon-transition'
             ] ) }
         >
+            <span className="absolute right-[-1px] top-[-1px] text-[10px] text-[#6104FF] bg-[#F5F0FF] px-[8px] py-[2px] rounded-bl-[4px] rounded-tr-[4px]">
+                { __( 'Beta', 'ultimate-addons-for-gutenberg' ) }
+            </span>
             <div className="flex-shrink-0">
                 { UAGB_Block_Icons[ 'global-block-styles' ] }
             </div>
@@ -67,9 +70,7 @@ const GBSExtension = () => {
                         </div>
                     ) }
                 </p>
-				<span className="focus-visible:text-slate-500 active:text-slate-500 hover:text-slate-500 focus:text-slate-400 text-slate-400 text-sm truncate">
-					{ __( 'Currently In Beta', 'ultimate-addons-for-gutenberg' ) }
-				</span>
+                <a className="focus-visible:text-slate-500 active:text-slate-500 hover:text-slate-500 focus:text-slate-400 text-slate-400 text-sm truncate" href='https://wpspectra.com/docs/global-block-style-extension/' target="_blank" rel="noreferrer">{__( 'Documentation', 'ultimate-addons-for-gutenberg' )}</a>
             </div>
             { uag_react.spectra_pro_status ? (
                 <Switch

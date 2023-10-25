@@ -159,11 +159,14 @@
 	}
 }
 .spectra-gbs-notice {
-	padding: 16px;
 	background: #eff6ff;
 	font-size: 12px;
 	font-style: italic;
 	font-weight: 500;
+	>span {
+		padding: 16px;
+		display: block;
+	}
 }
 
 @keyframes button-loading-spinner {
