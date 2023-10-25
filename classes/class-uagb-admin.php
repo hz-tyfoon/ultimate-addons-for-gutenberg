@@ -54,8 +54,6 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			// Activation hook.
 			add_action( 'admin_init', array( $this, 'activation_redirect' ) );
 
-			add_action( 'admin_init', array( $this, 'verify_spec_authorization' ) );
-
 			add_action( 'admin_init', array( $this, 'update_old_user_option_by_url_params' ) );
 
 			add_action( 'admin_post_uag_rollback', array( $this, 'post_uagb_rollback' ) );
@@ -135,87 +133,6 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 					'response' => 200,
 				)
 			);
-		}
-
-		/**
-		 * Verify if the user was given authorization to use Spec AI.
-		 *
-		 * @since x.x.x
-		 * @return void
-		 */
-		public function verify_spec_authorization() {
-			if (
-				! current_user_can( 'manage_options' )
-				|| empty( $_SERVER['HTTP_REFERER'] )
-				|| ! defined( 'SPEC_AI_MIDDLEWARE' )
-				|| ! class_exists( 'SpecAI\Classes\Spec_Helpers' )
-			) {
-				return;
-			}
-
-			// Use Spec_Helpers.
-			$spec_helpers = new \SpecAI\Classes\Spec_Helpers();
-
-			// Redirect to the settings page if the user is trying to revoke the token.
-			if ( isset( $_GET['revoke_spec_authorization_token'] ) && 'definitely' === $_GET['revoke_spec_authorization_token'] ) {
-				
-				// Get the Spec AI settings.
-				$existing_spec_options = $spec_helpers::get_admin_settings_option( 'spec_ai_settings' );
-
-				// If the spec options are not set, then bail.
-				if ( ! is_array( $existing_spec_options ) ) {
-					return;
-				}
-				
-				// Remove the auth token from the Spec AI settings.
-				unset( $existing_spec_options['auth_token'] );
-
-				// Ensure that Spec is always visible after unauthorizing.
-				$existing_spec_options['enabled'] = 1;
-
-				// Update the Spec AI settings.
-				$spec_helpers::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );              
-
-				// Redirect to the settings page.
-				wp_safe_redirect( admin_url() );
-				exit;
-			}
-
-			// Get the urls for the middleware and the referrer.
-			$middleware_url = wp_parse_url( SPEC_AI_MIDDLEWARE );
-			$referrer_url   = wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) );
-
-			// If the middleware and referrer are not the same, then bail.
-			if ( ! is_array( $middleware_url )
-				|| ! is_array( $referrer_url )
-				|| $middleware_url['host'] !== $referrer_url['host']
-			) {
-				return;
-			}
-
-			// Get the nonce.
-			$nonce = ( isset( $_GET['nonce'] ) ) ? sanitize_key( $_GET['nonce'] ) : '';
-
-			// If the nonce is not valid, or if there's no token, then bail.
-			if ( false === wp_verify_nonce( $nonce, 'spec_ai_auth_nonce' ) || ! isset( $_GET['token'] ) ) {
-				return;
-			}
-
-			// Get the existing options, and update the auth token before updating the option.
-			$existing_spec_options = $spec_helpers::get_admin_settings_option( 'spec_ai_settings', array() );
-			
-			// If the spec options is not an array, then rectify it.
-			if ( ! is_array( $existing_spec_options ) ) {
-				$existing_spec_options = array();
-			}
-
-			// Update the auth token, enable Spec and redirect.
-			$existing_spec_options['auth_token'] = $spec_helpers::encrypt( sanitize_text_field( $_GET['token'] ) );
-			$existing_spec_options['enabled']    = 1;
-			$spec_helpers::update_admin_settings_option( 'spec_ai_settings', $existing_spec_options );
-			
-			wp_safe_redirect( admin_url( 'tools.php?page=spec-ai' ) );
-			exit;
 		}
 
 		/**
