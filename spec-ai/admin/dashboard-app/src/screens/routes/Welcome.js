@@ -22,6 +22,9 @@ const Welcome = () => {
 	// Set the credit details.
 	const creditDetails = spec_ai_react.spec_credit_details;
 
+	// Set the threshold for the credits.
+	const belowThreshold = ( creditDetails.percentage <= creditDetails.threshold );
+
 	// Render the Spec AI Toggle Section.
 	const renderSpecEnabler = () => {
 		// Update the Spec AI option.
@@ -109,18 +112,20 @@ const Welcome = () => {
 				<h3 className='text-sm font-semibold text-slate-500'>
 					{ __( 'Words Remaining', 'ultimate-addons-for-gutenberg' ) }
 				</h3>
-				<a
-					className='flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-violet-50 text-slate-500'
-					href={ spec_ai_react?.spec_credit_topup_url }
-					target='_blank'
-					rel='noreferrer noopener'
-				>
-					{ __( 'Get more Credits', 'ultimate-addons-for-gutenberg' ) }
-					{ ExternalLinkIcon( {
-						width: 12,
-						height: 12,
-					} ) }
-				</a>
+				{ belowThreshold && (
+					<a
+						className='flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-violet-50 text-slate-500'
+						href={ spec_ai_react?.spec_credit_topup_url }
+						target='_blank'
+						rel='noreferrer noopener'
+					>
+						{ __( 'Get more Credits', 'ultimate-addons-for-gutenberg' ) }
+						{ ExternalLinkIcon( {
+							width: 12,
+							height: 12,
+						} ) }
+					</a>
+				) }
 			</div>
 			<div className='flex gap-2 items-center justify-between w-full'>
 				<div className='flex items-end gap-1'>
@@ -136,10 +141,16 @@ const Welcome = () => {
 					</span>
 				</div>
 			</div>
-			<div className='spec-ai__data-bar'>
-				<div className='spec-ai__data-bar--progress' style={ {
-					width: `${ creditDetails.percentage }%`,
-				} } />
+			<div className='spec-ai__data-bar bg-slate-200'>
+				<div
+					className={ specClassNames( [
+						'spec-ai__data-bar--progress',
+						belowThreshold ? 'bg-red-500' : 'bg-spec',
+					] ) }
+					style={ {
+						width: `${ creditDetails.percentage }%`,
+					} }
+				/>
 			</div>
 		</section>
 	);
@@ -237,14 +248,13 @@ const Welcome = () => {
 	// Return the Welcome Page.
 	return (
 		<>
-			<main className='py-[2.43rem]'>
+			<main className='py-10'>
 				<div className='max-w-3xl mx-auto px-6 lg:max-w-7xl'>
 					<div className='grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-5 xl:gap-10'>
 						{/* Left column */}
 						<div className='grid grid-cols-1 gap-4 lg:col-span-2 h-full'>
 							{ renderWelcomeCard() }
 						</div>
-
 						{/* Right column */}
 						<div className='space-y-4 flex h-full flex-col justify-start lg:space-y-5 xl:space-y-10'>
 							{ renderCreditsCard() }
