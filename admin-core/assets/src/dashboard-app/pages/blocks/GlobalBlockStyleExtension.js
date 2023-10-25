@@ -67,9 +67,14 @@ const GBSExtension = () => {
                         </div>
                     ) }
                 </p>
-				<span className="focus-visible:text-slate-500 active:text-slate-500 hover:text-slate-500 focus:text-slate-400 text-slate-400 text-sm truncate">
-					{ __( 'Currently In Beta', 'ultimate-addons-for-gutenberg' ) }
-				</span>
+                <span className="flex gap-x-2">
+                    <span className="focus-visible:text-slate-500 active:text-slate-500 hover:text-slate-500 focus:text-slate-400 text-slate-400 text-sm">
+                        { __( 'Currently In Beta', 'ultimate-addons-for-gutenberg' ) }
+                    </span>
+                    <a target='_blank' href='https://wpspectra.com/docs/global-block-style-extension/' className='text-red-500 active:text-red-500 hover:text-red-500 focus:text-red-500 px-2 border-l-[2px] border-red-500'>
+                        { __( 'Documentation', 'ultimate-addons-for-gutenberg' ) }
+                    </a>
+                </span>
             </div>
             { uag_react.spectra_pro_status ? (
                 <Switch
