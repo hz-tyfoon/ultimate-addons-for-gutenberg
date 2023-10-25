@@ -133,6 +133,9 @@ return array_merge(
 		'borderStyle'            => 'solid',
 		'borderColor'            => '#000',
 		'borderHColor'           => '',
+		// For Global Block Styles.
+		'globalBlockStyleName'   => '',
+		'globalBlockStyleId'     => '',
 	),
 	$border_attribute
 );
