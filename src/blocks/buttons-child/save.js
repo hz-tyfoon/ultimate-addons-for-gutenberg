@@ -64,8 +64,8 @@ export default function save( props ) {
 					className={ classnames(
 						'uagb-buttons-repeater',
 						`${ buttonTypeClass }`,
-						'wp-block-button__link'
 					) }
+					style={ { 'border-width': 'revert-layer' } }
 					href={ ( '' === link || dynamicContent?.link?.enable ) ? '#' : link }
 					onClick={ ( '' === link || '#' === link ) && ( ! dynamicContent?.link?.enable ) ? 'return false;' : 'return true;' }
 					rel={ noFollow ? 'nofollow noopener' : 'follow noopener' }

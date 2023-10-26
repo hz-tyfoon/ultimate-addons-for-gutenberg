@@ -85,6 +85,7 @@ const Render = ( props ) => {
 						'uagb-buttons-repeater',
 						`${ buttonTypeClass }`,
 					) }
+					style={ { 'border-width': 'revert-layer' } }
 				>
 					{ iconHtml( 'before' ) }
 					{ btnText() }
