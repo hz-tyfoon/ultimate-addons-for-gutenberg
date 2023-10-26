@@ -60,6 +60,7 @@ const initialState = {
 	spectraFSEFonts: [],
 	themeFonts: [],
 	spectraIsBlockTheme: false,
+	enableGBSExtension: '',
 };
 
 const globalDataStore = createStore(
