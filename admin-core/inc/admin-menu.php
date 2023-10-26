@@ -232,16 +232,6 @@ class Admin_Menu {
 			'description' => get_bloginfo( 'description' ),
 		);
 
-		// Temporary Check for Spec Authorization.
-		$spec_ai_options    = \UAGB_Admin_Helper::get_admin_settings_option( 'spec_ai_settings', array() );
-		$is_spec_authorized = (
-			! empty( $spec_ai_options )
-			&& is_array( $spec_ai_options )
-			&& ! empty( $spec_ai_options['auth_token'] )
-			&& is_string( $spec_ai_options['auth_token'] )
-			&& ! empty( trim( $spec_ai_options['auth_token'] ) )
-		);
-
 		$localize = apply_filters(
 			'uag_react_admin_localize',
 			array(
@@ -268,9 +258,6 @@ class Admin_Menu {
 				'is_block_theme'           => \UAGB_Admin_Helper::is_block_theme(),
 				'spectra_pro_url'          => \UAGB_Admin_Helper::get_spectra_pro_url(),
 				'site_details'             => $site_details,
-				'spec_auth_middleware'     => defined( 'SPEC_AI_MIDDLEWARE' ) ? SPEC_AI_MIDDLEWARE : null,
-				'is_spec_authorized'       => $is_spec_authorized,
-				'spec_auth_nonce'          => wp_create_nonce( 'spec_ai_auth_nonce' ),
 			)
 		);
 
