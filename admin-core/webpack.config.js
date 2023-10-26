@@ -39,10 +39,6 @@ const commonConfig = {
 				newPath,
 				'blocks-config/utils/'
 			),
-			'@ProBlocks': path.resolve(
-				newPath,
-				'../spectra-pro/src/blocks/'
-			),
 		},
 	},
 	module: {

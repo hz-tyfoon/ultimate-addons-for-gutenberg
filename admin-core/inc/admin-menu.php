@@ -226,12 +226,6 @@ class Admin_Menu {
 		$theme_settings      = $theme_data->get_settings();
 		$theme_font_families = isset( $theme_settings['typography']['fontFamilies']['theme'] ) && is_array( $theme_settings['typography']['fontFamilies']['theme'] ) ? $theme_settings['typography']['fontFamilies']['theme'] : array();
 
-		// Get the necessary site details for the admin dashboard.
-		$site_details = array(
-			'name'        => get_bloginfo( 'name' ),
-			'description' => get_bloginfo( 'description' ),
-		);
-
 		$localize = apply_filters(
 			'uag_react_admin_localize',
 			array(
@@ -258,7 +252,6 @@ class Admin_Menu {
 				'theme_fonts'              => $theme_font_families,
 				'is_block_theme'           => \UAGB_Admin_Helper::is_block_theme(),
 				'spectra_pro_url'          => \UAGB_Admin_Helper::get_spectra_pro_url(),
-				'site_details'             => $site_details,
 			)
 		);
 

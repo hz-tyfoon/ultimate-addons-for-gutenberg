@@ -64,7 +64,6 @@ module.exports = {
 		uagb_image_gallery: true,
 		Isotope: true,
 		imagesLoaded: true,
-		screen: true,
 		UAGBTabs: true,
 	},
 };
