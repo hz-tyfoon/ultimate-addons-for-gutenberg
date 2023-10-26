@@ -126,10 +126,6 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 		 * @return void
 		 */
 		public function loader() {
-			// If the UAGB directory is not defined, then bail.
-			if ( ! defined( 'UAGB_DIR' ) ) {
-				return;
-			}
 
 			require_once UAGB_DIR . 'classes/utils.php';
 			require_once UAGB_DIR . 'classes/class-spectra-block-prioritization.php';
