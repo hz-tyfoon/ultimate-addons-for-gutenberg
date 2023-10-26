@@ -88,7 +88,6 @@ class Admin_Helper {
 			'insta_linked_accounts'              => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_insta_linked_accounts', array() ),
 			'spectra_global_fse_fonts'           => \UAGB_Admin_Helper::get_admin_settings_option( 'spectra_global_fse_fonts', array() ),
 			'theme_fonts'                        => $theme_font_families,
-			'open_ai_options'                    => \UAGB_Admin_Helper::get_open_ai_data(),
 		);
 
 		return $options;

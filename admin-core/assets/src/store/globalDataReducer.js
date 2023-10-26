@@ -253,11 +253,6 @@ const globalDataReducer = ( state = {}, action ) => {
                 ...state,
                 btnInheritFromTheme: action.payload,
                 };
-		case 'UPDATE_OPEN_AI_OPTIONS':
-			return {
-				...state,
-				spectraOpenAIOptions: action.payload,
-			};
         default:
             return state;
     }
