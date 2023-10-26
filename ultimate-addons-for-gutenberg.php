@@ -16,10 +16,6 @@ define( 'UAGB_ROOT', dirname( plugin_basename( UAGB_FILE ) ) );
 define( 'UAGB_PLUGIN_NAME', 'Spectra' );
 define( 'UAGB_PLUGIN_SHORT_NAME', 'Spectra' );
 define( 'SPECTRA_PRO_PLUGIN_URL', 'https://wpspectra.com/pro' );
-// Until we move to the library, all plugins need to check if this constant was defined.
-if ( ! defined( 'SPEC_AI_MIDDLEWARE' ) ) {
-	define( 'SPEC_AI_MIDDLEWARE', 'https://store.brainstormforce.com/auth/' );
-}
 
 if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
 	add_action( 'admin_notices', 'uagb_fail_php_version' );

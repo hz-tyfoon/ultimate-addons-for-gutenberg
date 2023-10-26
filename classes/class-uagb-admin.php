@@ -54,8 +54,6 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			// Activation hook.
 			add_action( 'admin_init', array( $this, 'activation_redirect' ) );
 
-			add_action( 'admin_init', array( $this, 'verify_spec_authorization' ) );
-
 			add_action( 'admin_init', array( $this, 'update_old_user_option_by_url_params' ) );
 
 			add_action( 'admin_post_uag_rollback', array( $this, 'post_uagb_rollback' ) );
@@ -135,52 +133,6 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 					'response' => 200,
 				)
 			);
-		}
-
-		/**
-		 * Verify if the user was given authorization to use Spec AI.
-		 *
-		 * @since x.x.x
-		 * @return void
-		 */
-		public function verify_spec_authorization() {
-			if ( ! current_user_can( 'manage_options' ) || empty( $_SERVER['HTTP_REFERER'] ) ) {
-				return;
-			}
-
-			// Redirect to the settings page if the user is trying to revoke the token.
-			if ( isset( $_GET['revoke_spec_authorization_token'] ) && 'definitely' === $_GET['revoke_spec_authorization_token'] ) {
-				UAGB_Admin_Helper::delete_admin_settings_option( 'uagb_spec_auth_token' );
-				wp_safe_redirect( admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' ) );
-				exit;
-			}
-
-			// Get the urls for the middleware and the referrer.
-			$middleware_url = wp_parse_url( SPEC_AI_MIDDLEWARE );
-			$referrer_url   = wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) );
-
-			// If the middleware and referrer are not the same, then bail.
-			if ( ! is_array( $middleware_url )
-				|| ! is_array( $referrer_url )
-				|| $middleware_url['host'] !== $referrer_url['host']
-			) {
-				return;
-			}
-
-			// Get the nonce.
-			$nonce = ( isset( $_GET['nonce'] ) ) ? sanitize_key( $_GET['nonce'] ) : '';
-
-			// If the nonce is not valid, or if there's no token, then bail.
-			if ( false === wp_verify_nonce( $nonce, 'uagb_spec_auth_nonce' ) || ! isset( $_GET['token'] ) ) {
-				return;
-			}
-
-			// Set the redirect url.
-			$redirect_url = ( isset( $_GET['requested_from'] ) ) ? esc_url_raw( $_GET['requested_from'] ) : admin_url( 'admin.php?page=spectra&path=settings&settings=spectra-ai' );
-			$oauth_token  = UAGB_Admin_Helper::encrypt( sanitize_text_field( $_GET['token'] ) );
-			UAGB_Admin_Helper::update_admin_settings_option( 'uagb_spec_auth_token', $oauth_token );
-			wp_safe_redirect( $redirect_url );
-			exit;
 		}
 
 		/**
