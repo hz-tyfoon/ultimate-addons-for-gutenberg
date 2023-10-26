@@ -9,7 +9,7 @@ import { getFallbackNumber } from '@Controls/getAttributeFallback';
 import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateShadowCSS from '@Controls/generateShadowCSS';
 
-function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
+function styling( attributes, clientId, name, deviceType  ) {
 	const blockName = name.replace( 'uagb/', '' );
 	const previewType = deviceType.toLowerCase();
 
@@ -145,7 +145,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		const borderCSSMobile = generateBorderCSS( attributes, 'btn', 'mobile' );
 
 		selectors = {
-			'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater': {
+			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater': {
 				'font-size': generateCSSUnit( size, sizeType ),
 				'line-height': generateCSSUnit( lineHeight, lineHeightType ),
 				'font-family': fontFamily,
@@ -165,42 +165,42 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 				'box-shadow': boxShadowCSS,
 				'letter-spacing': generateCSSUnit( letterSpacing, letterSpacingType ),
 			},
-			'.uagb-buttons__outer-wrap .uagb-buttons-repeater:hover .uagb-button__link': {
+			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover .uagb-button__link': {
 				'color': hColor,
 			},
-			'.uagb-buttons__outer-wrap .uagb-buttons-repeater:hover': {
+			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover': {
 				'color': hColor,
 			},
-			'.uagb-buttons__outer-wrap .uagb-buttons-repeater .uagb-button__link': {
+			'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__link': {
 				'color': color,
 			},
 		};
-		selectors[ ' .uagb-buttons-repeater' ] = borderCSS;
-		selectors[ ' .uagb-buttons-repeater:hover' ] = {
+		selectors[ ' .wp-block-button__link.uagb-buttons-repeater' ] = borderCSS;
+		selectors[ ' .wp-block-button__link.uagb-buttons-repeater:hover' ] = {
 			'border-color': btnBorderHColor,
 		};
 		if ( useSeparateBoxShadows ) {
-			selectors['.uagb-buttons__outer-wrap .uagb-buttons-repeater:hover'] = {
+			selectors['.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover'] = {
 				'box-shadow' : boxShadowHoverCSS,
 			}
 		}
 		//Twenty Twenty theme
 		selectors[
-			'.uagb-buttons__outer-wrap.wp-block-button.is-style-outline .uagb-button__wrapper .uagb-buttons-repeater'
+			'.uagb-buttons__outer-wrap.wp-block-button.is-style-outline .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = borderCSS;
 		tabletSelectors[
-			'.uagb-buttons__outer-wrap.wp-block-button.is-style-outline .uagb-button__wrapper .uagb-buttons-repeater'
+			'.uagb-buttons__outer-wrap.wp-block-button.is-style-outline .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = borderCSSTablet;
 		mobileSelectors[
-			'.uagb-buttons__outer-wrap.wp-block-button.is-style-outline .uagb-button__wrapper .uagb-buttons-repeater'
+			'.uagb-buttons__outer-wrap.wp-block-button.is-style-outline .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = borderCSSMobile;
 		selectors[
-			'.uagb-buttons__outer-wrap.wp-block-button.is-style-outline .uagb-button__wrapper .uagb-buttons-repeater:hover'
+			'.uagb-buttons__outer-wrap.wp-block-button.is-style-outline .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater:hover'
 		] = {
 			'border-color': btnBorderHColor,
 		};
 		mobileSelectors[
-			'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater'
+			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = {
 			'font-size': generateCSSUnit( sizeMobile, sizeTypeMobile ),
 			'line-height': generateCSSUnit( lineHeightMobile, lineHeightType ),
@@ -217,7 +217,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		};
 
 		tabletSelectors[
-			'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater'
+			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = {
 			'font-size': generateCSSUnit( sizeTablet, sizeTypeTablet ),
 			'line-height': generateCSSUnit( lineHeightTablet, lineHeightType ),
@@ -234,7 +234,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		};
 
 		if ( 'transparent' === backgroundType ) {
-			selectors[ '.uagb-buttons__outer-wrap .uagb-buttons-repeater' ] = {
+			selectors[ '.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater' ] = {
 				'background': 'transparent',
 			};
 		} else if ( 'gradient' === backgroundType ) {
@@ -250,16 +250,16 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 				'selectGradient': selectGradient,
 			};
 			const btnBackground = generateBackgroundCSS( backgroundAttributes );
-			selectors[ '.uagb-buttons__outer-wrap .uagb-buttons-repeater' ] = btnBackground;
+			selectors[ '.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater' ] = btnBackground;
 		} else if ( 'color' === backgroundType ) {
-			selectors[ '.uagb-buttons__outer-wrap.wp-block-button .uagb-buttons-repeater' ] = {
+			selectors[ '.uagb-buttons__outer-wrap.wp-block-button .wp-block-button__link.uagb-buttons-repeater' ] = {
 				'background': background,
 			};
 		}
 
 
 		if ( 'transparent' === hoverbackgroundType ) {
-			selectors[ '.uagb-buttons__outer-wrap.wp-block-button .uagb-buttons-repeater:hover' ] = {
+			selectors[ '.uagb-buttons__outer-wrap.wp-block-button .wp-block-button__link.uagb-buttons-repeater:hover' ] = {
 				'background': 'transparent',
 			};
 		} else if ( 'gradient' === hoverbackgroundType ) {
@@ -277,16 +277,16 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 			const btnhBackground = generateBackgroundCSS( hoverbackgroundAttributes );
 			selectors[
-				'.uagb-buttons__outer-wrap.wp-block-button .uagb-buttons-repeater:hover'
+				'.uagb-buttons__outer-wrap.wp-block-button .wp-block-button__link.uagb-buttons-repeater:hover'
 			] = btnhBackground;
 		} else if ( 'color' === hoverbackgroundType ) {
-			selectors[ '.uagb-buttons__outer-wrap.wp-block-button .uagb-buttons-repeater:hover' ] = {
+			selectors[ '.uagb-buttons__outer-wrap.wp-block-button .wp-block-button__link.uagb-buttons-repeater:hover' ] = {
 				'background': hBackground,
 			};
 		}
 	} else {
 		selectors = {
-			'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater': {
+			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater': {
 				'margin-left': generateCSSUnit( leftMargin, marginType ),
 				'margin-right': generateCSSUnit( rightMargin, marginType ),
 				'margin-top': generateCSSUnit( topMargin, marginType ),
@@ -295,7 +295,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		};
 
 		mobileSelectors[
-			'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater'
+			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = {
 			'margin-left': generateCSSUnit( leftMarginMobile, marginType ),
 			'margin-right': generateCSSUnit( rightMarginMobile, marginType ),
@@ -304,7 +304,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		};
 
 		tabletSelectors[
-			'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater'
+			'.uagb-buttons__outer-wrap .uagb-button__wrapper .wp-block-button__link.uagb-buttons-repeater'
 		] = {
 			'margin-left': generateCSSUnit( leftMarginTablet, marginType ),
 			'margin-right': generateCSSUnit( rightMarginTablet, marginType ),
@@ -312,27 +312,27 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginType ),
 		};
 	}
-	selectors[ '.uagb-buttons__outer-wrap .uagb-buttons-repeater .uagb-button__icon svg' ] = {
+	selectors[ '.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__icon svg' ] = {
 		'width': generateCSSUnit( getFallbackNumber( iconSize, 'iconSize', blockName ), 'px' ),
 		'height': generateCSSUnit( getFallbackNumber( iconSize, 'iconSize', blockName ), 'px' ),
 		'fill': iconColor,
 	};
 	tabletSelectors[
-		'.uagb-buttons__outer-wrap .uagb-buttons-repeater .uagb-button__icon svg'
+		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__icon svg'
 	] = {
 		'width': generateCSSUnit( iconSizeTablet, 'px' ),
 		'height': generateCSSUnit( iconSizeTablet, 'px' ),
 		'fill': iconColor,
 	};
 	mobileSelectors[
-		'.uagb-buttons__outer-wrap .uagb-buttons-repeater .uagb-button__icon svg'
+		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater .uagb-button__icon svg'
 	] = {
 		'width': generateCSSUnit( iconSizeMobile, 'px' ),
 		'height': generateCSSUnit( iconSizeMobile, 'px' ),
 		'fill': iconColor,
 	};
 	selectors[
-		'.uagb-buttons__outer-wrap .uagb-buttons-repeater:hover .uagb-button__icon > svg'
+		'.uagb-buttons__outer-wrap .wp-block-button__link.uagb-buttons-repeater:hover .uagb-button__icon > svg'
 	] = {
 		'fill': iconHColor || hColor,
 	};
@@ -367,22 +367,21 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
             [ leftSideMargin ]: mobileIconMargin,
         };
     }
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }`;
+	let stylingCss = generateCSS( selectors, id );
 
-	const base_selector = gbsSelector ? gbsSelector + ' ' : `.editor-styles-wrapper .uagb-block-${ block_id }`;
-	let stylingCss = generateCSS( selectors, base_selector );
-
-	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
 		stylingCss += generateCSS(
 			tabletSelectors,
-			`${ base_selector }`,
+			`${ id }`,
 			true,
 			'tablet'
 		);
 
-		if( 'mobile' === previewType || gbsSelector ){
+		if( 'mobile' === previewType ){
 			stylingCss += generateCSS(
 				mobileSelectors,
-				`${ base_selector }`,
+				`${ id }`,
 				true,
 				'mobile'
 			);
