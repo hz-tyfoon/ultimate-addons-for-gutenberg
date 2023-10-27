@@ -29,6 +29,7 @@ const Render = ( props ) => {
 	let { label } = attributes;
 
 	const buttonTypeClass = ( inheritFromTheme && 'secondary' === buttonType ) ? 'ast-outline-button' : 'wp-block-button__link';
+	//border-width is added to revert the border related styles by default.
 	const borderStyle = 'secondary' === buttonType ? { 'border-width': 'revert-layer' } : '';
 
 	// Check if this has dynamic content.
