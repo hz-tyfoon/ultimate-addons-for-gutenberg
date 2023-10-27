@@ -929,7 +929,7 @@ class UAGB_Init_Blocks {
 	 *
 	 * @param string $block_content The block content.
 	 * @param array  $block The block data.
-	 * @since x.x.x
+	 * @since 2.9.0
 	 * @return mixed Returns the new block content.
 	 */
 	public function add_gbs_class( $block_content, $block ) {
@@ -961,7 +961,7 @@ class UAGB_Init_Blocks {
 	/**
 	 * Function to save Spectra Global Block Styles data.
 	 *
-	 * @since x.x.x
+	 * @since 2.9.0
 	 * @return void
 	 */
 	public function uag_global_block_styles() {
