@@ -220,6 +220,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Improvement: Admin - Made the welcome video GDPR compliant and added a filter to hide it.
 * Improvement: Buttons - Added a new vertical alignment option.
 * Improvement: Container - Enhanced the accessibility of nested Containers.
+* Improvement: Buttons - Added primary and secondary options to inherit from theme settings for Astra theme.
 * Fix: Image Gallery - Resolved an issue in which the custom link validation would fail when the root domain contained hyphens.
 * Fix: Lottie - Resolved an issue in which the SVG aligment would not work as intended in the TwentyTwentyThree theme.
 * Fix: Form - Resolved an issue that caused form submissions to fail when the reCAPTCHA badge was hidden with v3 enabled.
