@@ -60,5 +60,10 @@ module.exports = {
 		UAGBCountdown: true,
 		uagb_carousel_height: true,
 		scroll: true,
+		Swiper: true,
+		uagb_image_gallery: true,
+		Isotope: true,
+		imagesLoaded: true,
+		UAGBTabs: true,
 	},
 };

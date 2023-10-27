@@ -21,6 +21,8 @@ import AdvancedPopColorControl from '@Components/color-control/advanced-pop-colo
 import Range from '@Components/range/Range';
 import { boxShadowPresets, boxShadowHoverPresets } from './presets';
 import UAGPresets from '@Components/presets';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
 
@@ -179,6 +181,51 @@ const Settings = ( props ) => {
 		textColor,
 		linkColor,
 		linkHoverColor,
+
+		gradientOverlayValue,
+		gradientOverlayColor1,
+		gradientOverlayColor2,
+		gradientOverlayLocation1,
+		gradientOverlayLocation2,
+		gradientOverlayType,
+		gradientOverlayAngle,
+		selectOverlayGradient,
+		backgroundOverlayColor,
+		backgroundSizeOverlayDesktop,
+		backgroundSizeOverlayTablet,
+		backgroundSizeOverlayMobile,
+		backgroundCustomSizeOverlayDesktop,
+		backgroundCustomSizeOverlayTablet,
+		backgroundCustomSizeOverlayMobile,
+		backgroundCustomOverlaySizeType,
+		backgroundRepeatOverlayDesktop,
+		backgroundRepeatOverlayTablet,
+		backgroundRepeatOverlayMobile,
+		backgroundAttachmentOverlayDesktop,
+		backgroundAttachmentOverlayTablet,
+		backgroundAttachmentOverlayMobile,
+		backgroundPositionOverlayDesktop,
+		backgroundPositionOverlayTablet,
+		backgroundPositionOverlayMobile,
+		backgroundOverlayImageDesktop,
+		backgroundOverlayImageTablet,
+		backgroundOverlayImageMobile,
+		customOverlayPosition,
+		xPositionOverlayDesktop,
+		xPositionOverlayTablet,
+		xPositionOverlayMobile,
+		xPositionOverlayType,
+		xPositionOverlayTypeTablet,
+		xPositionOverlayTypeMobile,
+		yPositionOverlayDesktop,
+		yPositionOverlayTablet,
+		yPositionOverlayMobile,
+		yPositionOverlayType,
+		yPositionOverlayTypeTablet,
+		yPositionOverlayTypeMobile,
+		overlayBlendMode,
+		overlayBlendModeTablet,
+		overlayBlendModeMobile,
 
 		// responsive
 		innerContentCustomWidthTypeTablet,
@@ -874,6 +921,10 @@ const Settings = ( props ) => {
 						value: gradientColor1,
 						label: 'gradientColor1',
 					} }
+					backgroundOverlayGradientColor1 = { {
+						value: gradientOverlayColor1,
+						label: 'gradientOverlayColor1',
+					} }
 					gradientType={ {
 						value: selectGradient,
 						label: 'selectGradient',
@@ -882,21 +933,41 @@ const Settings = ( props ) => {
 						value: gradientColor2,
 						label: 'gradientColor2',
 					} }
+					backgroundOverlayGradientColor2 = { {
+						value: gradientOverlayColor2,
+						label: 'gradientOverlayColor2',
+					} }
 					backgroundGradientLocation1={ {
 						value: gradientLocation1,
 						label: 'gradientLocation1',
+					} }
+					backgroundOverlayGradientLocation1 = { {
+						value: gradientOverlayLocation1,
+						label: 'gradientOverlayLocation1',
 					} }
 					backgroundGradientLocation2={ {
 						value: gradientLocation2,
 						label: 'gradientLocation2',
 					} }
+					backgroundOverlayGradientLocation2 = { {
+						value: gradientOverlayLocation2,
+						label: 'gradientOverlayLocation2',
+					} }
 					backgroundGradientType={ {
 						value: gradientType,
 						label: 'gradientType',
 					} }
+					backgroundOverlayGradientType={ {
+						value: gradientOverlayType,
+						label: 'gradientOverlayType',
+					} }
 					backgroundGradientAngle={ {
 						value: gradientAngle,
 						label: 'gradientAngle',
+					} }
+					backgroundOverlayGradientAngle = { {
+						value: gradientOverlayAngle,
+						label: 'gradientOverlayAngle',
 					} }
 					backgroundImageColor={ {
 						value: backgroundImageColor,
@@ -991,9 +1062,14 @@ const Settings = ( props ) => {
 						},
 					} }
 					imageResponsive={ true }
+					imageOverlayResponsive={ true }
 					backgroundColor={ {
 						value: backgroundColor,
 						label: 'backgroundColor',
+					} }
+					backgroundOverlayColor={ {
+						value: backgroundOverlayColor,
+						label: 'backgroundOverlayColor',
 					} }
 					backgroundType={ {
 						value: backgroundType,
@@ -1076,6 +1152,168 @@ const Settings = ( props ) => {
 					backgroundVideoOpacity={ {
 						value: overlayOpacity,
 						label: 'overlayOpacity',
+					} }
+					backgroundOverlayGradient={ {
+						value: gradientOverlayValue,
+						label: 'gradientOverlayValue',
+					} }
+					overlayGradientType={ {
+						value: selectOverlayGradient,
+						label: 'selectOverlayGradient',
+					} }
+					backgroundOverlaySize={ {
+						desktop: {
+							value: backgroundSizeOverlayDesktop,
+							label: 'backgroundSizeOverlayDesktop',
+						},
+						tablet: {
+							value: backgroundSizeOverlayTablet,
+							label: 'backgroundSizeOverlayTablet',
+						},
+						mobile: {
+							value: backgroundSizeOverlayMobile,
+							label: 'backgroundSizeOverlayMobile',
+						},
+					} }
+					backgroundOverlayCustomSize={ {
+						desktop: {
+							value: backgroundCustomSizeOverlayDesktop,
+							label: 'backgroundCustomSizeOverlayDesktop',
+						},
+						tablet: {
+							value: backgroundCustomSizeOverlayTablet,
+							label: 'backgroundCustomSizeOverlayTablet',
+						},
+						mobile: {
+							value: backgroundCustomSizeOverlayMobile,
+							label: 'backgroundCustomSizeOverlayMobile',
+						},
+					} }
+					backgroundOverlayCustomSizeType={ {
+						value: backgroundCustomOverlaySizeType,
+						label: 'backgroundCustomOverlaySizeType',
+					} }
+					backgroundOverlayRepeat={ {
+						desktop: {
+							value: backgroundRepeatOverlayDesktop,
+							label: 'backgroundRepeatOverlayDesktop',
+						},
+						tablet: {
+							value: backgroundRepeatOverlayTablet,
+							label: 'backgroundRepeatOverlayTablet',
+						},
+						mobile: {
+							value: backgroundRepeatOverlayMobile,
+							label: 'backgroundRepeatOverlayMobile',
+						},
+					} }
+					backgroundOverlayAttachment={ {
+						desktop: {
+							value: backgroundAttachmentOverlayDesktop,
+							label: 'backgroundAttachmentOverlayDesktop',
+						},
+						tablet: {
+							value: backgroundAttachmentOverlayTablet,
+							label: 'backgroundAttachmentOverlayTablet',
+						},
+						mobile: {
+							value: backgroundAttachmentOverlayMobile,
+							label: 'backgroundAttachmentOverlayMobile',
+						},
+					} }
+					backgroundOverlayPosition={ {
+						desktop: {
+							value: backgroundPositionOverlayDesktop,
+							label: 'backgroundPositionOverlayDesktop',
+						},
+						tablet: {
+							value: backgroundPositionOverlayTablet,
+							label: 'backgroundPositionOverlayTablet',
+						},
+						mobile: {
+							value: backgroundPositionOverlayMobile,
+							label: 'backgroundPositionOverlayMobile',
+						},
+					} }
+					backgroundOverlayImage={ {
+						desktop: {
+							value: backgroundOverlayImageDesktop,
+							label: 'backgroundOverlayImageDesktop',
+						},
+						tablet: {
+							value: backgroundOverlayImageTablet,
+							label: 'backgroundOverlayImageTablet',
+						},
+						mobile: {
+							value: backgroundOverlayImageMobile,
+							label: 'backgroundOverlayImageMobile',
+						},
+					} }
+					customOverlayPosition={ {
+						value: customOverlayPosition,
+						label: 'customOverlayPosition',
+					} }
+					xPositionOverlayDesktop={ {
+						value: xPositionOverlayDesktop,
+						label: 'xPositionOverlayDesktop',
+					} }
+					xPositionOverlayTablet={ {
+						value: xPositionOverlayTablet,
+						label: 'xPositionOverlayTablet',
+					} }
+					xPositionOverlayMobile={ {
+						value: xPositionOverlayMobile,
+						label: 'xPositionOverlayMobile',
+					} }
+					xPositionOverlayType={ {
+						value: xPositionOverlayType,
+						label: 'xPositionOverlayType',
+					} }
+					xPositionOverlayTypeTablet={ {
+						value: xPositionOverlayTypeTablet,
+						label: 'xPositionOverlayTypeTablet',
+					} }
+					xPositionOverlayTypeMobile={ {
+						value: xPositionOverlayTypeMobile,
+						label: 'xPositionOverlayTypeMobile',
+					} }
+					yPositionOverlayDesktop={ {
+						value: yPositionOverlayDesktop,
+						label: 'yPositionOverlayDesktop',
+					} }
+					yPositionOverlayTablet={ {
+						value: yPositionOverlayTablet,
+						label: 'yPositionOverlayTablet',
+					} }
+					yPositionOverlayMobile={ {
+						value: yPositionOverlayMobile,
+						label: 'yPositionOverlayMobile',
+					} }
+					yPositionOverlayType={ {
+						value: yPositionOverlayType,
+						label: 'yPositionOverlayType',
+					} }
+					yPositionOverlayTypeTablet={ {
+						value: yPositionOverlayTypeTablet,
+						label: 'yPositionOverlayTypeTablet',
+					} }
+					yPositionOverlayTypeMobile={ {
+						value: yPositionOverlayTypeMobile,
+						label: 'yPositionOverlayTypeMobile',
+					} }
+					overlayBlendMode={ {
+						desktop: {
+							value: overlayBlendMode,
+							label: 'overlayBlendMode',
+						},
+						tablet: {
+							value: overlayBlendModeTablet,
+							label: 'overlayBlendModeTablet',
+						},
+						mobile: {
+							value: overlayBlendModeMobile,
+							label: 'overlayBlendModeMobile',
+						},
 					} }
 					onOpacityChange={ ( opacity ) => setAttributes( { overlayOpacity: opacity } ) }
 					{ ...props }
@@ -1842,10 +2080,10 @@ const Settings = ( props ) => {
 	return (
 		<InspectorControls>
 			<InspectorTabs>
-				<InspectorTab { ...UAGTabs.general }>
+				<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 					{ generalSettings() }
 				</InspectorTab>
-				<InspectorTab { ...UAGTabs.style }>
+				<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 					{ backgroundSettings() }
 					{ colorSettings() }
 					{ borderSettings() }
@@ -1853,7 +2091,9 @@ const Settings = ( props ) => {
 					{ shapeDividersSettings() }
 					{ spacingSettings() }
 				</InspectorTab>
-				<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+				<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+					{ renderGBSSettings( styling, setAttributes, attributes ) }
+				</InspectorTab>
 			</InspectorTabs>
 		</InspectorControls>
 	);

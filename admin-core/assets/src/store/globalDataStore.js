@@ -38,8 +38,8 @@ const initialState = {
 	secretKeyV2: '',
 	secretKeyV3: '',
 	settingsSavedNotification: '',
-	enableComingSoonMode: 'disabled',
-	comingSoonPage: '',
+	visibilityMode: 'disabled',
+	visibilityPage: '',
 	blocksEditorSpacing: '',
 	containerGlobalPadding: '',
 	containerGlobalElementsGap: 20,
@@ -59,7 +59,8 @@ const initialState = {
 	],
 	spectraFSEFonts: [],
 	themeFonts: [],
-	spectraIsBlockTheme: false
+	spectraIsBlockTheme: false,
+	enableGBSExtension: '',
 };
 
 const globalDataStore = createStore(

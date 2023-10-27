@@ -26,7 +26,9 @@ import { store as coreStore } from '@wordpress/core-data';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 import boxShadowPresets,{ boxShadowHoverPresets } from './presets';
 import UAGPresets from '@Components/presets';
-import { pickRelevantMediaFiles } from './utils';
+import { pickRelevantMediaFiles, getDevicesAttributes } from './utils';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 export default function Settings( props ) {
 
@@ -364,7 +366,8 @@ export default function Settings( props ) {
 			return;
 		}
 
-		const mediaAttributes = pickRelevantMediaFiles( media, imageDefaultSize );
+		let mediaAttributes = pickRelevantMediaFiles( media, imageDefaultSize );
+		mediaAttributes = { ...mediaAttributes, ...getDevicesAttributes( media, 'Tablet' ), ...getDevicesAttributes( media, 'Mobile' ) };
 
 		// If Custom Sizing was set, remove the size reset.
 		if ( 'custom' === sizeSlug ) {
@@ -1824,7 +1827,7 @@ export default function Settings( props ) {
 		<>
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
+					<InspectorTab { ...UAGTabs.general } parentProps={ props }>
 						{ generalPanel }
 						{ shapeGeneralPanel }
 						{ layout === 'overlay' && (
@@ -1835,7 +1838,7 @@ export default function Settings( props ) {
 							</>
 						) }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
+					<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 						{ ImageStylePanel }
 						{ 'static' === imageHoverEffect && imageBoxShadowStylePanel }
 						{ layout === 'overlay' && (
@@ -1848,7 +1851,9 @@ export default function Settings( props ) {
 						{ enableCaption && layout !== 'overlay' && captionStylePanel }
 						{ 'none' !== seperatorStyle && layout === 'overlay' && seperatorStylePanel }
 					</InspectorTab>
-					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>

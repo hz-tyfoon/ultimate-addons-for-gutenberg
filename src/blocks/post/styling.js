@@ -12,6 +12,7 @@ import generateShadowCSS from '@Controls/generateShadowCSS';
 
 function styling( attributes, clientId, deviceType ) {
 	const {
+		block_id,
 		blockName,
 		btnBorderHColor,
 		align,
@@ -667,7 +668,19 @@ function styling( attributes, clientId, deviceType ) {
 			'line-height': titleLineHeightMobile + titleLineHeightType,
 			'letter-spacing': generateCSSUnit( titleLetterSpacingMobile, titleLetterSpacingType ),
 		},
-		' .uagb-post__inner-wrap .uagb-post-grid-byline': {
+		' .uagb-post-grid-byline': {
+			'font-size': generateCSSUnit( metaFontSizeMobile, metaFontSizeType ),
+			'line-height': metaLineHeightMobile + metaLineHeightType,
+			'padding-bottom': generateCSSUnit( metaBottomSpaceMobile, metaBottomSpaceUnit ),
+			'letter-spacing': generateCSSUnit( metaLetterSpacingMobile, metaLetterSpacingType ),
+		},
+		' .uagb-post-grid-byline time': {
+			'font-size': generateCSSUnit( metaFontSizeMobile, metaFontSizeType ),
+			'line-height': metaLineHeightMobile + metaLineHeightType,
+			'padding-bottom': generateCSSUnit( metaBottomSpaceMobile, metaBottomSpaceUnit ),
+			'letter-spacing': generateCSSUnit( metaLetterSpacingMobile, metaLetterSpacingType ),
+		},
+		' .uagb-post-grid-byline span.uagb-post__comment': {
 			'font-size': generateCSSUnit( metaFontSizeMobile, metaFontSizeType ),
 			'line-height': metaLineHeightMobile + metaLineHeightType,
 			'padding-bottom': generateCSSUnit( metaBottomSpaceMobile, metaBottomSpaceUnit ),
@@ -775,7 +788,19 @@ function styling( attributes, clientId, deviceType ) {
 			'line-height': titleLineHeightTablet + titleLineHeightType,
 			'letter-spacing': generateCSSUnit( titleLetterSpacingTablet, titleLetterSpacingType ),
 		},
-		' .uagb-post__inner-wrap .uagb-post-grid-byline': {
+		' .uagb-post-grid-byline': {
+			'font-size': generateCSSUnit( metaFontSizeTablet, metaFontSizeType ),
+			'line-height': metaLineHeightTablet + metaLineHeightType,
+			'padding-bottom': generateCSSUnit( metaBottomSpaceTablet, metaBottomSpaceUnit ),
+			'letter-spacing': generateCSSUnit( metaLetterSpacingTablet, metaLetterSpacingType ),
+		},
+		' .uagb-post-grid-byline time': {
+			'font-size': generateCSSUnit( metaFontSizeTablet, metaFontSizeType ),
+			'line-height': metaLineHeightTablet + metaLineHeightType,
+			'padding-bottom': generateCSSUnit( metaBottomSpaceTablet, metaBottomSpaceUnit ),
+			'letter-spacing': generateCSSUnit( metaLetterSpacingTablet, metaLetterSpacingType ),
+		},
+		' .uagb-post-grid-byline span.uagb-post__comment': {
 			'font-size': generateCSSUnit( metaFontSizeTablet, metaFontSizeType ),
 			'line-height': metaLineHeightTablet + metaLineHeightType,
 			'padding-bottom': generateCSSUnit( metaBottomSpaceTablet, metaBottomSpaceUnit ),
@@ -990,13 +1015,14 @@ function styling( attributes, clientId, deviceType ) {
 	}
 
 	let stylingCss = '';
+	const baseSelector = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
-	stylingCss = generateCSS( selectors, `.editor-styles-wrapper .uagb-block-${ clientId.substr( 0, 8 ) }` );
+	stylingCss = generateCSS( selectors, baseSelector );
 
 	if( 'tablet' === previewType || 'mobile' === previewType ) {
 		stylingCss += generateCSS(
 			tabletSelectors,
-			`.uagb-block-${ clientId.substr( 0, 8 ) }`,
+			baseSelector,
 			true,
 			'tablet'
 		);
@@ -1004,7 +1030,7 @@ function styling( attributes, clientId, deviceType ) {
 		if( 'mobile' === previewType ){
 			stylingCss += generateCSS(
 				mobileSelectors,
-				`.uagb-block-${ clientId.substr( 0, 8 ) }`,
+				baseSelector,
 				true,
 				'mobile'
 			);

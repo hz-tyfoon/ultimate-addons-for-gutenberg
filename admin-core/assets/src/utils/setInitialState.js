@@ -4,7 +4,6 @@ const setInitialState = ( store ) => {
     apiFetch( {
         path: '/uag/v1/admin/commonsettings/',
     } ).then( ( data ) => {
-        
         const initialState = {
             initialStateSetFlag : true,
             activeBlocksFilterTab : 'all',
@@ -32,8 +31,8 @@ const setInitialState = ( store ) => {
 			secretKeyV2: data.recaptcha_secret_key_v2,
 			siteKeyV3: data.recaptcha_site_key_v3,
 			secretKeyV3: data.recaptcha_secret_key_v3,
-			enableComingSoonMode: data.uag_enable_coming_soon_mode,
-			comingSoonPage: data.coming_soon_page,
+			visibilityMode: data.uag_visibility_mode,
+			visibilityPage: data.visibility_page,
 			blocksEditorSpacing: data.uag_blocks_editor_spacing,
 			containerGlobalPadding: data.uag_container_global_padding,
 			containerGlobalElementsGap: data.uag_container_global_elements_gap,
@@ -48,6 +47,7 @@ const setInitialState = ( store ) => {
             spectraIsBlockTheme: data.wp_is_block_theme,
             themeFonts: data.theme_fonts,
             btnInheritFromTheme: data.uag_btn_inherit_from_theme,
+	        enableGBSExtension: data.uag_enable_gbs_extension,
         };
 
         store.dispatch( {type: 'UPDATE_INITIAL_STATE', payload: initialState} );

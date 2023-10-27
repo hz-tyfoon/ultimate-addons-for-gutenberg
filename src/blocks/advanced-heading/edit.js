@@ -14,12 +14,13 @@ import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import DynamicFontLoader from './dynamicFontLoader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 import AddInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBAdvancedHeading = ( props ) => {
 	const {
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, headingTitle, headingDesc },
 		isSelected,
 		clientId,
 		name,
@@ -28,12 +29,21 @@ const UAGBAdvancedHeading = ( props ) => {
 		setAttributes,
 	} = props;
 
+	// Check dynamic content in heading and description.
+	const headingHasDynamicContent = -1 !== headingTitle.indexOf( '<span data-spectra-dc-field="' );
+	const descriptionHasDynamicContent = headingDesc && -1 !== headingDesc.indexOf( '<span data-spectra-dc-field="' );
+
+	// Including condition in props for child component.
+	props = { ...props, headingHasDynamicContent, descriptionHasDynamicContent };
+
+
 	useEffect( () => {
 		responsiveConditionPreview( props );
 	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
-		if( ! attributes?.context ){
+		// Check if block has dynamic content and context is not set.
+		if ( ( headingHasDynamicContent || descriptionHasDynamicContent ) && ! attributes?.context ) {
 			setAttributes( { context } );
 		}
 	}, [ context ] )
@@ -57,4 +67,5 @@ const UAGBAdvancedHeading = ( props ) => {
 export default compose(
 	AddInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles
 )( UAGBAdvancedHeading );

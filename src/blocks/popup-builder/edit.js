@@ -4,8 +4,7 @@
 
 import { useEffect, useLayoutEffect, useMemo } from '@wordpress/element';
 import { select, useSelect, useDispatch, withDispatch } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
-import ReactHtmlParser from 'react-html-parser';
+import { __ } from '@wordpress/i18n';
 import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
 import { useEntityProp } from '@wordpress/core-data';
 import { compose } from '@wordpress/compose';
@@ -20,6 +19,7 @@ import Render from './render';
 import Settings from './settings';
 import styling from './styling';
 import styles from './editor.lazy.scss';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const SpectraPopupBuilderEdit = ( props ) => {
 
@@ -71,11 +71,6 @@ const SpectraPopupBuilderEdit = ( props ) => {
 		return () => {
 			styles.unuse();
 		};
-	}, [] );
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: clientId.substr( 0, 8 ) } );
 	}, [] );
 
 	// Add Dynamic Block Styling.
@@ -140,16 +135,12 @@ const SpectraPopupBuilderEdit = ( props ) => {
 						'Spectra Popup Builder',
 						'ultimate-addons-for-gutenberg'
 					) }
-					instructions={ ReactHtmlParser(
-						sprintf(
-							// translators: %s: break tag.
-							__(
-								'Display Site-Wide popups on your website.%sSelect a Popup type to start with.',
-								'ultimate-addons-for-gutenberg'
-							),
-							'</br>',
+					instructions={ 
+						__(
+							'Select a Popup type to start with.',
+							'ultimate-addons-for-gutenberg'
 						)
-					) }
+					}
 					variations={ variations }
 					onSelect={ ( nextVariation ) =>
 						blockVariationPickerOnSelect( nextVariation )
@@ -173,5 +164,6 @@ export default compose(
 		dispatch( 'core/block-editor' ).setTemplateValidity( true );
 		return true;
 	} ),
+	addInitialAttr,
 	AddStaticStyles,
 )( SpectraPopupBuilderEdit );

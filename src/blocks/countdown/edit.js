@@ -9,6 +9,7 @@ import DynamicFontLoader from './dynamicFontLoader';
 import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import { compose } from '@wordpress/compose';
 import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 import addInitialAttr from '@Controls/addInitialAttr';
 //  Import CSS.
 import './style.scss';
@@ -74,12 +75,18 @@ const UAGBCountdownEdit = ( props ) => {
 	const countdownRef = useRef( null );
 
 	useEffect( () => {
-		if ( countdownRef ) {
-			setTimeout( () => {
+		let countdownInterval = null;
+		if ( countdownRef && block_id ) {
+			countdownInterval =  setTimeout( () => {
 				UAGBCountdown.editorInit( '.uagb-block-' + block_id, attributes, countdownRef.current );
 			} );
 		}
-	}, [ countdownRef ] );
+		return () => {
+			if( null === countdownInterval ) {
+				clearInterval( countdownInterval );
+			}
+		}
+	}, [ countdownRef, block_id ] );
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
@@ -112,4 +119,5 @@ const UAGBCountdownEdit = ( props ) => {
 export default compose(
 	addInitialAttr,
 	AddStaticStyles,
+	AddGBSStyles
 )( UAGBCountdownEdit );

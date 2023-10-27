@@ -2,6 +2,11 @@
  * Internal dependencies
  */
 import rowIcons from './icons';
+import { __experimentalBlockVariationPicker as BlockVariationPicker } from '@wordpress/block-editor';
+import UAGB_Block_Icons from '@Controls/block-icons';
+import { __ } from '@wordpress/i18n';
+import { useDispatch } from '@wordpress/data';
+import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
 
 /**
  * Template option choices for predefined form layouts.
@@ -9,7 +14,7 @@ import rowIcons from './icons';
  * @constant
  * @type {Array}
  */
-const variations = [
+export const variations = [
 	{
 		name: 'one-column',
 		icon: rowIcons[ '100' ],
@@ -201,4 +206,34 @@ const variations = [
 	},
 ];
 
-export default variations;
+export const VariationPicker = ( props ) => {
+	const { clientId, setAttributes, defaultVariation } = props;
+	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
+
+	const blockVariationPickerOnSelect = ( nextVariation = defaultVariation ) => {
+		if ( nextVariation.attributes ) {
+			setAttributes( nextVariation.attributes );
+		}
+
+		if ( nextVariation.innerBlocks && 'one-column' !== nextVariation.name ) {
+			replaceInnerBlocks( clientId, createBlocksFromInnerBlocksTemplate( nextVariation.innerBlocks ) );
+		}
+	};
+
+	return (
+		<div className="uagb-container-variation-picker">
+			<BlockVariationPicker
+				icon={ UAGB_Block_Icons.container }
+				label={ __( 'Container', 'ultimate-addons-for-gutenberg' ) }
+				instructions={
+					__(
+						'Select a container layout to start with.',
+						'ultimate-addons-for-gutenberg'
+					)
+				}
+				variations={ variations }
+				onSelect={ ( nextVariation ) => blockVariationPickerOnSelect( nextVariation ) }
+			/>
+		</div>
+	);
+};

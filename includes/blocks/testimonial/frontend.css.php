@@ -105,25 +105,29 @@ $selectors = array(
 		'justify-content' => $img_align,
 	),
 );
-if ( 'gradient' === $attr['backgroundType'] ) {
-	$selectors[' .uagb-tm__content']['background-color'] = 'transparent';
-	
-	$gradientColor1    = isset( $attr['gradientColor1'] ) ? $attr['gradientColor1'] : '';
-	$gradientColor2    = isset( $attr['gradientColor2'] ) ? $attr['gradientColor2'] : '';
-	$gradientType      = isset( $attr['gradientType'] ) ? $attr['gradientType'] : '';
-	$gradientLocation1 = isset( $attr['gradientLocation1'] ) ? $attr['gradientLocation1'] : '';
-	$gradientLocation2 = isset( $attr['gradientLocation2'] ) ? $attr['gradientLocation2'] : '';
-	$gradientAngle     = isset( $attr['gradientAngle'] ) ? $attr['gradientAngle'] : '';
 
-	if ( 'basic' === $attr['selectGradient'] && $attr['gradientValue'] ) {
-		$gradient = $attr['gradientValue'];
-	} elseif ( 'linear' === $gradientType && 'advanced' === $attr['selectGradient'] ) {
-		$gradient = 'linear-gradient(' . $gradientAngle . 'deg, ' . $gradientColor1 . ' ' . $gradientLocation1 . '%, ' . $gradientColor2 . ' ' . $gradientLocation2 . '%)';
-	} elseif ( 'radial' === $gradientType && 'advanced' === $attr['selectGradient'] ) {
-		$gradient = 'radial-gradient( at center center, ' . $gradientColor1 . ' ' . $gradientLocation1 . '%, ' . $gradientColor2 . ' ' . $gradientLocation2 . '%)';
-	}
-	$selectors[' .uagb-tm__content']['background-image'] = $gradient;
-	
+$gradient = '';
+
+$gradientColor1    = isset( $attr['gradientColor1'] ) ? $attr['gradientColor1'] : '';
+$gradientColor2    = isset( $attr['gradientColor2'] ) ? $attr['gradientColor2'] : '';
+$gradientType      = isset( $attr['gradientType'] ) ? $attr['gradientType'] : '';
+$gradientLocation1 = isset( $attr['gradientLocation1'] ) ? $attr['gradientLocation1'] : '';
+$gradientLocation2 = isset( $attr['gradientLocation2'] ) ? $attr['gradientLocation2'] : '';
+$gradientAngle     = isset( $attr['gradientAngle'] ) ? $attr['gradientAngle'] : '';
+
+if ( 'basic' === $attr['selectGradient'] && $attr['gradientValue'] ) {
+	$gradient = $attr['gradientValue'];
+} elseif ( 'linear' === $gradientType && 'advanced' === $attr['selectGradient'] ) {
+	$gradient = 'linear-gradient(' . $gradientAngle . 'deg, ' . $gradientColor1 . ' ' . $gradientLocation1 . '%, ' . $gradientColor2 . ' ' . $gradientLocation2 . '%)';
+} elseif ( 'radial' === $gradientType && 'advanced' === $attr['selectGradient'] ) {
+	$gradient = 'radial-gradient( at center center, ' . $gradientColor1 . ' ' . $gradientLocation1 . '%, ' . $gradientColor2 . ' ' . $gradientLocation2 . '%)';
+}
+
+if ( 'gradient' === $attr['backgroundType'] ) {
+	$selectors[' .uagb-tm__content'] = array(
+		'background-color' => 'transparent',
+		'background-image' => $gradient,
+	);
 }
 if ( 'image' === $attr['backgroundType'] ) {
 	if ( 'color' === $attr['overlayType'] ) {
@@ -132,9 +136,7 @@ if ( 'image' === $attr['backgroundType'] ) {
 			'opacity'          => ( isset( $attr['backgroundOpacity'] ) && '' !== $attr['backgroundOpacity'] && 101 !== $attr['backgroundOpacity'] ) ? ( ( 100 - $attr['backgroundOpacity'] ) / 100 ) : '',
 		);
 	} elseif ( 'gradient' === $attr['overlayType'] ) {
-		if ( $attr['gradientValue'] ) {
-			$selectors[' .uagb-testimonial__wrap.uagb-tm__bg-type-image .uagb-tm__overlay']['background-image'] = $attr['gradientValue'];
-		}
+			$selectors[' .uagb-testimonial__wrap.uagb-tm__bg-type-image .uagb-tm__overlay']['background-image'] = $gradient;
 	}
 } else {
 	$selectors['  .uagb-testimonial__wrap.uagb-tm__bg-type-color .uagb-tm__content'] = array(
@@ -183,8 +185,8 @@ $m_selectors = array(
 	' .uagb-testimonial__wrap .uagb-tm__content'        => $overall_border_Mobile,
 	' .uagb-tm__desc'                                   => array(
 		'margin-bottom' => UAGB_Helper::get_css_value( $attr['descSpaceMobile'], $attr['descSpaceType'] ),
-		'margin-left'   => 'dots' !== $attr['arrowDots'] ? '20px' : 'auto',
-		'margin-right'  => 'dots' !== $attr['arrowDots'] ? '20px' : 'auto',
+		'margin-left'   => ( ( 1 === $attr['test_item_count'] ) || ( 'dots' === $attr['arrowDots'] ) || ( 1 !== $attr['columns'] ) ) ? 'auto' : '20px',
+		'margin-right'  => ( ( 1 === $attr['test_item_count'] ) || ( 'dots' === $attr['arrowDots'] ) || ( 1 !== $attr['columns'] ) ) ? 'auto' : '20px',
 	),
 	' .uagb-tm__content'                                => array(
 		'text-align'     => $attr['headingAlignMobile'],
