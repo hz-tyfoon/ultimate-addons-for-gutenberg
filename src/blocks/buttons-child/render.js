@@ -28,7 +28,8 @@ const Render = ( props ) => {
 
 	let { label } = attributes;
 
-	const buttonTypeClass = ( inheritFromTheme && buttonType === 'secondary' ) ? 'ast-outline-button' : 'wp-block-button__link';
+	const buttonTypeClass = ( inheritFromTheme && 'secondary' === buttonType ) ? 'ast-outline-button' : 'wp-block-button__link';
+	const borderStyle = 'secondary' === buttonType ? { 'border-width': 'revert-layer' } : '';
 
 	// Check if this has dynamic content.
 	if ( labelHasDynamicContent ) {
@@ -85,7 +86,7 @@ const Render = ( props ) => {
 						'uagb-buttons-repeater',
 						`${ buttonTypeClass }`,
 					) }
-					style={ { 'border-width': 'revert-layer' } }
+					style={ borderStyle }
 				>
 					{ iconHtml( 'before' ) }
 					{ btnText() }

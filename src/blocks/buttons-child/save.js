@@ -25,6 +25,7 @@ export default function save( props ) {
 	} = attributes;
 
 	const buttonTypeClass = ( inheritFromTheme && buttonType === 'secondary' ) ? 'ast-outline-button' : 'wp-block-button__link';
+	const borderStyle = 'secondary' === buttonType ? { 'border-width': 'revert-layer' } : '';
 
 	const btnText = () => {
 		if ( ! removeText ) {
@@ -65,7 +66,7 @@ export default function save( props ) {
 						'uagb-buttons-repeater',
 						`${ buttonTypeClass }`,
 					) }
-					style={ { 'border-width': 'revert-layer' } }
+					style={ borderStyle }
 					href={ ( '' === link || dynamicContent?.link?.enable ) ? '#' : link }
 					onClick={ ( '' === link || '#' === link ) && ( ! dynamicContent?.link?.enable ) ? 'return false;' : 'return true;' }
 					rel={ noFollow ? 'nofollow noopener' : 'follow noopener' }

@@ -103,7 +103,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'line-height': generateCSSUnit( lineHeight, lineHeightType ),
 	};
 
-	selectors[ '.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link' ] = {
+	selectors[ '.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater' ] = {
 		// For new user.
 		'font-family': fontFamily,
 		'font-style': fontStyle,
@@ -118,7 +118,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'margin-bottom': generateCSSUnit( bottomMargin, marginType ),
 		'letter-spacing': generateCSSUnit( fontLetterSpacing, fontLetterSpacingType ),
 	};
-	selectors[ ' .uagb-buttons-repeater.wp-block-button__link' ] = {
+	selectors[ ' .uagb-buttons-repeater' ] = {
 		// For new user.
 		'padding-left': generateCSSUnit( leftPadding, paddingUnit ),
 		'padding-right': generateCSSUnit( rightPadding, paddingUnit ),
@@ -244,7 +244,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	tabletSelectors[
-		'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link'
+		'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater'
 	] = {
 		'font-size': generateCSSUnit( fontSizeTablet, fontSizeTypeTablet ),
 		'line-height': generateCSSUnit( lineHeightTablet, lineHeightType ),
@@ -255,7 +255,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'letter-spacing': generateCSSUnit( fontLetterSpacingTablet, fontLetterSpacingType ),
 	};
 	tabletSelectors[
-		' .uagb-buttons-repeater.wp-block-button__link'
+		' .uagb-buttons-repeater'
 	] = {
 		'padding-left': generateCSSUnit( leftTabletPadding, tabletPaddingUnit ),
 		'padding-right': generateCSSUnit( rightTabletPadding, tabletPaddingUnit ),
@@ -264,7 +264,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	};
 
 	mobileSelectors[
-		'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater.wp-block-button__link'
+		'.uagb-buttons__outer-wrap .uagb-button__wrapper .uagb-buttons-repeater'
 	] = {
 		'font-size': generateCSSUnit( fontSizeMobile, fontSizeTypeMobile ),
 		'line-height': generateCSSUnit( lineHeightMobile, lineHeightType ),
@@ -276,7 +276,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	};
 
 	mobileSelectors[
-		' .uagb-buttons-repeater.wp-block-button__link'
+		' .uagb-buttons-repeater'
 	] = {
 		'padding-left': generateCSSUnit( leftMobilePadding, mobilePaddingUnit ),
 		'padding-right': generateCSSUnit( rightMobilePadding, mobilePaddingUnit ),

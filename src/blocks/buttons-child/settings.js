@@ -210,7 +210,7 @@ const Settings = ( props ) => {
 					onChange={ () => setAttributes( { inheritFromTheme: ! inheritFromTheme } ) }
 					label={ __( 'Inherit From Theme', 'ultimate-addons-for-gutenberg' ) }
 				/>
-				{ inheritFromTheme && currentTheme === 'Astra' && (
+				{ inheritFromTheme && 'Astra' === currentTheme && (
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
 						label={ __( `Button Type`, 'ultimate-addons-for-gutenberg' ) }
