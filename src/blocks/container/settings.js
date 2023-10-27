@@ -257,6 +257,9 @@ const Settings = ( props ) => {
 		display = 'flex',
 	} = attributes;
 
+	console.log( 'attributes', attributes );
+	console.log( 'attributes display', display );
+
 	const isPro = uagb_blocks_info.spectra_pro_status;
 
 	let currentDirection = directionDesktop?.split( '-' )?.[ 0 ];
@@ -786,7 +789,7 @@ const Settings = ( props ) => {
 					<UAGSelectControl
 						label={ __( 'Display', 'ultimate-addons-for-gutenberg' ) }
 						data={ {
-							value: display,
+							value: display || 'flex',
 							label: 'display',
 						} }
 						setAttributes={ setAttributes }
@@ -801,7 +804,7 @@ const Settings = ( props ) => {
 							},
 						] }
 					/>
-					{ 'flex' === display && (
+					{ 'flex' === display || "" === display && (
 						<>
 							<MultiButtonsControl
 								setAttributes={ setAttributes }
