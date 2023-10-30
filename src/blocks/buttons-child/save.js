@@ -21,12 +21,13 @@ export default function save( props ) {
 		showIcon,
 		dynamicContent,
 		buttonType,
-		inheritFromTheme
+		inheritFromTheme,
 	} = attributes;
 
-	const buttonTypeClass = ( inheritFromTheme && buttonType === 'secondary' ) ? 'ast-outline-button' : 'wp-block-button__link';
+	const inheritAstraSecondary = inheritFromTheme && 'secondary' === buttonType;
+	const buttonTypeClass = inheritAstraSecondary ? 'ast-outline-button' : 'wp-block-button__link';
 	//border-width is added to revert the border related styles by default.
-	const borderStyle = 'secondary' === buttonType ? { 'border-width': 'revert-layer' } : '';
+	const borderStyle = inheritAstraSecondary ? { borderWidth: 'revert-layer' } : {};
 
 	const btnText = () => {
 		if ( ! removeText ) {

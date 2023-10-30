@@ -216,7 +216,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ## Changelog ##
 
 ### x.x.x ###
-* Improvement: Buttons - Added primary and secondary options to inherit from theme settings for Astra theme.
+* Improvement: Buttons - Added an option to inherit the secondary styles when using the Astra theme.
 
 ### 2.9.0 - THURSDAY, 26th OCTOBER 2023 ###
 * New: Core Blocks - Added Global Block Style support for core blocks.
