@@ -1521,7 +1521,7 @@ const attributes = {
 		},
 	},
 	...inputBorderAttributes,
-	display: {
+	childrenWidth: {
 		type: 'string',
 		default: '',
 	},

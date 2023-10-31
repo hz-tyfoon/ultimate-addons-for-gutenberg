@@ -185,6 +185,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerBorderBottomWidthMobile,
 		containerBorderLeftWidthMobile,
 		globalBlockStyleId,
+		childrenWidth,
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -669,12 +670,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 				boxShadowPositionCSSHover;
 		}
 	} else {
-		selectors[ '.wp-block' ] = containerCSS;
-		selectors[ '.wp-block:not(uagb-is-root-container)'] = {
+		selectors[ '.wp-block-uagb-container' ] = containerCSS;
+		selectors[ '.wp-block-uagb-container:not(uagb-is-root-container)'] = {
 			'margin-left': generateCSSUnit( innerLeftMarginDesktop, marginType ) + ' !important',
 			'margin-right': generateCSSUnit( innerRightMarginDesktop, marginType ) + ' !important',
 		}
-		tablet_selectors[ '.wp-block' ] = {
+		tablet_selectors[ '.wp-block-uagb-container' ] = {
 			'padding-top': generateCSSUnit( topPaddingTablet, paddingTypeTablet ),
 			'padding-bottom': generateCSSUnit( bottomPaddingTablet, paddingTypeTablet ),
 			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
@@ -687,11 +688,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			...borderCSSTablet,
 			...containerBackgroundCSSTablet,
 		};
-		tablet_selectors[ '.wp-block:not(uagb-is-root-container)'] = {
+		tablet_selectors[ '.wp-block-uagb-container:not(uagb-is-root-container)'] = {
 			'margin-left': generateCSSUnit( innerLeftMarginTablet, marginTypeTablet ) + ' !important',
 			'margin-right': generateCSSUnit( innerRightMarginTablet, marginTypeTablet ) + ' !important',
 		}
-		mobile_selectors[ '.wp-block' ] = {
+		mobile_selectors[ '.wp-block-uagb-container' ] = {
 			'padding-top': generateCSSUnit( topPaddingMobile, paddingTypeMobile ),
 			'padding-bottom': generateCSSUnit( bottomPaddingMobile, paddingTypeMobile ),
 			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
@@ -704,11 +705,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			...borderCSSMobile,
 			...containerBackgroundCSSMobile
 		};
-		mobile_selectors[ '.wp-block:not(uagb-is-root-container)'] = {
+		mobile_selectors[ '.wp-block-uagb-container:not(uagb-is-root-container)'] = {
 			'margin-left': generateCSSUnit( innerLeftMarginMobile, marginTypeMobile ) + ' !important',
 			'margin-right': generateCSSUnit( innerRightMarginMobile, marginTypeMobile ) + ' !important',
 		}
-		selectors[ '.wp-block:hover' ] = {
+		selectors[ '.wp-block-uagb-container:hover' ] = {
 			'border-color': containerBorderHColor,
 			'box-shadow': '',
 		};
@@ -795,6 +796,18 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'width': '100%',
 			'height': '100%',
 			...borderCSSMobile,
+		};
+	}
+
+	// Add auto width to the inner blocks.
+	if( "auto" === childrenWidth ){
+		selectors[ '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = {
+			'width': 'auto',
+			'max-width': 'unset',
+		};
+		selectors[ '.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = {
+			'width': 'auto',
+			'max-width': 'unset',
 		};
 	}
 
