@@ -161,6 +161,7 @@ const Settings = ( props ) => {
 		overlayType,
 		overlayOpacity,
 		customPosition,
+		centralizedPosition,
 		xPositionDesktop,
 		xPositionTablet,
 		xPositionMobile,
@@ -255,10 +256,8 @@ const Settings = ( props ) => {
 		gradientAngle,
 		selectGradient,
 		childrenWidth = 'equal',
+		backgroundVideoFallbackImage
 	} = attributes;
-
-	console.log( 'attributes', attributes );
-	console.log( 'attributes display', childrenWidth );
 
 	const isPro = uagb_blocks_info.spectra_pro_status;
 
@@ -1112,6 +1111,10 @@ const Settings = ( props ) => {
 						value: customPosition,
 						label: 'customPosition',
 					} }
+					centralizedPosition = { {
+						value: centralizedPosition,
+						label: 'centralizedPosition',
+					}} 
 					xPositionDesktop={ {
 						value: xPositionDesktop,
 						label: 'xPositionDesktop',
@@ -1175,6 +1178,10 @@ const Settings = ( props ) => {
 						value: overlayOpacity,
 						label: 'overlayOpacity',
 					} }
+					backgroundVideoFallbackImage={{
+						value: backgroundVideoFallbackImage,
+						label: 'backgroundVideoFallbackImage',
+					}}
 					backgroundOverlayGradient={ {
 						value: gradientOverlayValue,
 						label: 'gradientOverlayValue',
@@ -1524,7 +1531,7 @@ const Settings = ( props ) => {
 
 	const spacingSettings = () => {
 		return (
-			<UAGAdvancedPanelBody title={ __( 'Layout', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
+			<UAGAdvancedPanelBody title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<ResponsiveSlider
 					label={ __( 'Row Gap', 'ultimate-addons-for-gutenberg' ) }
 					data={ {

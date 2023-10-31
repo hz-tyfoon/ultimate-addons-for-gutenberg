@@ -991,6 +991,10 @@ const attributes = {
 		},
 	},
 	// Background image position.
+	centralizedPosition: {
+		type: 'boolean',
+		default: false,
+	},
 	customPosition: {
 		type: 'string',
 		default: 'default',
@@ -1542,6 +1546,12 @@ const attributes = {
 	UAGAnimationShowContainerAdvancedSettings: {
 		type: 'boolean',
 		default: false,
+	},
+	backgroundVideoFallbackImage: {
+		type: 'object',
+		UAGCopyPaste: {
+			styleType: 'container-bg-image-desktop',
+		},
 	},
 };
 

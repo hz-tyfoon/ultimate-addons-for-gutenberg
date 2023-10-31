@@ -184,6 +184,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerBorderRightWidthMobile,
 		containerBorderBottomWidthMobile,
 		containerBorderLeftWidthMobile,
+		backgroundVideoFallbackImage,
 		globalBlockStyleId,
 		childrenWidth,
 	} = attributes;
@@ -310,6 +311,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'opacity': backgroundVideoOpacityValue,
 		},
 	};
+
+	if ( backgroundVideoFallbackImage?.url ){
+		selectors[ ' .uagb-container__video-wrap video'].background = `url(${backgroundVideoFallbackImage.url}) 50% 50%;`;
+	}
 
 	let boxShadowPositionCSS = boxShadowPosition;
 
@@ -800,7 +805,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	// Add auto width to the inner blocks.
-	if( "auto" === childrenWidth ){
+	if( 'auto' === childrenWidth ){
 		selectors[ '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = {
 			'width': 'auto',
 			'max-width': 'unset',
