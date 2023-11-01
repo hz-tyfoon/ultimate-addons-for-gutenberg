@@ -1212,8 +1212,8 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 		 * Get Masonry Gallery CSS.
 		 *
 		 * @since 1.24.0
-		 * @param array $attr The block attributes.
-		 * @param int   $id The selector ID.
+		 * @param array  $attr The block attributes.
+		 * @param string $id The selector ID.
 		 */
 		public static function get_gallery_css( $attr, $id ) {
 
@@ -1601,9 +1601,10 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 								$gen_bg_css['background-image'] = $gradient . ', url(' . $bg_img . ');';
 							}
 						}
-						if ( ( 'none' === $overlay_type || 'image' === $overlay_type ) && '' !== $bg_img ) {
+						if ( '' !== $bg_img && in_array( $overlay_type, array( '', 'none', 'image' ) ) ) {
 							$gen_bg_css['background-image'] = 'url(' . $bg_img . ');';
 						}
+						
 						$gen_bg_css['background-clip'] = 'padding-box';
 						break;
 
