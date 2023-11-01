@@ -483,7 +483,7 @@ const Settings = ( props ) => {
 			<>
 				<UAGAdvancedPanelBody
 					title={ __( 'Layout', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ false }
+					initialOpen={ true }
 				>
 					{ isBlockRootParent && (
 						<>
@@ -783,7 +783,7 @@ const Settings = ( props ) => {
 				</UAGAdvancedPanelBody>
 				<UAGAdvancedPanelBody
 					title={ __( 'Flex Properties', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ true }
+					initialOpen={ false }
 				>
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
