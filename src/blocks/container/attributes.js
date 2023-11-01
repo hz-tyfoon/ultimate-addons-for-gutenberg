@@ -1525,9 +1525,29 @@ const attributes = {
 		},
 	},
 	...inputBorderAttributes,
-	childrenWidth: {
+	childrenWidthDesktop: {
 		type: 'string',
 		default: '',
+		UAGCopyPaste: {
+			styleType: 'container-children-width-desktop',
+		},
+		isGBSStyle: true,
+	},
+	childrenWidthTablet: {
+		type: 'string',
+		default: '',
+		UAGCopyPaste: {
+			styleType: 'container-children-width-tablet',
+		},
+		isGBSStyle: true,
+	},
+	childrenWidthMobile: {
+		type: 'string',
+		default: '',
+		UAGCopyPaste: {
+			styleType: 'container-children-width-mobile',
+		},
+		isGBSStyle: true,
 	},
 
 	// Special Animations Extension Attributes.

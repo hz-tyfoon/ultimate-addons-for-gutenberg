@@ -22,6 +22,7 @@ import Range from '@Components/range/Range';
 import { boxShadowPresets, boxShadowHoverPresets } from './presets';
 import UAGPresets from '@Components/presets';
 import renderGBSSettings from '@Controls/renderGBSSettings';
+import { ChildrenWidthDropdown } from './utils';
 import styling from './styling';
 
 const Settings = ( props ) => {
@@ -255,7 +256,6 @@ const Settings = ( props ) => {
 		gradientType,
 		gradientAngle,
 		selectGradient,
-		childrenWidth = 'equal',
 		backgroundVideoFallbackImage
 	} = attributes;
 
@@ -483,7 +483,7 @@ const Settings = ( props ) => {
 			<>
 				<UAGAdvancedPanelBody
 					title={ __( 'Layout', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ true }
+					initialOpen={ false }
 				>
 					{ isBlockRootParent && (
 						<>
@@ -783,26 +783,8 @@ const Settings = ( props ) => {
 				</UAGAdvancedPanelBody>
 				<UAGAdvancedPanelBody
 					title={ __( 'Flex Properties', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ false }
+					initialOpen={ true }
 				>
-					<UAGSelectControl
-						label={ __( 'Children Width', 'ultimate-addons-for-gutenberg' ) }
-						data={ {
-							value: childrenWidth || 'equal',
-							label: 'childrenWidth',
-						} }
-						setAttributes={ setAttributes }
-						options={ [
-							{
-								value: 'auto',
-								label: __( 'Auto', 'ultimate-addons-for-gutenberg' ),
-							},
-							{
-								value: 'equal',
-								label: __( 'Equal', 'ultimate-addons-for-gutenberg' ),
-							},
-						] }
-					/>
 					<MultiButtonsControl
 						setAttributes={ setAttributes }
 						label={ __( 'Direction', 'ultimate-addons-for-gutenberg' ) }
@@ -828,6 +810,8 @@ const Settings = ( props ) => {
 							'ultimate-addons-for-gutenberg'
 						) }
 					/>
+
+					<ChildrenWidthDropdown { ...{ attributes, setAttributes, deviceType } } />
 
 					<MultiButtonsControl
 						setAttributes={ setAttributes }

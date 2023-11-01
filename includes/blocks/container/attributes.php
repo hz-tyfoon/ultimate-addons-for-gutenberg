@@ -238,6 +238,9 @@ return array_merge(
 		// For Global Block Styles.
 		'globalBlockStyleName'               => '',
 		'globalBlockStyleId'                 => '',
+		'childrenWidthDesktop'               => '',
+		'childrenWidthTablet'                => '',
+		'childrenWidthMobile'                => '',
 	),
 	$border_attribute
 );
