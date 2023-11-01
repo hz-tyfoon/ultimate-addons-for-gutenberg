@@ -58,6 +58,7 @@ class Admin_Helper {
 			'enable_block_responsive'            => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_block_responsive', 'enabled' ),
 			'enable_dynamic_content'             => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_dynamic_content', 'enabled' ),
 			'enable_animations_extension'        => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_animations_extension', 'enabled' ),
+			'enable_gbs_extension'               => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_gbs_extension', 'enabled' ),
 			'select_font_globally'               => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_select_font_globally', array() ),
 			'load_select_font_globally'          => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_load_select_font_globally', 'disabled' ),
 			'load_fse_font_globally'             => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_load_fse_font_globally', 'disabled' ),
@@ -97,7 +98,7 @@ class Admin_Helper {
 	/**
 	 * Get Visibility Page
 	 *
-	 * @since x.x.x
+	 * @since 2.8.0
 	 * @return boolean|array
 	 */
 	public static function get_visibility_page() {

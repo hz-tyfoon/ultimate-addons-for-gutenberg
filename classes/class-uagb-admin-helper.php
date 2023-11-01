@@ -55,6 +55,7 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 				'uag_enable_block_condition'          => self::get_admin_settings_option( 'uag_enable_block_condition', 'disabled' ),
 				'uag_enable_masonry_gallery'          => self::get_admin_settings_option( 'uag_enable_masonry_gallery', 'enabled' ),
 				'uag_enable_animations_extension'     => self::get_admin_settings_option( 'uag_enable_animations_extension', 'enabled' ),
+				'uag_enable_gbs_extension'            => self::get_admin_settings_option( 'uag_enable_gbs_extension', 'enabled' ),
 				'uag_enable_block_responsive'         => self::get_admin_settings_option( 'uag_enable_block_responsive', 'enabled' ),
 				'uag_select_font_globally'            => self::get_admin_settings_option( 'uag_select_font_globally', array() ),
 				'uag_load_select_font_globally'       => self::get_admin_settings_option( 'uag_load_select_font_globally', 'disabled' ),
@@ -125,7 +126,7 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 		 *
 		 * @param  string  $key     The option key.
 		 * @param  boolean $network_override Whether to allow the network admin setting to be overridden on subsites.
-		 * @since x.x.x
+		 * @since 2.8.0
 		 * @return void            Return the option value.
 		 */
 		public static function delete_admin_settings_option( $key, $network_override = false ) {

@@ -258,6 +258,11 @@ const globalDataReducer = ( state = {}, action ) => {
                 ...state,
                 btnInheritFromTheme: action.payload,
                 };
+        case 'UPDATE_GBS_EXTENSION':
+            return {
+                ...state,
+                enableGBSExtension: action.payload,
+                };
         default:
             return state;
     }
