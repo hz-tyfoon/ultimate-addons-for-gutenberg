@@ -151,6 +151,10 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 
 			$this->load_textdomain();
 
+
+			// Load Zip AI.
+			require_once UAGB_DIR . 'zip-ai/class-zip-ai.php';
+
 			require_once UAGB_DIR . 'classes/class-uagb-scripts-utils.php';
 			require_once UAGB_DIR . 'classes/class-uagb-block-module.php';
 			require_once UAGB_DIR . 'classes/class-uagb-admin-helper.php';

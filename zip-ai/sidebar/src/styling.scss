@@ -1,0 +1,40 @@
+$palette-primary: #007cba;
+
+// All Zip AI Sidebar Editor CSS.
+.zip-ai {
+
+	// The block menu icon styling.
+	&-toolbar {
+		border: 0;
+		border-radius: 0;
+		border-right: 1px solid #1e1e1e;
+
+		// The button inside the block-settings group.
+		.components-toolbar-button {
+			border-radius: 0;
+
+			// Removing the border that appears on focus.
+			&:focus::before {
+				box-shadow: none;
+				outline: none;
+			}
+
+			// The icon inside the button.
+			svg {
+				stroke: currentColor;
+				stroke-width: 1.4;
+				fill: none;
+			}
+		}
+	}
+}
+
+
+.interface-interface-skeleton__sidebar:has(> div > div.zip-ai-sidebar) {
+	display: none;
+}
+
+.zip-ai-highlighted {
+	background-color: $palette-primary;
+	color: #fff;
+}

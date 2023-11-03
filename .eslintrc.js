@@ -65,5 +65,7 @@ module.exports = {
 		Isotope: true,
 		imagesLoaded: true,
 		UAGBTabs: true,
+		zip_ai_react: true,
+		screen: true,
 	},
 };

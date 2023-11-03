@@ -4758,7 +4758,7 @@ parameters:
 
 		-
 			message: "#^Constant UAGB_DIR not found\\.$#"
-			count: 26
+			count: 27
 			path: classes/class-uagb-loader.php
 
 		-

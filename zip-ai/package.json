@@ -1,0 +1,48 @@
+{
+	"name": "zip_ai",
+	"version": "1.0.0",
+	"description": "Zip AI",
+	"main": "Gruntfile.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start"
+	},
+	"dependencies": {
+		"@headlessui/react": "^1.4.3",
+		"@heroicons/react": "^1.0.5",
+		"@tailwindcss/forms": "^0.4.0",
+		"@tailwindcss/typography": "^0.5.1",
+		"browser-sync": "^2.26.14",
+		"browser-sync-webpack-plugin": "^2.2.2",
+		"html-entities": "^1.3.1",
+		"node-fetch": "^2.6.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-html-parser": "^2.0.2",
+		"react-router-dom": "^5.2.0",
+		"react-select": "^5.7.2",
+		"request": "^2.88.2"
+	},
+	"devDependencies": {
+		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
+		"@types/sortablejs": "^1.10.6",
+		"@wordpress/api-fetch": "^3.20.0",
+		"@wordpress/components": "^11.1.0",
+		"@wordpress/compose": "^3.22.0",
+		"@wordpress/data": "^4.25.0",
+		"@wordpress/element": "^5.21.0",
+		"@wordpress/i18n": "^3.16.0",
+		"@wordpress/notices": "^2.10.0",
+		"@wordpress/prettier-config": "^0.4.0",
+		"@wordpress/scripts": "^19.2.2",
+		"autoprefixer": "^10.4.2",
+		"file-loader": "^6.2.0",
+		"loadash": "^1.0.0",
+		"sass-loader": "^12.4.0",
+		"shelljs": "^0.8.4",
+		"style-loader": "^3.3.3",
+		"tailwindcss": "^3.0.16"
+	},
+	"author": "brainstormforce",
+	"license": "ISC"
+}
