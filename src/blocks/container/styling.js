@@ -809,34 +809,36 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	const flexDirections = [ 'row-reverse', 'row' ];
 	const autoWidth = { 'width': 'auto' };
 	const SetWidth = { 'width': '100%' };
+	const containerSelector = '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block';
+	const containerSelector2 = '.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block';
 
 	// Add auto width to the inner blocks in desktop.
 	if( directionDesktop ){
 		if( flexDirections.includes( directionDesktop ) && 'auto' === childrenWidthDesktop ) {
-			selectors[ '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = autoWidth;
-			selectors[ '.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = autoWidth;
+			selectors[ containerSelector ] = autoWidth;
+			selectors[ containerSelector2 ] = autoWidth;
 		}
 	}
 
 	// Add auto width to the inner blocks in tablet.
 	if( directionTablet ){
 		if( flexDirections.includes( directionTablet ) && 'auto' === childrenWidthTablet ) {
-			tablet_selectors[ '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = autoWidth;
-			tablet_selectors[ '.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = autoWidth;
+			tablet_selectors[ containerSelector ] = autoWidth;
+			tablet_selectors[ containerSelector2 ] = autoWidth;
 		}else{
-			tablet_selectors[ '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = SetWidth;
-			tablet_selectors[ '.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = SetWidth;
+			tablet_selectors[ containerSelector ] = SetWidth;
+			tablet_selectors[ containerSelector2 ] = SetWidth;
 		}
 	}
 
 	// Add auto width to the inner blocks in mobile.
 	if( directionMobile ){
 		if( flexDirections.includes( directionMobile ) && 'auto' === childrenWidthMobile ) {
-			mobile_selectors[ '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = autoWidth;
-			mobile_selectors[ '.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = autoWidth;
+			mobile_selectors[ containerSelector ] = autoWidth;
+			mobile_selectors[ containerSelector2 ] = autoWidth;
 		} else{
-			mobile_selectors[ '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = SetWidth;
-			mobile_selectors[ '.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block' ] = SetWidth;
+			mobile_selectors[ containerSelector ] = SetWidth;
+			mobile_selectors[ containerSelector2 ] = SetWidth;
 		}
 	}
 
