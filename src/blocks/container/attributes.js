@@ -1527,7 +1527,6 @@ const attributes = {
 	...inputBorderAttributes,
 	childrenWidthDesktop: {
 		type: 'string',
-		default: '',
 		UAGCopyPaste: {
 			styleType: 'container-children-width-desktop',
 		},
@@ -1535,7 +1534,6 @@ const attributes = {
 	},
 	childrenWidthTablet: {
 		type: 'string',
-		default: '',
 		UAGCopyPaste: {
 			styleType: 'container-children-width-tablet',
 		},
@@ -1543,7 +1541,6 @@ const attributes = {
 	},
 	childrenWidthMobile: {
 		type: 'string',
-		default: '',
 		UAGCopyPaste: {
 			styleType: 'container-children-width-mobile',
 		},
