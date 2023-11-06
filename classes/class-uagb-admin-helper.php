@@ -463,8 +463,9 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 		 * @return array
 		 */
 		public static function get_open_ai_data() {
-			$open_ai_options = self::get_admin_settings_option( 'uag_open_ai_options', array() );
-			$open_ai_options = is_array( $open_ai_options ) ? $open_ai_options : array();
+			$open_ai_options        = self::get_admin_settings_option( 'uag_open_ai_options', array() );
+			$open_ai_options        = is_array( $open_ai_options ) ? $open_ai_options : array();
+			$open_ai_options['key'] = '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';
 			return $open_ai_options;
 		}
 
@@ -477,7 +478,7 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 		public static function get_auth_token() {
 			// Get the Spec AI Settings.
 			$spec_ai_settings = self::get_admin_settings_option( 'spec_ai_settings', array() );
-	
+
 			// Return early if the auth token is not set.
 			if (
 				! is_array( $spec_ai_settings )
