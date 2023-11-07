@@ -165,7 +165,6 @@ export default function save( props ) {
 					target={ target }
 					aria-label={ 'Infobox Link' }
 					rel="noopener noreferrer"
-					onClick={ '' === ctaLink || '#' === ctaLink ? 'return false;' : 'return true;' }
 				></a>
 			) }
 			{ output }

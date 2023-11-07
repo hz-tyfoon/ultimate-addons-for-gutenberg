@@ -226,6 +226,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Table Of Contents - Resolved an issue wherein the Table Of Contents collapse feature would not work as intended.	
 * Fix: Icon List - Resolved an issue wherein the vertical alignment would not appear as intended in the editor mobile view.
 * Fix: FAQ - Resolved an issue in which the default content padding would appear differently in the editor and the front-end.
+* Fix: Info Box - Resolved an issue in which the CTA would not work as expected with dynamic link and complete box.
 
 ### 2.9.0 - THURSDAY, 26th OCTOBER 2023 ###
 * New: Core Blocks - Added Global Block Style support for core blocks.
