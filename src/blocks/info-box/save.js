@@ -29,6 +29,7 @@ export default function save( props ) {
 		showDesc,
 		icon,
 		seperatorPosition,
+		dynamicContent,
 	} = attributes;
 
 	// Get icon/Image components.
@@ -165,7 +166,7 @@ export default function save( props ) {
 					target={ target }
 					aria-label={ 'Infobox Link' }
 					rel="noopener noreferrer"
-					onClick={ ( '' === ctaLink || '#' === ctaLink ) && ( ! attributes?.dynamicContent?.ctaLink?.enable ) ? 'return false;' : 'return true;' }
+					onClick={ ( '' === ctaLink || '#' === ctaLink ) && ( ! dynamicContent?.ctaLink?.enable ) ? 'return false;' : 'return true;' }
 				></a>
 			) }
 			{ output }
