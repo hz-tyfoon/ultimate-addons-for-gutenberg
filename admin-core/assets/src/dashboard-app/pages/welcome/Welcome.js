@@ -168,8 +168,6 @@ const Welcome = () => {
 									>
 										{ __( 'Join Now', 'ultimate-addons-for-gutenberg' ) }
 									</a>
-
-									
 									<a
 										className="text-base text-spectra focus:text-spectra focus-visible:text-spectra-hover active:text-spectra-hover hover:text-spectra-hover no-underline"
 										href="https://www.facebook.com/groups/wpspectra"
