@@ -808,7 +808,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	const flexDirections = [ 'row-reverse', 'row' ];
 	const autoWidth = { 'width': 'auto' };
-	const SetWidth = { 'width': '100%' };
+	const setWidth = { 'width': '100%' };
 	const containerSelector = '.wp-block-uagb-container > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block';
 	const containerSelector2 = '.wp-block-uagb-container > .uagb-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block';
 
@@ -826,8 +826,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			tablet_selectors[ containerSelector ] = autoWidth;
 			tablet_selectors[ containerSelector2 ] = autoWidth;
 		}else{
-			tablet_selectors[ containerSelector ] = SetWidth;
-			tablet_selectors[ containerSelector2 ] = SetWidth;
+			tablet_selectors[ containerSelector ] = setWidth;
+			tablet_selectors[ containerSelector2 ] = setWidth;
 		}
 	}
 
@@ -837,8 +837,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			mobile_selectors[ containerSelector ] = autoWidth;
 			mobile_selectors[ containerSelector2 ] = autoWidth;
 		} else{
-			mobile_selectors[ containerSelector ] = SetWidth;
-			mobile_selectors[ containerSelector2 ] = SetWidth;
+			mobile_selectors[ containerSelector ] = setWidth;
+			mobile_selectors[ containerSelector2 ] = setWidth;
 		}
 	}
 
