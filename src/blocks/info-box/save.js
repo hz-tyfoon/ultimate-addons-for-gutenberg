@@ -29,7 +29,6 @@ export default function save( props ) {
 		showDesc,
 		icon,
 		seperatorPosition,
-		dynamicContent,
 	} = attributes;
 
 	// Get icon/Image components.
