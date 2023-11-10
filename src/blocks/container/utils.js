@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import UAGSelectControl from '@Components/select-control';
+import MultiButtonsControl from '@Components/multi-buttons-control';
 
 export const ChildrenWidthDropdown = ( { attributes, setAttributes, deviceType } ) => {
 
@@ -15,13 +15,13 @@ export const ChildrenWidthDropdown = ( { attributes, setAttributes, deviceType }
     };
 
     return (
-        <UAGSelectControl
+        <MultiButtonsControl
+            setAttributes={ setAttributes }
             label={__( 'Children Width ', 'ultimate-addons-for-gutenberg' ) + deviceLabel[ deviceType ] }
             data={{
                 value: attributes[varDeviceType] || 'equal',
                 label: varDeviceType,
             }}
-            setAttributes={setAttributes}
             options={[
                 {
                     value: 'auto',
@@ -32,6 +32,8 @@ export const ChildrenWidthDropdown = ( { attributes, setAttributes, deviceType }
                     label: __( 'Equal', 'ultimate-addons-for-gutenberg' ),
                 },
             ]}
+            showIcons={ false }
+            responsive={ false }
         />
     );
 };
