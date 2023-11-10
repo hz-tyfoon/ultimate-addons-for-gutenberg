@@ -7,9 +7,8 @@
  * @package uagb
  */
 
-$js       = '';
-$popup_id = get_the_ID();
-
+$js             = '';
+$popup_id       = get_the_ID();
 $is_push_banner = ( 'banner' === $attr['variantType'] && $attr['willPushContent'] );
 $popup_timer    = $is_push_banner ? 500 : 100;
 
@@ -142,6 +141,11 @@ ob_start();
 <?php
 $js = ob_get_clean();
 
-$js = apply_filters( 'spectra_pro_popup_frontend_js', $js, $id, $attr, $is_push_banner, $popup_timer );
+$popup_ids = UAGB_Block_Helper::find_popup_and_enqueue_scripts( (int) $popup_id );
+if ( is_array( $popup_ids ) && ! empty( $popup_ids ) ) {
+	foreach ( $popup_ids as $popup_id ) {
+		$js = apply_filters( 'spectra_pro_popup_frontend_js', $js, $id, $attr, $is_push_banner, $popup_timer );
+	}
+}
 
 return $js;

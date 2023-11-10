@@ -427,7 +427,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 				);
 
 			// This class is loaded from blocks config.
-			UAGB_Popup_Builder::generate_scripts();
+			require_once UAGB_DIR . 'blocks-config/popup-builder/class-uagb-popup-builder.php';
 
 			UAGB_Update::migrate_visibility_mode();
 

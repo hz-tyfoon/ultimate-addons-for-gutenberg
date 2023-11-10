@@ -44,11 +44,20 @@ class UAGB_Popup_Builder {
 	 * @since 2.6.0
 	 */
 	public function __construct() {
-		$this->post_id   = 0;
-		$this->popup_ids = array();
-
+		$this->post_id = 0;
 		if ( ! shortcode_exists( 'spectra_popup' ) ) {
 			add_shortcode( 'spectra_popup', array( $this, 'spectra_popup_shortcode' ) );
+		}
+		add_filter( 'wp_head', array( $this, 'enqueue_popup_scripts' ) );
+		if ( ! is_front_page() ) {
+			$this->post_id = get_the_ID();
+		}
+		$elementor_preview_active = false;
+		if ( defined( 'ELEMENTOR_VERSION' ) ) { // Check if elementor is active.
+			$elementor_preview_active = \Elementor\Plugin::$instance->preview->is_preview_mode(); 
+		}
+		if ( is_numeric( $this->post_id ) && 'spectra-popup' === get_post_type( $this->post_id ) || $elementor_preview_active ) {
+			return;
 		}
 	}
 
@@ -62,19 +71,6 @@ class UAGB_Popup_Builder {
 	public static function create_for_admin() {
 		$instance = new self();
 		add_action( 'spectra_after_menu_register', array( $instance, 'add_popup_builder_submenu' ) );
-		return $instance;
-	}
-
-	/**
-	 * Create Instance with Script Generation.
-	 *
-	 * @return object  Initialized object of this class.
-	 *
-	 * @since 2.6.0
-	 */
-	public static function generate_scripts() {
-		$instance = new self();
-		add_action( 'wp_enqueue_scripts', array( $instance, 'enqueue_popup_scripts_for_post' ), 1 );
 		return $instance;
 	}
 
@@ -93,27 +89,6 @@ class UAGB_Popup_Builder {
 			'manage_options',
 			'edit.php?post_type=spectra-popup'
 		);
-	}
-
-	/**
-	 * Enqueue all popup scripts for the current post.
-	 *
-	 * @return void
-	 *
-	 * @since 2.6.0
-	 */
-	public function enqueue_popup_scripts_for_post() {
-		if ( ! is_front_page() ) {
-			$this->post_id = get_the_ID();
-		}
-		$elementor_preview_active = false;
-		if ( defined( 'ELEMENTOR_VERSION' ) ) { // Check if elementor is active.
-			$elementor_preview_active = \Elementor\Plugin::$instance->preview->is_preview_mode(); 
-		}
-		if ( 'spectra-popup' === get_post_type( $this->post_id ) || $elementor_preview_active ) {
-			return;
-		}
-		$this->enqueue_popup_scripts();
 	}
 
 	/**
@@ -163,46 +138,32 @@ class UAGB_Popup_Builder {
 	 * Enqueue all the Spectra Popup Scripts needed on the given post.
 	 *
 	 * @return void
-	 *
-	 * @since 2.6.0
 	 */
-	public function enqueue_popup_scripts() {
-		$args   = array( 'post_type' => 'spectra-popup' );
-		$popups = new WP_Query( $args );
-
-		while ( $popups->have_posts() ) :
-			$popups->the_post();
-
-			$popup_id = get_the_ID();
-			$enabled  = get_post_meta( $popup_id, 'spectra-popup-enabled', true );
-
-			$render_this_popup = apply_filters( 'spectra_pro_popup_display_filters', $enabled, $this->post_id );
-
-			if ( $render_this_popup ) {
-				$current_popup_assets = new UAGB_Post_Assets( $popup_id );
-				$current_popup_assets->enqueue_scripts();
-				if ( is_array( $this->popup_ids ) ) {
-					array_push( $this->popup_ids, $popup_id );
-				}
+	public function enqueue_popup_scripts() { // phpcs:ignore WordPressVIPMinimum.Hooks.AlwaysReturnInFilter.MissingReturnStatement, WordPressVIPMinimum.Hooks.AlwaysReturnInFilter.VoidReturn
+		$current_post_id = get_the_ID();
+		if ( ! $current_post_id ) {
+			return;
+		}
+		$popup_ids = UAGB_Block_Helper::find_popup_and_enqueue_scripts( $current_post_id );
+		if ( is_array( $popup_ids ) && ! empty( $popup_ids ) ) {
+			foreach ( $popup_ids as $popup_id ) {
+				$this->generate_popup_shortcode( $popup_id );
 			}
-		endwhile;
-		wp_reset_postdata();
-		add_action( 'wp_body_open', array( $this, 'generate_popup_shortcode' ) );
+		}
 	}
 
 	/**
 	 * Generate the popup shortcodes needed.
 	 *
+	 * @param string $popup_id id of popup.
 	 * @return void
 	 *
 	 * @since 2.6.0
 	 */
-	public function generate_popup_shortcode() {
-		if ( is_array( $this->popup_ids ) && ! empty( $this->popup_ids ) ) {
-			foreach ( $this->popup_ids as $popup_id ) {
-				echo do_shortcode( '[spectra_popup id=' . esc_attr( $popup_id ) . ']' );
-			}
-		}
+	public function generate_popup_shortcode( $popup_id ) {
+		echo do_shortcode( '[spectra_popup id=' . esc_attr( $popup_id ) . ']' );
+		$current_popup_assets = new UAGB_Post_Assets( (int) $popup_id );
+		$current_popup_assets->enqueue_scripts();
 	}
 
 	/**

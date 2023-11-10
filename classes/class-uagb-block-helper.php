@@ -2137,5 +2137,45 @@ if ( ! class_exists( 'UAGB_Block_Helper' ) ) {
 				$horizontal . ' ' . $vertical . ' ' . $blur . ( $spread ? " {$spread}" : '' ) . ' ' . ( $color ? $color : $alt_color ) . ( 'outset' === $position ? '' : " {$position}" )
 			);
 		}
+
+		/**
+		 * Find popup and enqueue scripts function
+		 *
+		 * @param int $current_post_id Current Post ID.
+		 * @return array $unique_array of Popup IDs.
+		 * @since x.x.x
+		 */
+		public static function find_popup_and_enqueue_scripts( $current_post_id ) {
+			$popup_ids = array();
+			if ( ! $current_post_id ) {
+				$current_post_id = get_the_ID();
+			}
+			if ( is_numeric( $current_post_id ) ) {
+				$content_post = get_post( $current_post_id );
+				if ( empty( $content_post->post_content ) ) {
+					return array(); // No need to proceed further if there's no post content.
+				}
+				$blocks = parse_blocks( $content_post->post_content );
+				foreach ( $blocks as $block ) {
+					if ( empty( $block['attrs']['className'] ) ) {
+						continue; // Skip blocks without a class name.
+					}
+					$class_name = $block['attrs']['className'];
+					if ( strpos( $class_name, 'spectra-popup-trigger-' ) === false ) {
+						continue; // Skip blocks without the required class.
+					}
+					if ( preg_match( '/\d+/', $class_name, $matches ) ) {
+						if ( 'spectra-popup-trigger-' . $matches[0] === $class_name ) {
+							array_push( $popup_ids, strval( $matches[0] ) );
+						}
+					}
+				}
+				if ( ! empty( $popup_ids ) ) {
+					$unique_array = array_unique( $popup_ids );
+					return $unique_array;
+				}
+			}
+			return array();
+		}
 	}
 }
