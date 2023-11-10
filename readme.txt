@@ -5,7 +5,7 @@ Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires at least: 5.6
 Requires PHP: 7.4
 Tested up to: 6.4
-Stable tag: 2.9.1
+Stable tag: 2.10.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -216,7 +216,12 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 == Changelog ==
 
 = x.x.x =
+* Fix: Inline Notice - Resolved an issue wherein the title would not appear to be full-width in the Firefox browser.
+* Fix: Tabs - Resolved an issue in which the tabs wrapper margin would appear differently in the editor and the front-end.
 * Feature: Container - Added new auto-width and equal-width options to the Container block.
+
+= 2.10.0 - THURSDAY, 9th NOVEMBER 2023 =
+* New: Integrated Zip AI into Spectra
 
 = 2.9.1 - TUESDAY, 7th NOVEMBER 2023 =
 * Improvement: Container - Added a fallback image option for the video background type.
