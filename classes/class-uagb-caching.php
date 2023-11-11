@@ -14,6 +14,8 @@ use SiteGround_Optimizer\File_Cacher\File_Cacher;
 
 /**
  * Class UAGB_Caching.
+ *
+ * @since x.x.x
  */
 class UAGB_Caching {
 
