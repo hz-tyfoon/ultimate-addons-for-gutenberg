@@ -44,6 +44,8 @@ class UAGB_Caching {
 
 	/**
 	 * Constructor
+	 *
+	 * @since x.x.x
 	 */
 	public function __construct() {
 		add_action( 'uagb_delete_uag_asset_dir', array( $this, 'clear_cache' ) );
