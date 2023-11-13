@@ -10,8 +10,15 @@
  * @package zip-ai
  */
 
+// Exit if Zip AI is already loaded.
 if ( defined( 'ZIP_AI_DIR' ) ) {
 	return;
 }
 
-require_once 'loader.php';
+// Load the functions.
+require_once 'functions.php';
+
+// Load the autoloader only if Zip AI is enabled.
+if ( ZipAI\Functions::is_zip_ai_enabled() ) {
+	require_once 'loader.php';
+}

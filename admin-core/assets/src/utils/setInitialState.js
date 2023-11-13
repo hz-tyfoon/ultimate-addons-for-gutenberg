@@ -48,6 +48,7 @@ const setInitialState = ( store ) => {
             themeFonts: data.theme_fonts,
             btnInheritFromTheme: data.uag_btn_inherit_from_theme,
 	        enableGBSExtension: data.uag_enable_gbs_extension,
+            zipAiStatus: data.zip_ai_status,
         };
 
         store.dispatch( {type: 'UPDATE_INITIAL_STATE', payload: initialState} );

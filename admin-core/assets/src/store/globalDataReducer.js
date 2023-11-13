@@ -258,6 +258,11 @@ const globalDataReducer = ( state = {}, action ) => {
                 ...state,
                 enableGBSExtension: action.payload,
                 };
+		case 'UPDATE_ZIP_AI_STATUS':
+			return {
+				...state,
+				zipAiStatus: action.payload,
+				};
         default:
             return state;
     }

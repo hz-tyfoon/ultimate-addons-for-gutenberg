@@ -61,6 +61,7 @@ const initialState = {
 	themeFonts: [],
 	spectraIsBlockTheme: false,
 	enableGBSExtension: '',
+	zipAiStatus: 'enabled',
 };
 
 const globalDataStore = createStore(
