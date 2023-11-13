@@ -65,7 +65,7 @@ class UAGB_Popup_Builder {
 	 * Generates stylesheet and appends in head tag.
 	 *
 	 * @return void|int
-	 * @since 2.0
+	 * @since x.x.x
 	 */
 	public function generate_stylesheet() {
 
