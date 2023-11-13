@@ -8,16 +8,11 @@ export const ChildrenWidthDropdown = ( { attributes, setAttributes, deviceType }
     }
 
     const varDeviceType = 'childrenWidth' + deviceType;
-    const deviceLabel = {
-        Desktop: __( 'Desktop', 'ultimate-addons-for-gutenberg' ),
-        Tablet: __( 'Tablet', 'ultimate-addons-for-gutenberg' ),
-        Mobile: __( 'Mobile', 'ultimate-addons-for-gutenberg' ),
-    };
 
     return (
         <MultiButtonsControl
             setAttributes={ setAttributes }
-            label={__( 'Children Width ', 'ultimate-addons-for-gutenberg' ) + deviceLabel[ deviceType ] }
+            label={__( 'Children Width ', 'ultimate-addons-for-gutenberg' )}
             data={{
                 value: attributes[varDeviceType] || 'equal',
                 label: varDeviceType,
