@@ -48,7 +48,6 @@ class UAGB_Popup_Builder {
 		if ( ! shortcode_exists( 'spectra_popup' ) ) {
 			add_shortcode( 'spectra_popup', array( $this, 'spectra_popup_shortcode' ) );
 		}
-		add_filter( 'wp_head', array( $this, 'enqueue_popup_scripts' ) );
 		if ( ! is_front_page() ) {
 			$this->post_id = get_the_ID();
 		}
@@ -58,6 +57,30 @@ class UAGB_Popup_Builder {
 		}
 		if ( is_numeric( $this->post_id ) && 'spectra-popup' === get_post_type( $this->post_id ) || $elementor_preview_active ) {
 			return;
+		}
+		add_action( 'wp', array( $this, 'generate_stylesheet' ), 101 );
+	}
+
+	/**
+	 * Generates stylesheet and appends in head tag.
+	 *
+	 * @return void|int
+	 * @since 2.0
+	 */
+	public function generate_stylesheet() {
+
+		$popup_ids = UAGB_Block_Helper::find_popup_and_enqueue_scripts( (int) get_the_ID() );
+
+		foreach ( $popup_ids as $popup_id ) {
+			add_filter(
+				'get_spectra_popup_id',
+				function() use ( $popup_id ) {
+					return (int) $popup_id;
+				} 
+			);
+			$this->generate_popup_shortcode( $popup_id );
+			$current_post_assets = new UAGB_Post_Assets( intval( $popup_id ) );
+			$current_post_assets->enqueue_scripts();
 		}
 	}
 
@@ -135,24 +158,6 @@ class UAGB_Popup_Builder {
 	}
 
 	/**
-	 * Enqueue all the Spectra Popup Scripts needed on the given post.
-	 *
-	 * @return void
-	 */
-	public function enqueue_popup_scripts() { // phpcs:ignore WordPressVIPMinimum.Hooks.AlwaysReturnInFilter.MissingReturnStatement, WordPressVIPMinimum.Hooks.AlwaysReturnInFilter.VoidReturn
-		$current_post_id = get_the_ID();
-		if ( ! $current_post_id ) {
-			return;
-		}
-		$popup_ids = UAGB_Block_Helper::find_popup_and_enqueue_scripts( $current_post_id );
-		if ( is_array( $popup_ids ) && ! empty( $popup_ids ) ) {
-			foreach ( $popup_ids as $popup_id ) {
-				$this->generate_popup_shortcode( $popup_id );
-			}
-		}
-	}
-
-	/**
 	 * Generate the popup shortcodes needed.
 	 *
 	 * @param string $popup_id id of popup.
@@ -162,8 +167,6 @@ class UAGB_Popup_Builder {
 	 */
 	public function generate_popup_shortcode( $popup_id ) {
 		echo do_shortcode( '[spectra_popup id=' . esc_attr( $popup_id ) . ']' );
-		$current_popup_assets = new UAGB_Post_Assets( (int) $popup_id );
-		$current_popup_assets->enqueue_scripts();
 	}
 
 	/**

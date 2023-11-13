@@ -8,9 +8,10 @@
  */
 
 $js             = '';
-$popup_id       = get_the_ID();
+$page_id        = get_the_ID();
 $is_push_banner = ( 'banner' === $attr['variantType'] && $attr['willPushContent'] );
 $popup_timer    = $is_push_banner ? 500 : 100;
+$popup_id       = apply_filters( 'get_spectra_popup_id', $page_id );
 
 // Render the JS Script to handle this popup on the current page.
 ob_start();
@@ -35,6 +36,11 @@ ob_start();
 		<?php
 			// Either check if the localStorage has been set before - If not, create it.
 			// Or if this popup has an updated repetition number, reset the localStorage.
+			/**
+			 * The Popup ID passed.
+			 * 
+			 * @var int $popup_id The ID of the popup.
+			 */ 
 		?>
 		let popupSesh = JSON.parse( localStorage.getItem( 'spectraPopup<?php echo esc_attr( strval( $popup_id ) ); ?>' ) );
 		const repetition = <?php echo intval( get_post_meta( $popup_id, 'spectra-popup-repetition', true ) ); ?>;
@@ -141,11 +147,6 @@ ob_start();
 <?php
 $js = ob_get_clean();
 
-$popup_ids = UAGB_Block_Helper::find_popup_and_enqueue_scripts( (int) $popup_id );
-if ( is_array( $popup_ids ) && ! empty( $popup_ids ) ) {
-	foreach ( $popup_ids as $popup_id ) {
-		$js = apply_filters( 'spectra_pro_popup_frontend_js', $js, $id, $attr, $is_push_banner, $popup_timer );
-	}
-}
+$js = apply_filters( 'spectra_pro_popup_frontend_js', $js, $id, $attr, $is_push_banner, $popup_timer );
 
 return $js;
