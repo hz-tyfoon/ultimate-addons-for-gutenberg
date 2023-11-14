@@ -18,7 +18,7 @@ if ( defined( 'ZIP_AI_DIR' ) ) {
 // Load the functions.
 require_once 'functions.php';
 
-// Load the autoloader only if Zip AI is enabled.
-if ( ZipAI\Functions::is_zip_ai_enabled() ) {
+// Load the library files only if Zip AI is enabled.
+if ( class_exists( 'ZipAI\Functions' ) && ZipAI\Functions::is_zip_ai_enabled() ) {
 	require_once 'loader.php';
 }

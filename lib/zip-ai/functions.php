@@ -64,12 +64,12 @@ if ( ! class_exists( '\ZipAI\Functions' ) ) {
 		 * Function to check if Zip AI is enabled.
 		 *
 		 * @since x.x.x
-		 * @return boolean
+		 * @return boolean True if Zip AI is enabled, false otherwise.
 		 */
 		public static function is_zip_ai_enabled() {
 			// Get the current status of Zip AI.
 			$zip_ai_settings = get_option( 'zip_ai_status' );
-			
+
 			// Return based on whether Zip AI is enabled or not.
 			return 'enabled' === $zip_ai_settings;
 		}

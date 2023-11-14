@@ -71,7 +71,7 @@ const ZipAISettings = () => {
 				<div className="mr-16 mt-2 w-full flex items-start">
 					<div className="w-9/12">
 						<p className="text-sm text-slate-500">
-							{ __( 'Load the Zip AI Library features like Zip AI Assistant into Spectra.', 'ultimate-addons-for-gutenberg' ) }
+							{ __( 'Load the Zip AI Library, with features like Zip AI Assistant, into Spectra.', 'ultimate-addons-for-gutenberg' ) }
 						</p>
 					</div>
 				</div>
