@@ -48,16 +48,7 @@ class UAGB_Popup_Builder {
 		if ( ! shortcode_exists( 'spectra_popup' ) ) {
 			add_shortcode( 'spectra_popup', array( $this, 'spectra_popup_shortcode' ) );
 		}
-		if ( ! is_front_page() ) {
-			$this->post_id = get_the_ID();
-		}
-		$elementor_preview_active = false;
-		if ( defined( 'ELEMENTOR_VERSION' ) ) { // Check if elementor is active.
-			$elementor_preview_active = \Elementor\Plugin::$instance->preview->is_preview_mode(); 
-		}
-		if ( is_numeric( $this->post_id ) && 'spectra-popup' === get_post_type( $this->post_id ) || $elementor_preview_active ) {
-			return;
-		}
+		$this->enqueue_popup_scripts_for_post();
 		add_action( 'wp', array( $this, 'generate_stylesheet' ), 101 );
 	}
 
@@ -81,6 +72,26 @@ class UAGB_Popup_Builder {
 			$this->generate_popup_shortcode( $popup_id );
 			$current_post_assets = new UAGB_Post_Assets( intval( $popup_id ) );
 			$current_post_assets->enqueue_scripts();
+		}
+	}
+
+	/**
+	 * Enqueue all popup scripts for the current post.
+	 *
+	 * @return void
+	 *
+	 * @since 2.6.0
+	 */
+	public function enqueue_popup_scripts_for_post() {
+		if ( ! is_front_page() ) {
+			$this->post_id = get_the_ID();
+		}
+		$elementor_preview_active = false;
+		if ( defined( 'ELEMENTOR_VERSION' ) ) { // Check if elementor is active.
+			$elementor_preview_active = \Elementor\Plugin::$instance->preview->is_preview_mode(); 
+		}
+		if ( is_numeric( $this->post_id ) && 'spectra-popup' === get_post_type( $this->post_id ) || $elementor_preview_active ) {
+			return;
 		}
 	}
 
