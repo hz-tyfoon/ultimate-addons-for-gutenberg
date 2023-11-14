@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use ZipAI\Functions;
 use ZipAI\Classes\Zip_Ai_Helpers;
 use ZipAI\Classes\Admin_Views;
 
@@ -67,6 +68,7 @@ class Admin_Configurations {
 
 		// Setup the Admin Ajax Actions.
 		add_action( 'wp_ajax_zip_ai_admin_settings_ajax', array( $this, 'admin_settings_ajax' ) );
+		add_action( 'wp_ajax_zip_ai_disabler_ajax', array( $this, 'zip_ai_disabler_ajax' ) );
 	}
 
 
@@ -155,6 +157,32 @@ class Admin_Configurations {
 			$redirection_url = apply_filters( 'zip_ai_auth_redirection_url', admin_url( 'tools.php?page=zip-ai' ) );
 			wp_safe_redirect( $redirection_url );
 			exit;
+		}
+	}
+
+	/**
+	 * Setup the Ajax Event to Entirely Disable the Zip AI Library from loading.
+	 *
+	 * @since x.x.x
+	 * @return void
+	 */
+	public function zip_ai_disabler_ajax() {
+		// If the current user does not have the required capability, then abandon ship.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error();
+		}
+
+		// Verify the nonce.
+		check_ajax_referer( 'zip_ai_admin_nonce', 'nonce' );
+
+		// Disable the Zip AI Library.
+		Functions::disable_zip_ai();
+
+		// Send the status based on whether the Zip AI Library is enabled or not.
+		if ( Functions::is_zip_ai_enabled() ) {
+			wp_send_json_error();
+		} else {
+			wp_send_json_success();
 		}
 	}
 
