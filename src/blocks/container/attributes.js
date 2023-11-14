@@ -991,6 +991,10 @@ const attributes = {
 		},
 	},
 	// Background image position.
+	centralizedPosition: {
+		type: 'boolean',
+		default: false,
+	},
 	customPosition: {
 		type: 'string',
 		default: 'default',
@@ -1375,13 +1379,6 @@ const attributes = {
 		},
 		default: '#FFFFFF75',
 	},
-	gradientOverlayValue: {
-		type: 'string',
-		default: 'linear-gradient(90deg, rgba(6, 147, 227, 0.5) 0%, rgba(155, 81, 224, 0.5) 100%)',
-		UAGCopyPaste: {
-			styleType: 'container-bg-gradient-overlay-value',
-		},
-	},
 	backgroundCustomSizeOverlayDesktop: {
 		type: 'number',
 		UAGCopyPaste: {
@@ -1538,6 +1535,12 @@ const attributes = {
 	UAGAnimationShowContainerAdvancedSettings: {
 		type: 'boolean',
 		default: false,
+	},
+	backgroundVideoFallbackImage: {
+		type: 'object',
+		UAGCopyPaste: {
+			styleType: 'container-bg-image-desktop',
+		},
 	},
 };
 

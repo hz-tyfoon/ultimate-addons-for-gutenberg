@@ -161,6 +161,7 @@ const Settings = ( props ) => {
 		overlayType,
 		overlayOpacity,
 		customPosition,
+		centralizedPosition,
 		xPositionDesktop,
 		xPositionTablet,
 		xPositionMobile,
@@ -182,7 +183,6 @@ const Settings = ( props ) => {
 		linkColor,
 		linkHoverColor,
 
-		gradientOverlayValue,
 		gradientOverlayColor1,
 		gradientOverlayColor2,
 		gradientOverlayLocation1,
@@ -254,6 +254,7 @@ const Settings = ( props ) => {
 		gradientType,
 		gradientAngle,
 		selectGradient,
+		backgroundVideoFallbackImage
 	} = attributes;
 
 	const isPro = uagb_blocks_info.spectra_pro_status;
@@ -1090,6 +1091,10 @@ const Settings = ( props ) => {
 						value: customPosition,
 						label: 'customPosition',
 					} }
+					centralizedPosition = { {
+						value: centralizedPosition,
+						label: 'centralizedPosition',
+					}} 
 					xPositionDesktop={ {
 						value: xPositionDesktop,
 						label: 'xPositionDesktop',
@@ -1153,10 +1158,10 @@ const Settings = ( props ) => {
 						value: overlayOpacity,
 						label: 'overlayOpacity',
 					} }
-					backgroundOverlayGradient={ {
-						value: gradientOverlayValue,
-						label: 'gradientOverlayValue',
-					} }
+					backgroundVideoFallbackImage={{
+						value: backgroundVideoFallbackImage,
+						label: 'backgroundVideoFallbackImage',
+					}}
 					overlayGradientType={ {
 						value: selectOverlayGradient,
 						label: 'selectOverlayGradient',

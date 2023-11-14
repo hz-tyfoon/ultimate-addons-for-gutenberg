@@ -4,8 +4,8 @@
 **Tags:** gutenberg, blocks, gutenberg blocks, editor, block  
 **Requires at least:** 5.6  
 **Requires PHP:** 7.4  
-**Tested up to:** 6.3.2  
-**Stable tag:** 2.9.0  
+**Tested up to:** 6.4.1  
+**Stable tag:** 2.10.1  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -216,7 +216,35 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 ## Changelog ##
 
 ### x.x.x ###
+* Fix: Container - Resolved an issue wherein the gradient overlay would not work as intended.
+* Fix: Inline Notice - Resolved an issue wherein the title would not appear to be full-width in the Firefox browser.
+* Fix: Tabs - Resolved an issue in which the tabs wrapper margin would appear differently in the editor and the front-end.
+* Fix: Icon List - Resolved an issue wherein the vertical layout alignment would not appear as intended in the editor's tablet view. 
+* Fix: FAQ - Resolved an issue wherein the block content padding would appear differently in the editor and the front-end.
 * Fix: Global - Resolved an edge case issue in multi-sites wherein SVGs would not render as required.
+
+### 2.10.1 - SATURDAY, 11th NOVEMBER 2023 ###
+* Improvement: Zip AI - Added an option to disable Zip AI.
+* Improvement: Caching - Added compatibility with SiteGround's caching.
+
+### 2.10.0 - THURSDAY, 9th NOVEMBER 2023 ###
+* New: Integrated Zip AI into Spectra.
+
+### 2.9.1 - TUESDAY, 7th NOVEMBER 2023 ###
+* Improvement: Container - Added a fallback image option for the video background type.
+* Improvement: Container - Added a new 'Centralized Position' setting for custom image background positioning.
+* Improvement: Global - Added the new 'X' logo for Twitter into the icon library.
+* Fix: Container - Resolved an issue wherein the background video opacity would not work as intended.
+* Fix: Container - Resolved an issue wherein the flex properties would not work as intended on the front-end when blocks were added inside a video-background Container.
+* Fix: Buttons - Resolved an issue in which the margins added to the button group would get overridden by child button margins.
+* Fix: FAQ - Resolved an issue in which the default content padding would appear differently in the editor and the front-end.
+* Fix: Form - Added a note for the Form block regarding duplicate name fields requiring distinct labels.
+* Fix: Icon List - Resolved an issue wherein the vertical alignment would not appear as intended in the editor's mobile view.
+* Fix: Post Grid/Carousel/Timeline - Resolved an issue wherein a `preg_replace` warning could appear.
+* Fix: Slider - Resolved an issue wherein the block would not work as intended in the Astra widget customizer.
+* Fix: Table Of Contents - Resolved an issue wherein the Table Of Contents collapse feature would not work as intended.
+* Fix: Global - Resolved an issue with Full Site Editing (FSE) in which changes applied to page templates would not be visible when File Generation was enabled.
+* Fix: Global - Resolved an issue in which the Spectra blocks were unable to be previewed in the widget editor customizer.
 
 ### 2.9.0 - THURSDAY, 26th OCTOBER 2023 ###
 * New: Core Blocks - Added Global Block Style support for core blocks.
