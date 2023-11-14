@@ -184,7 +184,6 @@ const Settings = ( props ) => {
 		linkColor,
 		linkHoverColor,
 
-		gradientOverlayValue,
 		gradientOverlayColor1,
 		gradientOverlayColor2,
 		gradientOverlayLocation1,
@@ -1166,10 +1165,6 @@ const Settings = ( props ) => {
 						value: backgroundVideoFallbackImage,
 						label: 'backgroundVideoFallbackImage',
 					}}
-					backgroundOverlayGradient={ {
-						value: gradientOverlayValue,
-						label: 'gradientOverlayValue',
-					} }
 					overlayGradientType={ {
 						value: selectOverlayGradient,
 						label: 'selectOverlayGradient',
