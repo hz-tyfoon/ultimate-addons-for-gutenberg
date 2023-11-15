@@ -1,16 +1,4 @@
-// import { test, expect } from '@playwright/test';
-
-
-// // test( 'first', async ( { page } ) => {
-// //     await page.goto( 'http://localhost:8888/wp-admin/options-general.php?page=spectra' );
-  
-// //     const spectrax = page.locator( 'text=Welcome to Spectra!' );
-  
-// //     await expect( spectrax ).toContainText( 'Welcome to Spectra!' )
-    
-// //   } );
-
-  import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   await page.goto('https://notable-normandeau-gfbwl.zipwp.dev/wp-admin/?wtlwp_token=6d8fb037b9d4f7aee9c35f3d5c3ab73088e60baf815f1e1859524931b16d65434b9037aa54f7f2ec7915da9f48101456eb42f317e66b151ee439a1a65634456b');
