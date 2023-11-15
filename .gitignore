@@ -44,7 +44,7 @@ auth.json
 # Artifact
 artifact/
 
-# PlayWright Code
+#PlayWright Code
 /test-results/
 /playwright-report/
 /playwright/.cache/

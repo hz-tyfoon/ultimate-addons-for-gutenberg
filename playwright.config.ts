@@ -38,7 +38,7 @@ const config: PlaywrightTestConfig = {
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    headless: true,
+    headless: false,
     browserName: 'chromium',
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
@@ -86,7 +86,7 @@ const config: PlaywrightTestConfig = {
     {
       name: 'Mobile Safari',
       use: {
-        ...devices['iPhone 12'],
+        ...devices['iPhone 15'],
       },
     },
 
