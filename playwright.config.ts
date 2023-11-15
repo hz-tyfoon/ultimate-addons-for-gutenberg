@@ -40,7 +40,7 @@ const config: PlaywrightTestConfig = {
   use: {
     headless: true,
     browserName: 'chromium',
-    viewport: { width: 1280, height: 720 },
+    viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
     storageState: 'storageState.json',
@@ -62,7 +62,6 @@ const config: PlaywrightTestConfig = {
       },
     },
 
-    
     {
       name: 'firefox',
       use: {
