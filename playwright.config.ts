@@ -24,7 +24,7 @@ const config: PlaywrightTestConfig = {
     timeout: 5000
   },
 
-  globalSetup: require.resolve( './/global-setup' ),
+  globalSetup: require.resolve( './/E2E' ),
   
   /* Run tests in files in parallel */
   fullyParallel: true,
