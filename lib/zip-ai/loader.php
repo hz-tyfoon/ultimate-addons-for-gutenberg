@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use ZipAI\Functions;
 use ZipAI\Classes\Admin_Configurations;
 use ZipAI\Classes\Sidebar_Configurations;
 use ZipAI\Classes\Zip_Ai_Helpers;
@@ -170,14 +171,8 @@ if ( ! class_exists( '\ZipAI\Loader' ) ) {
 		 * @return void
 		 */
 		public function setup_classes() {
-			$zip_ai_option = Zip_Ai_Helpers::get_zip_ai_setting();
-
 			// Enable the Zip AI Chat Sidebar if required.
-			if ( apply_filters( 'zip_ai_enable_chat_sidebar', true ) && false !== $zip_ai_option['chat_enabled'] ) {
-				// If the Zip AI Option does not exist, create it and ensure that Zip Chat is enabled.
-				if ( empty( $zip_ai_option['auth_token'] ) && ! isset( $zip_ai_option['chat_enabled'] ) ) {
-					Zip_Ai_Helpers::ensure_zip_chat_is_enabled();
-				}
+			if ( apply_filters( 'zip_ai_enable_chat_sidebar', true ) && Functions::is_module_enabled( 'ai_assistant' ) ) {
 				Sidebar_Configurations::get_instance();
 			}
 

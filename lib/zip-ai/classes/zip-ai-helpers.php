@@ -69,33 +69,6 @@ class Zip_Ai_Helpers {
 	}
 
 	/**
-	 * Enable Zip Chat if it's not already enabled.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function ensure_zip_chat_is_enabled() {
-		// Get the Zip AI settings.
-		$zip_ai_options = self::get_admin_settings_option( 'zip_ai_settings' );
-
-		// If Zip Chat is already enabled, abandon ship.
-		if ( ! empty( $zip_ai_options['chat_enabled'] ) ) {
-			return;
-		}
-
-		// If the Zip AI settings are empty, set them to an empty array.
-		if ( empty( $zip_ai_options ) || ! is_array( $zip_ai_options ) ) {
-			$zip_ai_options = array();
-		}
-
-		// Set the chat enabled option to true.
-		$zip_ai_options['chat_enabled'] = true;
-
-		// Update the Zip AI settings.
-		self::update_admin_settings_option( 'zip_ai_settings', $zip_ai_options );
-	}
-
-	/**
 	 * Check if Zip AI is authorized.
 	 *
 	 * @since 1.0.0

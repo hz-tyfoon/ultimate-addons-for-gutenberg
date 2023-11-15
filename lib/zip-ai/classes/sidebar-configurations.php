@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use ZipAI\Functions;
 use ZipAI\Classes\Zip_Ai_Helpers;
 
 /**
@@ -291,7 +292,7 @@ class Sidebar_Configurations {
 				'current_post_id'        => get_the_ID(),
 				'zip_ai_auth_middleware' => Zip_Ai_Helpers::get_auth_middleware_url(),
 				'is_zip_ai_authorized'   => Zip_Ai_Helpers::is_zip_ai_authorized(),
-				'is_zip_chat_enabled'    => Zip_Ai_Helpers::get_zip_ai_setting( 'chat_enabled', true ),
+				'is_zip_chat_enabled'    => Functions::is_module_enabled( 'ai_assistant' ),
 				'is_customize_preview'   => is_customize_preview(),
 			)
 		);

@@ -67,7 +67,7 @@ class Admin_Configurations {
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 
 		// Setup the Admin Ajax Actions.
-		add_action( 'wp_ajax_zip_ai_admin_settings_ajax', array( $this, 'admin_settings_ajax' ) );
+		add_action( 'wp_ajax_zip_ai_admin_update_ai_assistant_ajax', array( $this, 'zip_ai_admin_update_ai_assistant_ajax' ) );
 		add_action( 'wp_ajax_zip_ai_disabler_ajax', array( $this, 'zip_ai_disabler_ajax' ) );
 	}
 
@@ -149,9 +149,6 @@ class Admin_Configurations {
 		// Update the Zip AI settings.
 		Zip_Ai_Helpers::update_admin_settings_option( 'zip_ai_settings', $existing_zip_ai_options );
 
-		// Enable Zip Chat if it's not already enabled.
-		Zip_Ai_Helpers::ensure_zip_chat_is_enabled();
-
 		// Redirect to the settings page.
 		if ( apply_filters( 'zip_ai_auth_redirection_flag', true ) ) {
 			$redirection_url = apply_filters( 'zip_ai_auth_redirection_url', admin_url( 'tools.php?page=zip-ai' ) );
@@ -175,11 +172,22 @@ class Admin_Configurations {
 		// Verify the nonce.
 		check_ajax_referer( 'zip_ai_admin_nonce', 'nonce' );
 
+		error_log( print_r( get_option( 'zip_ai_settings' ), true ) );
+		error_log( print_r( get_option( 'zip_ai_modules' ), true ) );
+
+		// Check if the Zip AI Assistant was requested to be disabled.
+		if ( ! empty( $_POST['disable_zip_ai_assistant'] ) ) {
+			error_log( 'Disabling Zip AI Assistant' );
+			Functions::disable_module( 'ai_assistant' );
+			error_log( print_r( get_option( 'zip_ai_modules' ), true ) );
+		}
+
 		// Disable the Zip AI Library.
-		Functions::disable_zip_ai();
+		Functions::disable();
+		error_log( 'Disabled Zip AI' );
 
 		// Send the status based on whether the Zip AI Library is enabled or not.
-		if ( Functions::is_zip_ai_enabled() ) {
+		if ( Functions::is_enabled() ) {
 			wp_send_json_error();
 		} else {
 			wp_send_json_success();
@@ -192,7 +200,7 @@ class Admin_Configurations {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function admin_settings_ajax() {
+	public function zip_ai_admin_update_ai_assistant_ajax() {
 		// If the current user does not have the required capability, then abandon ship.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();
@@ -201,19 +209,17 @@ class Admin_Configurations {
 		// Verify the nonce.
 		check_ajax_referer( 'zip_ai_admin_nonce', 'nonce' );
 
-		// Get the Zip AI settings.
-		$zip_ai_options = Zip_Ai_Helpers::get_zip_ai_setting();
-
 		// If the Zip options is not an array, then send an error.
 		if ( empty( $_POST['enable_zip_chat'] ) || ! is_string( $_POST['enable_zip_chat'] ) ) {
 			wp_send_json_error();
 		}
 
 		// Update the enabled status.
-		$zip_ai_options['chat_enabled'] = ( 'enabled' === sanitize_text_field( $_POST['enable_zip_chat'] ) ) ? true : false;
-
-		// Update the zip_ai_settings option.
-		Zip_Ai_Helpers::update_admin_settings_option( 'zip_ai_settings', $zip_ai_options );
+		if ( 'enabled' === sanitize_text_field( $_POST['enable_zip_chat'] ) ) {
+			Functions::enable_module( 'ai_assistant' );
+		} else {
+			Functions::disable_module( 'ai_assistant' );
+		}
 
 		// Send the status.
 		wp_send_json_success();
@@ -315,7 +321,7 @@ class Admin_Configurations {
 				'zip_ai_auth_revoke_url'  => Zip_Ai_Helpers::get_auth_revoke_url(),
 				'zip_ai_credit_topup_url' => ZIP_AI_CREDIT_TOPUP_URL,
 				'is_zip_ai_authorized'    => Zip_Ai_Helpers::is_zip_ai_authorized(),
-				'is_zip_chat_enabled'     => Zip_Ai_Helpers::get_zip_ai_setting( 'chat_enabled', 'pts' ),
+				'is_zip_chat_enabled'     => Functions::is_module_enabled( 'ai_assistant' ),
 				'zip_ai_admin_nonce'      => wp_create_nonce( 'zip_ai_admin_nonce' ),
 				'page_slug'               => $this->menu_slug,
 				'zip_ai_credit_details'   => Zip_Ai_Helpers::get_credit_details(),

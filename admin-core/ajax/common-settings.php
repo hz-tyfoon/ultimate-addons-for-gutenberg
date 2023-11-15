@@ -923,10 +923,10 @@ class Common_Settings extends Ajax_Base {
 		if ( class_exists( '\ZipAI\Functions' ) ) {
 			// If the value is disabled, disable the Zip AI Library - else enable it.
 			if ( 'disabled' === $value ) {
-				\ZipAI\Functions::disable_zip_ai();
+				\ZipAI\Functions::disable();
 				wp_send_json_success( array( 'messsage' => __( 'Zip AI disabled!', 'ultimate-addons-for-gutenberg' ) ) );
 			} else {
-				\ZipAI\Functions::enable_zip_ai();
+				\ZipAI\Functions::enable();
 				wp_send_json_success( array( 'messsage' => __( 'Zip AI enabled!', 'ultimate-addons-for-gutenberg' ) ) );
 			}
 		} else {
