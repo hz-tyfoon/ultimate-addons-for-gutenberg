@@ -4,9 +4,9 @@
 
 import classnames from 'classnames';
 import { InnerBlocks } from '@wordpress/block-editor';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
+
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 
 const Render = ( props ) => {
 	// Add and remove the CSS on the drop and remove of the component.
@@ -17,21 +17,18 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	const deviceType = useDeviceType();
-
 	const {
-		attributes: { align, backgroundType, alignMobile, alignTablet },
+		attributes: { align, backgroundType, alignMobile, alignTablet, block_id },
 		isSelected,
 		className,
-	} = props.parentProps;
+		deviceType,
+	} = props;
 
 	const active = isSelected ? 'active' : 'not-active';
 
 	const alignClass = 'center' === align ? '' : `uagb-column__align-${ align }`;
-	const alignClassMobile =
-		'' === alignMobile ? '' : `uagb-column__align-mobile-${ alignMobile }`;
-	const alignClassTablet =
-		'' === alignTablet ? '' : `uagb-column__align-tablet-${ alignTablet }`;
+	const alignClassMobile = '' === alignMobile ? '' : `uagb-column__align-mobile-${ alignMobile }`;
+	const alignClassTablet = '' === alignTablet ? '' : `uagb-column__align-tablet-${ alignTablet }`;
 
 	return (
 		<div
@@ -44,7 +41,7 @@ const Render = ( props ) => {
 				alignClassMobile,
 				alignClassTablet,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.parentProps.clientId.substr( 0, 8 ) }`
+				`uagb-block-${ block_id }`
 			) }
 		>
 			<div className="uagb-column__overlay"></div>
@@ -53,4 +50,4 @@ const Render = ( props ) => {
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

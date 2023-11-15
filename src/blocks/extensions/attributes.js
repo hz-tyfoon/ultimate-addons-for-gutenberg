@@ -1,11 +1,12 @@
 const { enableMasonryGallery } = uagb_blocks_info;
+import { addFilter } from '@wordpress/hooks';
+import AnimationAttributes from '@Blocks/extensions/animations-extension/attributes.js';
+import positionAttributes from '@Blocks/extensions/advanced-positioning/attributes.js';
 
 function addAttributes( settings ) {
-
 	const excludeBlock = uagb_blocks_info.uagb_exclude_blocks_from_extension;
 
 	if ( ! excludeBlock.includes( settings.name ) ) {
-
 		if ( settings.attributes ) {
 			settings.attributes = Object.assign( settings.attributes, {
 				UAGUserRole: {
@@ -40,6 +41,10 @@ function addAttributes( settings ) {
 				UAGDisplayConditions: {
 					type: 'string',
 				},
+				UAGDay: {
+					type: 'array',
+					default: [],
+				},
 				zIndex: {
 					type: 'number',
 				},
@@ -53,17 +58,15 @@ function addAttributes( settings ) {
 					type: 'boolean',
 					default: false,
 				},
+				...AnimationAttributes,
+				...positionAttributes,
 			} );
 		}
 	}
 	return settings;
 }
 
-wp.hooks.addFilter(
-	'blocks.registerBlockType',
-	'uagb/advanced-control-block',
-	addAttributes
-);
+addFilter( 'blocks.registerBlockType', 'uagb/advanced-control-block', addAttributes );
 
 if ( 'enabled' === enableMasonryGallery || true === enableMasonryGallery ) {
 	function addMasonryAttribute( settings ) {
@@ -87,9 +90,5 @@ if ( 'enabled' === enableMasonryGallery || true === enableMasonryGallery ) {
 		return settings;
 	}
 
-	wp.hooks.addFilter(
-		'blocks.registerBlockType',
-		'uagb/masonry-gallery',
-		addMasonryAttribute
-	);
+	addFilter( 'blocks.registerBlockType', 'uagb/masonry-gallery', addMasonryAttribute );
 }

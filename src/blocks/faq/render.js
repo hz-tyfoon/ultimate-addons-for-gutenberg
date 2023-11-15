@@ -4,9 +4,9 @@
 
 import classnames from 'classnames';
 import { InnerBlocks } from '@wordpress/block-editor';
-import React, { useLayoutEffect, useMemo } from 'react';
+import { useLayoutEffect, memo, useMemo } from '@wordpress/element';
+
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 const ALLOWED_BLOCKS = [ 'uagb/faq-child' ];
 
 const faq = [];
@@ -21,10 +21,8 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
-	const { attributes } = props;
-	const { isPreview, equalHeight } = attributes;
+	const { attributes, deviceType } = props;
+	const { equalHeight, block_id } = attributes;
 
 	const getFaqChildTemplate = useMemo( () => {
 		const childFaq = [];
@@ -37,22 +35,20 @@ const Render = ( props ) => {
 	}, [ faqCount, faq ] );
 
 	const equalHeightClass = equalHeight ? 'uagb-faq-equal-height' : '';
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/faq.png`;
 
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
 			className={ classnames(
 				'uagb-faq__outer-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
-				`uagb-faq-icon-${ props.attributes.iconAlign }`,
-				`uagb-faq-layout-${ props.attributes.layout }`,
-				`uagb-faq-expand-first-${ props.attributes.expandFirstItem }`,
-				`uagb-faq-inactive-other-${ props.attributes.inactiveOtherItems }`,
+				`uagb-block-${ block_id }`,
+				`uagb-faq-icon-${ attributes.iconAlign }`,
+				`uagb-faq-layout-${ attributes.layout }`,
+				`uagb-faq-expand-first-${ attributes.expandFirstItem }`,
+				`uagb-faq-inactive-other-${ attributes.inactiveOtherItems }`,
 				equalHeightClass
 			) }
-			data-faqtoggle={ props.attributes.enableToggle }
+			data-faqtoggle={ attributes.enableToggle }
 			role="tablist"
 		>
 			<InnerBlocks
@@ -65,4 +61,4 @@ const Render = ( props ) => {
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

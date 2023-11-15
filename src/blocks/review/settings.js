@@ -1,28 +1,18 @@
 import TypographyControl from '@Components/typography';
-import WebfontLoader from '@Components/typography/fontloader';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
-
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
-import InspectorTab, {
-	UAGTabs,
-} from '@Components/inspector-tabs/InspectorTab.js';
+import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 import UAGMediaPicker from '@Components/image';
 import SpacingControl from '@Components/spacing-control';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import UAGSelectControl from '@Components/select-control';
 import { getImageSize } from '@Utils/Helpers';
 import renderSVG from '@Controls/renderIcon';
-import {
-	ToggleControl,
-	TextControl,
-	DateTimePicker,
-	Icon
-} from '@wordpress/components';
+import { ToggleControl, DateTimePicker, Icon } from '@wordpress/components';
+import UAGTextControl from '@Components/text-control';
+import { memo } from '@wordpress/element';
 
 let imageSizeOptions = [
 	{
@@ -33,17 +23,12 @@ let imageSizeOptions = [
 	{ value: 'full', label: __( 'Large', 'ultimate-addons-for-gutenberg' ) },
 ];
 export const removeFromArray = ( arr, removedElems ) =>
-	arr.filter( ( a ) =>
-		Array.isArray( removedElems )
-			? ! removedElems.includes( a )
-			: a !== removedElems
-	);
-
+	arr.filter( ( a ) => ( Array.isArray( removedElems ) ? ! removedElems.includes( a ) : a !== removedElems ) );
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
+
 	// Setup the attributes
 	const { attributes, setAttributes } = props;
 
@@ -170,16 +155,12 @@ const Settings = ( props ) => {
 			setAttributes( { enableDescription: true } );
 		}
 		if (
-			! subtypeCategories.hasOwnProperty(
-				itemType
-			) ||
-			! subtypeCategories[ itemType ].includes(
-				itemSubtype
-			)
+			! subtypeCategories.hasOwnProperty( itemType ) ||
+			! subtypeCategories[ itemType ].includes( itemSubtype )
 		) {
 			setAttributes( { itemSubtype: 'None' } );
 		}
-	}
+	};
 
 	/*
 	 * Event to set Image as while adding.
@@ -205,65 +186,13 @@ const Settings = ( props ) => {
 		setAttributes( { mainimage: '' } );
 	};
 
-	let loadContentGoogleFonts;
-	let loadHeadingGoogleFonts;
-	let loadSubHeadingGoogleFonts;
-
-	if ( headLoadGoogleFonts === true ) {
-		const hconfig = {
-			google: {
-				families: [
-					headFontFamily +
-						( headFontWeight ? ':' + headFontWeight : '' ),
-				],
-			},
-		};
-
-		loadHeadingGoogleFonts = (
-			<WebfontLoader config={ hconfig }></WebfontLoader>
-		);
-	}
-
-	if ( subHeadLoadGoogleFonts === true ) {
-		const sconfig = {
-			google: {
-				families: [
-					subHeadFontFamily +
-						( subHeadFontWeight ? ':' + subHeadFontWeight : '' ),
-				],
-			},
-		};
-
-		loadSubHeadingGoogleFonts = (
-			<WebfontLoader config={ sconfig }></WebfontLoader>
-		);
-	}
-
-	if ( contentLoadGoogleFonts === true ) {
-		const cconfig = {
-			google: {
-				families: [
-					contentFontFamily +
-						( contentFontWeight ? ':' + contentFontWeight : '' ),
-				],
-			},
-		};
-
-		loadContentGoogleFonts = (
-			<WebfontLoader config={ cconfig }></WebfontLoader>
-		);
-	}
-
 	const toggleTarget = () => {
 		setAttributes( { ctaTarget: ! ctaTarget } );
 	};
 
 	const authorSettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Author', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Author', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<>
 					<AdvancedPopColorControl
 						label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
@@ -281,10 +210,7 @@ const Settings = ( props ) => {
 
 	const contentSettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<>
 					<AdvancedPopColorControl
 						label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
@@ -302,10 +228,7 @@ const Settings = ( props ) => {
 
 	const summarySettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Summary', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Summary', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<AdvancedPopColorControl
 					label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ summaryColor }
@@ -316,10 +239,7 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<TypographyControl
-					label={ __(
-						'Typography',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
 					attributes={ props.attributes }
 					setAttributes={ setAttributes }
 					loadGoogleFonts={ {
@@ -401,15 +321,9 @@ const Settings = ( props ) => {
 
 	const starSettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Star', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Star', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<AdvancedPopColorControl
-					label={ __(
-						'Active Color',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Active Color', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ starColor }
 					data={ {
 						value: starColor,
@@ -418,10 +332,7 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<AdvancedPopColorControl
-					label={ __(
-						'Inactive Color',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Inactive Color', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ starActiveColor }
 					data={ {
 						value: starActiveColor,
@@ -430,10 +341,7 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<AdvancedPopColorControl
-					label={ __(
-						'Outline Color',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Outline Color', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ starOutlineColor }
 					data={ {
 						value: starOutlineColor,
@@ -447,10 +355,7 @@ const Settings = ( props ) => {
 
 	const titleSettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Title', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ true }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Title', 'ultimate-addons-for-gutenberg' ) } initialOpen={ true }>
 				<AdvancedPopColorControl
 					label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
 					colorValue={ titleColor }
@@ -461,10 +366,7 @@ const Settings = ( props ) => {
 					setAttributes={ setAttributes }
 				/>
 				<TypographyControl
-					label={ __(
-						'Typography',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
 					attributes={ props.attributes }
 					setAttributes={ setAttributes }
 					loadGoogleFonts={ {
@@ -543,17 +445,11 @@ const Settings = ( props ) => {
 
 	const descriptionSettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Description', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Description', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				{ enableDescription === true && (
 					<>
 						<AdvancedPopColorControl
-							label={ __(
-								'Color',
-								'ultimate-addons-for-gutenberg'
-							) }
+							label={ __( 'Color', 'ultimate-addons-for-gutenberg' ) }
 							colorValue={ descColor }
 							data={ {
 								value: descColor,
@@ -562,10 +458,7 @@ const Settings = ( props ) => {
 							setAttributes={ setAttributes }
 						/>
 						<TypographyControl
-							label={ __(
-								'Typography',
-								'ultimate-addons-for-gutenberg'
-							) }
+							label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
 							attributes={ props.attributes }
 							setAttributes={ setAttributes }
 							loadGoogleFonts={ {
@@ -650,15 +543,9 @@ const Settings = ( props ) => {
 	const schemaSettings = () => {
 		if ( true === enableSchema ) {
 			return (
-				<UAGAdvancedPanelBody
-					title={ __( 'Schema', 'ultimate-addons-for-gutenberg' ) }
-					initialOpen={ false }
-				>
+				<UAGAdvancedPanelBody title={ __( 'Schema', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 					<UAGSelectControl
-						label={ __(
-							'Item Type',
-							'ultimate-addons-for-gutenberg'
-						) }
+						label={ __( 'Item Type', 'ultimate-addons-for-gutenberg' ) }
 						data={ {
 							value: itemType,
 						} }
@@ -666,47 +553,29 @@ const Settings = ( props ) => {
 						options={ [
 							{
 								value: 'Book',
-								label: __(
-									'Book',
-									'ultimate-addons-for-gutenberg'
-								),
+								label: __( 'Book', 'ultimate-addons-for-gutenberg' ),
 							},
 							{
 								value: 'Course',
-								label: __(
-									'Course',
-									'ultimate-addons-for-gutenberg'
-								),
+								label: __( 'Course', 'ultimate-addons-for-gutenberg' ),
 							},
 							{
 								value: 'Movie',
-								label: __(
-									'Movie',
-									'ultimate-addons-for-gutenberg'
-								),
+								label: __( 'Movie', 'ultimate-addons-for-gutenberg' ),
 							},
 							{
 								value: 'Product',
-								label: __(
-									'Product',
-									'ultimate-addons-for-gutenberg'
-								),
+								label: __( 'Product', 'ultimate-addons-for-gutenberg' ),
 							},
 							{
 								value: 'SoftwareApplication',
-								label: __(
-									'Software Application',
-									'ultimate-addons-for-gutenberg'
-								),
+								label: __( 'Software Application', 'ultimate-addons-for-gutenberg' ),
 							},
 						] }
 					/>
 					{ subtypeCategories.hasOwnProperty( itemType ) && (
 						<UAGSelectControl
-							label={ __(
-								'Item Subtype',
-								'ultimate-addons-for-gutenberg'
-							) }
+							label={ __( 'Item Subtype', 'ultimate-addons-for-gutenberg' ) }
 							data={ {
 								value: itemSubtype,
 								label: 'itemSubtype',
@@ -715,10 +584,7 @@ const Settings = ( props ) => {
 							options={ [
 								{
 									value: 'none',
-									label: __(
-										'None',
-										'ultimate-addons-for-gutenberg'
-									),
+									label: __( 'None', 'ultimate-addons-for-gutenberg' ),
 								},
 								...subtypeCategories[ itemType ],
 							] }
@@ -726,66 +592,59 @@ const Settings = ( props ) => {
 					) }
 
 					{ itemTypeExtras }
-					<TextControl
-						label={ __(
-							'Review Publisher',
-							'ultimate-addons-for-gutenberg'
-						) }
+					<UAGTextControl
+						label={ __( 'Review Publisher', 'ultimate-addons-for-gutenberg' ) }
 						value={ reviewPublisher }
-						onChange={ ( value ) =>
-							setAttributes( { reviewPublisher: value } )
-						}
+						data={ {
+							value: reviewPublisher,
+							label: 'reviewPublisher',
+						} }
+						setAttributes={ setAttributes }
+						onChange={ ( value ) => setAttributes( { reviewPublisher: value } ) }
 						help={ __(
 							'Note: This is a mandatory field for the Review schema',
 							'ultimate-addons-for-gutenberg'
 						) }
 					/>
-					<h2>
-						{ __(
-							'Date Of Publish',
-							'ultimate-addons-for-gutenberg'
-						) }
-					</h2>
+					<h2>{ __( 'Date Of Publish', 'ultimate-addons-for-gutenberg' ) }</h2>
 					<DateTimePicker
 						className="uagb-date-picker"
 						currentDate={ datepublish }
-						onChange={ ( value ) =>
-							setAttributes( { datepublish: value } )
-						}
+						onChange={ ( value ) => setAttributes( { datepublish: value } ) }
 						is12Hour={ true }
 					/>
-					{ [ 'Product', 'SoftwareApplication' ].includes(
-						itemType
-					) && (
+					{ [ 'Product', 'SoftwareApplication' ].includes( itemType ) && (
 						<>
 							{ [ 'Product' ].includes( itemType ) && (
 								<>
-									<TextControl
-										label={ __(
-											'Brand',
-											'ultimate-addons-for-gutenberg'
-										) }
+									<UAGTextControl
+										label={ __( 'Brand', 'ultimate-addons-for-gutenberg' ) }
 										value={ brand }
-										onChange={ ( value ) =>
-											setAttributes( { brand: value } )
-										}
+										data={ {
+											value: brand,
+											label: 'brand',
+										} }
+										setAttributes={ setAttributes }
+										onChange={ ( value ) => setAttributes( { brand: value } ) }
 									/>
-									<TextControl
-										label={ __(
-											'SKU',
-											'ultimate-addons-for-gutenberg'
-										) }
+									<UAGTextControl
+										label={ __( 'SKU', 'ultimate-addons-for-gutenberg' ) }
 										value={ sku }
-										onChange={ ( value ) =>
-											setAttributes( { sku: value } )
-										}
+										data={ {
+											value: sku,
+											label: 'sku',
+										} }
+										setAttributes={ setAttributes }
+										onChange={ ( value ) => setAttributes( { sku: value } ) }
 									/>
-									<TextControl
-										label={ __(
-											'Identifier',
-											'ultimate-addons-for-gutenberg'
-										) }
+									<UAGTextControl
+										label={ __( 'Identifier', 'ultimate-addons-for-gutenberg' ) }
 										value={ identifier }
+										data={ {
+											value: identifier,
+											label: 'identifier',
+										} }
+										setAttributes={ setAttributes }
 										onChange={ ( value ) =>
 											setAttributes( {
 												identifier: value,
@@ -793,40 +652,31 @@ const Settings = ( props ) => {
 										}
 									/>
 									<UAGSelectControl
-										label={ __(
-											'Identifier Type',
-											'ultimate-addons-for-gutenberg'
-										) }
+										label={ __( 'Identifier Type', 'ultimate-addons-for-gutenberg' ) }
 										data={ {
 											value: identifierType,
 											label: 'identifierType',
 										} }
 										setAttributes={ setAttributes }
-										options={ [
-											'nsn',
-											'mpn',
-											'gtin8',
-											'gtin12',
-											'gtin13',
-											'gtin14',
-											'gtin',
-										].map( ( a ) => ( {
-											label: a.toUpperCase(),
-											value: a,
-										} ) ) }
+										options={ [ 'nsn', 'mpn', 'gtin8', 'gtin12', 'gtin13', 'gtin14', 'gtin' ].map(
+											( a ) => ( {
+												label: a.toUpperCase(),
+												value: a,
+											} )
+										) }
 									/>
 								</>
 							) }
-							{ [ 'Product', 'SoftwareApplication' ].includes(
-								itemType
-							) && (
+							{ [ 'Product', 'SoftwareApplication' ].includes( itemType ) && (
 								<>
-									<TextControl
-										label={ __(
-											'Offer Currency',
-											'ultimate-addons-for-gutenberg'
-										) }
+									<UAGTextControl
+										label={ __( 'Offer Currency', 'ultimate-addons-for-gutenberg' ) }
 										value={ offerCurrency }
+										data={ {
+											value: offerCurrency,
+											label: 'offerCurrency',
+										} }
+										setAttributes={ setAttributes }
 										onChange={ ( value ) =>
 											setAttributes( {
 												offerCurrency: value,
@@ -837,12 +687,14 @@ const Settings = ( props ) => {
 							) }
 							{ offerType === 'Offer' && (
 								<>
-									<TextControl
-										label={ __(
-											'Offer Price',
-											'ultimate-addons-for-gutenberg'
-										) }
+									<UAGTextControl
+										label={ __( 'Offer Price', 'ultimate-addons-for-gutenberg' ) }
 										value={ offerPrice }
+										data={ {
+											value: offerPrice,
+											label: 'offerPrice',
+										} }
+										setAttributes={ setAttributes }
 										onChange={ ( value ) =>
 											setAttributes( {
 												offerPrice: value,
@@ -854,10 +706,7 @@ const Settings = ( props ) => {
 										) }
 									/>
 									<UAGSelectControl
-										label={ __(
-											'Offer Status',
-											'ultimate-addons-for-gutenberg'
-										) }
+										label={ __( 'Offer Status', 'ultimate-addons-for-gutenberg' ) }
 										data={ {
 											value: offerStatus,
 											label: 'offerStatus',
@@ -865,85 +714,44 @@ const Settings = ( props ) => {
 										setAttributes={ props.setAttributes }
 										options={ [
 											{
-												value:
-													'https://schema.org/Discontinued',
-												label: __(
-													'Discontinued',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/Discontinued',
+												label: __( 'Discontinued', 'ultimate-addons-for-gutenberg' ),
 											},
 											{
-												value:
-													'https://schema.org/InStock',
-												label: __(
-													'In Stock',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/InStock',
+												label: __( 'In Stock', 'ultimate-addons-for-gutenberg' ),
 											},
 											{
-												value:
-													'https://schema.org/InStoreOnly',
-												label: __(
-													'In Store Only',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/InStoreOnly',
+												label: __( 'In Store Only', 'ultimate-addons-for-gutenberg' ),
 											},
 											{
-												value:
-													'https://schema.org/LimitedAvailability',
-												label: __(
-													'Limited Availability',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/LimitedAvailability',
+												label: __( 'Limited Availability', 'ultimate-addons-for-gutenberg' ),
 											},
 											{
-												value:
-													'https://schema.org/OnlineOnly',
-												label: __(
-													'Online Only',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/OnlineOnly',
+												label: __( 'Online Only', 'ultimate-addons-for-gutenberg' ),
 											},
 											{
-												value:
-													'https://schema.org/OutOfStock',
-												label: __(
-													'Out Of Stock',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/OutOfStock',
+												label: __( 'Out Of Stock', 'ultimate-addons-for-gutenberg' ),
 											},
 											{
-												value:
-													'https://schema.org/PreOrder',
-												label: __(
-													'Pre Order',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/PreOrder',
+												label: __( 'Pre Order', 'ultimate-addons-for-gutenberg' ),
 											},
 											{
-												value:
-													'https://schema.org/PreSale',
-												label: __(
-													'Pre Sale',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/PreSale',
+												label: __( 'Pre Sale', 'ultimate-addons-for-gutenberg' ),
 											},
 											{
-												value:
-													'https://schema.org/SoldOut',
-												label: __(
-													'Sold Out',
-													'ultimate-addons-for-gutenberg'
-												),
+												value: 'https://schema.org/SoldOut',
+												label: __( 'Sold Out', 'ultimate-addons-for-gutenberg' ),
 											},
 										] }
 									/>
-									<h2>
-										{ __(
-											'Price Valid Until',
-											'ultimate-addons-for-gutenberg'
-										) }
-									</h2>
+									<h2>{ __( 'Price Valid Until', 'ultimate-addons-for-gutenberg' ) }</h2>
 									<DateTimePicker
 										className="uagb-date-picker"
 										currentDate={ offerExpiry }
@@ -965,10 +773,7 @@ const Settings = ( props ) => {
 
 	const overallPadding = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<SpacingControl
 					{ ...props }
 					label={ __( 'Padding', 'ultimate-addons-for-gutenberg' ) }
@@ -1049,16 +854,10 @@ const Settings = ( props ) => {
 		}
 
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'General', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ true }
-			>
+			<UAGAdvancedPanelBody title={ __( 'General', 'ultimate-addons-for-gutenberg' ) } initialOpen={ true }>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __(
-						'Review Title Tag',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Review Title Tag', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: headingTag,
 						label: 'headingTag',
@@ -1092,10 +891,7 @@ const Settings = ( props ) => {
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __(
-						'Alignment',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Alignment', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: overallAlignment,
 						label: 'overallAlignment',
@@ -1104,62 +900,29 @@ const Settings = ( props ) => {
 					options={ [
 						{
 							value: 'left',
-							icon: (
-								<Icon
-									icon={ renderSVG( 'fa fa-align-left' ) }
-								/>
-							),
-							tooltip: __(
-								'Left',
-								'ultimate-addons-for-gutenberg'
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+							tooltip: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							value: 'center',
-							icon: (
-								<Icon
-									icon={ renderSVG(
-										'fa fa-align-center'
-									) }
-								/>
-							),
-							tooltip: __(
-								'Center',
-								'ultimate-addons-for-gutenberg'
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
+							tooltip: __( 'Center', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							value: 'right',
-							icon: (
-								<Icon
-									icon={ renderSVG(
-										'fa fa-align-right'
-									) }
-								/>
-							),
-							tooltip: __(
-								'Right',
-								'ultimate-addons-for-gutenberg'
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
+							tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 						},
 					] }
 					showIcons={ true }
 				/>
 				<ToggleControl
-					label={ __(
-						'Enable Schema Support',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Enable Schema Support', 'ultimate-addons-for-gutenberg' ) }
 					checked={ enableSchema }
-					onChange={ () =>
-						setAttributes( { enableSchema: ! enableSchema } )
-					}
+					onChange={ () => setAttributes( { enableSchema: ! enableSchema } ) }
 				/>
 				<ToggleControl
-					label={ __(
-						'Show Review Description',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Show Review Description', 'ultimate-addons-for-gutenberg' ) }
 					checked={ enableDescription }
 					onChange={ () =>
 						setAttributes( {
@@ -1172,59 +935,41 @@ const Settings = ( props ) => {
 					) }
 				/>
 				<ToggleControl
-					label={ __(
-						'Show Review Author',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Show Review Author', 'ultimate-addons-for-gutenberg' ) }
 					checked={ showAuthor }
-					onChange={ () =>
-						setAttributes( { showAuthor: ! showAuthor } )
-					}
+					onChange={ () => setAttributes( { showAuthor: ! showAuthor } ) }
 					help={ __(
 						'Note: This is a mandatory field for the Review schema.',
 						'ultimate-addons-for-gutenberg'
 					) }
 				/>
 				<ToggleControl
-					label={ __(
-						'Show Ratings',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Show Ratings', 'ultimate-addons-for-gutenberg' ) }
 					checked={ showFeature }
-					onChange={ () =>
-						setAttributes( { showFeature: ! showFeature } )
-					}
-					help={ __(
-						'Note: Add feature/section ratings separately.',
-						'ultimate-addons-for-gutenberg'
-					) }
+					onChange={ () => setAttributes( { showFeature: ! showFeature } ) }
+					help={ __( 'Note: Add feature/section ratings separately.', 'ultimate-addons-for-gutenberg' ) }
 				/>
 				<ToggleControl
-					label={ __(
-						'Show Review Image',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Show Review Image', 'ultimate-addons-for-gutenberg' ) }
 					checked={ enableImage }
-					onChange={ () =>
-						setAttributes( { enableImage: ! enableImage } )
-					}
+					onChange={ () => setAttributes( { enableImage: ! enableImage } ) }
 					help={ __(
 						'Note: This is a mandatory field for the Review schema.',
 						'ultimate-addons-for-gutenberg'
 					) }
 				/>
-				<h2>{ __( 'Link' ) }</h2>
-				<TextControl
+				<UAGTextControl
+					label={ __( 'Link', 'ultimate-addons-for-gutenberg' ) }
 					value={ ctaLink }
-					onChange={ ( value ) =>
-						setAttributes( { ctaLink: value } )
-					}
+					data={ {
+						value: ctaLink,
+						label: 'ctaLink',
+					} }
+					setAttributes={ setAttributes }
+					onChange={ ( value ) => setAttributes( { ctaLink: value } ) }
 				/>
 				<ToggleControl
-					label={ __(
-						'Open in new window',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Open in new window', 'ultimate-addons-for-gutenberg' ) }
 					checked={ ctaTarget }
 					onChange={ toggleTarget }
 				/>
@@ -1233,10 +978,7 @@ const Settings = ( props ) => {
 	};
 	const imageSettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Image', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Image', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<>
 					<UAGMediaPicker
 						onSelectImage={ onSelectImage }
@@ -1244,23 +986,17 @@ const Settings = ( props ) => {
 						onRemoveImage={ onRemoveImage }
 						disableLabel={ true }
 					/>
-					{ mainimage &&
-						mainimage !== 'null' &&
-						mainimage.url !== 'null' &&
-						mainimage.url !== '' && (
-							<UAGSelectControl
-								label={ __(
-									'Size',
-									'ultimate-addons-for-gutenberg'
-								) }
-								data={ {
-									value: imgSize,
-									label: 'imgSize',
-								} }
-								setAttributes={ setAttributes }
-								options={ imageSizeOptions }
-							/>
-						) }
+					{ mainimage && mainimage !== 'null' && mainimage.url !== 'null' && mainimage.url !== '' && (
+						<UAGSelectControl
+							label={ __( 'Size', 'ultimate-addons-for-gutenberg' ) }
+							data={ {
+								value: imgSize,
+								label: 'imgSize',
+							} }
+							setAttributes={ setAttributes }
+							options={ imageSizeOptions }
+						/>
+					) }
 				</>
 			</UAGAdvancedPanelBody>
 		);
@@ -1278,17 +1014,11 @@ const Settings = ( props ) => {
 		Product: [
 			{
 				value: 'IndividualProduct',
-				label: __(
-					'Individual Product',
-					'ultimate-addons-for-gutenberg'
-				),
+				label: __( 'Individual Product', 'ultimate-addons-for-gutenberg' ),
 			},
 			{
 				value: 'ProductCollection',
-				label: __(
-					'Product Collection',
-					'ultimate-addons-for-gutenberg'
-				),
+				label: __( 'Product Collection', 'ultimate-addons-for-gutenberg' ),
 			},
 			{
 				value: 'ProductGroup',
@@ -1310,10 +1040,7 @@ const Settings = ( props ) => {
 		SoftwareApplication: [
 			{
 				value: 'MobileApplication',
-				label: __(
-					'Mobile Application',
-					'ultimate-addons-for-gutenberg'
-				),
+				label: __( 'Mobile Application', 'ultimate-addons-for-gutenberg' ),
 			},
 			{
 				value: 'VideoGame',
@@ -1333,26 +1060,29 @@ const Settings = ( props ) => {
 		case 'Book':
 			itemTypeExtras = (
 				<>
-					<TextControl
+					<UAGTextControl
 						label={ __( 'ISBN', 'ultimate-addons-for-gutenberg' ) }
 						value={ isbn }
-						onChange={ ( value ) =>
-							setAttributes( { isbn: value } )
-						}
+						data={ {
+							value: isbn,
+							label: 'isbn',
+						} }
+						setAttributes={ setAttributes }
+						onChange={ ( value ) => setAttributes( { isbn: value } ) }
 						help={ __(
 							'Note: This is a mandatory field for the Review schema',
 							'ultimate-addons-for-gutenberg'
 						) }
 					/>
-					<TextControl
-						label={ __(
-							'Book author name',
-							'ultimate-addons-for-gutenberg'
-						) }
+					<UAGTextControl
+						label={ __( 'Book author name', 'ultimate-addons-for-gutenberg' ) }
 						value={ bookAuthorName }
-						onChange={ ( value ) =>
-							setAttributes( { bookAuthorName: value } )
-						}
+						data={ {
+							value: bookAuthorName,
+							label: 'bookAuthorName',
+						} }
+						setAttributes={ setAttributes }
+						onChange={ ( value ) => setAttributes( { bookAuthorName: value } ) }
 						help={ __(
 							'Note: This is a mandatory field for the Review schema',
 							'ultimate-addons-for-gutenberg'
@@ -1365,15 +1095,15 @@ const Settings = ( props ) => {
 		case 'Course':
 			itemTypeExtras = (
 				<>
-					<TextControl
-						label={ __(
-							'Provider',
-							'ultimate-addons-for-gutenberg'
-						) }
+					<UAGTextControl
+						label={ __( 'Provider', 'ultimate-addons-for-gutenberg' ) }
 						value={ provider }
-						onChange={ ( value ) =>
-							setAttributes( { provider: value } )
-						}
+						data={ {
+							value: provider,
+							label: 'provider',
+						} }
+						setAttributes={ setAttributes }
+						onChange={ ( value ) => setAttributes( { provider: value } ) }
 					/>
 				</>
 			);
@@ -1383,25 +1113,25 @@ const Settings = ( props ) => {
 		case 'SoftwareApplication':
 			itemTypeExtras = (
 				<>
-					<TextControl
-						label={ __(
-							'Application Category',
-							'ultimate-addons-for-gutenberg'
-						) }
+					<UAGTextControl
+						label={ __( 'Application Category', 'ultimate-addons-for-gutenberg' ) }
 						value={ appCategory }
-						onChange={ ( value ) =>
-							setAttributes( { appCategory: value } )
-						}
+						data={ {
+							value: appCategory,
+							label: 'appCategory',
+						} }
+						setAttributes={ setAttributes }
+						onChange={ ( value ) => setAttributes( { appCategory: value } ) }
 					/>
-					<TextControl
-						label={ __(
-							'Operating System',
-							'ultimate-addons-for-gutenberg'
-						) }
+					<UAGTextControl
+						label={ __( 'Operating System', 'ultimate-addons-for-gutenberg' ) }
 						value={ operatingSystem }
-						onChange={ ( value ) =>
-							setAttributes( { operatingSystem: value } )
-						}
+						data={ {
+							value: operatingSystem,
+							label: 'operatingSystem',
+						} }
+						setAttributes={ setAttributes }
+						onChange={ ( value ) => setAttributes( { operatingSystem: value } ) }
 					/>
 				</>
 			);
@@ -1410,22 +1140,20 @@ const Settings = ( props ) => {
 		case 'Movie':
 			itemTypeExtras = (
 				<>
-					<TextControl
-						label={ __(
-							'Director Name',
-							'ultimate-addons-for-gutenberg'
-						) }
+					<UAGTextControl
+						label={ __( 'Director Name', 'ultimate-addons-for-gutenberg' ) }
 						value={ directorname }
-						onChange={ ( value ) =>
-							setAttributes( { directorname: value } )
-						}
+						data={ {
+							value: directorname,
+							label: 'directorname',
+						} }
+						setAttributes={ setAttributes }
+						onChange={ ( value ) => setAttributes( { directorname: value } ) }
 					/>
-					<h2>{ __( 'Date of create' ) }</h2>
+					<h2>{ __( 'Date of create', 'ultimate-addons-for-gutenberg' ) }</h2>
 					<DateTimePicker
 						currentDate={ datecreated }
-						onChange={ ( value ) =>
-							setAttributes( { datecreated: value } )
-						}
+						onChange={ ( value ) => setAttributes( { datecreated: value } ) }
 						is12Hour={ true }
 					/>
 				</>
@@ -1434,7 +1162,7 @@ const Settings = ( props ) => {
 	}
 
 	return (
-<>
+		<>
 			<InspectorControls>
 				<InspectorTabs>
 					<InspectorTab { ...UAGTabs.general }>
@@ -1451,16 +1179,10 @@ const Settings = ( props ) => {
 						{ starSettings() }
 						{ overallPadding() }
 					</InspectorTab>
-					<InspectorTab
-						{ ...UAGTabs.advance }
-						parentProps={ props }
-					></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
-			{ loadHeadingGoogleFonts }
-			{ loadSubHeadingGoogleFonts }
-			{ loadContentGoogleFonts }
 		</>
 	);
 };
-export default React.memo( Settings );
+export default memo( Settings );

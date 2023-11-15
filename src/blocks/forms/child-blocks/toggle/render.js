@@ -1,8 +1,7 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
-import { ToggleControl } from '@wordpress/components';
 
 import { RichText } from '@wordpress/block-editor';
 
@@ -15,55 +14,20 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
+	const { attributes, setAttributes } = props;
 
-	const { attributes, setAttributes, isSelected } = props;
+	const { block_id, toggleRequired, name, toggleStatus, layout, trueValue, falseValue } = attributes;
 
-	const {
-		block_id,
-		toggleRequired,
-		name,
-		toggleStatus,
-		layout,
-		trueValue,
-		falseValue,
-	} = attributes;
-
-	const isRequired = toggleRequired
-		? __( 'required', 'ultimate-addons-for-gutenberg' )
-		: '';
+	const isRequired = toggleRequired ? 'required' : '';
 
 	return (
 		<>
 			<div
-				className={ classnames(
-					'uagb-forms-toggle-wrap',
-					'uagb-forms-field-set',
-					`uagb-block-${ block_id }`
-				) }
+				className={ classnames( 'uagb-forms-toggle-wrap', 'uagb-forms-field-set', `uagb-block-${ block_id }` ) }
 			>
-				{ isSelected && (
-					<div className="uagb-forms-required-wrap">
-						<ToggleControl
-							label={ __(
-								'Required',
-								'ultimate-addons-for-gutenberg'
-							) }
-							checked={ toggleRequired }
-							onChange={ () =>
-								setAttributes( {
-									toggleRequired: ! toggleRequired,
-								} )
-							}
-						/>
-					</div>
-				) }
 				<RichText
 					tagName="div"
-					placeholder={ __(
-						'Name',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Name', 'ultimate-addons-for-gutenberg' ) }
 					value={ name }
 					onChange={ ( value ) => setAttributes( { name: value } ) }
 					className={ `uagb-forms-toggle-label ${ isRequired } uagb-forms-input-label` }
@@ -98,4 +62,4 @@ const Render = ( props ) => {
 		</>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

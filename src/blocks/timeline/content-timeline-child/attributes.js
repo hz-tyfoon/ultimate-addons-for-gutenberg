@@ -5,6 +5,10 @@
 import { __ } from '@wordpress/i18n';
 
 const attributes = {
+	isPreview: {
+		type: 'boolean',
+		default: false,
+	},
 	content_class: {
 		type: 'string',
 	},
@@ -18,7 +22,7 @@ const attributes = {
 	time_desc: {
 		type: 'string',
 		default: __(
-			'This is Timeline description, you can change me anytime click here ',
+			'This is timeline description. Please click here to change this description.',
 			'ultimate-addons-for-gutenberg'
 		),
 	},
@@ -30,21 +34,21 @@ const attributes = {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {
-			styleType: 'overall-alignment'
+			styleType: 'overall-alignment',
 		},
 	},
 	alignTablet: {
 		type: 'string',
 		default: '',
 		UAGCopyPaste: {
-			styleType: 'overall-alignment-tablet'
+			styleType: 'overall-alignment-tablet',
 		},
 	},
 	alignMobile: {
 		type: 'string',
 		default: '',
 		UAGCopyPaste: {
-			styleType: 'overall-alignment-mobile'
+			styleType: 'overall-alignment-mobile',
 		},
 	},
 	headingTag: {
@@ -55,28 +59,28 @@ const attributes = {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {
-			styleType: 'timeline-alignment'
+			styleType: 'timeline-alignment',
 		},
 	},
 	timelinAlignmentTablet: {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {
-			styleType: 'timeline-alignment-tablet'
+			styleType: 'timeline-alignment-tablet',
 		},
 	},
 	timelinAlignmentMobile: {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {
-			styleType: 'timeline-alignment-mobile'
+			styleType: 'timeline-alignment-mobile',
 		},
 	},
 	arrowlinAlignment: {
 		type: 'string',
 		default: 'center',
 		UAGCopyPaste: {
-			styleType: 'arrowline-alignment'
+			styleType: 'arrowline-alignment',
 		},
 	},
 	block_id: {
@@ -95,7 +99,7 @@ const attributes = {
 		type: 'number',
 		default: 12,
 		UAGCopyPaste: {
-			styleType: 'icon-size'
+			styleType: 'icon-size',
 		},
 	},
 	icon: {

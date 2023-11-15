@@ -1,43 +1,45 @@
-import React, {    useEffect } from 'react';
+import { useEffect, useMemo } from '@wordpress/element';
 import styling from './styling';
-
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import Settings from './settings';
 import Render from './render';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
+import { GoogleMapsWrapper } from './wrapper';
 
 const UAGBGoogleMap = ( props ) => {
+	const {
+		isSelected,
+		attributes,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		name,
+		deviceType
+	} = props;
 
-	const deviceType = useDeviceType();
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( {
-			block_id: props.clientId.substr( 0, 8 ),
-		} );
-	}, [] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-google-map-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props, deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, name, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default UAGBGoogleMap;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+	GoogleMapsWrapper,
+)( UAGBGoogleMap );

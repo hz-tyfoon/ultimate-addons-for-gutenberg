@@ -21,18 +21,14 @@ final class UAGB_Scripts_Utils {
 	 */
 	public static function enqueue_blocks_dependency_both() {
 
-		$blocks       = UAGB_Config::get_block_attributes();
+		$blocks       = UAGB_Block_Module::get_blocks_info();
 		$saved_blocks = UAGB_Admin_Helper::get_admin_settings_option( '_uagb_blocks', array() );
-		$block_assets = UAGB_Config::get_block_assets();
+		$block_assets = UAGB_Block_Module::get_block_dependencies();
 
 		foreach ( $blocks as $slug => $value ) {
 			$_slug = str_replace( 'uagb/', '', $slug );
 
 			if ( ! ( isset( $saved_blocks[ $_slug ] ) && 'disabled' === $saved_blocks[ $_slug ] ) ) {
-
-				$js_assets = ( isset( $blocks[ $slug ]['js_assets'] ) ) ? $blocks[ $slug ]['js_assets'] : array();
-
-				$css_assets = ( isset( $blocks[ $slug ]['css_assets'] ) ) ? $blocks[ $slug ]['css_assets'] : array();
 
 				if ( 'cf7-styler' === $_slug ) {
 					if ( ! wp_script_is( 'contact-form-7', 'enqueued' ) ) {
@@ -43,35 +39,40 @@ final class UAGB_Scripts_Utils {
 						wp_enqueue_script( ' wpcf7-admin' );
 					}
 				}
+				foreach ( $block_assets as $handle => $asset ) {
 
-				foreach ( $js_assets as $asset_handle => $val ) {
-					// Scripts.
-					wp_register_script(
-						$val, // Handle.
-						$block_assets[ $val ]['src'],
-						$block_assets[ $val ]['dep'],
-						UAGB_VER,
-						true
-					);
+					if ( isset( $asset['type'] ) ) {
 
-					$skip_editor = isset( $block_assets[ $val ]['skipEditor'] ) ? $block_assets[ $val ]['skipEditor'] : false;
+						if ( 'js' === $asset['type'] ) {
 
-					if ( is_admin() && false === $skip_editor ) {
-						wp_enqueue_script( $val );
-					}
-				}
+							// Scripts.
+							wp_register_script(
+								$handle, // Handle.
+								$asset['src'],
+								$asset['dep'],
+								UAGB_VER,
+								true
+							);
 
-				foreach ( $css_assets as $asset_handle => $val ) {
-					// Styles.
-					wp_register_style(
-						$val, // Handle.
-						$block_assets[ $val ]['src'],
-						$block_assets[ $val ]['dep'],
-						UAGB_VER
-					);
+							$skip_editor = isset( $asset['skipEditor'] ) ? $asset['skipEditor'] : false;
 
-					if ( is_admin() ) {
-						wp_enqueue_style( $val );
+							if ( is_admin() && false === $skip_editor ) {
+								wp_enqueue_script( $handle );
+							}
+						} elseif ( 'css' === $asset['type'] ) {
+
+							// Styles.
+							wp_register_style(
+								$handle, // Handle.
+								$asset['src'],
+								$asset['dep'],
+								UAGB_VER
+							);
+
+							if ( is_admin() ) {
+								wp_enqueue_style( $handle );
+							}
+						}
 					}
 				}
 			}
@@ -94,6 +95,26 @@ final class UAGB_Scripts_Utils {
 			array(
 				'ajax_url'              => admin_url( 'admin-ajax.php' ),
 				'uagb_forms_ajax_nonce' => $uagb_forms_ajax_nonce,
+			)
+		);
+
+		$uagb_image_gallery_masonry_ajax_nonce         = wp_create_nonce( 'uagb_image_gallery_masonry_ajax_nonce' );
+		$uagb_image_gallery_grid_pagination_ajax_nonce = wp_create_nonce( 'uagb_image_gallery_grid_pagination_ajax_nonce' );
+		wp_localize_script(
+			'uagb-image-gallery-js',
+			'uagb_image_gallery',
+			array(
+				'ajax_url'                              => admin_url( 'admin-ajax.php' ),
+				'uagb_image_gallery_masonry_ajax_nonce' => $uagb_image_gallery_masonry_ajax_nonce,
+				'uagb_image_gallery_grid_pagination_ajax_nonce' => $uagb_image_gallery_grid_pagination_ajax_nonce,
+			)
+		);
+
+		wp_localize_script(
+			'uagb-countdown-js',
+			'uagb_countdown_data',
+			array(
+				'site_name_slug' => sanitize_title( get_bloginfo( 'name' ) ),
 			)
 		);
 
@@ -165,8 +186,8 @@ final class UAGB_Scripts_Utils {
 	 * Returns an array of paths for the CSS and JS assets
 	 * of the current post.
 	 *
-	 * @param  var $type    Gets the CSS\JS type.
-	 * @param  var $post_id Post ID.
+	 * @param  string $type    Gets the CSS\JS type.
+	 * @param  int    $post_id Post ID.
 	 * @since 1.14.0
 	 * @return array
 	 */

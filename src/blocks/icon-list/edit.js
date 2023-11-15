@@ -2,72 +2,62 @@
  * BLOCK: Icon List
  */
 
-import styling from './styling';
-import React, {    useEffect } from 'react';
-
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { select, dispatch } from '@wordpress/data';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import Settings from './settings';
 import Render from './render';
+import styling from './styling';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBIconList = ( props ) => {
-
-	const deviceType = useDeviceType();
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-		props.setAttributes( { classMigrate: true } );
-		props.setAttributes( { childMigrate: true } );
-
-	}, [] );
+	const {
+		isSelected,
+		attributes,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		clientId,
+		name,
+		deviceType
+	} = props;
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-icon-list-' + props.clientId.substr( 0, 8 ), blockStyling );
-
-	}, [ props ] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-icon-list-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-
 	}, [ deviceType ] );
 
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+
 	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
+	useEffect( () => {
 		select( 'core/block-editor' )
-            .getBlocksByClientId( props.clientId )[0]
-            ?.innerBlocks.forEach( function( block ) {
-
-                dispatch( 'core/block-editor' ).updateBlockAttributes(
-                    block.clientId, {
-                        fromParentIcon: props.attributes.parentIcon,
-						hideLabel: props.attributes.hideLabel,
-                    }
-                );
-
-            } );
-
-	}, [ props.attributes.parentIcon, props.attributes.hideLabel ] );
+			.getBlocksByClientId( clientId )[ 0 ]
+			?.innerBlocks.forEach( function ( block ) {
+				dispatch( 'core/block-editor' ).updateBlockAttributes( block.clientId, {
+					fromParentIcon: attributes.parentIcon,
+					hideLabel: attributes.hideLabel,
+					imageSizeChild: attributes.size,
+				} );
+			} );
+	}, [ attributes.parentIcon, attributes.hideLabel, attributes.size ] );
 
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default UAGBIconList;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( UAGBIconList );

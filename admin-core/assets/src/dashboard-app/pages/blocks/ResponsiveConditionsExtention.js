@@ -1,9 +1,10 @@
 import { __ } from '@wordpress/i18n';
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch } from '@headlessui/react'
-import apiFetch from '@wordpress/api-fetch';
 import UAGB_Block_Icons from '@Common/block-icons';
 import { useEffect } from 'react';
+
+import getApiData from '@Controls/getApiData';
 
 function classNames( ...classes ) {
     return classes.filter( Boolean ).join( ' ' )
@@ -18,18 +19,19 @@ const ResponsiveConditionsExtention = () => {
 
     useEffect( () => {
 
-        const formData = new window.FormData();
-
-		formData.append( 'action', 'uag_enable_block_responsive' );
-		formData.append( 'security', uag_react.enable_block_responsive_nonce );
-		formData.append( 'value', enableResponsiveConditions );
-
-		apiFetch( {
-			url: uag_react.ajax_url,
-			method: 'POST',
-			body: formData,
-		} ).then( () => {
-		} );
+        // Create an object with the security and value properties
+        const data = {
+            security: uag_react.enable_block_responsive_nonce,
+            value: enableResponsiveConditions,
+        };
+        // Call the getApiData function with the specified parameters
+        const getApiFetchData = getApiData( {
+            url: uag_react.ajax_url,
+            action: 'uag_enable_block_responsive',
+            data,
+        } );
+        // Wait for the API call to complete, but perform no actions after it finishes
+        getApiFetchData.then( () => {} );
 
     }, [enableResponsiveConditions] );
 
@@ -62,7 +64,7 @@ const ResponsiveConditionsExtention = () => {
             <div className="uagb-admin-block__extension-title flex-1 min-w-0">
                 <p className="text-base font-medium text-slate-800">
                     { __( 'Responsive Conditions', 'ultimate-addons-for-gutenberg' ) }
-                    <div className="inline-block align-top max-h-4 px-1.5 py-1 ml-1.5 text-[10px] leading-[10px] border border-slate-400 text-slate-500 rounded spectra-admin__block-label">
+                    <div className="inline-block align-text-bottom max-h-4 px-1.5 py-[3px] ml-1.5 text-[10px] leading-[10px] border border-slate-400 text-slate-500 rounded spectra-admin__block-label">
                         { __( 'Extension', 'ultimate-addons-for-gutenberg' ) }
                     </div>
                 </p>

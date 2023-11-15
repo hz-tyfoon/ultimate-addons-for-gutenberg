@@ -7,9 +7,9 @@ import {
 
 import { createBlock } from '@wordpress/blocks';
 import { InnerBlocks } from '@wordpress/block-editor';
-import { Placeholder, Button, Disabled, Tip } from '@wordpress/components';
+import { Placeholder, Button, Tip } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import React, {    useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 
 import styles from '.././editor.lazy.scss';
 
@@ -24,15 +24,12 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	const { state, setState, togglePreview } = props;
+	const { state, setState, togglePreview, categoriesList, latestPosts, replaceInnerBlocks, block } = props;
 
-	props = props.parentProps;
-
-	const { categoriesList, latestPosts, attributes, deviceType, name } = props;
+	const { attributes, deviceType, name, setAttributes, clientId, className } = props;
 
 	const renderEditMode = () => {
 		const onDone = () => {
-			const { block, setAttributes } = props;
 			setAttributes( {
 				layoutConfig: getPostLayoutConfig( block ),
 			} );
@@ -41,20 +38,19 @@ const Render = ( props ) => {
 		};
 
 		const onCancel = () => {
-			const { replaceInnerBlocks } = props;
 			const { innerBlocks } = state;
-			replaceInnerBlocks( props.clientId, innerBlocks );
+			replaceInnerBlocks( clientId, innerBlocks );
 			togglePreview();
 		};
 
 		const onReset = () => {
-			const { block, replaceInnerBlocks } = props;
 			const newBlocks = [];
-			DEFAULT_POST_LIST_LAYOUT.map( ( [ name, attribute ] ) => { // eslint-disable-line no-shadow
+			// eslint-disable-next-line no-shadow
+			DEFAULT_POST_LIST_LAYOUT.map( ( [ name, attribute ] ) => {
 				newBlocks.push( createBlock( name, attribute ) );
 				return true;
 			} );
-			replaceInnerBlocks( props.clientId, newBlocks );
+			replaceInnerBlocks( clientId, newBlocks );
 			setState( { innerBlocks: block } );
 		};
 
@@ -71,13 +67,10 @@ const Render = ( props ) => {
 				<div className="uagb-post-grid uagb-block-all-post-grid-item-template">
 					<Tip>
 						{ __(
-							'Edit the blocks inside the preview below to change the content displayed for each post within the post grid.'
+							'Edit the blocks inside the preview below to change the content displayed for each post within the post grid.', 'ultimate-addons-for-gutenberg'
 						) }
 					</Tip>
-					<InnerBlockLayoutContextProvider
-						parentName="uagb/post-masonry"
-						parentClassName="uagb-block-grid"
-					>
+					<InnerBlockLayoutContextProvider parentName="uagb/post-masonry" parentClassName="uagb-block-grid">
 						<article className="uagb-post__inner-wrap uagb-post__edit-mode">
 							<div className="uagb-post__text">
 								<InnerBlocks { ...InnerBlockProps } />
@@ -85,25 +78,14 @@ const Render = ( props ) => {
 						</article>
 					</InnerBlockLayoutContextProvider>
 					<div className="uagb-block-all-post__actions">
-						<Button
-							className="uagb-block-all-post__done-button"
-							isPrimary
-							onClick={ onDone }
-						>
-							{ __( 'Done' ) }
+						<Button className="uagb-block-all-post__done-button" isPrimary onClick={ onDone }>
+							{ __( 'Done', 'ultimate-addons-for-gutenberg' ) }
 						</Button>
-						<Button
-							className="uagb-block-all-post__cancel-button"
-							isTertiary
-							onClick={ onCancel }
-						>
-							{ __( 'Cancel' ) }
+						<Button className="uagb-block-all-post__cancel-button" isTertiary onClick={ onCancel }>
+							{ __( 'Cancel', 'ultimate-addons-for-gutenberg' ) }
 						</Button>
-						<Button
-							className="uagb-block-all-post__reset-button"
-							onClick={ onReset }
-						>
-							{ __( 'Reset Layout' ) }
+						<Button className="uagb-block-all-post__reset-button" onClick={ onReset }>
+							{ __( 'Reset Layout', 'ultimate-addons-for-gutenberg' ) }
 						</Button>
 					</div>
 				</div>
@@ -112,22 +94,19 @@ const Render = ( props ) => {
 	};
 
 	const renderViewMode = (
-		<Disabled>
-
-				<Blog
-					attributes={ attributes }
-					className={ props.className }
-					latestPosts={ latestPosts }
-					block_id={ props.clientId.substr( 0, 8 ) }
-					categoriesList={ categoriesList }
-					deviceType={ deviceType }
-					name={ name }
-				/>
-
-		</Disabled>
+		<Blog
+			attributes={ attributes }
+			className={ className }
+			latestPosts={ latestPosts }
+			block_id={ attributes.block_id }
+			categoriesList={ categoriesList }
+			deviceType={ deviceType }
+			name={ name }
+			setAttributes={ setAttributes }
+		/>
 	);
 
 	return <>{ state.isEditing ? renderEditMode() : renderViewMode }</>;
 };
 
-export default React.memo( Render );
+export default memo( Render );

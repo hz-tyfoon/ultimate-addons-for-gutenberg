@@ -1,9 +1,9 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
 import { SelectControl, Placeholder, Spinner } from '@wordpress/components';
-import { useDeviceType } from '@Controls/getPreviewType';
+
 const Render = ( props ) => {
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -13,12 +13,10 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
-	const { className, attributes } = props;
+	const { className, attributes, deviceType } = props;
 
 	const {
-		isPreview,
+		block_id,
 		formId,
 		align,
 		isHtml,
@@ -54,23 +52,10 @@ const Render = ( props ) => {
 		html = formJson.data.html;
 	}
 
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/gf-cf-styler.png`;
-
 	if ( parseInt( formId ) === 0 ) {
 		return (
-			isPreview ? <img width='100%' src={previewImageData} alt=''/> :
-			<Placeholder
-				icon="admin-post"
-				label={ __(
-					'Select a Contact Form 7',
-					'ultimate-addons-for-gutenberg'
-				) }
-			>
-				<SelectControl
-					value={ formId }
-					onChange={ onSelectForm }
-					options={ uagb_blocks_info.cf7_forms }
-				/>
+			<Placeholder icon="admin-post" label={ __( 'Select a Contact Form 7', 'ultimate-addons-for-gutenberg' ) }>
+				<SelectControl value={ formId } onChange={ onSelectForm } options={ uagb_blocks_info.cf7_forms } />
 			</Placeholder>
 		);
 	}
@@ -81,7 +66,7 @@ const Render = ( props ) => {
 				className,
 				'uagb-cf7-styler__outer-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`
+				`uagb-block-${ block_id }`
 			) }
 		>
 			<div
@@ -93,22 +78,12 @@ const Render = ( props ) => {
 					`uagb-cf7-styler__btn-align-mobile-${ buttonAlignmentMobile }`,
 					`uagb-cf7-styler__highlight-style-${ validationMsgPosition }`,
 					enableOveride ? 'uagb-cf7-styler__check-style-enabled' : '',
-					enableHighlightBorder
-						? 'uagb-cf7-styler__highlight-border'
-						: ''
+					enableHighlightBorder ? 'uagb-cf7-styler__highlight-border' : ''
 				) }
 			>
-				{ isHtml && (
-					<div dangerouslySetInnerHTML={ { __html: html } } />
-				) }
+				{ isHtml && <div dangerouslySetInnerHTML={ { __html: html } } /> }
 				{ isHtml === false && (
-					<Placeholder
-						icon="admin-post"
-						label={ __(
-							'Loading',
-							'ultimate-addons-for-gutenberg'
-						) }
-					>
+					<Placeholder icon="admin-post" label={ __( 'Loading', 'ultimate-addons-for-gutenberg' ) }>
 						<Spinner />
 					</Placeholder>
 				) }
@@ -117,4 +92,4 @@ const Render = ( props ) => {
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

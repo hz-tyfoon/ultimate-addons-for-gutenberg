@@ -1,30 +1,18 @@
 import classnames from 'classnames';
-import React from 'react';
 import { __ } from '@wordpress/i18n';
-import { ToggleControl } from '@wordpress/components';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
-
+import { memo } from '@wordpress/element';
 import { RichText } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
 	
-	props = props.parentProps;
-	
-	const blockName = props.name.replace( 'uagb/', '' );
+	const { attributes, setAttributes, name } = props;
 
-	const { attributes, setAttributes, isSelected } = props;
+	const blockName = name.replace( 'uagb/', '' );
 
-	const {
-		block_id,
-		textareaRequired,
-		textareaName,
-		rows,
-		placeholder,
-	} = attributes;
+	const { block_id, textareaRequired, textareaName, rows, placeholder } = attributes;
 
-	const isRequired = textareaRequired
-		? __( 'required', 'ultimate-addons-for-gutenberg' )
-		: '';
+	const isRequired = textareaRequired ? 'required' : '';
 
 	return (
 		<>
@@ -35,32 +23,11 @@ const Render = ( props ) => {
 					`uagb-block-${ block_id }`
 				) }
 			>
-				{ isSelected && (
-					<div className="uagb-forms-required-wrap">
-						<ToggleControl
-							label={ __(
-								'Required',
-								'ultimate-addons-for-gutenberg'
-							) }
-							checked={ textareaRequired }
-							onChange={ () =>
-								setAttributes( {
-									textareaRequired: ! textareaRequired,
-								} )
-							}
-						/>
-					</div>
-				) }
 				<RichText
 					tagName="div"
-					placeholder={ __(
-						'Textarea Name',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Textarea Name', 'ultimate-addons-for-gutenberg' ) }
 					value={ textareaName }
-					onChange={ ( value ) =>
-						setAttributes( { textareaName: value } )
-					}
+					onChange={ ( value ) => setAttributes( { textareaName: value } ) }
 					className={ `uagb-forms-textarea-label ${ isRequired } uagb-forms-input-label` }
 					multiline={ false }
 					id={ block_id }
@@ -76,4 +43,4 @@ const Render = ( props ) => {
 		</>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

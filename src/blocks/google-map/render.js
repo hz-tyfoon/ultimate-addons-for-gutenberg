@@ -1,15 +1,10 @@
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-import { useDeviceType } from '@Controls/getPreviewType';
-
 const Render = ( props ) => {
-
-	const deviceType = useDeviceType();
-
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
 		styles.use();
@@ -18,40 +13,40 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-
-	const blockName = props.name.replace( 'uagb/', '' );
-
 	const {
 		className,
-		attributes: { isPreview, zoom, address, language },
+		attributes: { zoom, address, language, height },
+		deviceType,
+		name,
+		block_id
 	} = props;
+
+	const blockName = name.replace( 'uagb/', '' );
 
 	const encoded_address = encodeURI( address );
 	const lang_par = language ? language : 'en';
 
-	const url = `https://www.google.com/maps/embed/v1/place?key=${ wp.uagb_google_api_key }&q=${ encoded_address }&zoom=${ getFallbackNumber( zoom, 'zoom', blockName ) }&language=${ lang_par }`;
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/gmap.png`;
+	const url = `https://maps.google.com/maps?q=${ encoded_address }&z=${ getFallbackNumber( zoom, 'zoom', blockName ) }&hl=${ lang_par }&t=m&output=embed&iwloc=near`;
+
 	return (
-		isPreview  ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
 			className={ classnames(
 				className,
 				'uagb-google-map__wrap',
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
-				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
+				`uagb-block-${ block_id }`,
+				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
 			) }
 		>
 			<iframe
 				className="uagb-google-map__iframe"
-				title={
-					__( 'Google Map for ', 'ultimate-addons-for-gutenberg' ) +
-					address
-				}
+				title={ __( 'Google Map for ', 'ultimate-addons-for-gutenberg' ) + address }
 				src={ url }
+				width="640"
+				height={ height }
+				loading="lazy"
 			></iframe>
 		</div>
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

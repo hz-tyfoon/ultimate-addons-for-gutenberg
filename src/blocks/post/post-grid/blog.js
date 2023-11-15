@@ -1,19 +1,15 @@
 import classnames from 'classnames';
-import {
-	InnerBlockLayoutContextProvider,
-	renderPostLayout,
-} from '.././function';
+import { InnerBlockLayoutContextProvider, renderPostLayout } from '.././function';
 import { useDeviceType } from '@Controls/getPreviewType';
-import React, { useRef } from 'react';
+import { useRef, memo } from '@wordpress/element';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
 const Blog = ( props ) => {
 	const blockName = props.name.replace( 'uagb/', '' );
 	const article = useRef();
-	const { attributes, className, latestPosts, block_id } = props;
+	const { attributes, className, latestPosts, block_id, setAttributes } = props;
 	const deviceType = useDeviceType();
 	const {
-		isPreview,
 		columns,
 		tcolumns,
 		mcolumns,
@@ -23,6 +19,7 @@ const Blog = ( props ) => {
 		paginationMarkup,
 		postPagination,
 		layoutConfig,
+		equalHeightInlineButtons,
 	} = attributes;
 
 	const postsToShowFallback = getFallbackNumber( postsToShow, 'postsToShow', blockName );
@@ -33,14 +30,13 @@ const Blog = ( props ) => {
 	const equalHeightClass = equalHeight ? 'uagb-post__equal-height' : '';
 	// Removing posts from display should be instant.
 	const displayPosts =
-		latestPosts.length > postsToShowFallback
-			? latestPosts.slice( 0, postsToShowFallback )
-			: latestPosts;
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/post-grid.png`;
-	const isImageEnabled = ( attributes.displayPostImage === true ) ? 'uagb-post__image-enabled' : 'uagb-post__image-disabled';
-
+		latestPosts.length > postsToShowFallback ? latestPosts.slice( 0, postsToShowFallback ) : latestPosts;
+	const isImageEnabled =
+		attributes.displayPostImage === true ? 'uagb-post__image-enabled' : 'uagb-post__image-disabled';
+	const equalHeightInlineReadMoreButtonsClass = equalHeightInlineButtons
+		? `uagb-equal_height_inline-read-more-buttons-in-editor`
+		: '';
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
 			className={ classnames(
 				'is-grid',
@@ -54,21 +50,20 @@ const Blog = ( props ) => {
 				'uagb-post-grid',
 				`uagb-post__image-position-${ imgPosition }`,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ block_id }`
+				`uagb-block-${ block_id }`,
+				`${ equalHeightInlineReadMoreButtonsClass }`
 			) }
 		>
-			<InnerBlockLayoutContextProvider
-				parentName="uagb/post-grid"
-				parentClassName="uagb-block-grid"
-			>
+			<InnerBlockLayoutContextProvider parentName="uagb/post-grid" parentClassName="uagb-block-grid">
 				{ displayPosts.map( ( post = {}, i ) => (
-					<article ref={article} key={ i } className="uagb-post__inner-wrap">
+					<article ref={ article } key={ i } className="uagb-post__inner-wrap">
 						{ renderPostLayout(
 							'uagb/post-grid',
 							post,
 							layoutConfig,
 							props.attributes,
 							props.categoriesList,
+							setAttributes,
 							article
 						) }
 					</article>
@@ -83,4 +78,4 @@ const Blog = ( props ) => {
 		</div>
 	);
 };
-export default React.memo( Blog );
+export default memo( Blog );

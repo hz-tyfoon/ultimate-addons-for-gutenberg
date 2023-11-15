@@ -2,37 +2,31 @@
  * BLOCK: Content Timeline child.
  */
 
-import React, { useEffect,    } from 'react';
-
-import { useDeviceType } from '@Controls/getPreviewType';
-
+import { useEffect } from '@wordpress/element';
 import Settings from './settings';
 import Render from './render';
+import { compose } from '@wordpress/compose';
+import AddInitialAttr from '@Controls/addInitialAttr';
 
 const ContentTimelineChildComponent = ( props ) => {
-	const deviceType = useDeviceType();
+	const { isSelected, deviceType } = props;
 
 	useEffect( () => {
-		// Replacement for componentDidMount.
-		//Store client id.
-		props.setAttributes( { block_id: props.clientId } );
-	}, [] );
-
-	useEffect( () => {
-		const loadContentTimelineEditor = new CustomEvent( 'UAGTimelineEditor', { // eslint-disable-line no-undef
+		const loadContentTimelineEditor = new CustomEvent( 'UAGTimelineEditor', {
+			// eslint-disable-line no-undef
 			detail: {},
 		} );
 		document.dispatchEvent( loadContentTimelineEditor );
 	}, [ props, deviceType ] );
 
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default ContentTimelineChildComponent;
+export default compose(
+	AddInitialAttr,
+)( ContentTimelineChildComponent );

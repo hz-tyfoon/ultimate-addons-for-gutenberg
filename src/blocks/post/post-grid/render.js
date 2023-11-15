@@ -1,9 +1,7 @@
 /**
  * BLOCK: Post Grid - Editor Render.
  */
-import React, {    useLayoutEffect } from 'react';
-
-
+import { useLayoutEffect, memo } from '@wordpress/element';
 import Blog from './blog';
 
 import {
@@ -12,11 +10,10 @@ import {
 	getPostLayoutConfig,
 	getBlockMap,
 } from '.././function';
-
 import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 
-import { Placeholder, Button, Tip, Disabled } from '@wordpress/components';
+import { Placeholder, Button, Tip } from '@wordpress/components';
 
 import { InnerBlocks } from '@wordpress/block-editor';
 import styles from '.././editor.lazy.scss';
@@ -30,20 +27,14 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
+	const { categoriesList, latestPosts, replaceInnerBlocks, block } = props;
 	const { isEditing } = props.state;
 
 	// Caching all Props.
-	const {
-		attributes,
-		latestPosts,
-		categoriesList,
-		deviceType,
-		name,
-	} = props.parentProps;
+	const { attributes, deviceType, name, setAttributes, clientId, className } = props;
 
 	const renderEditMode = () => {
 		const onDone = () => {
-			const { block, setAttributes } = props.parentProps;
 			setAttributes( {
 				layoutConfig: getPostLayoutConfig( block ),
 			} );
@@ -52,30 +43,29 @@ const Render = ( props ) => {
 		};
 
 		const onCancel = () => {
-			const { replaceInnerBlocks } = props.parentProps;
 			const { innerBlocks } = props.state;
-			replaceInnerBlocks( props.parentProps.clientId, innerBlocks );
+			replaceInnerBlocks( clientId, innerBlocks );
 			props.togglePreview();
 		};
 
 		const onReset = () => {
-			const { block, replaceInnerBlocks } = props.parentProps;
 			const newBlocks = [];
-			DEFAULT_POST_LIST_LAYOUT.map( ( [ name, attribute ] ) => { // eslint-disable-line no-shadow
+			// eslint-disable-next-line no-shadow
+			DEFAULT_POST_LIST_LAYOUT.map( ( [ name, attribute ] ) => {
 				newBlocks.push( createBlock( name, attribute ) );
 				return true;
 			} );
-			replaceInnerBlocks( props.parentProps.clientId, newBlocks );
+			replaceInnerBlocks( clientId, newBlocks );
 			props.setStateValue( { innerBlocks: block } );
 		};
 
 		const InnerBlockProps = {
-			template: props.parentProps.attributes.layoutConfig,
+			template: props.attributes.layoutConfig,
 			templateLock: false,
 			allowedBlocks: Object.keys( getBlockMap( 'uagb/post-grid' ) ),
 		};
 
-		if ( props.parentProps.attributes.layoutConfig.length !== 0 ) {
+		if ( props.attributes.layoutConfig.length !== 0 ) {
 			InnerBlockProps.renderAppender = false;
 		}
 		return (
@@ -83,13 +73,10 @@ const Render = ( props ) => {
 				<div className="uagb-post-grid uagb-block-all-post-grid-item-template">
 					<Tip>
 						{ __(
-							'Edit the blocks inside the preview below to change the content displayed for each post within the post grid.'
+							'Edit the blocks inside the preview below to change the content displayed for each post within the post grid.', 'ultimate-addons-for-gutenberg'
 						) }
 					</Tip>
-					<InnerBlockLayoutContextProvider
-						parentName="uagb/post-grid"
-						parentClassName="uagb-block-grid"
-					>
+					<InnerBlockLayoutContextProvider parentName="uagb/post-grid" parentClassName="uagb-block-grid">
 						<article className="uagb-post__inner-wrap uagb-post__edit-mode">
 							<div className="uagb-post__text">
 								<InnerBlocks { ...InnerBlockProps } />
@@ -97,25 +84,14 @@ const Render = ( props ) => {
 						</article>
 					</InnerBlockLayoutContextProvider>
 					<div className="uagb-block-all-post__actions">
-						<Button
-							className="uagb-block-all-post__done-button"
-							isPrimary
-							onClick={ onDone }
-						>
-							{ __( 'Done' ) }
+						<Button className="uagb-block-all-post__done-button" isPrimary onClick={ onDone }>
+							{ __( 'Done', 'ultimate-addons-for-gutenberg' ) }
 						</Button>
-						<Button
-							className="uagb-block-all-post__cancel-button"
-							isTertiary
-							onClick={ onCancel }
-						>
-							{ __( 'Cancel' ) }
+						<Button className="uagb-block-all-post__cancel-button" isTertiary onClick={ onCancel }>
+							{ __( 'Cancel', 'ultimate-addons-for-gutenberg' ) }
 						</Button>
-						<Button
-							className="uagb-block-all-post__reset-button"
-							onClick={ onReset }
-						>
-							{ __( 'Reset Layout' ) }
+						<Button className="uagb-block-all-post__reset-button" onClick={ onReset }>
+							{ __( 'Reset Layout', 'ultimate-addons-for-gutenberg' ) }
 						</Button>
 					</div>
 				</div>
@@ -129,23 +105,20 @@ const Render = ( props ) => {
 
 	const renderViewMode = () => {
 		return (
-			<Disabled>
-
-					<Blog
-						attributes={ attributes }
-						className={ props.parentProps.className }
-						latestPosts={ latestPosts }
-						block_id={ props.parentProps.clientId.substr( 0, 8 ) }
-						categoriesList={ categoriesList }
-						deviceType={ deviceType }
-						name={ name }
-					/>
-
-			</Disabled>
+			<Blog
+				attributes={ attributes }
+				className={ className }
+				latestPosts={ latestPosts }
+				block_id={ attributes.block_id }
+				categoriesList={ categoriesList }
+				deviceType={ deviceType }
+				name={ name }
+				setAttributes={ setAttributes }
+			/>
 		);
 	};
 
 	return <>{ renderViewMode() }</>;
 };
 
-export default React.memo( Render );
+export default memo( Render );

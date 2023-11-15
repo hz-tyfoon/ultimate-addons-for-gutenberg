@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import attributes from './attributes';
 import renderSVG from '@Controls/deprecatedRenderIcon';
 import links from './deprecatedLinks';
+import V2_7_1Save from './deprecated/V2_7_1/save';
 
 const deprecated = [
 	{
@@ -14,15 +15,7 @@ const deprecated = [
 		save: ( props ) => {
 			const { attributes, className } = props;
 
-			const {
-				current_url,
-				type,
-				image_icon,
-				icon,
-				image,
-				block_id,
-				link,
-			} = props.attributes;
+			const { current_url, type, image_icon, icon, image, block_id, link } = props.attributes;
 
 			let url = '';
 
@@ -34,16 +27,10 @@ const deprecated = [
 
 			if ( image_icon == 'icon' ) {
 				if ( icon ) {
-					imageIconHtml = (
-						<span className="uagb-ss__source-icon">
-							{ renderSVG( icon ) }
-						</span>
-					);
+					imageIconHtml = <span className="uagb-ss__source-icon">{ renderSVG( icon ) }</span>;
 				}
 			} else if ( image && image.url ) {
-				imageIconHtml = (
-					<img className="uagb-ss__source-image" src={ image.url } />
-				);
+				imageIconHtml = <img className="uagb-ss__source-image" src={ image.url } />;
 			}
 
 			return (
@@ -55,19 +42,17 @@ const deprecated = [
 						`uagb-block-${ block_id }`
 					) }
 				>
-					<a
-						className="uagb-ss__link"
-						data-href={ url }
-						rel="noopener noreferrer"
-					>
-						<span className="uagb-ss__source-wrap">
-							{ imageIconHtml }
-						</span>
+					<a className="uagb-ss__link" data-href={ url } rel="noopener noreferrer">
+						<span className="uagb-ss__source-wrap">{ imageIconHtml }</span>
 					</a>
 				</div>
 			);
 		},
 	},
+	{
+		attributes,
+		save: V2_7_1Save,
+	}
 ];
 
 export default deprecated;

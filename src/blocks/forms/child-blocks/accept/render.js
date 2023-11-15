@@ -1,6 +1,5 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect } from 'react';
-import { __ } from '@wordpress/i18n';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import styles from './editor.lazy.scss';
 
 const Render = ( props ) => {
@@ -11,45 +10,23 @@ const Render = ( props ) => {
 			styles.unuse();
 		};
 	}, [] );
-	props = props.parentProps;
 
 	const { attributes } = props;
 
-	const {
-		block_id,
-		acceptRequired,
-		acceptText,
-		showLink,
-		linkLabel,
-		link,
-		linkInNewTab,
-	} = attributes;
+	const { block_id, acceptRequired, acceptText, showLink, linkLabel, link, linkInNewTab } = attributes;
 
-	const isRequired = acceptRequired
-		? __( 'required', 'ultimate-addons-for-gutenberg' )
-		: '';
-	const target = linkInNewTab
-		? __( '_blank', 'ultimate-addons-for-gutenberg' )
-		: __( '_self', 'ultimate-addons-for-gutenberg' );
+	const isRequired = acceptRequired ? 'required' : '';
+	const target = linkInNewTab ? '_blank' : '_self';
 
 	return (
 		<>
 			<div
-				className={ classnames(
-					'uagb-forms-accept-wrap',
-					'uagb-forms-field-set',
-					`uagb-block-${ block_id }`
-				) }
+				className={ classnames( 'uagb-forms-accept-wrap', 'uagb-forms-field-set', `uagb-block-${ block_id }` ) }
 			>
 				{ showLink && (
 					<div className="uagb-forms-accept-privacy-link">
-						<a
-							href={ link }
-							target={ target }
-							rel="noopener noreferrer"
-						>
-							{ ' ' }
-							{ linkLabel }{ ' ' }
+						<a href={ link } target={ target } rel="noopener noreferrer">
+							{ linkLabel }
 						</a>
 					</div>
 				) }
@@ -74,4 +51,4 @@ const Render = ( props ) => {
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

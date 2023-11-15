@@ -1,5 +1,5 @@
 import { dateI18n, format } from '@wordpress/date';
-import React from 'react';
+import { memo } from '@wordpress/element';
 const PostDate = ( props ) => {
 	const { post, attributes, dateClass } = props;
 
@@ -12,12 +12,10 @@ const PostDate = ( props ) => {
 					color: attributes.dateColor,
 				} }
 			>
-				{ attributes.displayPostDate && post.date_gmt && (
-					dateI18n( attributes.dateFormat, post.date_gmt )
-				) }
+				{ attributes.displayPostDate && post.date_gmt && dateI18n( attributes.dateFormat, post.date_gmt ) }
 			</div>
 		</>
 	);
 };
 
-export default React.memo( PostDate );
+export default memo( PostDate );

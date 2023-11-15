@@ -26,7 +26,6 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 		 */
 		private static $instance;
 
-
 		/**
 		 *  Initiator
 		 *
@@ -148,6 +147,16 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 
 			$xpath = new DOMXPath( $doc );
 
+			$tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div' );
+			// Delete $tags[$s].uagb-toc-hide-heading from doc.
+			foreach ( $tags as $tag ) {
+				$query = sprintf( '//%s[contains(attribute::class, "uagb-toc-hide-heading")]', $tag );
+
+				foreach ( $xpath->query( $query ) as $e ) {
+					$e->parentNode->removeChild( $e );
+				}
+			}
+
 			// Get all non-empty heading elements in the post content.
 			$headings = iterator_to_array(
 				$xpath->query(
@@ -201,8 +210,8 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 
 			$string = preg_replace( '/[\x00-\x1F\x7F]*/u', '', $string );
 			$string = str_replace( array( '&amp;', '&nbsp;' ), ' ', $string );
-			// Remove all except alphbets, space, `-` and `_`.
-			$string = preg_replace( '/[^A-Za-z0-9 _-]/', '', $string );
+			// Remove all except alphbets, space, `-`,`_` and latin characters.
+			$string = preg_replace( '/[^a-zA-Z0-9\p{L} _-]/u', '', $string );
 			// Convert space characters to an `_` (underscore).
 			$string = preg_replace( '/\s+/', '_', $string );
 			// Replace multiple `_` (underscore) with a single `-` (hyphen).
@@ -216,7 +225,7 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 				$string = 'toc_' . uniqid();
 			}
 
-			return strtolower( $string ); // Replaces multiple hyphens with single one.
+			return mb_strtolower( $string ); // Replaces multiple hyphens with single one.
 		}
 
 		/**
@@ -286,10 +295,9 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 
 			foreach ( $nested_heading_list as $anchor => $heading ) {
 
-				$level    = $heading['heading']['level'];
-				$title    = $heading['heading']['content'];
-				$id       = $heading['heading']['id'];
-				$li_added = false;
+				$level = $heading['heading']['level'];
+				$title = $heading['heading']['content'];
+				$id    = $heading['heading']['id'];
 
 				if ( 0 === $anchor ) {
 					$first_level = $level;
@@ -315,7 +323,6 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 
 						$toc                  .= '<li class="uagb-toc__list">';
 						$depth_array[ $level ] = $current_depth;
-						$li_added              = true;
 
 					} elseif ( $level < $last_level ) {
 
@@ -334,16 +341,12 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 					}
 				}
 
-				if ( $li_added ) {
-					$toc .= sprintf( '<a href="#%s">%s</a>', esc_attr( $id ), $title );
-				} else {
-					$toc .= sprintf( '<li class="uagb-toc__list"><a href="#%s">%s</a>', esc_attr( $id ), $title );
-				}
+				$toc .= sprintf( '<li class="uagb-toc__list"><a href="#%s" class="uagb-toc-link__trigger">%s</a>', esc_attr( $id ), esc_html( $title ) );
 
 				$last_level = $level;
 			}
 
-			$toc .= str_repeat( '</li></ul>', $current_depth );
+			$toc .= str_repeat( '</ul>', $current_depth );
 			$toc .= '</ol>';
 
 			return $toc;
@@ -387,6 +390,39 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 
 		}
 		/**
+		 * Get the Reusable Headings Array.
+		 *
+		 * @since 2.0.14
+		 * @access public
+		 *
+		 * @param  array $blocks_array Block Array.
+		 *
+		 * @return array $final_reusable_array Heading Array.
+		 */
+		public function toc_recursive_reusable_heading( $blocks_array ) {
+			$final_reusable_array = array();
+			foreach ( $blocks_array as $key => $block ) {
+
+				if ( 'core/block' === $blocks_array[ $key ]['blockName'] ) {
+					if ( $blocks_array[ $key ]['attrs'] ) {
+						$reusable_block   = get_post( $blocks_array[ $key ]['attrs']['ref'] );
+						$reusable_heading = $this->table_of_contents_get_headings_from_content( $reusable_block->post_content );
+						if ( isset( $reusable_heading[0] ) ) {
+							$final_reusable_array = array_merge( $final_reusable_array, $reusable_heading );
+						}
+					}
+				} else {
+					if ( 'core/block' !== $blocks_array[ $key ]['blockName'] ) {
+						$inner_block_reusable_array = $this->toc_recursive_reusable_heading( $blocks_array[ $key ]['innerBlocks'] );
+						$final_reusable_array       = array_merge( $final_reusable_array, $inner_block_reusable_array );
+					}
+				}
+			}
+
+			return $final_reusable_array;
+		}
+
+		/**
 		 * Renders the UAGB Table Of Contents block.
 		 *
 		 * @since 1.23.0
@@ -401,7 +437,7 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 		public function render_table_of_contents( $attributes, $content, $block ) {
 
 			global $post;
-
+			$result = array();
 			if ( ! isset( $post->ID ) ) {
 				return '';
 			}
@@ -411,8 +447,22 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 			$uagb_toc_heading_content = ! empty( $uagb_toc_options['_uagb_toc_headings'] ) ? $uagb_toc_options['_uagb_toc_headings'] : '';
 
 			if ( empty( $uagb_toc_heading_content ) || UAGB_ASSET_VER !== $uagb_toc_version ) {
-
-				$uagb_toc_heading_content = $this->table_of_contents_get_headings_from_content( get_post( $post->ID )->post_content );
+				global $_wp_current_template_content;
+				$custom_post  = get_post( $post->ID );
+				$post_content = '';
+				if ( $custom_post instanceof WP_Post ) {
+					$post_content = $custom_post->post_content;
+				}
+				// If the current template contents exist, use that - else get the content from the post ID.
+				if ( $_wp_current_template_content && has_block( 'uagb/table-of-contents', $_wp_current_template_content ) ) {
+					$content = $_wp_current_template_content . $post_content;
+				} else {
+					$content = $post_content;
+				}
+				$uagb_toc_heading_content          = $this->table_of_contents_get_headings_from_content( $content );
+				$blocks                            = parse_blocks( $content );
+				$uagb_toc_reusable_heading_content = $this->toc_recursive_reusable_heading( $blocks );
+				$uagb_toc_heading_content          = array_merge( $uagb_toc_heading_content, $uagb_toc_reusable_heading_content );
 
 				$meta_array = array(
 					'_uagb_toc_version'  => UAGB_ASSET_VER,
@@ -442,6 +492,30 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 				$mob_class = ( isset( $attributes['UAGHideMob'] ) ) ? 'uag-hide-mob' : '';
 			}
 
+			$zindex_desktop           = '';
+			$zindex_tablet            = '';
+			$zindex_mobile            = '';
+			$zindex_wrap              = array();
+			$zindex_extention_enabled = ( isset( $attributes['zIndex'] ) || isset( $attributes['zIndexTablet'] ) || isset( $attributes['zIndexMobile'] ) );
+
+			if ( $zindex_extention_enabled ) {
+				$zindex_desktop = ( isset( $attributes['zIndex'] ) ) ? '--z-index-desktop:' . $attributes['zIndex'] . ';' : false;
+				$zindex_tablet  = ( isset( $attributes['zIndexTablet'] ) ) ? '--z-index-tablet:' . $attributes['zIndexTablet'] . ';' : false;
+				$zindex_mobile  = ( isset( $attributes['zIndexMobile'] ) ) ? '--z-index-mobile:' . $attributes['zIndexMobile'] . ';' : false;
+
+				if ( $zindex_desktop ) {
+					array_push( $zindex_wrap, $zindex_desktop );
+				}
+
+				if ( $zindex_tablet ) {
+					array_push( $zindex_wrap, $zindex_tablet );
+				}
+
+				if ( $zindex_mobile ) {
+					array_push( $zindex_wrap, $zindex_mobile );
+				}
+			}
+
 			$wrap = array(
 				'wp-block-uagb-table-of-contents',
 				'uagb-toc__align-' . $attributes['align'],
@@ -452,13 +526,15 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 				$desktop_class,
 				$tab_class,
 				$mob_class,
+				$zindex_extention_enabled ? 'uag-blocks-common-selector' : '',
 			);
 
 			ob_start();
 			?>
-				<div class="<?php echo esc_html( implode( ' ', $wrap ) ); ?>"
+				<div class="<?php echo esc_attr( implode( ' ', $wrap ) ); ?>"
 					data-scroll= "<?php echo esc_attr( $attributes['smoothScroll'] ); ?>"
 					data-offset= "<?php echo esc_attr( UAGB_Block_Helper::get_fallback_number( $attributes['smoothScrollOffset'], 'smoothScrollOffset', 'table-of-contents' ) ); ?>"
+					style="<?php echo esc_attr( implode( '', $zindex_wrap ) ); ?>"
 				>
 				<div class="uagb-toc__wrap">
 						<div class="uagb-toc__title">
@@ -893,6 +969,11 @@ if ( ! class_exists( 'UAGB_Table_Of_Content' ) ) {
 									'separatorHColor'      => array(
 										'type'    => 'string',
 										'default' => '',
+									),
+									// Overall block alignment.
+									'overallAlign'         => array(
+										'type'    => 'string',
+										'default' => 'left',
 									),
 								)
 							),

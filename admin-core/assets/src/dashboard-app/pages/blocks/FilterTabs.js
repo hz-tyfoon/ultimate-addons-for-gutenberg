@@ -1,9 +1,9 @@
-import apiFetch from '@wordpress/api-fetch';
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { __ } from '@wordpress/i18n';
 
-const classNames = ( ...classes ) => ( classes.filter( Boolean ).join( ' ' ) );
+import getApiData from '@Controls/getApiData';
 
 const FilterTabs = () => {
 
@@ -12,12 +12,13 @@ const FilterTabs = () => {
     const dispatch = useDispatch();
 
     const blocksStatuses = useSelector( ( state ) => state.blocksStatuses );
+    const coreBlocks = useSelector( ( state ) => state.coreBlocks );
     const activeBlocksFilterTab = useSelector( ( state ) => state.activeBlocksFilterTab );
     const [ categoriesBlocks, setcategoriesBlocks ] = useState( [] );
 
     const tabs = [
         { name: 'All', slug: 'all' },
-		{ name: 'Core', slug: 'core' },
+		{ name: 'Core Blocks', slug: 'core' },
         { name: 'Creative', slug: 'creative' },
         { name: 'Content', slug: 'content' },
         { name: 'Post', slug: 'post' },
@@ -25,6 +26,7 @@ const FilterTabs = () => {
         { name: 'Form', slug: 'form' },
         { name: 'SEO', slug: 'seo' },
         { name: 'Extensions', slug: 'extensions' },
+        { name: 'Pro', slug: 'pro' },
     ];
 
     useEffect( () => {
@@ -79,24 +81,30 @@ const FilterTabs = () => {
             dispatch( {type: 'UPDATE_ENABLE_MASONRY_EXTENSION', payload: 'enabled' } );
             dispatch( {type: 'UPDATE_ENABLE_DISPLAY_CONDITIONS', payload: 'enabled' } );
 			dispatch( {type: 'UPDATE_ENABLE_RESPONSIVE_CONDITIONS', payload: 'enabled' } );
+			dispatch( {type: 'UPDATE_ENABLE_DYNAMIC_CONTENT_EXTENSION', payload: 'enabled' } );
+            dispatch( {type: 'UPDATE_ENABLE_ANIMATIONS_EXTENSION', payload: 'enabled' } );
         }
 
-		const formData = new window.FormData();
+        if ( 'pro' === activeBlocksFilterTab ) {
+            // Update Extensions Statuses.
+			dispatch( { type: 'UPDATE_ENABLE_DYNAMIC_CONTENT_EXTENSION', payload: 'enabled' } );            
+        }
 
-		formData.append( 'action', 'uag_blocks_activation_and_deactivation' );
-		formData.append(
-			'security',
-			uag_react.blocks_activation_and_deactivation_nonce
-		);
-		formData.append( 'value', JSON.stringify( value ) );
-
-		apiFetch( {
-			url: uag_react.ajax_url,
-			method: 'POST',
-			body: formData,
-		} ).then( () => {
-			dispatch( {type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: 'Successfully saved!' } );
-		} );
+		// Create an object with the security and value properties
+        const data = {
+            security: uag_react.blocks_activation_and_deactivation_nonce,
+            value: JSON.stringify( value ),
+        };
+        // Call the getApiData function with the specified parameters
+        const getApiFetchData = getApiData( {
+            url: uag_react.ajax_url,
+            action: 'uag_blocks_activation_and_deactivation',
+            data,
+        } );
+        // Wait for the API call to complete, then update the state to show a notification that the settings have been saved
+        getApiFetchData.then( () => {
+            dispatch( {type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: 'Successfully saved!' } );
+        } );
 	};
 
 	const deactivateAllBlocks = () => {
@@ -104,7 +112,7 @@ const FilterTabs = () => {
 		const value = { ...blocksStatuses };
 
 		for ( const block in blocksStatuses ) {
-            if ( 'all' !== activeBlocksFilterTab && ( ! categoriesBlocks[activeBlocksFilterTab] || ! categoriesBlocks[activeBlocksFilterTab].includes( block ) ) ) {
+            if ( coreBlocks.includes( block ) || ( 'all' !== activeBlocksFilterTab && ( ! categoriesBlocks[activeBlocksFilterTab] || ! categoriesBlocks[activeBlocksFilterTab].includes( block ) ) ) ) {
                 continue;
             }
 			value[ block ] = 'disabled';
@@ -118,31 +126,52 @@ const FilterTabs = () => {
             dispatch( {type: 'UPDATE_ENABLE_MASONRY_EXTENSION', payload: 'disabled' } );
             dispatch( {type: 'UPDATE_ENABLE_DISPLAY_CONDITIONS', payload: 'disabled' } );
 			dispatch( {type: 'UPDATE_ENABLE_RESPONSIVE_CONDITIONS', payload: 'disabled' } );
+			dispatch( {type: 'UPDATE_ENABLE_DYNAMIC_CONTENT_EXTENSION', payload: 'disabled' } );
+            dispatch( {type: 'UPDATE_ENABLE_ANIMATIONS_EXTENSION', payload: 'disabled' } );
         }
 
-		const formData = new window.FormData();
+        if ( 'pro' === activeBlocksFilterTab ) {
+            // Update Extensions Statuses.
+			dispatch( { type: 'UPDATE_ENABLE_DYNAMIC_CONTENT_EXTENSION', payload: 'disabled' } );            
+        }
 
-		formData.append( 'action', 'uag_blocks_activation_and_deactivation' );
-		formData.append(
-			'security',
-			uag_react.blocks_activation_and_deactivation_nonce
-		);
-		formData.append( 'value', JSON.stringify( value ) );
-
-		apiFetch( {
-			url: uag_react.ajax_url,
-			method: 'POST',
-			body: formData,
-		} ).then( () => {
-			dispatch( {type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: 'Successfully saved!' } );
-		} );
+		// Create an object with the security and value properties
+        const data = {
+            security: uag_react.blocks_activation_and_deactivation_nonce,
+            value: JSON.stringify( value ),
+        };
+        // Call the getApiData function with the specified parameters
+        const getApiFetchData = getApiData( {
+            url: uag_react.ajax_url,
+            action: 'uag_blocks_activation_and_deactivation',
+            data,
+        } );
+        // Wait for the API call to complete, then update the state to show a notification that the settings have been saved
+        getApiFetchData.then( () => {
+            dispatch( {type: 'UPDATE_SETTINGS_SAVED_NOTIFICATION', payload: 'Successfully saved!' } );
+        } );
 	};
+
+    // This method concatinates all the required classes for Active and Normal states for Free and Pro Tabs.
+    const renderTabClassNames = ( tabName ) => {
+        let tabClasses = '';
+        if ( tabName === activeBlocksFilterTab ) {
+            tabClasses += ( 'pro' === tabName ) ? 'text-spectra active:text-spectra focus:text-spectra hover:text-spectra' : 'text-slate-800 active:text-slate-800 focus:text-slate-800 hover:text-slate-800';
+            tabClasses += ' bg-white border-transparent shadow shadow-focused';
+        } 
+        else {
+            tabClasses += ( 'pro' === tabName ) ? 'text-spectra border-indigo-100 bg-indigo-50 focus:text-spectra active:text-spectra hover:text-spectra' : 'text-slate-500 border-slate-200 focus:text-slate-500 active:text-slate-500 hover:text-slate-500';
+            tabClasses += ' focus-visible:bg-white hover:bg-white';
+        }
+        tabClasses += ' px-4 py-1 ml-4 my-1 font-medium text-sm rounded-2xl cursor-pointer border transition';
+        return tabClasses;
+    };
 
     return (
         <div className="mx-auto mb-6 px-6 lg:max-w-[80rem]">
             <div className="w-full sm:hidden">
                 <label htmlFor="tabs" className="sr-only">
-                    Select a tab
+                    { __( 'Select a tab', 'ultimate-addons-for-gutenberg' ) }
                 </label>
                 {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
                 <select
@@ -163,16 +192,11 @@ const FilterTabs = () => {
                     {tabs.map( ( tab ) => (
                     <Link // eslint-disable-line
 						to={ {
-							pathname: 'options-general.php',
+							pathname: 'admin.php',
 							search: `?page=spectra&path=blocks&filterTab=${tab.slug}`,
 						} }
                         key={tab.name}
-                        className={ classNames(
-                            ( tab.slug === activeBlocksFilterTab )
-                                ? 'bg-white border-transparent text-slate-800 active:text-slate-800 focus:text-slate-800 hover:text-slate-800 shadow shadow-focused'
-                                : 'text-slate-500 border-slate-200 focus:text-slate-500 focus-visible:bg-white active:text-slate-500 hover:text-slate-500 hover:bg-white',
-                            'px-4 py-1 ml-4 my-1 font-medium text-sm rounded-2xl cursor-pointer border transition'
-                        ) }
+                        className={ renderTabClassNames( tab.slug ) }
                         onClick={ () => {
 							dispatch( {type:'UPDATE_BLOCKS_ACTIVE_FILTER_TAB', payload: tab.slug} )
 						}}
@@ -187,14 +211,14 @@ const FilterTabs = () => {
                         className="focus:bg-indigo-50 focus:text-slate-500 focus-visible:text-spectra hover:bg-indigo-50 hover:text-spectra -ml-px relative inline-flex items-center px-4 py-2 border border-slate-200 bg-white text-sm font-medium text-slate-500 focus:z-10 focus:outline-none rounded-l-md transition"
                         onClick={activateAllBlocks}
                     >
-                        Activate all
+                        { __( 'Activate all', 'ultimate-addons-for-gutenberg' ) }
                     </button>
                     <button
                         type="button"
                         className="focus:bg-indigo-50 focus:text-slate-500 focus-visible:text-spectra hover:bg-indigo-50 hover:text-spectra -ml-px relative inline-flex items-center px-4 py-2 border border-slate-200 bg-white text-sm font-medium text-slate-500 focus:z-10 focus:outline-none rounded-r-md transition"
                         onClick={deactivateAllBlocks}
                     >
-                        Deactivate all
+                        { __( 'Deactivate all', 'ultimate-addons-for-gutenberg' ) }
                     </button>
                 </span>
             </div>

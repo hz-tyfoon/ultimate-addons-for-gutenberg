@@ -3,19 +3,29 @@
  */
 
 import styling from './styling';
-
-import React, { useEffect, useState,    } from 'react';
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useState, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import DynamicFontLoader from './dynamicFontLoader';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 let prevState;
 
 const ButtonsComponent = ( props ) => {
-
-	const deviceType = useDeviceType();
+	const {
+		isSelected,
+		attributes,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		clientId,
+		name,
+		deviceType,
+	} = props;
 
 	const initialState = {
 		isFocused: 'false',
@@ -25,51 +35,41 @@ const ButtonsComponent = ( props ) => {
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
-		// Replacement for componentDidMount.
-
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		// Assigning block_id in the attribute.
-		props.setAttributes( { classMigrate: true } );
-		props.setAttributes( { childMigrate: true } );
-
-		prevState = props.isSelected;
+		prevState = isSelected;
 	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
-		if ( ! props.isSelected && prevState && state.isFocused ) {
+		if ( ! isSelected && prevState && state.isFocused ) {
 			setStateValue( {
 				isFocused: 'false',
 			} );
 		}
-
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-buttons-' + props.clientId.substr( 0, 8 ), blockStyling );
-
-		prevState = props.isSelected;
-	}, [ props ] );
+		prevState = isSelected;
+	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-buttons-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
+	}, [ deviceType ] );
 
-	}, [deviceType] );
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default ButtonsComponent;
+export default compose(
+	AddGBSStyles,
+	addInitialAttr,
+	AddStaticStyles,
+)( ButtonsComponent );

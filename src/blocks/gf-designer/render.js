@@ -1,9 +1,8 @@
 import classnames from 'classnames';
 import { SelectControl, Placeholder, Spinner } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 const Render = ( props ) => {
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -13,12 +12,9 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
-	const { className, attributes, setAttributes } = props;
+	const { className, attributes, setAttributes, deviceType } = props;
 	// Setup the attributes.
 	const {
-		isPreview,
 		formId,
 		align,
 		isHtml,
@@ -31,6 +27,7 @@ const Render = ( props ) => {
 		enableLabel,
 		enableOveride,
 		advancedValidationSettings,
+		block_id,
 	} = attributes;
 
 	/*
@@ -51,25 +48,11 @@ const Render = ( props ) => {
 	if ( formJson && formJson.data.html ) {
 		html = formJson.data.html;
 	}
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/gf-cf-styler.png`;
 	if ( parseInt( formId ) === 0 ) {
 		return (
-			isPreview ? <img width='100%' src={previewImageData} alt=''/> :
-		<>
-			<Placeholder
-				icon="admin-post"
-				label={ __(
-					'Select a Gravity Form',
-					'ultimate-addons-for-gutenberg'
-				) }
-			>
-				<SelectControl
-					value={ formId }
-					onChange={ onSelectForm }
-					options={ uagb_blocks_info.gf_forms }
-				/>
+			<Placeholder icon="admin-post" label={ __( 'Select a Gravity Form', 'ultimate-addons-for-gutenberg' ) }>
+				<SelectControl value={ formId } onChange={ onSelectForm } options={ uagb_blocks_info.gf_forms } />
 			</Placeholder>
-		</>
 		);
 	}
 	return (
@@ -78,7 +61,7 @@ const Render = ( props ) => {
 				className,
 				'uagb-gf-styler__outer-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`
+				`uagb-block-${ block_id }`
 			) }
 		>
 			<div
@@ -91,22 +74,12 @@ const Render = ( props ) => {
 					`uagb-gf-styler__gform-heading-${ titleDescStyle }`,
 					enableOveride ? 'uagb-gf-styler__check-style-enabled' : '',
 					enableLabel ? 'uagb-gf-styler__hide-label' : '',
-					advancedValidationSettings
-						? 'uagb-gf-styler__error-yes'
-						: ''
+					advancedValidationSettings ? 'uagb-gf-styler__error-yes' : ''
 				) }
 			>
-				{ isHtml && (
-					<div dangerouslySetInnerHTML={ { __html: html } } />
-				) }
+				{ isHtml && <div dangerouslySetInnerHTML={ { __html: html } } /> }
 				{ isHtml === false && (
-					<Placeholder
-						icon="admin-post"
-						label={ __(
-							'Loading',
-							'ultimate-addons-for-gutenberg'
-						) }
-					>
+					<Placeholder icon="admin-post" label={ __( 'Loading', 'ultimate-addons-for-gutenberg' ) }>
 						<Spinner />
 					</Placeholder>
 				) }
@@ -114,4 +87,4 @@ const Render = ( props ) => {
 		</div>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

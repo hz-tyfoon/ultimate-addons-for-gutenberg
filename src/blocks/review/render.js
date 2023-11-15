@@ -1,9 +1,9 @@
 // Import block dependencies and components
 import classnames from 'classnames';
 import ReviewBody from './review-body';
-import React, { useLayoutEffect, useState } from 'react';
+import { useEffect, useState, useLayoutEffect, memo } from '@wordpress/element';
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
+import getImageHeightWidth from '@Controls/getImageHeightWidth';
 
 const Render = ( props ) => {
 	// Add and remove the CSS on the drop and remove of the component.
@@ -14,8 +14,6 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
 	const {
 		attributes: {
 			block_id,
@@ -41,16 +39,18 @@ const Render = ( props ) => {
 			starOutlineColor,
 			enableDescription,
 			enableImage,
+			imgTagHeight,
+			imgTagWidth,
 		},
 		setAttributes,
 		isSelected,
 		className,
+		deviceType
 	} = props;
+
 	const bodyInitialState = {
 		average:
-			props.attributes.parts
-				.map( ( i ) => i.value )
-				.reduce( ( total, v ) => total + v ) /
+			props.attributes.parts.map( ( i ) => i.value ).reduce( ( total, v ) => total + v ) /
 			props.attributes.parts.length,
 	};
 
@@ -74,7 +74,7 @@ const Render = ( props ) => {
 	) {
 		urlChk = props.attributes.mainimage.url;
 		title = props.attributes.mainimage.title;
-		defaultedAlt = ( props.attributes.mainimage?.alt ) ? props.attributes.mainimage?.alt : '';
+		defaultedAlt = props.attributes.mainimage?.alt ? props.attributes.mainimage?.alt : '';
 	}
 
 	let url = '';
@@ -82,15 +82,16 @@ const Render = ( props ) => {
 		const size = props.attributes.mainimage.sizes;
 		const imageSize = props.attributes.imgSize;
 
-		if (
-			'undefined' !== typeof size &&
-			'undefined' !== typeof size[ imageSize ]
-		) {
+		if ( 'undefined' !== typeof size && 'undefined' !== typeof size[ imageSize ] ) {
 			url = size[ imageSize ].url;
 		} else {
 			url = urlChk;
 		}
 	}
+
+	useEffect( () => {
+		getImageHeightWidth( url, setAttributes );
+	}, [ url ] );
 
 	let imageIconHtml = '';
 
@@ -100,6 +101,9 @@ const Render = ( props ) => {
 				className="uagb-review__source-image"
 				src={ url }
 				title={ title }
+				width={ imgTagWidth }
+				height={ imgTagHeight }
+				loading="lazy"
 				alt={ defaultedAlt }
 			/>
 		);
@@ -109,25 +113,19 @@ const Render = ( props ) => {
 			className={ classnames(
 				className,
 				'uagb-ratings__outer-wrap',
-				`uagb-block-${ block_id.substr( 0, 8 ) }`,
+				`uagb-block-${ block_id }`,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
 			) }
 		>
 			<ReviewBody
 				rTitle={ rTitle }
-				setTitle={ ( newValue ) =>
-					setAttributes( { rTitle: newValue } )
-				}
+				setTitle={ ( newValue ) => setAttributes( { rTitle: newValue } ) }
 				ctaLink={ ctaLink }
 				ctaTarget={ ctaTarget }
 				rContent={ rContent }
-				setDescription={ ( newValue ) =>
-					setAttributes( { rContent: newValue } )
-				}
+				setDescription={ ( newValue ) => setAttributes( { rContent: newValue } ) }
 				rAuthor={ rAuthor }
-				setAuthorName={ ( newValue ) =>
-					setAttributes( { rAuthor: newValue } )
-				}
+				setAuthorName={ ( newValue ) => setAttributes( { rAuthor: newValue } ) }
 				headingTag={ headingTag }
 				mainimage={ mainimage }
 				imgSize={ imgSize }
@@ -147,9 +145,7 @@ const Render = ( props ) => {
 				activeStarColor={ activeStarColor }
 				selectedStarColor={ activeStarColor }
 				starOutlineColor={ starOutlineColor }
-				setItemName={ ( newValue ) =>
-					setAttributes( { itemName: newValue } )
-				}
+				setItemName={ ( newValue ) => setAttributes( { itemName: newValue } ) }
 				setImage={ ( img ) =>
 					setAttributes( {
 						imgID: img.id,
@@ -157,22 +153,12 @@ const Render = ( props ) => {
 						imgAlt: img.alt,
 					} )
 				}
-				setItems={ ( newValue ) =>
-					setAttributes( { parts: newValue } )
-				}
-				setSummaryTitle={ ( newValue ) =>
-					setAttributes( { summaryTitle: newValue } )
-				}
-				setSummaryDescription={ ( newValue ) =>
-					setAttributes( { summaryDescription: newValue } )
-				}
+				setItems={ ( newValue ) => setAttributes( { parts: newValue } ) }
+				setSummaryTitle={ ( newValue ) => setAttributes( { summaryTitle: newValue } ) }
+				setSummaryDescription={ ( newValue ) => setAttributes( { summaryDescription: newValue } ) }
 				hasFocus={ isSelected }
-				setEditable={ ( newValue ) =>
-					bodySetStateValue( { editable: newValue } )
-				}
-				setActiveStarIndex={ ( editedStar ) =>
-					bodySetStateValue( { editedStar } )
-				}
+				setEditable={ ( newValue ) => bodySetStateValue( { editable: newValue } ) }
+				setActiveStarIndex={ ( editedStar ) => bodySetStateValue( { editedStar } ) }
 				showfeature={ showFeature }
 				showauthor={ showAuthor }
 				state={ bodyState }
@@ -183,4 +169,4 @@ const Render = ( props ) => {
 		</div>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

@@ -1,25 +1,23 @@
-
-import React from 'react';
+import { memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, BlockControls, Inserter } from '@wordpress/block-editor';
 import TypographyControl from '@Components/typography';
-import WebfontLoader from '@Components/typography/fontloader';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import renderSVG from '@Controls/renderIcon';
 import ResponsiveSlider from '@Components/responsive-slider';
 import SpacingControl from '@Components/spacing-control';
 import ResponsiveSelectControl from '@Components/responsive-select';
+import { InspectorControls, BlockControls, AlignmentToolbar, BlockVerticalAlignmentControl } from '@wordpress/block-editor';
+import { select } from '@wordpress/data';
 
-import { Toolbar , Icon } from '@wordpress/components';
+import { Icon } from '@wordpress/components';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
-import InspectorTab, {
-	UAGTabs,
-} from '@Components/inspector-tabs/InspectorTab.js';
+import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import renderGBSSettings from '@Controls/renderGBSSettings';
+import styling from './styling';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 
 	const { attributes, setAttributes } = props;
 
@@ -39,6 +37,8 @@ const Settings = ( props ) => {
 		alignTablet,
 		alignMobile,
 		fontSizeType,
+		fontSizeTypeMobile,
+		fontSizeTypeTablet,
 		fontSize,
 		fontSizeMobile,
 		fontSizeTablet,
@@ -90,62 +90,75 @@ const Settings = ( props ) => {
 		fontLetterSpacingTablet,
 		fontLetterSpacingMobile,
 		fontLetterSpacingType,
-
+		verticalAlignment,
 	} = attributes;
+
+	const parentBlock = select( 'core/block-editor' ).getSelectedBlock();
+	const buttonsCount = parentBlock.innerBlocks.length;
 
 	const buttonSizeOptions = [
 		{
 			value: 'default',
-			label: __(
-				'Default',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Default', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'small',
-			label: __(
-				'Small',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Small', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'medium',
-			label: __(
-				'Medium',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Medium', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'large',
-			label: __(
-				'Large',
-				'ultimate-addons-for-gutenberg'
-			),
+			label: __( 'Large', 'ultimate-addons-for-gutenberg' ),
 		},
 		{
 			value: 'extralarge',
-			label: __(
-				'Extra Large',
-				'ultimate-addons-for-gutenberg'
-			),
-		}
+			label: __( 'Extra Large', 'ultimate-addons-for-gutenberg' ),
+		},
 	];
 
-	let loadBtnGoogleFonts;
+	const alignmentControls = [
+		{
+			align: 'left',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+			title: __( 'Left', 'ultimate-addons-for-gutenberg' ),
+		},
+		{
+			align: 'center',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
+			title: __( 'Center', 'ultimate-addons-for-gutenberg' ),
+		},
+		{
+			align: 'right',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
+			title: __( 'Right', 'ultimate-addons-for-gutenberg' ),
+		},
+		{
+			align: 'full',
+			icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
+			title: __( 'Full', 'ultimate-addons-for-gutenberg' ),
+		},
+	];
 
-	if ( loadGoogleFonts === true ) {
-		const btnconfig = {
-			google: {
-				families: [
-					fontFamily + ( fontWeight ? ':' + fontWeight : '' ),
-				],
-			},
-		};
-
-		loadBtnGoogleFonts = (
-			<WebfontLoader config={ btnconfig }></WebfontLoader>
-		);
-	}
+	const getBlockControls = () => (
+		<BlockControls>
+			<BlockVerticalAlignmentControl
+				onChange={ ( alignment ) =>
+					setAttributes( { verticalAlignment: alignment } )
+				}
+				value={ verticalAlignment }
+			/>
+			<AlignmentToolbar
+				value={ align }
+				onChange={ ( value ) => {
+					setAttributes( { align: value } );
+				} }
+				alignmentControls={ alignmentControls }
+			/>
+		</BlockControls>
+	);
 
 	const generalSettings = () => {
 		return (
@@ -170,122 +183,107 @@ const Settings = ( props ) => {
 					options={ [
 						{
 							value: 'left',
-							icon: (
-								<Icon
-									icon={ renderSVG( 'fa fa-align-left' ) }
-								/>
-							),
-							tooltip: __(
-								'Left',
-								'ultimate-addons-for-gutenberg'
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-left' ) } />,
+							tooltip: __( 'Left', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							value: 'center',
-							icon: (
-								<Icon
-									icon={ renderSVG( 'fa fa-align-center' ) }
-								/>
-							),
-							tooltip: __(
-								'Center',
-								'ultimate-addons-for-gutenberg'
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
+							tooltip: __( 'Center', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							value: 'right',
-							icon: (
-								<Icon
-									icon={ renderSVG( 'fa fa-align-right' ) }
-								/>
-							),
-							tooltip: __(
-								'Right',
-								'ultimate-addons-for-gutenberg'
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
+							tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							value: 'full',
-							icon: (
-								<Icon
-									icon={ renderSVG( 'fa fa-align-justify' ) }
-								/>
-							),
-							tooltip: __(
-								'Full Width',
-								'ultimate-addons-for-gutenberg'
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-justify' ) } />,
+							tooltip: __( 'Full Width', 'ultimate-addons-for-gutenberg' ),
 						},
 					] }
 					showIcons={ true }
-					responsive={true}
+					responsive={ true }
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
-					label={ __( 'Stack Orientation', 'ultimate-addons-for-gutenberg' ) }
+					label={ __( 'Vertical Alignment', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
-						value: stack,
-						label: 'stack',
+						value: verticalAlignment,
+						label: 'verticalAlignment',
 					} }
 					options={ [
 						{
-							value: 'none',
-							label: __(
-								'None',
-								'ultimate-addons-for-gutenberg'
-							),
+							value: 'top',
+							label: 'Top',
 						},
 						{
-							value: 'desktop',
-							label: __(
-								'Desktop',
-								'ultimate-addons-for-gutenberg'
-							),
+							value: 'center',
+							label: 'Middle',
 						},
 						{
-							value: 'tablet',
-							label: __(
-								'Tablet',
-								'ultimate-addons-for-gutenberg'
-							),
-						},
-						{
-							value: 'mobile',
-							label: __(
-								'Mobile',
-								'ultimate-addons-for-gutenberg'
-							),
+							value: 'bottom',
+							label: 'Bottom',
 						},
 					] }
-					help={ __(
-						'Note: Choose on what breakpoint the buttons will stack.',
-						'ultimate-addons-for-gutenberg'
-					) }
+					showIcons={false}
+					responsive={false}
 				/>
-				<ResponsiveSlider
-					label={ __(
-						'Gap Between Buttons',
-						'ultimate-addons-for-gutenberg'
-					) }
-					data={ {
-						desktop: {
-							value: gap,
-							label: 'gap',
-						},
-						tablet: {
-							value: gapTablet,
-							label: 'gapTablet',
-						},
-						mobile: {
-							value: gapMobile,
-							label: 'gapMobile',
-						},
-					} }
-					min={ 0 }
-					max={ 200 }
-					displayUnit={ false }
-					setAttributes={ setAttributes }
-				/>
+				{ buttonsCount > 1 && (
+					<MultiButtonsControl
+						setAttributes={ setAttributes }
+						label={ __( 'Stack Orientation', 'ultimate-addons-for-gutenberg' ) }
+						data={ {
+							value: stack,
+							label: 'stack',
+						} }
+						options={ [
+							{
+								value: 'none',
+								label: __( 'None', 'ultimate-addons-for-gutenberg' ),
+							},
+							{
+								value: 'desktop',
+								label: __( 'Desktop', 'ultimate-addons-for-gutenberg' ),
+							},
+							{
+								value: 'tablet',
+								label: __( 'Tablet', 'ultimate-addons-for-gutenberg' ),
+							},
+							{
+								value: 'mobile',
+								label: __( 'Mobile', 'ultimate-addons-for-gutenberg' ),
+							},
+						] }
+						help={ __(
+							'Note: Choose on what breakpoint the buttons will stack.',
+							'ultimate-addons-for-gutenberg'
+						) }
+					/>
+				) }
+				{ buttonsCount > 1 && (
+					<ResponsiveSlider
+						label={ __( 'Gap Between Buttons', 'ultimate-addons-for-gutenberg' ) }
+						data={ {
+							desktop: {
+								value: gap,
+								label: 'gap',
+							},
+							tablet: {
+								value: gapTablet,
+								label: 'gapTablet',
+							},
+							mobile: {
+								value: gapMobile,
+								label: 'gapMobile',
+							},
+						} }
+						min={ 0 }
+						max={ 200 }
+						displayUnit={ false }
+						setAttributes={ setAttributes }
+					/>
+				) }
 				<ResponsiveSelectControl
 					label={ __( 'Button Size', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
@@ -315,16 +313,9 @@ const Settings = ( props ) => {
 
 	const styleSettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Text', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ true }
-			>
-
+			<UAGAdvancedPanelBody title={ __( 'Text', 'ultimate-addons-for-gutenberg' ) } initialOpen={ true }>
 				<TypographyControl
-					label={ __(
-						'Typography',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Typography', 'ultimate-addons-for-gutenberg' ) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 					loadGoogleFonts={ {
@@ -348,6 +339,14 @@ const Settings = ( props ) => {
 					fontSizeType={ {
 						value: fontSizeType,
 						label: 'fontSizeType',
+					} }
+					fontSizeTypeTablet={ {
+						value: fontSizeTypeTablet,
+						label: 'fontSizeTypeTablet',
+					} }
+					fontSizeTypeMobile={ {
+						value: fontSizeTypeMobile,
+						label: 'fontSizeTypeMobile',
 					} }
 					fontSize={ {
 						value: fontSize,
@@ -399,10 +398,7 @@ const Settings = ( props ) => {
 	};
 	const spacingSettings = () => {
 		return (
-			<UAGAdvancedPanelBody
-				title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Spacing', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<SpacingControl
 					{ ...props }
 					label={ __( 'Padding', 'ultimate-addons-for-gutenberg' ) }
@@ -546,42 +542,24 @@ const Settings = ( props ) => {
 			</UAGAdvancedPanelBody>
 		);
 	};
-	const blockControls = () => {
-		return (
-			<BlockControls>
-				<Toolbar className="uag-container-block-inserter">
-					<Inserter
-						clientId = { props.clientId }
-						rootClientId = { props.clientId }
-						__experimentalIsQuick = {true}
-						position="bottom right"
-					/>
-				</Toolbar>
-			</BlockControls>
-		);
-	};
 
 	return (
-			<>
-			{ blockControls() }
+		<>
+			{ getBlockControls() }
 			<InspectorControls>
 				<InspectorTabs>
-					<InspectorTab { ...UAGTabs.general }>
-						{ generalSettings() }
-					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
+					<InspectorTab { ...UAGTabs.general } parentProps={ props }>{ generalSettings() }</InspectorTab>
+					<InspectorTab { ...UAGTabs.style } parentProps={ props }>
 						{ styleSettings() }
 						{ spacingSettings() }
 					</InspectorTab>
-					<InspectorTab
-						{ ...UAGTabs.advance }
-						parentProps={ props }
-					></InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }>
+						{ renderGBSSettings( styling, setAttributes, attributes ) }
+					</InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
-			{ loadBtnGoogleFonts }
-			</>
+		</>
 	);
 };
 
-export default React.memo( Settings );
+export default memo( Settings );

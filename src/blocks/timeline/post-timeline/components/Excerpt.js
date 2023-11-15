@@ -1,12 +1,11 @@
-import React from 'react';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
+import { memo } from '@wordpress/element';
 const Excerpt = ( props ) => {
 	const { post, attributes } = props;
 	const contentSpaceFallback = getFallbackNumber( attributes.contentSpace, 'contentSpace', 'post-timeline' );
 	const exerptLengthFallback = getFallbackNumber( attributes.exerptLength, 'exerptLength', 'post-timeline' );
 	let trimmed_excerpt;
 	if ( attributes.displayPostExcerpt && post.uagb_excerpt ) {
-		
 		trimmed_excerpt = post.uagb_excerpt.split( /\s+/ ).slice( 0, exerptLengthFallback ).join( ' ' );
 
 		let margin_var = '';
@@ -26,4 +25,4 @@ const Excerpt = ( props ) => {
 	return null;
 };
 
-export default React.memo( Excerpt );
+export default memo( Excerpt );

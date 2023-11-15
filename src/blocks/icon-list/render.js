@@ -1,9 +1,8 @@
 // Import classes
 import classnames from 'classnames';
 import { InnerBlocks } from '@wordpress/block-editor';
-import React, { useLayoutEffect, useMemo } from 'react';
+import { useLayoutEffect, memo, useMemo } from '@wordpress/element';
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 
 const ALLOWED_BLOCKS = [ 'uagb/icon-list-child' ];
 
@@ -16,16 +15,9 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
-	const { attributes } = props;
+	const { attributes, deviceType } = props;
 
-	const {
-		isPreview,
-		className,
-		icon_count,
-		block_id,
-	} = attributes;
+	const { className, icon_count, block_id } = attributes;
 
 	const getIconTemplate = useMemo( () => {
 		const childIconList = [];
@@ -37,10 +29,7 @@ const Render = ( props ) => {
 		return childIconList;
 	}, [ icon_count ] );
 
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/icon-list.png`;
-
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
 			className={ classnames(
 				className,
@@ -49,13 +38,9 @@ const Render = ( props ) => {
 			) }
 		>
 			<div className="uagb-icon-list__wrap">
-				<InnerBlocks
-					template={ getIconTemplate }
-					templateLock={ false }
-					allowedBlocks={ ALLOWED_BLOCKS }
-				/>
+				<InnerBlocks template={ getIconTemplate } templateLock={ false } allowedBlocks={ ALLOWED_BLOCKS } />
 			</div>
 		</div>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

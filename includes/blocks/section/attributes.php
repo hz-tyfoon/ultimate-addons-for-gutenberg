@@ -61,7 +61,6 @@ return array_merge(
 		'backgroundVideoOpacity'   => '50',
 		'backgroundImageColor'     => '',
 		'align'                    => 'center',
-		'borderHoverColor'         => '',
 		'themeWidth'               => false,
 		'mobileMarginType'         => 'px',
 		'tabletMarginType'         => 'px',
@@ -72,6 +71,7 @@ return array_merge(
 		'overlayType'              => 'color',
 		'gradientOverlayColor1'    => '',
 		'gradientOverlayColor2'    => '',
+		'selectGradient'           => 'basic',
 		'gradientOverlayType'      => 'linear',
 		'gradientOverlayLocation1' => '0',
 		'gradientOverlayLocation2' => '100',
@@ -85,6 +85,10 @@ return array_merge(
 		'boxShadowPosition'        => 'outset',
 		'gradientValue'            => '',
 		'backgroundOpacity'        => 0,
+		'borderStyle'              => 'none',
+		'borderWidth'              => 1,
+		'borderRadius'             => '',
+		'borderColor'              => '',
 	),
 	$overall_border_attributes
 );

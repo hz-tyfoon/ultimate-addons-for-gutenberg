@@ -1,6 +1,9 @@
 import classnames from 'classnames';
-import React from 'react';
 import { __ } from '@wordpress/i18n';
+import { getFallbackNumber } from '@Controls/getAttributeFallback';
+import save_v2_6_3 from './v2.6.3/save';
+import attributes_v2_6_3 from './v2.6.3/attributes';
+
 const attributes = {
 	block_id: {
 		type: 'string',
@@ -18,10 +21,10 @@ const attributes = {
 		default: 12,
 	},
 	language: {
-		type: "string",
-		default: "en",
+		type: 'string',
+		default: 'en',
 	},
-}
+};
 const deprecated = [
 	{
 		attributes,
@@ -33,13 +36,7 @@ const deprecated = [
 			const url = `https://www.google.com/maps/embed/v1/place?key=${ wp.uagb_google_api_key }&q=${ encoded_address }&zoom=${ zoom }`;
 
 			return (
-				<div
-					className={ classnames(
-						props.className,
-						'uagb-google-map__wrap',
-						`uagb-block-${ block_id }`
-					) }
-				>
+				<div className={ classnames( props.className, 'uagb-google-map__wrap', `uagb-block-${ block_id }` ) }>
 					<iframe
 						className="uagb-google-map__iframe"
 						title={ __( 'Google Map for ' + address ) }
@@ -61,17 +58,10 @@ const deprecated = [
 
 			return (
 				<div
-					className={ classnames(
-						props.className,
-						'uagb-google-map__wrap'
-					) }
+					className={ classnames( props.className, 'uagb-google-map__wrap' ) }
 					id={ `uagb-google-map-${ block_id }` }
 				>
-					<iframe
-						className="uagb-google-map__iframe"
-						src={ url }
-						style={ { height } }
-					></iframe>
+					<iframe className="uagb-google-map__iframe" src={ url } style={ { height } }></iframe>
 				</div>
 			);
 		},
@@ -86,17 +76,30 @@ const deprecated = [
 			const url = `https://www.google.com/maps/embed/v1/place?key=${ wp.uagb_google_api_key }&q=${ encoded_address }&zoom=${ zoom }`;
 
 			return (
-				<div
-					className={ classnames(
-						props.className,
-						'uagb-google-map__wrap',
-						`uagb-block-${ block_id }`
-					) }
-				>
+				<div className={ classnames( props.className, 'uagb-google-map__wrap', `uagb-block-${ block_id }` ) }>
+					<iframe className="uagb-google-map__iframe" src={ url } style={ { height } }></iframe>
+				</div>
+			);
+		},
+	},
+	{
+		attributes,
+		save( props ) {
+			const { block_id, height, zoom, address, language } = props.attributes;
+
+			let encoded_address = encodeURI( address );
+
+			var lang_par = language ? language : 'en';
+
+			let url = `https://www.google.com/maps/embed/v1/place?key=${ wp.uagb_google_api_key }&q=${ encoded_address }&zoom=${ zoom }&language=${ lang_par }`;
+
+			return (
+				<div className={ classnames( props.className, 'uagb-google-map__wrap', `uagb-block-${ block_id }` ) }>
 					<iframe
 						className="uagb-google-map__iframe"
+						title={ __( 'Google Map for ' + address ) }
 						src={ url }
-						style={ { height } }
+						style={ { height: height } }
 					></iframe>
 				</div>
 			);
@@ -104,33 +107,30 @@ const deprecated = [
 	},
 	{
 		attributes,
-		save ( props ) {
+		save( props ) {
+			const blockName = 'google-map';
 
-			const {
-				block_id,
-				height,
-				zoom,
-				address,
-				language
-			} = props.attributes
-
-			let encoded_address = encodeURI( address )
-
-			var lang_par = (language) ? language : "en";
-
-			let url = `https://www.google.com/maps/embed/v1/place?key=${wp.uagb_google_api_key}&q=${encoded_address}&zoom=${zoom}&language=${lang_par}`
+			const { block_id, zoom, address, language } = props.attributes;
+			const encoded_address = encodeURI( address );
+			const lang_par = language ? language : 'en';
+			const url = `https://www.google.com/maps/embed/v1/place?key=${
+				wp.uagb_google_api_key
+			}&q=${ encoded_address }&zoom=${ getFallbackNumber( zoom, 'zoom', blockName ) }&language=${ lang_par }`;
 
 			return (
-				<div className={ classnames( props.className, "uagb-google-map__wrap", `uagb-block-${block_id}` ) }>
+				<div className={ classnames( props.className, 'uagb-google-map__wrap', `uagb-block-${ block_id }` ) }>
 					<iframe
 						className="uagb-google-map__iframe"
-						title = { __( "Google Map for " + address ) }
-						src={url}
-						style={{height: height}}></iframe>
+						title={ __( 'Google Map for ', 'ultimate-addons-for-gutenberg' ) + address }
+						src={ url }
+					></iframe>
 				</div>
-			)
-		}
-
+			);
+		},
+	},
+	{
+		attributes: attributes_v2_6_3,
+		save: save_v2_6_3,
 	},
 ];
 

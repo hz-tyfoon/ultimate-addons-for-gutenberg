@@ -1,42 +1,21 @@
-import classnames from 'classnames';
-import { RichText } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import React from 'react';
-import { useDeviceType } from '@Controls/getPreviewType';
+import { memo } from '@wordpress/element';
+import { uagbClassNames } from '@Utils/Helpers';
+import Renderer from './renderer';
+import RendererDesc from './renderer-desc';
 
 const Render = ( props ) => {
-	props = props.parentProps;
 	const {
 		attributes: {
-			isPreview,
 			block_id,
 			headingTitleToggle,
-			headingTitle,
-			headingDesc,
-			headingDescToggle,
-			headingTag,
+			headingDescToggle, 
 			seperatorStyle,
+			seperatorPosition,
+			headingDescPosition,
 		},
-		setAttributes,
 		className,
+		deviceType
 	} = props;
-
-	const deviceType = useDeviceType();
-	const headingText = (
-		<RichText
-			tagName={ headingTag }
-			placeholder={ __(
-				'Write a Heading',
-				'ultimate-addons-for-gutenberg'
-			) }
-			value={ headingTitle }
-			className="uagb-heading-text"
-			multiline={ false }
-			onChange={ ( value ) => {
-				setAttributes( { headingTitle: value } );
-			} }
-		/>
-	);
 
 	const separator = seperatorStyle !== 'none' && (
 		<div className="uagb-separator-wrap">
@@ -44,32 +23,35 @@ const Render = ( props ) => {
 		</div>
 	);
 
-	const descText = (
-		<RichText
-			tagName="p"
-			placeholder={ __(
-				'Write a Description',
-				'ultimate-addons-for-gutenberg'
-			) }
-			value={ headingDesc }
-			className="uagb-desc-text"
-			onChange={ ( value ) => setAttributes( { headingDesc: value } ) }
-		/>
+	const headingText = (
+		<>
+			{ seperatorPosition === 'above-heading' ? separator : '' }
+			<Renderer { ...props } />
+			{ seperatorPosition === 'below-heading' ? separator : '' }
+		</>
 	);
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/creative-heading.png`;
+
+	const descText = (
+		<>
+			{ seperatorPosition === 'above-sub-heading' ? separator : '' }
+			<RendererDesc { ...props } />
+			{ seperatorPosition === 'below-sub-heading' ? separator : '' }
+		</>
+	);
+
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
-			className={ classnames(
+			className={ uagbClassNames( [
 				className,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ block_id }`
-			) }
+				`uagb-block-${ block_id }`,
+			] ) }
 		>
+			{ headingDescToggle && 'above-heading' === headingDescPosition ? descText : '' }
 			{ headingTitleToggle && headingText }
-			{ separator }
-			{ headingDescToggle && descText  }
-		</div>
+			{ headingDescToggle && 'below-heading' === headingDescPosition ? descText : '' }
+			{ ! headingDescToggle && ! headingTitleToggle ? separator : '' }
+		</div>	
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

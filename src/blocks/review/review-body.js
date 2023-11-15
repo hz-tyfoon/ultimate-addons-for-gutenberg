@@ -1,6 +1,6 @@
 import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import Stars from './star';
+import EditorStars from './editorStars';
 
 const ReviewBody = ( props ) => {
 	const {
@@ -35,9 +35,7 @@ const ReviewBody = ( props ) => {
 
 	const { average } = props.state;
 
-	const newAverage =
-		items.map( ( i ) => i.value ).reduce( ( total, v ) => total + v ) /
-		items.length;
+	const newAverage = items.map( ( i ) => i.value ).reduce( ( total, v ) => total + v ) / items.length;
 
 	if ( average !== newAverage ) {
 		props.setStateValue( { average: newAverage } );
@@ -51,18 +49,10 @@ const ReviewBody = ( props ) => {
 
 	return (
 		<div className="uagb_review_block">
-			<a
-				href={ ctaLink }
-				className="uagb-rating-link-wrapper"
-				target={ target }
-				rel={ rel }
-			>
+			<a href={ ctaLink } className="uagb-rating-link-wrapper" target={ target } rel={ rel }>
 				<RichText
 					tagName={ headingTag }
-					placeholder={ __(
-						'Title of the review',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Title of the review', 'ultimate-addons-for-gutenberg' ) }
 					keepPlaceholderOnFocus
 					value={ rTitle }
 					className="uagb-rating-title"
@@ -72,10 +62,7 @@ const ReviewBody = ( props ) => {
 			{ descriptionEnabled === true && (
 				<RichText
 					tagName="p"
-					placeholder={ __(
-						'Review Description',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Review Description', 'ultimate-addons-for-gutenberg' ) }
 					keepPlaceholderOnFocus
 					value={ rContent }
 					className="uagb-rating-desc"
@@ -85,28 +72,21 @@ const ReviewBody = ( props ) => {
 			{ showauthor === true && (
 				<RichText
 					tagName="p"
-					placeholder={ __(
-						'Review Author',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Review Author', 'ultimate-addons-for-gutenberg' ) }
 					keepPlaceholderOnFocus
 					value={ rAuthor }
 					className="uagb-rating-author"
 					onChange={ ( text ) => setAuthorName( text ) }
 				/>
 			) }
-			{ imageEnabled === true && (
-				<div className="uagb-rating__source-wrap">
-					{ image_icon_html }
-				</div>
-			) }
+			{ imageEnabled === true && <div className="uagb-rating__source-wrap">{ image_icon_html }</div> }
 			{ items.map(
 				( j, i ) =>
 					showfeature === true && (
 						<div className="uagb_review_entry" key={ i }>
 							<RichText
 								style={ { marginRight: 'auto' } }
-								placeholder={ __( 'Edit feature' ) }
+								placeholder={ __( 'Edit feature', 'ultimate-addons-for-gutenberg' ) }
 								value={ j.label }
 								onChange={ ( text ) =>
 									setItems( [
@@ -122,32 +102,7 @@ const ReviewBody = ( props ) => {
 									minWidth: items.length > 1 ? 120 : 100,
 								} }
 							>
-								{ items.length > 1 && (
-									<div // eslint-disable-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-										className="dashicons dashicons-trash"
-										onClick={ () => {
-											const newItems = items
-												.slice( 0, i )
-												.concat(
-													items.slice(
-														i + 1,
-														items.length
-													)
-												);
-											setItems( newItems );
-											props.setStateValue( {
-												average:
-													newItems
-														.map( ( k ) => k.value )
-														.reduce(
-															( total, v ) =>
-																total + v
-														) / newItems.length,
-											} );
-										} }
-									/>
-								) }
-								<Stars
+								<EditorStars
 									id={ `${ ID }-${ i }` }
 									key={ i }
 									value={ j.value }
@@ -162,12 +117,8 @@ const ReviewBody = ( props ) => {
 										setActiveStarIndex( i );
 										props.setStateValue( {
 											average:
-												newArray
-													.map( ( k ) => k.value )
-													.reduce(
-														( total, v ) =>
-															total + v
-													) / newArray.length,
+												newArray.map( ( k ) => k.value ).reduce( ( total, v ) => total + v ) /
+												newArray.length,
 										} );
 									} }
 									inactiveStarColor={ inactiveStarColor }
@@ -177,13 +128,30 @@ const ReviewBody = ( props ) => {
 									state={ props.starState }
 									setStateValue={ props.starSetStateValue }
 								/>
+								{ items.length > 1 && (
+									<div // eslint-disable-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+										className="dashicons dashicons-trash"
+										onClick={ () => {
+											const newItems = items
+												.slice( 0, i )
+												.concat( items.slice( i + 1, items.length ) );
+											setItems( newItems );
+											props.setStateValue( {
+												average:
+													newItems
+														.map( ( k ) => k.value )
+														.reduce( ( total, v ) => total + v ) / newItems.length,
+											} );
+										} }
+									/>
+								) }
 							</div>
 						</div>
 					)
 			) }
 			{ showfeature === true && (
 				<div // eslint-disable-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-					title={ __( 'Insert new review entry' ) }
+					title={ __( 'Insert new review entry', 'ultimate-addons-for-gutenberg' ) }
 					onClick={ () => {
 						setItems( [ ...items, { label: '', value: 0 } ] );
 						props.setStateValue( {
@@ -196,28 +164,20 @@ const ReviewBody = ( props ) => {
 			<div className="uagb_review_summary">
 				<RichText
 					className="uagb_review_summary_title"
-					placeholder={ __(
-						'Title of the summary goes here',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Title of the summary goes here', 'ultimate-addons-for-gutenberg' ) }
 					tagName="p"
 					onChange={ ( text ) => setSummaryTitle( text ) }
 					value={ summaryTitle }
 				/>
 				<div className="uagb_review_overall_value">
 					<RichText
-						placeholder={ __(
-							'Summary of the review goes here',
-							'ultimate-addons-for-gutenberg'
-						) }
+						placeholder={ __( 'Summary of the review goes here', 'ultimate-addons-for-gutenberg' ) }
 						onChange={ ( text ) => setSummaryDescription( text ) }
 						value={ summaryDescription }
 					/>
 					<div className="uagb_review_average">
-						<span className="uagb_review_rating">
-							{ Math.round( average * 10 ) / 10 }
-						</span>
-						<Stars
+						<span className="uagb_review_rating">{ Math.round( average * 10 ) / 10 }</span>
+						<EditorStars
 							id={ `${ ID }-average` }
 							className="uagb_review_average_stars"
 							onHover={ () => null }

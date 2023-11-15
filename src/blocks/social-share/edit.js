@@ -3,46 +3,58 @@
  */
 import styling from './styling';
 
-import React, { useEffect,    } from 'react';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
-
+import { select, dispatch } from '@wordpress/data';
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 const SocialShareComponent = ( props ) => {
-	const deviceType = useDeviceType();
-	useEffect( () => {
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-		props.setAttributes( { classMigrate: true } );
-		props.setAttributes( { childMigrate: true } );
-
-	}, [] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-style-social-share-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
+	const {
+		isSelected,
+		clientId,
+		attributes,
+		name,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		deviceType
+	} = props;
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-        addBlockEditorDynamicStyles( 'uagb-style-social-share-' + props.clientId.substr( 0, 8 ), blockStyling );
-
+	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
+
+	useEffect( () => {
+		select( 'core/block-editor' )
+			.getBlocksByClientId( clientId )[ 0 ]
+			?.innerBlocks.forEach( function ( block ) {
+				dispatch( 'core/block-editor' ).updateBlockAttributes( block.clientId, {
+					parentSize: attributes.size,
+					parentSizeMobile: attributes.sizeMobile,
+					parentSizeTablet: attributes.sizeTablet,
+				} );
+			} );
+	}, [ attributes.size, attributes.sizeMobile, attributes.sizeTablet ] );
+
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default SocialShareComponent;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( SocialShareComponent );

@@ -1,10 +1,7 @@
-import React from 'react';
 import { __ } from '@wordpress/i18n';
 import renderSVG from '@Controls/renderIcon';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
-import InspectorTab, {
-	UAGTabs,
-} from '@Components/inspector-tabs/InspectorTab.js';
+import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
 import ResponsiveSlider from '@Components/responsive-slider';
@@ -12,30 +9,21 @@ import Range from '@Components/range/Range.js';
 import UAGMediaPicker from '@Components/image';
 import UAGTabsControl from '@Components/tabs';
 
-import {
-	InspectorControls,
-	MediaPlaceholder,
-	BlockControls,
-	MediaReplaceFlow,
-} from '@wordpress/block-editor';
+import { InspectorControls, BlockControls, MediaReplaceFlow } from '@wordpress/block-editor';
 
-import {
-	ToggleControl,
-	ToolbarGroup,
-	Icon,
-	TextControl,
-} from '@wordpress/components';
+import { ToggleControl, ToolbarGroup, Icon, ExternalLink } from '@wordpress/components';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
+import UAGTextControl from '@Components/text-control';
+import { memo } from '@wordpress/element';
 
 const Settings = ( props ) => {
+
 	const { loopLottie, reverseDirection } = props;
 
-	props = props.parentProps;
-
-	const { setAttributes, attributes } = props;
-
 	const {
+		setAttributes,
+		attributes: {
 		lottieSource,
 		align,
 		height,
@@ -52,28 +40,32 @@ const Settings = ( props ) => {
 		lottieURl,
 		playOn,
 		backgroundHColor,
-		isPreview,
-	} = attributes;
-
-	const onSelectLottieJSON = ( media ) => {
-		if ( ! media || ! media.url ) {
-			setAttributes( { jsonLottie: null } );
-			return;
-		}
-
-		setAttributes( { jsonLottie: media, lottieURl: media.url, lottieSource: 'library' } );
-	};
-
-	const onSelectLottieURL = ( mediaURL ) => {
-		setAttributes( { lottieURl: mediaURL, lottieSource: 'url' } );
-	};
+		},
+		onSelectLottieJSON,
+		onSelectLottieURL,
+	} = props;
 
 	const controlsSettings = (
 		<>
-			<UAGAdvancedPanelBody
-				title={ __( 'General', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ true }
-			>
+			<UAGAdvancedPanelBody title={ __( 'General', 'ultimate-addons-for-gutenberg' ) } initialOpen={ true }>
+				<p className="uagb-form-notice">
+					{
+						<>
+							{__(
+								'Note: You can see sample Lottie animations ',
+								'ultimate-addons-for-gutenberg'
+							)}
+							<ExternalLink
+								href={
+									'https://lottiefiles.com/'
+								}
+							>
+								{__( 'here on this', 'ultimate-addons-for-gutenberg' )}
+							</ExternalLink>
+							{__( ' website.', 'ultimate-addons-for-gutenberg' )}
+						</>
+					}
+				</p>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
 					label={ __( 'File Source', 'ultimate-addons-for-gutenberg' ) }
@@ -84,17 +76,11 @@ const Settings = ( props ) => {
 					options={ [
 						{
 							value: 'library',
-							label: __(
-								'Library',
-								'ultimate-addons-for-gutenberg'
-							),
+							label: __( 'Library', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							value: 'url',
-							label: __(
-								'URL',
-								'ultimate-addons-for-gutenberg'
-							),
+							label: __( 'URL', 'ultimate-addons-for-gutenberg' ),
 						},
 					] }
 				/>
@@ -119,20 +105,19 @@ const Settings = ( props ) => {
 					/>
 				) }
 				{ lottieSource === 'url' && (
-					<TextControl
-						label={ __(
-							'Lottie Animation URL',
-							'ultimate-addons-for-gutenberg'
-						) }
+					<UAGTextControl
+						label={ __( 'Lottie Animation URL', 'ultimate-addons-for-gutenberg' ) }
 						value={ lottieURl }
+						data={ {
+							value: lottieURl,
+							label: 'lottieURl',
+						} }
+						setAttributes={ setAttributes }
 						onChange={ ( value ) => setAttributes( { lottieURl: value } ) }
 					/>
 				) }
 			</UAGAdvancedPanelBody>
-			<UAGAdvancedPanelBody
-				title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) }
-				initialOpen={ false }
-			>
+			<UAGAdvancedPanelBody title={ __( 'Content', 'ultimate-addons-for-gutenberg' ) } initialOpen={ false }>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
 					label={ __( 'Play On', 'ultimate-addons-for-gutenberg' ) }
@@ -156,18 +141,15 @@ const Settings = ( props ) => {
 						},
 						{
 							value: 'scroll',
-							label: __(
-								'Viewport',
-								'ultimate-addons-for-gutenberg'
-							),
+							label: __( 'Viewport', 'ultimate-addons-for-gutenberg' ),
 						},
 					] }
 					help={
-						( 'scroll' === playOn || 'none' === playOn )
+						'scroll' === playOn || 'none' === playOn
 							? __(
 									"This setting will only take effect once you are on the live page, and not while you're editing.",
 									'ultimate-addons-for-gutenberg'
-							)
+							  )
 							: ''
 					}
 				/>
@@ -187,19 +169,12 @@ const Settings = ( props ) => {
 						},
 						{
 							value: 'center',
-							icon: (
-								<Icon icon={ renderSVG( 'fa fa-align-center' ) } />
-							),
-							tooltip: __(
-								'Center',
-								'ultimate-addons-for-gutenberg'
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-center' ) } />,
+							tooltip: __( 'Center', 'ultimate-addons-for-gutenberg' ),
 						},
 						{
 							value: 'right',
-							icon: (
-								<Icon icon={ renderSVG( 'fa fa-align-right' ) } />
-							),
+							icon: <Icon icon={ renderSVG( 'fa fa-align-right' ) } />,
 							tooltip: __( 'Right', 'ultimate-addons-for-gutenberg' ),
 						},
 					] }
@@ -235,10 +210,7 @@ const Settings = ( props ) => {
 						label={ __( 'Reverse', 'ultimate-addons-for-gutenberg' ) }
 						checked={ reverse }
 						onChange={ reverseDirection }
-						help={ __(
-							'Direction of animation.',
-							'ultimate-addons-for-gutenberg'
-						) }
+						help={ __( 'Direction of animation.', 'ultimate-addons-for-gutenberg' ) }
 					/>
 				) }
 			</UAGAdvancedPanelBody>
@@ -246,10 +218,7 @@ const Settings = ( props ) => {
 	);
 
 	const styleSettings = (
-		<UAGAdvancedPanelBody
-			title={ __( 'Background', 'ultimate-addons-for-gutenberg' ) }
-			initialOpen={ true }
-		>
+		<UAGAdvancedPanelBody title={ __( 'Background', 'ultimate-addons-for-gutenberg' ) } initialOpen={ true }>
 			<ResponsiveSlider
 				label={ __( 'Width', 'ultimate-addons-for-gutenberg' ) }
 				data={ {
@@ -330,11 +299,6 @@ const Settings = ( props ) => {
 		</UAGAdvancedPanelBody>
 	);
 
-	//Check if given url is valid or not for json extension.
-	let validJsonPath = 'invalid';
-	if ( lottieURl && lottieURl.endsWith( '.json' ) ) {
-		validJsonPath = 'valid';
-	}
 	if ( ! uagb_blocks_info.uagb_mime_type ) {
 		return (
 			<div className="uagb-show-notice">
@@ -348,47 +312,11 @@ const Settings = ( props ) => {
 						target="__blank"
 					>
 						{ ' ' }
-						{ __( 'this document' ) }{ ' ' }
+						{ __( 'this document', 'ultimate-addons-for-gutenberg' ) }{ ' ' }
 					</a>
-					{ __( 'to know more about it.' ) }
+					{ __( 'to know more about it.', 'ultimate-addons-for-gutenberg' ) }
 				</span>
 			</div>
-		);
-	}
-
-	if ( validJsonPath === 'invalid' ) {
-		const lottie_url = (
-			<span className="uagb-lottie-instructions">
-				{ ' ' }
-				{ __(
-					'Allows you to add fancy animation i.e Lottie to your website. You can see sample Lottie animations',
-					'ultimate-addons-for-gutenberg'
-				) }
-				<a className="uagb-lottie-instructions__lottie-url" href="https://lottiefiles.com/" target="__blank">
-					{ ' ' }
-					{ __( 'here on this' ) }{ ' ' }
-				</a>
-				{ __( 'website.' ) }
-			</span>
-		);
-		const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/lottie-animation.png`;
-		return (
-			isPreview ? <img width='100%' src={previewImageData} alt=''/> :
-			<>
-			<div className="uagb-lottie_upload_wrap">
-				<MediaPlaceholder
-					labels={ {
-						title: __( 'Lottie', 'ultimate-addons-for-gutenberg' ),
-						instructions: lottie_url,
-					} }
-					allowedTypes={ [ 'application/json' ] }
-					accept={ [ 'application/json' ] }
-					value={ jsonLottie }
-					onSelectURL={ ( value ) => onSelectLottieURL( value ) }
-					onSelect={ onSelectLottieJSON }
-				/>
-			</div>
-			</>
 		);
 	}
 
@@ -410,23 +338,16 @@ const Settings = ( props ) => {
 
 	return (
 		<>
-			{ validJsonPath === 'valid' && getBlockControls() }
+			{ getBlockControls() }
 			<InspectorControls>
 				<InspectorTabs tabs={ [ 'general', 'style', 'advance' ] }>
-					<InspectorTab { ...UAGTabs.general }>
-						{ controlsSettings }
-					</InspectorTab>
-					<InspectorTab { ...UAGTabs.style }>
-						{ styleSettings }
-					</InspectorTab>
-					<InspectorTab
-						{ ...UAGTabs.advance }
-						parentProps={ props }
-					></InspectorTab>
+					<InspectorTab { ...UAGTabs.general }>{ controlsSettings }</InspectorTab>
+					<InspectorTab { ...UAGTabs.style }>{ styleSettings }</InspectorTab>
+					<InspectorTab { ...UAGTabs.advance } parentProps={ props }></InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>
 	);
 };
 
-export default React.memo( Settings );
+export default memo( Settings );

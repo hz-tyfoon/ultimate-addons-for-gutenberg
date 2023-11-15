@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import { InnerBlocks } from '@wordpress/block-editor';
-import React, { useLayoutEffect, useMemo } from 'react';
+import { useLayoutEffect, useMemo, memo } from '@wordpress/element';
+
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 
 const ALLOWED_BLOCKS = [ 'uagb/buttons-child' ];
 
@@ -15,13 +15,8 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-
-	const { attributes } = props;
-
-	const deviceType = useDeviceType();
-
-	const { className, btn_count, buttons, stack, isPreview, buttonSize, buttonSizeTablet, buttonSizeMobile } = attributes;
+	const { attributes, deviceType } = props;
+	const { className, btn_count, buttons, stack, buttonSize, buttonSizeTablet, buttonSizeMobile, block_id } = attributes;
 
 	const getButtonTemplate = useMemo( () => {
 		const childButtons = [];
@@ -33,40 +28,28 @@ const Render = ( props ) => {
 		return childButtons;
 	}, [ btn_count, buttons ] );
 
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/multi-button.png`;
-
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
-		<>
 		<div
 			className={ classnames(
 				className,
 				'uagb-buttons__outer-wrap',
-				`uagb-btn__${buttonSize}-btn`,
-				`uagb-btn-tablet__${buttonSizeTablet}-btn`,
-				`uagb-btn-mobile__${buttonSizeMobile}-btn`,
+				`uagb-btn__${ buttonSize }-btn`,
+				`uagb-btn-tablet__${ buttonSizeTablet }-btn`,
+				`uagb-btn-mobile__${ buttonSizeMobile }-btn`,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
+				`uagb-block-${ block_id }`
 			) }
 		>
-			<div
-				className={ classnames(
-					'uagb-buttons__wrap',
-					`uagb-buttons-stack-${ stack }`
-				) }
-			>
+			<div className={ classnames( 'uagb-buttons__wrap', `uagb-buttons-stack-${ stack }` ) }>
 				<InnerBlocks
 					template={ getButtonTemplate }
 					templateLock={ false }
 					allowedBlocks={ ALLOWED_BLOCKS }
-					__experimentalMoverDirection={
-						'desktop' === stack ? 'vertical' : 'horizontal'
-					}
+					__experimentalMoverDirection={ 'desktop' === stack ? 'vertical' : 'horizontal' }
 				/>
 			</div>
 		</div>
-		</>
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

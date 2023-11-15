@@ -2,11 +2,12 @@
  * BLOCK: FAQ - Child
  */
 
-import React, { useEffect,    useState } from 'react';
-
+import { useEffect, useState } from '@wordpress/element';
+import { compose } from '@wordpress/compose';
 
 import Settings from './settings';
 import Render from './render';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 let prevState;
 
@@ -14,40 +15,39 @@ const FaqChildComponent = ( props ) => {
 	const initialState = {
 		isFocused: 'false',
 	};
+	const { isSelected, attributes } = props;
 
 	const [ state, setStateValue ] = useState( initialState );
 
 	useEffect( () => {
-		// Replacement for componentDidMount.
-
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
 		// Pushing Style tag for this block css.
-		prevState = props.isSelected;
+		prevState = isSelected;
 	}, [] );
 
 	useEffect( () => {
 		// Replacement for componentDidUpdate.
 
-		if ( ! props.isSelected && prevState && state.isFocused ) {
+		if ( ! isSelected && prevState && state.isFocused ) {
 			setStateValue( {
 				isFocused: 'false',
 			} );
 		}
-		if ( props.isSelected && ! prevState ) {
+		if ( isSelected && ! prevState ) {
 			setStateValue( {
 				isFocused: true,
 			} );
 		}
-		prevState = props.isSelected;
-	}, [ props ] );
+		prevState = isSelected;
+	}, [ attributes ] );
 
 	return (
-			<>
-			<Settings />
-			<Render parentProps={ props } state={ state } />
-			</>
+		<>
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } state={ state } />
+		</>
 	);
 };
 
-export default FaqChildComponent;
+export default compose(
+	addInitialAttr,
+)( FaqChildComponent );

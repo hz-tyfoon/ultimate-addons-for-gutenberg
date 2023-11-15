@@ -1,8 +1,7 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect, useMemo } from 'react';
+import { useMemo, useLayoutEffect, memo } from '@wordpress/element';
 import { InnerBlocks } from '@wordpress/block-editor';
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 const ALLOWED_BLOCKS = [ 'uagb/restaurant-menu-child' ];
 
 const Render = ( props ) => {
@@ -14,12 +13,10 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
-	const { className, attributes } = props;
+	const { className, attributes, deviceType } = props;
 
 	// Setup the attributes.
-	const { isPreview, menu_item_count, columns, tcolumns, mcolumns } = attributes;
+	const { menu_item_count, columns, tcolumns, mcolumns, block_id } = attributes;
 
 	const getPriceListTemplate = useMemo( () => {
 		const childList = [];
@@ -31,18 +28,15 @@ const Render = ( props ) => {
 		return childList;
 	}, [ menu_item_count ] );
 
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/price-list.png`;
-
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
 			className={ classnames(
 				className,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
-				`uagb-rm__desk-column-${columns}`,
-				`uagb-rm__tablet-column-${tcolumns}`,
-				`uagb-rm__mobile-column-${mcolumns}`,
+				`uagb-block-${ block_id }`,
+				`uagb-rm__desk-column-${ columns }`,
+				`uagb-rm__tablet-column-${ tcolumns }`,
+				`uagb-rm__mobile-column-${ mcolumns }`
 			) }
 		>
 			<InnerBlocks
@@ -54,4 +48,4 @@ const Render = ( props ) => {
 		</div>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

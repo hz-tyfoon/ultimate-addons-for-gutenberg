@@ -1,16 +1,13 @@
-import React from 'react';
 import { __ } from '@wordpress/i18n';
+import { memo } from '@wordpress/element';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
-import InspectorTab, {
-	UAGTabs,
-} from '@Components/inspector-tabs/InspectorTab.js';
+import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 import { ToggleControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 
 	const { attributes, setAttributes } = props;
 
@@ -22,9 +19,7 @@ const Settings = ( props ) => {
 				<ToggleControl
 					label={ __( 'Required', 'ultimate-addons-for-gutenberg' ) }
 					checked={ radioRequired }
-					onChange={ () =>
-						setAttributes( { radioRequired: ! radioRequired } )
-					}
+					onChange={ () => setAttributes( { radioRequired: ! radioRequired } ) }
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
@@ -53,12 +48,10 @@ const Settings = ( props ) => {
 	return (
 		<InspectorControls>
 			<InspectorTabs tabs={ [ 'general', 'advance' ] }>
-				<InspectorTab { ...UAGTabs.general }>
-					{ radioInspectorControls() }
-				</InspectorTab>
+				<InspectorTab { ...UAGTabs.general }>{ radioInspectorControls() }</InspectorTab>
 				<InspectorTab { ...UAGTabs.advance }></InspectorTab>
 			</InspectorTabs>
 		</InspectorControls>
 	);
 };
-export default React.memo( Settings );
+export default memo( Settings );

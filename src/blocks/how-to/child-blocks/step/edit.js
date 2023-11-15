@@ -2,51 +2,38 @@
  * BLOCK: How-to Step - Edit
  */
 
-import React, {   useEffect,  } from 'react';
-
+import { useEffect, useMemo } from '@wordpress/element';
 import styling from './styling';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBHowToStepEdit = ( props ) => {
-	const deviceType = useDeviceType();
-	useEffect( () => {
-		const { setAttributes } = props;
 
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
+	const { isSelected, attributes, clientId, deviceType } = props;
 
-	}, [] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-style-how-to-step-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-style-how-to-step-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	return (
 		<>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
-export default UAGBHowToStepEdit;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( UAGBHowToStepEdit );

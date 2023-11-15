@@ -56,7 +56,6 @@ class UAGB_Front_Assets {
 	 * Constructor
 	 */
 	public function __construct() {
-
 		add_action( 'wp', array( $this, 'set_initial_variables' ), 99 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_asset_files' ) );
 	}
@@ -116,22 +115,23 @@ class UAGB_Front_Assets {
 		if ( is_archive() || is_home() || is_search() || is_404() ) {
 
 			global $wp_query;
-			$cached_wp_query = $wp_query->posts;
-
-			foreach ( $cached_wp_query as $post ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-
-				$current_post_assets = new UAGB_Post_Assets( $post->ID );
-
+			$current_object_id = $wp_query->get_queried_object_id();
+			$cached_wp_query   = $wp_query->posts;
+			if ( 0 !== $current_object_id && null !== $current_object_id ) {
+				$current_post_assets = new UAGB_Post_Assets( $current_object_id );
 				$current_post_assets->enqueue_scripts();
-
-			}
-
-			/*
-			If no posts are present in the category/archive
-			or 404 page (which is an obvious case for 404), then get the current page ID and enqueue script.
-			*/
-			if ( ! $cached_wp_query ) {
-				$current_post_assets = new UAGB_Post_Assets( get_queried_object_id() );
+			} elseif ( ! empty( $cached_wp_query ) && is_array( $cached_wp_query ) ) {
+				foreach ( $cached_wp_query as $post ) {
+					$current_post_assets = new UAGB_Post_Assets( $post->ID );
+					$current_post_assets->enqueue_scripts();
+				}
+			} else {
+				/*
+				If no posts are present in the category/archive
+				or 404 page (which is an obvious case for 404), then get the current page ID and enqueue script.
+				*/
+				$current_object_id   = is_int( $current_object_id ) ? $current_object_id : (int) $current_object_id;
+				$current_post_assets = new UAGB_Post_Assets( $current_object_id );
 				$current_post_assets->enqueue_scripts();
 			}
 		}

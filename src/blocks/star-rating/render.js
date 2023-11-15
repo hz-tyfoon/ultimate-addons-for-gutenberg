@@ -3,8 +3,7 @@ import classnames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { RichText } from '@wordpress/block-editor';
 import styles from './editor.lazy.scss';
-import React, { useLayoutEffect } from 'react';
-import { useDeviceType } from '@Controls/getPreviewType';
+import { useLayoutEffect, memo } from '@wordpress/element';
 
 const Render = ( props ) => {
 	// Add and remove the CSS on the drop and remove of the component.
@@ -15,13 +14,12 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
 	// Setup the attributes
 	const {
 		className,
 		setAttributes,
-		attributes: { isPreview, rating, range, title, displayTitle },
+		attributes: { rating, range, title, displayTitle, block_id },
+		deviceType,
 	} = props;
 
 	const rangeValue = parseInt( range );
@@ -33,23 +31,19 @@ const Render = ( props ) => {
 			</span>
 		);
 	}
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/star-ratings.png`;
+
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
 			className={ classnames(
 				className,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`,
+				`uagb-block-${ block_id }`
 			) }
 		>
 			{ displayTitle && (
 				<RichText
 					tagName="p"
-					placeholder={ __(
-						'Write a title',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Write a title', 'ultimate-addons-for-gutenberg' ) }
 					value={ title }
 					className="uag-star-rating__title"
 					onChange={ ( value ) => setAttributes( { title: value } ) }
@@ -61,4 +55,4 @@ const Render = ( props ) => {
 		</div>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

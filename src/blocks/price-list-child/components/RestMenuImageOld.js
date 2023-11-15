@@ -1,4 +1,4 @@
-const RestMenuImage = ( props ) => {
+const RestMenuImageOld = ( props ) => {
 	const { attributes, index_value } = props;
 	let urlCheck = '';
 	let imageArr = '';
@@ -28,10 +28,7 @@ const RestMenuImage = ( props ) => {
 		if ( urlCheck !== '' ) {
 			const size = image.sizes;
 			const imageSize = attributes.imageSize;
-			if (
-				typeof size !== 'undefined' &&
-				typeof size[ imageSize ] !== 'undefined'
-			) {
+			if ( typeof size !== 'undefined' && typeof size[ imageSize ] !== 'undefined' ) {
 				url = size[ imageSize ].url;
 			} else {
 				url = urlCheck;
@@ -50,4 +47,4 @@ const RestMenuImage = ( props ) => {
 	return null;
 };
 
-export default RestMenuImage;
+export default RestMenuImageOld;

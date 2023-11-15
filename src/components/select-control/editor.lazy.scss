@@ -1,15 +1,14 @@
 @import "../../styles/variables";
 
 .uagb-select-control {
-
 	&--layout-inline {
-
 		.components-select-control {
 			align-items: center;
 			display: grid;
 			grid-template-columns: 50% 50%;
 			margin-bottom: $spectra-control-vertical-gap;
 			color: $spectra-color-body;
+			gap: 0;
 		}
 
 		.uagb-control__header,
@@ -22,5 +21,4 @@
 			margin-bottom: 0;
 		}
 	}
-
 }

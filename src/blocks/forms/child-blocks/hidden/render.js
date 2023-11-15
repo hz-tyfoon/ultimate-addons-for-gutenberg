@@ -1,16 +1,13 @@
 import classnames from 'classnames';
-import React from 'react';
+import { memo } from '@wordpress/element';
 
 const Render = ( props ) => {
-	props = props.parentProps;
 
-	const { attributes } = props;
+	const { attributes, isSelected } = props;
 
 	const { block_id, hidden_field_name, hidden_field_value } = attributes;
 
-	const hidden_field_label = hidden_field_name
-		.replace( /\s+/g, '-' )
-		.toLowerCase();
+	const hidden_field_label = hidden_field_name.replace( /\s+/g, '-' ).toLowerCase();
 
 	const changeHiddenName = ( value ) => {
 		const { setAttributes } = props;
@@ -19,14 +16,9 @@ const Render = ( props ) => {
 
 	return (
 		<>
-			<div
-				className={ classnames(
-					'uagb-forms-hidden-wrap',
-					`uagb-block-${ block_id }`
-				) }
-			>
+			<div className={ classnames( 'uagb-forms-hidden-wrap', `uagb-block-${ block_id }` ) }>
 				{ /* Edit View */ }
-				{ props.isSelected && (
+				{ isSelected && (
 					<input
 						type="text"
 						className="uagb-forms-hidden-input"
@@ -35,7 +27,7 @@ const Render = ( props ) => {
 					/>
 				) }
 				{ /* Hidden Field View */ }
-				{ ! props.isSelected && (
+				{ ! isSelected && (
 					<>
 						<label
 							className={ `uagb-forms-hidden-label uagb-form-hidden-${ hidden_field_label }` }
@@ -44,7 +36,7 @@ const Render = ( props ) => {
 							{ hidden_field_name }
 						</label>
 						<input
-						    id={ hidden_field_label }
+							id={ hidden_field_label }
 							type="hidden"
 							className="uagb-forms-hidden-input"
 							value={ hidden_field_value }
@@ -55,4 +47,4 @@ const Render = ( props ) => {
 		</>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

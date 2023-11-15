@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-
 import ContentTmClasses from '.././classes';
 import AlignClass from '.././align-classes';
 import DayAlignClass from '.././day-align-classes';
@@ -10,10 +9,9 @@ import CtaLink from './components/CtaLink';
 import Author from './components/Author';
 import PostDate from './components/PostDate';
 import Icon from './components/Icon';
-import { useDeviceType } from '@Controls/getPreviewType';
 import { __ } from '@wordpress/i18n';
 import { Placeholder, Spinner } from '@wordpress/components';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import styles from '../editor.lazy.scss';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
@@ -25,117 +23,72 @@ const Render = ( props ) => {
 			styles.unuse();
 		};
 	}, [] );
+	
+	const { latestPosts, attributes, className, setAttributes, deviceType, name } = props;
 
-	props = props.parentProps;
-	const blockName = props.name.replace( 'uagb/', '' );
-	const deviceType = useDeviceType();
-	const { attributes, className, latestPosts } = props;
+	const blockName = name.replace( 'uagb/', '' );
 
-	const {
-		isPreview,
-		displayPostLink,
-		postsToShow,
-	} = attributes;
+	const { displayPostLink, postsToShow, block_id } = attributes;
 
-	const timelinAlignment = 'undefined' !== typeof attributes['timelinAlignment' + deviceType ] ? attributes['timelinAlignment' + deviceType ] :  attributes.timelinAlignment;
+	const timelinAlignment =
+		'undefined' !== typeof attributes[ 'timelinAlignment' + deviceType ]
+			? attributes[ 'timelinAlignment' + deviceType ]
+			: attributes.timelinAlignment;
 	const postsToShowFallback = getFallbackNumber( postsToShow, 'postsToShow', blockName );
 
 	/* Render output at backend */
 	const getContent = () => {
-
 		const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
 
 		if ( ! hasPosts ) {
 			return (
-				<Placeholder
-					icon="admin-post"
-					label={
-						uagb_blocks_info.blocks[ 'uagb/post-timeline' ].title
-					}
-				>
-					{ ! Array.isArray( latestPosts ) ? (
-						<Spinner />
-					) : (
-						__( 'No posts found.' )
-					) }
+				<Placeholder icon="admin-post" label={ __( 'Post Timeline', 'ultimate-addons-for-gutenberg' ) }>
+					{ ! Array.isArray( latestPosts ) ? <Spinner /> : __( 'No posts found.', 'ultimate-addons-for-gutenberg' ) }
 				</Placeholder>
 			);
 		}
 		// Removing posts from display should be instant.
 		const displayPosts =
-			latestPosts.length > postsToShowFallback
-				? latestPosts.slice( 0, postsToShowFallback )
-				: latestPosts;
+			latestPosts.length > postsToShowFallback ? latestPosts.slice( 0, postsToShowFallback ) : latestPosts;
 
 		let contentAlignClass = AlignClass( props.attributes, 0, deviceType ); // Get classname for layout alignment
 		let dayAlignClass = DayAlignClass( props.attributes, 0, deviceType ); // Get classname for day alignment.
 
 		let displayInnerDate = false;
-		const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/post-timeline.png`;
+
 		return (
-			isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 			<>
 				{ displayPosts.map( ( post, index ) => {
 					if ( timelinAlignment === 'center' ) {
 						displayInnerDate = true;
-						contentAlignClass = AlignClass(
-							props.attributes,
-							index,
-							deviceType
-						);
-						dayAlignClass = DayAlignClass(
-							props.attributes,
-							index,
-							deviceType
-						);
+						contentAlignClass = AlignClass( props.attributes, index, deviceType );
+						dayAlignClass = DayAlignClass( props.attributes, index, deviceType );
 					}
 
 					return (
-						<article
-							className={ classnames( 'uagb-timeline__field ', contentAlignClass ) }
-							key={ index }
-						>
+						<article className={ classnames( 'uagb-timeline__field ', contentAlignClass ) } key={ index }>
 							{ <Icon attributes={ attributes } /> }
 							<div className={ classnames( dayAlignClass, 'uagb-timeline__events-inner-new' ) }>
-								<div className='uagb-timeline__events-inner--content'>
+								<div className="uagb-timeline__events-inner--content">
 									<PostDate
 										post={ post }
 										attributes={ attributes }
 										dateClass="uagb-timeline__date-hide uagb-timeline__inner-date-new"
 									/>
-									{	
-										<FeaturedImage
+									{ <FeaturedImage post={ post } attributes={ attributes } /> }
+									{ <Title post={ post } attributes={ attributes } /> }
+									{ <Author post={ post } attributes={ attributes } /> }
+									{ <Excerpt post={ post } attributes={ attributes } /> }
+									{
+										<CtaLink
 											post={ post }
 											attributes={ attributes }
+											setAttributes={ setAttributes }
 										/>
 									}
-										{
-											<Title
-												post={ post }
-												attributes={ attributes }
-											/>
-										}
-										{
-											<Author
-												post={ post }
-												attributes={ attributes }
-											/>
-										}
-										{
-											<Excerpt
-												post={ post }
-												attributes={ attributes }
-											/>
-										}
-										{
-											<CtaLink
-												post={ post }
-												attributes={ attributes }
-											/>
-										}
 
-										<div className="uagb-timeline__arrow"></div>
-									</div>
+									<div className="uagb-timeline__arrow"></div>
+								</div>
 							</div>
 							{ displayInnerDate && (
 								<>
@@ -166,7 +119,7 @@ const Render = ( props ) => {
 				'uagb-timeline__outer-wrap',
 				'uagb-timeline__content-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId }`,
+				`uagb-block-${ block_id }`,
 				ctaEnable,
 				...ContentTmClasses( props.attributes, deviceType )
 			) }
@@ -178,4 +131,4 @@ const Render = ( props ) => {
 		</div>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

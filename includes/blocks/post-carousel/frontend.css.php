@@ -10,15 +10,33 @@
 // Adds Fonts.
 UAGB_Block_JS::blocks_post_gfont( $attr );
 
-$arrow_size_fallback = UAGB_Block_Helper::get_fallback_number( $attr['arrowSize'], 'arrowSize', $attr['blockName'] );
-
 $selectors = UAGB_Block_Helper::get_post_selectors( $attr );
 
 $m_selectors = UAGB_Block_Helper::get_post_mobile_selectors( $attr );
 
 $t_selectors = UAGB_Block_Helper::get_post_tablet_selectors( $attr );
 
-$arrow_size                 = UAGB_Helper::get_css_value( $arrow_size_fallback, 'px' );
+if ( 'background' === $attr['imgPosition'] && $attr['columns'] === $attr['postsToShow'] ) {
+	$selectors['.uagb-post__image-position-background'] = array(
+		'flex-wrap' => 'nowrap !important',
+		'gap'       => $attr['rowGap'] . 'px !important',
+	);
+	$selectors[' .uagb-post__inner-wrap']               = array(
+		'padding-left'  => '0px !important',
+		'padding-right' => '0px !important',
+	);
+	$selectors[' .uagb-post__image']                    = array(
+		'width'       => '100% !important',
+		'margin-left' => 'unset !important',
+	);
+}
+
+$arrow_size = UAGB_Helper::get_css_value( $attr['arrowSize'], 'px' );
+
+$selectors['.is_carousel .uagb-post__inner-wrap'] = array(
+	'background-color' => $attr['bgType'] ? $attr['bgColor'] : 'transparent',
+);
+
 $selectors[' .slick-arrow'] = array(
 	'border-color' => $attr['arrowColor'],
 );
@@ -80,6 +98,17 @@ if ( isset( $attr['arrowDots'] ) && 'dots' === $attr['arrowDots'] ) {
 		'padding' => '0 0 35px 0',
 	);
 }
+
+// post carousal margin top for dots.
+$selectors[' .slick-dots']   = array(
+	'margin-top' => UAGB_Helper::get_css_value( $attr['dotsMarginTop'], $attr['dotsMarginTopUnit'] ) . ' !important',
+);
+$t_selectors[' .slick-dots'] = array(
+	'margin-top' => UAGB_Helper::get_css_value( $attr['dotsMarginTopTablet'], $attr['dotsMarginTopUnit'] ) . ' !important',
+);
+$m_selectors[' .slick-dots'] = array(
+	'margin-top' => UAGB_Helper::get_css_value( $attr['dotsMarginTopMobile'], $attr['dotsMarginTopUnit'] ) . ' !important',
+);
 
 $combined_selectors = array(
 	'desktop' => $selectors,

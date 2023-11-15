@@ -2,43 +2,25 @@
  * BLOCK: Testimonial
  */
 import TestimonialStyle from './inline-styles';
-import React, {    useEffect } from 'react';
-
-
+import { useEffect, useMemo } from '@wordpress/element';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
-
 import Settings from './settings';
 import Render from './render';
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import hexToRGBA from '@Controls/hexToRgba';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import maybeGetColorForVariable from '@Controls/maybeGetColorForVariable';
+import DynamicCSSLoader from '../../components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
+import { compose } from '@wordpress/compose';
 
 const UAGBtestimonial = ( props ) => {
-	const deviceType = useDeviceType();
-	useEffect( () => {
-
-		const { setAttributes, attributes } = props;
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		setAttributes( { classMigrate: true } );
-
-		const {
-			imgVrPadding,
-			imgHrPadding,
-			imgpaddingTop,
-			imgpaddingBottom,
-			imgpaddingRight,
-			imgpaddingLeft,
-			contentPadding,
-			paddingTop,
-			paddingBottom,
-			paddingLeft,
-			paddingRight,
+	const {
+		setAttributes,
+		attributes,
+		attributes: {
 			backgroundOpacity,
 			backgroundImageColor,
 			backgroundType,
@@ -50,41 +32,26 @@ const UAGBtestimonial = ( props ) => {
 			gradientType,
 			gradientAngle,
 			gradientPosition,
-		} = attributes;
+			borderStyle,
+			borderWidth,
+			borderRadius,
+			borderColor,
+			borderHoverColor,
+			equalHeight,
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+			block_id,
+		},
+		isSelected,
+		clientId,
+		name,
+		deviceType
+	} = props;
 
-		if ( imgVrPadding ) {
-			if ( undefined === imgpaddingTop ) {
-				setAttributes( { imgpaddingTop: imgVrPadding } );
-			}
-			if ( undefined === imgpaddingBottom ) {
-				setAttributes( { imgpaddingBottom: imgVrPadding } );
-			}
-		}
-		if ( imgHrPadding ) {
-			if ( undefined === imgpaddingRight ) {
-				setAttributes( { imgpaddingRight: imgHrPadding } );
-			}
-			if ( undefined === imgpaddingLeft ) {
-				setAttributes( { imgpaddingLeft: imgHrPadding } );
-			}
-		}
-		if ( contentPadding ) {
-			if ( undefined === paddingTop ) {
-				setAttributes( { paddingTop: contentPadding } );
-			}
-			if ( undefined === paddingBottom ) {
-				setAttributes( { paddingBottom: contentPadding } );
-			}
-			if ( undefined === paddingLeft ) {
-				setAttributes( { paddingLeft: contentPadding } );
-			}
-			if ( undefined === paddingRight ) {
-				setAttributes( { paddingRight: contentPadding } );
-			}
-		}
+	useEffect( () => {
 
-
-		if( 101 !== backgroundOpacity && 'image' === backgroundType && 'gradient' === overlayType ){
+		if ( 101 !== backgroundOpacity && 'image' === backgroundType && 'gradient' === overlayType ) {
 			const color1 = hexToRGBA( maybeGetColorForVariable( gradientColor1 ), backgroundOpacity );
 			const color2 = hexToRGBA( maybeGetColorForVariable( gradientColor2 ), backgroundOpacity );
 			let gradientVal;
@@ -103,62 +70,69 @@ const UAGBtestimonial = ( props ) => {
 				setAttributes( { backgroundOpacity: 101 } );
 			}
 		}
-		const { borderStyle,borderWidth,borderRadius,borderColor,borderHoverColor } = props.attributes;
+
 		// Backward Border Migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'overall', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if ( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ) {
+			migrateBorderAttributes(
+				'overall',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
-
 	}, [] );
 
 	useEffect( () => {
-		const equalHeight = props.attributes.equalHeight;
 		if ( equalHeight ) {
-			uagb_carousel_height( props.clientId.substr( 0, 8 ) ); // eslint-disable-line no-undef
+			uagb_carousel_height( block_id );
 		} else {
-			uagb_carousel_unset_height( props.clientId.substr( 0, 8 ) ); // eslint-disable-line no-undef
+			uagb_carousel_unset_height( block_id ); // eslint-disable-line no-undef
 		}
-
-		const blockStyling = TestimonialStyle( props );
-
-		addBlockEditorDynamicStyles( 'uagb-testinomial-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
-
+	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = TestimonialStyle( props );
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-		addBlockEditorDynamicStyles( 'uagb-testinomial-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
+	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
+
+	const blockStyling = useMemo( () => TestimonialStyle( attributes, clientId, name, deviceType ), [
+		attributes,
+		deviceType,
+	] );
+
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default UAGBtestimonial;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( UAGBtestimonial );

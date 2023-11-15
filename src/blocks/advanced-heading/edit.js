@@ -1,56 +1,71 @@
 /**
  * BLOCK: Advanced Heading
  */
-import styling from './styling';
-import React, {    useEffect } from 'react';
 
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
 //  Import CSS.
 import './style.scss';
+import styling from './styling';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+import AddInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBAdvancedHeading = ( props ) => {
-	const deviceType = useDeviceType();
+	const {
+		attributes,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, headingTitle, headingDesc },
+		isSelected,
+		clientId,
+		name,
+		deviceType,
+		context,
+		setAttributes,
+	} = props;
+
+	// Check dynamic content in heading and description.
+	const headingHasDynamicContent = -1 !== headingTitle.indexOf( '<span data-spectra-dc-field="' );
+	const descriptionHasDynamicContent = headingDesc && -1 !== headingDesc.indexOf( '<span data-spectra-dc-field="' );
+
+	// Including condition in props for child component.
+	props = { ...props, headingHasDynamicContent, descriptionHasDynamicContent };
+
+
 	useEffect( () => {
-
-		const { setAttributes } = props;
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-		setAttributes( { classMigrate: true } )
-
-	}, [] );
-
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-adv-heading-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
+		// Check if block has dynamic content and context is not set.
+		if ( ( headingHasDynamicContent || descriptionHasDynamicContent ) && ! attributes?.context ) {
+			setAttributes( { context } );
+		}
+	}, [ context ] )
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-adv-heading-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	return (
 		<>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
-export default UAGBAdvancedHeading;
+
+export default compose(
+	AddInitialAttr,
+	AddStaticStyles,
+	AddGBSStyles
+)( UAGBAdvancedHeading );

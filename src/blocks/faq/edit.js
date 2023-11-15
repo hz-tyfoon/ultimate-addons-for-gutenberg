@@ -3,23 +3,52 @@
  */
 
 import styling from './styling';
-import React, { useEffect } from 'react';
-
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import {migrateBorderAttributes} from '@Controls/generateAttributes';
+import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import { select } from '@wordpress/data';
 import Settings from './settings';
 import Render from './render';
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import DynamicFontLoader from './dynamicFontLoader';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const FaqComponent = ( props ) => {
-
-	const deviceType = useDeviceType();
+	const {
+		isSelected,
+		setAttributes,
+		attributes,
+		attributes: {
+			questionBottomPaddingDesktop,
+			vquestionPaddingDesktop,
+			questionLeftPaddingDesktop,
+			hquestionPaddingDesktop,
+			questionBottomPaddingTablet,
+			vquestionPaddingTablet,
+			questionLeftPaddingTablet,
+			hquestionPaddingTablet,
+			questionBottomPaddingMobile,
+			vquestionPaddingMobile,
+			questionLeftPaddingMobile,
+			hquestionPaddingMobile,
+			borderStyle,
+			borderWidth,
+			borderRadius,
+			borderColor,
+			borderHoverColor,
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+		},
+		clientId,
+		name,
+		deviceType
+	} = props;
 
 	const updatePageSchema = () => {
-
-		const { setAttributes, clientId } = props;
 		const allBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 		let pageURL = '';
 		if ( select( 'core/editor' ) ) {
@@ -32,7 +61,7 @@ const FaqComponent = ( props ) => {
 			'mainEntity': [],
 		};
 
-		allBlocks.forEach( ( block )=> {
+		allBlocks.forEach( ( block ) => {
 			let faqData = {};
 
 			faqData = {
@@ -46,192 +75,74 @@ const FaqComponent = ( props ) => {
 			jsonData.mainEntity.push( faqData );
 		} );
 
-		setAttributes( {schema: JSON.stringify( jsonData )} );
+		setAttributes( { schema: JSON.stringify( jsonData ) } );
 	};
 
 	useEffect( () => {
-		// Replacement for componentDidMount.
-
-		const { attributes, setAttributes } = props;
-
-		const {
-			questionBottomPaddingDesktop,
-			vquestionPaddingDesktop,
-			questionLeftPaddingDesktop,
-			hquestionPaddingDesktop,
-			questionBottomPaddingTablet,
-			vquestionPaddingTablet,
-			questionLeftPaddingTablet,
-			hquestionPaddingTablet,
-			questionBottomPaddingMobile,
-			vquestionPaddingMobile,
-			questionLeftPaddingMobile,
-			hquestionPaddingMobile,
-			answerTopPadding,
-			answerBottomPadding,
-			answerRightPadding,
-			answerLeftPadding,
-			answerTopPaddingTablet,
-			answerBottomPaddingTablet,
-			answerRightPaddingTablet,
-			answerLeftPaddingTablet,
-			answerTopPaddingMobile,
-			answerBottomPaddingMobile,
-			answerRightPaddingMobile,
-			answerLeftPaddingMobile,
-			vanswerPaddingDesktop,
-			hanswerPaddingDesktop,
-			vanswerPaddingTablet,
-			hanswerPaddingTablet,
-			vanswerPaddingMobile,
-			hanswerPaddingMobile,
-		} = attributes;
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		if (
-			10 === questionBottomPaddingDesktop &&
-			10 !== vquestionPaddingDesktop
-		) {
+		
+		if ( 10 === questionBottomPaddingDesktop && 10 !== vquestionPaddingDesktop ) {
 			setAttributes( {
 				questionBottomPaddingDesktop: vquestionPaddingDesktop,
 			} );
 		}
-		if (
-			10 === questionLeftPaddingDesktop &&
-			10 !== hquestionPaddingDesktop
-		) {
+		if ( 10 === questionLeftPaddingDesktop && 10 !== hquestionPaddingDesktop ) {
 			setAttributes( {
 				questionLeftPaddingDesktop: hquestionPaddingDesktop,
 			} );
 		}
 
-		if (
-			10 === questionBottomPaddingTablet &&
-			10 !== vquestionPaddingTablet
-		) {
+		if ( 10 === questionBottomPaddingTablet && 10 !== vquestionPaddingTablet ) {
 			setAttributes( {
 				questionBottomPaddingTablet: vquestionPaddingTablet,
 			} );
 		}
-		if (
-			10 === questionLeftPaddingTablet &&
-			10 !== hquestionPaddingTablet
-		) {
+		if ( 10 === questionLeftPaddingTablet && 10 !== hquestionPaddingTablet ) {
 			setAttributes( {
 				questionLeftPaddingTablet: hquestionPaddingTablet,
 			} );
 		}
 
-		if (
-			10 === questionBottomPaddingMobile &&
-			10 !== vquestionPaddingMobile
-		) {
+		if ( 10 === questionBottomPaddingMobile && 10 !== vquestionPaddingMobile ) {
 			setAttributes( {
 				questionBottomPaddingMobile: vquestionPaddingMobile,
 			} );
 		}
-		if (
-			10 === questionLeftPaddingMobile &&
-			10 !== hquestionPaddingMobile
-		) {
+		if ( 10 === questionLeftPaddingMobile && 10 !== hquestionPaddingMobile ) {
 			setAttributes( {
 				questionLeftPaddingMobile: hquestionPaddingMobile,
 			} );
 		}
 
-		if ( vanswerPaddingDesktop ) {
-			if ( undefined === answerTopPadding ) {
-				setAttributes( { answerTopPadding: vanswerPaddingDesktop } );
-			}
-			if ( undefined === answerBottomPadding ) {
-				setAttributes( { answerBottomPadding: vanswerPaddingDesktop } );
-			}
-		}
-		if ( hanswerPaddingDesktop ) {
-			if ( undefined === answerRightPadding ) {
-				setAttributes( { answerRightPadding: hanswerPaddingDesktop } );
-			}
-			if ( undefined === answerLeftPadding ) {
-				setAttributes( { answerLeftPadding: hanswerPaddingDesktop } );
-			}
-		}
-
-		if ( vanswerPaddingTablet ) {
-			if ( undefined === answerTopPaddingTablet ) {
-				setAttributes( {
-					answerTopPaddingTablet: vanswerPaddingTablet,
-				} );
-			}
-			if ( undefined === answerBottomPaddingTablet ) {
-				setAttributes( {
-					answerBottomPaddingTablet: vanswerPaddingTablet,
-				} );
-			}
-		}
-		if ( hanswerPaddingTablet ) {
-			if ( undefined === answerRightPaddingTablet ) {
-				setAttributes( {
-					answerRightPaddingTablet: hanswerPaddingTablet,
-				} );
-			}
-			if ( undefined === answerLeftPaddingTablet ) {
-				setAttributes( {
-					answerLeftPaddingTablet: hanswerPaddingTablet,
-				} );
-			}
-		}
-
-		if ( vanswerPaddingMobile ) {
-			if ( undefined === answerTopPaddingMobile ) {
-				setAttributes( {
-					answerTopPaddingMobile: vanswerPaddingMobile,
-				} );
-			}
-			if ( undefined === answerBottomPaddingMobile ) {
-				setAttributes( {
-					answerBottomPaddingMobile: vanswerPaddingMobile,
-				} );
-			}
-		}
-		if ( hanswerPaddingMobile ) {
-			if ( undefined === answerRightPaddingMobile ) {
-				setAttributes( {
-					answerRightPaddingMobile: hanswerPaddingMobile,
-				} );
-			}
-			if ( undefined === answerLeftPaddingMobile ) {
-				setAttributes( {
-					answerLeftPaddingMobile: hanswerPaddingMobile,
-				} );
-			}
-		}
-		const {borderStyle,borderWidth,borderRadius,borderColor,borderHoverColor} = props.attributes
 		// border migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'overall', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if ( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ) {
+			migrateBorderAttributes(
+				'overall',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
@@ -239,113 +150,112 @@ const FaqComponent = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-faq-' + props.clientId.substr( 0, 8 ), blockStyling );
-
-		const getChildBlocks = select( 'core/block-editor' ).getBlocks(
-			props.clientId
-		);
+		const getChildBlocks = select( 'core/block-editor' ).getBlocks( clientId );
 
 		getChildBlocks.forEach( ( faqChild ) => {
-			faqChild.attributes.headingTag = props.attributes.headingTag;
+			faqChild.attributes.headingTag = attributes.headingTag;
 		} );
 
 		// Use Effect Case to Update the Defaults for Backward Compatible Attributes that don't have a Default.
 		// Used when Resetting Preset to Default.
-		if ( props.attributes.vanswerPaddingDesktop ) {
-			if ( '' === props.attributes.answerTopPadding ) {
-				props.setAttributes( { answerTopPadding: props.attributes.vanswerPaddingDesktop } );
+		if ( attributes.vanswerPaddingDesktop ) {
+			if ( '' === attributes.answerTopPadding ) {
+				setAttributes( { answerTopPadding: attributes.vanswerPaddingDesktop } );
 			}
-			if ( '' === props.attributes.answerBottomPadding ) {
-				props.setAttributes( { answerBottomPadding: props.attributes.vanswerPaddingDesktop } );
-			}
-		}
-		if ( props.attributes.hanswerPaddingDesktop ) {
-			if ( '' === props.attributes.answerRightPadding ) {
-				props.setAttributes( { answerRightPadding: props.attributes.hanswerPaddingDesktop } );
-			}
-			if ( '' === props.attributes.answerLeftPadding ) {
-				props.setAttributes( { answerLeftPadding: props.attributes.hanswerPaddingDesktop } );
+			if ( '' === attributes.answerBottomPadding ) {
+				setAttributes( { answerBottomPadding: attributes.vanswerPaddingDesktop } );
 			}
 		}
-
-		if ( props.attributes.vanswerPaddingTablet ) {
-			if ( '' === props.attributes.answerTopPaddingTablet ) {
-				props.setAttributes( {
-					answerTopPaddingTablet: props.attributes.vanswerPaddingTablet,
-				} );
+		if ( attributes.hanswerPaddingDesktop ) {
+			if ( '' === attributes.answerRightPadding ) {
+				setAttributes( { answerRightPadding: attributes.hanswerPaddingDesktop } );
 			}
-			if ( '' === props.attributes.answerBottomPaddingTablet ) {
-				props.setAttributes( {
-					answerBottomPaddingTablet: props.attributes.vanswerPaddingTablet,
-				} );
-			}
-		}
-		if ( props.attributes.hanswerPaddingTablet ) {
-			if ( '' === props.attributes.answerRightPaddingTablet ) {
-				props.setAttributes( {
-					answerRightPaddingTablet: props.attributes.hanswerPaddingTablet,
-				} );
-			}
-			if ( '' === props.attributes.answerLeftPaddingTablet ) {
-				props.setAttributes( {
-					answerLeftPaddingTablet: props.attributes.hanswerPaddingTablet,
-				} );
+			if ( '' === attributes.answerLeftPadding ) {
+				setAttributes( { answerLeftPadding: attributes.hanswerPaddingDesktop } );
 			}
 		}
 
-		if ( props.attributes.vanswerPaddingMobile ) {
-			if ( '' === props.attributes.answerTopPaddingMobile ) {
-				props.setAttributes( {
-					answerTopPaddingMobile: props.attributes.vanswerPaddingMobile,
+		if ( attributes.vanswerPaddingTablet ) {
+			if ( '' === attributes.answerTopPaddingTablet ) {
+				setAttributes( {
+					answerTopPaddingTablet: attributes.vanswerPaddingTablet,
 				} );
 			}
-			if ( '' === props.attributes.answerBottomPaddingMobile ) {
-				props.setAttributes( {
-					answerBottomPaddingMobile: props.attributes.vanswerPaddingMobile,
+			if ( '' === attributes.answerBottomPaddingTablet ) {
+				setAttributes( {
+					answerBottomPaddingTablet: attributes.vanswerPaddingTablet,
 				} );
 			}
 		}
-		if ( props.attributes.hanswerPaddingMobile ) {
-			if ( '' === props.attributes.answerRightPaddingMobile ) {
-				props.setAttributes( {
-					answerRightPaddingMobile: props.attributes.hanswerPaddingMobile,
+		if ( attributes.hanswerPaddingTablet ) {
+			if ( '' === attributes.answerRightPaddingTablet ) {
+				setAttributes( {
+					answerRightPaddingTablet: attributes.hanswerPaddingTablet,
 				} );
 			}
-			if ( '' === props.attributes.answerLeftPaddingMobile ) {
-				props.setAttributes( {
-					answerLeftPaddingMobile: props.attributes.hanswerPaddingMobile,
+			if ( '' === attributes.answerLeftPaddingTablet ) {
+				setAttributes( {
+					answerLeftPaddingTablet: attributes.hanswerPaddingTablet,
 				} );
 			}
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		if ( attributes.vanswerPaddingMobile ) {
+			if ( '' === attributes.answerTopPaddingMobile ) {
+				setAttributes( {
+					answerTopPaddingMobile: attributes.vanswerPaddingMobile,
+				} );
+			}
+			if ( '' === attributes.answerBottomPaddingMobile ) {
+				setAttributes( {
+					answerBottomPaddingMobile: attributes.vanswerPaddingMobile,
+				} );
+			}
+		}
+		if ( attributes.hanswerPaddingMobile ) {
+			if ( '' === attributes.answerRightPaddingMobile ) {
+				setAttributes( {
+					answerRightPaddingMobile: attributes.hanswerPaddingMobile,
+				} );
+			}
+			if ( '' === attributes.answerLeftPaddingMobile ) {
+				setAttributes( {
+					answerLeftPaddingMobile: attributes.hanswerPaddingMobile,
+				} );
+			}
+		}
+
+		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
-			return () => { postSaveButton?.removeEventListener( 'click', updatePageSchema ); }
+			return () => {
+				postSaveButton?.removeEventListener( 'click', updatePageSchema );
+			};
 		}
+	}, [ attributes ] );
 
-	}, [ props ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-faq-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
+
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	return (
-			<>
-			<Settings parentProps={ props } deviceType = { deviceType } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicFontLoader { ...{ attributes } } />
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default FaqComponent;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( FaqComponent );

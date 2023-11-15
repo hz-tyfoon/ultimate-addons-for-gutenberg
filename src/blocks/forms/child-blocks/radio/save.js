@@ -3,9 +3,6 @@
  */
 
 import classnames from 'classnames';
-
-import { __ } from '@wordpress/i18n';
-
 import { RichText } from '@wordpress/block-editor';
 
 export default function save( props ) {
@@ -13,18 +10,10 @@ export default function save( props ) {
 
 	const { block_id, radioRequired, options, radioName, layout } = attributes;
 
-	const isRequired = radioRequired
-		? __( 'required', 'ultimate-addons-for-gutenberg' )
-		: '';
+	const isRequired = radioRequired ? 'required' : '';
 
 	return (
-		<div
-			className={ classnames(
-				'uagb-forms-radio-wrap',
-				'uagb-forms-field-set',
-				`uagb-block-${ block_id }`
-			) }
-		>
+		<div className={ classnames( 'uagb-forms-radio-wrap', 'uagb-forms-field-set', `uagb-block-${ block_id }` ) }>
 			<RichText.Content
 				tagName="div"
 				value={ radioName }
@@ -45,9 +34,7 @@ export default function save( props ) {
 							required={ radioRequired }
 							className={ layout }
 						/>
-						<label htmlFor={ `radio-${ value }-${ block_id }` }>
-							{ o.optiontitle }
-						</label>
+						<label htmlFor={ `radio-${ value }-${ block_id }` }>{ o.optiontitle }</label>
 						<br />
 					</>
 				);

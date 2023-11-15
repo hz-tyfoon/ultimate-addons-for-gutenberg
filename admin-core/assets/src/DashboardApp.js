@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* Main Compnent */
-import './common/all-config.scss';
+/* Main Component */
+import '@Common/all-config.scss';
 import SettingsWrap from '@DashboardApp/SettingsWrap';
 import { Provider } from 'react-redux';
 import globalDataStore from '@Admin/store/globalDataStore';

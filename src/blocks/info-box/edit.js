@@ -1,114 +1,127 @@
 /**
  * BLOCK: Info Box - Edit Class
  */
-import React, {    useEffect } from 'react';
-
+import { useEffect, useMemo } from '@wordpress/element';
 import styling from './styling';
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
 import Settings from './settings';
 import Render from './render';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
+import { InfoBoxWrapper } from './components/Wrapper';
+import AddGBSStyles from '@Controls/AddGBSStyles';
 
 const UAGBInfoBox = ( props ) => {
-	const deviceType = useDeviceType();
-
-	useEffect( () => {
-
-		const { setAttributes } = props;
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		setAttributes( { classMigrate: true } );
-
-		const {
-			ctaBtnVertPadding,
-			ctaBtnHrPadding,
-			paddingBtnTop,
-			paddingBtnBottom,
-			paddingBtnRight,
-			paddingBtnLeft,
+	const {
+		setAttributes,
+		isSelected,
+		attributes,
+		attributes: {
 			ctaBorderStyle,
 			ctaBorderWidth,
 			ctaBorderRadius,
 			ctaBorderColor,
-			ctaBorderhoverColor
-		} = props.attributes;
+			ctaBorderhoverColor,
+			ctaBgType,
+			ctaBgHoverType,
+			showCtaIcon,
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+			globalBlockStyleId,
+		},
+		name,
+		clientId,
+		deviceType,
+		context,
+		hasDynamicImg,
+		hasDescriptionDC,
+		hasPrefixTitleDC,
+		hasTitleDC,
+	} = props;
 
-		if ( ctaBtnVertPadding ) {
-			if ( undefined === paddingBtnTop ) {
-				props.setAttributes( { paddingBtnTop: ctaBtnVertPadding } );
-			}
-			if ( undefined === paddingBtnBottom ) {
-				props.setAttributes( { paddingBtnBottom: ctaBtnVertPadding } );
-			}
+	useEffect( () => {
+		// Don't set attributes if global style is applied.
+		if( globalBlockStyleId ) {
+			return;
 		}
-		if ( ctaBtnHrPadding ) {
-			if ( undefined === paddingBtnRight ) {
-				props.setAttributes( { paddingBtnRight: ctaBtnHrPadding } );
-			}
-			if ( undefined === paddingBtnLeft ) {
-				props.setAttributes( { paddingBtnLeft: ctaBtnHrPadding } );
-			}
+
+		if ( ctaBgType === undefined ) {
+			setAttributes( { ctaBgType: 'color' } );
 		}
+
+		if ( ctaBgHoverType === undefined ) {
+			setAttributes( { ctaBgHoverType: 'color' } );
+		}
+
+		if ( showCtaIcon === undefined ) {
+			setAttributes( { showCtaIcon: true } );
+		}
+
 		// Backward Border Migration
-		if( ctaBorderWidth || ctaBorderRadius || ctaBorderColor || ctaBorderhoverColor || ctaBorderStyle ){
-
-			migrateBorderAttributes( 'btn', {
-				label: 'ctaBorderWidth',
-				value: ctaBorderWidth,
-			}, {
-				label: 'ctaBorderRadius',
-				value: ctaBorderRadius
-			}, {
-				label: 'ctaBorderColor',
-				value: ctaBorderColor
-			}, {
-				label: 'ctaBorderhoverColor',
-				value: ctaBorderhoverColor
-			},{
-				label: 'ctaBorderStyle',
-				value: ctaBorderStyle
-			},
-			props.setAttributes,
-			props.attributes
-		);
+		if ( ctaBorderWidth || ctaBorderRadius || ctaBorderColor || ctaBorderhoverColor || ctaBorderStyle ) {
+			migrateBorderAttributes(
+				'btn',
+				{
+					label: 'ctaBorderWidth',
+					value: ctaBorderWidth,
+				},
+				{
+					label: 'ctaBorderRadius',
+					value: ctaBorderRadius,
+				},
+				{
+					label: 'ctaBorderColor',
+					value: ctaBorderColor,
+				},
+				{
+					label: 'ctaBorderhoverColor',
+					value: ctaBorderhoverColor,
+				},
+				{
+					label: 'ctaBorderStyle',
+					value: ctaBorderStyle,
+				},
+				setAttributes,
+				attributes
+			);
 		}
 	}, [] );
 
 	useEffect( () => {
-
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-info-box-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
-	}, [ props ] );
-
+		if( ( hasDynamicImg || hasDescriptionDC || hasPrefixTitleDC || hasTitleDC ) && ! attributes?.context ){
+			setAttributes( { context } );
+		}
+	}, [ context ] )
 
 	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-info-box-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+	
+	useEffect( () => {
 		scrollBlockToView();
-
 	}, [ deviceType ] );
 
 	return (
 		<>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
-export default UAGBInfoBox;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+	InfoBoxWrapper,
+	AddGBSStyles
+)( UAGBInfoBox );

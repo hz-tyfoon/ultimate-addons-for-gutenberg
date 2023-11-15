@@ -1,21 +1,17 @@
-import React from 'react';
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, TextControl } from '@wordpress/components';
+import { ToggleControl } from '@wordpress/components';
 import UAGSelectControl from '@Components/select-control';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
-import InspectorTab, {
-	UAGTabs,
-} from '@Components/inspector-tabs/InspectorTab.js';
+import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 
 import { InspectorControls } from '@wordpress/block-editor';
-
-
+import UAGTextControl from '@Components/text-control';
+import { memo } from '@wordpress/element';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
-
+	
 	const { attributes, setAttributes } = props;
 
 	const { required, placeholder, autocomplete } = attributes;
@@ -24,10 +20,7 @@ const Settings = ( props ) => {
 		return (
 			<UAGAdvancedPanelBody initialOpen={ true }>
 				<UAGSelectControl
-					label={ __(
-						'Autocomplete',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Autocomplete', 'ultimate-addons-for-gutenberg' ) }
 					data={ {
 						value: autocomplete,
 						label: 'autocomplete',
@@ -38,15 +31,15 @@ const Settings = ( props ) => {
 						{ label: __( 'URL', 'ultimate-addons-for-gutenberg' ), value: 'url' },
 					] }
 				/>
-				<TextControl
-					label={ __(
-						'Placeholder',
-						'ultimate-addons-for-gutenberg'
-					) }
+				<UAGTextControl
+					label={ __( 'Placeholder', 'ultimate-addons-for-gutenberg' ) }
 					value={ placeholder }
-					onChange={ ( value ) =>
-						setAttributes( { placeholder: value } )
-					}
+					data={ {
+						value: placeholder,
+						label: 'placeholder',
+					} }
+					setAttributes={ setAttributes }
+					onChange={ ( value ) => setAttributes( { placeholder: value } ) }
 				/>
 				<ToggleControl
 					label={ __( 'Required', 'ultimate-addons-for-gutenberg' ) }
@@ -60,12 +53,10 @@ const Settings = ( props ) => {
 	return (
 		<InspectorControls>
 			<InspectorTabs tabs={ [ 'general', 'advance' ] }>
-				<InspectorTab { ...UAGTabs.general }>
-					{ urlInspectorControls() }
-				</InspectorTab>
+				<InspectorTab { ...UAGTabs.general }>{ urlInspectorControls() }</InspectorTab>
 				<InspectorTab { ...UAGTabs.advance }></InspectorTab>
 			</InspectorTabs>
 		</InspectorControls>
 	);
 };
-export default React.memo( Settings );
+export default memo( Settings );

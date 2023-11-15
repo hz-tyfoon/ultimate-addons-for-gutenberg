@@ -1,133 +1,42 @@
 /**
  * BLOCK: Forms - Edit
- */import React, { useEffect, useCallback } from 'react';
+ */
+import { useLayoutEffect, useEffect, useCallback, useMemo } from '@wordpress/element';
 import styling from './styling';
 import UAGB_Block_Icons from '@Controls/block-icons';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import Settings from './settings';
 import Render from './render';
-
-import { withSelect, useDispatch } from '@wordpress/data';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { compose, createHigherOrderComponent } from '@wordpress/compose';
-
-import { createBlock } from '@wordpress/blocks';
-
+import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
 import { __experimentalBlockVariationPicker } from '@wordpress/block-editor';
-
 import { withNotices } from '@wordpress/components';
-
 import { __ } from '@wordpress/i18n';
+import { migrateBorderAttributes } from '@Controls/generateAttributes';
+import styles from './editor.lazy.scss';
+import { addFilter } from '@wordpress/hooks';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
+import { uagbClassNames } from '@Utils/Helpers';
 
-import apiFetch from '@wordpress/api-fetch';
-
-import {migrateBorderAttributes} from '@Controls/generateAttributes';
+import getApiData from '@Controls/getApiData';
 
 const UAGBFormsEdit = ( props ) => {
-	const deviceType = useDeviceType();
-	useEffect( () => {
-		const { setAttributes } = props;
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-		const {
-			vPaddingSubmit,
-			hPaddingSubmit,
-			vPaddingField,
-			hPaddingField,
-			paddingFieldTop,
-			paddingFieldRight,
-			paddingFieldBottom,
-			paddingFieldLeft,
-			paddingBtnTop,
-			paddingBtnRight,
-			paddingBtnBottom,
-			paddingBtnLeft,
+	const {
+		isSelected,
+		attributes,
+		attributes: {
 			reCaptchaSiteKeyV2,
 			reCaptchaSecretKeyV2,
 			reCaptchaSiteKeyV3,
 			reCaptchaSecretKeyV3,
 			reCaptchaEnable,
 			toggleColor,
-			inputColor
-		} = props.attributes;
-
-		if( inputColor ) {
-			if ( undefined === toggleColor ) {
-				setAttributes( { toggleColor: inputColor } );
-			}
-		}
-
-		if ( vPaddingSubmit ) {
-			if ( undefined === paddingBtnTop ) {
-				setAttributes( { paddingBtnTop: vPaddingSubmit } );
-			}
-			if ( undefined === paddingBtnBottom ) {
-				setAttributes( { paddingBtnBottom: vPaddingSubmit } );
-			}
-		}
-		if ( hPaddingSubmit ) {
-			if ( undefined === paddingBtnRight ) {
-				setAttributes( { paddingBtnRight: hPaddingSubmit } );
-			}
-			if ( undefined === paddingBtnLeft ) {
-				setAttributes( { paddingBtnLeft: hPaddingSubmit } );
-			}
-		}
-		if ( vPaddingField ) {
-			if ( undefined === paddingFieldTop ) {
-				setAttributes( { paddingFieldTop: vPaddingField } );
-			}
-			if ( undefined === paddingFieldBottom ) {
-				setAttributes( { paddingFieldBottom: vPaddingField } );
-			}
-		}
-		if ( hPaddingField ) {
-			if ( undefined === paddingFieldRight ) {
-				setAttributes( { paddingFieldRight: hPaddingField } );
-			}
-			if ( undefined === paddingFieldLeft ) {
-				setAttributes( { paddingFieldLeft: hPaddingField } );
-			}
-		}
-
-		const id = props.clientId;
-
-		window.addEventListener( 'load', renderReadyClasses( id ) );
-
-		if( reCaptchaEnable ) {
-
-			const keys = {};
-			if( '' === uagb_blocks_info.recaptcha_site_key_v2 && '' === uagb_blocks_info.recaptcha_secret_key_v2 && reCaptchaSiteKeyV2 && reCaptchaSecretKeyV2 ) {
-
-				keys.reCaptchaSiteKeyV2 = reCaptchaSiteKeyV2;
-				keys.reCaptchaSecretKeyV2 = reCaptchaSecretKeyV2;
-			}
-			if( '' === uagb_blocks_info.recaptcha_site_key_v3 && '' === uagb_blocks_info.recaptcha_secret_key_v3 && reCaptchaSiteKeyV3 && reCaptchaSecretKeyV3 ) {
-
-				keys.reCaptchaSiteKeyV3 = reCaptchaSiteKeyV3;
-				keys.reCaptchaSecretKeyV3 = reCaptchaSecretKeyV3;
-			}
-
-			const formData = new window.FormData();
-
-			formData.append( 'action', 'uagb_forms_recaptcha' );
-			formData.append( 'nonce', uagb_blocks_info.uagb_ajax_nonce );
-			formData.append( 'value', JSON.stringify( keys ) );
-
-			if ( Object.keys( keys ).length !== 0 ) {
-
-				apiFetch( {
-					url: uagb_blocks_info.ajax_url,
-					method: 'POST',
-					body: formData,
-				} ).then( () => {
-				} );
-			}
-		}
-		const {
+			bgColor,
 			inputborderStyle,
 			inputborderWidth,
 			inputborderColor,
@@ -136,183 +45,252 @@ const UAGBFormsEdit = ( props ) => {
 			submitborderWidth,
 			submitborderRadius,
 			submitborderColor,
-			submitborderHColor,
+			submitborderHoverColor,
 			submitborderStyle,
-		} = props.attributes;
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+		},
+		setAttributes,
+		clientId,
+		name,
+		deviceType
+	} = props;
+
+	const {
+		variations,
+		hasInnerBlocks,
+		defaultVariation,
+	} = useSelect( ( select ) => {
+		const { getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
+
+		return {
+			hasInnerBlocks: select( 'core/block-editor' ).getBlocks( clientId ).length > 0,
+			defaultVariation:
+				typeof getDefaultBlockVariation === 'undefined' ? null : getDefaultBlockVariation( name ),
+			variations: typeof getBlockVariations === 'undefined' ? null : getBlockVariations( name ),
+		};
+	} );
+	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
+	// Add and remove the CSS on the drop and remove of the component.
+	useLayoutEffect( () => {
+		styles.use();
+		return () => {
+			styles.unuse();
+		};
+	}, [] );
+
+	useEffect( () => {
+		if ( bgColor ) {
+			if ( undefined === toggleColor ) {
+				setAttributes( { toggleColor: bgColor } );
+			}
+		}
+
+		const id = clientId;
+
+		window.addEventListener( 'load', renderReadyClasses( id ) );
+
+		if ( reCaptchaEnable ) {
+			const keys = {};
+			if (
+				'' === uagb_blocks_info.recaptcha_site_key_v2 &&
+				'' === uagb_blocks_info.recaptcha_secret_key_v2 &&
+				reCaptchaSiteKeyV2 &&
+				reCaptchaSecretKeyV2
+			) {
+				keys.reCaptchaSiteKeyV2 = reCaptchaSiteKeyV2;
+				keys.reCaptchaSecretKeyV2 = reCaptchaSecretKeyV2;
+			}
+			if (
+				'' === uagb_blocks_info.recaptcha_site_key_v3 &&
+				'' === uagb_blocks_info.recaptcha_secret_key_v3 &&
+				reCaptchaSiteKeyV3 &&
+				reCaptchaSecretKeyV3
+			) {
+				keys.reCaptchaSiteKeyV3 = reCaptchaSiteKeyV3;
+				keys.reCaptchaSecretKeyV3 = reCaptchaSecretKeyV3;
+			}
+
+			// Create an object with the nonce and value properties
+			const data = {
+				nonce: uagb_blocks_info.uagb_ajax_nonce,
+				value: JSON.stringify( keys ),
+			};
+
+			if ( Object.keys( keys ).length !== 0 ) {
+				// Call the getApiData function with the specified parameters
+				const getApiFetchData = getApiData( {
+					url: uagb_blocks_info.ajax_url,
+					action: 'uagb_forms_recaptcha',
+					data,
+				} );
+				// Wait for the API call to complete, but perform no actions after it finishes
+				getApiFetchData.then( () => {} );
+			}
+		}
 
 		// inputborder
-		if( inputborderWidth || inputborderRadius || inputborderColor || inputborderHoverColor || inputborderStyle ){
-			migrateBorderAttributes( 'field', {
-				label: 'inputborderWidth',
-				value: inputborderWidth,
-			}, {
-				label: 'inputborderRadius',
-				value: inputborderRadius
-			}, {
-				label: 'inputborderColor',
-				value: inputborderColor
-			}, {
-				label: 'inputborderHoverColor',
-				value: inputborderHoverColor
-			},{
-				label: 'inputborderStyle',
-				value: inputborderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if ( inputborderWidth || inputborderRadius || inputborderColor || inputborderHoverColor || inputborderStyle ) {
+			migrateBorderAttributes(
+				'field',
+				{
+					label: 'inputborderWidth',
+					value: inputborderWidth,
+				},
+				{
+					label: 'inputborderRadius',
+					value: inputborderRadius,
+				},
+				{
+					label: 'inputborderColor',
+					value: inputborderColor,
+				},
+				{
+					label: 'inputborderHoverColor',
+					value: inputborderHoverColor,
+				},
+				{
+					label: 'inputborderStyle',
+					value: inputborderStyle,
+				},
+				setAttributes,
+				attributes
 			);
-			migrateBorderAttributes( 'checkBoxToggle', {
-				label: 'inputborderWidth',
-				value: inputborderWidth,
-			}, {
-				label: 'inputborderRadius',
-				value: inputborderRadius
-			}, {
-				label: 'inputborderColor',
-				value: inputborderColor
-			}, {
-				label: 'inputborderHoverColor',
-				value: inputborderHoverColor
-			},{
-				label: 'inputborderStyle',
-				value: inputborderStyle
-			},
-			props.setAttributes,
-			props.attributes
+			migrateBorderAttributes(
+				'checkBoxToggle',
+				{
+					label: 'inputborderWidth',
+					value: inputborderWidth,
+				},
+				{
+					label: 'inputborderRadius',
+					value: inputborderRadius,
+				},
+				{
+					label: 'inputborderColor',
+					value: inputborderColor,
+				},
+				{
+					label: 'inputborderHoverColor',
+					value: inputborderHoverColor,
+				},
+				{
+					label: 'inputborderStyle',
+					value: inputborderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
-		if( submitborderWidth || submitborderRadius || submitborderColor || submitborderHColor || submitborderStyle ){
-			migrateBorderAttributes( 'btn', {
-				label: 'submitborderWidth',
-				value: submitborderWidth,
-			}, {
-				label: 'submitborderRadius',
-				value: submitborderRadius
-			}, {
-				label: 'submitborderColor',
-				value: submitborderColor
-			}, {
-				label: 'submitborderHColor',
-				value: submitborderHColor
-			},{
-				label: 'submitborderStyle',
-				value: submitborderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if (
+			submitborderWidth ||
+			submitborderRadius ||
+			submitborderColor ||
+			submitborderHoverColor ||
+			submitborderStyle
+		) {
+			migrateBorderAttributes(
+				'btn',
+				{
+					label: 'submitborderWidth',
+					value: submitborderWidth,
+				},
+				{
+					label: 'submitborderRadius',
+					value: submitborderRadius,
+				},
+				{
+					label: 'submitborderColor',
+					value: submitborderColor,
+				},
+				{
+					label: 'submitborderHoverColor',
+					value: submitborderHoverColor,
+				},
+				{
+					label: 'submitborderStyle',
+					value: submitborderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
 	}, [] );
 
-	useEffect( () => {
-
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-style-forms-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-style-forms-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
+		const id = clientId;
+		window.addEventListener( 'load', renderReadyClasses( id ) );
+	}, [ deviceType ] );
 
-		const id = props.clientId
-		window.addEventListener( 'load', renderReadyClasses( id ) )
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-	}, [deviceType] );
-
-	const blockVariationPickerOnSelect = useCallback(
-		( nextVariation = props.defaultVariation ) => {
-			if ( nextVariation.attributes ) {
-				props.setAttributes( nextVariation.attributes );
-			}
-
-			if ( nextVariation.innerBlocks ) {
-				props.replaceInnerBlocks(
-					props.clientId,
-					createBlocksFromInnerBlocksTemplate(
-						nextVariation.innerBlocks
-					)
-				);
-			}
+	const blockVariationPickerOnSelect = useCallback( ( nextVariation = defaultVariation ) => {
+		if ( nextVariation.attributes ) {
+			setAttributes( nextVariation.attributes );
 		}
-	);
-	const createBlocksFromInnerBlocksTemplate = useCallback(
-		( innerBlocksTemplate ) => {
-			return innerBlocksTemplate.map(
-				( [ name, attributes, innerBlocks = [] ] ) =>
-					createBlock(
-						name,
-						attributes,
-						createBlocksFromInnerBlocksTemplate( innerBlocks )
-					)
-			);
+
+		if ( nextVariation.innerBlocks ) {
+			replaceInnerBlocks( clientId, createBlocksFromInnerBlocksTemplate( nextVariation.innerBlocks ) );
 		}
-	);
-	const { variations, hasInnerBlocks } = props;
+	} );
 
 	const renderReadyClasses = useCallback( ( id ) => {
 		const iframeEl = document.querySelector( `iframe[name='editor-canvas']` );
 		let mainDiv;
 		let formscope;
-		if( iframeEl ){
-			mainDiv = iframeEl.contentDocument.getElementById( 'block-' + id )
-			formscope = mainDiv.getElementsByClassName( 'uagb-forms__outer-wrap' )
+		if ( iframeEl ) {
+			mainDiv = iframeEl.contentDocument.getElementById( 'block-' + id );
+			formscope = mainDiv.getElementsByClassName( 'uagb-forms__outer-wrap' );
 		} else {
-			mainDiv = document.getElementById( 'block-' + id )
-			formscope = mainDiv?.getElementsByClassName( 'uagb-forms__outer-wrap' )
+			mainDiv = document.getElementById( 'block-' + id );
+			formscope = mainDiv?.getElementsByClassName( 'uagb-forms__outer-wrap' );
 		}
 
 		if ( formscope && formscope[ 0 ] ) {
 			const editorwrap = formscope[ 0 ].children;
 			const formInnerWrap = editorwrap[ 0 ].children;
-			const editorBlockWrap = formInnerWrap[ 0 ].getElementsByClassName(
-				'block-editor-block-list__layout'
-			);
+			const editorBlockWrap = formInnerWrap[ 0 ].getElementsByClassName( 'block-editor-block-list__layout' );
 			const sibling = editorBlockWrap[ 0 ].children;
 
 			for ( let index = 0; index < sibling.length; index++ ) {
 				if (
-					sibling[ index ].classList.contains( 'uag-col-2' ) &&
-					sibling[ index + 1 ].classList.contains( 'uag-col-2' )
+					sibling[ index ]?.classList.contains( 'uag-col-2' ) &&
+					sibling[ index + 1 ]?.classList.contains( 'uag-col-2' )
 				) {
 					const div = document.createElement( 'div' );
 					div.className = 'uag-col-2-wrap uag-col-wrap-' + index;
 					sibling[ index + 1 ].after( div );
-					const wrapper_div = formscope[ 0 ].getElementsByClassName(
-						'uag-col-wrap-' + index
-					);
+					const wrapper_div = formscope[ 0 ].getElementsByClassName( 'uag-col-wrap-' + index );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 				} else if (
-					sibling[ index ].classList.contains( 'uag-col-3' ) &&
-					sibling[ index + 1 ].classList.contains( 'uag-col-3' ) &&
-					sibling[ index + 2 ].classList.contains( 'uag-col-3' )
+					sibling[ index ]?.classList.contains( 'uag-col-3' ) &&
+					sibling[ index + 1 ]?.classList.contains( 'uag-col-3' ) &&
+					sibling[ index + 2 ]?.classList.contains( 'uag-col-3' )
 				) {
 					const div = document.createElement( 'div' );
 					div.className = 'uag-col-3-wrap uag-col-wrap-' + index;
 					sibling[ index + 2 ].after( div );
-					const wrapper_div = formscope[ 0 ].getElementsByClassName(
-						'uag-col-wrap-' + index
-					);
+					const wrapper_div = formscope[ 0 ].getElementsByClassName( 'uag-col-wrap-' + index );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 				} else if (
-					sibling[ index ].classList.contains( 'uag-col-4' ) &&
-					sibling[ index + 1 ].classList.contains( 'uag-col-4' ) &&
-					sibling[ index + 2 ].classList.contains( 'uag-col-4' ) &&
-					sibling[ index + 3 ].classList.contains( 'uag-col-4' )
+					sibling[ index ]?.classList.contains( 'uag-col-4' ) &&
+					sibling[ index + 1 ]?.classList.contains( 'uag-col-4' ) &&
+					sibling[ index + 2 ]?.classList.contains( 'uag-col-4' ) &&
+					sibling[ index + 3 ]?.classList.contains( 'uag-col-4' )
 				) {
 					const div = document.createElement( 'div' );
 					div.className = 'uag-col-4-wrap uag-col-wrap-' + index;
 					sibling[ index + 3 ].after( div );
-					const wrapper_div = formscope[ 0 ].getElementsByClassName(
-						'uag-col-wrap-' + index
-					);
+					const wrapper_div = formscope[ 0 ].getElementsByClassName( 'uag-col-wrap-' + index );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
 					wrapper_div[ 0 ].appendChild( sibling[ index ] );
@@ -321,88 +299,53 @@ const UAGBFormsEdit = ( props ) => {
 			}
 		}
 	} );
-const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/form.png`;
+
 	if ( ! hasInnerBlocks ) {
 		return (
-			<>
-			{ props.attributes.isPreview ? <img width='100%' src={previewImageData} alt=''/> :
+			<div className="uagb-variation-picker uagb-variation-picker--fill">
 				<__experimentalBlockVariationPicker
 					icon={ UAGB_Block_Icons.forms }
-					label={ uagb_blocks_info.blocks[ 'uagb/forms' ].title }
-					instructions={ __(
-						'Select a variation to start with.',
-						'ultimate-addons-for-gutenberg'
-					) }
+					label={ __( 'Forms', 'ultimate-addons-for-gutenberg' ) }
+					instructions={
+						__(
+							'Select a form layout to start with.',
+							'ultimate-addons-for-gutenberg'
+						)
+					}
 					variations={ variations }
 					allowSkip
-					onSelect={ ( nextVariation ) =>
-						blockVariationPickerOnSelect( nextVariation )
-					}
-					className="uagb-forms-variations"
+					onSelect={ ( nextVariation ) => blockVariationPickerOnSelect( nextVariation ) }
 				/>
-	}
-			</>
+			</div>
 		);
 	}
 
 	return (
 		<>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
-const applyWithSelect = withSelect( ( select, props ) => {
-	const { getBlocks } = select( 'core/block-editor' );
-	const {
-		getBlockType,
-		getBlockVariations,
-		getDefaultBlockVariation,
-	} = select( 'core/blocks' );
-
-	const innerBlocks = getBlocks( props.clientId );
-	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
-
-	return {
-		// Subscribe to changes of the innerBlocks to control the display of the layout selection placeholder.
-		innerBlocks,
-		hasInnerBlocks:
-			select( 'core/block-editor' ).getBlocks( props.clientId ).length >
-			0,
-
-		blockType: getBlockType( props.name ),
-		defaultVariation:
-			typeof getDefaultBlockVariation === 'undefined'
-				? null
-				: getDefaultBlockVariation( props.name ),
-		variations:
-			typeof getBlockVariations === 'undefined'
-				? null
-				: getBlockVariations( props.name ),
-		replaceInnerBlocks,
-	};
-} );
-
 const addAdvancedClasses = createHigherOrderComponent( ( BlockListBlock ) => {
 	return ( props ) => {
-		return (
-			<BlockListBlock
-				{ ...props }
-				className={ props.attributes.className }
-			/>
-		);
+		// First we add any existing classes, then we add our classes if needed.
+		const addClassNames = uagbClassNames( [
+			props?.className || '',
+			props?.attributes?.className || '',
+		] );
+		return <BlockListBlock { ...props } className={ addClassNames ? addClassNames : null } />
 	};
 }, 'addAdvancedClasses' );
 
-wp.hooks.addFilter( 'editor.BlockListBlock', 'uagb/forms', addAdvancedClasses );
+addFilter( 'editor.BlockListBlock', 'uagb/forms', addAdvancedClasses );
 
 export default compose(
 	withNotices,
-	applyWithSelect,
-	addAdvancedClasses
+	addAdvancedClasses,
+	addInitialAttr,
+	AddStaticStyles,
 )( UAGBFormsEdit );

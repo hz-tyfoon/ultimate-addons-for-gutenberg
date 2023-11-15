@@ -1,9 +1,8 @@
 import classnames from 'classnames';
 import ContentTmClasses from '.././classes';
-import React, { useMemo, useLayoutEffect } from 'react';
+import { useMemo, useLayoutEffect, memo } from '@wordpress/element';
 import { InnerBlocks } from '@wordpress/block-editor';
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 
 const ALLOWED_BLOCKS = [ 'uagb/content-timeline-child' ];
 
@@ -16,37 +15,33 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
 	// Setup the attributes.
 	const {
 		className,
-		attributes: { isPreview, tm_content, timelineItem },
+		attributes: { tm_content, timelineItem, block_id },
+		attributes,
+		deviceType,
 	} = props;
 
 	const getContentTimelineTemplate = useMemo( () => {
 		const childTimeline = [];
 
 		for ( let i = 0; i < timelineItem; i++ ) {
-			childTimeline.push( [
-				'uagb/content-timeline-child',
-				tm_content[ i ],
-			] );
+			childTimeline.push( [ 'uagb/content-timeline-child', tm_content[ i ] ] );
 		}
 
 		return childTimeline;
 	}, [ timelineItem, tm_content ] );
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/content-timeline.png`;
+
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
 			className={ classnames(
 				className,
 				'uagb-timeline__outer-wrap',
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId }`,
+				`uagb-block-${ block_id }`,
 				'uagb-timeline__content-wrap',
-				...ContentTmClasses( props.attributes, deviceType )
+				...ContentTmClasses( attributes, deviceType )
 			) }
 		>
 			<InnerBlocks
@@ -61,4 +56,4 @@ const Render = ( props ) => {
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

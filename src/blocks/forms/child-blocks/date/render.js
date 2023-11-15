@@ -1,9 +1,7 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
-
-import { ToggleControl } from '@wordpress/components';
 
 import { RichText } from '@wordpress/block-editor';
 
@@ -16,19 +14,9 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
+	const { attributes, setAttributes } = props;
 
-	const { attributes, setAttributes, isSelected } = props;
-
-	const {
-		block_id,
-		dateRequired,
-		name,
-		additonalVal,
-		minYear,
-		minMonth,
-		minDay,
-	} = attributes;
+	const { block_id, dateRequired, name, additonalVal, minYear, minMonth, minDay } = attributes;
 
 	let validation_min_value = '';
 	const validation_max_value = '';
@@ -60,41 +48,14 @@ const Render = ( props ) => {
 		);
 	}
 
-	const isRequired = dateRequired
-		? __( 'required', 'ultimate-addons-for-gutenberg' )
-		: '';
+	const isRequired = dateRequired ? 'required' : '';
 
 	return (
 		<>
-			<div
-				className={ classnames(
-					'uagb-forms-date-wrap',
-					'uagb-forms-field-set',
-					`uagb-block-${ block_id }`
-				) }
-			>
-				{ isSelected && (
-					<div className="uagb-forms-required-wrap">
-						<ToggleControl
-							label={ __(
-								'Required',
-								'ultimate-addons-for-gutenberg'
-							) }
-							checked={ dateRequired }
-							onChange={ () =>
-								setAttributes( {
-									dateRequired: ! dateRequired,
-								} )
-							}
-						/>
-					</div>
-				) }
+			<div className={ classnames( 'uagb-forms-date-wrap', 'uagb-forms-field-set', `uagb-block-${ block_id }` ) }>
 				<RichText
 					tagName="div"
-					placeholder={ __(
-						'Date',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Date', 'ultimate-addons-for-gutenberg' ) }
 					value={ name }
 					onChange={ ( value ) => setAttributes( { name: value } ) }
 					className={ `uagb-forms-date-label ${ isRequired } uagb-forms-input-label` }
@@ -106,4 +67,4 @@ const Render = ( props ) => {
 		</>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

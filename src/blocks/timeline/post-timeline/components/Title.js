@@ -1,5 +1,5 @@
 import { decodeEntities } from '@wordpress/html-entities';
-import React from 'react';
+import { memo } from '@wordpress/element';
 const Title = ( props ) => {
 	const Tag = props.attributes.headingTag;
 
@@ -11,15 +11,11 @@ const Title = ( props ) => {
 	}
 	return (
 		<Tag className="uagb-timeline__heading">
-			<a
-				href={ post.link }
-				target={ target }
-				rel="noopener noreferrer"
-			>
+			<a href={ post.link } target={ target } rel="noopener noreferrer">
 				{ decodeEntities( post.title.rendered.trim() ) }
 			</a>
 		</Tag>
 	);
 };
 
-export default React.memo( Title );
+export default memo( Title );

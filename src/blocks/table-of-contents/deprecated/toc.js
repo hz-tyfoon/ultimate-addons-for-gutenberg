@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
+import { Component } from '@wordpress/element';
 
-class TableOfContents extends React.Component {
+class TableOfContents extends Component {
 	render() {
 		const { mappingHeaders, headers } = this.props;
 
@@ -11,19 +12,14 @@ class TableOfContents extends React.Component {
 				.filter( ( header ) => mappingHeaders[ header.tag - 1 ] )
 				.forEach( ( header ) => {
 					let last = arrays.length - 1;
-					if (
-						arrays.length === 0 ||
-						arrays[ last ][ 0 ].tag < header.tag
-					) {
+					if ( arrays.length === 0 || arrays[ last ][ 0 ].tag < header.tag ) {
 						arrays.push( [ header ] );
 					} else if ( arrays[ last ][ 0 ].tag === header.tag ) {
 						arrays[ last ].push( header );
 					} else {
 						while ( arrays[ last ][ 0 ].tag > header.tag ) {
 							if ( arrays.length > 1 ) {
-								arrays[ arrays.length - 2 ].push(
-									arrays.pop()
-								);
+								arrays[ arrays.length - 2 ].push( arrays.pop() );
 								last = arrays.length - 1;
 							} else break;
 						}
@@ -33,11 +29,7 @@ class TableOfContents extends React.Component {
 					}
 				} );
 
-			while (
-				arrays.length > 1 &&
-				arrays[ arrays.length - 1 ][ 0 ].tag >
-					arrays[ arrays.length - 2 ][ 0 ].tag
-			) {
+			while ( arrays.length > 1 && arrays[ arrays.length - 1 ][ 0 ].tag > arrays[ arrays.length - 2 ][ 0 ].tag ) {
 				arrays[ arrays.length - 2 ].push( arrays.pop() );
 			}
 
@@ -79,10 +71,7 @@ class TableOfContents extends React.Component {
 				} );
 				ul_counter++;
 				return (
-					<ul
-						key={ counter + '-' + ul_counter }
-						className="uagb-toc__list"
-					>
+					<ul key={ counter + '-' + ul_counter } className="uagb-toc__list">
 						{ items }
 					</ul>
 				);
@@ -93,20 +82,13 @@ class TableOfContents extends React.Component {
 			mappingHeaders != 'undefined' &&
 			headers &&
 			headers.length > 0 &&
-			headers.filter( ( header ) => mappingHeaders[ header.tag - 1 ] )
-				.length > 0
+			headers.filter( ( header ) => mappingHeaders[ header.tag - 1 ] ).length > 0
 		) {
-			return (
-				<div className="uagb-toc__list-wrap">
-					{ parseList( filterArray( headers ) ) }
-				</div>
-			);
+			return <div className="uagb-toc__list-wrap">{ parseList( filterArray( headers ) ) }</div>;
 		}
 		return (
 			<p className="uagb_table-of-contents-placeholder">
-				{ __(
-					'Add a header to begin generating the table of contents'
-				) }
+				{ __( 'Add a header to begin generating the table of contents' ) }
 			</p>
 		);
 	}

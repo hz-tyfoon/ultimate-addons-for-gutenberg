@@ -3,32 +3,28 @@
  */
 
 import CtaStyle from './inline-styles';
-import React, { useEffect,    } from 'react';
-
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import DynamicFontLoader from './dynamicFontLoader';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 const UAGBCallToAction = ( props ) => {
-
-	const deviceType = useDeviceType();
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		props.setAttributes( { classMigrate: true } );
-
-		const {
-			ctaBtnVertPadding,
-			ctaBtnHrPadding,
-			ctaTopPadding,
-			ctaRightPadding,
-			ctaBottomPadding,
-			ctaLeftPadding,
+	const {
+		isSelected,
+		setAttributes,
+		attributes,
+		attributes: {
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
 			ctaPosition,
 			stack,
 			ctaLeftSpace,
@@ -38,90 +34,86 @@ const UAGBCallToAction = ( props ) => {
 			ctaBorderWidth,
 			ctaBorderColor,
 			ctaBorderhoverColor,
-			ctaBorderRadius
-		} = props.attributes;
+			ctaBorderRadius,
+			globalBlockStyleId,
+		},
+		clientId,
+		name,
+		deviceType
+	} = props;
 
-		if( stack === 'tablet' ) {
-			props.setAttributes( {stack: 'tablet'} );
-		}else if ( stack === 'mobile' ) {
-			props.setAttributes( {stack: 'mobile'} )
-		} else if ( stack === 'none' && ctaPosition === 'right' ) {
-			props.setAttributes( {stack: 'none'} )
+	useEffect( () => {
+		if ( stack === 'none' && ctaPosition === 'right' ) {
+			setAttributes( { stack: 'none' } );
 		} else if ( stack === 'none' && 'below-title' === ctaPosition ) {
-			props.setAttributes( { stack: 'desktop' } );
+			setAttributes( { stack: 'desktop' } );
 		}
 
-		if ( ctaBtnVertPadding ) {
-			if ( undefined === ctaTopPadding ) {
-				props.setAttributes( { ctaTopPadding: ctaBtnVertPadding } );
-			}
-			if ( undefined === ctaBottomPadding ) {
-				props.setAttributes( { ctaBottomPadding: ctaBtnVertPadding } );
-			}
+		if( globalBlockStyleId ) {
+			return;
 		}
-		if ( ctaBtnHrPadding ) {
-			if ( undefined === ctaRightPadding ) {
-				props.setAttributes( { ctaRightPadding: ctaBtnHrPadding } );
-			}
-			if ( undefined === ctaLeftPadding ) {
-				props.setAttributes( { ctaLeftPadding: ctaBtnHrPadding } );
-			}
-		}
+
 		if ( ctaLeftSpace ) {
 			if ( undefined === overallBlockLeftMargin && 'left' === textAlign && 'right' === ctaPosition ) {
-				props.setAttributes( { overallBlockLeftMargin: ctaLeftSpace } );
+				setAttributes( { overallBlockLeftMargin: ctaLeftSpace } );
 			}
 		}
 
 		// border
-		if( ctaBorderWidth || ctaBorderRadius || ctaBorderColor || ctaBorderhoverColor || ctaBorderStyle ){
-			migrateBorderAttributes( 'btn', {
-				label: 'ctaBorderWidth',
-				value: ctaBorderWidth,
-			}, {
-				label: 'ctaBorderRadius',
-				value: ctaBorderRadius
-			}, {
-				label: 'ctaBorderColor',
-				value: ctaBorderColor
-			}, {
-				label: 'ctaBorderhoverColor',
-				value: ctaBorderhoverColor
-			},{
-				label: 'ctaBorderStyle',
-				value: ctaBorderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if ( ctaBorderWidth || ctaBorderRadius || ctaBorderColor || ctaBorderhoverColor || ctaBorderStyle ) {
+			migrateBorderAttributes(
+				'btn',
+				{
+					label: 'ctaBorderWidth',
+					value: ctaBorderWidth,
+				},
+				{
+					label: 'ctaBorderRadius',
+					value: ctaBorderRadius,
+				},
+				{
+					label: 'ctaBorderColor',
+					value: ctaBorderColor,
+				},
+				{
+					label: 'ctaBorderhoverColor',
+					value: ctaBorderhoverColor,
+				},
+				{
+					label: 'ctaBorderStyle',
+					value: ctaBorderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
 	}, [] );
 
 	useEffect( () => {
-
-		// Replacement for componentDidUpdate.
-		const blockStyling = CtaStyle( props );
-
-		addBlockEditorDynamicStyles( 'uagb-cta-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
+		scrollBlockToView();
+	}, [ deviceType ] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = CtaStyle( props );
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-		addBlockEditorDynamicStyles( 'uagb-cta-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
-		scrollBlockToView();
-	}, [deviceType] );
+	const blockStyling = useMemo( () => CtaStyle( attributes, clientId, name, deviceType ), [
+		attributes,
+		deviceType,
+	] );
 
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default UAGBCallToAction;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+	AddGBSStyles
+)( UAGBCallToAction );

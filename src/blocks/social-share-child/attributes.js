@@ -3,6 +3,10 @@
  */
 
 const attributes = {
+	isPreview: {
+		type: 'boolean',
+		default: false,
+	},
 	block_id: {
 		type: 'string',
 	},
@@ -23,35 +27,55 @@ const attributes = {
 	},
 	image: {
 		type: 'object',
-		default: null
+		default: null,
 	},
 	icon_color: {
 		type: 'string',
 		default: '',
 		UAGCopyPaste: {
-			styleType: 'icon-color'
+			styleType: 'icon-color',
 		},
 	},
 	icon_hover_color: {
 		type: 'string',
 		UAGCopyPaste: {
-			styleType: 'icon-hover-color'
+			styleType: 'icon-hover-color',
 		},
 		default: '',
 	},
 	icon_bg_color: {
 		type: 'string',
 		UAGCopyPaste: {
-			styleType: 'icon-bg-color'
+			styleType: 'icon-bg-color',
 		},
 		default: '',
 	},
 	icon_bg_hover_color: {
 		type: 'string',
 		UAGCopyPaste: {
-			styleType: 'icon-bg-hover-color'
+			styleType: 'icon-bg-hover-color',
 		},
 		default: '',
+	},
+	parentSize: {
+		type: 'number',
+		default: 30,
+	},
+	parentSizeMobile: {
+		type: 'number',
+		default: '',
+	},
+	parentSizeTablet: {
+		type: 'number',
+		default: '',
+	},
+	imgTagHeight: {
+		type: 'number',
+		default: 0,
+	},
+	imgTagWidth: {
+		type: 'number',
+		default: 0,
 	},
 };
 

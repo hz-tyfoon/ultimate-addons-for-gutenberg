@@ -4,21 +4,22 @@
 
 import styling from './styling';
 import SchemaNotices from './schema-notices';
-import React, { useEffect } from 'react';
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import Settings from './settings';
 import Render from './render';
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const ReviewComponent = ( props ) => {
-
-	const deviceType = useDeviceType();
-
-	const updatePageSchema = () => {
-
-		const { setAttributes, attributes } = props;
-		const {
+	const {
+		isSelected,
+		attributes,
+		attributes: {
 			parts,
 			itemType,
 			summaryDescription,
@@ -36,6 +37,7 @@ const ReviewComponent = ( props ) => {
 			directorname,
 			appCategory,
 			operatingSystem,
+			aggregateType,
 			offerType,
 			offerPrice,
 			itemSubtype,
@@ -46,25 +48,34 @@ const ReviewComponent = ( props ) => {
 			offerExpiry,
 			offerCurrency,
 			offerStatus,
-		} = attributes;
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+			contentVrPadding,
+			contentHrPadding,
+			topPadding,
+			bottomPadding,
+			rightPadding,
+			leftPadding,
+			enableSchema,
+			items,
+			showFeature,
+			showAuthor,
+			enableDescription,
+			enableImage,
+			bookAuthorName,
+		},
+		setAttributes,
+		deviceType
+	} = props;
 
-		const newAverage =
-			parts
-				.map( ( i ) => i.value )
-				.reduce( ( total, v ) => total + v ) /
-			parts.length;
+	const updatePageSchema = () => {
+		const newAverage = parts.map( ( i ) => i.value ).reduce( ( total, v ) => total + v ) / parts.length;
+		const newAverageCount = parts.length;
 		let itemtype = '';
 
-		if (
-			[ 'Product', 'SoftwareApplication', 'Book' ].includes(
-				itemType
-			)
-		) {
-			itemtype =
-				itemSubtype !== 'None' &&
-				itemSubtype !== ''
-					? itemSubtype
-					: itemType;
+		if ( [ 'Product', 'SoftwareApplication', 'Book' ].includes( itemType ) ) {
+			itemtype = itemSubtype !== 'None' && itemSubtype !== '' ? itemSubtype : itemType;
 		} else {
 			itemtype = itemType;
 		}
@@ -145,6 +156,11 @@ const ReviewComponent = ( props ) => {
 					'name': rTitle,
 					'applicationCategory': appCategory,
 					operatingSystem,
+					'aggregateRating': {
+						'@type': aggregateType,
+						'ratingValue': newAverage,
+						'ratingCount': newAverageCount,
+					},
 					'offers': {
 						'@type': offerType,
 						'price': offerPrice,
@@ -163,8 +179,7 @@ const ReviewComponent = ( props ) => {
 		}
 
 		if ( itemType === 'Product' ) {
-			jsonData.itemReviewed[ identifierType ] =
-				identifier;
+			jsonData.itemReviewed[ identifierType ] = identifier;
 			jsonData.itemReviewed.offers = {
 				'@type': offerType,
 				'price': offerPrice,
@@ -175,22 +190,10 @@ const ReviewComponent = ( props ) => {
 			};
 		}
 
-		setAttributes( {schema: JSON.stringify( jsonData )} );
-	}
+		setAttributes( { schema: JSON.stringify( jsonData ) } );
+	};
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		const { attributes, setAttributes } = props;
-		const {
-			contentVrPadding,
-			contentHrPadding,
-			topPadding,
-			bottomPadding,
-			rightPadding,
-			leftPadding,
-		} = attributes;
 
 		if ( contentVrPadding ) {
 			if ( undefined === topPadding ) {
@@ -210,7 +213,7 @@ const ReviewComponent = ( props ) => {
 			}
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
@@ -218,80 +221,30 @@ const ReviewComponent = ( props ) => {
 	}, [] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-ratings-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		const ratingLinkWrapper = document.querySelector( '.uagb-rating-link-wrapper' );
-		if( ratingLinkWrapper !== null ){
+		if ( ratingLinkWrapper !== null ) {
 			ratingLinkWrapper.addEventListener( 'click', function ( event ) {
 				event.preventDefault();
 			} );
 		}
 
-		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[0];
+		const postSaveButton = document.getElementsByClassName( 'editor-post-publish-button' )?.[ 0 ];
 
 		if ( postSaveButton ) {
 			postSaveButton.addEventListener( 'click', updatePageSchema );
-			return () => { postSaveButton?.removeEventListener( 'click', updatePageSchema ); }
+			return () => {
+				postSaveButton?.removeEventListener( 'click', updatePageSchema );
+			};
 		}
-
-
-	}, [ props ] );
+	}, [ attributes, deviceType ] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-ratings-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
-	// Setup the attributes
-	const { attributes, setAttributes } = props;
-
-	const {
-		block_id,
-		enableSchema,
-		itemType,
-		items,
-		parts,
-		starCount,
-		sku,
-		identifier,
-		offerType,
-		offerCurrency,
-		offerPrice,
-		offerExpiry,
-		datepublish,
-		ctaLink,
-		brand,
-		rTitle,
-		rContent,
-		rAuthor,
-		mainimage,
-		showFeature,
-		showAuthor,
-		enableDescription,
-		enableImage,
-		isbn,
-		bookAuthorName,
-		reviewPublisher,
-		provider,
-		appCategory,
-		operatingSystem,
-		datecreated,
-		directorname,
-		isPreview,
-	} = attributes;
-
-	if ( block_id === '' ) {
-		setAttributes( {
-			block_id: props.clientId.substr( 0, 8 ),
-		} );
-	}
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
 	if (
 		items &&
@@ -306,10 +259,9 @@ const ReviewComponent = ( props ) => {
 		} );
 	}
 
-		const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/review.png`;
+	const blockStyling = useMemo( () => styling( attributes, deviceType ), [ attributes, deviceType ] );
 
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<>
 			<SchemaNotices
 				enableSchema={ enableSchema }
@@ -325,6 +277,7 @@ const ReviewComponent = ( props ) => {
 				showAuthor={ showAuthor }
 				rAuthor={ rAuthor }
 				showfeature={ showFeature }
+				aggregateType={ aggregateType }
 				offerType={ offerType }
 				datepublish={ datepublish }
 				offerCurrency={ offerCurrency }
@@ -341,14 +294,15 @@ const ReviewComponent = ( props ) => {
 				operatingSystem={ operatingSystem }
 				reviewPublisher={ reviewPublisher }
 			/>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
-export default ReviewComponent;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( ReviewComponent );

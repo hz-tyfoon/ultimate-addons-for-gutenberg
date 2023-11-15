@@ -1,8 +1,6 @@
 import classnames from 'classnames';
-import React, { useCallback, useLayoutEffect } from 'react';
+import { memo, useCallback } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 
 const ALLOWED_BLOCKS = [
 	'uagb/forms-name',
@@ -22,27 +20,9 @@ const ALLOWED_BLOCKS = [
 import { InnerBlocks, RichText } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
-	// Add and remove the CSS on the drop and remove of the component.
-	useLayoutEffect( () => {
-		styles.use();
-		return () => {
-			styles.unuse();
-		};
-	}, [] );
 
-	props = props.parentProps;
-
-	const deviceType = useDeviceType();
-
-	const { attributes, setAttributes } = props;
-	const {
-		block_id,
-		submitButtonText,
-		formLabel,
-		buttonSize,
-		reCaptchaEnable,
-		reCaptchaType
-	} = attributes;
+	const { attributes, setAttributes, deviceType } = props;
+	const { block_id, submitButtonText, formLabel, buttonSize, reCaptchaEnable, reCaptchaType } = attributes;
 
 	const onSubmitClick = useCallback( ( e ) => {
 		e.preventDefault();
@@ -50,17 +30,11 @@ const Render = ( props ) => {
 
 	const renderButtonHtml = () => {
 		return (
-			<button
-				onClick={ onSubmitClick }
-				className="uagb-forms-main-submit-button wp-block-button__link"
-			>
+			<button onClick={ onSubmitClick } className="uagb-forms-main-submit-button wp-block-button__link">
 				<RichText
 					tagName="div"
-					placeholder={ __(
-						'Submit',
-						'ultimate-addons-for-gutenberg'
-					) }
-					value={ submitButtonText }
+					placeholder={ __( 'Submit', 'ultimate-addons-for-gutenberg' ) }
+					value={ submitButtonText.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
 					onChange={ ( value ) =>
 						setAttributes( {
 							submitButtonText: value,
@@ -68,16 +42,11 @@ const Render = ( props ) => {
 					}
 					className="uagb-forms-main-submit-button-text"
 					multiline={ false }
-					allowedFormats={ [
-						'core/bold',
-						'core/italic',
-						'core/strikethrough',
-					] }
+					allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
 				/>
 			</button>
 		);
 	};
-
 
 	return (
 		<>
@@ -89,50 +58,27 @@ const Render = ( props ) => {
 					`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
 				) }
 			>
-				<form
-					className="uagb-forms-main-form"
-					name={ `uagb-form-${ block_id }` }
-				>
+				<form className="uagb-forms-main-form" name={ `uagb-form-${ block_id }` }>
 					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
 					<div className="uagb-forms-form-hidden-data">
 						{ reCaptchaEnable && (
-							<input
-								type="hidden"
-								id="g-recaptcha-response"
-								className="uagb-forms-recaptcha"
-							/>
+							<input type="hidden" id="g-recaptcha-response" className="uagb-forms-recaptcha" />
 						) }
-						<input
-							type="hidden"
-							name="uagb_forms_form_label"
-							value={ formLabel }
-						/>
-						<input
-							type="hidden"
-							name="uagb_forms_form_id"
-							value={ `uagb-form-${ block_id }` }
-						/>
+						<input type="hidden" name="uagb_forms_form_label" value={ formLabel } />
+						<input type="hidden" name="uagb_forms_form_id" value={ `uagb-form-${ block_id }` } />
 					</div>
 
-					{ reCaptchaEnable &&
-						'v2' === reCaptchaType && (
-							<>
-								<div
-									className="g-recaptcha uagb-forms-field-set"
-									data-sitekey= ''
-								></div>
-							</>
-						) }
-						<div
-							className={ `uagb-form-reacaptcha-error-${ block_id }` }
-						></div>
-					<div className="uagb-forms-main-submit-button-wrap wp-block-button">
-						{ renderButtonHtml() }
-					</div>
+					{ reCaptchaEnable && 'v2' === reCaptchaType && (
+						<>
+							<div className="g-recaptcha uagb-forms-field-set" data-sitekey=""></div>
+						</>
+					) }
+					<div className={ `uagb-form-reacaptcha-error-${ block_id }` }></div>
+					<div className="uagb-forms-main-submit-button-wrap wp-block-button">{ renderButtonHtml() }</div>
 				</form>
 			</div>
 		</>
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

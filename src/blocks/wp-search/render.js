@@ -1,9 +1,8 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import renderSVG from '@Controls/renderIcon';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 import { RichText } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
@@ -15,18 +14,9 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, deviceType } = props;
 
-	const {
-		block_id,
-		layout,
-		placeholder,
-		buttonType,
-		buttonText,
-		isPreview
-	} = attributes;
+	const { block_id, layout, placeholder, buttonType, buttonText } = attributes;
 
 	const renderClassic = () => {
 		if ( 'input-button' === layout ) {
@@ -38,10 +28,7 @@ const Render = ( props ) => {
 					action={ uagb_blocks_info.uagb_home_url }
 					method="get"
 				>
-					<div
-						className="uagb-search-form__container wp-block-button"
-						role="tablist"
-					>
+					<div className="uagb-search-form__container wp-block-button" role="tablist">
 						<input
 							placeholder={ placeholder }
 							className="uagb-search-form__input"
@@ -50,10 +37,7 @@ const Render = ( props ) => {
 							title="Search"
 						/>
 
-						<button
-							className="uagb-search-submit wp-block-button__link"
-							type="submit"
-						>
+						<button className="uagb-search-submit wp-block-button__link" type="submit">
 							{ 'icon' === buttonType && (
 								<span className="uagb-wp-search-button-icon-wrap">
 									{ renderSVG( 'fas fa-search' ) }
@@ -62,10 +46,7 @@ const Render = ( props ) => {
 							{ 'text' === buttonType && (
 								<RichText
 									tagName="span"
-									placeholder={ __(
-										'Search',
-										'ultimate-addons-for-gutenberg'
-									) }
+									placeholder={ __( 'Search', 'ultimate-addons-for-gutenberg' ) }
 									value={ buttonText }
 									onChange={ ( value ) =>
 										setAttributes( {
@@ -74,11 +55,7 @@ const Render = ( props ) => {
 									}
 									className="uagb-wp-search-button-text"
 									multiline={ false }
-									allowedFormats={ [
-										'core/bold',
-										'core/italic',
-										'core/strikethrough',
-									] }
+									allowedFormats={ [ 'core/bold', 'core/italic', 'core/strikethrough' ] }
 								/>
 							) }
 						</button>
@@ -101,9 +78,7 @@ const Render = ( props ) => {
 					method="get"
 				>
 					<div className="uagb-search-form__container" role="tablist">
-						<span className="uagb-wp-search-icon-wrap">
-							{ renderSVG( 'fas fa-search' ) }
-						</span>
+						<span className="uagb-wp-search-icon-wrap">{ renderSVG( 'fas fa-search' ) }</span>
 						<input
 							placeholder={ placeholder }
 							className="uagb-search-form__input"
@@ -119,11 +94,7 @@ const Render = ( props ) => {
 		return '';
 	};
 
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/wp-search.png`;
-
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
-		<>
 		<div
 			className={ classnames(
 				'uagb-wp-search__outer-wrap',
@@ -135,8 +106,7 @@ const Render = ( props ) => {
 			{ renderClassic() }
 			{ renderMinimal() }
 		</div>
-		</>
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

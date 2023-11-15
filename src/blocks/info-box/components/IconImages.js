@@ -2,11 +2,7 @@ const InfoBoxIconImage = ( props ) => {
 	const { attributes } = props;
 
 	let urlCheck = '';
-	if (
-		typeof attributes.iconImage !== 'undefined' &&
-		attributes.iconImage !== null &&
-		attributes.iconImage !== ''
-	) {
+	if ( typeof attributes.iconImage !== 'undefined' && attributes.iconImage !== null && attributes.iconImage !== '' ) {
 		urlCheck = attributes.iconImage.url;
 	}
 
@@ -14,11 +10,9 @@ const InfoBoxIconImage = ( props ) => {
 	if ( urlCheck !== '' ) {
 		const size = attributes.iconImage.sizes;
 		const imageSize = attributes.imageSize;
+		const { imgTagWidth, imgTagHeight, imageWidth, imageWidthType } = attributes;
 
-		if (
-			typeof size !== 'undefined' &&
-			typeof size[ imageSize ] !== 'undefined'
-		) {
+		if ( typeof size !== 'undefined' && typeof size[ imageSize ] !== 'undefined' ) {
 			url = size[ imageSize ].url;
 		} else {
 			url = urlCheck;
@@ -26,14 +20,17 @@ const InfoBoxIconImage = ( props ) => {
 
 		return (
 			<>
-			{ ( attributes.showIcon ) && (
-			<div className="uagb-ifb-image-content">
-			<img
-				src={ url }
-				alt={ attributes.iconImage.alt }
-			/>
-			</div>
-			)}
+				{ attributes.showIcon && (
+					<div className="uagb-ifb-image-content">
+						<img
+							src={ url }
+							alt={ attributes.iconImage.alt }
+							width={ imageWidthType ? imageWidth : imgTagWidth }
+							height={ imgTagHeight }
+							loading="lazy"
+						/>
+					</div>
+				) }
 			</>
 		);
 	}

@@ -1,6 +1,6 @@
 {
   "name": "ultimate-addons-for-gutenberg",
-  "version": "2.0.11",
+  "version": "2.10.1",
   "description": "The Ultimate Addons for Gutenberg extends the Gutenberg functionality with several unique and feature-rich blocks that help build websites faster.",
   "author": "Brainstorm Force",
   "license": "ISC",
@@ -20,13 +20,14 @@
   "main": "src/blocks.js",
   "dependencies": {
     "@dr-kobros/react-webfont-loader": "^8.0.0",
-    "@fonticonpicker/react-fonticonpicker": "^1.2.0",
     "@lottiefiles/react-lottie-player": "^3.4.1",
     "@wordpress/icons": "^2.10.1",
     "classnames": "^2.2.6",
     "playwright": "^1.25.2",
+    "codemirror": "^6.0.1",
     "prop-types": "^15.6.2",
     "re-resizable": "^4.7.1",
+    "react-codemirror": "^1.0.0",
     "react-color": "^2.18.0",
     "react-container-dimensions": "^1.4.1",
     "react-countdown": "^2.3.1",
@@ -35,7 +36,9 @@
     "react-select": "^2.2.0",
     "react-slick": "^0.24.0",
     "react-transition-group": "^2.4.0",
+    "react-virtualized": "^9.22.3",
     "striptags": "^3.2.0",
+    "swiper": "^8.4.5",
     "wp-playwright-utils": "^0.1.0"
   },
   "devDependencies": {
@@ -57,10 +60,14 @@
     "grunt-wp-i18n": "^1.0.3",
     "grunt-wp-readme-to-markdown": "^2.0.1",
     "install": "^0.13.0",
+    "js-yaml": "^4.1.0",
     "node-sass": "^7.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "npm:wp-prettier@2.2.1-beta-1",
     "sass-loader": "^6.0.6",
     "style-loader": "^2.0.0",
-    "webpack": "^4.46.0"
+    "webpack": "^4.46.0",
+    "wp-prettier": "^2.2.1-beta-1"
   },
   "scripts": {
     "start": "wp-scripts start && node index.js",
@@ -76,6 +83,9 @@
     "lint-js:fix": "npm run lint-js -- --fix",
     "lint-css": "wp-scripts lint-style",
     "lint-css:fix": "npm run lint-css -- --fix",
+    "pretty": "prettier --check .",
+    "pretty:fix": "prettier --write .",
+    "lint-scripts:fix": "npm run pretty:fix && npm run lint-js -- --fix && npm run lint-css -- --fix",
     "admin-lint-js": "wp-scripts lint-js admin-core/assets/src",
     "admin-lint-js:fix": "npm run admin-lint-js -- --fix",
     "lint:pkg-json": "wp-scripts lint-pkg-json",

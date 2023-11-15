@@ -1,27 +1,28 @@
 import styling from './styling';
-import React, {   useEffect,  } from 'react';
-
-import apiFetch from '@wordpress/api-fetch';
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import DynamicFontLoader from './dynamicFontLoader';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import Settings from './settings';
 import Render from './render';
 
-import { withSelect } from '@wordpress/data';
+import getApiData from '@Controls/getApiData';
+
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
+import { useSelect } from '@wordpress/data';
 
 const UAGBCF7 = ( props ) => {
-
-	const deviceType = useDeviceType();
-
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { isHtml: false } );
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		const { attributes, setAttributes } = props;
-		const {
+	const {
+		isSelected,
+		setAttributes,
+		clientId,
+		attributes,
+		attributes: {
+			formId,
+			isHtml,
 			msgVrPadding,
 			msgHrPadding,
 			messageTopPaddingDesktop,
@@ -74,7 +75,44 @@ const UAGBCF7 = ( props ) => {
 			btnBorderColor,
 			btnBorderHColor,
 			btnBorderStyle,
-		} = attributes;
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+		},
+		deviceType
+	} = props;
+
+	useSelect(
+		( select ) => { // eslint-disable-line  no-unused-vars
+			let jsonData = '';
+
+			if ( formId && -1 !== formId && 0 !== formId && ! isHtml ) {
+				// Create an object with the nonce and formId properties
+				const data = {
+					nonce: uagb_blocks_info.uagb_ajax_nonce,
+					formId,
+				};
+				// Call the getApiData function with the specified parameters
+				const getApiFetchData = getApiData( {
+					url: uagb_blocks_info.ajax_url,
+					action: 'uagb_cf7_shortcode',
+					data,
+				} );
+				// Wait for the API call to complete, then update attributes and jsonData variable
+				getApiFetchData.then( ( _data ) => {
+					setAttributes( { isHtml: true } );
+					setAttributes( { formJson: _data } );
+					jsonData = _data;
+				} );
+			}
+
+			return {
+				formHTML: jsonData,
+			};
+		},
+	);
+
+	useEffect( () => {
 
 		if ( msgVrPadding ) {
 			if ( ! messageTopPaddingDesktop ) {
@@ -129,168 +167,138 @@ const UAGBCF7 = ( props ) => {
 			}
 		}
 
-		if( fieldBorderWidth ){
-			if( undefined === inputBorderTopWidth ) {
-				props.setAttributes( {
+		if ( fieldBorderWidth ) {
+			if ( undefined === inputBorderTopWidth ) {
+				setAttributes( {
 					inputBorderTopWidth: fieldBorderWidth,
 				} );
 			}
-			if( undefined === inputBorderLeftWidth ) {
-				props.setAttributes( { inputBorderLeftWidth : fieldBorderWidth} );
+			if ( undefined === inputBorderLeftWidth ) {
+				setAttributes( { inputBorderLeftWidth: fieldBorderWidth } );
 			}
-			if( undefined === inputBorderRightWidth ) {
-				props.setAttributes( { inputBorderRightWidth : fieldBorderWidth} );
+			if ( undefined === inputBorderRightWidth ) {
+				setAttributes( { inputBorderRightWidth: fieldBorderWidth } );
 			}
-			if( undefined === inputBorderBottomWidth ) {
-				props.setAttributes( { inputBorderBottomWidth : fieldBorderWidth} );
-			}
-		}
-
-		if( fieldBorderRadius ){
-
-			if( undefined === inputBorderTopLeftRadius ) {
-				props.setAttributes( { inputBorderTopLeftRadius : fieldBorderRadius} );
-			}
-			if( undefined === inputBorderTopRightRadius ) {
-				props.setAttributes( { inputBorderTopRightRadius : fieldBorderRadius} );
-			}
-			if( undefined === inputBorderBottomLeftRadius ) {
-				props.setAttributes( { inputBorderBottomLeftRadius : fieldBorderRadius} );
-			}
-			if( undefined === inputBorderBottomRightRadius ) {
-				props.setAttributes( { inputBorderBottomRightRadius : fieldBorderRadius} );
+			if ( undefined === inputBorderBottomWidth ) {
+				setAttributes( { inputBorderBottomWidth: fieldBorderWidth } );
 			}
 		}
 
-		if( fieldBorderColor ){
-			if( undefined === inputBorderColor ) {
-				props.setAttributes( { inputBorderColor : fieldBorderColor} );
+		if ( fieldBorderRadius ) {
+			if ( undefined === inputBorderTopLeftRadius ) {
+				setAttributes( { inputBorderTopLeftRadius: fieldBorderRadius } );
+			}
+			if ( undefined === inputBorderTopRightRadius ) {
+				setAttributes( { inputBorderTopRightRadius: fieldBorderRadius } );
+			}
+			if ( undefined === inputBorderBottomLeftRadius ) {
+				setAttributes( { inputBorderBottomLeftRadius: fieldBorderRadius } );
+			}
+			if ( undefined === inputBorderBottomRightRadius ) {
+				setAttributes( { inputBorderBottomRightRadius: fieldBorderRadius } );
 			}
 		}
 
-		if( fieldBorderHColor ){
-			if( undefined === inputBorderHColor ) {
-				props.setAttributes( { inputBorderHColor : fieldBorderHColor} );
+		if ( fieldBorderColor ) {
+			if ( undefined === inputBorderColor ) {
+				setAttributes( { inputBorderColor: fieldBorderColor } );
 			}
 		}
 
-		if( fieldBorderStyle ){
-			if( undefined === inputBorderStyle ) {
-				props.setAttributes( { inputBorderStyle : fieldBorderStyle} );
+		if ( fieldBorderHColor ) {
+			if ( undefined === inputBorderHColor ) {
+				setAttributes( { inputBorderHColor: fieldBorderHColor } );
 			}
 		}
 
+		if ( fieldBorderStyle ) {
+			if ( undefined === inputBorderStyle ) {
+				setAttributes( { inputBorderStyle: fieldBorderStyle } );
+			}
+		}
 
-		if( buttonBorderWidth ){
-			if( undefined === btnBorderTopWidth ) {
-				props.setAttributes( {
+		if ( buttonBorderWidth ) {
+			if ( undefined === btnBorderTopWidth ) {
+				setAttributes( {
 					btnBorderTopWidth: buttonBorderWidth,
 				} );
 			}
-			if( undefined === btnBorderLeftWidth ) {
-				props.setAttributes( { btnBorderLeftWidth : buttonBorderWidth} );
+			if ( undefined === btnBorderLeftWidth ) {
+				setAttributes( { btnBorderLeftWidth: buttonBorderWidth } );
 			}
-			if( undefined === btnBorderRightWidth ) {
-				props.setAttributes( { btnBorderRightWidth : buttonBorderWidth} );
+			if ( undefined === btnBorderRightWidth ) {
+				setAttributes( { btnBorderRightWidth: buttonBorderWidth } );
 			}
-			if( undefined === btnBorderBottomWidth ) {
-				props.setAttributes( { btnBorderBottomWidth : buttonBorderWidth} );
-			}
-		}
-
-		if( buttonBorderRadius ){
-
-			if( undefined === btnBorderTopLeftRadius ) {
-				props.setAttributes( { btnBorderTopLeftRadius : buttonBorderRadius} );
-			}
-			if( undefined === btnBorderTopRightRadius ) {
-				props.setAttributes( { btnBorderTopRightRadius : buttonBorderRadius} );
-			}
-			if( undefined === btnBorderBottomLeftRadius ) {
-				props.setAttributes( { btnBorderBottomLeftRadius : buttonBorderRadius} );
-			}
-			if( undefined === btnBorderBottomRightRadius ) {
-				props.setAttributes( { btnBorderBottomRightRadius : buttonBorderRadius} );
+			if ( undefined === btnBorderBottomWidth ) {
+				setAttributes( { btnBorderBottomWidth: buttonBorderWidth } );
 			}
 		}
 
-		if( buttonBorderColor ){
-			if( undefined === btnBorderColor ) {
-				props.setAttributes( { btnBorderColor : buttonBorderColor} );
+		if ( buttonBorderRadius ) {
+			if ( undefined === btnBorderTopLeftRadius ) {
+				setAttributes( { btnBorderTopLeftRadius: buttonBorderRadius } );
+			}
+			if ( undefined === btnBorderTopRightRadius ) {
+				setAttributes( { btnBorderTopRightRadius: buttonBorderRadius } );
+			}
+			if ( undefined === btnBorderBottomLeftRadius ) {
+				setAttributes( { btnBorderBottomLeftRadius: buttonBorderRadius } );
+			}
+			if ( undefined === btnBorderBottomRightRadius ) {
+				setAttributes( { btnBorderBottomRightRadius: buttonBorderRadius } );
 			}
 		}
 
-		if( buttonBorderHColor ){
-			if( undefined === btnBorderHColor ) {
-				props.setAttributes( { btnBorderHColor : buttonBorderHColor} );
+		if ( buttonBorderColor ) {
+			if ( undefined === btnBorderColor ) {
+				setAttributes( { btnBorderColor: buttonBorderColor } );
 			}
 		}
 
-		if( buttonBorderStyle ){
-			if( undefined === btnBorderStyle ) {
-				props.setAttributes( { btnBorderStyle : buttonBorderStyle} );
+		if ( buttonBorderHColor ) {
+			if ( undefined === btnBorderHColor ) {
+				setAttributes( { btnBorderHColor: buttonBorderHColor } );
+			}
+		}
+
+		if ( buttonBorderStyle ) {
+			if ( undefined === btnBorderStyle ) {
+				setAttributes( { btnBorderStyle: buttonBorderStyle } );
 			}
 		}
 	}, [] );
 
 	useEffect( () => {
 		const submitButton = document.querySelector( '.wpcf7-submit' );
-		if( submitButton !== null ){
+		if ( submitButton !== null ) {
 			submitButton.addEventListener( 'click', function ( event ) {
 				event.preventDefault();
 			} );
 		}
-
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-cf7-styler-' + props.clientId.substr( 0, 8 ), blockStyling );
 	}, [ props ] );
 
+
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-cf7-styler-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
+
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+
+	const blockStyling = useMemo( () => styling( attributes, clientId, deviceType ), [ attributes, deviceType ] );
 
 	return (
-			<>
-			<Settings parentProps={ props } deviceType = { deviceType }/>
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default withSelect( ( select, props ) => {
-	const { setAttributes } = props;
-	const { formId, isHtml } = props.attributes;
-	let jsonData = '';
-
-	if ( formId && -1 !== formId && 0 !== formId && ! isHtml ) {
-		const formData = new window.FormData();
-
-		formData.append( 'action', 'uagb_cf7_shortcode' );
-		formData.append(
-			'nonce',
-			uagb_blocks_info.uagb_ajax_nonce
-		);
-		formData.append( 'formId', formId );
-
-		apiFetch( {
-			url: uagb_blocks_info.ajax_url,
-			method: 'POST',
-			body: formData,
-		} ).then( ( data ) => {
-			setAttributes( { isHtml: true } );
-			setAttributes( { formJson: data } );
-			jsonData = data;
-		} );
-	}
-
-	return {
-		formHTML: jsonData,
-	};
-} )( UAGBCF7 );
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( UAGBCF7 );

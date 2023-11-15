@@ -1,85 +1,56 @@
 import styling from './styling';
-
-import React, {   useEffect,  } from 'react';
-
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import DynamicFontLoader from './dynamicFontLoader';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import Settings from './settings';
 import Render from './render';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBBlockQuote = ( props ) => {
-
-	const deviceType = useDeviceType();
+	const {
+		attributes,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, authorImageWidthUnit, authorImgBorderRadiusUnit },
+		isSelected,
+		setAttributes,
+		clientId,
+		name,
+		deviceType
+	} = props;
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		// Assigning block_id in the attribute.
-		props.setAttributes( { classMigrate: true } );
-		const {
-			tweetBtnVrPadding,
-			tweetBtnHrPadding,
-			paddingBtnTop,
-			paddingBtnBottom,
-			paddingBtnRight,
-			paddingBtnLeft,
-			authorImageWidthUnit,
-			authorImgBorderRadiusUnit,
-		} = props.attributes;
-
-		if( undefined ===  authorImageWidthUnit ){
-			props.setAttributes( { authorImageWidthUnit: 'px' } );
+		if ( undefined === authorImageWidthUnit ) {
+			setAttributes( { authorImageWidthUnit: 'px' } );
 		}
-		if( undefined ===  authorImgBorderRadiusUnit ){
-			props.setAttributes( { authorImgBorderRadiusUnit: '%' } );
-		}
-
-		if ( tweetBtnVrPadding ) {
-			if ( undefined === paddingBtnTop ) {
-				props.setAttributes( { paddingBtnTop: tweetBtnVrPadding } );
-			}
-			if ( undefined === paddingBtnBottom ) {
-				props.setAttributes( { paddingBtnBottom: tweetBtnVrPadding } );
-			}
-		}
-		if ( tweetBtnHrPadding ) {
-			if ( undefined === paddingBtnRight ) {
-				props.setAttributes( { paddingBtnRight: tweetBtnHrPadding } );
-			}
-			if ( undefined === paddingBtnLeft ) {
-				props.setAttributes( { paddingBtnLeft: tweetBtnHrPadding } );
-			}
+		if ( undefined === authorImgBorderRadiusUnit ) {
+			setAttributes( { authorImgBorderRadiusUnit: '%' } );
 		}
 	}, [] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-blockquote-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
-	}, [ props ] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-blockquote-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
 	}, [ deviceType ] );
 
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default UAGBBlockQuote;
+export default compose(
+	AddInitialAttr,
+	AddStaticStyles,
+)( UAGBBlockQuote );

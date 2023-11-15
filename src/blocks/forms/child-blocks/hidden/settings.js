@@ -1,21 +1,16 @@
-import React from 'react';
 import { __ } from '@wordpress/i18n';
+import { memo } from '@wordpress/element';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
-import InspectorTab, {
-	UAGTabs,
-} from '@Components/inspector-tabs/InspectorTab.js';
+import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 
-import { TextControl } from '@wordpress/components';
+import UAGTextControl from '@Components/text-control';
 
 import { InspectorControls } from '@wordpress/block-editor';
-
-
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
-
+	
 	const { attributes, setAttributes } = props;
 
 	const { hidden_field_value } = attributes;
@@ -23,12 +18,15 @@ const Settings = ( props ) => {
 	const hiddenFieldSettings = () => {
 		return (
 			<UAGAdvancedPanelBody initialOpen={ true }>
-				<TextControl
+				<UAGTextControl
 					label={ __( 'Value', 'ultimate-addons-for-gutenberg' ) }
 					value={ hidden_field_value }
-					onChange={ ( value ) =>
-						setAttributes( { hidden_field_value: value } )
-					}
+					data={ {
+						value: hidden_field_value,
+						label: 'hidden_field_value',
+					} }
+					setAttributes={ setAttributes }
+					onChange={ ( value ) => setAttributes( { hidden_field_value: value } ) }
 				/>
 			</UAGAdvancedPanelBody>
 		);
@@ -38,13 +36,11 @@ const Settings = ( props ) => {
 		<>
 			<InspectorControls>
 				<InspectorTabs tabs={ [ 'general', 'advance' ] }>
-					<InspectorTab { ...UAGTabs.general }>
-						{ hiddenFieldSettings() }
-					</InspectorTab>
+					<InspectorTab { ...UAGTabs.general }>{ hiddenFieldSettings() }</InspectorTab>
 					<InspectorTab { ...UAGTabs.advance }></InspectorTab>
 				</InspectorTabs>
 			</InspectorControls>
 		</>
 	);
 };
-export default React.memo( Settings );
+export default memo( Settings );

@@ -6,12 +6,14 @@ import generateBorderCSS from '@Controls/generateBorderCSS';
 import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
+import { applyFilters } from '@wordpress/hooks';
 
-function styling( props ) {
-
-	const blockName = props.name.replace( 'uagb/', '' );
+function styling( attributes, clientId, name, deviceType, gbsSelector = false ) {
+	const previewType = deviceType.toLowerCase();
+	const blockName = name.replace( 'uagb/', '' );
 
 	const {
+		block_id,
 		headingAlign,
 		headingAlignTablet,
 		headingAlignMobile,
@@ -43,6 +45,8 @@ function styling( props ) {
 		headFontWeight,
 		headFontSize,
 		headFontSizeType,
+		headFontSizeTypeMobile,
+		headFontSizeTypeTablet,
 		headFontSizeMobile,
 		headFontSizeTablet,
 		headLineHeight,
@@ -63,6 +67,8 @@ function styling( props ) {
 		subHeadFontWeight,
 		subHeadFontSize,
 		subHeadFontSizeType,
+		subHeadFontSizeTypeMobile,
+		subHeadFontSizeTypeTablet,
 		subHeadFontSizeMobile,
 		subHeadFontSizeTablet,
 		subHeadLineHeight,
@@ -122,6 +128,8 @@ function styling( props ) {
 		highLightTransform,
 		highLightDecoration,
 		highLightFontSizeType,
+		highLightFontSizeTypeTablet,
+		highLightFontSizeTypeMobile,
 		highLightLineHeightType,
 		highLightFontSize,
 		highLightFontSizeTablet,
@@ -148,173 +156,135 @@ function styling( props ) {
 		highLightPaddingUnit,
 		highLightPaddingUnitTablet,
 		highLightPaddingUnitMobile,
-	} = props.attributes;
+		subHeadSpace,
+		subHeadSpaceTablet,
+		subHeadSpaceMobile,
+		headingDescToggle
+	} = attributes;
 
-	const tablet_selectors = {};
-	const mobile_selectors = {};
 
-	let gradientLinkColor = {}
-	let gradientLinkHoverColor = {}
-	if( 'gradient' === headingColorType ){
-		gradientLinkColor =  {
-			'-webkit-text-fill-color': linkColor
-		}
-		gradientLinkHoverColor =  {
-			'-webkit-text-fill-color': linkHColor
-		}
+	let tablet_selectors = {};
+	let mobile_selectors = {};
+
+	let gradientLinkColor = {};
+	let gradientLinkHoverColor = {};
+	if ( 'gradient' === headingColorType ) {
+		gradientLinkColor = {
+			'-webkit-text-fill-color': linkColor,
+		};
+		gradientLinkHoverColor = {
+			'-webkit-text-fill-color': linkHColor,
+		};
 	}
 
-	const highLightBorderCSS = generateBorderCSS( props.attributes, 'highLight' )
-	const highLightBorderCSSTablet = generateBorderCSS( props.attributes, 'highLight', 'tablet' )
-	const highLightBorderCSSMobile = generateBorderCSS( props.attributes, 'highLight', 'mobile' )
+	const highLightBorderCSS = generateBorderCSS( attributes, 'highLight' );
+	const highLightBorderCSSTablet = generateBorderCSS( attributes, 'highLight', 'tablet' );
+	const highLightBorderCSSMobile = generateBorderCSS( attributes, 'highLight', 'mobile' );
 
-
-	const selectors = {
-		'.wp-block-uagb-advanced-heading ':{
-			'background': 	'classic' === blockBackgroundType ? blockBackground : blockGradientBackground,
+	let selectors = {
+		'.wp-block-uagb-advanced-heading ': {
+			'background': 'classic' === blockBackgroundType ? blockBackground : blockGradientBackground,
 			'text-align': headingAlign,
-			'margin-top': generateCSSUnit(
-				blockTopMargin,
-				blockMarginUnit
-			),
-			'margin-right': generateCSSUnit(
-				blockRightMargin,
-				blockMarginUnit
-			),
-			'margin-bottom': generateCSSUnit(
-				blockBottomMargin,
-				blockMarginUnit
-			),
-			'margin-left': generateCSSUnit(
-				blockLeftMargin,
-				blockMarginUnit
-			),
-			'padding-top': generateCSSUnit(
-				blockTopPadding,
-				blockPaddingUnit
-			),
-			'padding-right': generateCSSUnit(
-				blockRightPadding,
-				blockPaddingUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				blockBottomPadding,
-				blockPaddingUnit
-			),
-			'padding-left': generateCSSUnit(
-				blockLeftPadding,
-				blockPaddingUnit
-			),
+			'margin-top': generateCSSUnit( blockTopMargin, blockMarginUnit ),
+			'margin-right': generateCSSUnit( blockRightMargin, blockMarginUnit ),
+			'margin-bottom': generateCSSUnit( blockBottomMargin, blockMarginUnit ),
+			'margin-left': generateCSSUnit( blockLeftMargin, blockMarginUnit ),
+			'padding-top': generateCSSUnit( blockTopPadding, blockPaddingUnit ),
+			'padding-right': generateCSSUnit( blockRightPadding, blockPaddingUnit ),
+			'padding-bottom': generateCSSUnit( blockBottomPadding, blockPaddingUnit ),
+			'padding-left': generateCSSUnit( blockLeftPadding, blockPaddingUnit ),
 		},
-		' .uagb-desc-text': {
-			'margin': 0,
+		' p.uagb-desc-text': {
 			'font-family': subHeadFontFamily,
-			'font-style' : subHeadFontStyle,
+			'font-style': subHeadFontStyle,
 			'text-decoration': subHeadDecoration,
 			'text-transform': subHeadTransform,
 			'font-weight': subHeadFontWeight,
-			'font-size': generateCSSUnit(
-				subHeadFontSize,
-				subHeadFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				subHeadLineHeight,
-				subHeadLineHeightType
-			),
+			'font-size': generateCSSUnit( subHeadFontSize, subHeadFontSizeType ),
+			'line-height': generateCSSUnit( subHeadLineHeight, subHeadLineHeightType ),
 			'letter-spacing': generateCSSUnit( subHeadLetterSpacing, subHeadLetterSpacingType ),
 			'color': subHeadingColor,
+			'margin-bottom': generateCSSUnit( getFallbackNumber( subHeadSpace, 'subHeadSpace', blockName ), 'px' ),
 		},
 		'.wp-block-uagb-advanced-heading a': {
 			'color': linkColor,
-			...gradientLinkColor
+			...gradientLinkColor,
 		},
 		'.wp-block-uagb-advanced-heading a:hover': {
 			'color': linkHColor,
-			...gradientLinkHoverColor
+			...gradientLinkHoverColor,
 		},
 		'.wp-block-uagb-advanced-heading .uagb-highlight': {
 			'background': highLightBackground,
 			'color': highLightColor,
 			'-webkit-text-fill-color': highLightColor,
 			'font-family': highLightFontFamily,
-			'font-style' : highLightFontStyle,
+			'font-style': highLightFontStyle,
 			'text-decoration': highLightDecoration,
 			'text-transform': highLightTransform,
 			'font-weight': highLightFontWeight,
 			'font-size': generateCSSUnit( highLightFontSize, highLightFontSizeType ),
 			'line-height': generateCSSUnit( highLightLineHeight, highLightLineHeightType ),
 			'letter-spacing': generateCSSUnit( highLightLetterSpacing, highLightLetterSpacingType ),
-			'padding-top': generateCSSUnit(
-				highLightTopPadding,
-				highLightPaddingUnit
-			),
-			'padding-right': generateCSSUnit(
-				highLightRightPadding,
-				highLightPaddingUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				highLightBottomPadding,
-				highLightPaddingUnit
-			),
-			'padding-left': generateCSSUnit(
-				highLightLeftPadding,
-				highLightPaddingUnit
-			),
+			'padding-top': generateCSSUnit( highLightTopPadding, highLightPaddingUnit ),
+			'padding-right': generateCSSUnit( highLightRightPadding, highLightPaddingUnit ),
+			'padding-bottom': generateCSSUnit( highLightBottomPadding, highLightPaddingUnit ),
+			'padding-left': generateCSSUnit( highLightLeftPadding, highLightPaddingUnit ),
 			...highLightBorderCSS,
 		},
 		'.wp-block-uagb-advanced-heading .uagb-highlight:hover': {
 			'border-color': highLightBorderHColor,
-		}
+		},
 	};
 
 	// gradient text color
-	let headingGradientStyle  = {}
-	if( 'gradient' === headingColorType ){
-		headingGradientStyle =  {
+	let headingGradientStyle = {};
+	if ( 'gradient' === headingColorType ) {
+		headingGradientStyle = {
 			'background': headingGradientColor,
 			'-webkit-background-clip': 'text',
-			'-webkit-text-fill-color': 'transparent'
-		}
+			'-webkit-text-fill-color': 'transparent',
+		};
 	}
 
 	// Text Selection & highlight
 	const highlightSelectionText = {
 		'color': highLightColor,
 		'background': highLightBackground,
-		'-webkit-text-fill-color': highLightColor
-	}
-	// selectors[ '.wp-block-uagb-advanced-heading .uagb-heading-text::-moz-selection' ] = highlightSelectionText
-	// selectors[ '.wp-block-uagb-advanced-heading .uagb-heading-text::selection' ] = highlightSelectionText
-	// selectors[ '.wp-block-uagb-advanced-heading .uagb-desc-text::-moz-selection' ] = highlightSelectionText
-	// selectors[ '.wp-block-uagb-advanced-heading .uagb-desc-text::selection' ] = highlightSelectionText
-	selectors[ '.wp-block-uagb-advanced-heading .uagb-highlight::-moz-selection' ] = highlightSelectionText
-	selectors[ '.wp-block-uagb-advanced-heading .uagb-highlight::selection' ] = highlightSelectionText
+		'-webkit-text-fill-color': highLightColor,
+	};
+	selectors[ '.wp-block-uagb-advanced-heading .uagb-highlight::-moz-selection' ] = highlightSelectionText;
+	selectors[ '.wp-block-uagb-advanced-heading .uagb-highlight::selection' ] = highlightSelectionText;
 
 	// heading
 	selectors[ ' ' + headingTag + '.uagb-heading-text' ] = {
 		'font-family': headFontFamily,
-		'font-style' : headFontStyle,
+		'font-style': headFontStyle,
 		'text-decoration': headDecoration,
 		'text-transform': headTransform,
 		'font-weight': headFontWeight,
 		'font-size': generateCSSUnit( headFontSize, headFontSizeType ),
 		'line-height': generateCSSUnit( headLineHeight, headLineHeightType ),
 		'color': headingColor,
-		'margin-bottom': generateCSSUnit(
-			getFallbackNumber( headSpace, 'headSpace', blockName ),
-			'px'
-		),
 		'letter-spacing': generateCSSUnit( headLetterSpacing, headLetterSpacingType ),
-		...headingGradientStyle
+		...headingGradientStyle,
 	};
 
-	const headingTextShadow = headShadowColor && generateCSSUnit( headShadowHOffset, 'px' ) + ' ' + generateCSSUnit( headShadowVOffset, 'px' ) + ' ' + generateCSSUnit( headShadowBlur, 'px' ) + ' ' +  headShadowColor;
+	const headingTextShadow =
+		headShadowColor &&
+		generateCSSUnit( headShadowHOffset, 'px' ) +
+			' ' +
+			generateCSSUnit( headShadowVOffset, 'px' ) +
+			' ' +
+			generateCSSUnit( headShadowBlur, 'px' ) +
+			' ' +
+			headShadowColor;
 
 	// Text Shadow conditional CSS as per Color Type of Heading.
 	if ( 'gradient' === headingColorType ) {
-		selectors[ ' ' + headingTag + '.uagb-heading-text' ].filter = `drop-shadow(${headingTextShadow})`;
+		selectors[ ' ' + headingTag + '.uagb-heading-text' ].filter = `drop-shadow(${ headingTextShadow })`;
 	} else {
-		selectors[ ' ' + headingTag + '.uagb-heading-text' ]['text-shadow'] = headingTextShadow
+		selectors[ ' ' + headingTag + '.uagb-heading-text' ][ 'text-shadow' ] = headingTextShadow;
 	}
 
 	// separator
@@ -337,131 +307,55 @@ function styling( props ) {
 		};
 	}
 
-
 	// tablet
-	tablet_selectors['.wp-block-uagb-advanced-heading '] = {
+	tablet_selectors[ '.wp-block-uagb-advanced-heading ' ] = {
 		'text-align': headingAlignTablet,
-		'margin-top': generateCSSUnit(
-			blockTopMarginTablet,
-			blockMarginUnitTablet
-		),
-		'margin-right': generateCSSUnit(
-			blockRightMarginTablet,
-			blockMarginUnitTablet
-		),
-		'margin-bottom': generateCSSUnit(
-			blockBottomMarginTablet,
-			blockMarginUnitTablet
-		),
-		'margin-left': generateCSSUnit(
-			blockLeftMarginTablet,
-			blockMarginUnitTablet
-		),
-		'padding-top': generateCSSUnit(
-			blockTopPaddingTablet,
-			blockPaddingUnitTablet
-		),
-		'padding-right': generateCSSUnit(
-			blockRightPaddingTablet,
-			blockPaddingUnitTablet
-		),
-		'padding-bottom': generateCSSUnit(
-			blockBottomPaddingTablet,
-			blockPaddingUnitTablet
-		),
-		'padding-left': generateCSSUnit(
-			blockLeftPaddingTablet,
-			blockPaddingUnitTablet
-		),
-	}
+		'margin-top': generateCSSUnit( blockTopMarginTablet, blockMarginUnitTablet ),
+		'margin-right': generateCSSUnit( blockRightMarginTablet, blockMarginUnitTablet ),
+		'margin-bottom': generateCSSUnit( blockBottomMarginTablet, blockMarginUnitTablet ),
+		'margin-left': generateCSSUnit( blockLeftMarginTablet, blockMarginUnitTablet ),
+		'padding-top': generateCSSUnit( blockTopPaddingTablet, blockPaddingUnitTablet ),
+		'padding-right': generateCSSUnit( blockRightPaddingTablet, blockPaddingUnitTablet ),
+		'padding-bottom': generateCSSUnit( blockBottomPaddingTablet, blockPaddingUnitTablet ),
+		'padding-left': generateCSSUnit( blockLeftPaddingTablet, blockPaddingUnitTablet ),
+	};
 
 	tablet_selectors[ ' ' + headingTag + '.uagb-heading-text' ] = {
-		'font-size': generateCSSUnit( headFontSizeTablet, headFontSizeType ),
-		'line-height': generateCSSUnit(
-			headLineHeightTablet,
-			headLineHeightType
-		),
+		'font-size': generateCSSUnit( headFontSizeTablet, headFontSizeTypeTablet ),
+		'line-height': generateCSSUnit( headLineHeightTablet, headLineHeightType ),
 		'letter-spacing': generateCSSUnit( headLetterSpacingTablet, headLetterSpacingType ),
+	};
+	tablet_selectors[ ' p.uagb-desc-text' ] = {
+		'font-size': generateCSSUnit( subHeadFontSizeTablet, subHeadFontSizeTypeTablet ),
+		'line-height': generateCSSUnit( subHeadLineHeightTablet, subHeadLineHeightType ),
+		'letter-spacing': generateCSSUnit( subHeadLetterSpacingTablet, subHeadLetterSpacingType ),
 		'margin-bottom': generateCSSUnit(
-			getFallbackNumber( headSpaceTablet, 'headSpaceTablet', blockName ),
+			getFallbackNumber( subHeadSpaceTablet, 'subHeadSpaceTablet', blockName ),
 			'px'
 		),
 	};
-	tablet_selectors[ ' .uagb-desc-text' ] = {
-		'font-size': generateCSSUnit(
-			subHeadFontSizeTablet,
-			subHeadFontSizeType
-		),
-		'line-height': generateCSSUnit(
-			subHeadLineHeightTablet,
-			subHeadLineHeightType
-		),
-		'letter-spacing': generateCSSUnit( subHeadLetterSpacingTablet, subHeadLetterSpacingType ),
-	};
 	tablet_selectors[ '.wp-block-uagb-advanced-heading .uagb-highlight' ] = {
-		'font-size': generateCSSUnit(
-			highLightFontSizeTablet,
-			highLightFontSizeType
-		),
-		'line-height': generateCSSUnit(
-			highLightLineHeightTablet,
-			highLightLineHeightType
-		),
+		'font-size': generateCSSUnit( highLightFontSizeTablet, highLightFontSizeTypeTablet ),
+		'line-height': generateCSSUnit( highLightLineHeightTablet, highLightLineHeightType ),
 		'letter-spacing': generateCSSUnit( highLightLetterSpacingTablet, highLightLetterSpacingType ),
-		'padding-top': generateCSSUnit(
-			highLightTopPaddingTablet,
-			highLightPaddingUnitTablet
-		),
-		'padding-right': generateCSSUnit(
-			highLightRightPaddingTablet,
-			highLightPaddingUnitTablet
-		),
-		'padding-bottom': generateCSSUnit(
-			highLightBottomPaddingTablet,
-			highLightPaddingUnitTablet
-		),
-		'padding-left': generateCSSUnit(
-			highLightLeftPaddingTablet,
-			highLightPaddingUnitTablet
-		),
-		...highLightBorderCSSTablet
+		'padding-top': generateCSSUnit( highLightTopPaddingTablet, highLightPaddingUnitTablet ),
+		'padding-right': generateCSSUnit( highLightRightPaddingTablet, highLightPaddingUnitTablet ),
+		'padding-bottom': generateCSSUnit( highLightBottomPaddingTablet, highLightPaddingUnitTablet ),
+		'padding-left': generateCSSUnit( highLightLeftPaddingTablet, highLightPaddingUnitTablet ),
+		...highLightBorderCSSTablet,
 	};
 	// mobile
-	mobile_selectors['.wp-block-uagb-advanced-heading '] = {
+	mobile_selectors[ '.wp-block-uagb-advanced-heading ' ] = {
 		'text-align': headingAlignMobile,
-		'margin-top': generateCSSUnit(
-			blockTopMarginMobile,
-			blockMarginUnitMobile
-		),
-		'margin-right': generateCSSUnit(
-			blockRightMarginMobile,
-			blockMarginUnitMobile
-		),
-		'margin-bottom': generateCSSUnit(
-			blockBottomMarginMobile,
-			blockMarginUnitMobile
-		),
-		'margin-left': generateCSSUnit(
-			blockLeftMarginMobile,
-			blockMarginUnitMobile
-		),
-		'padding-top': generateCSSUnit(
-			blockTopPaddingMobile,
-			blockPaddingUnitMobile
-		),
-		'padding-right': generateCSSUnit(
-			blockRightPaddingMobile,
-			blockPaddingUnitMobile
-		),
-		'padding-bottom': generateCSSUnit(
-			blockBottomPaddingMobile,
-			blockPaddingUnitMobile
-		),
-		'padding-left': generateCSSUnit(
-			blockLeftPaddingMobile,
-			blockPaddingUnitMobile
-		),
-	}
+		'margin-top': generateCSSUnit( blockTopMarginMobile, blockMarginUnitMobile ),
+		'margin-right': generateCSSUnit( blockRightMarginMobile, blockMarginUnitMobile ),
+		'margin-bottom': generateCSSUnit( blockBottomMarginMobile, blockMarginUnitMobile ),
+		'margin-left': generateCSSUnit( blockLeftMarginMobile, blockMarginUnitMobile ),
+		'padding-top': generateCSSUnit( blockTopPaddingMobile, blockPaddingUnitMobile ),
+		'padding-right': generateCSSUnit( blockRightPaddingMobile, blockPaddingUnitMobile ),
+		'padding-bottom': generateCSSUnit( blockBottomPaddingMobile, blockPaddingUnitMobile ),
+		'padding-left': generateCSSUnit( blockLeftPaddingMobile, blockPaddingUnitMobile ),
+	};
 	tablet_selectors[ ' .uagb-separator' ] = {
 		'width': generateCSSUnit(
 			getFallbackNumber( separatorWidthTablet, 'separatorWidthTablet', blockName ),
@@ -474,55 +368,28 @@ function styling( props ) {
 	};
 
 	mobile_selectors[ ' ' + headingTag + '.uagb-heading-text' ] = {
-		'font-size': generateCSSUnit( headFontSizeMobile, headFontSizeType ),
-		'line-height': generateCSSUnit(
-			headLineHeightMobile,
-			headLineHeightType
-		),
+		'font-size': generateCSSUnit( headFontSizeMobile, headFontSizeTypeMobile ),
+		'line-height': generateCSSUnit( headLineHeightMobile, headLineHeightType ),
 		'letter-spacing': generateCSSUnit( headLetterSpacingMobile, headLetterSpacingType ),
+	};
+	mobile_selectors[ ' p.uagb-desc-text' ] = {
+		'font-size': generateCSSUnit( subHeadFontSizeMobile, subHeadFontSizeTypeMobile ),
+		'line-height': generateCSSUnit( subHeadLineHeightMobile, subHeadLineHeightType ),
+		'letter-spacing': generateCSSUnit( subHeadLetterSpacingMobile, subHeadLetterSpacingType ),
 		'margin-bottom': generateCSSUnit(
-			getFallbackNumber( headSpaceMobile, 'headSpaceMobile', blockName ),
+			getFallbackNumber( subHeadSpaceMobile, 'subHeadSpaceMobile', blockName ),
 			'px'
 		),
 	};
-	mobile_selectors[ ' .uagb-desc-text' ] = {
-		'font-size': generateCSSUnit(
-			subHeadFontSizeMobile,
-			subHeadFontSizeType
-		),
-		'line-height': generateCSSUnit(
-			subHeadLineHeightMobile,
-			subHeadLineHeightType
-		),
-		'letter-spacing': generateCSSUnit( subHeadLetterSpacingMobile, subHeadLetterSpacingType ),
-	};
 	mobile_selectors[ '.wp-block-uagb-advanced-heading .uagb-highlight' ] = {
-		'font-size': generateCSSUnit(
-			highLightFontSizeMobile,
-			highLightFontSizeType
-		),
-		'line-height': generateCSSUnit(
-			highLightLineHeightMobile,
-			highLightLineHeightType
-		),
+		'font-size': generateCSSUnit( highLightFontSizeMobile, highLightFontSizeTypeMobile ),
+		'line-height': generateCSSUnit( highLightLineHeightMobile, highLightLineHeightType ),
 		'letter-spacing': generateCSSUnit( highLightLetterSpacingMobile, highLightLetterSpacingType ),
-		'padding-top': generateCSSUnit(
-			highLightTopPaddingMobile,
-			highLightPaddingUnitMobile
-		),
-		'padding-right': generateCSSUnit(
-			highLightRightPaddingMobile,
-			highLightPaddingUnitMobile
-		),
-		'padding-bottom': generateCSSUnit(
-			highLightBottomPaddingMobile,
-			highLightPaddingUnitMobile
-		),
-		'padding-left': generateCSSUnit(
-			highLightLeftPaddingMobile,
-			highLightPaddingUnitMobile
-		),
-		...highLightBorderCSSMobile
+		'padding-top': generateCSSUnit( highLightTopPaddingMobile, highLightPaddingUnitMobile ),
+		'padding-right': generateCSSUnit( highLightRightPaddingMobile, highLightPaddingUnitMobile ),
+		'padding-bottom': generateCSSUnit( highLightBottomPaddingMobile, highLightPaddingUnitMobile ),
+		'padding-left': generateCSSUnit( highLightLeftPaddingMobile, highLightPaddingUnitMobile ),
+		...highLightBorderCSSMobile,
 	};
 	mobile_selectors[ ' .uagb-separator' ] = {
 		'width': generateCSSUnit(
@@ -535,27 +402,42 @@ function styling( props ) {
 		),
 	};
 
-	const base_selector = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr(
-		0,
-		8
-	) }`;
+	if( headingDescToggle || 'none' !== seperatorStyle ) {
+		selectors[ ' .uagb-heading-text' ] ={
+			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpace, 'headSpace', blockName ), 'px' ),
+		};
+		tablet_selectors[ ' .uagb-heading-text' ] = {
+			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceTablet, 'headSpaceTablet', blockName ), 'px' ),
+		};
+		mobile_selectors[ ' .uagb-heading-text' ] = {
+			'margin-bottom': generateCSSUnit( getFallbackNumber( headSpaceMobile, 'headSpaceMobile', blockName ), 'px' ),
+		};
+	}
+	const base_selector = '.editor-styles-wrapper ' + ( gbsSelector ? gbsSelector + ' ' : `#block-${ clientId } .uagb-block-${ block_id }` );
+
+	selectors = applyFilters( `spectra.${ blockName }.styling`, selectors, attributes );
+	tablet_selectors = applyFilters( `spectra.${ blockName }.tabletStyling`, tablet_selectors, attributes );
+	mobile_selectors = applyFilters( `spectra.${ blockName }.mobileStyling`, mobile_selectors, attributes );
 
 	let styling_css = generateCSS( selectors, base_selector );
 
-	styling_css += generateCSS(
-		tablet_selectors,
-		`${ base_selector }.uagb-editor-preview-mode-tablet`,
-		true,
-		'tablet'
-	);
+	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
+		styling_css += generateCSS(
+			tablet_selectors,
+			`${ base_selector }`,
+			true,
+			'tablet'
+		);
 
-	styling_css += generateCSS(
-		mobile_selectors,
-		`${ base_selector }.uagb-editor-preview-mode-mobile`,
-		true,
-		'mobile'
-	);
-
+		if( 'mobile' === previewType || gbsSelector ){
+			styling_css += generateCSS(
+				mobile_selectors,
+				`${ base_selector }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return styling_css;
 }
 

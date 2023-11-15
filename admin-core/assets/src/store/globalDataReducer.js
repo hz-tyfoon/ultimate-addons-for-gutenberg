@@ -34,6 +34,11 @@ const globalDataReducer = ( state = {}, action ) => {
                 ...state,
                 enableTemplates: action.payload,
             };
+		case 'UPDATE_ON_PAGE_CSS_BUTTON':
+			return {
+				...state,
+				enableOnPageCSS: action.payload,
+			};
         case 'UPDATE_BETA':
             return {
                 ...state,
@@ -54,6 +59,11 @@ const globalDataReducer = ( state = {}, action ) => {
                 ...state,
                 selectedFontFamilies: action.payload,
             };
+        case 'UPDATE_ENABLE_FSE_FONT_FAMILIES':
+            return {
+                ...state,
+                enableFSEFontFamilies: action.payload,
+        };
         case 'UPDATE_ENABLE_LOAD_FONTS_LOCALLY':
             return {
                 ...state,
@@ -83,6 +93,85 @@ const globalDataReducer = ( state = {}, action ) => {
             return {
                 ...state,
                 enableMasonryExtension: action.payload,
+            };
+        case 'UPDATE_ENABLE_ANIMATIONS_EXTENSION':
+            return {
+                ...state,
+                enableAnimationsExtension: action.payload,
+            };
+        case 'UPDATE_RECAPTCHA_VERSION':
+            return {
+                ...state,
+                social: {
+					...state.social,
+					recaptchaVersion: action.payload
+				},
+            };
+        case 'UPDATE_RECAPTCHA_BADGE':
+            return {
+                ...state,
+                social: {
+					...state.social,
+					recaptchaBadgeHide: action.payload
+				},
+            };
+        case 'UPDATE_RECAPTCHA_SITE_KEY':
+            return {
+                ...state,
+                social: {
+					...state.social,
+					recaptchaSiteKey: action.payload
+				},
+            };
+        case 'UPDATE_RECAPTCHA_SECRET_KEY':
+            return {
+                ...state,
+                social: {
+					...state.social,
+					recaptchaSecretKey: action.payload
+				},
+            };
+        case 'UPDATE_SOCIAL_REGISTER':
+            return {
+                ...state,
+                social: {
+					...state.social,
+					socialRegister: action.payload
+				},
+            };
+        case 'UPDATE_GOOGLE_CLIENT_ID':
+            return {
+                ...state,
+                social: {
+					...state.social,
+					googleClientId: action.payload
+				},
+            };
+        case 'UPDATE_FACEBOOK_APP_ID':
+            return {
+                ...state,
+                social: {
+					...state.social,
+					facebookAppId: action.payload
+				},
+            };
+        case 'UPDATE_FACEBOOK_APP_SECRET':
+            return {
+                ...state,
+                social: {
+					...state.social,
+					facebookAppSecret: action.payload
+				}
+			}
+        case 'UPDATE_ENABLE_DYNAMIC_CONTENT_EXTENSION':
+            return {
+                ...state,
+                enableDynamicContentExtension: action.payload,
+            };
+        case 'UPDATE_DYNAMIC_CONTENT_MODE':
+            return {
+                ...state,
+                dynamicContentMode: action.payload,
             };
 		case 'UPDATE_ENABLE_RESPONSIVE_CONDITIONS':
 			return {
@@ -119,15 +208,15 @@ const globalDataReducer = ( state = {}, action ) => {
 				...state,
 				settingsSavedNotification: action.payload,
 			};
-		case 'UPDATE_ENABLE_COMING_SOON':
+		case 'UPDATE_VISIBILITY_MODE':
 			return {
 				...state,
-				enableComingSoonMode: action.payload,
+				visibilityMode: action.payload,
 			};
-		case 'UPDATE_COMING_SOON_PAGE':
+		case 'UPDATE_VISIBILITY_PAGE':
 			return {
 				...state,
-				comingSoonPage: action.payload,
+				visibilityPage: action.payload,
 			};
 		case 'UPDATE_BLOCKS_EDITOR_SPACING':
 			return {
@@ -154,6 +243,21 @@ const globalDataReducer = ( state = {}, action ) => {
 				...state,
 				containerGlobalElementsGap: action.payload,
 				};
+        case 'UPDATE_INSTA_LINKED_ACCOUNTS':
+            return {
+                ...state,
+                instaLinkedAccounts: action.payload,
+            };
+        case 'UPDATE_BTN_INHERIT_FROM_THEME':
+            return {
+                ...state,
+                btnInheritFromTheme: action.payload,
+                };
+        case 'UPDATE_GBS_EXTENSION':
+            return {
+                ...state,
+                enableGBSExtension: action.payload,
+                };
         default:
             return state;
     }

@@ -16,61 +16,73 @@ import CallToAction from './components/CallToAction';
 import InfoBoxIconImage from './components/InfoBoxIconImage';
 import IconImage from './components/IconImage';
 import { getBorderAttributes } from '@Controls/generateAttributes';
+import newAttributesV2_0_13 from './deprecated/v2_0_13/attributes';
+import newSaveV2_0_13 from './deprecated/v2_0_13/save';
+import newSaveV2_4 from './deprecated/v2_4/save';
+import newSaveV2_7_0 from './deprecated/v2_7_0/save';
+import newSaveV2_7_4 from './deprecated/v2_7_4/save';
+import newAttributesV2_7_4 from './deprecated/v2_7_4/attributes'; 
+import InfoBoxIconImageNewVer from './components/DeprecatedIconImagesV_2_0_13';
+import AttributesNewVer from './attributes';
+import InfoBoxSeparatorNewVer from './components/Separator';
+import IconNewVer from './components/Icons';
+import InfoBoxPositionClassesNewVer from './style-classes';
 
 const borderAttributes = getBorderAttributes( 'btn' );
 
 const attributes = {
 	inheritFromTheme: {
-		type: "boolean",
-		default: false
+		type: 'boolean',
+		default: false,
 	},
 	prefixTitle: {
-		source: "html",
-		selector: "span.uagb-ifb-title-prefix",
-		default: "Prefix",
+		source: 'html',
+		selector: 'span.uagb-ifb-title-prefix',
+		default: 'Prefix',
 	},
 	classMigrate: {
-		type: "boolean",
-		default: false
+		type: 'boolean',
+		default: false,
 	},
 	infoBoxTitle: {
-		source: "html",
-		selector: "h1,h2,h3,h4,h5,h6",
-		default: "Info Box",
+		source: 'html',
+		selector: 'h1,h2,h3,h4,h5,h6',
+		default: 'Info Box',
 	},
 	headingDesc: {
-		source: "html",
-		selector: "p",
-		default: "Click here to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+		source: 'html',
+		selector: 'p',
+		default:
+			'Click here to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.',
 	},
 	headingAlign: {
-		type: "string",
-		default: "center",
+		type: 'string',
+		default: 'center',
 	},
 	headingColor: {
-		type: "string",
+		type: 'string',
 	},
 	subHeadingColor: {
-		type: "string",
+		type: 'string',
 	},
 	prefixColor: {
-		type: "string",
+		type: 'string',
 	},
-	icon : {
-		type : "string",
-		default : "fa fa-star"
+	icon: {
+		type: 'string',
+		default: 'fa fa-star',
 	},
 	iconimgPosition: {
-		type: "string",
-		default: "above-title"
+		type: 'string',
+		default: 'above-title',
 	},
-	iconSize : {
-		type: "number",
+	iconSize: {
+		type: 'number',
 		default: 40,
 	},
-	iconHover : {
-		type : "string",
-		default : ""
+	iconHover: {
+		type: 'string',
+		default: '',
 	},
 	iconSizeType: {
 		type: 'String',
@@ -148,358 +160,362 @@ const attributes = {
 		type: 'string',
 		default: 'px',
 	},
-	iconBgHover : {
-		type : "string",
-		default : ""
+	iconBgHover: {
+		type: 'string',
+		default: '',
 	},
-	iconColor : {
-		type : "string",
-		default : "#333",
+	iconColor: {
+		type: 'string',
+		default: '#333',
 	},
-	prefixTag :{
-		type: "string",
-		default: "h3"
+	prefixTag: {
+		type: 'string',
+		default: 'h3',
 	},
 	prefixFontSize: {
-		type: "number",
+		type: 'number',
 	},
 	prefixFontSizeType: {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px',
 	},
 	prefixFontSizeTablet: {
-		type: "number",
+		type: 'number',
 	},
 	prefixFontSizeMobile: {
-		type: "number",
+		type: 'number',
 	},
 	prefixFontFamily: {
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	prefixFontWeight: {
-		type: "string",
+		type: 'string',
 	},
 	prefixFontSubset: {
-		type: "string",
+		type: 'string',
 	},
 	prefixLineHeightType: {
-		type: "string",
-		default: "em"
+		type: 'string',
+		default: 'em',
 	},
 	prefixLineHeight: {
-		type: "number",
+		type: 'number',
 	},
 	prefixLineHeightTablet: {
-		type: "number",
+		type: 'number',
 	},
 	prefixLineHeightMobile: {
-		type: "number",
+		type: 'number',
 	},
 	prefixLoadGoogleFonts: {
-		type: "boolean",
-		default: false
-	},
-	headingTag: {
-		type: "string",
-		default: "h3"
-	},
-	headFontSize: {
-		type: "number",
-	},
-	headFontSizeType: {
-		type: "string",
-		default: "px"
-	},
-	headFontSizeTablet: {
-		type: "number",
-	},
-	headFontSizeMobile: {
-		type: "number",
-	},
-	headFontFamily: {
-		type: "string",
-		default: "Default",
-	},
-	headFontWeight: {
-		type: "string",
-	},
-	headFontSubset: {
-		type: "string",
-	},
-	headLineHeightType: {
-		type: "string",
-		default: "em"
-	},
-	headLineHeight: {
-		type: "number",
-	},
-	headLineHeightTablet: {
-		type: "number",
-	},
-	headLineHeightMobile: {
-		type: "number",
-	},
-	headLoadGoogleFonts: {
-		type: "boolean",
-		default: false
-	},
-	subHeadFontSize: {
-		type: "number",
-	},
-	subHeadFontSizeType: {
-		type: "string",
-		default: "px"
-	},
-	subHeadFontSizeTablet: {
-		type: "number",
-	},
-	subHeadFontSizeMobile: {
-		type: "number",
-	},
-	subHeadFontFamily: {
-		type: "string",
-		default: "Default",
-	},
-	subHeadFontWeight: {
-		type: "string",
-	},
-	subHeadFontSubset: {
-		type: "string",
-	},
-	subHeadLineHeightType: {
-		type: "string",
-		default: "em"
-	},
-	subHeadLineHeight: {
-		type: "number",
-	},
-	subHeadLineHeightTablet: {
-		type: "number",
-	},
-	subHeadLineHeightMobile: {
-		type: "number",
-	},
-	subHeadLoadGoogleFonts: {
-		type: "boolean",
-		default: false
-	},
-	headSpace: {
-		type: "number",
-		default : 10,
-	},
-	subHeadSpace: {
-		type: "number",
-		default : 10,
-	},
-	seperatorSpace:{
-		type: "number",
-		default : 10,
-	},
-	iconimgBorderRadius: {
-		type: "number",
-		default : 0
-	},
-	source_type :{
-		type: "string",
-		default: "icon",
-	},
-	block_id :{
-		type : "string",
-		default : "not_set"
-	},
-	sourceAlign:{
-		type : "string",
-		default : "top"
-	},
-	ctaTarget: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
-	ctaIcon : {
-		type : "string",
-		default : ""
+	headingTag: {
+		type: 'string',
+		default: 'h3',
+	},
+	headFontSize: {
+		type: 'number',
+	},
+	headFontSizeType: {
+		type: 'string',
+		default: 'px',
+	},
+	headFontSizeTablet: {
+		type: 'number',
+	},
+	headFontSizeMobile: {
+		type: 'number',
+	},
+	headFontFamily: {
+		type: 'string',
+		default: 'Default',
+	},
+	headFontWeight: {
+		type: 'string',
+	},
+	headFontSubset: {
+		type: 'string',
+	},
+	headLineHeightType: {
+		type: 'string',
+		default: 'em',
+	},
+	headLineHeight: {
+		type: 'number',
+	},
+	headLineHeightTablet: {
+		type: 'number',
+	},
+	headLineHeightMobile: {
+		type: 'number',
+	},
+	headLoadGoogleFonts: {
+		type: 'boolean',
+		default: false,
+	},
+	subHeadFontSize: {
+		type: 'number',
+	},
+	subHeadFontSizeType: {
+		type: 'string',
+		default: 'px',
+	},
+	subHeadFontSizeTablet: {
+		type: 'number',
+	},
+	subHeadFontSizeMobile: {
+		type: 'number',
+	},
+	subHeadFontFamily: {
+		type: 'string',
+		default: 'Default',
+	},
+	subHeadFontWeight: {
+		type: 'string',
+	},
+	subHeadFontSubset: {
+		type: 'string',
+	},
+	subHeadLineHeightType: {
+		type: 'string',
+		default: 'em',
+	},
+	subHeadLineHeight: {
+		type: 'number',
+	},
+	subHeadLineHeightTablet: {
+		type: 'number',
+	},
+	subHeadLineHeightMobile: {
+		type: 'number',
+	},
+	subHeadLoadGoogleFonts: {
+		type: 'boolean',
+		default: false,
+	},
+	headSpace: {
+		type: 'number',
+		default: 10,
+	},
+	subHeadSpace: {
+		type: 'number',
+		default: 10,
+	},
+	seperatorSpace: {
+		type: 'number',
+		default: 10,
+	},
+	iconimgBorderRadius: {
+		type: 'number',
+		default: 0,
+	},
+	source_type: {
+		type: 'string',
+		default: 'icon',
+	},
+	block_id: {
+		type: 'string',
+		default: 'not_set',
+	},
+	sourceAlign: {
+		type: 'string',
+		default: 'top',
+	},
+	ctaTarget: {
+		type: 'boolean',
+		default: false,
+	},
+	ctaIcon: {
+		type: 'string',
+		default: '',
 	},
 	ctaIconPosition: {
-		type: "string",
-		default: "after"
+		type: 'string',
+		default: 'after',
 	},
-	ctaIconSpace :{
-		type: "number",
-		default : 5
+	ctaIconSpace: {
+		type: 'number',
+		default: 5,
 	},
 	seperatorPosition: {
-		type: "string",
-		default: "after_title",
+		type: 'string',
+		default: 'after_title',
 	},
 	seperatorStyle: {
-		type: "string",
-		default: "solid",
-	},
-	seperatorColor: {
-		type: "string",
-		default: "#333",
-	},
-	seperatorWidth :{
-		type: "number",
-		default : 30
-	},
-	separatorWidthType: {
-		type: "string",
-		default: "%"
-	},
-	seperatorThickness :{
-		type: "number",
-		default : 2
-	},
-	ctaType: {
-		type: "string",
-		default: "none",
-	},
-	ctaText: {
-		type: "html",
-		default: "Read More",
-	},
-	ctaLink: {
-		type: "string",
-		default: "#",
-	},
-	ctaLinkColor :{
-		type: "string",
-		default: "#333",
-	},
-	ctaFontSize :{
-		type: "number",
-	},
-	ctaFontSizeType :{
-		type: "string",
-		default: "px"
-	},
-	ctaFontSizeMobile :{
-		type: "number",
-	},
-	ctaFontSizeTablet :{
-		type: "number",
-	},
-	ctaFontFamily: {
-		type: "string",
-		default: "Default",
-	},
-	ctaFontWeight: {
-		type: "string",
-	},
-	ctaFontSubset: {
-		type: "string",
-	},
-	ctaLoadGoogleFonts: {
-		type: "boolean",
-		default: false
-	},
-	ctaBtnLinkColor :{
-		type: "string",
-		default: "#333",
-	},
-	ctaLinkHoverColor:{
-		type: "string",
-		default: "",
-	},
-	ctaBgColor :{
-		type: "string",
-		default:"transparent",
-	},
-	ctaBgHoverColor :{
-		type: "string",
-		default:"transparent",
-	},
-	ctaBorderColor: {
-		type: "string",
-	},
-	ctaBorderhoverColor:{
-		type: "string",
-	},
-	ctaBorderStyle: {
-		type: "string",
+		type: 'string',
 		default: 'solid',
 	},
-	ctaBtnVertPadding :{
-		type: "number",
+	seperatorColor: {
+		type: 'string',
+		default: '#333',
+	},
+	seperatorWidth: {
+		type: 'number',
+		default: 30,
+	},
+	separatorWidthType: {
+		type: 'string',
+		default: '%',
+	},
+	seperatorThickness: {
+		type: 'number',
+		default: 2,
+	},
+	ctaType: {
+		type: 'string',
+		default: 'none',
+	},
+	ctaText: {
+		type: 'html',
+		default: 'Read More',
+	},
+	ctaLink: {
+		type: 'string',
+		default: '#',
+	},
+	ctaLinkColor: {
+		type: 'string',
+		default: '#333',
+	},
+	ctaFontSize: {
+		type: 'number',
+	},
+	ctaFontSizeType: {
+		type: 'string',
+		default: 'px',
+	},
+	ctaFontSizeMobile: {
+		type: 'number',
+	},
+	ctaFontSizeTablet: {
+		type: 'number',
+	},
+	ctaFontFamily: {
+		type: 'string',
+		default: 'Default',
+	},
+	ctaFontWeight: {
+		type: 'string',
+	},
+	ctaFontSubset: {
+		type: 'string',
+	},
+	ctaLoadGoogleFonts: {
+		type: 'boolean',
+		default: false,
+	},
+	ctaBtnLinkColor: {
+		type: 'string',
+		default: '#333',
+	},
+	ctaLinkHoverColor: {
+		type: 'string',
+		default: '',
+	},
+	ctaBgColor: {
+		type: 'string',
+		default: 'transparent',
+	},
+	ctaBgHoverColor: {
+		type: 'string',
+		default: 'transparent',
+	},
+	ctaBorderColor: {
+		type: 'string',
+		default: '#333',
+	},
+	ctaBorderhoverColor: {
+		type: 'string',
+		default: '',
+	},
+	ctaBorderStyle: {
+		type: 'string',
+		default: 'solid',
+	},
+	ctaBtnVertPadding: {
+		type: 'number',
 		default: 10,
 	},
-	ctaBtnHrPadding :{
-		type: "number",
+	ctaBtnHrPadding: {
+		type: 'number',
 		default: 14,
 	},
-	ctaBorderWidth :{
-		type: "number",
+	ctaBorderWidth: {
+		type: 'number',
+		default: 1,
 	},
-	ctaBorderRadius :{
-		type: "number",
+	ctaBorderRadius: {
+		type: 'number',
+		default: 0,
 	},
-	prefixSpace :{
-		type: "number",
+	prefixSpace: {
+		type: 'number',
 		default: 5,
 	},
-	iconLeftMargin :{
-		type: "number",
+	iconLeftMargin: {
+		type: 'number',
 		default: 10,
 	},
-	iconRightMargin :{
-		type: "number",
+	iconRightMargin: {
+		type: 'number',
 		default: 10,
 	},
-	iconTopMargin :{
-		type: "number",
+	iconTopMargin: {
+		type: 'number',
 		default: 5,
 	},
-	iconBottomMargin :{
-		type: "number",
+	iconBottomMargin: {
+		type: 'number',
 		default: 5,
 	},
 	iconImage: {
-		type: "object",
-		default:{
-			"url": "",
-			"alt": "InfoBox placeholder img",
-		}
+		type: 'object',
+		default: {
+			url: '',
+			alt: 'InfoBox placeholder img',
+		},
 	},
-	imageSize:{
-		type: "string",
-		default: "thumbnail",
+	imageSize: {
+		type: 'string',
+		default: 'thumbnail',
 	},
-	imageWidth :{
-		type: "number",
+	imageWidth: {
+		type: 'number',
 		default: 120,
 	},
-	imageWidthType : {
-		type    : "boolean",
-		default : true,
+	imageWidthType: {
+		type: 'boolean',
+		default: true,
 	},
 	stack: {
-		type: "string",
-		default: "tablet"
+		type: 'string',
+		default: 'tablet',
 	},
 	showIcon: {
 		type: 'boolean',
 		default: true,
 	},
 	showPrefix: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	showTitle: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	showDesc: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	iconView: {
 		type: 'string',
 		default: 'none',
 	},
-	...borderAttributes
-}
+	...borderAttributes,
+};
 
 const deprecated = [
 	{
@@ -529,14 +545,9 @@ const deprecated = [
 			// Get description and seperator components.
 			const desc = (
 				<>
-					{ 'none' !== seperatorStyle && (
-						<InfoBoxSeparator attributes={ props.attributes } />
-					) }
+					{ 'none' !== seperatorStyle && <InfoBoxSeparator attributes={ props.attributes } /> }
 					<div className="uagb-ifb-text-wrap">
-						<InfoBoxDesc
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
+						<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
 						<InfoBoxCta attributes={ props.attributes } />
 					</div>
 				</>
@@ -546,14 +557,8 @@ const deprecated = [
 			const title_text = (
 				<>
 					<div className="uagb-ifb-title-wrap">
-						<Prefix
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
-						<Title
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
+						<Prefix attributes={ props.attributes } setAttributes="not_set" />
+						<Title attributes={ props.attributes } setAttributes="not_set" />
 					</div>
 				</>
 			);
@@ -571,15 +576,12 @@ const deprecated = [
 							<div className="uagb-ifb-content">
 								{ iconimgPosition == 'above-title' && is_image }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) &&
 									title_text }
 
 								{ iconimgPosition == 'below-title' && is_image }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
-									desc }
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && desc }
 
 								{ iconimgPosition === 'left-title' && (
 									<>
@@ -601,8 +603,7 @@ const deprecated = [
 									</>
 								) }
 
-								{ ( iconimgPosition == 'left' ||
-									iconimgPosition == 'right' ) && (
+								{ ( iconimgPosition == 'left' || iconimgPosition == 'right' ) && (
 									<>
 										{ title_text }
 										{ desc }
@@ -624,10 +625,7 @@ const deprecated = [
 			return (
 				<>
 					<div
-						className={ classnames(
-							className,
-							'uagb-infobox__outer-wrap'
-						) }
+						className={ classnames( className, 'uagb-infobox__outer-wrap' ) }
 						id={ `uagb-infobox-${ block_id }` }
 					>
 						{ ctaType == 'all' && (
@@ -683,19 +681,12 @@ const deprecated = [
 			// Get description and seperator components.
 			const desc = (
 				<>
-					{ 'none' !== seperatorStyle && (
-						<InfoBoxSeparator attributes={ props.attributes } />
-					) }
+					{ 'none' !== seperatorStyle && <InfoBoxSeparator attributes={ props.attributes } /> }
 					<div className="uagb-ifb-text-wrap">
 						{ showDesc && '' !== headingDesc && (
-							<InfoBoxDesc
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ ctaType !== 'none' && (
-							<InfoBoxCta attributes={ props.attributes } />
-						) }
+						{ ctaType !== 'none' && <InfoBoxCta attributes={ props.attributes } /> }
 					</div>
 				</>
 			);
@@ -705,16 +696,10 @@ const deprecated = [
 				<>
 					<div className="uagb-ifb-title-wrap">
 						{ showPrefix && '' !== prefixTitle && (
-							<Prefix
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Prefix attributes={ props.attributes } setAttributes="not_set" />
 						) }
 						{ showTitle && '' !== infoBoxTitle && (
-							<Title
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Title attributes={ props.attributes } setAttributes="not_set" />
 						) }
 					</div>
 				</>
@@ -733,15 +718,12 @@ const deprecated = [
 							<div className="uagb-ifb-content">
 								{ iconimgPosition == 'above-title' && is_image }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) &&
 									title_text }
 
 								{ iconimgPosition == 'below-title' && is_image }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
-									desc }
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && desc }
 
 								{ iconimgPosition === 'left-title' && (
 									<>
@@ -763,8 +745,7 @@ const deprecated = [
 									</>
 								) }
 
-								{ ( iconimgPosition == 'left' ||
-									iconimgPosition == 'right' ) && (
+								{ ( iconimgPosition == 'left' || iconimgPosition == 'right' ) && (
 									<>
 										{ title_text }
 										{ desc }
@@ -786,10 +767,7 @@ const deprecated = [
 			return (
 				<>
 					<div
-						className={ classnames(
-							className,
-							'uagb-infobox__outer-wrap'
-						) }
+						className={ classnames( className, 'uagb-infobox__outer-wrap' ) }
 						id={ `uagb-infobox-${ block_id }` }
 					>
 						{ ctaType == 'all' && (
@@ -845,19 +823,12 @@ const deprecated = [
 			// Get description and seperator components.
 			const desc = (
 				<>
-					{ 'none' !== seperatorStyle && (
-						<InfoBoxSeparator attributes={ props.attributes } />
-					) }
+					{ 'none' !== seperatorStyle && <InfoBoxSeparator attributes={ props.attributes } /> }
 					<div className="uagb-ifb-text-wrap">
 						{ showDesc && '' !== headingDesc && (
-							<InfoBoxDesc
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ ctaType !== 'none' && (
-							<CallToAction attributes={ props.attributes } />
-						) }
+						{ ctaType !== 'none' && <CallToAction attributes={ props.attributes } /> }
 					</div>
 				</>
 			);
@@ -867,16 +838,10 @@ const deprecated = [
 				<>
 					<div className="uagb-ifb-title-wrap">
 						{ showPrefix && '' !== prefixTitle && (
-							<Prefix
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Prefix attributes={ props.attributes } setAttributes="not_set" />
 						) }
 						{ showTitle && '' !== infoBoxTitle && (
-							<Title
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Title attributes={ props.attributes } setAttributes="not_set" />
 						) }
 					</div>
 				</>
@@ -895,15 +860,12 @@ const deprecated = [
 							<div className="uagb-ifb-content">
 								{ iconimgPosition == 'above-title' && is_image }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) &&
 									title_text }
 
 								{ iconimgPosition == 'below-title' && is_image }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
-									desc }
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && desc }
 
 								{ iconimgPosition === 'left-title' && (
 									<>
@@ -925,8 +887,7 @@ const deprecated = [
 									</>
 								) }
 
-								{ ( iconimgPosition == 'left' ||
-									iconimgPosition == 'right' ) && (
+								{ ( iconimgPosition == 'left' || iconimgPosition == 'right' ) && (
 									<>
 										{ title_text }
 										{ desc }
@@ -948,10 +909,7 @@ const deprecated = [
 			return (
 				<>
 					<div
-						className={ classnames(
-							className,
-							'uagb-infobox__outer-wrap'
-						) }
+						className={ classnames( className, 'uagb-infobox__outer-wrap' ) }
 						id={ `uagb-infobox-${ block_id }` }
 					>
 						{ ctaType == 'all' && (
@@ -1007,15 +965,12 @@ const deprecated = [
 
 			let icon_image_html = is_image;
 			let seperator_position = seperatorPosition;
-			const seperator_html = (
-				<InfoBoxSeparator attributes={ props.attributes } />
-			);
+			const seperator_html = <InfoBoxSeparator attributes={ props.attributes } />;
 			let show_seperator = true;
 
 			if (
 				seperatorPosition == 'after_icon' &&
-				( iconimgPosition == 'above-title' ||
-					iconimgPosition == 'below-title' )
+				( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' )
 			) {
 				show_seperator = false;
 				icon_image_html = (
@@ -1028,16 +983,12 @@ const deprecated = [
 
 			if (
 				seperatorPosition == 'after_icon' &&
-				( iconimgPosition !== 'above-title' ||
-					iconimgPosition !== 'below-title' )
+				( iconimgPosition !== 'above-title' || iconimgPosition !== 'below-title' )
 			) {
 				seperator_position = 'after_title';
 			}
 
-			if (
-				iconimgPosition == 'below-title' &&
-				seperatorPosition == 'after_title'
-			) {
+			if ( iconimgPosition == 'below-title' && seperatorPosition == 'after_title' ) {
 				show_seperator = false;
 				icon_image_html = (
 					<>
@@ -1055,17 +1006,10 @@ const deprecated = [
 						seperator_html }
 					<div className="uagb-ifb-text-wrap">
 						{ showDesc && '' !== headingDesc && (
-							<InfoBoxDesc
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ 'none' !== seperatorStyle &&
-							seperator_position == 'after_desc' &&
-							seperator_html }
-						{ ctaType !== 'none' && (
-							<CallToAction attributes={ props.attributes } />
-						) }
+						{ 'none' !== seperatorStyle && seperator_position == 'after_desc' && seperator_html }
+						{ ctaType !== 'none' && <CallToAction attributes={ props.attributes } /> }
 					</div>
 				</>
 			);
@@ -1075,19 +1019,11 @@ const deprecated = [
 				<>
 					<div className="uagb-ifb-title-wrap">
 						{ showPrefix && '' !== prefixTitle && (
-							<Prefix
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Prefix attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ 'none' !== seperatorStyle &&
-							seperator_position == 'after_prefix' &&
-							seperator_html }
+						{ 'none' !== seperatorStyle && seperator_position == 'after_prefix' && seperator_html }
 						{ showTitle && '' !== infoBoxTitle && (
-							<Title
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Title attributes={ props.attributes } setAttributes="not_set" />
 						) }
 					</div>
 				</>
@@ -1098,28 +1034,21 @@ const deprecated = [
 					<div
 						className={ classnames(
 							'uagb-infobox__content-wrap',
-							ctaType == 'all'
-								? ' uagb-infobox_cta-type-all'
-								: '',
+							ctaType == 'all' ? ' uagb-infobox_cta-type-all' : '',
 							...InfoBoxPositionClasses( props.attributes )
 						) }
 					>
 						<div className="uagb-ifb-left-right-wrap">
 							{ iconimgPosition == 'left' && is_image }
 							<div className="uagb-ifb-content">
-								{ iconimgPosition == 'above-title' &&
-									icon_image_html }
+								{ iconimgPosition == 'above-title' && icon_image_html }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) &&
 									title_text }
 
-								{ iconimgPosition == 'below-title' &&
-									icon_image_html }
+								{ iconimgPosition == 'below-title' && icon_image_html }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
-									desc }
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && desc }
 
 								{ iconimgPosition === 'left-title' && (
 									<>
@@ -1141,8 +1070,7 @@ const deprecated = [
 									</>
 								) }
 
-								{ ( iconimgPosition == 'left' ||
-									iconimgPosition == 'right' ) && (
+								{ ( iconimgPosition == 'left' || iconimgPosition == 'right' ) && (
 									<>
 										{ title_text }
 										{ desc }
@@ -1164,10 +1092,7 @@ const deprecated = [
 			return (
 				<>
 					<div
-						className={ classnames(
-							className,
-							'uagb-infobox__outer-wrap'
-						) }
+						className={ classnames( className, 'uagb-infobox__outer-wrap' ) }
 						id={ `uagb-infobox-${ block_id }` }
 					>
 						{ ctaType == 'all' && (
@@ -1221,15 +1146,12 @@ const deprecated = [
 
 			let icon_image_html = is_image;
 			let seperator_position = seperatorPosition;
-			const seperator_html = (
-				<InfoBoxSeparator attributes={ props.attributes } />
-			);
+			const seperator_html = <InfoBoxSeparator attributes={ props.attributes } />;
 			let show_seperator = true;
 
 			if (
 				seperatorPosition == 'after_icon' &&
-				( iconimgPosition == 'above-title' ||
-					iconimgPosition == 'below-title' )
+				( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' )
 			) {
 				show_seperator = false;
 				icon_image_html = (
@@ -1242,16 +1164,12 @@ const deprecated = [
 
 			if (
 				seperatorPosition == 'after_icon' &&
-				( iconimgPosition !== 'above-title' ||
-					iconimgPosition !== 'below-title' )
+				( iconimgPosition !== 'above-title' || iconimgPosition !== 'below-title' )
 			) {
 				seperator_position = 'after_title';
 			}
 
-			if (
-				iconimgPosition == 'below-title' &&
-				seperatorPosition == 'after_title'
-			) {
+			if ( iconimgPosition == 'below-title' && seperatorPosition == 'after_title' ) {
 				show_seperator = false;
 				icon_image_html = (
 					<>
@@ -1269,17 +1187,10 @@ const deprecated = [
 						seperator_html }
 					<div className="uagb-ifb-text-wrap">
 						{ showDesc && '' !== headingDesc && (
-							<InfoBoxDesc
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ 'none' !== seperatorStyle &&
-							seperator_position == 'after_desc' &&
-							seperator_html }
-						{ ctaType !== 'none' && (
-							<CallToAction attributes={ props.attributes } />
-						) }
+						{ 'none' !== seperatorStyle && seperator_position == 'after_desc' && seperator_html }
+						{ ctaType !== 'none' && <CallToAction attributes={ props.attributes } /> }
 					</div>
 				</>
 			);
@@ -1289,19 +1200,11 @@ const deprecated = [
 				<>
 					<div className="uagb-ifb-title-wrap">
 						{ showPrefix && '' !== prefixTitle && (
-							<Prefix
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Prefix attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ 'none' !== seperatorStyle &&
-							seperator_position == 'after_prefix' &&
-							seperator_html }
+						{ 'none' !== seperatorStyle && seperator_position == 'after_prefix' && seperator_html }
 						{ showTitle && '' !== infoBoxTitle && (
-							<Title
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Title attributes={ props.attributes } setAttributes="not_set" />
 						) }
 					</div>
 				</>
@@ -1312,28 +1215,21 @@ const deprecated = [
 					<div
 						className={ classnames(
 							'uagb-infobox__content-wrap',
-							ctaType == 'all'
-								? ' uagb-infobox_cta-type-all'
-								: '',
+							ctaType == 'all' ? ' uagb-infobox_cta-type-all' : '',
 							...InfoBoxPositionClasses( props.attributes )
 						) }
 					>
 						<div className="uagb-ifb-left-right-wrap">
 							{ iconimgPosition == 'left' && is_image }
 							<div className="uagb-ifb-content">
-								{ iconimgPosition == 'above-title' &&
-									icon_image_html }
+								{ iconimgPosition == 'above-title' && icon_image_html }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) &&
 									title_text }
 
-								{ iconimgPosition == 'below-title' &&
-									icon_image_html }
+								{ iconimgPosition == 'below-title' && icon_image_html }
 
-								{ ( iconimgPosition == 'above-title' ||
-									iconimgPosition == 'below-title' ) &&
-									desc }
+								{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && desc }
 
 								{ iconimgPosition === 'left-title' && (
 									<>
@@ -1355,8 +1251,7 @@ const deprecated = [
 									</>
 								) }
 
-								{ ( iconimgPosition == 'left' ||
-									iconimgPosition == 'right' ) && (
+								{ ( iconimgPosition == 'left' || iconimgPosition == 'right' ) && (
 									<>
 										{ title_text }
 										{ desc }
@@ -1377,13 +1272,7 @@ const deprecated = [
 
 			return (
 				<>
-					<div
-						className={ classnames(
-							className,
-							'uagb-infobox__outer-wrap',
-							`uagb-block-${ block_id }`
-						) }
-					>
+					<div className={ classnames( className, 'uagb-infobox__outer-wrap', `uagb-block-${ block_id }` ) }>
 						{ ctaType == 'all' && (
 							<>
 								<a
@@ -1434,15 +1323,12 @@ const deprecated = [
 
 			let icon_image_html = is_image;
 			let seperator_position = seperatorPosition;
-			const seperator_html = (
-				<InfoBoxSeparator attributes={ props.attributes } />
-			);
+			const seperator_html = <InfoBoxSeparator attributes={ props.attributes } />;
 			let show_seperator = true;
 
 			if (
 				seperatorPosition == 'after_icon' &&
-				( iconimgPosition == 'above-title' ||
-					iconimgPosition == 'below-title' )
+				( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' )
 			) {
 				show_seperator = false;
 				icon_image_html = (
@@ -1455,16 +1341,12 @@ const deprecated = [
 
 			if (
 				seperatorPosition == 'after_icon' &&
-				( iconimgPosition !== 'above-title' ||
-					iconimgPosition !== 'below-title' )
+				( iconimgPosition !== 'above-title' || iconimgPosition !== 'below-title' )
 			) {
 				seperator_position = 'after_title';
 			}
 
-			if (
-				iconimgPosition == 'below-title' &&
-				seperatorPosition == 'after_title'
-			) {
+			if ( iconimgPosition == 'below-title' && seperatorPosition == 'after_title' ) {
 				show_seperator = false;
 				icon_image_html = (
 					<>
@@ -1482,17 +1364,10 @@ const deprecated = [
 						seperator_html }
 					<div className="uagb-ifb-text-wrap">
 						{ showDesc && '' !== headingDesc && (
-							<InfoBoxDesc
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ 'none' !== seperatorStyle &&
-							seperator_position == 'after_desc' &&
-							seperator_html }
-						{ ctaType !== 'none' && (
-							<CallToAction attributes={ props.attributes } />
-						) }
+						{ 'none' !== seperatorStyle && seperator_position == 'after_desc' && seperator_html }
+						{ ctaType !== 'none' && <CallToAction attributes={ props.attributes } /> }
 					</div>
 				</>
 			);
@@ -1501,19 +1376,11 @@ const deprecated = [
 			const title_text = (
 				<div className="uagb-ifb-title-wrap">
 					{ showPrefix && '' !== prefixTitle && (
-						<Prefix
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
+						<Prefix attributes={ props.attributes } setAttributes="not_set" />
 					) }
-					{ 'none' !== seperatorStyle &&
-						seperator_position == 'after_prefix' &&
-						seperator_html }
+					{ 'none' !== seperatorStyle && seperator_position == 'after_prefix' && seperator_html }
 					{ showTitle && '' !== infoBoxTitle && (
-						<Title
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
+						<Title attributes={ props.attributes } setAttributes="not_set" />
 					) }
 				</div>
 			);
@@ -1529,19 +1396,13 @@ const deprecated = [
 					<div className="uagb-ifb-left-right-wrap">
 						{ iconimgPosition == 'left' && is_image }
 						<div className="uagb-ifb-content">
-							{ iconimgPosition == 'above-title' &&
-								icon_image_html }
+							{ iconimgPosition == 'above-title' && icon_image_html }
 
-							{ ( iconimgPosition == 'above-title' ||
-								iconimgPosition == 'below-title' ) &&
-								title_text }
+							{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && title_text }
 
-							{ iconimgPosition == 'below-title' &&
-								icon_image_html }
+							{ iconimgPosition == 'below-title' && icon_image_html }
 
-							{ ( iconimgPosition == 'above-title' ||
-								iconimgPosition == 'below-title' ) &&
-								desc }
+							{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && desc }
 
 							{ iconimgPosition === 'left-title' && (
 								<>
@@ -1563,8 +1424,7 @@ const deprecated = [
 								</>
 							) }
 
-							{ ( iconimgPosition == 'left' ||
-								iconimgPosition == 'right' ) && (
+							{ ( iconimgPosition == 'left' || iconimgPosition == 'right' ) && (
 								<>
 									{ title_text }
 									{ desc }
@@ -1583,13 +1443,7 @@ const deprecated = [
 			}
 
 			return (
-				<div
-					className={ classnames(
-						className,
-						'uagb-infobox__outer-wrap',
-						`uagb-block-${ block_id }`
-					) }
-				>
+				<div className={ classnames( className, 'uagb-infobox__outer-wrap', `uagb-block-${ block_id }` ) }>
 					{ ctaType == 'all' && (
 						<a
 							href={ ctaLink }
@@ -1637,15 +1491,12 @@ const deprecated = [
 
 			let icon_image_html = is_image;
 			let seperator_position = seperatorPosition;
-			const seperator_html = (
-				<InfoBoxSeparator attributes={ props.attributes } />
-			);
+			const seperator_html = <InfoBoxSeparator attributes={ props.attributes } />;
 			let show_seperator = true;
 
 			if (
 				seperatorPosition == 'after_icon' &&
-				( iconimgPosition == 'above-title' ||
-					iconimgPosition == 'below-title' )
+				( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' )
 			) {
 				show_seperator = false;
 				icon_image_html = (
@@ -1658,16 +1509,12 @@ const deprecated = [
 
 			if (
 				seperatorPosition == 'after_icon' &&
-				( iconimgPosition !== 'above-title' ||
-					iconimgPosition !== 'below-title' )
+				( iconimgPosition !== 'above-title' || iconimgPosition !== 'below-title' )
 			) {
 				seperator_position = 'after_title';
 			}
 
-			if (
-				iconimgPosition == 'below-title' &&
-				seperatorPosition == 'after_title'
-			) {
+			if ( iconimgPosition == 'below-title' && seperatorPosition == 'after_title' ) {
 				show_seperator = false;
 				icon_image_html = (
 					<>
@@ -1685,17 +1532,10 @@ const deprecated = [
 						seperator_html }
 					<div className="uagb-ifb-text-wrap">
 						{ showDesc && '' !== headingDesc && (
-							<InfoBoxDesc
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ 'none' !== seperatorStyle &&
-							seperator_position == 'after_desc' &&
-							seperator_html }
-						{ ctaType !== 'none' && (
-							<CallToAction attributes={ props.attributes } />
-						) }
+						{ 'none' !== seperatorStyle && seperator_position == 'after_desc' && seperator_html }
+						{ ctaType !== 'none' && <CallToAction attributes={ props.attributes } /> }
 					</div>
 				</>
 			);
@@ -1704,19 +1544,11 @@ const deprecated = [
 			const title_text = (
 				<div className="uagb-ifb-title-wrap">
 					{ showPrefix && '' !== prefixTitle && (
-						<Prefix
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
+						<Prefix attributes={ props.attributes } setAttributes="not_set" />
 					) }
-					{ 'none' !== seperatorStyle &&
-						seperator_position == 'after_prefix' &&
-						seperator_html }
+					{ 'none' !== seperatorStyle && seperator_position == 'after_prefix' && seperator_html }
 					{ showTitle && '' !== infoBoxTitle && (
-						<Title
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
+						<Title attributes={ props.attributes } setAttributes="not_set" />
 					) }
 				</div>
 			);
@@ -1732,19 +1564,13 @@ const deprecated = [
 					<div className="uagb-ifb-left-right-wrap">
 						{ iconimgPosition == 'left' && is_image }
 						<div className="uagb-ifb-content">
-							{ iconimgPosition == 'above-title' &&
-								icon_image_html }
+							{ iconimgPosition == 'above-title' && icon_image_html }
 
-							{ ( iconimgPosition == 'above-title' ||
-								iconimgPosition == 'below-title' ) &&
-								title_text }
+							{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && title_text }
 
-							{ iconimgPosition == 'below-title' &&
-								icon_image_html }
+							{ iconimgPosition == 'below-title' && icon_image_html }
 
-							{ ( iconimgPosition == 'above-title' ||
-								iconimgPosition == 'below-title' ) &&
-								desc }
+							{ ( iconimgPosition == 'above-title' || iconimgPosition == 'below-title' ) && desc }
 
 							{ iconimgPosition === 'left-title' && (
 								<>
@@ -1766,8 +1592,7 @@ const deprecated = [
 								</>
 							) }
 
-							{ ( iconimgPosition == 'left' ||
-								iconimgPosition == 'right' ) && (
+							{ ( iconimgPosition == 'left' || iconimgPosition == 'right' ) && (
 								<>
 									{ title_text }
 									{ desc }
@@ -1786,13 +1611,7 @@ const deprecated = [
 			}
 
 			return (
-				<div
-					className={ classnames(
-						className,
-						'uagb-infobox__outer-wrap',
-						`uagb-block-${ block_id }`
-					) }
-				>
+				<div className={ classnames( className, 'uagb-infobox__outer-wrap', `uagb-block-${ block_id }` ) }>
 					{ ctaType == 'all' && (
 						<a
 							href={ ctaLink }
@@ -1808,7 +1627,6 @@ const deprecated = [
 		},
 	},
 	{
-
 		attributes,
 		save( props ) {
 			const {
@@ -1859,8 +1677,7 @@ const deprecated = [
 
 			if (
 				position === 'after_icon' &&
-				( iconimgPosition !== 'above-title' ||
-					iconimgPosition !== 'below-title' )
+				( iconimgPosition !== 'above-title' || iconimgPosition !== 'below-title' )
 			) {
 				position = 'after_title';
 			}
@@ -1877,23 +1694,13 @@ const deprecated = [
 			// Get description and seperator components.
 			const desc = (
 				<>
-					{ 'none' !== seperatorStyle &&
-						position === 'after_title' &&
-						showSeperator &&
-						seperatorHtml }
+					{ 'none' !== seperatorStyle && position === 'after_title' && showSeperator && seperatorHtml }
 					<div className="uagb-ifb-text-wrap">
 						{ showDesc && '' !== headingDesc && (
-							<InfoBoxDesc
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
 						) }
-						{ 'none' !== seperatorStyle &&
-							position === 'after_desc' &&
-							seperatorHtml }
-						{ ctaType !== 'none' && (
-							<CallToAction attributes={ props.attributes } />
-						) }
+						{ 'none' !== seperatorStyle && position === 'after_desc' && seperatorHtml }
+						{ ctaType !== 'none' && <CallToAction attributes={ props.attributes } /> }
 					</div>
 				</>
 			);
@@ -1902,19 +1709,11 @@ const deprecated = [
 			const title_text = (
 				<div className="uagb-ifb-title-wrap">
 					{ showPrefix && '' !== prefixTitle && (
-						<Prefix
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
+						<Prefix attributes={ props.attributes } setAttributes="not_set" />
 					) }
-					{ 'none' !== seperatorStyle &&
-						position === 'after_prefix' &&
-						seperatorHtml }
+					{ 'none' !== seperatorStyle && position === 'after_prefix' && seperatorHtml }
 					{ showTitle && '' !== infoBoxTitle && (
-						<Title
-							attributes={ props.attributes }
-							setAttributes="not_set"
-						/>
+						<Title attributes={ props.attributes } setAttributes="not_set" />
 					) }
 				</div>
 			);
@@ -1932,15 +1731,11 @@ const deprecated = [
 						<div className="uagb-ifb-content">
 							{ iconimgPosition === 'above-title' && iconImageHtml }
 
-							{ ( iconimgPosition === 'above-title' ||
-								iconimgPosition === 'below-title' ) &&
-								title_text }
+							{ ( iconimgPosition === 'above-title' || iconimgPosition === 'below-title' ) && title_text }
 
 							{ iconimgPosition === 'below-title' && iconImageHtml }
 
-							{ ( iconimgPosition === 'above-title' ||
-								iconimgPosition === 'below-title' ) &&
-								desc }
+							{ ( iconimgPosition === 'above-title' || iconimgPosition === 'below-title' ) && desc }
 
 							{ iconimgPosition === 'left-title' && (
 								<>
@@ -1962,8 +1757,7 @@ const deprecated = [
 								</>
 							) }
 
-							{ ( iconimgPosition === 'left' ||
-								iconimgPosition === 'right' ) && (
+							{ ( iconimgPosition === 'left' || iconimgPosition === 'right' ) && (
 								<>
 									{ title_text }
 									{ desc }
@@ -1982,11 +1776,169 @@ const deprecated = [
 			}
 
 			return (
+				<div className={ classnames( className, 'uagb-infobox__outer-wrap', `uagb-block-${ block_id }` ) }>
+					{ ctaType === 'all' && (
+						<a // eslint-disable-line jsx-a11y/anchor-has-content
+							href={ ctaLink }
+							className="uagb-infobox-link-wrap uagb-infbox__link-to-all"
+							target={ target }
+							aria-label={ 'Infobox Link' }
+							rel="noopener noreferrer"
+						></a>
+					) }
+					{ output }
+				</div>
+			);
+		},
+	},
+	{
+		attributes: AttributesNewVer,
+		save( props ) {
+			const {
+				iconimgPosition,
+				block_id,
+				source_type,
+				seperatorStyle,
+				ctaType,
+				ctaLink,
+				ctaTarget,
+				prefixTitle,
+				infoBoxTitle,
+				headingDesc,
+				showPrefix,
+				showTitle,
+				showDesc,
+				icon,
+				seperatorPosition,
+			} = props.attributes;
+
+			// Get icon/Image components.
+			let isImage = '';
+
+			if ( source_type === 'icon' && icon !== '' ) {
+				isImage = <IconNewVer attributes={ props.attributes } />;
+			} else {
+				isImage = <InfoBoxIconImageNewVer attributes={ props.attributes } />;
+			}
+
+			let iconImageHtml = isImage;
+			let position = seperatorPosition;
+			const seperatorHtml = <InfoBoxSeparatorNewVer attributes={ props.attributes } />;
+			let showSeperator = true;
+
+			if (
+				position === 'after_icon' &&
+				( iconimgPosition === 'above-title' || iconimgPosition === 'below-title' )
+			) {
+				showSeperator = false;
+				iconImageHtml = (
+					<>
+						{ isImage }
+						{ 'none' !== seperatorStyle && seperatorHtml }
+					</>
+				);
+			}
+
+			if (
+				position === 'after_icon' &&
+				( iconimgPosition === 'left-title' ||
+					iconimgPosition === 'right-title' ||
+					iconimgPosition === 'left' ||
+					iconimgPosition === 'right' )
+			) {
+				position = 'after_title';
+			}
+
+			if ( iconimgPosition === 'below-title' && position === 'after_title' ) {
+				showSeperator = false;
+				iconImageHtml = (
+					<>
+						{ 'none' !== seperatorStyle && seperatorHtml }
+						{ isImage }
+					</>
+				);
+			}
+			// Get description and seperator components.
+			const desc = (
+				<>
+					{ 'none' !== seperatorStyle && position === 'after_title' && showSeperator && seperatorHtml }
+					{ showDesc && '' !== headingDesc && (
+						<InfoBoxDesc attributes={ props.attributes } setAttributes="not_set" />
+					) }
+					{ 'none' !== seperatorStyle && position === 'after_desc' && seperatorHtml }
+					{ ctaType !== 'none' && <CallToAction attributes={ props.attributes } /> }
+				</>
+			);
+
+			// Get Title and Prefix components.
+			const titleText = (
+				<div className="uagb-ifb-title-wrap">
+					{ showPrefix && '' !== prefixTitle && (
+						<Prefix attributes={ props.attributes } setAttributes="not_set" />
+					) }
+					{ 'none' !== seperatorStyle && position === 'after_prefix' && seperatorHtml }
+					{ showTitle && '' !== infoBoxTitle && (
+						<Title attributes={ props.attributes } setAttributes="not_set" />
+					) }
+				</div>
+			);
+
+			const output = (
+				<>
+					{ iconimgPosition === 'left' && iconImageHtml }
+					<div className="uagb-ifb-content">
+						{ iconimgPosition === 'above-title' && iconImageHtml }
+
+						{ ( iconimgPosition === 'above-title' || iconimgPosition === 'below-title' ) && titleText }
+
+						{ iconimgPosition === 'below-title' && iconImageHtml }
+
+						{ ( iconimgPosition === 'above-title' || iconimgPosition === 'below-title' ) && desc }
+
+						{ iconimgPosition === 'left-title' && (
+							<>
+								<div className="uagb-ifb-left-title-image">
+									{ iconImageHtml }
+									{ titleText }
+								</div>
+								{ desc }
+							</>
+						) }
+
+						{ iconimgPosition === 'right-title' && (
+							<>
+								<div className="uagb-ifb-right-title-image">
+									{ titleText }
+									{ iconImageHtml }
+								</div>
+								{ desc }
+							</>
+						) }
+
+						{ ( iconimgPosition === 'left' || iconimgPosition === 'right' ) && (
+							<>
+								{ titleText }
+								{ desc }
+							</>
+						) }
+					</div>
+
+					{ iconimgPosition === 'right' && iconImageHtml }
+				</>
+			);
+
+			let target = '_self';
+			if ( ctaTarget ) {
+				target = '_blank';
+			}
+
+			return (
 				<div
 					className={ classnames(
-						className,
-						'uagb-infobox__outer-wrap',
-						`uagb-block-${ block_id }`
+						`uagb-block-${ block_id }`,
+						'uagb-infobox__content-wrap',
+						ctaType === 'all' ? ' uagb-infobox_cta-type-all' : '',
+						...InfoBoxPositionClassesNewVer( props.attributes )
 					) }
 				>
 					{ ctaType === 'all' && (
@@ -2001,7 +1953,23 @@ const deprecated = [
 					{ output }
 				</div>
 			);
-		}
+		},
+	},
+	{
+		attributes: newAttributesV2_0_13,
+		save: newSaveV2_0_13,
+	},
+	{
+		attributes: AttributesNewVer,
+		save: newSaveV2_4,
+	},
+	{
+		attributes: AttributesNewVer,
+		save: newSaveV2_7_0,
+	},
+	{
+		attributes: newAttributesV2_7_4,
+		save: newSaveV2_7_4,
 	}
 ];
 

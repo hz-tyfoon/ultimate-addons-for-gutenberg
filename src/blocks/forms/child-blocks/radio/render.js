@@ -1,10 +1,8 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
-
-import { Button, ToggleControl } from '@wordpress/components';
-
+import { Button } from '@wordpress/components';
 import { RichText } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
@@ -16,28 +14,19 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	const { setState } = props;
-
-	props = props.parentProps;
-
 	const { attributes, setAttributes, isSelected } = props;
 
 	const { block_id, radioRequired, options, radioName, layout } = attributes;
 
 	const addOption = () => {
 		const newOption = {
-			optiontitle:
-				__( 'Option Name ', 'ultimate-addons-for-gutenberg' ) +
-				`${ options.length + 1 }`,
-			optionvalue:
-				__( 'Option Value ', 'ultimate-addons-for-gutenberg' ) +
-				`${ options.length + 1 }`,
+			optiontitle: __( 'Option Name ', 'ultimate-addons-for-gutenberg' ) + `${ options.length + 1 }`,
+			optionvalue: __( 'Option Value ', 'ultimate-addons-for-gutenberg' ) + `${ options.length + 1 }`,
 		};
 		options[ options.length ] = newOption;
 		const addnewOptions = options.map( ( item ) => item );
 
 		setAttributes( { options: addnewOptions } );
-		setState( { optionsstate: addnewOptions } );
 	};
 
 	const editView = options.map( ( option, index ) => {
@@ -52,8 +41,7 @@ const Render = ( props ) => {
 				/>
 				<label // eslint-disable-line jsx-a11y/label-has-associated-control
 					htmlFor={ option.optiontitle }
-				>
-				</label>
+				></label>
 				<input
 					className="uagb-inner-input-view"
 					aria-label={ option.optiontitle }
@@ -72,9 +60,7 @@ const Render = ( props ) => {
 				<input
 					className="uagb-inner-input-view"
 					aria-label={ option.optionvalue }
-					onChange={ ( e ) =>
-						changeOption( { optionvalue: e.target.value }, index )
-					}
+					onChange={ ( e ) => changeOption( { optionvalue: e.target.value }, index ) }
 					type="text"
 					value={ option.optionvalue }
 				/>
@@ -118,7 +104,6 @@ const Render = ( props ) => {
 		} );
 
 		setAttributes( { options: editOptions } );
-		setState( { optionsstate: editOptions } );
 	};
 
 	const deleteOption = ( index ) => {
@@ -130,49 +115,21 @@ const Render = ( props ) => {
 			return item;
 		} );
 
-		setState( { optionsstate: deleteOptions } );
 		setAttributes( { deleteOptions } );
 	};
 
-	const isRequired = radioRequired
-		? __( 'required', 'ultimate-addons-for-gutenberg' )
-		: '';
+	const isRequired = radioRequired ? 'required' : '';
 
 	return (
 		<>
 			<div
-				className={ classnames(
-					'uagb-forms-radio-wrap',
-					'uagb-forms-field-set',
-					`uagb-block-${ block_id }`
-				) }
+				className={ classnames( 'uagb-forms-radio-wrap', 'uagb-forms-field-set', `uagb-block-${ block_id }` ) }
 			>
-				{ isSelected && (
-					<div className="uagb-forms-required-wrap">
-						<ToggleControl
-							label={ __(
-								'Required',
-								'ultimate-addons-for-gutenberg'
-							) }
-							checked={ radioRequired }
-							onChange={ () =>
-								setAttributes( {
-									radioRequired: ! radioRequired,
-								} )
-							}
-						/>
-					</div>
-				) }
 				<RichText
 					tagName="div"
-					placeholder={ __(
-						'Radio Title',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Radio Title', 'ultimate-addons-for-gutenberg' ) }
 					value={ radioName }
-					onChange={ ( value ) =>
-						setAttributes( { radioName: value } )
-					}
+					onChange={ ( value ) => setAttributes( { radioName: value } ) }
 					className={ `uagb-forms-radio-label ${ isRequired } uagb-forms-input-label` }
 					multiline={ false }
 					id={ block_id }
@@ -183,10 +140,7 @@ const Render = ( props ) => {
 							{ editView }
 							<div>
 								<Button isSecondary onClick={ addOption }>
-									{ __(
-										' + Add Option ',
-										'ultimate-addons-for-gutenberg'
-									) }
+									{ __( ' + Add Option ', 'ultimate-addons-for-gutenberg' ) }
 								</Button>
 							</div>
 						</div>
@@ -198,4 +152,4 @@ const Render = ( props ) => {
 		</>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

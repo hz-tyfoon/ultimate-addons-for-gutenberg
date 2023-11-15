@@ -1,10 +1,10 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
 import { RichText } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
-import { useDeviceType } from '@Controls/getPreviewType';
+import getImageHeightWidth from '@Controls/getImageHeightWidth';
 
 const Render = ( props ) => {
 	// Add and remove the CSS on the drop and remove of the component.
@@ -15,13 +15,9 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
+	const { attributes, setAttributes, mergeBlocks, insertBlocksAfter, onReplace, deviceType } = props;
 
-	const deviceType = useDeviceType();
-
-	const { attributes, setAttributes, mergeBlocks, insertBlocksAfter, onReplace } = props;
-
-	const { 
+	const {
 		block_id,
 		name,
 		description,
@@ -31,15 +27,13 @@ const Render = ( props ) => {
 		imageSize,
 		urlText,
 		urlTarget,
-		imgPosition
+		imgPosition,
+		imgTagHeight,
+		imgTagWidth,
 	} = attributes;
 
 	let urlCheck = '';
-	if (
-		typeof image !== 'undefined' &&
-		image !== null &&
-		image !== ''
-	) {
+	if ( typeof image !== 'undefined' && image !== null && image !== '' ) {
 		urlCheck = image.url;
 	}
 
@@ -47,10 +41,7 @@ const Render = ( props ) => {
 	if ( urlCheck !== '' ) {
 		const size = image.sizes;
 
-		if (
-			typeof size !== 'undefined' &&
-			typeof size[ imageSize ] !== 'undefined'
-		) {
+		if ( typeof size !== 'undefined' && typeof size[ imageSize ] !== 'undefined' ) {
 			imageUrl = size[ imageSize ].url;
 		} else {
 			imageUrl = urlCheck;
@@ -60,11 +51,19 @@ const Render = ( props ) => {
 	if ( urlTarget ) {
 		target = '_blank';
 	}
+
+	useEffect( () => {
+		getImageHeightWidth( imageUrl, setAttributes );
+	}, [ imageUrl ] );
+
 	const imageMarkup = (
 		<img
 			className="uagb-how-to-step-image"
 			src={ imageUrl }
 			alt={ image.alt }
+			width={ imgTagWidth }
+			height={ imgTagHeight }
+			loading="lazy"
 		/>
 	);
 	const contentMarkup = (
@@ -72,10 +71,7 @@ const Render = ( props ) => {
 			<RichText
 				tagName="div"
 				className="uagb-how-to-step-name"
-				placeholder={ __(
-					'Name',
-					'ultimate-addons-for-gutenberg'
-				) }
+				placeholder={ __( 'Name', 'ultimate-addons-for-gutenberg' ) }
 				value={ name }
 				onChange={ ( value ) => setAttributes( { name: value } ) }
 				multiline={ false }
@@ -83,11 +79,9 @@ const Render = ( props ) => {
 			<RichText
 				tagName="p"
 				value={ description }
-				placeholder={ __( 'Write a Description' ) }
+				placeholder={ __( 'Write a Description', 'ultimate-addons-for-gutenberg' ) }
 				className="uagb-how-to-step-description"
-				onChange={ ( value ) =>
-					setAttributes( { description: value } )
-				}
+				onChange={ ( value ) => setAttributes( { description: value } ) }
 				onMerge={ mergeBlocks }
 				onSplit={
 					insertBlocksAfter
@@ -99,22 +93,22 @@ const Render = ( props ) => {
 										description: after,
 									} ),
 								] );
-						}
+						  }
 						: undefined
 				}
 				onRemove={ () => onReplace( [] ) }
 			/>
-			{'text' === urlType && (
-				<a
-					href={url}
-					target={target}
-					className="uagb-step-link"
-				>
-					<span className="uagb-step-link-text">
-						{urlText}
-					</span>
-				</a>
-			)}
+			{ 'text' === urlType && (
+				<>
+					{ '' !== url ? (
+						<a href={ url } target={ target } className="uagb-step-link" rel="noopener noreferrer">
+							<span className="uagb-step-link-text">{ urlText }</span>
+						</a>
+					) : (
+						<span className="uagb-step-link-text">{ urlText }</span>
+					) }
+				</>
+			) }
 		</div>
 	);
 	return (
@@ -125,30 +119,30 @@ const Render = ( props ) => {
 				`uagb-block-${ block_id }`
 			) }
 		>
-			{'all' === urlType && (
-					<>
-						<a // eslint-disable-line jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid 
+			{ ( 'all' === urlType || 'none' === urlType ) && (
+				<>
+					{ '' !== url && 'all' === urlType && (
+						<a // eslint-disable-line jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid
 							className="uagb-step-link"
-							aria-label={'Step Link'}
+							aria-label={ 'Step Link' }
 							rel="noopener noreferrer"
-							target={target}
+							target={ target }
 						></a>
-						<div className={`uagb-step-image-content-wrap uag-image-position-${imgPosition}`}>
-							{ imageUrl && imageMarkup }
-
-							{ contentMarkup }
-						</div>
-					</>
-				)
-			}
-			{'text' === urlType && (
-					<div className={`uagb-step-image-content-wrap uag-image-position-${imgPosition}`}>
+					) }
+					<div className={ `uagb-step-image-content-wrap uag-image-position-${ imgPosition }` }>
 						{ imageUrl && imageMarkup }
+
 						{ contentMarkup }
 					</div>
-				)
-			}
+				</>
+			) }
+			{ 'text' === urlType && (
+				<div className={ `uagb-step-image-content-wrap uag-image-position-${ imgPosition }` }>
+					{ imageUrl && imageMarkup }
+					{ contentMarkup }
+				</div>
+			) }
 		</div>
 	);
 };
-export default React.memo( Render );
+export default memo( Render );

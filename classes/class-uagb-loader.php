@@ -36,6 +36,15 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 		public static function get_instance() {
 			if ( ! isset( self::$instance ) ) {
 				self::$instance = new self();
+
+				/**
+				 * Spectra loaded.
+				 *
+				 * Fires when Spectra was fully loaded and instantiated.
+				 *
+				 * @since 2.1.0
+				 */
+				do_action( 'spectra_core_loaded' );
 			}
 			return self::$instance;
 		}
@@ -61,6 +70,8 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 
 			$this->loader();
 
+			add_action( 'after_setup_theme', array( $this, 'load_compatibility' ) );
+
 			add_action( 'plugins_loaded', array( $this, 'load_plugin' ) );
 
 			add_action( 'init', array( $this, 'init_actions' ) );
@@ -75,7 +86,7 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			define( 'UAGB_BASE', plugin_basename( UAGB_FILE ) );
 			define( 'UAGB_DIR', plugin_dir_path( UAGB_FILE ) );
 			define( 'UAGB_URL', plugins_url( '/', UAGB_FILE ) );
-			define( 'UAGB_VER', '2.0.11' );
+			define( 'UAGB_VER', '2.10.1' );
 			define( 'UAGB_MODULES_DIR', UAGB_DIR . 'modules/' );
 			define( 'UAGB_MODULES_URL', UAGB_URL . 'modules/' );
 			define( 'UAGB_SLUG', 'spectra' );
@@ -117,22 +128,11 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 		public function loader() {
 
 			require_once UAGB_DIR . 'classes/utils.php';
+			require_once UAGB_DIR . 'classes/class-spectra-block-prioritization.php';
 			require_once UAGB_DIR . 'classes/class-uagb-install.php';
-			require_once UAGB_DIR . 'classes/class-uagb-admin-helper.php';
-			require_once UAGB_DIR . 'classes/class-uagb-block-module.php';
-			require_once UAGB_DIR . 'classes/class-uagb-helper.php';
-			require_once UAGB_DIR . 'classes/class-uagb-scripts-utils.php';
 			require_once UAGB_DIR . 'classes/class-uagb-filesystem.php';
 			require_once UAGB_DIR . 'classes/class-uagb-update.php';
-			require_once UAGB_DIR . 'admin/bsf-analytics/class-bsf-analytics.php';
-
-			$enable_templates_button = UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_templates_button', 'yes' );
-
-			if ( 'yes' === $enable_templates_button ) {
-				require_once UAGB_DIR . 'lib/class-uagb-ast-block-templates.php';
-			} else {
-				add_filter( 'ast_block_templates_disable', '__return_true' );
-			}
+			require_once UAGB_DIR . 'classes/class-uagb-block.php';
 
 			if ( is_admin() ) {
 				require_once UAGB_DIR . 'classes/class-uagb-beta-updates.php';
@@ -151,6 +151,10 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 
 			$this->load_textdomain();
 
+			require_once UAGB_DIR . 'classes/class-uagb-scripts-utils.php';
+			require_once UAGB_DIR . 'classes/class-uagb-block-module.php';
+			require_once UAGB_DIR . 'classes/class-uagb-admin-helper.php';
+			require_once UAGB_DIR . 'classes/class-uagb-helper.php';
 			require_once UAGB_DIR . 'blocks-config/blocks-config.php';
 			require_once UAGB_DIR . 'lib/astra-notices/class-astra-notices.php';
 
@@ -162,7 +166,8 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			require_once UAGB_DIR . 'classes/class-uagb-front-assets.php';
 			require_once UAGB_DIR . 'classes/class-uagb-init-blocks.php';
 			require_once UAGB_DIR . 'classes/class-uagb-rest-api.php';
-			require_once UAGB_DIR . 'classes/class-uagb-coming-soon.php';
+			require_once UAGB_DIR . 'classes/class-uagb-visibility.php';
+			require_once UAGB_DIR . 'classes/class-uagb-caching.php';
 
 			if ( 'twentyseventeen' === get_template() ) {
 				require_once UAGB_DIR . 'classes/class-uagb-twenty-seventeen-compatibility.php';
@@ -170,9 +175,33 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 
 			require_once UAGB_DIR . 'admin-core/admin-loader.php';
 
+			// Register all UAG Lite Blocks.
+			uagb_block()->register_blocks();
+
 			add_filter( 'rest_pre_dispatch', array( $this, 'rest_pre_dispatch' ), 10, 3 );
+
+			$enable_templates_button = UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_templates_button', 'yes' );
+
+			if ( 'yes' === $enable_templates_button ) {
+				require_once UAGB_DIR . 'lib/class-uagb-ast-block-templates.php';
+			} else {
+				add_filter( 'ast_block_templates_disable', '__return_true' );
+			}
+
+			// Includes Zip AI library.
+			require_once UAGB_DIR . 'lib/zip-ai/zip-ai.php';
 		}
 
+		/**
+		 * Loads theme compatibility files.
+		 *
+		 * @since 2.5.1
+		 *
+		 * @return void
+		 */
+		public function load_compatibility() {
+			require_once UAGB_DIR . 'classes/class-uagb-fse-fonts-compatibility.php';
+		}
 		/**
 		 * Fix REST API issue with blocks registered via PHP register_block_type.
 		 *
@@ -226,12 +255,60 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 					unset( $attributes['UAGLoggedOut'] );
 				}
 
+				if ( isset( $attributes['UAGDay'] ) ) {
+					unset( $attributes['UAGDay'] );
+				}
+
 				if ( isset( $attributes['zIndex'] ) ) {
 					unset( $attributes['zIndex'] );
 				}
 
 				if ( isset( $attributes['UAGResponsiveConditions'] ) ) {
 					unset( $attributes['UAGResponsiveConditions'] );
+				}
+
+				if ( isset( $attributes['UAGAnimationType'] ) ) {
+					unset( $attributes['UAGAnimationType'] );
+				}
+
+				if ( isset( $attributes['UAGAnimationTime'] ) ) {
+					unset( $attributes['UAGAnimationTime'] );
+				}
+
+				if ( isset( $attributes['UAGAnimationDelay'] ) ) {
+					unset( $attributes['UAGAnimationDelay'] );
+				}
+
+				if ( isset( $attributes['UAGAnimationEasing'] ) ) {
+					unset( $attributes['UAGAnimationEasing'] );
+				}
+
+				if ( isset( $attributes['UAGAnimationRepeat'] ) ) {
+					unset( $attributes['UAGAnimationRepeat'] );
+				}
+
+				if ( isset( $attributes['UAGAnimationDelayInterval'] ) ) {
+					unset( $attributes['UAGAnimationDelayInterval'] );
+				}
+
+				if ( isset( $attributes['UAGAnimationDoNotApplyToContainer'] ) ) {
+					unset( $attributes['UAGAnimationDoNotApplyToContainer'] );
+				}
+
+				if ( isset( $attributes['UAGStickyLocation'] ) ) {
+					unset( $attributes['UAGStickyLocation'] );
+				}
+
+				if ( isset( $attributes['UAGStickyRestricted'] ) ) {
+					unset( $attributes['UAGStickyRestricted'] );
+				}
+
+				if ( isset( $attributes['UAGStickyOffset'] ) ) {
+					unset( $attributes['UAGStickyOffset'] );
+				}
+
+				if ( isset( $attributes['UAGPosition'] ) ) {
+					unset( $attributes['UAGPosition'] );
 				}
 
 					$request['attributes'] = $attributes;
@@ -335,6 +412,113 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 
 			if ( 'astra' === $theme_folder ) {
 				require_once UAGB_DIR . 'compatibility/class-uagb-astra-compatibility.php';
+			}
+
+				register_meta(
+					'post',
+					'_uag_custom_page_level_css',
+					array(
+						'show_in_rest'  => true,
+						'type'          => 'string',
+						'single'        => true,
+						'auth_callback' => function() {
+							return current_user_can( 'edit_posts' );
+						},
+					)
+				);
+
+			// This class is loaded from blocks config.
+			UAGB_Popup_Builder::generate_scripts();
+
+			UAGB_Update::migrate_visibility_mode();
+
+			// Adds filters to modify the blocks allowed in excerpts.
+			add_filter( 'excerpt_allowed_blocks', array( $this, 'add_blocks_to_excerpt' ), 20 );
+			add_filter( 'excerpt_allowed_wrapper_blocks', array( $this, 'add_wrapper_blocks_to_excerpt' ), 20 );
+			add_filter( 'uagb_blocks_allowed_in_excerpt', array( $this, 'add_uagb_blocks_to_excerpt' ), 20, 2 );
+			$this->get_regenerate_assets_on_migration();
+		}
+
+		/**
+		 * Adds specified blocks to the list of allowed blocks in excerpts.
+		 *
+		 * @param array $allowed    List of allowed blocks in excerpts.
+		 * @since 2.6.0
+		 * @return array            Modified list of allowed blocks in excerpts.
+		 */
+		public function add_blocks_to_excerpt( $allowed ) {
+			return apply_filters( 'uagb_blocks_allowed_in_excerpt', $allowed, array( 'uagb/advanced-heading' ) );
+		}
+
+		/**
+		 * Adds specified wrapper blocks to the list of allowed blocks in excerpts.
+		 *
+		 * @param array $allowed    List of allowed blocks in excerpts.
+		 * @since 2.6.0
+		 * @return array            Modified list of allowed blocks in excerpts.
+		 */
+		public function add_wrapper_blocks_to_excerpt( $allowed ) {
+			return apply_filters(
+				'uagb_blocks_allowed_in_excerpt',
+				$allowed,
+				array(
+					'uagb/container',
+					'uagb/columns',
+					'uagb/column',
+				)
+			);
+		}
+
+		/**
+		 * Adds specified UAGB blocks to the list of allowed blocks in excerpts.
+		 *
+		 * @param array $excerpt_blocks     List of allowed blocks in excerpts.
+		 * @param array $blocks_to_add      Blocks to add to the list of allowed blocks in excerpts.
+		 * @since 2.6.0
+		 * @return array                    The merged excerpt blocks array if both parameters are arrays, or the original excerpt blocks if either parameter is not an array.
+		 */
+		public function add_uagb_blocks_to_excerpt( $excerpt_blocks, $blocks_to_add ) {
+			if ( is_array( $excerpt_blocks ) && is_array( $blocks_to_add ) ) {
+				return array_merge( $excerpt_blocks, $blocks_to_add );
+			}
+
+			// If either parameter is not an array, return the original excerpt blocks.
+			return $excerpt_blocks;
+		}
+
+		/**
+		 * Generate assets on migration.
+		 *
+		 * @since 2.7.10
+		 * @return void
+		 */
+		public function get_regenerate_assets_on_migration() {
+			// Parse the host (domain/hostname) from the site URL.
+			$site_host = wp_parse_url( site_url(), PHP_URL_HOST );
+
+			// Check if $site_host is empty or not a string. If true, return and exit the function.
+			if ( empty( $site_host ) || ! is_string( $site_host ) ) {
+				return;
+			}
+
+			// Remove 'www.' from the domain.
+			$domain = str_replace( 'www.', '', $site_host );
+
+			// Replace dots (.) with dashes (-) in the domain to create $site_domain.
+			$site_domain = str_replace( '.', '-', $domain );
+
+			// Retrieve the stored domain from admin settings.
+			$stored_domain = \UAGB_Admin_Helper::get_admin_settings_option( 'uagb_site_url', '' );
+
+			// If the stored domain is empty, update the 'uagb_site_url' option in admin settings with the modified site domain and return.
+			if ( empty( $stored_domain ) ) {
+				\UAGB_Admin_Helper::update_admin_settings_option( 'uagb_site_url', $site_domain );
+				return;
+			}
+
+			// If the stored domain is different from the current site domain, update the '__uagb_asset_version' option with the current timestamp.
+			if ( $stored_domain !== $site_domain ) {
+				\UAGB_Admin_Helper::update_admin_settings_option( '__uagb_asset_version', time() );
 			}
 		}
 	}

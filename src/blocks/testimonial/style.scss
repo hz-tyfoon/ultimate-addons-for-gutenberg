@@ -4,6 +4,10 @@
  * CSS for both Frontend+Backend.
  */
 
+.wp-block-uagb-testimonial.uagb-slick-carousel ul.slick-dots {
+	margin-bottom: 20px;
+}
+
 .uagb-testimonial__wrap {
 	box-sizing: border-box;
 }
@@ -43,6 +47,7 @@
 	text-align: center;
 	word-break: break-word;
 	border-radius: inherit;
+	display: grid;
 }
 
 .uagb-tm__image-position-left .uagb-tm__content,
@@ -111,13 +116,11 @@
 
 /* Slick CSS */
 .uagb-slick-carousel {
-
 	&.uagb-tm__arrow-outside .slick-next {
 		right: -45px;
 	}
 
 	&.uagb-tm__arrow-inside {
-
 		.slick-prev {
 			left: 25px;
 			z-index: 1;
@@ -130,11 +133,8 @@
 }
 
 [dir="rtl"] {
-
 	.uagb-tm__arrow-inside {
-
 		&.uagb-slick-carousel {
-
 			.slick-prev {
 				left: auto;
 				right: 25px;
@@ -148,9 +148,7 @@
 	}
 
 	.uagb-tm__arrow-outside {
-
 		&.uagb-slick-carousel {
-
 			.slick-prev {
 				right: auto;
 				left: -45px;
@@ -164,10 +162,8 @@
 	}
 }
 
-@media (min-width: 1025px) {
-
+@media ( min-width: 1025px ) {
 	.wp-block-uagb-testimonial.uagb-post__carousel_notset {
-
 		.slick-slide:last-child .uagb-testimonial__wrap {
 			padding-right: 0;
 		}
@@ -179,18 +175,14 @@
 		.uagb-testimonial__wrap {
 			margin-bottom: 0;
 		}
-
 	}
 }
 
-@media (max-width: 976px) {
-
+@media ( max-width: 976px ) {
 	.wp-block-uagb-testimonial.uagb-post__carousel_notset-tablet {
-
 		.uagb-testimonial__wrap {
 			margin-bottom: 0;
 		}
-
 
 		.slick-slide:last-child .uagb-testimonial__wrap {
 			padding-right: 0;
@@ -202,9 +194,7 @@
 	}
 
 	.uagb-tm-stacked-tablet {
-
 		&.uagb-tm__image-position-bottom {
-
 			.uagb-tm__image-content,
 			.uagb-testimonial-details {
 				display: block;
@@ -214,14 +204,12 @@
 
 		&.uagb-tm__image-position-left,
 		&.uagb-tm__image-position-right {
-
 			.uagb-tm__content {
 				display: block;
 			}
 		}
 
 		&.uagb-tm__image-position-right {
-
 			&.uagb-tm-reverse-order-tablet .uagb-tm__content {
 				display: inline-flex;
 				flex-direction: column-reverse;
@@ -229,7 +217,6 @@
 		}
 
 		&.uagb-tm__image-aligned-top {
-
 			.uagb-tm__image-content {
 				display: inline-flex;
 				align-self: center;
@@ -238,9 +225,7 @@
 	}
 
 	.uagb-slick-carousel {
-
 		&.uagb-tm__arrow-outside {
-
 			.slick-prev {
 				left: -10px;
 				z-index: 1;
@@ -253,11 +238,8 @@
 	}
 
 	[dir="rtl"] {
-
 		.uagb-slick-carousel {
-
 			&.uagb-tm__arrow-outside {
-
 				.slick-prev {
 					left: auto;
 					right: 15px;
@@ -272,10 +254,8 @@
 	}
 }
 
-@media (max-width: 768px) {
-
+@media ( max-width: 768px ) {
 	.wp-block-uagb-testimonial.uagb-post__carousel_notset-mobile {
-
 		.uagb-testimonial__wrap {
 			margin-bottom: 0;
 		}
@@ -290,9 +270,7 @@
 	}
 
 	.uagb-tm-stacked-mobile {
-
 		&.uagb-tm__image-position-bottom {
-
 			.uagb-tm__image-content,
 			.uagb-testimonial-details {
 				display: block;
@@ -302,14 +280,12 @@
 
 		&.uagb-tm__image-position-left,
 		&.uagb-tm__image-position-right {
-
 			.uagb-tm__content {
 				display: block;
 			}
 		}
 
 		&.uagb-tm__image-position-right {
-
 			&.uagb-tm-reverse-order-mobile .uagb-tm__content {
 				display: inline-flex;
 				flex-direction: column-reverse;
@@ -317,11 +293,19 @@
 		}
 
 		&.uagb-tm__image-aligned-top {
-
 			.uagb-tm__image-content {
 				display: inline-flex;
 				align-self: center;
 			}
+		}
+	}
+}
+
+.entry-content {
+	.wp-block-uagb-testimonial
+	.is-carousel {
+		ul.slick-dots {
+			padding: unset; // To resolve an issue of dots are not in center on front-end, unseting padding of ul of slick-dots.
 		}
 	}
 }

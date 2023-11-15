@@ -1,53 +1,42 @@
-import React from 'react';
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, TextControl } from '@wordpress/components';
+import { ToggleControl } from '@wordpress/components';
 import InspectorTabs from '@Components/inspector-tabs/InspectorTabs.js';
-import InspectorTab, {
-	UAGTabs,
-} from '@Components/inspector-tabs/InspectorTab.js';
+import InspectorTab, { UAGTabs } from '@Components/inspector-tabs/InspectorTab.js';
 import MultiButtonsControl from '@Components/multi-buttons-control';
 import { InspectorControls } from '@wordpress/block-editor';
-
-
+import UAGTextControl from '@Components/text-control';
+import { memo } from '@wordpress/element';
 
 import UAGAdvancedPanelBody from '@Components/advanced-panel-body';
 
 const Settings = ( props ) => {
-	props = props.parentProps;
 
 	const { attributes, setAttributes } = props;
 
-	const {
-		toggleRequired,
-		toggleStatus,
-		layout,
-		trueValue,
-		falseValue,
-	} = attributes;
+	const { toggleRequired, toggleStatus, layout, trueValue, falseValue } = attributes;
 
 	const toggleInspectorControls = () => {
 		return (
 			<UAGAdvancedPanelBody initialOpen={ true }>
-				
-				<TextControl
-					label={ __(
-						'True State',
-						'ultimate-addons-for-gutenberg'
-					) }
+				<UAGTextControl
+					label={ __( 'True State', 'ultimate-addons-for-gutenberg' ) }
 					value={ trueValue }
-					onChange={ ( value ) =>
-						setAttributes( { trueValue: value } )
-					}
+					data={ {
+						value: trueValue,
+						label: 'trueValue',
+					} }
+					setAttributes={ setAttributes }
+					onChange={ ( value ) => setAttributes( { trueValue: value } ) }
 				/>
-				<TextControl
-					label={ __(
-						'False State',
-						'ultimate-addons-for-gutenberg'
-					) }
+				<UAGTextControl
+					label={ __( 'False State', 'ultimate-addons-for-gutenberg' ) }
 					value={ falseValue }
-					onChange={ ( value ) =>
-						setAttributes( { falseValue: value } )
-					}
+					data={ {
+						value: falseValue,
+						label: 'falseValue',
+					} }
+					setAttributes={ setAttributes }
+					onChange={ ( value ) => setAttributes( { falseValue: value } ) }
 				/>
 				<MultiButtonsControl
 					setAttributes={ setAttributes }
@@ -72,9 +61,7 @@ const Settings = ( props ) => {
 				<ToggleControl
 					label={ __( 'Required', 'ultimate-addons-for-gutenberg' ) }
 					checked={ toggleRequired }
-					onChange={ () =>
-						setAttributes( { toggleRequired: ! toggleRequired } )
-					}
+					onChange={ () => setAttributes( { toggleRequired: ! toggleRequired } ) }
 				/>
 				<ToggleControl
 					label={
@@ -83,9 +70,7 @@ const Settings = ( props ) => {
 							: __( 'OFF State', 'ultimate-addons-for-gutenberg' )
 					}
 					checked={ toggleStatus }
-					onChange={ () =>
-						setAttributes( { toggleStatus: ! toggleStatus } )
-					}
+					onChange={ () => setAttributes( { toggleStatus: ! toggleStatus } ) }
 				/>
 				<p className="uagb-settings-notice">
 					{ __(
@@ -100,12 +85,10 @@ const Settings = ( props ) => {
 	return (
 		<InspectorControls>
 			<InspectorTabs tabs={ [ 'general', 'advance' ] }>
-				<InspectorTab { ...UAGTabs.general }>
-					{ toggleInspectorControls() }
-				</InspectorTab>
+				<InspectorTab { ...UAGTabs.general }>{ toggleInspectorControls() }</InspectorTab>
 				<InspectorTab { ...UAGTabs.advance }></InspectorTab>
 			</InspectorTabs>
 		</InspectorControls>
 	);
 };
-export default React.memo( Settings );
+export default memo( Settings );

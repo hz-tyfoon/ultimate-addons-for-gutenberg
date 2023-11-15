@@ -2,35 +2,102 @@
  * BLOCK: Container
  */
 import styling from './styling';
-import React, {    useEffect, useLayoutEffect } from 'react';
-
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useLayoutEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import Settings from './settings';
 import Render from './render';
-
 //  Import CSS.
 import './style.scss';
-import { __ } from '@wordpress/i18n';
-
-import { withSelect, useDispatch, select } from '@wordpress/data';
-
-import { compose } from '@wordpress/compose';
-
-import {
-	__experimentalBlockVariationPicker as BlockVariationPicker,
-} from '@wordpress/block-editor';
-
-import { createBlock } from '@wordpress/blocks';
-
+import { useSelect } from '@wordpress/data';
 import styles from './editor.lazy.scss';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
+import { containerWrapper } from './containerWrapper';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+import { VariationPicker } from './variationPicker';
 
 const UAGBContainer = ( props ) => {
+	const {
+		isSelected,
+		attributes,
+		attributes: {
+			borderStyle,
+			borderWidth,
+			borderColor,
+			borderHoverColor,
+			borderRadius,
+			variationSelected,
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+			globalBlockStyleId,
+			backgroundType,
+			backgroundVideoOpacity,
+		},
+		clientId,
+		setAttributes,
+		name,
+		deviceType,
+		context,
+		hasDynamicContent
+	} = props;
+	
+	const {
+		isParentOfSelectedBlock,
+		variations,
+		defaultVariation,
+		getBlockParents,
+		parentBlocks,
+	} = useSelect( ( select ) => {
+		const coreBlocks = select( 'core/blocks' );
+		const coreBlockEditor = select( 'core/block-editor' );
+		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
 
-	const deviceType = useDeviceType();
+		return {
+			defaultVariation: coreBlocks?.getDefaultBlockVariation( name ),
+			variations: coreBlocks?.getBlockVariations( name ),
+			isParentOfSelectedBlock: coreBlockEditor?.hasSelectedInnerBlock( clientId, true ),
+			getBlockParents : getBlockParentStore,
+			parentBlocks : coreBlockEditor?.getBlocksByClientId( getBlockParentStore ),
+		};
+	} );
+
+	// Check if a parent of this container is one of these special blocks with useMemo.
+	const checkSpecialBlockAvailability = useMemo( ()=> {
+		const attributesToUpdate = {
+			hasSliderParent: false,
+			hasPopupParent: false,
+		};
+
+		// Add the lists of special block cases.
+		const specialBlocks = {
+			sliderBlocks: [ 'uagb/slider', 'uagb/slider-child' ],
+			popupBlocks: [ 'uagb/modal', 'uagb/popup-builder' ],
+		};
+
+		if ( parentBlocks?.length ) {
+			for ( const parent in parentBlocks ) {
+				const parentName = parentBlocks[parent]?.name;
+				// For Slider.
+				if ( specialBlocks.sliderBlocks.includes( parentName ) ) {
+					attributesToUpdate.hasSliderParent = true;
+				}
+
+				// For Modal and Popup Builder.
+				if ( specialBlocks.popupBlocks.includes( parentName ) ) {
+					attributesToUpdate.hasPopupParent = true;
+				}
+			}
+		}
+
+		return attributesToUpdate;
+	}, [] );
+
+	props = { ...props, ...checkSpecialBlockAvailability };
 
 	// Add and remove the CSS on the drop and remove of the component.
 	useLayoutEffect( () => {
@@ -40,7 +107,7 @@ const UAGBContainer = ( props ) => {
 		};
 	}, [] );
 
-	if ( props.isParentOfSelectedBlock ) {
+	if ( isParentOfSelectedBlock ) {
 		const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
 		if ( emptyBlockInserter ) {
 			emptyBlockInserter.style.display = 'none';
@@ -48,201 +115,95 @@ const UAGBContainer = ( props ) => {
 	}
 
 	useEffect( () => {
-		const isBlockRootParent = 0 === select( 'core/block-editor' ).getBlockParents( props.clientId ).length;
+		// Check if a parent of this container is one of these special blocks.
+		const attributesToUpdate = {};
 
-		if ( isBlockRootParent ) {
-			props.setAttributes( { isBlockRootParent: true } );
+		// Conditionally set the isBlockRootParent attribute
+		if ( ! parentBlocks || parentBlocks.length === 0 || ! parentBlocks.some( parent => parent.name === 'uagb/container' ) ) {
+			attributesToUpdate.isBlockRootParent = true;
 		}
 
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		const iframeEl = document.querySelector( `iframe[name='editor-canvas']` );
-		let element;
-		if( iframeEl ){
-			element = iframeEl.contentDocument.getElementById( 'block-' + props.clientId )
-		} else {
-			element = document.getElementById( 'block-' + props.clientId )
-		}
-		// Add Close Button for Variation Selector.
-		const variationPicker = element?.querySelector( '.uagb-container-variation-picker .block-editor-block-variation-picker' );
-		const closeButton = document.createElement( 'button' );
-		closeButton.onclick = function() {
-			if ( props.defaultVariation.attributes ) {
-				props.setAttributes( props.defaultVariation.attributes );
-			}
-		};
-		closeButton.setAttribute( 'class', 'uagb-variation-close' );
-		closeButton.innerHTML = '×';
-		if ( variationPicker ) {
-			const variationPickerLabel = variationPicker.querySelector( '.components-placeholder__label' );
-			variationPicker.insertBefore( closeButton,variationPickerLabel );
+		// If the legacy video overlay opacity for video background was set, migrate it.
+		if ( 'video' === backgroundType && backgroundVideoOpacity ) {
+			attributesToUpdate.overlayOpacity = backgroundVideoOpacity;
+			attributesToUpdate.backgroundVideoOpacity = 0;
 		}
 
-		const descendants = select( 'core/block-editor' ).getBlocks( props.clientId );
-
-		if ( descendants.length !== props.attributes.blockDescendants.length ) {
-			props.setAttributes( { blockDescendants: descendants } );
+		// Compare with attribute and attributeToUpdate and update only if there is a change.
+		if ( attributesToUpdate.isBlockRootParent !== attributes.isBlockRootParent
+			|| attributesToUpdate.hasPopupParent !== attributes.hasPopupParent
+			|| attributesToUpdate.hasSliderParent !== attributes.hasSliderParent
+			|| attributesToUpdate.backgroundVideoOpacity !== attributes.backgroundVideoOpacity
+		) {
+			setAttributes( attributesToUpdate );
 		}
-		const {
-			borderStyle,
-			borderWidth,
-			borderColor,
-			borderHColor,
-			borderRadius
-		} = props.attributes;
 
+		if( globalBlockStyleId ) {
+			return;
+		}
+		
 		// border
-		if( borderWidth || borderRadius || borderColor || borderHColor || borderStyle ){
-			migrateBorderAttributes( 'container', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHColor',
-				value: borderHColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if ( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ) {
+			migrateBorderAttributes(
+				'container',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
 		}
-
-		if( 0 !== select( 'core/block-editor' ).getBlockParents(  props.clientId ).length ){ // if there is no parent for container when child container moved outside root then do not show variations.
-			props.setAttributes( { variationSelected: true } );
-		}
-
 	}, [] );
 
 	useEffect( () => {
-
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-container-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
-		const descendants = select( 'core/block-editor' ).getBlocks( props.clientId );
-
-		if ( descendants.length !== props.attributes.blockDescendants.length ) {
-			props.setAttributes( { blockDescendants: descendants } );
+		if ( hasDynamicContent && ! attributes?.context ) {
+			setAttributes( { context } );
 		}
+	}, [ context ] )
 
-	}, [ props ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
-
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-container-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-
 	}, [ deviceType ] );
 
-	const blockVariationPickerOnSelect = (
-		nextVariation = props.defaultVariation
-	) => {
-		if ( nextVariation.attributes ) {
-			props.setAttributes( nextVariation.attributes );
-		}
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-		if ( nextVariation.innerBlocks && 'one-column' !== nextVariation.name ) {
-			props.replaceInnerBlocks(
-				props.clientId,
-				createBlocksFromInnerBlocksTemplate( nextVariation.innerBlocks )
-			);
-		}
-	};
-
-	const createBlocksFromInnerBlocksTemplate = ( innerBlocksTemplate ) => {
-		return innerBlocksTemplate.map(
-			( [ name, attributes, innerBlocks = [] ] ) =>
-				createBlock(
-					name,
-					attributes,
-					createBlocksFromInnerBlocksTemplate( innerBlocks )
-				)
-		);
-	};
-
-	const { variations } = props;
-
-	const { variationSelected, isPreview } = props.attributes;
-
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/container.png`;
-
-	if ( ! variationSelected && 0 === select( 'core/block-editor' ).getBlockParents( props.clientId ).length ) {
-
-		return (
-			isPreview ? <img width='100%' src={previewImageData} alt=''/> :
-			<>
-			<div className='uagb-container-variation-picker'>
-				<BlockVariationPicker
-					icon={ '' }
-					label={ __(
-						'Select a Layout',
-						'ultimate-addons-for-gutenberg'
-					) }
-					instructions={ false }
-					variations={ variations }
-					onSelect={ ( nextVariation ) =>
-						blockVariationPickerOnSelect( nextVariation )
-					}
-				/>
-			</div>
-			</>
-		);
+	if ( ! variationSelected && 0 === getBlockParents?.length ) {
+		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
 	return (
 		<>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
-const applyWithSelect = withSelect( ( select, props ) => { // eslint-disable-line no-shadow
-	const { __experimentalGetPreviewDeviceType = null } = select(
-		'core/edit-post'
-	);
-	const deviceType = __experimentalGetPreviewDeviceType
-		? __experimentalGetPreviewDeviceType()
-		: null;
-		const { getBlocks } = select( 'core/block-editor' );
-	const {
-		getBlockType,
-		getBlockVariations,
-		getDefaultBlockVariation,
-	} = select( 'core/blocks' );
-	const innerBlocks = getBlocks( props.clientId );
-	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
-
-	return {
-		// Subscribe to changes of the innerBlocks to control the display of the layout selection placeholder.
-		innerBlocks,
-		blockType: getBlockType( props.name ),
-		defaultVariation:
-			typeof getDefaultBlockVariation === 'undefined'
-				? null
-				: getDefaultBlockVariation( props.name ),
-		variations:
-			typeof getBlockVariations === 'undefined'
-				? null
-				: getBlockVariations( props.name ),
-		replaceInnerBlocks,
-		deviceType,
-		isParentOfSelectedBlock: select( 'core/block-editor' ).hasSelectedInnerBlock( props.clientId, true )
-	};
-} );
-export default compose( applyWithSelect )( UAGBContainer );
+export default compose(
+	containerWrapper,
+	addInitialAttr,
+	AddStaticStyles,
+	AddGBSStyles
+)( UAGBContainer );

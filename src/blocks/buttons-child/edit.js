@@ -4,110 +4,108 @@
 
 // Import classes
 import styling from './styling';
-
-import React, { useEffect, useState,    } from 'react';
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useState, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
-
+import DynamicFontLoader from './dynamicFontLoader';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
 import Settings from './settings';
 import Render from './render';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const ButtonsChildComponent = ( props ) => {
-	const deviceType = useDeviceType();
+	const {
+		isSelected,
+		clientId,
+		attributes,
+		attributes: { borderStyle, borderWidth, borderRadius, borderHColor, borderColor, label, globalBlockStyleId },
+		setAttributes,
+		name,
+		deviceType,
+		context,
+	} = props;
+
 	const initialState = {
 		isURLPickerOpen: false,
 	};
 
 	const [ state, setStateValue ] = useState( initialState );
 
+	// Check label has dynamic content.
+	const labelHasDynamicContent = label && -1 !== label.indexOf( '<span data-spectra-dc-field="' );
+	
+	// Including condition in props for child component.
+	props = { ...props, labelHasDynamicContent };
+
 	useEffect( () => {
-		// Replacement for componentDidMount.
 
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		const { attributes, setAttributes } = props;
-		const {
-			vPadding,
-			hPadding,
-			topPadding,
-			rightPadding,
-			bottomPadding,
-			leftPadding,
-		} = attributes;
-
-		if ( vPadding ) {
-			if ( undefined === topPadding ) {
-				setAttributes( { topPadding: vPadding } );
-			}
-			if ( undefined === bottomPadding ) {
-				setAttributes( { bottomPadding: vPadding } );
-			}
+		if( globalBlockStyleId ) {
+			return;
 		}
-
-		if ( hPadding ) {
-			if ( undefined === rightPadding ) {
-				setAttributes( { rightPadding: hPadding } );
-			}
-			if ( undefined === leftPadding ) {
-				setAttributes( { leftPadding: hPadding } );
-			}
-		}
-		const { borderStyle, borderWidth, borderRadius, borderColor, borderHColor } = props.attributes
+		
 		// border migration
-		if( borderWidth || borderRadius || borderColor || borderHColor || borderStyle ){
-			migrateBorderAttributes( 'btn', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHColor',
-				value: borderHColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if ( borderWidth || borderRadius || borderColor || borderHColor || borderStyle ) {
+			migrateBorderAttributes(
+				'btn',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHColor',
+					value: borderHColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
-
 		}
 	}, [] );
 
 	useEffect( () => {
-
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-button-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
+		if( labelHasDynamicContent && ! attributes?.context ){
+			setAttributes( { context } );
+		}
+	}, [ context ] )
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-button-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
+
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	return (
-			<>
-			<Settings
-				parentProps={ props }
-				state={ state }
-				setStateValue={ setStateValue }
-				deviceType = { deviceType }
-			/>
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && (
+				<Settings
+					{ ...props }
+					state={ state }
+					setStateValue={ setStateValue }
+				/>
+			) }
+			<Render { ...props } />
+		</>
 	);
 };
-export default ButtonsChildComponent;
+
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+	AddGBSStyles
+)( ButtonsChildComponent );

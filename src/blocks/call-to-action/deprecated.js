@@ -11,7 +11,10 @@ import Description from './components/Description';
 import CtaPositionClasses from './classes';
 import CallToAction from './components/CallToAction';
 import CTA from './components/CTA';
-import attributes from './attributes';
+import attributes from './old-attributes';
+import CTANew from './components/CallToActionNew';
+import SecondCTAButton from './components/SecondCTAButton';
+import saveV2_7_0 from './deprecated/v2_7_0/save';
 
 import { __ } from '@wordpress/i18n';
 
@@ -30,22 +33,14 @@ const deprecated = [
 				description,
 			} = props.attributes;
 
-			const isCta = (
-				<CallToAction
-					attributes={ props.attributes }
-					setAttributes="not_set"
-				/>
-			);
+			const isCta = <CallToAction attributes={ props.attributes } setAttributes="not_set" />;
 
 			// Get description and seperator components.
 			const desc = (
 				<>
 					{ '' !== description && (
 						<div className="uagb-cta-text-wrap">
-							<Description
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Description attributes={ props.attributes } setAttributes="not_set" />
 						</div>
 					) }
 				</>
@@ -56,10 +51,7 @@ const deprecated = [
 				<>
 					{ '' !== ctaTitle && (
 						<div className="uagb-cta__title-wrap">
-							<Title
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Title attributes={ props.attributes } setAttributes="not_set" />
 						</div>
 					) }
 				</>
@@ -68,10 +60,7 @@ const deprecated = [
 			const output = (
 				<>
 					<div
-						className={ classnames(
-							'uagb-cta__content-wrap',
-							...CtaPositionClasses( props.attributes )
-						) }
+						className={ classnames( 'uagb-cta__content-wrap', ...CtaPositionClasses( props.attributes ) ) }
 					>
 						<div className="uagb-cta__left-right-wrap">
 							{ ctaPosition == 'left' && isCta }
@@ -92,8 +81,7 @@ const deprecated = [
 									</>
 								) }
 
-								{ ( ctaPosition == 'left' ||
-									ctaPosition == 'right' ) && (
+								{ ( ctaPosition == 'left' || ctaPosition == 'right' ) && (
 									<>
 										{ titleText }
 										{ desc }
@@ -115,10 +103,7 @@ const deprecated = [
 			return (
 				<>
 					<div
-						className={ classnames(
-							className,
-							'uagb-cta__outer-wrap'
-						) }
+						className={ classnames( className, 'uagb-cta__outer-wrap' ) }
 						id={ `uagb-cta-block-${ block_id }` }
 					>
 						{ ctaType == 'all' && (
@@ -152,19 +137,14 @@ const deprecated = [
 				description,
 			} = props.attributes;
 
-			const isCta = (
-				<CTA attributes={ props.attributes } setAttributes="not_set" />
-			);
+			const isCta = <CTA attributes={ props.attributes } setAttributes="not_set" />;
 
 			// Get description and seperator components.
 			const desc = (
 				<>
 					{ '' !== description && (
 						<div className="uagb-cta-text-wrap">
-							<Description
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Description attributes={ props.attributes } setAttributes="not_set" />
 						</div>
 					) }
 				</>
@@ -175,10 +155,7 @@ const deprecated = [
 				<>
 					{ '' !== ctaTitle && (
 						<div className="uagb-cta__title-wrap">
-							<Title
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Title attributes={ props.attributes } setAttributes="not_set" />
 						</div>
 					) }
 				</>
@@ -187,10 +164,7 @@ const deprecated = [
 			const output = (
 				<>
 					<div
-						className={ classnames(
-							'uagb-cta__content-wrap',
-							...CtaPositionClasses( props.attributes )
-						) }
+						className={ classnames( 'uagb-cta__content-wrap', ...CtaPositionClasses( props.attributes ) ) }
 					>
 						<div className="uagb-cta__left-right-wrap">
 							{ ctaPosition == 'left' && isCta }
@@ -211,8 +185,7 @@ const deprecated = [
 									</>
 								) }
 
-								{ ( ctaPosition == 'left' ||
-									ctaPosition == 'right' ) && (
+								{ ( ctaPosition == 'left' || ctaPosition == 'right' ) && (
 									<>
 										{ titleText }
 										{ desc }
@@ -234,10 +207,7 @@ const deprecated = [
 			return (
 				<>
 					<div
-						className={ classnames(
-							className,
-							'uagb-cta__outer-wrap'
-						) }
+						className={ classnames( className, 'uagb-cta__outer-wrap' ) }
 						id={ `uagb-cta-block-${ block_id }` }
 					>
 						{ ctaType == 'all' && (
@@ -271,19 +241,14 @@ const deprecated = [
 				description,
 			} = props.attributes;
 
-			const isCta = (
-				<CTA attributes={ props.attributes } setAttributes="not_set" />
-			);
+			const isCta = <CTA attributes={ props.attributes } setAttributes="not_set" />;
 
 			// Get description and seperator components.
 			const desc = (
 				<>
 					{ '' !== description && (
 						<div className="uagb-cta-text-wrap">
-							<Description
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Description attributes={ props.attributes } setAttributes="not_set" />
 						</div>
 					) }
 				</>
@@ -294,10 +259,7 @@ const deprecated = [
 				<>
 					{ '' !== ctaTitle && (
 						<div className="uagb-cta__title-wrap">
-							<Title
-								attributes={ props.attributes }
-								setAttributes="not_set"
-							/>
+							<Title attributes={ props.attributes } setAttributes="not_set" />
 						</div>
 					) }
 				</>
@@ -306,10 +268,7 @@ const deprecated = [
 			const output = (
 				<>
 					<div
-						className={ classnames(
-							'uagb-cta__content-wrap',
-							...CtaPositionClasses( props.attributes )
-						) }
+						className={ classnames( 'uagb-cta__content-wrap', ...CtaPositionClasses( props.attributes ) ) }
 					>
 						<div className="uagb-cta__left-right-wrap">
 							{ ctaPosition == 'left' && isCta }
@@ -330,8 +289,7 @@ const deprecated = [
 									</>
 								) }
 
-								{ ( ctaPosition == 'left' ||
-									ctaPosition == 'right' ) && (
+								{ ( ctaPosition == 'left' || ctaPosition == 'right' ) && (
 									<>
 										{ titleText }
 										{ desc }
@@ -352,13 +310,7 @@ const deprecated = [
 
 			return (
 				<>
-					<div
-						className={ classnames(
-							className,
-							'uagb-cta__outer-wrap',
-							`uagb-block-${ block_id }`
-						) }
-					>
+					<div className={ classnames( className, 'uagb-cta__outer-wrap', `uagb-block-${ block_id }` ) }>
 						{ ctaType == 'all' && (
 							<>
 								<a
@@ -376,6 +328,83 @@ const deprecated = [
 			);
 		},
 	},
+	{
+		attributes,
+		save( props ) {
+			const {
+				block_id,
+				ctaType,
+				ctaLink,
+				ctaTarget,
+				ctaTitle,
+				description,
+				enabledSecondCtaButton,
+			} = props.attributes;
+
+			const isCta = <CTANew attributes={ props.attributes } setAttributes="not_set" />;
+
+			const secondCtaButton =
+				'button' === ctaType && enabledSecondCtaButton ? (
+					<SecondCTAButton attributes={ props.attributes } setAttributes="not_set" />
+				) : (
+					''
+				);
+
+			// Get description and seperator components.
+			const desc = (
+				<>{ '' !== description && <Description attributes={ props.attributes } setAttributes="not_set" /> }</>
+			);
+
+			// Get Title components.
+			const titleText = (
+				<>{ '' !== ctaTitle && <Title attributes={ props.attributes } setAttributes="not_set" /> }</>
+			);
+
+			const output = (
+				<>
+					<div className="uagb-cta__wrap">
+						{ titleText }
+						{ desc }
+					</div>
+					<div className="uagb-cta__buttons">
+						{ isCta }
+						{ secondCtaButton }
+					</div>
+				</>
+			);
+
+			let target = '';
+			if ( ctaTarget ) {
+				target = '_blank';
+			}
+
+			return (
+				<div
+					className={ classnames(
+						`uagb-block-${ block_id }`,
+						'button' === ctaType ? 'wp-block-button' : ''
+					) }
+				>
+					{ ctaType === 'all' && (
+						<>
+							<a
+								href={ ctaLink }
+								className="uagb-cta__link-to-all"
+								target={ target }
+								rel="noopener noreferrer"
+							></a>
+							{ output }
+						</>
+					) }
+					{ ctaType !== 'all' && output }
+				</div>
+			);
+		},
+	},
+	{
+		attributes,
+		saveV2_7_0,
+	}
 ];
 
 export default deprecated;

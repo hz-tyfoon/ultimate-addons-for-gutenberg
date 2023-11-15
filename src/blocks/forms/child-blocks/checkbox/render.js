@@ -1,10 +1,8 @@
 import classnames from 'classnames';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import styles from './editor.lazy.scss';
-
-import { Button, ToggleControl } from '@wordpress/components';
-
+import { Button } from '@wordpress/components';
 import { RichText } from '@wordpress/block-editor';
 
 const Render = ( props ) => {
@@ -16,28 +14,19 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	const { setState } = props;
-
-	props = props.parentProps;
-
 	const { attributes, setAttributes, isSelected } = props;
 
 	const { block_id, checkboxRequired, options, checkboxName } = attributes;
 
+	const isRequired = checkboxRequired ? 'required' : '';
+
 	const addOption = () => {
 		const newOption = {
-			optiontitle:
-				__( 'Option Name ', 'ultimate-addons-for-gutenberg' ) +
-				`${ options.length + 1 }`,
-			optionvalue:
-				__( 'Option Value ', 'ultimate-addons-for-gutenberg' ) +
-				`${ options.length + 1 }`,
+			optiontitle: __( 'Option Name ', 'ultimate-addons-for-gutenberg' ) + `${ options.length + 1 }`,
+			optionvalue: __( 'Option Value ', 'ultimate-addons-for-gutenberg' ) + `${ options.length + 1 }`,
 		};
-		options[ options.length ] = newOption;
-		const addnewOptions = options.map( ( item ) => item );
-
-		setAttributes( { options: addnewOptions } );
-		setState( { optionsstate: addnewOptions } );
+		const addNewOptions = [ ...options, newOption ]; 
+		setAttributes( { options: addNewOptions } );
 	};
 
 	const editView = options.map( ( option, index ) => {
@@ -48,6 +37,7 @@ const Render = ( props ) => {
 					name={ `checkbox-${ block_id }` }
 					value={ option.optiontitle }
 					id={ option.optiontitle }
+					required={ checkboxRequired }
 				/>
 				<label htmlFor={ option.optiontitle }> </label>
 				<input
@@ -64,15 +54,15 @@ const Render = ( props ) => {
 					}
 					type="text"
 					value={ option.optiontitle }
+					required={ checkboxRequired }
 				/>
 				<input
 					className="uagb-inner-input-view"
 					aria-label={ option.optionvalue }
-					onChange={ ( e ) =>
-						changeOption( { optionvalue: e.target.value }, index )
-					}
+					onChange={ ( e ) => changeOption( { optionvalue: e.target.value }, index ) }
 					type="text"
 					value={ option.optionvalue }
+					required={ checkboxRequired }
 				/>
 				<Button
 					className="uagb-form-checkbox-option-delete"
@@ -98,9 +88,7 @@ const Render = ( props ) => {
 						value={ value }
 						required={ checkboxRequired }
 					/>
-					<label htmlFor={ `checkbox-${ value }-${ block_id }` }>
-						{ option.optiontitle }
-					</label>
+					<label htmlFor={ `checkbox-${ value }-${ block_id }` }>{ option.optiontitle }</label>
 					<br />
 				</>
 			);
@@ -116,7 +104,6 @@ const Render = ( props ) => {
 		} );
 
 		setAttributes( { options: editOptions } );
-		setState( { optionsstate: editOptions } );
 	};
 
 	const deleteOption = ( index ) => {
@@ -128,32 +115,11 @@ const Render = ( props ) => {
 			return item;
 		} );
 
-		setState( { optionsstate: deleteOptions } );
 		setAttributes( { deleteOptions } );
 	};
 
-	const isRequired = checkboxRequired
-		? __( 'required', 'ultimate-addons-for-gutenberg' )
-		: '';
-
 	return (
 		<>
-			{ isSelected && (
-				<div className="uagb-forms-required-wrap">
-					<ToggleControl
-						label={ __(
-							'Required',
-							'ultimate-addons-for-gutenberg'
-						) }
-						checked={ checkboxRequired }
-						onChange={ () =>
-							setAttributes( {
-								checkboxRequired: ! checkboxRequired,
-							} )
-						}
-					/>
-				</div>
-			) }
 			<div
 				className={ classnames(
 					'uagb-forms-checkbox-wrap',
@@ -163,14 +129,9 @@ const Render = ( props ) => {
 			>
 				<RichText
 					tagName="div"
-					placeholder={ __(
-						'Checkbox Title',
-						'ultimate-addons-for-gutenberg'
-					) }
+					placeholder={ __( 'Checkbox Title', 'ultimate-addons-for-gutenberg' ) }
 					value={ checkboxName }
-					onChange={ ( value ) =>
-						setAttributes( { checkboxName: value } )
-					}
+					onChange={ ( value ) => setAttributes( { checkboxName: value } ) }
 					className={ `uagb-forms-checkbox-label ${ isRequired } uagb-forms-input-label` }
 					multiline={ false }
 					id={ block_id }
@@ -181,10 +142,7 @@ const Render = ( props ) => {
 						<div className="uagb-forms-checkbox-controls">
 							<div>
 								<Button isSecondary onClick={ addOption }>
-									{ __(
-										' + Add Option ',
-										'ultimate-addons-for-gutenberg'
-									) }
+									{ __( ' + Add Option ', 'ultimate-addons-for-gutenberg' ) }
 								</Button>
 							</div>
 						</div>
@@ -197,4 +155,4 @@ const Render = ( props ) => {
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

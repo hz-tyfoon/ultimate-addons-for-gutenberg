@@ -1,29 +1,29 @@
 import { isBlobURL } from '@wordpress/blob';
 
 export const pickRelevantMediaFiles = ( image, size ) => {
-	const { alt, id, link, caption} = image
-	const imageProps = {alt, id, link, caption};
+	const { alt, id, link, caption } = image;
+	const imageProps = { alt, id, link, caption };
 
-	if( image?.sizes && image?.sizes[size] ){
+	if ( image?.sizes && image?.sizes[ size ] ) {
 		return {
 			...imageProps,
-			width: image?.sizes[size]?.width,
-			height: image?.sizes[size]?.height,
-			url: image?.sizes[size]?.url,
-		}
-	} else if( image?.media_details && image?.media_details?.sizes[size] ){
+			width: image?.sizes[ size ]?.width,
+			height: image?.sizes[ size ]?.height,
+			url: image?.sizes[ size ]?.url,
+		};
+	} else if ( image?.media_details && image?.media_details?.sizes[ size ] ) {
 		return {
 			...imageProps,
-			width: image?.media_details?.sizes[size]?.width,
-			height: image?.media_details?.sizes[size]?.height,
-			url: image?.media_details?.sizes[size]?.source_url,
-		}
+			width: image?.media_details?.sizes[ size ]?.width,
+			height: image?.media_details?.sizes[ size ]?.height,
+			url: image?.media_details?.sizes[ size ]?.source_url,
+		};
 	}
 
 	return {
 		...imageProps,
-		url: image?.url
-	}
+		url: image?.url,
+	};
 };
 
 /**
@@ -58,10 +58,8 @@ export const isExternalImage = ( id, url ) => url && ! id && ! isBlobURL( url );
  * @return {boolean} Whether or not it has default image size.
  */
 export const hasDefaultSize = ( image, defaultSize ) => {
-
-	return ( image?.sizes?.[ defaultSize ] || image?.media_details?.sizes?.[ defaultSize ] ) ? true : false;
-
-}
+	return image?.sizes?.[ defaultSize ] || image?.media_details?.sizes?.[ defaultSize ] ? true : false;
+};
 
 /**
  * Checks if a media attachment object has been "destroyed",
@@ -75,4 +73,33 @@ export const hasDefaultSize = ( image, defaultSize ) => {
 export const isMediaDestroyed = ( id ) => {
 	const attachment = wp?.media?.attachment( id ) || {};
 	return attachment.destroyed;
+};
+
+// Get image attributes according to device type.
+export const getDevicesAttributes = ( media, deviceType ) => {
+	const urlType = 'url' + deviceType; // urlTablet, urlMobile
+	const heightType = 'height' + deviceType; // heightTablet, heightMobile
+	const widthType = 'width' + deviceType; // widthTablet, widthMobile
+	const deviceSizeSlug = 'sizeSlug' + deviceType; // sizeSlugTablet, sizeSlugMobile
+
+	const getMobileAttributes = pickRelevantMediaFiles( media, deviceSizeSlug );
+	const mediaAttributes = {};
+	if( getMobileAttributes.url ){
+		mediaAttributes[ urlType ] = getMobileAttributes.url;
+	}
+
+	if( 'custom' !== deviceSizeSlug ){
+		if( getMobileAttributes.height ){
+			mediaAttributes[ heightType ] = getMobileAttributes.height;
+		}
+
+		if( getMobileAttributes.width ){
+			mediaAttributes[ widthType ] = getMobileAttributes.width;
+		}
+	}else{
+		mediaAttributes[ heightType ] = undefined;
+		mediaAttributes[ widthType ] = undefined;
+	}
+	
+	return mediaAttributes;
 }

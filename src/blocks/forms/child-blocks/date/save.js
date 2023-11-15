@@ -3,9 +3,6 @@
  */
 
 import classnames from 'classnames';
-
-import { __ } from '@wordpress/i18n';
-
 import { RichText } from '@wordpress/block-editor';
 
 export default function save( props ) {
@@ -47,6 +44,7 @@ export default function save( props ) {
 				max={ validation_max_value }
 				name={ block_id }
 				autoComplete={ autocomplete }
+				aria-label={ name }
 			/>
 		);
 	} else {
@@ -57,21 +55,14 @@ export default function save( props ) {
 				required={ dateRequired }
 				name={ block_id }
 				autoComplete={ autocomplete }
+				aria-label={ name }
 			/>
 		);
 	}
-	const isRequired = dateRequired
-		? __( 'required', 'ultimate-addons-for-gutenberg' )
-		: '';
+	const isRequired = dateRequired ? 'required' : '';
 
 	return (
-		<div
-			className={ classnames(
-				'uagb-forms-date-wrap',
-				'uagb-forms-field-set',
-				`uagb-block-${ block_id }`
-			) }
-		>
+		<div className={ classnames( 'uagb-forms-date-wrap', 'uagb-forms-field-set', `uagb-block-${ block_id }` ) }>
 			<RichText.Content
 				tagName="div"
 				value={ name }

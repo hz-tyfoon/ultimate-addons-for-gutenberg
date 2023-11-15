@@ -7,11 +7,11 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( props ) {
-
-	const blockName = props.name.replace( 'uagb/', '' );
-
+function styling( attributes, clientId, name, deviceType ) {
+	const blockName = name.replace( 'uagb/', '' );
+	const previewType = deviceType.toLowerCase();
 	const {
+		block_id,
 		customWidth,
 		makeCollapsible,
 		widthDesktop,
@@ -27,6 +27,7 @@ function styling( props ) {
 		bulletColor,
 		iconSize,
 		align,
+		overallAlign,
 		//Color
 		backgroundColor,
 		linkColor,
@@ -51,6 +52,12 @@ function styling( props ) {
 		leftMarginMobile,
 		marginTypeTablet,
 		//Padding,
+		vPaddingDesktop,
+		hPaddingDesktop,
+		vPaddingTablet,
+		hPaddingTablet,
+		vPaddingMobile,
+		hPaddingMobile,
 		topPadding,
 		rightPadding,
 		bottomPadding,
@@ -126,7 +133,7 @@ function styling( props ) {
 		separatorHColor,
 		separatorSpaceTablet,
 		separatorSpaceMobile,
-	} = props.attributes;
+	} = attributes;
 
 	const tColumnsDesktopFallback = getFallbackNumber( tColumnsDesktop, 'tColumnsDesktop', blockName );
 	const tColumnsTabletFallback = getFallbackNumber( tColumnsTablet, 'tColumnsTablet', blockName );
@@ -137,11 +144,29 @@ function styling( props ) {
 	let tablet_selectors = {};
 	let mobile_selectors = {};
 
-	const overallBorderCSS = generateBorderCSS( props.attributes, 'overall' )
-	const overallBorderCSSTablet = generateBorderCSS( props.attributes, 'overall', 'tablet' )
-	const overallBorderCSSMobile = generateBorderCSS( props.attributes, 'overall', 'mobile' )
+	const overallBorderCSS = generateBorderCSS( attributes, 'overall' );
+	const overallBorderCSSTablet = generateBorderCSS( attributes, 'overall', 'tablet' );
+	const overallBorderCSSMobile = generateBorderCSS( attributes, 'overall', 'mobile' );
+
+	const paddingTop = ( 'number' === typeof topPadding ) ? topPadding : vPaddingDesktop;
+	const paddingBottom = ( 'number' === typeof bottomPadding ) ? bottomPadding : vPaddingDesktop;
+	const paddingLeft = ( 'number' === typeof leftPadding ) ? leftPadding : hPaddingDesktop;
+	const paddingRight = ( 'number' === typeof rightPadding ) ? rightPadding : hPaddingDesktop;
+
+	const paddingTopTablet = ( 'number' === typeof topPaddingTablet ) ? topPaddingTablet : vPaddingTablet;
+	const paddingBottomTablet = ( 'number' === typeof bottomPaddingTablet ) ? bottomPaddingTablet : vPaddingTablet;
+	const paddingLeftTablet = ( 'number' === typeof leftPaddingTablet ) ? leftPaddingTablet : hPaddingTablet;
+	const paddingRightTablet = ( 'number' === typeof rightPaddingTablet ) ? rightPaddingTablet : hPaddingTablet;
+
+	const paddingTopMobile = ( 'number' === typeof topPaddingMobile ) ? topPaddingMobile : vPaddingMobile;
+	const paddingBottomMobile = ( 'number' === typeof bottomPaddingMobile ) ? bottomPaddingMobile : vPaddingMobile;
+	const paddingLeftMobile = ( 'number' === typeof leftPaddingMobile ) ? leftPaddingMobile : hPaddingMobile;
+	const paddingRightMobile = ( 'number' === typeof rightPaddingMobile ) ? rightPaddingMobile : hPaddingMobile;
 
 	selectors = {
+		'.wp-block-uagb-table-of-contents': {
+			'text-align': overallAlign,
+		},
 		' .uagb-toc__list-wrap ul li': {
 			'font-size': generateCSSUnit( fontSize, fontSizeType ),
 		},
@@ -152,7 +177,7 @@ function styling( props ) {
 			'font-size': generateCSSUnit( fontSize, fontSizeType ),
 			'line-height': generateCSSUnit( lineHeight, lineHeightType ),
 			'font-family': fontFamily,
-			'font-style' : fontStyle,
+			'font-style': fontStyle,
 			'text-decoration': fontDecoration,
 			'text-transform': fontTransform,
 			'font-weight': fontWeight,
@@ -166,16 +191,10 @@ function styling( props ) {
 		' .uagb-toc__title': {
 			'justify-content': headingAlignment,
 			'margin-bottom': generateCSSUnit( headingBottom, headingBottomType ),
-			'font-size': generateCSSUnit(
-				headingFontSize,
-				headingFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				headingLineHeight,
-				headingLineHeightType
-			),
+			'font-size': generateCSSUnit( headingFontSize, headingFontSizeType ),
+			'line-height': generateCSSUnit( headingLineHeight, headingLineHeightType ),
 			'font-family': headingFontFamily,
-			'font-style' : headingFontStyle,
+			'font-style': headingFontStyle,
 			'text-decoration': headingDecoration,
 			'text-transform': headingTransform,
 			'font-weight': headingFontWeight,
@@ -187,16 +206,10 @@ function styling( props ) {
 		},
 		' .uagb-toc__wrap': {
 			...overallBorderCSS,
-			'padding-left': generateCSSUnit( leftPadding, paddingTypeDesktop ),
-			'padding-right': generateCSSUnit(
-				rightPadding,
-				paddingTypeDesktop
-			),
-			'padding-top': generateCSSUnit( topPadding, paddingTypeDesktop ),
-			'padding-bottom': generateCSSUnit(
-				bottomPadding,
-				paddingTypeDesktop
-			),
+			'padding-left': generateCSSUnit( paddingLeft, paddingTypeDesktop ),
+			'padding-right': generateCSSUnit( paddingRight, paddingTypeDesktop ),
+			'padding-top': generateCSSUnit( paddingTop, paddingTypeDesktop ),
+			'padding-bottom': generateCSSUnit( paddingBottom, paddingTypeDesktop ),
 			'background': backgroundColor,
 		},
 		' .uagb-toc__wrap:hover': {
@@ -215,38 +228,14 @@ function styling( props ) {
 			'padding-bottom': 0,
 		},
 		' .uagb-toc__list-wrap ol.uagb-toc__list > li': {
-			'list-style-type': disableBullets ? 'none !important' :  markerView + ' !important',
-			'padding-top':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingDesktop,
-					contentPaddingTypeDesktop
-				) +
-				' / 2 )',
-			'padding-bottom':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingDesktop,
-					contentPaddingTypeDesktop
-				) +
-				' / 2 )',
+			'list-style-type': disableBullets ? 'none !important' : markerView + ' !important',
+			'padding-top': 'calc( ' + generateCSSUnit( contentPaddingDesktop, contentPaddingTypeDesktop ) + ' / 2 )',
+			'padding-bottom': 'calc( ' + generateCSSUnit( contentPaddingDesktop, contentPaddingTypeDesktop ) + ' / 2 )',
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list > li': {
-			'list-style-type': disableBullets ? 'none !important' :  markerView + ' !important',
-			'padding-top':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingDesktop,
-					contentPaddingTypeDesktop
-				) +
-				' / 2 )',
-			'padding-bottom':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingDesktop,
-					contentPaddingTypeDesktop
-				) +
-				' / 2 )',
+			'list-style-type': disableBullets ? 'none !important' : markerView + ' !important',
+			'padding-top': 'calc( ' + generateCSSUnit( contentPaddingDesktop, contentPaddingTypeDesktop ) + ' / 2 )',
+			'padding-bottom': 'calc( ' + generateCSSUnit( contentPaddingDesktop, contentPaddingTypeDesktop ) + ' / 2 )',
 		},
 		' .uag-toc__collapsible-wrap svg': {
 			'width': generateCSSUnit( iconSize, 'px' ),
@@ -267,14 +256,15 @@ function styling( props ) {
 	};
 
 	if ( customWidth ) {
-		selectors[ ' .uagb-toc__wrap' ].width = generateCSSUnit(
-			widthDesktopFallback,
-			widthTypeDesktop
-		);
+		selectors[ ' .uagb-toc__wrap' ].width = generateCSSUnit( widthDesktopFallback, widthTypeDesktop );
 	}
 
 	if ( customWidth && makeCollapsible ) {
-		selectors[ ' .uagb-toc__title']['justify-content'] = 'space-between';
+		selectors[ ' .uagb-toc__title' ][ 'justify-content' ] = 'space-between';
+	}
+
+	if ( customWidth && makeCollapsible ) {
+		selectors[ ' .uagb-toc__title' ].cursor = 'pointer';
 	}
 
 	if ( disableBullets ) {
@@ -302,51 +292,24 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( letterSpacingTablet, letterSpacingType ),
 		},
 		' .uagb-toc__title': {
-			'font-size': generateCSSUnit(
-				headingFontSizeTablet,
-				headingFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				headingLineHeightTablet,
-				headingLineHeightType
-			),
+			'font-size': generateCSSUnit( headingFontSizeTablet, headingFontSizeType ),
+			'line-height': generateCSSUnit( headingLineHeightTablet, headingLineHeightType ),
 			'margin-bottom': generateCSSUnit( headingBottomTablet, headingBottomType ),
 			'letter-spacing': generateCSSUnit( headingLetterSpacingTablet, headingLetterSpacingType ),
 		},
 		' .uagb-toc__wrap': {
 			...overallBorderCSSTablet,
 			'width': generateCSSUnit( widthTablet, widthTypeTablet ),
-			'padding-left': generateCSSUnit(
-				leftPaddingTablet,
-				paddingTypeTablet
-			),
-			'padding-right': generateCSSUnit(
-				rightPaddingTablet,
-				paddingTypeTablet
-			),
-			'padding-top': generateCSSUnit(
-				topPaddingTablet,
-				paddingTypeTablet
-			),
-			'padding-bottom': generateCSSUnit(
-				bottomPaddingTablet,
-				paddingTypeTablet
-			),
+			'padding-left': generateCSSUnit( paddingLeftTablet, paddingTypeTablet ),
+			'padding-right': generateCSSUnit( paddingRightTablet, paddingTypeTablet ),
+			'padding-top': generateCSSUnit( paddingTopTablet, paddingTypeTablet ),
+			'padding-bottom': generateCSSUnit( paddingBottomTablet, paddingTypeTablet ),
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list:first-child': {
-			'margin-left': generateCSSUnit(
-				leftMarginTablet,
-				marginTypeTablet
-			),
-			'margin-right': generateCSSUnit(
-				rightMarginTablet,
-				marginTypeTablet
-			),
+			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet ),
+			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet ),
 			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet ),
-			'margin-bottom': generateCSSUnit(
-				bottomMarginTablet,
-				marginTypeTablet
-			),
+			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet ),
 		},
 		' .uagb-toc__list-wrap': {
 			'column-count': tColumnsTabletFallback,
@@ -355,48 +318,18 @@ function styling( props ) {
 		},
 
 		' .uagb-toc__list-wrap > ol.uagb-toc__list > li:first-child': {
-			'padding-top': generateCSSUnit(
-				contentPaddingTablet,
-				contentPaddingTypeTablet
-			),
+			'padding-top': generateCSSUnit( contentPaddingTablet, contentPaddingTypeTablet ),
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list:last-child > li:last-child': {
-			'padding-bottom': generateCSSUnit(
-				contentPaddingTablet,
-				contentPaddingTypeTablet
-			),
+			'padding-bottom': generateCSSUnit( contentPaddingTablet, contentPaddingTypeTablet ),
 		},
 		' .uagb-toc__list-wrap ol.uagb-toc__list > li': {
-			'padding-top':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingTablet,
-					contentPaddingTypeTablet
-				) +
-				' / 2 )',
-			'padding-bottom':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingTablet,
-					contentPaddingTypeTablet
-				) +
-				' / 2 )',
+			'padding-top': 'calc( ' + generateCSSUnit( contentPaddingTablet, contentPaddingTypeTablet ) + ' / 2 )',
+			'padding-bottom': 'calc( ' + generateCSSUnit( contentPaddingTablet, contentPaddingTypeTablet ) + ' / 2 )',
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list > li': {
-			'padding-top':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingTablet,
-					contentPaddingTypeTablet
-				) +
-				' / 2 )',
-			'padding-bottom':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingTablet,
-					contentPaddingTypeTablet
-				) +
-				' / 2 )',
+			'padding-top': 'calc( ' + generateCSSUnit( contentPaddingTablet, contentPaddingTypeTablet ) + ' / 2 )',
+			'padding-bottom': 'calc( ' + generateCSSUnit( contentPaddingTablet, contentPaddingTypeTablet ) + ' / 2 )',
 		},
 	};
 
@@ -413,51 +346,24 @@ function styling( props ) {
 			'letter-spacing': generateCSSUnit( letterSpacingMobile, letterSpacingType ),
 		},
 		' .uagb-toc__title': {
-			'font-size': generateCSSUnit(
-				headingFontSizeMobile,
-				headingFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				headingLineHeightMobile,
-				headingLineHeightType
-			),
+			'font-size': generateCSSUnit( headingFontSizeMobile, headingFontSizeType ),
+			'line-height': generateCSSUnit( headingLineHeightMobile, headingLineHeightType ),
 			'margin-bottom': generateCSSUnit( headingBottomMobile, headingBottomType ),
 			'letter-spacing': generateCSSUnit( headingLetterSpacingMobile, headingLetterSpacingType ),
 		},
 		' .uagb-toc__wrap': {
 			...overallBorderCSSMobile,
 			'width': generateCSSUnit( widthMobile, widthTypeMobile ),
-			'padding-left': generateCSSUnit(
-				leftPaddingMobile,
-				paddingTypeMobile
-			),
-			'padding-right': generateCSSUnit(
-				rightPaddingMobile,
-				paddingTypeMobile
-			),
-			'padding-top': generateCSSUnit(
-				topPaddingMobile,
-				paddingTypeMobile
-			),
-			'padding-bottom': generateCSSUnit(
-				bottomPaddingMobile,
-				paddingTypeMobile
-			),
+			'padding-left': generateCSSUnit( paddingLeftMobile, paddingTypeMobile ),
+			'padding-right': generateCSSUnit( paddingRightMobile, paddingTypeMobile ),
+			'padding-top': generateCSSUnit( paddingTopMobile, paddingTypeMobile ),
+			'padding-bottom': generateCSSUnit( paddingBottomMobile, paddingTypeMobile ),
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list:first-child': {
-			'margin-left': generateCSSUnit(
-				leftMarginMobile,
-				marginTypeMobile
-			),
-			'margin-right': generateCSSUnit(
-				rightMarginMobile,
-				marginTypeMobile
-			),
+			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile ),
+			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile ),
 			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile ),
-			'margin-bottom': generateCSSUnit(
-				bottomMarginMobile,
-				marginTypeMobile
-			),
+			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile ),
 		},
 		' .uagb-toc__list-wrap': {
 			'column-count': tColumnsMobileFallback,
@@ -465,65 +371,34 @@ function styling( props ) {
 			'text-align': align,
 		},
 		' .uagb-toc__list-wrap > ol.uagb-toc__list > li:first-child': {
-			'padding-top': generateCSSUnit(
-				contentPaddingMobile,
-				contentPaddingTypeMobile
-			),
+			'padding-top': generateCSSUnit( contentPaddingMobile, contentPaddingTypeMobile ),
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list:last-child > li:last-child': {
-			'padding-bottom': generateCSSUnit(
-				contentPaddingMobile,
-				contentPaddingTypeMobile
-			),
+			'padding-bottom': generateCSSUnit( contentPaddingMobile, contentPaddingTypeMobile ),
 		},
 		' .uagb-toc__list-wrap ol.uagb-toc__list > li': {
-			'padding-top':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingMobile,
-					contentPaddingTypeMobile
-				) +
-				' / 2 )',
-			'padding-bottom':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingMobile,
-					contentPaddingTypeMobile
-				) +
-				' / 2 )',
+			'padding-top': 'calc( ' + generateCSSUnit( contentPaddingMobile, contentPaddingTypeMobile ) + ' / 2 )',
+			'padding-bottom': 'calc( ' + generateCSSUnit( contentPaddingMobile, contentPaddingTypeMobile ) + ' / 2 )',
 		},
 		' .uagb-toc__list-wrap ul.uagb-toc__list > li': {
-			'padding-top':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingMobile,
-					contentPaddingTypeMobile
-				) +
-				' / 2 )',
-			'padding-bottom':
-				'calc( ' +
-				generateCSSUnit(
-					contentPaddingMobile,
-					contentPaddingTypeMobile
-				) +
-				' / 2 )',
+			'padding-top': 'calc( ' + generateCSSUnit( contentPaddingMobile, contentPaddingTypeMobile ) + ' / 2 )',
+			'padding-bottom': 'calc( ' + generateCSSUnit( contentPaddingMobile, contentPaddingTypeMobile ) + ' / 2 )',
 		},
 	};
 
 	// separator
 	if ( separatorStyle !== 'none' ) {
-
 		// Since we need the separator to ignore the padding and cover the entire width of the parent container,
 		// we use calc and do the following calculations.
 
-		const calcPaddingLeft = generateCSSUnit( leftPadding, paddingTypeDesktop );
-		const calcPaddingRight = generateCSSUnit( rightPadding, paddingTypeDesktop );
+		const calcPaddingLeft = generateCSSUnit( paddingLeft, paddingTypeDesktop );
+		const calcPaddingRight = generateCSSUnit( paddingRight, paddingTypeDesktop );
 
-		const tCalcPaddingLeft = generateCSSUnit( leftPaddingTablet, paddingTypeTablet );
-		const tCalcPaddingRight = generateCSSUnit( rightPaddingTablet, paddingTypeTablet );
+		const tCalcPaddingLeft = generateCSSUnit( paddingLeftTablet, paddingTypeTablet );
+		const tCalcPaddingRight = generateCSSUnit( paddingRightTablet, paddingTypeTablet );
 
-		const mCalcPaddingLeft = generateCSSUnit( leftPaddingMobile, paddingTypeMobile );
-		const mCalcPaddingRight = generateCSSUnit( rightPaddingMobile, paddingTypeMobile );
+		const mCalcPaddingLeft = generateCSSUnit( paddingLeftMobile, paddingTypeMobile );
+		const mCalcPaddingRight = generateCSSUnit( paddingRightMobile, paddingTypeMobile );
 
 		selectors[ ' .uagb-toc__separator' ] = {
 			'border-top-style': separatorStyle,
@@ -531,7 +406,7 @@ function styling( props ) {
 				getFallbackNumber( separatorHeight, 'separatorHeight', blockName ),
 				separatorHeightType
 			),
-			'width': 'calc( 100% + ' + calcPaddingLeft + ' + ' + calcPaddingRight +')',
+			'width': 'calc( 100% + ' + calcPaddingLeft + ' + ' + calcPaddingRight + ')',
 			'margin-left': '-' + calcPaddingLeft,
 			'border-color': separatorColor,
 			'margin-bottom': generateCSSUnit(
@@ -545,7 +420,7 @@ function styling( props ) {
 		};
 
 		tablet_selectors[ ' .uagb-toc__separator' ] = {
-			'width': 'calc( 100% + ' + tCalcPaddingLeft + ' + ' + tCalcPaddingRight +')',
+			'width': 'calc( 100% + ' + tCalcPaddingLeft + ' + ' + tCalcPaddingRight + ')',
 			'margin-left': '-' + tCalcPaddingLeft,
 			'margin-bottom': generateCSSUnit(
 				getFallbackNumber( separatorSpaceTablet, 'separatorSpaceTablet', blockName ),
@@ -554,40 +429,39 @@ function styling( props ) {
 		};
 
 		mobile_selectors[ ' .uagb-toc__separator' ] = {
-			'width': 'calc( 100% + ' + mCalcPaddingLeft + ' + ' + mCalcPaddingRight +')',
+			'width': 'calc( 100% + ' + mCalcPaddingLeft + ' + ' + mCalcPaddingRight + ')',
 			'margin-left': '-' + mCalcPaddingLeft,
 			'margin-bottom': generateCSSUnit(
 				getFallbackNumber( separatorSpaceMobile, 'separatorSpaceMobile', blockName ),
 				separatorSpaceType
 			),
 		};
-
 	}
 
-	const id = `.block-editor-block-list__block .uagb-block-${ props.clientId.substr(
-		0,
-		8
-	) }`;
+	const id = `.block-editor-block-list__block .uagb-block-${ block_id }`;
 
 	let styling_css = generateCSS( selectors, id );
 
-	styling_css += generateCSS(
-		tablet_selectors,
-		`${ id }.uagb-editor-preview-mode-tablet`,
-		true,
-		'tablet'
-	);
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		styling_css += generateCSS(
+			tablet_selectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	styling_css += generateCSS(
-		mobile_selectors,
-		`${ id }.uagb-editor-preview-mode-mobile`,
-		true,
-		'mobile'
-	);
+		if( 'mobile' === previewType ){
+			styling_css += generateCSS(
+				mobile_selectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 
 	if ( '' !== scrollToTopColor ) {
-		styling_css +=
-			'.uagb-toc__scroll-top { color: ' + scrollToTopColor + '; }';
+		styling_css += '.uagb-toc__scroll-top { color: ' + scrollToTopColor + '; }';
 	}
 
 	if ( '' !== scrollToTopBgColor ) {

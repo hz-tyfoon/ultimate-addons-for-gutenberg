@@ -3,80 +3,48 @@
  */
 
 import styling from './styling';
-import React, { useEffect,    } from 'react';
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-
-
+import DynamicCSSLoader from '../../components/dynamic-css-loader';
+import DynamicFontLoader from './dynamicFontLoader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
 import Settings from './settings';
 import Render from './render';
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBTeam = ( props ) => {
-	const deviceType = useDeviceType();
+	const {
+		isSelected,
+		attributes,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		clientId,
+		name,
+		deviceType
+	} = props;
+
 	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-team-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
 	useEffect( () => {
-
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-team-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
 	}, [ deviceType ] );
 
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-		props.setAttributes( { classMigrate: true } );
-
-		const {
-			imgLeftMargin,
-			imgRightMargin,
-			imgTopMargin,
-			imgBottomMargin,
-			imageLeftMargin,
-			imageRightMargin,
-			imageTopMargin,
-			imageBottomMargin,
-		} = props.attributes;
-
-		if ( imgTopMargin ) {
-			if ( null === imageTopMargin || undefined === imageTopMargin ) {
-				props.setAttributes( { imageTopMargin: imgTopMargin } );
-			}
-		}
-		if ( imgBottomMargin ) {
-			if ( null === imageBottomMargin || undefined === imageBottomMargin ) {
-				props.setAttributes( { imageBottomMargin: imgBottomMargin } );
-			}
-		}
-
-		if ( imgLeftMargin ) {
-			if ( null === imageLeftMargin || undefined === imageLeftMargin ) {
-				props.setAttributes( { imageLeftMargin: imgLeftMargin } );
-			}
-		}
-		if ( imgRightMargin ) {
-			if ( null === imageRightMargin || undefined === imageRightMargin ) {
-				props.setAttributes( { imageRightMargin: imgRightMargin } );
-			}
-		}
-
-	}, [] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			<DynamicFontLoader { ...{ attributes } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default UAGBTeam;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( UAGBTeam );

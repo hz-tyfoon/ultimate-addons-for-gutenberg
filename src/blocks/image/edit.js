@@ -1,47 +1,58 @@
-import React, {    useEffect } from 'react';
-
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import styling from './styling';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
 import Settings from './settings';
 import Render from './render';
-
 //  Import CSS.
 import './style.scss';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import { compose } from '@wordpress/compose';
+import { getLoopImage } from './getLoopImage';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import AddGBSStyles from '@Controls/AddGBSStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
+function UAGBImageEdit( props ) {
+	const {
+		isSelected,
+		attributes,
+		name,
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		deviceType,
+		context,
+		setAttributes,
+		clientId,
+		hasDynamicContent,
+	} = props;
 
-export default function UAGBImageEdit( props ) {
-	const deviceType = useDeviceType();
 	useEffect( () => {
-
-		const { setAttributes } = props;
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-	}, [] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-image-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props, deviceType ] );
+		if ( hasDynamicContent && ! attributes?.context ) {
+			setAttributes( { context } );
+		}
+	}, [ context ] )
 
 	useEffect( () => {
 		scrollBlockToView();
 	}, [ deviceType ] );
 
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+
+	useEffect( () => {
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
+
 	return (
-		<React.Fragment>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
-		</React.Fragment>
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 }
+export default compose( 
+	getLoopImage, 
+	addInitialAttr, 
+	AddStaticStyles,
+	AddGBSStyles,
+	)( UAGBImageEdit );

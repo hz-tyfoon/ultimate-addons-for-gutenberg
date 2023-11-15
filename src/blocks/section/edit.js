@@ -3,84 +3,93 @@
  */
 
 import styling from './styling';
-import React, {    useEffect } from 'react';
-
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import { migrateBorderAttributes } from '@Controls/generateAttributes';
 import Settings from './settings';
 import Render from './render';
-
+import responsiveConditionPreview from '@Controls/responsiveConditionPreview';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
 import hexToRGBA from '@Controls/hexToRgba';
 
 import maybeGetColorForVariable from '@Controls/maybeGetColorForVariable';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 const UAGBSectionEdit = ( props ) => {
-	const deviceType = useDeviceType();
+	const {
+		isSelected,
+		attributes,
+		attributes: {
+			borderStyle,
+			borderWidth,
+			borderRadius,
+			borderColor,
+			borderHoverColor,
+			UAGHideDesktop,
+			UAGHideTab,
+			UAGHideMob,
+			backgroundOpacity,
+			backgroundImageColor,
+			gradientOverlayColor1,
+			gradientOverlayColor2,
+			backgroundType,
+			overlayType,
+			gradientOverlayAngle,
+			gradientOverlayLocation1,
+			gradientOverlayPosition,
+			gradientOverlayLocation2,
+			gradientOverlayType,
+			backgroundVideoOpacity,
+			backgroundVideoColor,
+		},
+		setAttributes,
+		clientId,
+		deviceType
+	} = props;
+
 	useEffect( () => {
-		const { borderStyle,borderWidth,borderRadius,borderColor,borderHoverColor } = props.attributes;
 		// Backward Border Migration
-		if( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ){
-			migrateBorderAttributes( 'overall', {
-				label: 'borderWidth',
-				value: borderWidth,
-			}, {
-				label: 'borderRadius',
-				value: borderRadius
-			}, {
-				label: 'borderColor',
-				value: borderColor
-			}, {
-				label: 'borderHoverColor',
-				value: borderHoverColor
-			},{
-				label: 'borderStyle',
-				value: borderStyle
-			},
-			props.setAttributes,
-			props.attributes
+		if ( borderWidth || borderRadius || borderColor || borderHoverColor || borderStyle ) {
+			migrateBorderAttributes(
+				'overall',
+				{
+					label: 'borderWidth',
+					value: borderWidth,
+				},
+				{
+					label: 'borderRadius',
+					value: borderRadius,
+				},
+				{
+					label: 'borderColor',
+					value: borderColor,
+				},
+				{
+					label: 'borderHoverColor',
+					value: borderHoverColor,
+				},
+				{
+					label: 'borderStyle',
+					value: borderStyle,
+				},
+				setAttributes,
+				attributes
 			);
-
 		}
-	}, [ ] );
-	useEffect( () => {
-
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-section-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
+	}, [] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
+		responsiveConditionPreview( props );
+	}, [ UAGHideDesktop, UAGHideTab, UAGHideMob, deviceType ] );
 
-        addBlockEditorDynamicStyles( 'uagb-section-style-' + props.clientId.substr( 0, 8 ), blockStyling );
-
+	useEffect( () => {
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
 	useEffect( () => {
-
-		const { setAttributes, attributes } = props;
-
-		const {
-			 backgroundOpacity,
-			 backgroundImageColor,
-			 gradientOverlayColor1,
-			 gradientOverlayColor2,
-			 backgroundType,
-			 overlayType,
-			 gradientOverlayAngle,
-			 gradientOverlayLocation1,
-			 gradientOverlayPosition,
-			 gradientOverlayLocation2,
-			 gradientOverlayType,
-			 backgroundVideoOpacity,
-			 backgroundVideoColor
-			} = attributes;
-
-		if( 101 !== backgroundOpacity && 'image' === backgroundType && 'gradient' === overlayType ){
+		if ( 101 !== backgroundOpacity && 'image' === backgroundType && 'gradient' === overlayType ) {
 			const color1 = hexToRGBA( maybeGetColorForVariable( gradientOverlayColor1 ), backgroundOpacity );
 			const color2 = hexToRGBA( maybeGetColorForVariable( gradientOverlayColor2 ), backgroundOpacity );
 			let gradientVal;
@@ -91,11 +100,6 @@ const UAGBSectionEdit = ( props ) => {
 			}
 			setAttributes( { gradientValue: gradientVal } );
 		}
-
-		// Assigning block_id in the attribute.
-		setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-		setAttributes( { classMigrate: true } );
 
 		if ( 'image' === backgroundType ) {
 			if ( 101 !== backgroundOpacity ) {
@@ -111,19 +115,20 @@ const UAGBSectionEdit = ( props ) => {
 				setAttributes( { backgroundVideoColor: color } );
 			}
 		}
-
 	}, [] );
+
+	const blockStyling = useMemo( () => styling( attributes, clientId, deviceType ), [ attributes, deviceType ] );
 
 	return (
 		<>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
-export default UAGBSectionEdit;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( UAGBSectionEdit );

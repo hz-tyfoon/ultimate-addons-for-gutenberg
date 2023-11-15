@@ -48,7 +48,7 @@ const WebfontLoader = ( props ) => {
 	const handleInactive = () => {
 		setValue( { status: statuses.inactive } );
 	};
-
+	
 	const loadFonts = () => {
 		if ( ! googlefonts.includes( props.config.google.families[ 0 ] ) ) {
 			WebFont.load( {
@@ -60,26 +60,17 @@ const WebfontLoader = ( props ) => {
 			addFont( props.config.google.families[ 0 ] );
 		}
 
-		const tabletPreview = document.getElementsByClassName( 'is-tablet-preview' );
-		const mobilePreview = document.getElementsByClassName( 'is-mobile-preview' );
+		const iframeFound = document.querySelector( 'iframe[name="editor-canvas"]' );
 
-		if ( 0 !== tabletPreview.length || 0 !== mobilePreview.length ) {
-
-			const preview = tabletPreview[0] || mobilePreview[0];
-
-			const iframe = preview.getElementsByTagName( 'iframe' )[0];
-
-			if ( iframe ) {
-
-				WebFont.load( {
-					...props.config,
-					loading: handleLoading,
-					active: handleActive,
-					inactive: handleInactive,
-					context: iframe?.contentWindow
-				} );
-				addFont( props.config.google.families[ 0 ] );
-			}
+		if ( iframeFound?.contentWindow ) {
+			WebFont.load( {
+				...props.config,
+				loading: handleLoading,
+				active: handleActive,
+				inactive: handleInactive,
+				context: iframeFound.contentWindow,
+			} );
+			addFont( props.config.google.families[ 0 ] );
 		}
 	};
 

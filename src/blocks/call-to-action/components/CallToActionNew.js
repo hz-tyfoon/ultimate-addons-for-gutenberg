@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-
+import { RichText } from '@wordpress/block-editor';
 import renderSVG from '@Controls/renderIcon';
 
 const CTA = ( props ) => {
@@ -12,23 +12,56 @@ const CTA = ( props ) => {
 	}
 
 	let ctaIconOutput = '';
-	if ( attributes.ctaIcon !== '' ) {
-		ctaIconOutput = renderSVG( attributes.ctaIcon );
+	if ( attributes.showIcon && attributes.ctaIcon !== '' ) {
+		if ( setAttributes !== 'not_set' ) {
+			ctaIconOutput = renderSVG( attributes.ctaIcon, setAttributes );
+		} else {
+			ctaIconOutput = renderSVG( attributes.ctaIcon );
+		}
 	}
 
 	let link = '/';
-	let preventDefaultFunc = ( e ) => {  // Disables click events for link in editor.
+	let preventDefaultFunc = ( e ) => {
+		// Disables click events for link in editor.
 		e.preventDefault();
+	};
+	if ( setAttributes === 'not_set' || attributes?.dynamicContent?.ctaLink?.enable ) {
+		link = attributes.ctaLink || '#';
+		preventDefaultFunc = false; // Ensures click events for links aren't disabled for frontend.
 	}
-	if ( setAttributes === 'not_set' ) {
-		link = attributes.ctaLink;
-		preventDefaultFunc = false;  // Ensures click events for links aren't disabled for frontend.
+
+	if ( setAttributes !== 'not_set' ) {
+		return (
+			<>
+				{ ( attributes.ctaType === 'button' || attributes.ctaType === 'text' ) && (
+					<a
+						href={ link }
+						className={ classnames(
+							'uagb-cta__button-link-wrapper',
+							'button' === attributes.ctaType ? 'wp-block-button__link' : ''
+						) }
+						target={ target }
+						rel={ rel }
+						onClick={ preventDefaultFunc }
+					>
+						{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
+						<RichText
+							value={ attributes.ctaText.replace( /<(?!br\s*V?)[^>]+>/g, '' ) }
+							onChange={ ( value ) => {
+								setAttributes( { ctaText: value } );
+							} }
+							allowedFormats={ [] } // Removed the WP default link/bold/italic from the toolbar for button.
+						/>
+						{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
+					</a>
+				) }
+			</>
+		);
 	}
 
 	return (
 		<>
-			{ ( attributes.ctaType === 'button' ||
-				attributes.ctaType === 'text' ) && (
+			{ ( attributes.ctaType === 'button' || attributes.ctaType === 'text' ) && (
 				<a
 					href={ link }
 					className={ classnames(
@@ -40,7 +73,7 @@ const CTA = ( props ) => {
 					onClick={ preventDefaultFunc }
 				>
 					{ attributes.ctaIconPosition === 'before' && ctaIconOutput }
-					{ attributes.ctaText }
+					<RichText.Content value={ attributes.ctaText.replace( /<(?!br\s*V?)[^>]+>/g, '' ) } />
 					{ attributes.ctaIconPosition === 'after' && ctaIconOutput }
 				</a>
 			) }

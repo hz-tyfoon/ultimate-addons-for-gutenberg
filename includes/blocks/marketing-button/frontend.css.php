@@ -10,15 +10,6 @@
 // Adds Fonts.
 UAGB_Block_JS::blocks_marketing_btn_gfont( $attr );
 
-$block_name = 'marketing-button';
-
-$gradient_location_1_fallback = UAGB_Block_Helper::get_fallback_number( $attr['gradientLocation1'], 'gradientLocation1', $block_name );
-$gradient_location_2_fallback = UAGB_Block_Helper::get_fallback_number( $attr['gradientLocation2'], 'gradientLocation2', $block_name );
-$gradient_angle_fallback      = UAGB_Block_Helper::get_fallback_number( $attr['gradientAngle'], 'gradientAngle', $block_name );
-$icon_space_fallback          = UAGB_Block_Helper::get_fallback_number( $attr['iconSpace'], 'iconSpace', $block_name );
-$icon_font_size_fallback      = UAGB_Block_Helper::get_fallback_number( $attr['iconFontSize'], 'iconFontSize', $block_name );
-$title_space_fallback         = UAGB_Block_Helper::get_fallback_number( $attr['titleSpace'], 'titleSpace', $block_name );
-
 $m_selectors = array();
 $t_selectors = array();
 
@@ -46,23 +37,34 @@ $btn_border_css        = UAGB_Block_Helper::uag_generate_deprecated_border_css(
 	( isset( $attr['borderWidth'] ) ? $attr['borderWidth'] : '' ),
 	( isset( $attr['borderRadius'] ) ? $attr['borderRadius'] : '' ),
 	( isset( $attr['borderColor'] ) ? $attr['borderColor'] : '' ),
-	( isset( $attr['borderStyle'] ) ? $attr['borderStyle'] : '' ),
-	( isset( $attr['borderHColor'] ) ? $attr['borderHColor'] : '' )
+	( isset( $attr['borderStyle'] ) ? $attr['borderStyle'] : '' )
 );
 $btn_border_css_tablet = UAGB_Block_Helper::uag_generate_border_css( $attr, 'btn', 'tablet' );
 $btn_border_css_mobile = UAGB_Block_Helper::uag_generate_border_css( $attr, 'btn', 'mobile' );
 
 
+$icon_spacing        = UAGB_Helper::get_css_value( $attr['iconSpace'], 'px' );
+$icon_spacing_tablet = UAGB_Helper::get_css_value( $attr['iconSpaceTablet'], 'px' );
+$icon_spacing_mobile = UAGB_Helper::get_css_value( $attr['iconSpaceMobile'], 'px' );
+
+$right_side_margin = 'margin-right';
+$left_side_margin  = 'margin-left';
+
+if ( ! is_rtl() ) {
+	$right_side_margin = 'margin-left';
+	$left_side_margin  = 'margin-right';
+}
+
 $selectors = array(
-	' .uagb-marketing-btn__prefix'         => array(
-		'margin-top' => UAGB_Helper::get_css_value( $title_space_fallback, $attr['titleSpaceUnit'] ),
+	' .uagb-marketing-btn__prefix'                         => array(
+		'margin-top' => UAGB_Helper::get_css_value( $attr['titleSpace'], $attr['titleSpaceUnit'] ),
 	),
-	' svg'                                 => array(
+	' svg'                                                 => array(
 		'fill'   => $icon_color,
-		'width'  => UAGB_Helper::get_css_value( $icon_font_size_fallback, $attr['iconFontSizeType'] ),
-		'height' => UAGB_Helper::get_css_value( $icon_font_size_fallback, $attr['iconFontSizeType'] ),
+		'width'  => UAGB_Helper::get_css_value( $attr['iconFontSize'], $attr['iconFontSizeType'] ),
+		'height' => UAGB_Helper::get_css_value( $attr['iconFontSize'], $attr['iconFontSizeType'] ),
 	),
-	' p.uagb-marketing-btn__prefix'        => array(
+	' p.uagb-marketing-btn__prefix'                        => array(
 		'color' => $attr['prefixColor'],
 	),
 	' .uagb-marketing-btn__link:hover p.uagb-marketing-btn__prefix' => array(
@@ -71,13 +73,13 @@ $selectors = array(
 	' .uagb-marketing-btn__link:focus p.uagb-marketing-btn__prefix' => array(
 		'color' => $attr['prefixHoverColor'],
 	),
-	' .uagb-marketing-btn__link:hover svg' => array(
+	' .uagb-marketing-btn__link:hover svg'                 => array(
 		'fill' => $icon_hover_color,
 	),
-	' .uagb-marketing-btn__link:focus svg' => array(
+	' .uagb-marketing-btn__link:focus svg'                 => array(
 		'fill' => $icon_hover_color,
 	),
-	' .uagb-marketing-btn__link'           => array_merge(
+	' .uagb-marketing-btn__link.wp-block-button__link'     => array_merge(
 		array(
 			'padding-left'   => UAGB_Helper::get_css_value( $btn_padding_left, $attr['paddingBtnUnit'] ),
 			'padding-right'  => UAGB_Helper::get_css_value( $btn_padding_right, $attr['paddingBtnUnit'] ),
@@ -86,70 +88,101 @@ $selectors = array(
 		),
 		$btn_border_css
 	),
-	' .uagb-marketing-btn__link:hover'     => array(
-		'border-color' => isset( $attr['borderHoverColor'] ) && ! empty( $attr['borderHoverColor'] ) ? $attr['borderHoverColor'] : $attr['btnBorderHColor'],
+	' .uagb-marketing-btn__link:hover'                     => array(
+		'border-color' => ! empty( $attr['btnBorderHColor'] ) ? $attr['btnBorderHColor'] : $attr['borderHoverColor'],
 	),
-	' .uagb-marketing-btn__link:focus'     => array(
-		'border-color' => isset( $attr['borderHoverColor'] ) && ! empty( $attr['borderHoverColor'] ) ? $attr['borderHoverColor'] : $attr['btnBorderHColor'],
+	' .uagb-marketing-btn__link:focus'                     => array(
+		'border-color' => ! empty( $attr['btnBorderHColor'] ) ? $attr['btnBorderHColor'] : $attr['borderHoverColor'],
 	),
 	'.uagb-marketing-btn__icon-after .uagb-marketing-btn__link svg' => array(
-		'margin-left' => UAGB_Helper::get_css_value( $icon_space_fallback, 'px' ),
+		$right_side_margin => $icon_spacing,
 	),
 	'.uagb-marketing-btn__icon-before .uagb-marketing-btn__link svg' => array(
-		'margin-right' => UAGB_Helper::get_css_value( $icon_space_fallback, 'px' ),
+		$left_side_margin => $icon_spacing,
 	),
 	'.uagb-marketing-btn__icon-after .uagb-marketing-btn__icon-wrap svg' => array( // For backword compatibility.
-		'margin-left' => UAGB_Helper::get_css_value( $icon_space_fallback, 'px' ),
+		$right_side_margin => $icon_spacing,
 	),
 	'.uagb-marketing-btn__icon-before .uagb-marketing-btn__icon-wrap svg' => array( // For backword compatibility.
-		'margin-right' => UAGB_Helper::get_css_value( $icon_space_fallback, 'px' ),
+		$left_side_margin => $icon_spacing,
+	),
+	' .uagb-marketing-btn__title-wrap'                     => array( // For backword compatibility.
+		'align-items' => 'center',
+	),
+	' .uagb-marketing-btn__title-wrap .uagb-marketing-btn__icon-wrap svg' => array( // For backword compatibility.
+		'vertical-align' => 'sub',
+	),
+	' .uagb-marketing-btn__wrap .uagb-marketing-btn__link' => array_merge( // deprecated for v1.25.6 .
+		array(
+			'padding-left'   => UAGB_Helper::get_css_value( $btn_padding_left ? $btn_padding_left : 20, $attr['paddingBtnUnit'] ),
+			'padding-right'  => UAGB_Helper::get_css_value( $btn_padding_right ? $btn_padding_right : 20, $attr['paddingBtnUnit'] ),
+			'padding-top'    => UAGB_Helper::get_css_value( $btn_padding_top ? $btn_padding_top : 8, $attr['paddingBtnUnit'] ),
+			'padding-bottom' => UAGB_Helper::get_css_value( $btn_padding_bottom ? $btn_padding_bottom : 8, $attr['paddingBtnUnit'] ),
+		),
+		$btn_border_css
 	),
 );
 
-$selectors[ ' ' . $attr['titleTag'] . '.uagb-marketing-btn__title' ] = array(
+$selectors[' .uagb-marketing-btn__link .uagb-marketing-btn__title'] = array(
 	'color' => $attr['titleColor'],
 );
 
-
-
-$selectors[ ' .uagb-marketing-btn__link:hover ' . $attr['titleTag'] . '.uagb-marketing-btn__title' ] = array(
+$selectors[' .uagb-marketing-btn__link:hover .uagb-marketing-btn__title'] = array(
 	'color' => $attr['titleHoverColor'],
 );
-$selectors[ ' .uagb-marketing-btn__link:focus ' . $attr['titleTag'] . '.uagb-marketing-btn__title' ] = array(
+$selectors[' .uagb-marketing-btn__link:focus .uagb-marketing-btn__title'] = array(
 	'color' => $attr['titleHoverColor'],
 );
 
 if ( 'transparent' === $attr['backgroundType'] ) {
 
 	$selectors[' .uagb-marketing-btn__link']['background'] = 'transparent';
+	$selectors['.wp-block-uagb-marketing-button.wp-block-button:not(.is-style-outline) a.wp-block-button__link:not(.has-background)']['background'] = 'transparent';
+
 
 } elseif ( 'color' === $attr['backgroundType'] ) {
 
-	$selectors[' .uagb-marketing-btn__link']['background'] = UAGB_Helper::hex2rgba( $attr['backgroundColor'], $attr['backgroundOpacity'] );
+	$selectors['.wp-block-uagb-marketing-button.wp-block-button .wp-block-button__link.uagb-marketing-btn__link']['background'] = UAGB_Helper::hex2rgba( $attr['backgroundColor'], $attr['backgroundOpacity'] );
+
+	$selectors['.wp-block-uagb-marketing-button.wp-block-button:not(.is-style-outline) a.wp-block-button__link:not(.has-background)']['background-color'] = UAGB_Helper::hex2rgba( $attr['backgroundColor'], $attr['backgroundOpacity'] );
 
 	// Hover Background.
+	$selectors['.wp-block-uagb-marketing-button.wp-block-button:not(.is-style-outline) .wp-block-button__link.uagb-marketing-btn__link:hover']['background']   = UAGB_Helper::hex2rgba( $attr['backgroundHoverColor'], $attr['backgroundHoverOpacity'] );
+	$selectors['.wp-block-uagb-marketing-button.wp-block-button:not(.is-style-outline) .wp-block-button__link.uagb-marketing-btn__link:focus']['background']   = UAGB_Helper::hex2rgba( $attr['backgroundHoverColor'], $attr['backgroundHoverOpacity'] );
+	$selectors['.wp-block-uagb-marketing-button.wp-block-button:not(.is-style-outline) .wp-block-button__link.uagb-marketing-btn__link:hover']['border-color'] = UAGB_Helper::hex2rgba( $attr['btnBorderHColor'] );
+
+	// Deprecated for v1.2.6.
+	$selectors[' .uagb-marketing-btn__link']['background'] = UAGB_Helper::hex2rgba( $attr['backgroundColor'], $attr['backgroundOpacity'] );
+
+	// Hover Background Deprecated for v1.2.6.
 	$selectors[' .uagb-marketing-btn__link:hover']['background'] = UAGB_Helper::hex2rgba( $attr['backgroundHoverColor'], $attr['backgroundHoverOpacity'] );
 	$selectors[' .uagb-marketing-btn__link:focus']['background'] = UAGB_Helper::hex2rgba( $attr['backgroundHoverColor'], $attr['backgroundHoverOpacity'] );
 
 } elseif ( 'gradient' === $attr['backgroundType'] ) {
 
 	$selectors[' .uagb-marketing-btn__link']['background-color'] = 'transparent';
+	$selectors['.wp-block-uagb-marketing-button.wp-block-button:not(.is-style-outline) a.wp-block-button__link:not(.has-background)']['background-color'] = 'transparent';
+
 
 	if ( 'linear' === $attr['gradientType'] ) {
 
-		$selectors[' .uagb-marketing-btn__link']['background-image'] = 'linear-gradient(' . $gradient_angle_fallback . 'deg, ' . UAGB_Helper::hex2rgba( $attr['gradientColor1'], $attr['backgroundOpacity'] ) . ' ' . $gradient_location_1_fallback . '%, ' . UAGB_Helper::hex2rgba( $attr['gradientColor2'], $attr['backgroundOpacity'] ) . ' ' . $gradient_location_2_fallback . '%)';
+		$selectors[' .uagb-marketing-btn__link']['background-image'] = 'linear-gradient(' . $attr['gradientAngle'] . 'deg, ' . UAGB_Helper::hex2rgba( $attr['gradientColor1'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation1'] . '%, ' . UAGB_Helper::hex2rgba( $attr['gradientColor2'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation2'] . '%)';
+		$selectors['.wp-block-uagb-marketing-button.wp-block-button:not(.is-style-outline) a.wp-block-button__link:not(.has-background)']['background-image'] = 'linear-gradient(' . $attr['gradientAngle'] . 'deg, ' . UAGB_Helper::hex2rgba( $attr['gradientColor1'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation1'] . '%, ' . UAGB_Helper::hex2rgba( $attr['gradientColor2'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation2'] . '%)';
+
 	} else {
 
-		$selectors[' .uagb-marketing-btn__link']['background-image'] = 'radial-gradient( at center center, ' . UAGB_Helper::hex2rgba( $attr['gradientColor1'], $attr['backgroundOpacity'] ) . ' ' . $gradient_location_1_fallback . '%, ' . UAGB_Helper::hex2rgba( $attr['gradientColor2'], $attr['backgroundOpacity'] ) . ' ' . $gradient_location_2_fallback . '%)';
+		$selectors[' .uagb-marketing-btn__link']['background-image'] = 'radial-gradient( at center center, ' . UAGB_Helper::hex2rgba( $attr['gradientColor1'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation1'] . '%, ' . UAGB_Helper::hex2rgba( $attr['gradientColor2'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation2'] . '%)';
+		$selectors['.wp-block-uagb-marketing-button.wp-block-button:not(.is-style-outline) a.wp-block-button__link:not(.has-background)']['background-image'] = 'radial-gradient( at center center, ' . UAGB_Helper::hex2rgba( $attr['gradientColor1'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation1'] . '%, ' . UAGB_Helper::hex2rgba( $attr['gradientColor2'], $attr['backgroundOpacity'] ) . ' ' . $attr['gradientLocation2'] . '%)';
+
 	}
 }
 
 $m_selectors = array(
-	' svg'                         => array(
+	' svg'                                                 => array(
 		'width'  => UAGB_Helper::get_css_value( $attr['iconFontSizeMobile'], $attr['iconFontSizeType'] ),
 		'height' => UAGB_Helper::get_css_value( $attr['iconFontSizeMobile'], $attr['iconFontSizeType'] ),
 	),
-	' .uagb-marketing-btn__link'   => array_merge(
+	'.wp-block-uagb-marketing-button.wp-block-button .uagb-marketing-btn__link' => array_merge(
 		array(
 			'padding-left'   => UAGB_Helper::get_css_value( $btn_padding_left_mobile, $attr['mobilePaddingBtnUnit'] ),
 			'padding-right'  => UAGB_Helper::get_css_value( $btn_padding_right_mobile, $attr['mobilePaddingBtnUnit'] ),
@@ -159,25 +192,34 @@ $m_selectors = array(
 		$btn_border_css_mobile
 	),
 	'.uagb-marketing-btn__icon-after .uagb-marketing-btn__link svg' => array(
-		'margin-left' => UAGB_Helper::get_css_value( $attr['iconSpaceMobile'], 'px' ),
+		$right_side_margin => $icon_spacing_mobile,
 	),
 	'.uagb-marketing-btn__icon-before .uagb-marketing-btn__link svg' => array(
-		'margin-right' => UAGB_Helper::get_css_value( $attr['iconSpaceMobile'], 'px' ),
+		$left_side_margin => $icon_spacing_mobile,
 	),
-	' .uagb-marketing-btn__prefix' => array(
+	' .uagb-marketing-btn__prefix'                         => array(
 		'margin-top' => UAGB_Helper::get_css_value( $attr['titleSpaceMobile'], 'px' ),
+	),
+	' .uagb-marketing-btn__wrap .uagb-marketing-btn__link' => array_merge( // deprecated for v1.25.6 .
+		array(
+			'padding-left'   => UAGB_Helper::get_css_value( $btn_padding_left_mobile ? $btn_padding_left_mobile : 20, $attr['paddingBtnUnit'] ),
+			'padding-right'  => UAGB_Helper::get_css_value( $btn_padding_right_mobile ? $btn_padding_right_mobile : 20, $attr['paddingBtnUnit'] ),
+			'padding-top'    => UAGB_Helper::get_css_value( $btn_padding_top_mobile ? $btn_padding_top_mobile : 8, $attr['paddingBtnUnit'] ),
+			'padding-bottom' => UAGB_Helper::get_css_value( $btn_padding_bottom_mobile ? $btn_padding_bottom_mobile : 8, $attr['paddingBtnUnit'] ),
+		),
+		$btn_border_css_mobile
 	),
 );
 
 $t_selectors = array(
-	' .uagb-marketing-btn__prefix' => array(
+	' .uagb-marketing-btn__prefix'                         => array(
 		'margin-top' => UAGB_Helper::get_css_value( $attr['titleSpaceTablet'], 'px' ),
 	),
-	' svg'                         => array(
+	' svg'                                                 => array(
 		'width'  => UAGB_Helper::get_css_value( $attr['iconFontSizeTablet'], $attr['iconFontSizeType'] ),
 		'height' => UAGB_Helper::get_css_value( $attr['iconFontSizeTablet'], $attr['iconFontSizeType'] ),
 	),
-	' .uagb-marketing-btn__link'   => array_merge(
+	' .uagb-marketing-btn__link.wp-block-button__link'     => array_merge(
 		array(
 			'padding-left'   => UAGB_Helper::get_css_value( $btn_padding_left_tablet, $attr['tabletPaddingBtnUnit'] ),
 			'padding-right'  => UAGB_Helper::get_css_value( $btn_padding_right_tablet, $attr['tabletPaddingBtnUnit'] ),
@@ -187,10 +229,19 @@ $t_selectors = array(
 		$btn_border_css_tablet
 	),
 	'.uagb-marketing-btn__icon-after .uagb-marketing-btn__link svg' => array(
-		'margin-left' => UAGB_Helper::get_css_value( $attr['iconSpaceTablet'], 'px' ),
+		$left_side_margin => $icon_spacing_tablet,
 	),
 	'.uagb-marketing-btn__icon-before .uagb-marketing-btn__link svg' => array(
-		'margin-right' => UAGB_Helper::get_css_value( $attr['iconSpaceTablet'], 'px' ),
+		$right_side_margin => $icon_spacing_tablet,
+	),
+	' .uagb-marketing-btn__wrap .uagb-marketing-btn__link' => array_merge( // deprecated for v1.25.6 .
+		array(
+			'padding-left'   => UAGB_Helper::get_css_value( $btn_padding_left_tablet ? $btn_padding_left_tablet : 20, $attr['paddingBtnUnit'] ),
+			'padding-right'  => UAGB_Helper::get_css_value( $btn_padding_right_tablet ? $btn_padding_right_tablet : 20, $attr['paddingBtnUnit'] ),
+			'padding-top'    => UAGB_Helper::get_css_value( $btn_padding_top_tablet ? $btn_padding_top_tablet : 8, $attr['paddingBtnUnit'] ),
+			'padding-bottom' => UAGB_Helper::get_css_value( $btn_padding_bottom_tablet ? $btn_padding_bottom_tablet : 8, $attr['paddingBtnUnit'] ),
+		),
+		$btn_border_css_tablet
 	),
 
 );

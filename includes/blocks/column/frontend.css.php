@@ -18,8 +18,7 @@ $border        = UAGB_Block_Helper::uag_generate_deprecated_border_css(
 	( isset( $attr['borderWidth'] ) ? $attr['borderWidth'] : '' ),
 	( isset( $attr['borderRadius'] ) ? $attr['borderRadius'] : '' ),
 	( isset( $attr['borderColor'] ) ? $attr['borderColor'] : '' ),
-	( isset( $attr['borderStyle'] ) ? $attr['borderStyle'] : '' ),
-	( isset( $attr['borderHColor'] ) ? $attr['borderHColor'] : '' )
+	( isset( $attr['borderStyle'] ) ? $attr['borderStyle'] : '' )
 );
 $border_tablet = UAGB_Block_Helper::uag_generate_border_css( $attr, 'column', 'tablet' );
 $border_mobile = UAGB_Block_Helper::uag_generate_border_css( $attr, 'column', 'mobile' );
@@ -89,20 +88,25 @@ if ( 'image' === $bg_type ) {
 		'opacity'          => ( isset( $attr['backgroundOpacity'] ) && '' !== $attr['backgroundOpacity'] && 101 !== $attr['backgroundOpacity'] ) ? $attr['backgroundOpacity'] / 100 : '',
 	);
 } elseif ( 'gradient' === $bg_type ) {
-	$selectors[' > .uagb-column__overlay']['background-color'] = 'transparent';
-	$selectors[' > .uagb-column__overlay']['opacity']          = ( isset( $attr['backgroundOpacity'] ) && '' !== $attr['backgroundOpacity'] ) ? $attr['backgroundOpacity'] / 100 : '';
-	if ( $attr['gradientValue'] ) {
-		$selectors[' > .uagb-column__overlay']['background-image'] = $attr['gradientValue'];
-	} else {
-		if ( 'linear' === $attr['gradientType'] ) {
-			$selectors[' > .uagb-column__overlay']['background-image'] = 'linear-gradient(' . $attr['gradientAngle'] . 'deg, ' . $attr['gradientColor1'] . ' ' . $attr['gradientLocation1'] . '%, ' . $attr['gradientColor2'] . ' ' . $attr['gradientLocation2'] . '%)';
-		} else {
-			$selectors[' > .uagb-column__overlay']['background-image'] = 'radial-gradient( at center center, ' . $attr['gradientColor1'] . ' ' . $attr['gradientLocation1'] . '%, ' . $attr['gradientColor2'] . ' ' . $attr['gradientLocation2'] . '%)';
-		}
-	}
+
+	$gradientColor1    = isset( $attr['gradientColor1'] ) ? $attr['gradientColor1'] : '';
+	$gradientColor2    = isset( $attr['gradientColor2'] ) ? $attr['gradientColor2'] : '';
+	$gradientType      = isset( $attr['gradientType'] ) ? $attr['gradientType'] : '';
+	$gradientLocation1 = isset( $attr['gradientLocation1'] ) ? $attr['gradientLocation1'] : '';
+	$gradientLocation2 = isset( $attr['gradientLocation2'] ) ? $attr['gradientLocation2'] : '';
+	$gradientAngle     = isset( $attr['gradientAngle'] ) ? $attr['gradientAngle'] : '';
+
+	if ( 'basic' === $attr['selectGradient'] && $attr['gradientValue'] ) {
+		$gradient = $attr['gradientValue'];
+	} elseif ( 'linear' === $gradientType && 'advanced' === $attr['selectGradient'] ) {
+		$gradient = 'linear-gradient(' . $gradientAngle . 'deg, ' . $gradientColor1 . ' ' . $gradientLocation1 . '%, ' . $gradientColor2 . ' ' . $gradientLocation2 . '%)';
+	} elseif ( 'radial' === $gradientType && 'advanced' === $attr['selectGradient'] ) {
+		$gradient = 'radial-gradient( at center center, ' . $gradientColor1 . ' ' . $gradientLocation1 . '%, ' . $gradientColor2 . ' ' . $gradientLocation2 . '%)';
+	} 
+	$selectors[' > .uagb-column__overlay']['background-image'] = $gradient;
 }
 
-$selectors[' > .uagb-column__overlay']['border-radius'] = $border['border-top-left-radius'] . ' ' . $border['border-top-right-radius'] . ' ' . $border['border-bottom-left-radius'] . ' ' . $border['border-bottom-right-radius'];
+$selectors[' > .uagb-column__overlay']['border-radius'] = $attr['columnBorderTopLeftRadius'] . ' ' . $attr['columnBorderTopRightRadius'] . ' ' . $attr['columnBorderBottomLeftRadius'] . ' ' . $attr['columnBorderBottomRightRadius'];
 
 if ( '' !== $attr['colWidth'] && 0 !== $attr['colWidth'] ) {
 

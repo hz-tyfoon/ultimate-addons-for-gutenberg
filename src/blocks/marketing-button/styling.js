@@ -6,10 +6,9 @@ import generateCSS from '@Controls/generateCSS';
 import generateCSSUnit from '@Controls/generateCSSUnit';
 import { getFallbackNumber } from '@Controls/getAttributeFallback';
 
-function styling( props ) {
-
-	const blockName = props.name.replace( 'uagb/', '' );
-
+function styling( attributes, clientId, name, deviceType ) {
+	const blockName = name.replace( 'uagb/', '' );
+	const previewType = deviceType.toLowerCase();
 	const {
 		titleSpace,
 		titleSpaceTablet,
@@ -94,7 +93,8 @@ function styling( props ) {
 		prefixLetterSpacingTablet,
 		prefixLetterSpacingMobile,
 		prefixLetterSpacingType,
-	} = props.attributes;
+		block_id
+	} = attributes;
 
 	const gradientLocation1Fallback = getFallbackNumber( gradientLocation1, 'gradientLocation1', blockName );
 	const gradientLocation2Fallback = getFallbackNumber( gradientLocation2, 'gradientLocation2', blockName );
@@ -108,12 +108,11 @@ function styling( props ) {
 	let mobileSelectors = {};
 
 	const setIconColor = '' === iconColor ? titleColor : iconColor;
-	const setIconHoverColor =
-		'' === iconHoverColor ? titleHoverColor : iconHoverColor;
+	const setIconHoverColor = '' === iconHoverColor ? titleHoverColor : iconHoverColor;
 
-	const btnBorderCSS = generateBorderCSS( props.attributes, 'btn' )
-	const btnBorderCSSTablet = generateBorderCSS( props.attributes, 'btn', 'tablet' )
-	const btnBorderCSSMobile = generateBorderCSS( props.attributes, 'btn', 'mobile' )
+	const btnBorderCSS = generateBorderCSS( attributes, 'btn' );
+	const btnBorderCSSTablet = generateBorderCSS( attributes, 'btn', 'tablet' );
+	const btnBorderCSSMobile = generateBorderCSS( attributes, 'btn', 'mobile' );
 
 	selectors = {
 		' .uagb-marketing-btn__prefix': {
@@ -121,10 +120,7 @@ function styling( props ) {
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__title': {
 			'font-size': generateCSSUnit( titleFontSize, titleFontSizeType ),
-			'line-height': generateCSSUnit(
-				titleLineHeight,
-				titleLineHeightType
-			),
+			'line-height': generateCSSUnit( titleLineHeight, titleLineHeightType ),
 			'font-family': titleFontFamily,
 			'font-weight': titleFontWeight,
 			'font-style': titleFontStyle,
@@ -140,10 +136,7 @@ function styling( props ) {
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
 			'font-size': generateCSSUnit( prefixFontSize, prefixFontSizeType ),
-			'line-height': generateCSSUnit(
-				prefixLineHeight,
-				prefixLineHeightType
-			),
+			'line-height': generateCSSUnit( prefixLineHeight, prefixLineHeightType ),
 			'font-family': prefixFontFamily,
 			'font-weight': prefixFontWeight,
 			'color': prefixColor,
@@ -170,14 +163,11 @@ function styling( props ) {
 		' .uagb-marketing-btn__link:focus svg': {
 			'fill': setIconHoverColor,
 		},
-		' .uagb-marketing-btn__link': {
+		' .uagb-marketing-btn__link:not(.has-background)': {
 			'padding-left': generateCSSUnit( paddingBtnLeft, paddingBtnUnit ),
 			'padding-right': generateCSSUnit( paddingBtnRight, paddingBtnUnit ),
 			'padding-top': generateCSSUnit( paddingBtnTop, paddingBtnUnit ),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottom,
-				paddingBtnUnit
-			),
+			'padding-bottom': generateCSSUnit( paddingBtnBottom, paddingBtnUnit ),
 			...btnBorderCSS,
 		},
 		' .uagb-marketing-btn__link:hover': {
@@ -189,80 +179,66 @@ function styling( props ) {
 	};
 
 	if ( 'transparent' === backgroundType ) {
-		selectors[ ' .uagb-marketing-btn__link' ].background = 'transparent';
+		selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ] = {
+			'background-color': 'transparent',
+		};
 	} else if ( 'color' === backgroundType ) {
-		selectors[ ' .uagb-marketing-btn__link' ].background = backgroundColor;
+		selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ] = {
+			'background-color': backgroundColor,
+		};
 
 		// Hover Background
-		selectors[ ' .uagb-marketing-btn__link:hover' ].background = backgroundHoverColor;
+		selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background):hover' ] = {
+			'background-color': backgroundHoverColor,
+		};
 	} else if ( 'gradient' === backgroundType ) {
-		selectors[ ' .uagb-marketing-btn__link' ][ 'background-color' ] =
-			'transparent';
+		selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ] = {
+			'background-color': 'transparent',
+		};
 
 		if ( 'linear' === gradientType ) {
-			selectors[ ' .uagb-marketing-btn__link' ][
+			selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ][
 				'background-image'
-			] = `linear-gradient(${ gradientAngleFallback }deg, ${ gradientColor1 } ${ gradientLocation1Fallback }%, ${	gradientColor2 } ${ gradientLocation2Fallback }%)`;
+			] = `linear-gradient(${ gradientAngleFallback }deg, ${ gradientColor1 } ${ gradientLocation1Fallback }%, ${ gradientColor2 } ${ gradientLocation2Fallback }%)`;
 		} else {
-			selectors[ ' .uagb-marketing-btn__link' ][
+			selectors[ ':not(.is-style-outline) .uagb-marketing-btn__link:not(.has-background)' ][
 				'background-image'
-			] = `radial-gradient( at center center, ${ gradientColor1} ${ gradientLocation1Fallback }%, ${ gradientColor2 } ${ gradientLocation2Fallback }%)`;
+			] = `radial-gradient( at center center, ${ gradientColor1 } ${ gradientLocation1Fallback }%, ${ gradientColor2 } ${ gradientLocation2Fallback }%)`;
 		}
 	}
 
-	const marginType = 'after' === iconPosition ? 'margin-left' : 'margin-right';
+	let marginType;
+	if ( uagb_blocks_info.is_rtl !== '1' ) {
+		marginType = 'after' === iconPosition ? 'margin-left' : 'margin-right';
+	} else {
+		marginType = 'after' === iconPosition ? 'margin-right' : 'margin-left';
+	}
 
-	selectors[ ' svg' ][
-		marginType
-	] = generateCSSUnit( iconSpaceFallback, 'px' );
+	selectors[ ' svg' ][ marginType ] = generateCSSUnit( iconSpaceFallback, 'px' );
 
 	tabletSelectors = {
 		' .uagb-marketing-btn__prefix': {
 			'margin-top': generateCSSUnit( titleSpaceTablet, 'px' ),
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__title': {
-			'font-size': generateCSSUnit(
-				titleFontSizeTablet,
-				titleFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				titleLineHeightTablet,
-				titleLineHeightType
-			),
+			'font-size': generateCSSUnit( titleFontSizeTablet, titleFontSizeType ),
+			'line-height': generateCSSUnit( titleLineHeightTablet, titleLineHeightType ),
 			'letter-spacing': generateCSSUnit( titleLetterSpacingTablet, titleLetterSpacingType ),
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
-			'font-size': generateCSSUnit(
-				prefixFontSizeTablet,
-				prefixFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				prefixLineHeightTablet,
-				prefixLineHeightType
-			),
+			'font-size': generateCSSUnit( prefixFontSizeTablet, prefixFontSizeType ),
+			'line-height': generateCSSUnit( prefixLineHeightTablet, prefixLineHeightType ),
 			'letter-spacing': generateCSSUnit( prefixLetterSpacingTablet, prefixLetterSpacingType ),
 		},
 		' svg': {
 			'width': generateCSSUnit( iconFontSizeTablet, iconFontSizeType ),
 			'height': generateCSSUnit( iconFontSizeTablet, iconFontSizeType ),
 		},
-		' .uagb-marketing-btn__link': {
-			'padding-left': generateCSSUnit(
-				paddingBtnLeftTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-right': generateCSSUnit(
-				paddingBtnRightTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-top': generateCSSUnit(
-				paddingBtnTopTablet,
-				tabletPaddingBtnUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottomTablet,
-				tabletPaddingBtnUnit
-			),
+		' .uagb-marketing-btn__link:not(.has-background)': {
+			'padding-left': generateCSSUnit( paddingBtnLeftTablet, tabletPaddingBtnUnit ),
+			'padding-right': generateCSSUnit( paddingBtnRightTablet, tabletPaddingBtnUnit ),
+			'padding-top': generateCSSUnit( paddingBtnTopTablet, tabletPaddingBtnUnit ),
+			'padding-bottom': generateCSSUnit( paddingBtnBottomTablet, tabletPaddingBtnUnit ),
 			...btnBorderCSSTablet,
 		},
 	};
@@ -272,78 +248,53 @@ function styling( props ) {
 			'margin-top': generateCSSUnit( titleSpaceMobile, 'px' ),
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__title': {
-			'font-size': generateCSSUnit(
-				titleFontSizeMobile,
-				titleFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				titleLineHeightMobile,
-				titleLineHeightType
-			),
+			'font-size': generateCSSUnit( titleFontSizeMobile, titleFontSizeType ),
+			'line-height': generateCSSUnit( titleLineHeightMobile, titleLineHeightType ),
 			'letter-spacing': generateCSSUnit( titleLetterSpacingMobile, titleLetterSpacingType ),
 		},
 		' .block-editor-rich-text__editable.uagb-marketing-btn__prefix': {
-			'font-size': generateCSSUnit(
-				prefixFontSizeMobile,
-				prefixFontSizeType
-			),
-			'line-height': generateCSSUnit(
-				prefixLineHeightMobile,
-				prefixLineHeightType
-			),
+			'font-size': generateCSSUnit( prefixFontSizeMobile, prefixFontSizeType ),
+			'line-height': generateCSSUnit( prefixLineHeightMobile, prefixLineHeightType ),
 			'letter-spacing': generateCSSUnit( prefixLetterSpacingMobile, prefixLetterSpacingType ),
 		},
 		' svg': {
 			'width': generateCSSUnit( iconFontSizeMobile, iconFontSizeType ),
 			'height': generateCSSUnit( iconFontSizeMobile, iconFontSizeType ),
 		},
-		' .uagb-marketing-btn__link': {
-			'padding-left': generateCSSUnit(
-				paddingBtnLeftMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-right': generateCSSUnit(
-				paddingBtnRightMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-top': generateCSSUnit(
-				paddingBtnTopMobile,
-				mobilePaddingBtnUnit
-			),
-			'padding-bottom': generateCSSUnit(
-				paddingBtnBottomMobile,
-				mobilePaddingBtnUnit
-			),
-			...btnBorderCSSMobile
+		' .uagb-marketing-btn__link:not(.has-background)': {
+			'padding-left': generateCSSUnit( paddingBtnLeftMobile, mobilePaddingBtnUnit ),
+			'padding-right': generateCSSUnit( paddingBtnRightMobile, mobilePaddingBtnUnit ),
+			'padding-top': generateCSSUnit( paddingBtnTopMobile, mobilePaddingBtnUnit ),
+			'padding-bottom': generateCSSUnit( paddingBtnBottomMobile, mobilePaddingBtnUnit ),
+			...btnBorderCSSMobile,
 		},
 	};
 
-	tabletSelectors[ ' svg' ][
-		marginType
-	] = generateCSSUnit( iconSpaceTablet, 'px' );
+	tabletSelectors[ ' svg' ][ marginType ] = generateCSSUnit( iconSpaceTablet, 'px' );
 
-	mobileSelectors[ ' svg' ][
-		marginType
-	] = generateCSSUnit( iconSpaceMobile, 'px' );
+	mobileSelectors[ ' svg' ][ marginType ] = generateCSSUnit( iconSpaceMobile, 'px' );
 
-	const id = `.editor-styles-wrapper .uagb-block-${ props.clientId.substr( 0, 8 ) }`;
+	const id = `.editor-styles-wrapper .uagb-block-${ block_id }`;
 
 	let stylingCss = generateCSS( selectors, id );
 
-	stylingCss += generateCSS(
-		tabletSelectors,
-		`${ id }.uagb-editor-preview-mode-tablet`,
-		true,
-		'tablet'
-	);
+	if( 'tablet' === previewType || 'mobile' === previewType ) {
+		stylingCss += generateCSS(
+			tabletSelectors,
+			`${ id }`,
+			true,
+			'tablet'
+		);
 
-	stylingCss += generateCSS(
-		mobileSelectors,
-		`${ id }.uagb-editor-preview-mode-mobile`,
-		true,
-		'mobile'
-	);
-
+		if( 'mobile' === previewType ){
+			stylingCss += generateCSS(
+				mobileSelectors,
+				`${ id }`,
+				true,
+				'mobile'
+			);
+		}
+	}
 	return stylingCss;
 }
 

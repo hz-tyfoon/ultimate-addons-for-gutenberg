@@ -5,9 +5,11 @@
  */
 
 .wp-block-uagb-table-of-contents {
-
 	.uagb-toc__wrap {
 		display: inline-block;
+		max-width: -moz-available; /* WebKit-based browsers will ignore this. */
+		max-width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+		max-width: fill-available; /* The element will expand to take all available space in it's container. */
 	}
 
 	li.uagb-toc__list {
@@ -16,7 +18,7 @@
 
 	ul.uagb-toc__list,
 	ol.uagb-toc__list {
-
+		list-style-position: inside;
 		padding-left: 0;
 		margin-bottom: 0;
 		margin-left: 2.2em;
@@ -104,7 +106,6 @@ ol.uagb-toc__list > li {
 
 // These fixes are specific to the Astra theme.
 body[class*="astra"] {
-
 	.uagb-toc__list {
 		line-height: normal;
 	}

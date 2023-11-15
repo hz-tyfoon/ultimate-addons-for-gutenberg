@@ -10,18 +10,14 @@
 // Adds Fonts.
 UAGB_Block_JS::blocks_gf_styler_gfont( $attr );
 
-$block_name = 'gf-styler';
-
 $attr['msgVrPadding']   = ( '' === $attr['msgVrPadding'] ) ? '0' : $attr['msgVrPadding'];
 $attr['msgHrPadding']   = ( '' === $attr['msgHrPadding'] ) ? '0' : $attr['msgHrPadding'];
 $attr['textAreaHeight'] = ( 'auto' === $attr['msgHrPadding'] ) ?
-							UAGB_Block_Helper::get_fallback_number( $attr['textAreaHeight'], 'textAreaHeight', $block_name ) :
-							UAGB_Block_Helper::get_fallback_number( $attr['textAreaHeight'], 'textAreaHeight', $block_name ) . 'px';
-
-$button_top_padding    = isset( $attr['buttontopPadding'] ) ? $attr['buttontopPadding'] : $attr['buttonVrPadding'];
-$button_bottom_padding = isset( $attr['buttonbottomPadding'] ) ? $attr['buttonbottomPadding'] : $attr['buttonVrPadding'];
-$button_left_padding   = isset( $attr['buttonleftPadding'] ) ? $attr['buttonleftPadding'] : $attr['buttonHrPadding'];
-$button_right_padding  = isset( $attr['buttonrightPadding'] ) ? $attr['buttonrightPadding'] : $attr['buttonHrPadding'];
+$attr['textAreaHeight'] : $attr['textAreaHeight'] . 'px';
+$button_top_padding     = isset( $attr['buttontopPadding'] ) ? $attr['buttontopPadding'] : $attr['buttonVrPadding'];
+$button_bottom_padding  = isset( $attr['buttonbottomPadding'] ) ? $attr['buttonbottomPadding'] : $attr['buttonVrPadding'];
+$button_left_padding    = isset( $attr['buttonleftPadding'] ) ? $attr['buttonleftPadding'] : $attr['buttonHrPadding'];
+$button_right_padding   = isset( $attr['buttonrightPadding'] ) ? $attr['buttonrightPadding'] : $attr['buttonHrPadding'];
 
 $msg_top_padding    = isset( $attr['msgtopPadding'] ) ? $attr['msgtopPadding'] : $attr['msgVrPadding'];
 $msg_bottom_padding = isset( $attr['msgbottomPadding'] ) ? $attr['msgbottomPadding'] : $attr['msgVrPadding'];
@@ -52,11 +48,11 @@ $selectors = array(
 		'border-style'     => $attr['fieldBorderStyle'],
 		'border-color'     => $attr['fieldBorderColor'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderRadius'], 'fieldBorderRadius', $block_name ),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 		'padding-left'     => UAGB_Helper::get_css_value( $field_left_padding, $attr['fieldpaddingUnit'] ),
@@ -64,11 +60,11 @@ $selectors = array(
 		'padding-top'      => UAGB_Helper::get_css_value( $field_top_padding, $attr['fieldpaddingUnit'] ),
 		'padding-bottom'   => UAGB_Helper::get_css_value( $field_bottom_padding, $attr['fieldpaddingUnit'] ),
 		'margin-top'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacing'], 'fieldLabelSpacing', $block_name ),
+			$attr['fieldLabelSpacing'],
 			'px'
 		),
 		'margin-bottom'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacing'], 'fieldSpacing', $block_name ),
+			$attr['fieldSpacing'],
 			'px'
 		),
 		'text-align'       => $attr['align'],
@@ -89,11 +85,11 @@ $selectors = array(
 		'border-color'     => $attr['buttonBorderColor'],
 		'border-style'     => $attr['buttonBorderStyle'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['buttonBorderWidth'], 'buttonBorderWidth', $block_name ),
+			$attr['buttonBorderWidth'],
 			'px'
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['buttonBorderRadius'], 'buttonBorderRadius', $block_name ),
+			$attr['buttonBorderRadius'],
 			$attr['buttonBorderRadiusType']
 		),
 		'padding-left'     => UAGB_Helper::get_css_value( $button_left_padding, $attr['buttonpaddingUnit'] ),
@@ -106,28 +102,29 @@ $selectors = array(
 		'background-color' => $attr['buttonBgHoverColor'],
 		'border-color'     => $attr['buttonBorderHoverColor'],
 	),
+	' input[type=button]:focus'                            => array(
+		'color'            => $attr['buttonTextHoverColor'],
+		'background-color' => $attr['buttonBgHoverColor'],
+		'border-color'     => $attr['buttonBorderHoverColor'],
+	),
 	' .gform_wrapper select '                              => array(
 		'background-color' => $attr['fieldBgColor'],
 		'border-style'     => $attr['fieldBorderStyle'],
 		'border-color'     => $attr['fieldBorderColor'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['fieldBorderRadius'],
-				'fieldBorderRadius',
-				$block_name
-			),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 		'margin-top'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacing'], 'fieldLabelSpacing', $block_name ),
+			$attr['fieldLabelSpacing'],
 			'px'
 		),
 		'margin-bottom'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacing'], 'fieldSpacing', $block_name ),
+			$attr['fieldSpacing'],
 			'px'
 		),
 		'color'            => $attr['fieldInputColor'],
@@ -142,23 +139,19 @@ $selectors = array(
 		'border-style'     => $attr['fieldBorderStyle'],
 		'border-color'     => $attr['fieldBorderColor'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['fieldBorderRadius'],
-				'fieldBorderRadius',
-				$block_name
-			),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 		'margin-top'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacing'], 'fieldLabelSpacing', $block_name ),
+			$attr['fieldLabelSpacing'],
 			'px'
 		),
 		'margin-bottom'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacing'], 'fieldSpacing', $block_name ),
+			$attr['fieldSpacing'],
 			'px'
 		),
 		'color'            => $attr['fieldInputColor'],
@@ -188,15 +181,11 @@ $selectors = array(
 		'color'            => $attr['fieldInputColor'],
 		'border-color'     => $attr['fieldBorderColor'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['fieldBorderRadius'],
-				'fieldBorderRadius',
-				$block_name
-			),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 		'border-style'     => $attr['fieldBorderStyle'],
@@ -205,11 +194,11 @@ $selectors = array(
 		'padding-top'      => UAGB_Helper::get_css_value( $field_top_padding, $attr['fieldpaddingUnit'] ),
 		'padding-bottom'   => UAGB_Helper::get_css_value( $field_bottom_padding, $attr['fieldpaddingUnit'] ),
 		'margin-top'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacing'], 'fieldLabelSpacing', $block_name ),
+			$attr['fieldLabelSpacing'],
 			'px'
 		),
 		'margin-bottom'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacing'], 'fieldSpacing', $block_name ),
+			$attr['fieldSpacing'],
 			'px'
 		),
 		'text-align'       => $attr['align'],
@@ -259,13 +248,13 @@ $selectors = array(
 	),
 	' .gform_wrapper.gravity-theme .gfield_checkbox '      => array(
 		'margin-top' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacing'], 'fieldLabelSpacing', $block_name ),
+			$attr['fieldLabelSpacing'],
 			'px'
 		),
 	),
 	' .gform_wrapper.gravity-theme .gfield_radio '         => array(
 		'margin-top' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacing'], 'fieldLabelSpacing', $block_name ),
+			$attr['fieldLabelSpacing'],
 			'px'
 		),
 	),
@@ -277,15 +266,11 @@ $selectors = array(
 		'border-color'     => $attr['buttonBorderColor'],
 		'border-style'     => $attr['buttonBorderStyle'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['buttonBorderWidth'], 'buttonBorderWidth', $block_name ),
+			$attr['buttonBorderWidth'],
 			'px'
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['buttonBorderRadius'],
-				'buttonBorderRadius',
-				$block_name
-			),
+			$attr['buttonBorderRadius'],
 			$attr['buttonBorderRadiusType']
 		),
 		'padding-left'     => UAGB_Helper::get_css_value( $button_left_padding, $attr['buttonpaddingUnit'] ),
@@ -299,6 +284,11 @@ $selectors = array(
 	),
 
 	' input.gform_button:hover'                            => array(
+		'color'            => $attr['buttonTextHoverColor'],
+		'background-color' => $attr['buttonBgHoverColor'],
+		'border-color'     => $attr['buttonBorderHoverColor'],
+	),
+	' input.gform_button:focus'                            => array(
 		'color'            => $attr['buttonTextHoverColor'],
 		'background-color' => $attr['buttonBgHoverColor'],
 		'border-color'     => $attr['buttonBorderHoverColor'],
@@ -319,11 +309,11 @@ $selectors = array(
 		'border-style'     => $attr['fieldBorderStyle'],
 		'border-color'     => $attr['fieldBorderColor'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderRadius'], 'fieldBorderRadius', $block_name ),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 		'font-size'        => 'calc( ' . $attr['fieldVrPadding'] . 'px / 1.2 )',
@@ -343,15 +333,11 @@ $selectors = array(
 		'border-color'     => $attr['fieldBorderColor'],
 		'border-style'     => $attr['fieldBorderStyle'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['fieldBorderRadius'],
-				'fieldBorderRadius',
-				$block_name
-			),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 	),
@@ -367,7 +353,7 @@ $selectors = array(
 		'border-style'     => $attr['fieldBorderStyle'],
 		'border-color'     => $attr['fieldBorderColor'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 	),
@@ -381,15 +367,11 @@ $selectors = array(
 		'border-bottom-color' => $attr['fieldBorderColor'],
 		'border-bottom-style' => 'solid',
 		'border-bottom-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['fieldBorderRadius'],
-				'fieldBorderRadius',
-				$block_name
-			),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 	),
@@ -400,11 +382,11 @@ $selectors = array(
 		'border-bottom-color' => $attr['fieldBorderColor'],
 		'border-bottom-style' => 'solid',
 		'border-bottom-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderRadius'], 'fieldBorderRadius', $block_name ),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 	),
@@ -413,15 +395,11 @@ $selectors = array(
 		'border-bottom-color' => $attr['fieldBorderColor'],
 		'border-bottom-style' => 'solid',
 		'border-bottom-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['fieldBorderRadius'],
-				'fieldBorderRadius',
-				$block_name
-			),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 	),
@@ -430,11 +408,11 @@ $selectors = array(
 		'border-bottom-color' => $attr['fieldBorderColor'],
 		'border-bottom-style' => 'solid',
 		'border-bottom-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ),
+			$attr['fieldBorderWidth'],
 			$attr['fieldBorderWidthType']
 		),
 		'border-radius'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderRadius'], 'fieldBorderRadius', $block_name ),
+			$attr['fieldBorderRadius'],
 			$attr['fieldBorderRadiusType']
 		),
 	),
@@ -448,26 +426,26 @@ $selectors = array(
 	' .uagb-gf-styler__field-style-box .gfield_checkbox input[type="checkbox"]:checked + label:before' => array(
 		'border-style'  => 'solid',
 		'border-width'  => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidth'], 'radioCheckBorderWidth', $block_name ),
+			$attr['radioCheckBorderWidth'],
 			'px'
 		),
 		'border-radius' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderRadius'], 'radioCheckBorderRadius', $block_name ),
+			$attr['radioCheckBorderRadius'],
 			$attr['radioCheckBorderRadiusType']
 		),
-		'font-size'     => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ) . 'px / 1.2 )',
+		'font-size'     => 'calc( ' . $attr['radioCheckSize'] . 'px / 1.2 )',
 	),
 	' .uagb-gf-styler__field-style-box input[type="checkbox"]:checked + label:before' => array(
 		'border-style'  => 'solid',
 		'border-width'  => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidth'], 'radioCheckBorderWidth', $block_name ),
+			$attr['radioCheckBorderWidth'],
 			'px'
 		),
 		'border-radius' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderRadius'], 'radioCheckBorderRadius', $block_name ),
+			$attr['radioCheckBorderRadius'],
 			$attr['radioCheckBorderRadiusType']
 		),
-		'font-size'     => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ) . 'px / 1.2 )',
+		'font-size'     => 'calc( ' . $attr['radioCheckSize'] . 'px / 1.2 )',
 	),
 	' .gfield_radio input[type="radio"]:checked + label:before' => array(
 		'background-color' => $attr['fieldInputColor'],
@@ -478,26 +456,22 @@ $selectors = array(
 		'background-color' => $attr['radioCheckBgColor'],
 		'color'            => $attr['radioCheckSelectColor'],
 		'height'           => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ),
+			$attr['radioCheckSize'],
 			'px'
 		),
 		'width'            => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ),
+			$attr['radioCheckSize'],
 			'px'
 		),
-		'font-size'        => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ) . 'px / 1.2 )',
+		'font-size'        => 'calc( ' . $attr['radioCheckSize'] . 'px / 1.2 )',
 		'border-color'     => $attr['radioCheckBorderColor'],
 		'border-style'     => 'solid',
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidth'], 'radioCheckBorderWidth', $block_name ),
+			$attr['radioCheckBorderWidth'],
 			'px'
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['radioCheckBorderRadius'],
-				'radioCheckBorderRadius',
-				$block_name
-			),
+			$attr['radioCheckBorderRadius'],
 			$attr['radioCheckBorderRadiusType']
 		),
 	),
@@ -508,25 +482,21 @@ $selectors = array(
 		'background-color' => $attr['radioCheckBgColor'],
 		'color'            => $attr['radioCheckSelectColor'],
 		'height'           => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ),
+			$attr['radioCheckSize'],
 			'px'
 		),
 		'width'            => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ),
+			$attr['radioCheckSize'],
 			'px'
 		),
-		'font-size'        => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ) . 'px / 1.2 )',
+		'font-size'        => 'calc( ' . $attr['radioCheckSize'] . 'px / 1.2 )',
 		'border-color'     => $attr['radioCheckBorderColor'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidth'], 'radioCheckBorderWidth', $block_name ),
+			$attr['radioCheckBorderWidth'],
 			'px'
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['radioCheckBorderRadius'],
-				'radioCheckBorderRadius',
-				$block_name
-			),
+			$attr['radioCheckBorderRadius'],
 			$attr['radioCheckBorderRadiusType']
 		),
 	),
@@ -538,25 +508,21 @@ $selectors = array(
 		'background-color' => $attr['radioCheckBgColor'],
 		'color'            => $attr['radioCheckSelectColor'],
 		'height'           => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ),
+			$attr['radioCheckSize'],
 			'px'
 		),
 		'width'            => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ),
+			$attr['radioCheckSize'],
 			'px'
 		),
-		'font-size'        => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSize'], 'radioCheckSize', $block_name ) . 'px / 1.2 )',
+		'font-size'        => 'calc( ' . $attr['radioCheckSize'] . 'px / 1.2 )',
 		'border-color'     => $attr['radioCheckBorderColor'],
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidth'], 'radioCheckBorderWidth', $block_name ),
+			$attr['radioCheckBorderWidth'],
 			'px'
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['radioCheckBorderRadius'],
-				'radioCheckBorderRadius',
-				$block_name
-			),
+			$attr['radioCheckBorderRadius'],
 			$attr['radioCheckBorderRadiusType']
 		),
 	),
@@ -615,11 +581,11 @@ $selectors = array(
 	),
 
 	' .uagb-gf-styler__error-yes .gform_wrapper li.gfield_error input[type="text"]' => array(
-		'border' => UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ) . $attr['fieldBorderWidthType'] . ' ' . $attr['fieldBorderStyle'] . ' ' . $attr['fieldBorderColor'] . '!important',
+		'border' => $attr['fieldBorderWidth'] . $attr['fieldBorderWidthType'] . ' ' . $attr['fieldBorderStyle'] . ' ' . $attr['fieldBorderColor'] . '!important',
 	),
 
 	' .uael-gf-style-underline.uagb-gf-styler__error-yes .gform_wrapper li.gfield_error input[type="text"]' => array(
-		'border-width' => UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidth'], 'fieldBorderWidth', $block_name ) . $attr['fieldBorderWidthType'] . ' !important',
+		'border-width' => $attr['fieldBorderWidth'] . $attr['fieldBorderWidthType'] . ' !important',
 		'border-style' => 'solid !important',
 		'border-color' => $attr['fieldBorderColor'] . '!important',
 	),
@@ -630,19 +596,11 @@ $selectors = array(
 		'border-color'     => $attr['errorMsgBorderColor'],
 		'border-style'     => 'solid',
 		'border-width'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['msgBorderSize'],
-				'msgBorderSize',
-				$block_name
-			),
+			$attr['msgBorderSize'],
 			'px'
 		),
 		'border-radius'    => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number(
-				$attr['msgBorderRadius'],
-				'msgBorderRadius',
-				$block_name
-			),
+			$attr['msgBorderRadius'],
 			$attr['msgBorderRadiusType']
 		),
 		'padding-left'     => UAGB_Helper::get_css_value( $msg_left_padding, $attr['msgpaddingUnit'] ),
@@ -659,60 +617,60 @@ $selectors = array(
 $t_selectors = array(
 	' .uagb-gf-styler__field-style-box .gfield_checkbox input[type="checkbox"]:checked + label:before' => array(
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidthTablet'], 'radioCheckBorderWidthTablet', $block_name ),
+			$attr['radioCheckBorderWidthTablet'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeTablet'] . 'px / 1.2 )',
 	),
 	' .uagb-gf-styler__field-style-box input[type="checkbox"]:checked + label:before' => array(
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidthTablet'], 'radioCheckBorderWidthTablet', $block_name ),
+			$attr['radioCheckBorderWidthTablet'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeTablet'] . 'px / 1.2 )',
 	),
 	' .uagb-gf-styler__check-style-enabled .gfield_checkbox input[type="checkbox"] + label:before' => array(
 		'height'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ),
+			$attr['radioCheckSizeTablet'],
 			'px'
 		),
 		'width'        => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ),
+			$attr['radioCheckSizeTablet'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeTablet'] . 'px / 1.2 )',
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidthTablet'], 'radioCheckBorderWidthTablet', $block_name ),
+			$attr['radioCheckBorderWidthTablet'],
 			'px'
 		),
 	),
 	' .uagb-gf-styler__check-style-enabled input[type="checkbox"] + label:before' => array(
 		'height'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ),
+			$attr['radioCheckSizeTablet'],
 			'px'
 		),
 		'width'        => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ),
+			$attr['radioCheckSizeTablet'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeTablet'] . 'px / 1.2 )',
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidth'], 'radioCheckBorderWidth', $block_name ),
+			$attr['radioCheckBorderWidth'],
 			'px'
 		),
 	),
 	' .uagb-gf-styler__check-style-enabled input[type="radio"] + label:before' => array(
 		'height'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ),
+			$attr['radioCheckSizeTablet'],
 			'px'
 		),
 		'width'        => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ),
+			$attr['radioCheckSizeTablet'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeTablet'], 'radioCheckSizeTablet', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeTablet'] . 'px / 1.2 )',
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidthTablet'], 'radioCheckBorderWidthTablet', $block_name ),
+			$attr['radioCheckBorderWidthTablet'],
 			'px'
 		),
 	),
@@ -725,15 +683,15 @@ $t_selectors = array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['fieldtopTabletPadding'], $attr['fieldtabletPaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['fieldbottomTabletPadding'], $attr['fieldtabletPaddingUnit'] ),
 		'margin-top'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacingTablet'], 'fieldLabelSpacingTablet', $block_name ),
+			$attr['fieldLabelSpacingTablet'],
 			'px'
 		),
 		'margin-bottom'  => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacingTablet'], 'fieldSpacingTablet', $block_name ),
+			$attr['fieldSpacingTablet'],
 			'px'
 		),
 		'border-width'   => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidthTablet'], 'fieldBorderWidthTablet', $block_name ),
+			$attr['fieldBorderWidthTablet'],
 			$attr['fieldBorderWidthType']
 		),
 	),
@@ -743,19 +701,19 @@ $t_selectors = array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['fieldtopTabletPadding'], $attr['fieldtabletPaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['fieldbottomTabletPadding'], $attr['fieldtabletPaddingUnit'] ),
 		'margin-top'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacingTablet'], 'fieldLabelSpacingTablet', $block_name ),
+			$attr['fieldLabelSpacingTablet'],
 			'px'
 		),
 		'margin-bottom'  => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacingTablet'], 'fieldSpacingTablet', $block_name ),
+			$attr['fieldSpacingTablet'],
 			'px'
 		),
-		'height'         => 'auto' === UAGB_Block_Helper::get_fallback_number( $attr['textAreaHeightTablet'], 'textAreaHeightTablet', $block_name ) ? UAGB_Block_Helper::get_fallback_number( $attr['textAreaHeightTablet'], 'textAreaHeightTablet', $block_name ) : UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['textAreaHeightTablet'], 'textAreaHeightTablet', $block_name ),
+		'height'         => 'auto' === $attr['textAreaHeightTablet'] ? $attr['textAreaHeightTablet'] : UAGB_Helper::get_css_value(
+			$attr['textAreaHeightTablet'],
 			'px'
 		),
 		'border-width'   => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidthTablet'], 'fieldBorderWidthTablet', $block_name ),
+			$attr['fieldBorderWidthTablet'],
 			$attr['fieldBorderWidthType']
 		),
 	),
@@ -765,7 +723,7 @@ $t_selectors = array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['buttontopTabletPadding'], $attr['buttontabletPaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['buttonbottomTabletPadding'], $attr['buttontabletPaddingUnit'] ),
 		'border-width'   => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['buttonBorderWidthTablet'], 'buttonBorderWidthTablet', $block_name ),
+			$attr['buttonBorderWidthTablet'],
 			'px'
 		),
 	),
@@ -781,15 +739,15 @@ $t_selectors = array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['fieldtopTabletPadding'], $attr['fieldtabletPaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['fieldbottomTabletPadding'], $attr['fieldtabletPaddingUnit'] ),
 		'margin-top'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacingTablet'], 'fieldLabelSpacingTablet', $block_name ),
+			$attr['fieldLabelSpacingTablet'],
 			'px'
 		),
 		'margin-bottom'  => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacingTablet'], 'fieldSpacingTablet', $block_name ),
+			$attr['fieldSpacingTablet'],
 			'px'
 		),
 		'border-width'   => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidthTablet'], 'fieldBorderWidthTablet', $block_name ),
+			$attr['fieldBorderWidthTablet'],
 			$attr['fieldBorderWidthType']
 		),
 	),
@@ -798,60 +756,60 @@ $t_selectors = array(
 $m_selectors = array(
 	' .uagb-gf-styler__field-style-box .gfield_checkbox input[type="checkbox"]:checked + label:before' => array(
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidthMobile'], 'radioCheckBorderWidthMobile', $block_name ),
+			$attr['radioCheckBorderWidthMobile'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeMobile'] . 'px / 1.2 )',
 	),
 	' .uagb-gf-styler__field-style-box input[type="checkbox"]:checked + label:before' => array(
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidthMobile'], 'radioCheckBorderWidthMobile', $block_name ),
+			$attr['radioCheckBorderWidthMobile'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeMobile'] . 'px / 1.2 )',
 	),
 	' .uagb-gf-styler__check-style-enabled .gfield_checkbox input[type="checkbox"] + label:before' => array(
 		'height'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ),
+			$attr['radioCheckSizeMobile'],
 			'px'
 		),
 		'width'        => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ),
+			$attr['radioCheckSizeMobile'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeMobile'] . 'px / 1.2 )',
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidthMobile'], 'radioCheckBorderWidthMobile', $block_name ),
+			$attr['radioCheckBorderWidthMobile'],
 			'px'
 		),
 	),
 	' .uagb-gf-styler__check-style-enabled input[type="checkbox"] + label:before' => array(
 		'height'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ),
+			$attr['radioCheckSizeMobile'],
 			'px'
 		),
 		'width'        => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ),
+			$attr['radioCheckSizeMobile'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeMobile'] . 'px / 1.2 )',
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidth'], 'radioCheckBorderWidth', $block_name ),
+			$attr['radioCheckBorderWidth'],
 			'px'
 		),
 	),
 	' .uagb-gf-styler__check-style-enabled input[type="radio"] + label:before' => array(
 		'height'       => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ),
+			$attr['radioCheckSizeMobile'],
 			'px'
 		),
 		'width'        => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ),
+			$attr['radioCheckSizeMobile'],
 			'px'
 		),
-		'font-size'    => 'calc( ' . UAGB_Block_Helper::get_fallback_number( $attr['radioCheckSizeMobile'], 'radioCheckSizeMobile', $block_name ) . 'px / 1.2 )',
+		'font-size'    => 'calc( ' . $attr['radioCheckSizeMobile'] . 'px / 1.2 )',
 		'border-width' => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['radioCheckBorderWidthMobile'], 'radioCheckBorderWidthMobile', $block_name ),
+			$attr['radioCheckBorderWidthMobile'],
 			'px'
 		),
 	),
@@ -861,15 +819,15 @@ $m_selectors = array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['fieldtopMobilePadding'], $attr['fieldmobilePaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['fieldbottomMobilePadding'], $attr['fieldmobilePaddingUnit'] ),
 		'margin-top'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacingMobile'], 'fieldLabelSpacingMobile', $block_name ),
+			$attr['fieldLabelSpacingMobile'],
 			'px'
 		),
 		'margin-bottom'  => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacingMobile'], 'fieldSpacingMobile', $block_name ),
+			$attr['fieldSpacingMobile'],
 			'px'
 		),
 		'border-width'   => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidthMobile'], 'fieldBorderWidthMobile', $block_name ),
+			$attr['fieldBorderWidthMobile'],
 			$attr['fieldBorderWidthType']
 		),
 	),
@@ -879,19 +837,19 @@ $m_selectors = array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['fieldtopMobilePadding'], $attr['fieldmobilePaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['fieldbottomMobilePadding'], $attr['fieldmobilePaddingUnit'] ),
 		'margin-top'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacingMobile'], 'fieldLabelSpacingMobile', $block_name ),
+			$attr['fieldLabelSpacingMobile'],
 			'px'
 		),
 		'margin-bottom'  => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacingMobile'], 'fieldSpacingMobile', $block_name ),
+			$attr['fieldSpacingMobile'],
 			'px'
 		),
-		'height'         => 'auto' === UAGB_Block_Helper::get_fallback_number( $attr['textAreaHeightMobile'], 'textAreaHeightMobile', $block_name ) ? UAGB_Block_Helper::get_fallback_number( $attr['textAreaHeightMobile'], 'textAreaHeightMobile', $block_name ) : UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['textAreaHeightMobile'], 'textAreaHeightMobile', $block_name ),
+		'height'         => 'auto' === $attr['textAreaHeightMobile'] ? $attr['textAreaHeightMobile'] : UAGB_Helper::get_css_value(
+			$attr['textAreaHeightMobile'],
 			'px'
 		),
 		'border-width'   => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidthMobile'], 'fieldBorderWidthMobile', $block_name ),
+			$attr['fieldBorderWidthMobile'],
 			$attr['fieldBorderWidthType']
 		),
 	),
@@ -901,7 +859,7 @@ $m_selectors = array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['buttontopMobilePadding'], $attr['buttonmobilePaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['buttonbottomMobilePadding'], $attr['buttonmobilePaddingUnit'] ),
 		'border-width'   => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['buttonBorderWidthMobile'], 'buttonBorderWidthMobile', $block_name ),
+			$attr['buttonBorderWidthMobile'],
 			'px'
 		),
 	),
@@ -917,15 +875,15 @@ $m_selectors = array(
 		'padding-top'    => UAGB_Helper::get_css_value( $attr['fieldtopTabletPadding'], $attr['fieldtabletPaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $attr['fieldbottomTabletPadding'], $attr['fieldtabletPaddingUnit'] ),
 		'margin-top'     => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldLabelSpacingTablet'], 'fieldLabelSpacingTablet', $block_name ),
+			$attr['fieldLabelSpacingTablet'],
 			'px'
 		),
 		'margin-bottom'  => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldSpacingTablet'], 'fieldSpacingTablet', $block_name ),
+			$attr['fieldSpacingTablet'],
 			'px'
 		),
 		'border-width'   => UAGB_Helper::get_css_value(
-			UAGB_Block_Helper::get_fallback_number( $attr['fieldBorderWidthTablet'], 'fieldBorderWidthTablet', $block_name ),
+			$attr['fieldBorderWidthTablet'],
 			$attr['fieldBorderWidthType']
 		),
 	),

@@ -2,27 +2,22 @@
  * BLOCK: Price List
  */
 
-import React, {    useEffect } from 'react';
-
-
 import Settings from './settings';
 import Render from './render';
-const UAGBRestaurantMenuChild = ( props ) => {
-	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-	}, [] );
+import addInitialAttr from '@Controls/addInitialAttr';
+import { compose } from '@wordpress/compose';
 
+const UAGBRestaurantMenuChild = ( props ) => {
+	const { isSelected } = props;
+	
 	return (
 		<>
-
-						<>
-			<Settings parentProps={ props } />
-				<Render parentProps={ props } />
-			</>
-
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
 		</>
 	);
 };
 
-export default UAGBRestaurantMenuChild;
+export default compose(
+	addInitialAttr,
+)( UAGBRestaurantMenuChild );

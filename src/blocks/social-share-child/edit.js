@@ -5,57 +5,44 @@
 // Import classes
 
 import styling from './styling';
-
-import React, { useEffect,    } from 'react';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-import { useDeviceType } from '@Controls/getPreviewType';
 import { select } from '@wordpress/data';
-
 import Settings from './settings';
 import Render from './render';
-
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 const SocialShareChildComponent = ( props ) => {
-	const deviceType = useDeviceType();
+	const { isSelected, setAttributes, attributes, clientId, deviceType } = props;
+
 	useEffect( () => {
 		// Replacement for componentDidMount.
 
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
 		if ( select( 'core/editor' ) ) {
-			props.setAttributes( {
+			setAttributes( {
 				current_url: select( 'core/editor' ).getPermalink(),
 			} );
 		}
-
 	}, [] );
 
 	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-style-social-share-child-' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-	    const blockStyling = styling( props );
-
-        addBlockEditorDynamicStyles( 'uagb-style-social-share-child-' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
-	}, [deviceType] );
+	}, [ deviceType ] );
 
+	const blockStyling = useMemo( () => styling( attributes, clientId ), [ attributes, deviceType ] );
 
 	return (
-
-					<>
-			<Settings parentProps={ props } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ isSelected && <Settings { ...props } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default SocialShareChildComponent;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( SocialShareChildComponent );

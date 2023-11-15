@@ -4,9 +4,8 @@
 
 import classnames from 'classnames';
 import { InnerBlocks } from '@wordpress/block-editor';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect, memo } from '@wordpress/element';
 import styles from './editor.lazy.scss';
-import { useDeviceType } from '@Controls/getPreviewType';
 
 const ALLOWED_BLOCKS = [ 'uagb/social-share-child' ];
 
@@ -19,11 +18,9 @@ const Render = ( props ) => {
 		};
 	}, [] );
 
-	props = props.parentProps;
-	const deviceType = useDeviceType();
-	const { attributes } = props;
+	const { attributes, deviceType } = props;
 
-	const { isPreview, className, social_layout } = attributes;
+	const { className, social_layout, block_id } = attributes;
 
 	const getSocialShareTemplate = [
 		[
@@ -80,17 +77,14 @@ const Render = ( props ) => {
 		],
 	];
 
-	const previewImageData = `${ uagb_blocks_info.uagb_url }/admin/assets/preview-images/social-share.png`;
-
 	return (
-		isPreview ? <img width='100%' src={previewImageData} alt=''/> :
 		<div
 			className={ classnames(
 				className,
 				'uagb-social-share__outer-wrap',
 				`uagb-social-share__layout-${ social_layout }`,
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`,
-				`uagb-block-${ props.clientId.substr( 0, 8 ) }`
+				`uagb-block-${ block_id }`
 			) }
 		>
 			<InnerBlocks
@@ -103,4 +97,4 @@ const Render = ( props ) => {
 	);
 };
 
-export default React.memo( Render );
+export default memo( Render );

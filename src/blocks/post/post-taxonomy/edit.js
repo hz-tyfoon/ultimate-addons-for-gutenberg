@@ -1,9 +1,13 @@
-
 export const PostTaxonomy = ( props ) => {
+	const { post, categoriesList, attributes } = props;
 
-	const { post, categoriesList } = props;
-
-	const { taxStyle, displayPostTaxonomy, displayPostTaxonomyAboveTitle, hideTaxonomyIcon, taxDivider } = props.attributes;
+	const {
+		taxStyle,
+		displayPostTaxonomy,
+		displayPostTaxonomyAboveTitle,
+		hideTaxonomyIcon,
+		taxDivider,
+	} = attributes;
 
 	const list = categoriesList;
 	const cat = post.categories;
@@ -22,30 +26,34 @@ export const PostTaxonomy = ( props ) => {
 	return (
 		<>
 			{ displayPostTaxonomy && 'aboveTitle' === displayPostTaxonomyAboveTitle && 0 !== categoriesName.length && (
-				<>
-				{ ( 'default' === taxStyle ) && (
-					<span className=" uagb-post__text uagb-post__taxonomy  default">
-					{ ( hideTaxonomyIcon && 'aboveTitle' === displayPostTaxonomyAboveTitle ) && ( <span className="dashicons-tag dashicons"></span> ) }
-					<div
-						dangerouslySetInnerHTML={ {
-							__html: categoriesName.join( taxDivider ),
-						} }
-					></div>
-					</span>
-				) }
-				{ ( 'highlighted' === taxStyle ) && (
-				list.map( ( Litem ) => (
-					cat.map( ( Citem ) => (
-						( Litem.id === Citem ) && (
-							<span className={`uagb-post__taxonomy uagb-post__text ${taxStyle}`}>
-							{ ( hideTaxonomyIcon && 'aboveTitle' === displayPostTaxonomyAboveTitle ) && ( <span className="dashicons-tag dashicons"></span> ) }
-							{Litem.name}
-							</span>
-						)
-					) )
-				) )
-			) }
-			</>
+				<div className="uagb-post__text">
+					{ 'default' === taxStyle && (
+						<span className="uagb-post__taxonomy default">
+							{ hideTaxonomyIcon && 'aboveTitle' === displayPostTaxonomyAboveTitle && (
+								<span className="dashicons-tag dashicons"></span>
+							) }
+							<div
+								dangerouslySetInnerHTML={ {
+									__html: categoriesName.join( taxDivider ),
+								} }
+							></div>
+						</span>
+					) }
+					{ 'highlighted' === taxStyle &&
+						list.map( ( Litem ) =>
+							cat.map(
+								( Citem ) =>
+									Litem.id === Citem && (
+										<span className={ `uagb-post__taxonomy ${ taxStyle }` }>
+											{ hideTaxonomyIcon && 'aboveTitle' === displayPostTaxonomyAboveTitle && (
+												<span className="dashicons-tag dashicons"></span>
+											) }
+											{ Litem.name }
+										</span>
+									)
+							)
+						) }
+				</div>
 			) }
 		</>
 	);

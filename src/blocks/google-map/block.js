@@ -4,17 +4,21 @@
 
 import UAGB_Block_Icons from '@Controls/block-icons';
 import './style.scss';
-import edit from './edit';
-import save from './save';
+import Edit from './edit';
 import deprecated from './deprecated';
 import attributes from './attributes';
 import { __ } from '@wordpress/i18n';
 
 import { registerBlockType } from '@wordpress/blocks';
+import PreviewImage from '@Controls/previewImage';
 
 wp.uagb_google_api_key = 'AIzaSyAsd_d46higiozY-zNqtr7zdA81Soswje4';
-
+import { applyFilters } from '@wordpress/hooks';
+import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
+let googleMapCommonData = {};
+googleMapCommonData = applyFilters( 'uagb/google-map', addCommonDataToSpectraBlocks( googleMapCommonData ) );
 registerBlockType( 'uagb/google-map', {
+	...googleMapCommonData,
 	title: __( 'Google Maps', 'ultimate-addons-for-gutenberg' ),
 	description: __( 'Show a Google Map location on your website.', 'ultimate-addons-for-gutenberg' ),
 	icon: UAGB_Block_Icons.google_map,
@@ -26,14 +30,10 @@ registerBlockType( 'uagb/google-map', {
 	supports: {
 		anchor: true,
 	},
-	category: uagb_blocks_info.category,
 	attributes,
-	example: {
-		attributes: {
-			isPreview: true,
-		}
-	},
-	edit,
-	save,
+	category: uagb_blocks_info.category,
+	edit: ( props ) => ( props.attributes.isPreview ? <PreviewImage image="google-maps" /> : <Edit { ...props } /> ),
+	// Render via PHP
+	save: () => null,
 	deprecated,
 } );

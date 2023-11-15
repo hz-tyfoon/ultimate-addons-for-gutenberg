@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from '@wordpress/element';
 const Author = ( props ) => {
 	const { post, attributes } = props;
 
@@ -8,22 +8,21 @@ const Author = ( props ) => {
 	}
 	return (
 		<>
-			{ attributes.displayPostAuthor &&
-				undefined !== post.uagb_author_info && (
-					<>
-						<span className="dashicons-admin-users dashicons"></span>
-						<a
-							className="uagb-timeline__author-link"
-							target={ target }
-							href={ post.uagb_author_info.author_link }
-							rel="noopener noreferrer"
-						>
-							{ post.uagb_author_info.display_name }
-						</a>
-					</>
-				) }
+			{ attributes.displayPostAuthor && undefined !== post.uagb_author_info && (
+				<>
+					<span className="dashicons-admin-users dashicons"></span>
+					<a
+						className="uagb-timeline__author-link"
+						target={ target }
+						href={ post.uagb_author_info.author_link }
+						rel="noopener noreferrer"
+					>
+						{ post.uagb_author_info.display_name }
+					</a>
+				</>
+			) }
 		</>
 	);
 };
 
-export default React.memo( Author );
+export default memo( Author );

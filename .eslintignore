@@ -12,7 +12,14 @@ node_modules
 vendor
 *.css
 *.scss
+*.min.js
 
 assets/js/js_cookie.min.js
+blocks-config/uagb-controls/fonts.js
 
 **/deprecated/**
+
+# Misc.
+
+# AOS library files.
+assets/js/aos.js

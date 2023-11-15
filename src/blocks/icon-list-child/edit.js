@@ -3,52 +3,38 @@
  */
 
 // Import classes
-
 import styling from './styling';
-import React, {    useEffect } from 'react';
-
-import { useDeviceType } from '@Controls/getPreviewType';
-import addBlockEditorDynamicStyles from '@Controls/addBlockEditorDynamicStyles';
+import { useEffect, useMemo } from '@wordpress/element';
 import scrollBlockToView from '@Controls/scrollBlockToView';
-
 import Settings from './settings';
 import Render from './render';
+import DynamicCSSLoader from '@Components/dynamic-css-loader';
+import { compose } from '@wordpress/compose';
+import AddStaticStyles from '@Controls/AddStaticStyles';
+import addInitialAttr from '@Controls/addInitialAttr';
 
 let hideLabel;
 
 const UAGBIconListChild = ( props ) => {
 
-	const deviceType = useDeviceType();
+	const { isSelected, clientId, attributes, deviceType } = props;
+
+	const blockStyling = useMemo( () => styling( attributes, clientId, deviceType ), [ attributes, deviceType ] );
 
 	useEffect( () => {
-		// Assigning block_id in the attribute.
-		props.setAttributes( { block_id: props.clientId.substr( 0, 8 ) } );
-
-	}, [] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-icon-list-child' + props.clientId.substr( 0, 8 ), blockStyling );
-	}, [ props ] );
-
-	useEffect( () => {
-		// Replacement for componentDidUpdate.
-		const blockStyling = styling( props );
-
-		addBlockEditorDynamicStyles( 'uagb-style-icon-list-child' + props.clientId.substr( 0, 8 ), blockStyling );
-
 		scrollBlockToView();
 	}, [ deviceType ] );
 
 	return (
-			<>
-			<Settings parentProps={ props } hideLabel={ hideLabel } />
-			<Render parentProps={ props } />
-			</>
-
+		<>
+			<DynamicCSSLoader { ...{ blockStyling } } />
+			{ isSelected && <Settings { ...props } hideLabel={ hideLabel } /> }
+			<Render { ...props } />
+		</>
 	);
 };
 
-export default UAGBIconListChild;
+export default compose(
+	addInitialAttr,
+	AddStaticStyles,
+)( UAGBIconListChild );
