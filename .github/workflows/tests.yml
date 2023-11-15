@@ -34,7 +34,7 @@ jobs:
 
     - name: E2E Tests
       if: always()
-      run:  npx playwright test 
+      run: npm install -D @playwright/test && npx playwright test 
 
     - name: Stop Docker environment
       run: npm run env:stop
