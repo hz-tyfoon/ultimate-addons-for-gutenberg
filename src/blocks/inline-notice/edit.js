@@ -20,10 +20,18 @@ const UAGBInlineNoticeEdit = ( props ) => {
 		isSelected,
 		clientId,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, noticeTitle },
 		name,
-		deviceType
+		deviceType,
+		setAttributes,
 	} = props;
+
+	useEffect( () => {
+		// Pushing Style tag for this block css.
+		if ( noticeTitle && '' !== noticeTitle ) {
+			setAttributes( { noteTitle: noticeTitle } );
+		}
+	}, [] );
 
 	useEffect( () => {
 		scrollBlockToView();

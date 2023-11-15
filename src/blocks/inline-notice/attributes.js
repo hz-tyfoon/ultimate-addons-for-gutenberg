@@ -17,6 +17,10 @@ const attributes = {
 		selector: '.uagb-notice-title',
 		default: __( 'Notice Title', 'ultimate-addons-for-gutenberg' ),
 	},
+	noteTitle: {
+		type: 'string',
+		default: __( 'Notice Title', 'ultimate-addons-for-gutenberg' ),
+	},
 	headingTag: {
 		type: 'string',
 		default: 'h4',

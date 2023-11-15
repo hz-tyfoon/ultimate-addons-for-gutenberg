@@ -17,18 +17,27 @@ UAGBInlineNotice = {
 				mainWrap.style.display = 'block';
 			}
 			const noticeDismissClass = mainWrap.querySelector( '.uagb-notice-dismiss' );
-			const closeBtn = noticeDismissClass ? noticeDismissClass : mainWrap.querySelector( 'svg' );
-
+			const closeBtn = noticeDismissClass ? noticeDismissClass : mainWrap.querySelector( 'div[role="tablist"] svg' );
+			
 			if ( '' !== attr.noticeDismiss && '' !== attr.icon ) {
-				closeBtn.addEventListener( 'click', function () {
-					if ( true === isCookie && 'undefined' === typeof currentCookie ) {
-						Cookies.set( 'uagb-notice-' + uniqueId, true, { expires: cookiesDays } );
+				closeBtn.addEventListener( 'click', function ( e ) {
+					dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, e, main );	
+				} );
+				document.addEventListener( 'keydown', function ( e ) {
+					if ( e.keyCode === 13 || e.keyCode === 32 ) {
+						dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, e, main );
 					}
-
-					this.parentElement.classList.add( 'uagb-notice__active' );
-					this.parentElement.style.display = 'none';
 				} );
 			}
 		}
 	},
 };
+
+function dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, e, main ) { 
+	if ( true === isCookie && 'undefined' === typeof currentCookie ) {
+		Cookies.set( 'uagb-notice-' + uniqueId, true, { expires: cookiesDays } );
+	} 
+	const parent = e.currentTarget?.closest( '.wp-block-uagb-inline-notice' );
+	main[0]?.classList?.add( 'uagb-notice__active' );
+	parent.style.display = 'none';
+}

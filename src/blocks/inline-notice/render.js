@@ -17,7 +17,7 @@ const Render = ( props ) => {
 
 	// Setup the attributes
 	const {
-		attributes: { block_id, icon, noticeTitle, noticeContent, noticeDismiss, noticeAlignment, headingTag },
+		attributes: { block_id, icon, noteTitle, noticeContent, noticeDismiss, noticeAlignment, headingTag },
 		setAttributes,
 		className,
 		deviceType
@@ -39,14 +39,16 @@ const Render = ( props ) => {
 				`uagb-editor-preview-mode-${ deviceType.toLowerCase() }`
 			) }
 		>
-			{ imageIconHtml }
+			<div role="tablist">
+				<span role="tab">{ imageIconHtml }</span>
+			</div>
 			<RichText
 				tagName={ headingTag }
 				placeholder={ __( 'Notice Title', 'ultimate-addons-for-gutenberg' ) }
 				keepPlaceholderOnFocus
-				value={ noticeTitle }
+				value={ noteTitle }
 				className="uagb-notice-title"
-				onChange={ ( value ) => setAttributes( { noticeTitle: value } ) }
+				onChange={ ( value ) => setAttributes( { noteTitle: value } ) }
 			/>
 			<RichText
 				tagName="div"
