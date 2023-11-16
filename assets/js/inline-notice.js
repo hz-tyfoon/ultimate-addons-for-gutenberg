@@ -23,9 +23,9 @@ UAGBInlineNotice = {
 				closeBtn.addEventListener( 'click', function () {
 					dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, main );	
 				} );
-				document.addEventListener( 'keydown', function ( e ) {
+				main[0].addEventListener( 'keydown', function ( e ) {
 					if ( e.keyCode === 13 || e.keyCode === 32 ) {
-						const focusedVisibleElement = document.querySelector( '.wp-block-uagb-inline-notice :focus-visible' );
+						const focusedVisibleElement = document.querySelector( id + ' :focus-visible' );
 						dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, main, focusedVisibleElement );
 					}
 				} );
