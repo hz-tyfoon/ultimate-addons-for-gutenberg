@@ -43,7 +43,7 @@ export default function save( props ) {
 			)}
 		>
 			<div role="tablist">
-				<span role="tab">{imageIconHtml}</span>
+				<span role="tab" tabIndex="0" title="dismiss">{imageIconHtml}</span>
 			</div>
 			<RichText.Content value={noticeTitle} tagName={headingTag} className="uagb-notice-title" />
 			<RichText.Content value={noticeContent} tagName="div" className="uagb-notice-text" />
