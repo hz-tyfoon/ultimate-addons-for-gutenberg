@@ -689,30 +689,6 @@ if ( ! class_exists( 'UAGB_Inline_Notice' ) ) {
 				$mob_class = ( isset( $attributes['UAGHideMob'] ) ) ? 'uag-hide-mob' : '';
 			}
 
-			$zindex_desktop           = '';
-			$zindex_tablet            = '';
-			$zindex_mobile            = '';
-			$zindex_wrap              = array();
-			$zindex_extension_enabled = ( isset( $attributes['zIndex'] ) || isset( $attributes['zIndexTablet'] ) || isset( $attributes['zIndexMobile'] ) );
-
-			if ( $zindex_extension_enabled ) {
-				$zindex_desktop = ( isset( $attributes['zIndex'] ) ) ? '--z-index-desktop:' . $attributes['zIndex'] . ';' : false;
-				$zindex_tablet  = ( isset( $attributes['zIndexTablet'] ) ) ? '--z-index-tablet:' . $attributes['zIndexTablet'] . ';' : false;
-				$zindex_mobile  = ( isset( $attributes['zIndexMobile'] ) ) ? '--z-index-mobile:' . $attributes['zIndexMobile'] . ';' : false;
-
-				if ( $zindex_desktop ) {
-					array_push( $zindex_wrap, $zindex_desktop );
-				}
-
-				if ( $zindex_tablet ) {
-					array_push( $zindex_wrap, $zindex_tablet );
-				}
-
-				if ( $zindex_mobile ) {
-					array_push( $zindex_wrap, $zindex_mobile );
-				}
-			}
-
 			$main_classes = array(
 				'wp-block-uagb-inline-notice',
 				$noticeDismiss,
@@ -722,16 +698,17 @@ if ( ! class_exists( 'UAGB_Inline_Notice' ) ) {
 				$desktop_class,
 				$tab_class,
 				$mob_class,
-				$zindex_extension_enabled ? 'uag-blocks-common-selector' : '',
 			);
+
+			$title = __( 'Dismiss', 'ultimate-addons-for-gutenberg' );
 
 			ob_start();
 
 			?>
 				<div class = "<?php echo esc_attr( implode( ' ', $main_classes ) ); ?>" >
-					<?php if( $noticeDismiss ) { ?>
+					<?php if ( $noticeDismiss ) { ?>
 						<div role="tablist">
-							<span role="tab" tabindex="0" target="_blank"><?php UAGB_Helper::render_svg_html( $attributes['icon'] ); ?></span>
+							<span role="tab" tabindex="0" title="<?php echo esc_attr( $title ); ?>"><?php UAGB_Helper::render_svg_html( $attributes['icon'] ); ?></span>
 						</div>
 					<?php } ?>
 					<<?php echo esc_attr( $headingTag ); ?> class="uagb-notice-title"><?php echo esc_html( $attributes['noteTitle'] ); ?></<?php echo esc_attr( $headingTag ); ?>>

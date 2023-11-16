@@ -20,12 +20,13 @@ UAGBInlineNotice = {
 			const closeBtn = noticeDismissClass ? noticeDismissClass : mainWrap.querySelector( 'div[role="tablist"] svg' );
 			
 			if ( '' !== attr.noticeDismiss && '' !== attr.icon ) {
-				closeBtn.addEventListener( 'click', function ( e ) {
-					dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, e, main );	
+				closeBtn.addEventListener( 'click', function () {
+					dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, main );	
 				} );
 				document.addEventListener( 'keydown', function ( e ) {
 					if ( e.keyCode === 13 || e.keyCode === 32 ) {
-						dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, e, main );
+						const focusedVisibleElement = document.querySelector( '.wp-block-uagb-inline-notice :focus-visible' );
+						dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, main, focusedVisibleElement );
 					}
 				} );
 			}
@@ -33,11 +34,15 @@ UAGBInlineNotice = {
 	},
 };
 
-function dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, e, main ) { 
+function dismissClick( isCookie, currentCookie, uniqueId, cookiesDays, main, focusedVisibleElement ) { 
 	if ( true === isCookie && 'undefined' === typeof currentCookie ) {
 		Cookies.set( 'uagb-notice-' + uniqueId, true, { expires: cookiesDays } );
 	} 
-	const parent = e.currentTarget?.closest( '.wp-block-uagb-inline-notice' );
 	main[0]?.classList?.add( 'uagb-notice__active' );
-	parent.style.display = 'none';
+	if ( focusedVisibleElement ) {
+		const closeDismiss = focusedVisibleElement.parentElement.parentElement;
+		closeDismiss.style.display = 'none';
+	} else {
+		main[0].style.display = 'none';
+	}
 }

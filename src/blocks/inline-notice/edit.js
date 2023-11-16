@@ -20,7 +20,7 @@ const UAGBInlineNoticeEdit = ( props ) => {
 		isSelected,
 		clientId,
 		attributes,
-		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, noticeTitle },
+		attributes: { UAGHideDesktop, UAGHideTab, UAGHideMob, noticeTitle, noteTitle },
 		name,
 		deviceType,
 		setAttributes,
@@ -28,7 +28,7 @@ const UAGBInlineNoticeEdit = ( props ) => {
 
 	useEffect( () => {
 		// Pushing Style tag for this block css.
-		if ( noticeTitle && '' !== noticeTitle ) {
+		if ( noticeTitle && '' !== noticeTitle && noticeTitle !== noteTitle ) {
 			setAttributes( { noteTitle: noticeTitle } );
 		}
 	}, [] );
