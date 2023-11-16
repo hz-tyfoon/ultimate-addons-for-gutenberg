@@ -172,19 +172,13 @@ class Admin_Configurations {
 		// Verify the nonce.
 		check_ajax_referer( 'zip_ai_admin_nonce', 'nonce' );
 
-		error_log( print_r( get_option( 'zip_ai_settings' ), true ) );
-		error_log( print_r( get_option( 'zip_ai_modules' ), true ) );
-
 		// Check if the Zip AI Assistant was requested to be disabled.
 		if ( ! empty( $_POST['disable_zip_ai_assistant'] ) ) {
-			error_log( 'Disabling Zip AI Assistant' );
 			Functions::disable_module( 'ai_assistant' );
-			error_log( print_r( get_option( 'zip_ai_modules' ), true ) );
 		}
 
 		// Disable the Zip AI Library.
 		Functions::disable();
-		error_log( 'Disabled Zip AI' );
 
 		// Send the status based on whether the Zip AI Library is enabled or not.
 		if ( Functions::is_enabled() ) {

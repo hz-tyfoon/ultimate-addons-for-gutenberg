@@ -106,7 +106,7 @@ if ( ! class_exists( '\ZipAI\Functions' ) ) {
 			if ( isset( $zip_ai_settings['chat_enabled'] ) ) {
 				// Set the new option value based on the chat enabled value.
 				$ai_assistant_status = false === $zip_ai_settings['chat_enabled'] ? 'disabled' : 'enabled';
-				
+
 				// Update the AI assistant module status.
 				$ai_assistant_migrated = self::update_module( 'ai_assistant', $ai_assistant_status );
 
