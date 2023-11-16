@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import renderSVG from '@Controls/deprecatedRenderIcon';
 import { RichText } from '@wordpress/block-editor';
 import attributes from './attributes';
+import newRenderSVG from '@Controls/renderIcon';
 
 const deprecated = [
 	{
@@ -74,7 +75,7 @@ const deprecated = [
 			let imageIconHtml = '';
 
 			if (noticeDismiss) {
-				imageIconHtml = renderSVG(icon);
+				imageIconHtml = newRenderSVG(icon);
 			}
 
 			let active = '';
