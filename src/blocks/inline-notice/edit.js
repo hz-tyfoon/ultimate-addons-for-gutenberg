@@ -26,12 +26,12 @@ const UAGBInlineNoticeEdit = ( props ) => {
 		setAttributes,
 	} = props;
 
-	useEffect( () => {
-		// Pushing Style tag for this block css.
-		if ( noticeTitle && '' !== noticeTitle && noticeTitle !== noteTitle ) {
-			setAttributes( { noteTitle: noticeTitle } );
-		}
-	}, [] );
+	// useEffect( () => {
+	// 	// Pushing Style tag for this block css.
+	// 	if ( noticeTitle && '' !== noticeTitle && noticeTitle !== noteTitle ) {
+	// 		setAttributes( { noteTitle: noticeTitle } );
+	// 	}
+	// }, [] );
 
 	useEffect( () => {
 		scrollBlockToView();

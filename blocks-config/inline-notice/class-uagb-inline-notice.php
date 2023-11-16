@@ -71,6 +71,12 @@ if ( ! class_exists( 'UAGB_Inline_Notice' ) ) {
 							'block_id'                   => array(
 								'type' => 'string',
 							),
+							'noticeTitle'  => array(
+								'type'      => 'string',
+								'source'    => 'html',
+								'selector'  => '.uagb-notice-title',
+								'default' => __( 'Notice Title', 'ultimate-addons-for-gutenberg' ),
+							),
 							'noteTitle'                  => array(
 								'type'    => 'string',
 								'default' => __( 'Notice Title', 'ultimate-addons-for-gutenberg' ),
@@ -701,6 +707,10 @@ if ( ! class_exists( 'UAGB_Inline_Notice' ) ) {
 			);
 
 			$title = __( 'Dismiss', 'ultimate-addons-for-gutenberg' );
+			// if( isset( $attributes['noticeTitle'] ) ){
+				error_log( print_r( $attributes['noticeTitle'], true ) );
+			// }
+			// error_log( 'noteTitle' . print_r( $attributes['noteTitle'], true ) );
 
 			ob_start();
 
@@ -711,7 +721,7 @@ if ( ! class_exists( 'UAGB_Inline_Notice' ) ) {
 							<span role="tab" tabindex="0" title="<?php echo esc_attr( $title ); ?>"><?php UAGB_Helper::render_svg_html( $attributes['icon'] ); ?></span>
 						</div>
 					<?php } ?>
-					<<?php echo esc_attr( $headingTag ); ?> class="uagb-notice-title"><?php echo esc_html( $attributes['noteTitle'] ); ?></<?php echo esc_attr( $headingTag ); ?>>
+					<<?php echo esc_attr( $headingTag ); ?> class="uagb-notice-title"><?php echo esc_html( $attributes['noticeTitle'] ); ?></<?php echo esc_attr( $headingTag ); ?>>
 					<div class="uagb-notice-text"><?php echo esc_html( $attributes['noticeContent'] ); ?></div>
 				</div>
 

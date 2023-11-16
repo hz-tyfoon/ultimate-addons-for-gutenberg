@@ -17,7 +17,7 @@ const Render = ( props ) => {
 
 	// Setup the attributes
 	const {
-		attributes: { block_id, icon, noteTitle, noticeContent, noticeDismiss, noticeAlignment, headingTag },
+		attributes: { block_id, icon, noticeTitle, noticeContent, noticeDismiss, noticeAlignment, headingTag },
 		setAttributes,
 		className,
 		deviceType
@@ -46,9 +46,9 @@ const Render = ( props ) => {
 				tagName={ headingTag }
 				placeholder={ __( 'Notice Title', 'ultimate-addons-for-gutenberg' ) }
 				keepPlaceholderOnFocus
-				value={ noteTitle }
+				value={ noticeTitle }
 				className="uagb-notice-title"
-				onChange={ ( value ) => setAttributes( { noteTitle: value } ) }
+				onChange={ ( value ) => setAttributes( { noticeTitle: value } ) }
 			/>
 			<RichText
 				tagName="div"
