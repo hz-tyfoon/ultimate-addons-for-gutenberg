@@ -170,11 +170,6 @@ if ( ! class_exists( '\ZipAI\Loader' ) ) {
 		 * @return void
 		 */
 		public function setup_classes() {
-			// Load the library visible classes only if Zip AI is enabled.
-			if ( ! Helpers::is_enabled() ) {
-				return;
-			}
-
 			// Enable the Zip AI Chat Sidebar if required.
 			if ( apply_filters( 'zip_ai_enable_chat_sidebar', true ) && Helpers::is_module_enabled( 'ai_assistant' ) ) {
 				Sidebar_Configurations::get_instance();

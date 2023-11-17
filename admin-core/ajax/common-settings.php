@@ -94,7 +94,7 @@ class Common_Settings extends Ajax_Base {
 			'insta_all_users_media',
 			'insta_refresh_all_tokens',
 			'btn_inherit_from_theme',
-			'zip_ai_status',
+			'zip_ai_assistant_status',
 		);
 
 		$this->init_ajax_events( $ajax_events );
@@ -908,14 +908,14 @@ class Common_Settings extends Ajax_Base {
 	}
 
 	/**
-	 * Save setting - Enables the Zip AI Library.
+	 * Save setting - Enables the Zip AI Chat Assistant.
 	 *
 	 * @since x.x.x
 	 * @return void
 	 */
-	public function zip_ai_status() {
+	public function zip_ai_assistant_status() {
 		// Check permission.
-		$this->check_permission_nonce( 'uag_zip_ai_status' );
+		$this->check_permission_nonce( 'uag_zip_ai_assistant_status' );
 		// Check post value.
 		$value = $this->check_post_value();
 
