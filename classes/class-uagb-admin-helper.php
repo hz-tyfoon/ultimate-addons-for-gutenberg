@@ -85,7 +85,7 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 					)
 				),
 				'wp_is_block_theme'                 => self::is_block_theme(),
-				'zip_ai_status'                     => self::get_admin_settings_option( 'zip_ai_status', 'enabled' ),
+				'zip_ai_chat_status'                => self::get_admin_settings_option( 'zip_ai_status', 'enabled' ),
 			);
 
 			return $options;

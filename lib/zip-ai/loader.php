@@ -13,10 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use ZipAI\Functions;
+use ZipAI\Classes\Helpers;
 use ZipAI\Classes\Admin_Configurations;
 use ZipAI\Classes\Sidebar_Configurations;
-use ZipAI\Classes\Zip_Ai_Helpers;
 
 if ( ! class_exists( '\ZipAI\Loader' ) ) {
 	/**
@@ -171,13 +170,13 @@ if ( ! class_exists( '\ZipAI\Loader' ) ) {
 		 * @return void
 		 */
 		public function setup_classes() {
-			// Load the library files only if Zip AI is enabled.
-			if ( ! Functions::is_enabled() ) {
+			// Load the library visible classes only if Zip AI is enabled.
+			if ( ! Helpers::is_enabled() ) {
 				return;
 			}
 
 			// Enable the Zip AI Chat Sidebar if required.
-			if ( apply_filters( 'zip_ai_enable_chat_sidebar', true ) && Functions::is_module_enabled( 'ai_assistant' ) ) {
+			if ( apply_filters( 'zip_ai_enable_chat_sidebar', true ) && Helpers::is_module_enabled( 'ai_assistant' ) ) {
 				Sidebar_Configurations::get_instance();
 			}
 

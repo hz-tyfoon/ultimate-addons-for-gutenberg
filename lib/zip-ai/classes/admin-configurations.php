@@ -12,8 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use ZipAI\Functions;
-use ZipAI\Classes\Zip_Ai_Helpers;
+use ZipAI\Classes\Helpers;
 use ZipAI\Classes\Admin_Views;
 
 /**
@@ -61,14 +60,14 @@ class Admin_Configurations {
 		add_action( 'admin_init', array( $this, 'settings_admin_scripts' ) );
 
 		// Verify Zip AI Authorization.
-		add_action( 'admin_init', array( $this, 'verify_zip_ai_authorization' ) );
+		add_action( 'admin_init', array( $this, 'verify_authorization' ) );
 
 		// Setup the Admin Menu.
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 
 		// Setup the Admin Ajax Actions.
-		add_action( 'wp_ajax_zip_ai_admin_update_ai_assistant_ajax', array( $this, 'zip_ai_admin_update_ai_assistant_ajax' ) );
-		add_action( 'wp_ajax_zip_ai_disabler_ajax', array( $this, 'zip_ai_disabler_ajax' ) );
+		add_action( 'wp_ajax_zip_ai_admin_update_ai_assistant_ajax', array( $this, 'admin_update_ai_assistant_ajax' ) );
+		add_action( 'wp_ajax_zip_ai_disabler_ajax', array( $this, 'disabler_ajax' ) );
 	}
 
 
@@ -104,7 +103,7 @@ class Admin_Configurations {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function verify_zip_ai_authorization() {
+	public function verify_authorization() {
 		// If the current user does not have the required capability or the referrer is empty, then abandon ship.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -122,13 +121,13 @@ class Admin_Configurations {
 		if ( isset( $_GET['revoke_zip_ai_authorization_token'] ) && 'definitely' === sanitize_text_field( $_GET['revoke_zip_ai_authorization_token'] ) ) {
 
 			// Get the Zip AI settings.
-			$existing_zip_ai_options = Zip_Ai_Helpers::get_zip_ai_setting();
+			$db_settings_options = Helpers::get_setting();
 
 			// Remove the auth token from the Zip AI settings.
-			unset( $existing_zip_ai_options['auth_token'] );
+			unset( $db_settings_options['auth_token'] );
 
 			// Update the Zip AI settings.
-			Zip_Ai_Helpers::update_admin_settings_option( 'zip_ai_settings', $existing_zip_ai_options );
+			Helpers::update_admin_settings_option( 'zip_ai_settings', $db_settings_options );
 
 			// Redirect to the settings page.
 			wp_safe_redirect( admin_url() );
@@ -141,13 +140,13 @@ class Admin_Configurations {
 		}
 
 		// Get the existing options, and update the auth token before updating the option.
-		$existing_zip_ai_options = Zip_Ai_Helpers::get_zip_ai_setting();
+		$db_settings_options = Helpers::get_setting();
 
 		// Update the auth token.
-		$existing_zip_ai_options['auth_token'] = Zip_Ai_Helpers::encrypt( sanitize_text_field( $_GET['token'] ) );
+		$db_settings_options['auth_token'] = Helpers::encrypt( sanitize_text_field( $_GET['token'] ) );
 
 		// Update the Zip AI settings.
-		Zip_Ai_Helpers::update_admin_settings_option( 'zip_ai_settings', $existing_zip_ai_options );
+		Helpers::update_admin_settings_option( 'zip_ai_settings', $db_settings_options );
 
 		// Redirect to the settings page.
 		if ( apply_filters( 'zip_ai_auth_redirection_flag', true ) ) {
@@ -163,7 +162,7 @@ class Admin_Configurations {
 	 * @since x.x.x
 	 * @return void
 	 */
-	public function zip_ai_disabler_ajax() {
+	public function disabler_ajax() {
 		// If the current user does not have the required capability, then abandon ship.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();
@@ -174,17 +173,17 @@ class Admin_Configurations {
 
 		// Check if the Zip AI Assistant was requested to be disabled.
 		if ( ! empty( $_POST['disable_zip_ai_assistant'] ) ) {
-			Functions::disable_module( 'ai_assistant' );
+			Helpers::disable_module( 'ai_assistant' );
 		}
 
-		// Disable the Zip AI Library.
-		Functions::disable();
+		// Disable the Zip AI Library classes from loading.
+		$is_library_disabled = Helpers::disable();
 
 		// Send the status based on whether the Zip AI Library is enabled or not.
-		if ( Functions::is_enabled() ) {
-			wp_send_json_error();
-		} else {
+		if ( $is_library_disabled ) {
 			wp_send_json_success();
+		} else {
+			wp_send_json_error();
 		}
 	}
 
@@ -194,7 +193,7 @@ class Admin_Configurations {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function zip_ai_admin_update_ai_assistant_ajax() {
+	public function admin_update_ai_assistant_ajax() {
 		// If the current user does not have the required capability, then abandon ship.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();
@@ -210,9 +209,9 @@ class Admin_Configurations {
 
 		// Update the enabled status.
 		if ( 'enabled' === sanitize_text_field( $_POST['enable_zip_chat'] ) ) {
-			Functions::enable_module( 'ai_assistant' );
+			Helpers::enable_module( 'ai_assistant' );
 		} else {
-			Functions::disable_module( 'ai_assistant' );
+			Helpers::disable_module( 'ai_assistant' );
 		}
 
 		// Send the status.
@@ -230,7 +229,7 @@ class Admin_Configurations {
 		$menu_page_slug = $this->menu_slug;
 
 		// Check if Zip AI is Authorized, then either render the settings page or the auth screen.
-		if ( ! Zip_Ai_Helpers::is_zip_ai_authorized() ) {
+		if ( ! Helpers::is_authorized() ) {
 			// If Zip AI is not authorized, render the auth screen.
 			Admin_Views::render_admin_auth_markup( $menu_page_slug );
 		} else {
@@ -256,7 +255,7 @@ class Admin_Configurations {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
 
 		// Add the footer link if needed.
-		if ( Zip_Ai_Helpers::is_zip_ai_authorized() ) {
+		if ( Helpers::is_authorized() ) {
 			// Add the footer link.
 			add_filter( 'admin_footer_text', array( $this, 'add_footer_link' ), 99 );
 		}
@@ -293,7 +292,7 @@ class Admin_Configurations {
 		);
 
 		// Get the response from the endpoint.
-		$response = Zip_Ai_Helpers::get_scs_response( 'usage' );
+		$response = Helpers::get_response( 'usage' );
 
 		// If the response is not an error, then update the credit details.
 		if (
@@ -309,16 +308,16 @@ class Admin_Configurations {
 		$localize = apply_filters(
 			'zip_ai_admin_localize',
 			array(
-				'admin_url'               => admin_url(),
-				'ajax_url'                => admin_url( 'admin-ajax.php' ),
-				'zip_ai_auth_middleware'  => Zip_Ai_Helpers::get_auth_middleware_url(),
-				'zip_ai_auth_revoke_url'  => Zip_Ai_Helpers::get_auth_revoke_url(),
-				'zip_ai_credit_topup_url' => ZIP_AI_CREDIT_TOPUP_URL,
-				'is_zip_ai_authorized'    => Zip_Ai_Helpers::is_zip_ai_authorized(),
-				'is_zip_chat_enabled'     => Functions::is_module_enabled( 'ai_assistant' ),
-				'zip_ai_admin_nonce'      => wp_create_nonce( 'zip_ai_admin_nonce' ),
-				'page_slug'               => $this->menu_slug,
-				'zip_ai_credit_details'   => Zip_Ai_Helpers::get_credit_details(),
+				'admin_url'        => admin_url(),
+				'ajax_url'         => admin_url( 'admin-ajax.php' ),
+				'auth_middleware'  => Helpers::get_auth_middleware_url(),
+				'auth_revoke_url'  => Helpers::get_auth_revoke_url(),
+				'credit_topup_url' => ZIP_AI_CREDIT_TOPUP_URL,
+				'is_authorized'    => Helpers::is_authorized(),
+				'is_chat_enabled'  => Helpers::is_module_enabled( 'ai_assistant' ),
+				'admin_nonce'      => wp_create_nonce( 'zip_ai_admin_nonce' ),
+				'page_slug'        => $this->menu_slug,
+				'credit_details'   => Helpers::get_credit_details(),
 			)
 		);
 
