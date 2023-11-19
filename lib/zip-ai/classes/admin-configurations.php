@@ -171,16 +171,16 @@ class Admin_Configurations {
 		// Verify the nonce.
 		check_ajax_referer( 'zip_ai_admin_nonce', 'nonce' );
 
+		// Have a variable to check if the module was disabled.
+		$is_module_disabled = false;
+
 		// Check if the Zip AI Assistant was requested to be disabled.
 		if ( ! empty( $_POST['disable_zip_ai_assistant'] ) ) {
-			Helpers::disable_module( 'ai_assistant' );
+			$is_module_disabled = Helpers::disable_module( 'ai_assistant' );
 		}
 
-		// Disable the Zip AI Library classes from loading.
-		$is_library_disabled = Helpers::disable();
-
 		// Send the status based on whether the Zip AI Library is enabled or not.
-		if ( $is_library_disabled ) {
+		if ( $is_module_disabled ) {
 			wp_send_json_success();
 		} else {
 			wp_send_json_error();
