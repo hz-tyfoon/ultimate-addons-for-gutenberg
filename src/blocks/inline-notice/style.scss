@@ -67,7 +67,7 @@
 			transition: 0.3s ease;
 		}
 
-		div[role="tablist"] {
+		button[type="button"] {
 			position: absolute;
 			cursor: pointer;
 			opacity: 0.8;
@@ -84,9 +84,13 @@
 			left: 13px;
 		}
 
-		div[role="tablist"] {
+		button[type="button"] {
 			left: 13px;
 			top: 13px;
+			border: none;
+			padding-inline: 0;
+			padding-block: 0;
+			line-height: 0px;
 		}
 	}
 
@@ -97,9 +101,13 @@
 			right: 13px;
 		}
 
-		div[role="tablist"] {
+		button[type="button"] {
 			right: 13px;
 			top: 13px;
+			border: none;
+			padding-inline: 0;
+			padding-block: 0;
+			line-height: 0px;
 		}
 	}
 
@@ -110,9 +118,13 @@
 			right: 13px;
 		}
 
-		div[role="tablist"] {
+		button[type="button"] {
 			right: 13px;
 			top: 13px;
+			border: none;
+			padding-inline: 0;
+			padding-block: 0;
+			line-height: 0px;
 		}
 	}
 }

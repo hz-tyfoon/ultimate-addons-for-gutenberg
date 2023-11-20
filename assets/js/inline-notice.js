@@ -17,7 +17,7 @@ UAGBInlineNotice = {
 				mainWrap.style.display = 'block';
 			}
 			const noticeDismissClass = mainWrap.querySelector( '.uagb-notice-dismiss' );
-			const closeBtn = noticeDismissClass ? noticeDismissClass : mainWrap.querySelector( 'div[role="tablist"] svg' );
+			const closeBtn = noticeDismissClass ? noticeDismissClass : mainWrap.querySelector( 'button[type="button"] svg' );
 			
 			if ( '' !== attr.noticeDismiss && '' !== attr.icon ) {
 				closeBtn.addEventListener( 'click', function () {

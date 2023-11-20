@@ -42,9 +42,7 @@ export default function save( props ) {
 				`${active}`
 			)}
 		>
-			<button className="uagb-notice-close-button" type="button" aria-label="Close">
-				{imageIconHtml}
-			</button>
+			{imageIconHtml}
 			<RichText.Content value={noticeTitle} tagName={headingTag} className="uagb-notice-title" />
 			<RichText.Content value={noticeContent} tagName="div" className="uagb-notice-text" />
 		</div>
