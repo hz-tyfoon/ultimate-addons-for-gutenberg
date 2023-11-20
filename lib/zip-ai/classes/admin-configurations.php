@@ -66,7 +66,7 @@ class Admin_Configurations {
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 
 		// Setup the Admin Ajax Actions.
-		add_action( 'wp_ajax_zip_ai_admin_update_ai_assistant_ajax', array( $this, 'admin_update_ai_assistant_ajax' ) );
+		add_action( 'wp_ajax_zip_ai_toggle_chat_status_ajax', array( $this, 'toggle_chat_status_ajax' ) );
 		add_action( 'wp_ajax_zip_ai_disabler_ajax', array( $this, 'disabler_ajax' ) );
 	}
 
@@ -193,7 +193,7 @@ class Admin_Configurations {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function admin_update_ai_assistant_ajax() {
+	public function toggle_chat_status_ajax() {
 		// If the current user does not have the required capability, then abandon ship.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();

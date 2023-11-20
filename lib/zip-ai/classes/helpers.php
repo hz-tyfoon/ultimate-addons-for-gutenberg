@@ -204,7 +204,7 @@ class Helpers {
 	 */
 	public static function is_module_enabled( $module_name ) {
 		// Check if the module name is valid.
-		if ( ! array_key_exists( $module_name, self::$modules ) ) {
+		if ( ! is_string( $module_name ) || ! array_key_exists( $module_name, self::$modules ) ) {
 			return false;
 		}
 
