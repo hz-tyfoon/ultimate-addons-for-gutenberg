@@ -116,11 +116,11 @@ $selectors = array(
 		'fill'  => $attr['noticeDismissColor'],
 		'color' => $attr['noticeDismissColor'],
 	),
-	' button[type="button"] svg'                   => array(
+	' button[type="button"] svg'                      => array(
 		'fill'  => $attr['noticeDismissColor'],
 		'color' => $attr['noticeDismissColor'],
 	),
-	'.uagb-dismissable button[type="button"] svg'  => array(
+	'.uagb-dismissable button[type="button"] svg'     => array(
 		'width'  => UAGB_Helper::get_css_value( $attr['iconSize'], $attr['iconSizeUnit'] ),
 		'height' => UAGB_Helper::get_css_value( $attr['iconSize'], $attr['iconSizeUnit'] ),
 		'top'    => UAGB_Helper::get_css_value( $attr['titleTopPadding'], $attr['titlePaddingUnit'] ),
@@ -145,14 +145,14 @@ $selectors = array(
 );
 
 $m_selectors = array(
-	' .uagb-notice-text'                             => array(
+	' .uagb-notice-text'                          => array(
 		'color'          => $attr['textColor'],
 		'padding-left'   => UAGB_Helper::get_css_value( $content_left_padding_mobile, $attr['mobileContentPaddingUnit'] ),
 		'padding-right'  => UAGB_Helper::get_css_value( $content_right_padding_mobile, $attr['mobileContentPaddingUnit'] ),
 		'padding-top'    => UAGB_Helper::get_css_value( $content_top_padding_mobile, $attr['mobileContentPaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $content_bottom_padding_mobile, $attr['mobileContentPaddingUnit'] ),
 	),
-	' .uagb-notice-title'                            => array(
+	' .uagb-notice-title'                         => array(
 		'padding-left'   => UAGB_Helper::get_css_value( $left_padding_mobile, $attr['mobileTitlePaddingUnit'] ),
 		'padding-right'  => UAGB_Helper::get_css_value( $right_padding_mobile, $attr['mobileTitlePaddingUnit'] ),
 		'padding-top'    => UAGB_Helper::get_css_value( $title_top_padding_mobile, $attr['mobileTitlePaddingUnit'] ),
@@ -163,7 +163,7 @@ $m_selectors = array(
 		'height' => UAGB_Helper::get_css_value( $attr['iconSizeMob'], $attr['iconSizeUnit'] ),
 		'top'    => UAGB_Helper::get_css_value( $pos_top_mob, $pos_top_unit_mob ),
 	),
-	'.uagb-dismissable > svg'                        => array( // For Backward.
+	'.uagb-dismissable > svg'                     => array( // For Backward.
 		'width'  => UAGB_Helper::get_css_value( $attr['iconSizeMob'], $attr['iconSizeUnit'] ),
 		'height' => UAGB_Helper::get_css_value( $attr['iconSizeMob'], $attr['iconSizeUnit'] ),
 		'top'    => UAGB_Helper::get_css_value( $pos_top_mob, $pos_top_unit_mob ),
@@ -171,25 +171,25 @@ $m_selectors = array(
 	'.uagb-inline_notice__align-left button[type="button"] svg' => array(
 		'right' => UAGB_Helper::get_css_value( $pos_right_mob, $pos_right_unit_mob ),
 	),
-	'.uagb-inline_notice__align-left svg'            => array( // For Backward.
+	'.uagb-inline_notice__align-left svg'         => array( // For Backward.
 		'right' => UAGB_Helper::get_css_value( $pos_right_mob, $pos_right_unit_mob ),
 	),
 	'.uagb-inline_notice__align-center button[type="button"] svg' => array(
 		'right' => UAGB_Helper::get_css_value( $pos_right_mob, $pos_right_unit_mob ),
 	),
-	'.uagb-inline_notice__align-center svg'          => array( // For Backward.
+	'.uagb-inline_notice__align-center svg'       => array( // For Backward.
 		'right' => UAGB_Helper::get_css_value( $pos_right_mob, $pos_right_unit_mob ),
 	),
 );
 
 $t_selectors = array(
-	' .uagb-notice-text'                             => array(
+	' .uagb-notice-text'                          => array(
 		'padding-left'   => UAGB_Helper::get_css_value( $content_left_padding_tablet, $attr['tabletContentPaddingUnit'] ),
 		'padding-right'  => UAGB_Helper::get_css_value( $content_right_padding_tablet, $attr['tabletContentPaddingUnit'] ),
 		'padding-top'    => UAGB_Helper::get_css_value( $content_top_padding_tablet, $attr['tabletContentPaddingUnit'] ),
 		'padding-bottom' => UAGB_Helper::get_css_value( $content_bottom_padding_tablet, $attr['tabletContentPaddingUnit'] ),
 	),
-	' .uagb-notice-title'                            => array(
+	' .uagb-notice-title'                         => array(
 		'padding-left'   => UAGB_Helper::get_css_value( $left_padding_tablet, $attr['tabletTitlePaddingUnit'] ),
 		'padding-right'  => UAGB_Helper::get_css_value( $right_padding_tablet, $attr['tabletTitlePaddingUnit'] ),
 		'padding-top'    => UAGB_Helper::get_css_value( $title_top_padding_tablet, $attr['tabletTitlePaddingUnit'] ),
@@ -200,7 +200,7 @@ $t_selectors = array(
 		'height' => UAGB_Helper::get_css_value( $attr['iconSizeTab'], $attr['iconSizeUnit'] ),
 		'top'    => UAGB_Helper::get_css_value( $pos_top_tab, $pos_top_unit_tab ),
 	),
-	'.uagb-dismissable > svg'                        => array( // For Backward.
+	'.uagb-dismissable > svg'                     => array( // For Backward.
 		'width'  => UAGB_Helper::get_css_value( $attr['iconSizeTab'], $attr['iconSizeUnit'] ),
 		'height' => UAGB_Helper::get_css_value( $attr['iconSizeTab'], $attr['iconSizeUnit'] ),
 		'top'    => UAGB_Helper::get_css_value( $pos_top_tab, $pos_top_unit_tab ),
@@ -208,13 +208,13 @@ $t_selectors = array(
 	'.uagb-inline_notice__align-left button[type="button"] svg' => array(
 		'right' => UAGB_Helper::get_css_value( $pos_right_tab, $pos_right_unit_tab ),
 	),
-	'.uagb-inline_notice__align-left svg'            => array( // For Backward.
+	'.uagb-inline_notice__align-left svg'         => array( // For Backward.
 		'right' => UAGB_Helper::get_css_value( $pos_right_tab, $pos_right_unit_tab ),
 	),
 	'.uagb-inline_notice__align-center button[type="button"] svg' => array(
 		'right' => UAGB_Helper::get_css_value( $pos_right_tab, $pos_right_unit_tab ),
 	),
-	'.uagb-inline_notice__align-center svg'          => array( // For Backward.
+	'.uagb-inline_notice__align-center svg'       => array( // For Backward.
 		'right' => UAGB_Helper::get_css_value( $pos_right_tab, $pos_right_unit_tab ),
 	),
 );
