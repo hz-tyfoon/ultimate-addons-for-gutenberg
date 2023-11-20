@@ -58,7 +58,7 @@ const deprecated = [
 	},
 	{
 		attributes,
-		newSaveV2_10_1,
+		save: newSaveV2_10_1,
 	}
 ];
 
