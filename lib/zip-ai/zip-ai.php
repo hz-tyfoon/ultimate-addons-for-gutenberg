@@ -15,8 +15,5 @@ if ( defined( 'ZIP_AI_DIR' ) ) {
 	return;
 }
 
-// Load the functions.
-require_once 'functions.php';
-
 // Load the Zip AI Loader.
 require_once 'loader.php';

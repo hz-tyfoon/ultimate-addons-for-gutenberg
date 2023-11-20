@@ -7,8 +7,6 @@
 
 namespace ZipAI\Classes;
 
-use ZipAI\Classes\Zip_Ai_Helpers;
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

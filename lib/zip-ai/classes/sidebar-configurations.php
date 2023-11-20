@@ -12,8 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use ZipAI\Functions;
-use ZipAI\Classes\Zip_Ai_Helpers;
+use ZipAI\Classes\Helpers;
 
 /**
  * The Sidebar_Configurations Class.
@@ -60,7 +59,7 @@ class Sidebar_Configurations {
 		add_action( 'rest_api_init', array( $this, 'register_route' ) );
 
 		// Setup the Sidebar Auth Ajax.
-		add_action( 'wp_ajax_verify_zip_ai_authenticity', array( $this, 'verify_zip_ai_authenticity' ) );
+		add_action( 'wp_ajax_verify_zip_ai_authenticity', array( $this, 'verify_authenticity' ) );
 
 		// Add the Sidebar to the Gutenberg Editor.
 		add_action( 'enqueue_block_editor_assets', array( $this, 'load_editor_sidebar_assets' ) );
@@ -106,7 +105,7 @@ class Sidebar_Configurations {
 	}
 
 	/**
-	 * Fetches ai data from the middleware server - this will be merged with the get_scs_response() function.
+	 * Fetches ai data from the middleware server - this will be merged with the get_response() function.
 	 *
 	 * @param \WP_REST_Request $request request object.
 	 * @since 1.0.0
@@ -134,7 +133,7 @@ class Sidebar_Configurations {
 			}
 
 			// Get the token count, and if it's greater than 2000, break out of the loop.
-			$token_count += Zip_AI_Helpers::get_token_count( $current_message['content'] );
+			$token_count += Helpers::get_token_count( $current_message['content'] );
 			if ( $token_count >= 2000 ) {
 				break;
 			}
@@ -169,7 +168,7 @@ class Sidebar_Configurations {
 			$endpoint,
 			array(
 				'headers' => array(
-					'Authorization' => 'Bearer ' . Zip_Ai_Helpers::get_decrypted_auth_token(),
+					'Authorization' => 'Bearer ' . Helpers::get_decrypted_auth_token(),
 				),
 				'body'    => $data,
 				'timeout' => 30, // phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout -- 30 seconds is required sometime for open ai responses
@@ -224,16 +223,13 @@ class Sidebar_Configurations {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function verify_zip_ai_authenticity() {
+	public function verify_authenticity() {
 
 		// Check the nonce.
 		check_ajax_referer( 'zip_ai_ajax_nonce', 'nonce' );
 
-		// Get the Zip AI Authorization status.
-		$zip_ai_status = Zip_Ai_Helpers::is_zip_ai_authorized();
-
 		// Send a boolean based on whether the auth token has been added.
-		wp_send_json_success( array( 'is_authorized' => $zip_ai_status ) );
+		wp_send_json_success( array( 'is_authorized' => Helpers::is_authorized() ) );
 	}
 
 	/**
@@ -286,14 +282,14 @@ class Sidebar_Configurations {
 			$handle,
 			'zip_ai_react',
 			array(
-				'ajax_url'               => admin_url( 'admin-ajax.php' ),
-				'ajax_nonce'             => wp_create_nonce( 'zip_ai_ajax_nonce' ),
-				'zip_ai_admin_nonce'     => wp_create_nonce( 'zip_ai_admin_nonce' ),
-				'current_post_id'        => get_the_ID(),
-				'zip_ai_auth_middleware' => Zip_Ai_Helpers::get_auth_middleware_url(),
-				'is_zip_ai_authorized'   => Zip_Ai_Helpers::is_zip_ai_authorized(),
-				'is_zip_chat_enabled'    => Functions::is_module_enabled( 'ai_assistant' ),
-				'is_customize_preview'   => is_customize_preview(),
+				'ajax_url'             => admin_url( 'admin-ajax.php' ),
+				'ajax_nonce'           => wp_create_nonce( 'zip_ai_ajax_nonce' ),
+				'admin_nonce'          => wp_create_nonce( 'zip_ai_admin_nonce' ),
+				'current_post_id'      => get_the_ID(),
+				'auth_middleware'      => Helpers::get_auth_middleware_url(),
+				'is_authorized'        => Helpers::is_authorized(),
+				'is_chat_enabled'      => Helpers::is_module_enabled( 'ai_assistant' ),
+				'is_customize_preview' => is_customize_preview(),
 			)
 		);
 	}
