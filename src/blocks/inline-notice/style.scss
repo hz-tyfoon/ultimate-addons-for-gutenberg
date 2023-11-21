@@ -58,7 +58,8 @@
 	}
 
 	&.uagb-dismissable {
-		> svg { // Backward compatibility.
+
+		& > svg { // Backward compatibility.
 			position: absolute;
 			cursor: pointer;
 			opacity: 0.8;
