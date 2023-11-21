@@ -28,6 +28,7 @@ import ContainerGlobalPadding from '@DashboardApp/pages/settings/ContainerGlobal
 import ContainerGlobalElementsGap from '@DashboardApp/pages/settings/ContainerGlobalElementsGap';
 import MyAccount from '@DashboardApp/pages/settings/MyAccount';
 import InstagramUsers from '@DashboardApp/pages/settings/block-settings/InstagramUsers';
+import ZipAISettings from '@DashboardApp/pages/settings/block-settings/ZipAISettings';
 import InheritFromTheme from '@DashboardApp/pages/settings/InheritFromTheme';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useEffect } from '@wordpress/element';
@@ -165,11 +166,11 @@ const Settings = () => {
                         }
                         { 'block-settings' === activeSettingsNavigationTab &&
 							<>
+								<ZipAISettings/>
 								{
 									uag_react.spectra_pro_status && (
 										<>
 											<InstagramUsers/>
-											{/* SOCIAL MARKER */}
 										</>
 									)
 								}

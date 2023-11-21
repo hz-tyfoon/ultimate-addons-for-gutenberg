@@ -45,6 +45,15 @@ class Admin_Helper {
 		$theme_settings      = $theme_data->get_settings();
 		$theme_font_families = isset( $theme_settings['typography']['fontFamilies']['theme'] ) && is_array( $theme_settings['typography']['fontFamilies']['theme'] ) ? $theme_settings['typography']['fontFamilies']['theme'] : array();
 
+		// Prepare to get the Zip AI Co-pilot modules.
+		$zip_ai_modules = array();
+
+		// If the Zip AI Helper is available, get the required modules and their states.
+		if ( class_exists( '\ZipAI\Classes\Module' ) ) {
+			// Add the AI Assitant module.
+			$zip_ai_modules['ai_assistant'] = \ZipAI\Classes\Module::is_enabled( 'ai_assistant' );
+		}
+
 		$options = array(
 			'rollback_to_previous_version'       => isset( $uag_versions[0]['value'] ) ? $uag_versions[0]['value'] : '',
 			'enable_beta_updates'                => \UAGB_Admin_Helper::get_admin_settings_option( 'uagb_beta', 'no' ),
@@ -89,6 +98,7 @@ class Admin_Helper {
 			'insta_linked_accounts'              => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_insta_linked_accounts', array() ),
 			'spectra_global_fse_fonts'           => \UAGB_Admin_Helper::get_admin_settings_option( 'spectra_global_fse_fonts', array() ),
 			'theme_fonts'                        => $theme_font_families,
+			'zip_ai_modules'                     => $zip_ai_modules,
 		);
 
 		return $options;

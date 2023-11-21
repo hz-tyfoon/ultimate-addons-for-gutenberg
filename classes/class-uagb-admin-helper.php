@@ -44,6 +44,15 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 		 */
 		public static function get_admin_settings_shareable_data() {
 
+			// Prepare to get the Zip AI Co-pilot modules.
+			$zip_ai_modules = array();
+
+			// If the Zip AI Helper is available, get the required modules and their states.
+			if ( class_exists( '\ZipAI\Classes\Module' ) ) {
+				// Add the AI Assitant module.
+				$zip_ai_modules['ai_assistant'] = \ZipAI\Classes\Module::is_enabled( 'ai_assistant' );
+			}
+
 			$content_width = self::get_global_content_width();
 
 			$options = array(
@@ -85,6 +94,7 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 					)
 				),
 				'wp_is_block_theme'                 => self::is_block_theme(),
+				'zip_ai_modules'                    => $zip_ai_modules,
 			);
 
 			return $options;
