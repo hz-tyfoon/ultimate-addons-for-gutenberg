@@ -66,7 +66,7 @@ class Admin_Configurations {
 
 		// Setup the Admin Menu based on whether Spectra is active or not.
 		if ( is_plugin_active( 'ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php' ) ) {
-			add_action( 'spectra_after_menu_register', array( $this, 'add_spectra_zip_ai_submenu' ), 40 );
+			add_action( 'spectra_after_menu_register', array( $this, 'add_spectra_submenu' ), 40 );
 		} else {
 			add_action( 'admin_menu', array( $this, 'setup_menu_page' ) );
 		}
@@ -83,7 +83,7 @@ class Admin_Configurations {
 	 * @since x.x.x
 	 * @return void
 	 */
-	public function add_spectra_zip_ai_submenu() {
+	public function add_spectra_submenu() {
 		// If the current user does not have the required capability, then abandon ship.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -97,7 +97,7 @@ class Admin_Configurations {
 			apply_filters( 'zip_ai_page_title', 'Zip - AI Assistant' ), // The page title.
 			apply_filters( 'zip_ai_menu_title', 'Zip - AI Assistant' ), // The menu title.
 			apply_filters( 'zip_ai_menu_capability', $capability ), // The capability required for access to this page.
-			$this->menu_slug,
+			$this->menu_slug, // The menu slug.
 			array( $this, 'render_dashboard' ), // The rendered output function.
 			20 // The position of this menu item in the menu.
 		);
@@ -123,7 +123,7 @@ class Admin_Configurations {
 			apply_filters( 'zip_ai_page_title', 'Zip - AI Assistant' ), // The page title.
 			apply_filters( 'zip_ai_menu_title', 'Zip - AI Assistant' ), // The menu title.
 			apply_filters( 'zip_ai_menu_capability', $capability ), // The capability required for access to this page.
-			$this->menu_slug,
+			$this->menu_slug, // The menu slug.
 			array( $this, 'render_dashboard' ), // The rendered output function.
 			apply_filters( 'zip_ai_menu_position', 1 ) // The position of this menu item in the menu.
 		);
