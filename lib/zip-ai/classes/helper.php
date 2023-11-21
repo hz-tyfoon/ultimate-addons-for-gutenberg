@@ -1,6 +1,9 @@
 <?php
 /**
- * Zip AI - Helpers.
+ * Zip AI - Helper.
+ *
+ * This file contains the helper functions of Zip AI.
+ * Helpers are functions that are used throughout the library.
  *
  * @package zip-ai
  */
@@ -12,88 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Classes to be used, in alphabetical order.
 use ZipAI\Classes\Token_Calculator;
+use ZipAI\Classes\Utils;
 
 /**
- * The Helpers Class.
+ * The Helper Class.
  */
-class Helpers {
-	/**
-	 * Private Variable of all the available Zip AI Modules.
-	 *
-	 * @since x.x.x
-	 * @var array $modules Array of all the available Zip AI Modules.
-	 */
-	private static $modules = [
-		'ai_assistant' => 'enabled',
-	];
-
-	/**
-	 * Update the status of Zip AI Module(s).
-	 *
-	 * @param string|array $module_name Name of the module or an array of module names.
-	 * @param string       $status      Status of the module(s) to be updated.
-	 * @since x.x.x
-	 * @return boolean True if Zip AI Module(s) status has been updated, false otherwise.
-	 */
-	private static function update_module( $module_name, $status ) {
-		// If the status is not a valid status, return.
-		if ( ! in_array( $status, [ 'enabled', 'disabled' ], true ) ) {
-			return false;
-		}
-
-		// If the module name is a string, format it into an array.
-		if ( is_string( $module_name ) && ! empty( trim( $module_name ) ) ) {
-			$module_name = [ $module_name ];
-		} elseif ( ! is_array( $module_name ) ) {
-			return false;
-		}
-
-		// Ensure that the module names are valid.
-		$module_name = array_intersect( array_keys( self::$modules ), $module_name );
-
-		// Get the existing Zip AI modules from the DB.
-		$modules_from_db = get_option( 'zip_ai_modules', [] );
-
-		// Ensure that the modules are in the correct format.
-		$modules_from_db = is_array( $modules_from_db ) ? $modules_from_db : [];
-
-		// Update the modules.
-		$updated_modules = array_merge(
-			$modules_from_db,
-			array_fill_keys( $module_name, $status )
-		);
-
-		// Update the modules array.
-		return update_option( 'zip_ai_modules', $updated_modules );
-	}
-
-	/**
-	 * Function to migrate older Zip AI options into the new modular format.
-	 *
-	 * @since x.x.x
-	 * @return void
-	 */
-	private static function migrate_options() {
-		// Get the existing Zip AI settings option.
-		$existing_settings = get_option( 'zip_ai_settings' );
-
-		// If the chat enabled option is set, migrate it.
-		if ( isset( $existing_settings['chat_enabled'] ) ) {
-			// Set the new option value based on the chat enabled value.
-			$ai_assistant_status = false === $existing_settings['chat_enabled'] ? 'disabled' : 'enabled';
-
-			// Update the AI assistant module status.
-			$ai_assistant_migrated = self::update_module( 'ai_assistant', $ai_assistant_status );
-
-			// If the migration was successful, unset the chat enabled value and update the settings.
-			if ( $ai_assistant_migrated ) {
-				unset( $existing_settings['chat_enabled'] );
-				update_option( 'zip_ai_settings', $existing_settings );
-			}
-		}
-	}
-
+class Helper {
 	/**
 	 * Get an option from the database.
 	 *
@@ -115,16 +44,11 @@ class Helpers {
 	 * @param mixed  $value            The value to update.
 	 * @param bool   $network_override Whether to allow the network_override admin setting to be overridden on subsites.
 	 * @since 1.0.0
-	 * @return void
+	 * @return bool True if the option was updated, false otherwise.
 	 */
 	public static function update_admin_settings_option( $key, $value, $network_override = false ) {
-
-		// Update the site-wide option if we're in the network admin.
-		if ( $network_override && is_multisite() ) {
-			update_site_option( $key, $value );
-		} else {
-			update_option( $key, $value );
-		}
+		// Update the site-wide option if we're in the network admin, and return the updated status.
+		return $network_override && is_multisite() ? update_site_option( $key, $value ) : update_option( $key, $value );
 	}
 
 	/**
@@ -165,63 +89,6 @@ class Helpers {
 			&& is_string( $existing_settings['auth_token'] )
 			&& ! empty( trim( $existing_settings['auth_token'] ) )
 		);
-	}
-
-	/**
-	 * Function to enable Zip AI Module(s).
-	 *
-	 * If a string is passed, that module will be enabled if valid.
-	 * If an array is passed, all valid modules will be enabled.
-	 *
-	 * @param string|array $module_name Name of the module or an array of module names.
-	 * @since x.x.x
-	 * @return boolean True if Zip AI module(s) has been enabled, false otherwise.
-	 */
-	public static function enable_module( $module_name ) {
-		return self::update_module( $module_name, 'enabled' );
-	}
-
-	/**
-	 * Function to disable Zip AI Module(s).
-	 *
-	 * If a string is passed, that module will be disabled if valid.
-	 * If an array is passed, all valid modules will be disabled.
-	 *
-	 * @param string|array $module_name Name of the module or an array of module names.
-	 * @since x.x.x
-	 * @return boolean True if Zip AI module(s) has been enabled, false otherwise.
-	 */
-	public static function disable_module( $module_name ) {
-		return self::update_module( $module_name, 'disabled' );
-	}
-
-	/**
-	 * Function to check if Zip AI Module is enabled.
-	 *
-	 * @param string $module_name Name of the module.
-	 * @since x.x.x
-	 * @return boolean True if Zip AI is enabled, false otherwise.
-	 */
-	public static function is_module_enabled( $module_name ) {
-		// Check if the module name is valid.
-		if ( ! is_string( $module_name ) || ! array_key_exists( $module_name, self::$modules ) ) {
-			return false;
-		}
-
-		// Get the current status of all saved Zip AI modules.
-		$modules_from_db = get_option( 'zip_ai_modules', [] );
-
-		// Ensure that the modules are in the correct format.
-		$modules_from_db = is_array( $modules_from_db ) ? $modules_from_db : [];
-
-		// Update the modules array for the check - if a module does not exist, the library's default will be considered.
-		$updated_modules = array_merge(
-			self::$modules,
-			$modules_from_db
-		);
-
-		// Return based on whether Zip AI is enabled or not.
-		return 'enabled' === $updated_modules[ $module_name ];
 	}
 
 	/**
@@ -275,7 +142,7 @@ class Helpers {
 	 * @since 1.0.0
 	 * @return array The Zip AI Response.
 	 */
-	public static function get_response( $endpoint ) {
+	public static function get_credit_server_response( $endpoint ) {
 		// If the endpoint is not a string, then abandon ship.
 		if ( ! is_string( $endpoint ) ) {
 			return array(
@@ -336,53 +203,15 @@ class Helpers {
 	 */
 	public static function get_decrypted_auth_token() {
 		// Get the Zip AI Settings.
-		$zip_auth_token = self::get_setting( 'auth_token' );
+		$auth_token = self::get_setting( 'auth_token' );
 
 		// Return early if the auth token is not set.
-		if ( empty( $zip_auth_token ) || ! is_string( $zip_auth_token ) ) {
+		if ( empty( $auth_token ) || ! is_string( $auth_token ) ) {
 			return '';
 		}
 
 		// Return the decrypted auth token.
-		return ! empty( trim( $zip_auth_token ) ) ? self::decrypt( $zip_auth_token ) : '';
-	}
-
-	/**
-	 * Encrypt data using base64.
-	 *
-	 * @param string $input The input string which needs to be encrypted.
-	 * @since 1.0.0
-	 * @return string The encrypted string.
-	 */
-	public static function encrypt( $input ) {
-		// If the input is empty or not a string, then abandon ship.
-		if ( empty( $input ) || ! is_string( $input ) ) {
-			return '';
-		}
-
-		// Encrypt the input and return it.
-		$base_64 = base64_encode( $input ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
-		$encode  = rtrim( $base_64, '=' );
-		return $encode;
-	}
-
-	/**
-	 * Decrypt data using base64.
-	 *
-	 * @param string $input The input string which needs to be decrypted.
-	 * @since 1.0.0
-	 * @return string The decrypted string.
-	 */
-	public static function decrypt( $input ) {
-		// If the input is empty or not a string, then abandon ship.
-		if ( empty( $input ) || ! is_string( $input ) ) {
-			return '';
-		}
-
-		// Decrypt the input and return it.
-		$base_64 = $input . str_repeat( '=', strlen( $input ) % 4 );
-		$decode  = base64_decode( $base_64 ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
-		return $decode;
+		return ! empty( trim( $auth_token ) ) ? Utils::decrypt( $auth_token ) : '';
 	}
 
 	/**
@@ -405,7 +234,7 @@ class Helpers {
 		);
 
 		// Get the response from the endpoint.
-		$response = self::get_response( 'usage' );
+		$response = self::get_credit_server_response( 'usage' );
 
 		// If the response is not an error, then update the credit details.
 		if (

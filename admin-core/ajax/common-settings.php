@@ -920,13 +920,13 @@ class Common_Settings extends Ajax_Base {
 		$value = $this->check_post_value();
 
 		// Check if the Zip AI Helpers are available.
-		if ( class_exists( '\ZipAI\Classes\Helpers' ) ) {
+		if ( class_exists( '\ZipAI\Classes\Module' ) ) {
 			// If the value is disabled, disable the Zip AI Library - else enable it.
 			if ( 'disabled' === $value ) {
-				\ZipAI\Classes\Helpers::disable_module( 'ai_assistant' );
+				\ZipAI\Classes\Module::disable( 'ai_assistant' );
 				wp_send_json_success( array( 'messsage' => __( 'Zip AI Chat disabled!', 'ultimate-addons-for-gutenberg' ) ) );
 			} else {
-				\ZipAI\Classes\Helpers::enable_module( 'ai_assistant' );
+				\ZipAI\Classes\Module::enable( 'ai_assistant' );
 				wp_send_json_success( array( 'messsage' => __( 'Zip AI Chat enabled!', 'ultimate-addons-for-gutenberg' ) ) );
 			}
 		} else {
