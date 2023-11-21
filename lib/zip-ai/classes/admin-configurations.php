@@ -12,8 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use ZipAI\Classes\Helpers;
+// Classes to be used, in alphabetical order.
 use ZipAI\Classes\Admin_Views;
+use ZipAI\Classes\Helper;
+use ZipAI\Classes\Module;
+use ZipAI\Classes\Utils;
 
 /**
  * The Admin_Configurations Class.
@@ -121,13 +124,13 @@ class Admin_Configurations {
 		if ( isset( $_GET['revoke_zip_ai_authorization_token'] ) && 'definitely' === sanitize_text_field( $_GET['revoke_zip_ai_authorization_token'] ) ) {
 
 			// Get the Zip AI settings.
-			$db_settings_options = Helpers::get_setting();
+			$db_settings_options = Helper::get_setting();
 
 			// Remove the auth token from the Zip AI settings.
 			unset( $db_settings_options['auth_token'] );
 
 			// Update the Zip AI settings.
-			Helpers::update_admin_settings_option( 'zip_ai_settings', $db_settings_options );
+			Helper::update_admin_settings_option( 'zip_ai_settings', $db_settings_options );
 
 			// Redirect to the settings page.
 			wp_safe_redirect( admin_url() );
@@ -140,13 +143,13 @@ class Admin_Configurations {
 		}
 
 		// Get the existing options, and update the auth token before updating the option.
-		$db_settings_options = Helpers::get_setting();
+		$db_settings_options = Helper::get_setting();
 
 		// Update the auth token.
-		$db_settings_options['auth_token'] = Helpers::encrypt( sanitize_text_field( $_GET['token'] ) );
+		$db_settings_options['auth_token'] = Utils::encrypt( sanitize_text_field( $_GET['token'] ) );
 
 		// Update the Zip AI settings.
-		Helpers::update_admin_settings_option( 'zip_ai_settings', $db_settings_options );
+		Helper::update_admin_settings_option( 'zip_ai_settings', $db_settings_options );
 
 		// Redirect to the settings page.
 		if ( apply_filters( 'zip_ai_auth_redirection_flag', true ) ) {
@@ -176,7 +179,7 @@ class Admin_Configurations {
 
 		// Check if the Zip AI Assistant was requested to be disabled.
 		if ( ! empty( $_POST['disable_zip_ai_assistant'] ) ) {
-			$is_module_disabled = Helpers::disable_module( 'ai_assistant' );
+			$is_module_disabled = Module::disable( 'ai_assistant' );
 		}
 
 		// Send the status based on whether the Zip AI Library is enabled or not.
@@ -209,9 +212,9 @@ class Admin_Configurations {
 
 		// Update the enabled status.
 		if ( 'enabled' === sanitize_text_field( $_POST['enable_zip_chat'] ) ) {
-			Helpers::enable_module( 'ai_assistant' );
+			Module::enable( 'ai_assistant' );
 		} else {
-			Helpers::disable_module( 'ai_assistant' );
+			Module::disable( 'ai_assistant' );
 		}
 
 		// Send the status.
@@ -229,7 +232,7 @@ class Admin_Configurations {
 		$menu_page_slug = $this->menu_slug;
 
 		// Check if Zip AI is Authorized, then either render the settings page or the auth screen.
-		if ( ! Helpers::is_authorized() ) {
+		if ( ! Helper::is_authorized() ) {
 			// If Zip AI is not authorized, render the auth screen.
 			Admin_Views::render_admin_auth_markup( $menu_page_slug );
 		} else {
@@ -255,7 +258,7 @@ class Admin_Configurations {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_and_scripts' ) );
 
 		// Add the footer link if needed.
-		if ( Helpers::is_authorized() ) {
+		if ( Helper::is_authorized() ) {
 			// Add the footer link.
 			add_filter( 'admin_footer_text', array( $this, 'add_footer_link' ), 99 );
 		}
@@ -292,7 +295,7 @@ class Admin_Configurations {
 		);
 
 		// Get the response from the endpoint.
-		$response = Helpers::get_response( 'usage' );
+		$response = Helper::get_credit_server_response( 'usage' );
 
 		// If the response is not an error, then update the credit details.
 		if (
@@ -310,14 +313,14 @@ class Admin_Configurations {
 			array(
 				'admin_url'        => admin_url(),
 				'ajax_url'         => admin_url( 'admin-ajax.php' ),
-				'auth_middleware'  => Helpers::get_auth_middleware_url(),
-				'auth_revoke_url'  => Helpers::get_auth_revoke_url(),
+				'auth_middleware'  => Helper::get_auth_middleware_url(),
+				'auth_revoke_url'  => Helper::get_auth_revoke_url(),
 				'credit_topup_url' => ZIP_AI_CREDIT_TOPUP_URL,
-				'is_authorized'    => Helpers::is_authorized(),
-				'is_chat_enabled'  => Helpers::is_module_enabled( 'ai_assistant' ),
+				'is_authorized'    => Helper::is_authorized(),
+				'is_chat_enabled'  => Module::is_enabled( 'ai_assistant' ),
 				'admin_nonce'      => wp_create_nonce( 'zip_ai_admin_nonce' ),
 				'page_slug'        => $this->menu_slug,
-				'credit_details'   => Helpers::get_credit_details(),
+				'credit_details'   => Helper::get_credit_details(),
 			)
 		);
 

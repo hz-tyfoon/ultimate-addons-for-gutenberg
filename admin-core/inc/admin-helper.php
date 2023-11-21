@@ -49,9 +49,9 @@ class Admin_Helper {
 		$zip_ai_modules = array();
 
 		// If the Zip AI Helper is available, get the required modules and their states.
-		if ( class_exists( '\ZipAI\Classes\Helpers' ) ) {
+		if ( class_exists( '\ZipAI\Classes\Module' ) ) {
 			// Add the AI Assitant module.
-			$zip_ai_modules['ai_assistant'] = \ZipAI\Classes\Helpers::is_module_enabled( 'ai_assistant' );
+			$zip_ai_modules['ai_assistant'] = \ZipAI\Classes\Module::is_enabled( 'ai_assistant' );
 		}
 
 		$options = array(

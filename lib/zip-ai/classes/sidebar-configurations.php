@@ -12,7 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use ZipAI\Classes\Helpers;
+// Classes to be used, in alphabetical order.
+use ZipAI\Classes\Helper;
+use ZipAI\Classes\Module;
 
 /**
  * The Sidebar_Configurations Class.
@@ -105,7 +107,7 @@ class Sidebar_Configurations {
 	}
 
 	/**
-	 * Fetches ai data from the middleware server - this will be merged with the get_response() function.
+	 * Fetches ai data from the middleware server - this will be merged with the get_credit_server_response() function.
 	 *
 	 * @param \WP_REST_Request $request request object.
 	 * @since 1.0.0
@@ -133,7 +135,7 @@ class Sidebar_Configurations {
 			}
 
 			// Get the token count, and if it's greater than 2000, break out of the loop.
-			$token_count += Helpers::get_token_count( $current_message['content'] );
+			$token_count += Helper::get_token_count( $current_message['content'] );
 			if ( $token_count >= 2000 ) {
 				break;
 			}
@@ -168,7 +170,7 @@ class Sidebar_Configurations {
 			$endpoint,
 			array(
 				'headers' => array(
-					'Authorization' => 'Bearer ' . Helpers::get_decrypted_auth_token(),
+					'Authorization' => 'Bearer ' . Helper::get_decrypted_auth_token(),
 				),
 				'body'    => $data,
 				'timeout' => 30, // phpcs:ignore WordPressVIPMinimum.Performance.RemoteRequestTimeout.timeout_timeout -- 30 seconds is required sometime for open ai responses
@@ -229,7 +231,7 @@ class Sidebar_Configurations {
 		check_ajax_referer( 'zip_ai_ajax_nonce', 'nonce' );
 
 		// Send a boolean based on whether the auth token has been added.
-		wp_send_json_success( array( 'is_authorized' => Helpers::is_authorized() ) );
+		wp_send_json_success( array( 'is_authorized' => Helper::is_authorized() ) );
 	}
 
 	/**
@@ -286,9 +288,9 @@ class Sidebar_Configurations {
 				'ajax_nonce'           => wp_create_nonce( 'zip_ai_ajax_nonce' ),
 				'admin_nonce'          => wp_create_nonce( 'zip_ai_admin_nonce' ),
 				'current_post_id'      => get_the_ID(),
-				'auth_middleware'      => Helpers::get_auth_middleware_url(),
-				'is_authorized'        => Helpers::is_authorized(),
-				'is_chat_enabled'      => Helpers::is_module_enabled( 'ai_assistant' ),
+				'auth_middleware'      => Helper::get_auth_middleware_url(),
+				'is_authorized'        => Helper::is_authorized(),
+				'is_chat_enabled'      => Module::is_enabled( 'ai_assistant' ),
 				'is_customize_preview' => is_customize_preview(),
 			)
 		);
