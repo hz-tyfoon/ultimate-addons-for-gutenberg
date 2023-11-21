@@ -203,15 +203,15 @@ class Helper {
 	 */
 	public static function get_decrypted_auth_token() {
 		// Get the Zip AI Settings.
-		$zip_auth_token = self::get_setting( 'auth_token' );
+		$auth_token = self::get_setting( 'auth_token' );
 
 		// Return early if the auth token is not set.
-		if ( empty( $zip_auth_token ) || ! is_string( $zip_auth_token ) ) {
+		if ( empty( $auth_token ) || ! is_string( $auth_token ) ) {
 			return '';
 		}
 
 		// Return the decrypted auth token.
-		return ! empty( trim( $zip_auth_token ) ) ? Utils::decrypt( $zip_auth_token ) : '';
+		return ! empty( trim( $auth_token ) ) ? Utils::decrypt( $auth_token ) : '';
 	}
 
 	/**
