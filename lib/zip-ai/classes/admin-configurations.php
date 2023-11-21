@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Classes to be used, in alphabetical order.
-use ZipAI\Classes\Admin_Views;
 use ZipAI\Classes\Helper;
 use ZipAI\Classes\Module;
 use ZipAI\Classes\Utils;
@@ -65,8 +64,13 @@ class Admin_Configurations {
 		// Verify Zip AI Authorization.
 		add_action( 'admin_init', array( $this, 'verify_authorization' ) );
 
-		// Setup the Admin Menu, and the locations to trigger the admin menu.
-		add_action( 'spectra_after_menu_register', array( $this, 'add_spectra_zip_ai_submenu' ), 40 );
+		// Setup the Admin Menu based on whether Spectra is active or not.
+		if ( is_plugin_active( 'ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php' ) ) {
+			add_action( 'spectra_after_menu_register', array( $this, 'add_spectra_zip_ai_submenu' ), 40 );
+		} else {
+			add_action( 'admin_menu', array( $this, 'setup_menu_page' ) );
+		}
+
 
 		// Setup the Admin Ajax Actions.
 		add_action( 'wp_ajax_zip_ai_toggle_assistant_status_ajax', array( $this, 'toggle_assistant_status_ajax' ) );
@@ -74,9 +78,9 @@ class Admin_Configurations {
 	}
 
 	/**
-	 * Add the Zip AI menu page.
+	 * Add the Zip AI submenu to the Spectra menu.
 	 *
-	 * @since 1.0.0
+	 * @since x.x.x
 	 * @return void
 	 */
 	public function add_spectra_zip_ai_submenu() {
@@ -87,15 +91,41 @@ class Admin_Configurations {
 
 		$capability = 'manage_options';
 
-		// Add a submenu page underneath the Spectra menu.
+		// Add the Zip AI Submenu.
 		add_submenu_page(
-			'spectra',
+			'spectra', // The parent page of this menu.
 			apply_filters( 'zip_ai_page_title', 'Zip - AI Assistant' ), // The page title.
 			apply_filters( 'zip_ai_menu_title', 'Zip - AI Assistant' ), // The menu title.
 			apply_filters( 'zip_ai_menu_capability', $capability ), // The capability required for access to this page.
-			'zip-ai',
+			$this->menu_slug,
 			array( $this, 'render_dashboard' ), // The rendered output function.
-			apply_filters( 'zip_ai_menu_position', 20 ) // The position of this menu item in the menu.
+			20 // The position of this menu item in the menu.
+		);
+	}
+
+	/**
+	 * Add the Zip AI menu page.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function setup_menu_page() {
+		// If the current user does not have the required capability, then abandon ship.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$capability = 'manage_options';
+
+		// Add the Zip AI Submenu.
+		add_submenu_page(
+			apply_filters( 'zip_ai_parent_page', 'none' ), // The parent page of this menu.
+			apply_filters( 'zip_ai_page_title', 'Zip - AI Assistant' ), // The page title.
+			apply_filters( 'zip_ai_menu_title', 'Zip - AI Assistant' ), // The menu title.
+			apply_filters( 'zip_ai_menu_capability', $capability ), // The capability required for access to this page.
+			$this->menu_slug,
+			array( $this, 'render_dashboard' ), // The rendered output function.
+			apply_filters( 'zip_ai_menu_position', 1 ) // The position of this menu item in the menu.
 		);
 
 	}
