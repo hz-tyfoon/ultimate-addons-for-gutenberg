@@ -2,7 +2,7 @@
 /**
  * Frontend CSS & Google Fonts loading File.
  *
- * @var array<string, string> $attr The block attributes.
+ * @var mixed[] $attr The block attributes.
  * @since 2.0.0
  *
  * @package uagb
