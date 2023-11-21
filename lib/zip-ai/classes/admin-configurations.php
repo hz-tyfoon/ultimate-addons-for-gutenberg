@@ -71,7 +71,6 @@ class Admin_Configurations {
 			add_action( 'admin_menu', array( $this, 'setup_menu_page' ) );
 		}
 
-
 		// Setup the Admin Ajax Actions.
 		add_action( 'wp_ajax_zip_ai_toggle_assistant_status_ajax', array( $this, 'toggle_assistant_status_ajax' ) );
 		add_action( 'wp_ajax_zip_ai_disabler_ajax', array( $this, 'disabler_ajax' ) );
