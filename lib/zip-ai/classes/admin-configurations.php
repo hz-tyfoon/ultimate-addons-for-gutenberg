@@ -69,7 +69,7 @@ class Admin_Configurations {
 		add_action( 'admin_menu', array( $this, 'setup_menu' ) );
 
 		// Setup the Admin Ajax Actions.
-		add_action( 'wp_ajax_zip_ai_toggle_chat_status_ajax', array( $this, 'toggle_chat_status_ajax' ) );
+		add_action( 'wp_ajax_zip_ai_toggle_assistant_status_ajax', array( $this, 'toggle_assistant_status_ajax' ) );
 		add_action( 'wp_ajax_zip_ai_disabler_ajax', array( $this, 'disabler_ajax' ) );
 	}
 
@@ -191,12 +191,12 @@ class Admin_Configurations {
 	}
 
 	/**
-	 * Setup the Admin Settings Ajax.
+	 * Setup the AI Assistant Toggle Ajax.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function toggle_chat_status_ajax() {
+	public function toggle_assistant_status_ajax() {
 		// If the current user does not have the required capability, then abandon ship.
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();
@@ -210,15 +210,22 @@ class Admin_Configurations {
 			wp_send_json_error();
 		}
 
+		// Create a variable to check if the assistant module was toggled.
+		$is_module_toggled = false;
+
 		// Update the enabled status.
 		if ( 'enabled' === sanitize_text_field( $_POST['enable_zip_chat'] ) ) {
-			Module::enable( 'ai_assistant' );
+			$is_module_toggled = Module::enable( 'ai_assistant' );
 		} else {
-			Module::disable( 'ai_assistant' );
+			$is_module_toggled = Module::disable( 'ai_assistant' );
 		}
 
-		// Send the status.
-		wp_send_json_success();
+		// Send the status based on whether the module was toggled.
+		if ( $is_module_toggled ) {
+			wp_send_json_success();
+		} else {
+			wp_send_json_error();
+		}
 	}
 
 	/**

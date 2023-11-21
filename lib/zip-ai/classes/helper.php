@@ -44,16 +44,11 @@ class Helper {
 	 * @param mixed  $value            The value to update.
 	 * @param bool   $network_override Whether to allow the network_override admin setting to be overridden on subsites.
 	 * @since 1.0.0
-	 * @return void
+	 * @return bool True if the option was updated, false otherwise.
 	 */
 	public static function update_admin_settings_option( $key, $value, $network_override = false ) {
-
-		// Update the site-wide option if we're in the network admin.
-		if ( $network_override && is_multisite() ) {
-			update_site_option( $key, $value );
-		} else {
-			update_option( $key, $value );
-		}
+		// Update the site-wide option if we're in the network admin, and return the updated status.
+		return $network_override && is_multisite() ? update_site_option( $key, $value ) : update_option( $key, $value );
 	}
 
 	/**
