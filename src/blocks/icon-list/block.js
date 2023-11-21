@@ -8,10 +8,10 @@ import Edit from './edit';
 import save from './save';
 import deprecated from './deprecated';
 import './style.scss';
-
+import colourNameToHex from '@Controls/changeColorNameToHex';
 import { __ } from '@wordpress/i18n';
 
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
 import { applyFilters } from '@wordpress/hooks';
 import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
@@ -35,4 +35,22 @@ registerBlockType( 'uagb/icon-list', {
 	edit: ( props ) => ( props.attributes.isPreview ? <PreviewImage image="icon-list" /> : <Edit { ...props } /> ),
 	save,
 	deprecated,
+	transforms: {
+		from: 
+		[ {
+				type: 'block',
+				blocks: [ 'core/list' ],
+				transform: ( _attributes, childBlocks ) => {
+					const iconListChildBlocks = childBlocks.map( ( listItem ) => {
+						return createBlock( 'uagb/icon-list-child', {
+							label: listItem.attributes.content,
+							label_color:colourNameToHex( _attributes.textColor ),
+						} );
+					} );
+
+					return createBlock( 'uagb/icon-list', {}, iconListChildBlocks );
+				},
+			},
+		],
+	},
 } );
