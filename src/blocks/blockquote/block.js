@@ -51,6 +51,19 @@ registerBlockType( 'uagb/blockquote', {
 			},
 			{
 				type: 'block',
+				blocks: [ 'core/pullquote' ],
+				transform: ( attribute ) => {
+					return createBlock( 'uagb/blockquote', {
+						descriptionText: attribute.value,
+						author: attribute.citation,
+						align: attribute.align,
+						descColor: colourNameToHex( attribute.textColor ),
+						authorColor: colourNameToHex( attribute.backgroundColor ),
+					} );
+				},
+			},
+			{
+				type: 'block',
 				blocks: [ 'core/heading' ],
 				transform: ( attribute ) => {
 					return createBlock( 'uagb/blockquote', {
