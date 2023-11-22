@@ -75,6 +75,25 @@ registerBlockType( 'uagb/image', {
 					} );
 				},
 			},
+			{
+				type: 'block',
+				blocks: [ 'core/cover' ],
+				transform: ( { url } ) => {
+					return createBlock( 'uagb/image', {
+						url,
+					} );
+				},
+			},
+			{
+				type: 'block',
+				blocks: [ 'core/media-text' ],
+				transform: ( { mediaUrl } ) => {
+					return createBlock( 'uagb/image', {
+						url:mediaUrl,
+					} );
+				},
+			},
+
 		],
 		to: [
 			{
