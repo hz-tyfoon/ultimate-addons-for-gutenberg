@@ -11,7 +11,7 @@ import './style.scss';
 
 import { __ } from '@wordpress/i18n';
 
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
 import { applyFilters } from '@wordpress/hooks';
 import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
@@ -35,4 +35,22 @@ registerBlockType( 'uagb/info-box', {
 	edit: ( props ) => ( props.attributes.isPreview ? <PreviewImage image="info-box" /> : <Edit { ...props } /> ),
 	save,
 	deprecated,
+	transforms: {
+		from: [
+		  {
+			type: 'block',
+			blocks: ['core/media-text'],
+			transform: ( _attributes, innerBlocks ) => {
+				const firstInnerBlockAttributes = innerBlocks[0]?.attributes || {};
+				const hasTitle = Boolean( firstInnerBlockAttributes.content );
+				return createBlock( 'uagb/info-box', {
+					source_type:'image',
+					infoBoxTitle:hasTitle ? firstInnerBlockAttributes.content:'',
+					iconImage: { url:_attributes.mediaUrl, },
+
+				} );
+			},
+		  },
+		],
+	  },
 } );
