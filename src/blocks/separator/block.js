@@ -11,6 +11,7 @@ import { registerBlockType, createBlock } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
 import { applyFilters } from '@wordpress/hooks';
 import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
+import colourNameToHex from '@Controls/changeColorNameToHex';
 const separatorCommonData = applyFilters( 'uagb/separator', addCommonDataToSpectraBlocks( {} ) );
 
 registerBlockType( 'uagb/separator', {
@@ -42,8 +43,9 @@ registerBlockType( 'uagb/separator', {
 			{
 				type: 'block',
 				blocks: [ 'core/separator' ],
-				transform: () => {
+				transform: ( _attributes ) => {
 					return createBlock( 'uagb/separator', {
+						separatorColor:colourNameToHex( _attribute.backgroundColor )
 				} );
 				},
 			},
