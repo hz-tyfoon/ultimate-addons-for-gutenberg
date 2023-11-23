@@ -78,9 +78,14 @@ registerBlockType( 'uagb/image', {
 			{
 				type: 'block',
 				blocks: [ 'core/cover' ],
-				transform: ( { url } ) => {
+				transform: ( _attributes, innerBlocks ) => {
+					const firstInnerBlockAttributes = innerBlocks[0]?.attributes || {};
+					const hasCaption = Boolean( firstInnerBlockAttributes.content );
 					return createBlock( 'uagb/image', {
-						url,
+						url:_attributes.url,
+						alt:_attributes.alt,
+						enableCaption: hasCaption,
+						caption: hasCaption ? firstInnerBlockAttributes.content: '',
 					} );
 				},
 			},
