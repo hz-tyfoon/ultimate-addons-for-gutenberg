@@ -92,9 +92,14 @@ registerBlockType( 'uagb/image', {
 			{
 				type: 'block',
 				blocks: [ 'core/media-text' ],
-				transform: ( { mediaUrl } ) => {
+				transform: ( _attributes, innerBlocks ) => {
+					const firstInnerBlockAttributes = innerBlocks[0]?.attributes || {};
+					const hasCaption = Boolean( firstInnerBlockAttributes.content );
 					return createBlock( 'uagb/image', {
-						url:mediaUrl,
+						url:_attributes.mediaUrl,
+						alt:_attributes.mediaAlt,
+						enableCaption: hasCaption,
+						caption: hasCaption ? firstInnerBlockAttributes.content: '',
 					} );
 				},
 			},
