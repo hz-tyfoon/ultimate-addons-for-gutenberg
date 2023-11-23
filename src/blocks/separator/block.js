@@ -45,7 +45,7 @@ registerBlockType( 'uagb/separator', {
 				blocks: [ 'core/separator' ],
 				transform: ( _attributes ) => {
 					return createBlock( 'uagb/separator', {
-						separatorColor:colourNameToHex( _attribute.backgroundColor )
+						separatorColor:colourNameToHex( _attributes.backgroundColor )
 				} );
 				},
 			},
