@@ -10,7 +10,7 @@ import save from './save';
 import deprecated from './deprecated';
 import { __ } from '@wordpress/i18n';
 
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
 import { applyFilters } from '@wordpress/hooks';
 import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
@@ -47,5 +47,17 @@ if ( 'yes' === uagb_blocks_info.uagb_old_user_less_than_2 || 'yes' === uagb_bloc
 		},
 		save,
 		deprecated,
+		transforms: {
+			from: [
+				{
+					type: 'block',
+					blocks: ['core/group'],
+					transform: ( _attributes, innerBlocks ) => {
+						return createBlock( 'uagb/section', {}, innerBlocks );
+					},
+				},
+			],
+		},
+	
 	} );
 }
