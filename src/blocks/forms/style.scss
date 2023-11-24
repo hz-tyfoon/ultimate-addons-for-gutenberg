@@ -371,6 +371,42 @@ select::before {
 				}
 				/* End here - To adjust the forms field width on tablet. */
 			}
+
+			/* Start here - To adjust the forms submit button width on tablet. */
+			&.uagb-forms-button-tablet-width-20 .uagb-forms-main-submit-button-wrap {
+				width: 20%;
+			}
+			&.uagb-forms-button-tablet-width-25 .uagb-forms-main-submit-button-wrap {
+				width: 25%;
+			}
+			&.uagb-forms-button-tablet-width-33 .uagb-forms-main-submit-button-wrap {
+				width: 33.33%;
+			}
+			&.uagb-forms-button-tablet-width-40 .uagb-forms-main-submit-button-wrap {
+				width: 40%;
+			}
+			&.uagb-forms-button-tablet-width-50 .uagb-forms-main-submit-button-wrap {
+				width: 50%;
+			}
+			&.uagb-forms-button-tablet-width-60 .uagb-forms-main-submit-button-wrap {
+				width: 60%;
+			}
+			&.uagb-forms-button-tablet-width-66 .uagb-forms-main-submit-button-wrap {
+				width: 66.66%;
+			}
+			&.uagb-forms-button-tablet-width-75 .uagb-forms-main-submit-button-wrap {
+				width: 75%;
+			}
+			&.uagb-forms-button-tablet-width-80 .uagb-forms-main-submit-button-wrap {
+				width: 80%;
+			}
+			&.uagb-forms-button-tablet-width-100 .uagb-forms-main-submit-button-wrap {
+				width: 100%;
+			}
+			&.uagb-forms-button-tablet-width-unset .uagb-forms-main-submit-button-wrap {
+				width: auto;
+			}
+			/* End here - To adjust the forms submit button width on tablet. */
 		}
 	}
 }
