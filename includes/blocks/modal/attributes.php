@@ -15,7 +15,7 @@ $content_border_attributes = UAGB_Block_Helper::uag_generate_border_attribute(
 	'content'
 );
 
-$additional_attributes = apply_filters(
+$additional_attributes = (array) apply_filters(
 	'spectra_modal_attributes',
 	array()
 );

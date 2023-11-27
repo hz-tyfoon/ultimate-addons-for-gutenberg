@@ -3,7 +3,8 @@
  * Frontend CSS loading File.
  *
  * @since 2.2.0
- *
+ * @var string[] $attr
+ * @var int $id
  * @package uagb
  */
 
