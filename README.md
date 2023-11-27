@@ -215,7 +215,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 
 ## Changelog ##
 
-### 2.10.2 - TUESDAY, 18th NOVEMBER 2023 ###
+### 2.10.2 - TUESDAY, 28th NOVEMBER 2023 ###
 * Fix: Buttons - Resolved an issue where the padding styles are getting overridden by Astra default padding styles.
 * Fix: Container - Resolved an issue wherein the animation slide right doesn't work as intended with Testimonial block in Firefox browser.
 * Fix: Container - Resolved an issue wherein the gradient overlay would not work as intended.
