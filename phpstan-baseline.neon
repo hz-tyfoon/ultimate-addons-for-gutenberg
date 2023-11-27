@@ -6906,13 +6906,6 @@ parameters:
 			count: 1
 			path: includes/blocks/lottie/frontend.js.php
 
-
-		
-
-		
-
-
-
 		-
 			message: "#^Parameter \\#1 \\$prefix of static method UAGB_Block_Helper\\:\\:uag_generate_border_attribute\\(\\) expects array, string given\\.$#"
 			count: 1
