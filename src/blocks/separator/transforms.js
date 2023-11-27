@@ -18,8 +18,11 @@ const transforms = {
             type: 'block',
             blocks: ['core/separator'],
             transform: ( _attributes ) => {
+                const sepStyle = ( _attributes.className === 'is-style-dots' ) ? 'dotted':'solid';
+                
                 return createBlock( 'uagb/separator', {
                     separatorColor: colourNameToHex( _attributes.backgroundColor ),
+                    separatorStyle:sepStyle,
                 } );
             },
         },

@@ -86,6 +86,8 @@ registerBlockType( 'uagb/image', {
 						alt:_attributes.alt,
 						enableCaption: hasCaption,
 						caption: hasCaption ? firstInnerBlockAttributes.content: '',
+						captionFontWeight: innerBlocks[0].attributes.style.typography.fontWeight,
+						captionFontSize: parseInt( innerBlocks[0].attributes.style.typography.fontSize ),
 					} );
 				},
 			},
@@ -100,6 +102,8 @@ registerBlockType( 'uagb/image', {
 						alt:_attributes.mediaAlt,
 						enableCaption: hasCaption,
 						caption: hasCaption ? firstInnerBlockAttributes.content: '',
+						captionFontWeight: innerBlocks[0].attributes.style.typography.fontWeight,
+						captionFontSize: parseInt( innerBlocks[0].attributes.style.typography.fontSize ),
 					} );
 				},
 			},
