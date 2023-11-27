@@ -9,11 +9,11 @@ import deprecated from './deprecated';
 import save from './save';
 import './style.scss';
 import { __ } from '@wordpress/i18n';
-import { registerBlockType, createBlock } from '@wordpress/blocks';
+import { registerBlockType } from '@wordpress/blocks';
 import PreviewImage from '@Controls/previewImage';
 import { applyFilters } from '@wordpress/hooks';
 import addCommonDataToSpectraBlocks from '@Controls/addCommonDataToSpectraBlocks';
-import colourNameToHex from '@Controls/changeColorNameToHex';
+import transforms from './transforms';
 let buttonsCommonData = {};
 buttonsCommonData = applyFilters( 'uagb/buttons', addCommonDataToSpectraBlocks( buttonsCommonData ) );
 registerBlockType( 'uagb/buttons', {
@@ -33,27 +33,7 @@ registerBlockType( 'uagb/buttons', {
 	edit: ( props ) => ( props.attributes.isPreview ? <PreviewImage image="buttons" /> : <Edit { ...props } /> ),
 	save,
 	deprecated,
-	transforms: {
-		from: [
-			{
-				type: 'block',
-				blocks: ['core/buttons'],
-				transform: ( _attributes, innerBlocks ) => {
-					const buttonsArray = [];
-					innerBlocks.forEach( innerBlock => {			
-						const buttonText = innerBlock.attributes.text;
-						const buttonBlock = createBlock( 'uagb/buttons-child', {
-							label: buttonText,
-							color:colourNameToHex( innerBlock.attributes.textColor ),
-							background:colourNameToHex( innerBlock.attributes.backgroundColor ),
-						} );
-						buttonsArray.push( buttonBlock );
-					} );
-					return createBlock( 'uagb/buttons', {}, buttonsArray );
-				},
-			},
-		],
-	},
+	transforms,
 
 	
 } );
