@@ -58,7 +58,7 @@ registerBlockType( 'uagb/blockquote', {
 						author: attribute.citation,
 						align: attribute.align,
 						descColor: colourNameToHex( attribute.textColor ),
-						authorColor: colourNameToHex( attribute.backgroundColor ),
+						authorColor: colourNameToHex( attribute.textColor ),
 					} );
 				},
 			},
