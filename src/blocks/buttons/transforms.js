@@ -8,12 +8,18 @@ const transforms = {
             blocks: ['core/buttons'],
             transform: ( _attributes, innerBlocks ) => {
                 const buttonsArray = [];
-                innerBlocks.forEach( innerBlock => {			
-                    const buttonText = innerBlock.attributes.text;
+
+                // eslint-disable-next-line no-console
+                console.log( 'innerBlocks', innerBlocks );
+                innerBlocks.forEach( innerBlock => {		
+                    const BlockAttributes = innerBlock.attributes;	
                     const buttonBlock = createBlock( 'uagb/buttons-child', {
-                        label: buttonText,
-                        color:colourNameToHex( innerBlock.attributes.textColor ),
-                        background:colourNameToHex( innerBlock.attributes.backgroundColor ),
+                        label: BlockAttributes.text,
+                        color:colourNameToHex( BlockAttributes.textColor ),
+                        background:colourNameToHex( BlockAttributes.backgroundColor ),
+                        fontWeight: BlockAttributes?.style?.typography?.fontWeight || '',
+						size: parseInt( BlockAttributes?.style?.typography?.fontSize || '' ),
+                        borderRadius:parseInt( BlockAttributes?.style?.border?.radius || '' ),
                     } );
                     buttonsArray.push( buttonBlock );
                 } );

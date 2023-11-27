@@ -13,8 +13,10 @@ const transforms = {
           return createBlock( 'uagb/info-box', {
             source_type: 'image',
             infoBoxTitle: hasTitle ? firstInnerBlockAttributes.content : '',
-            headingColor: colourNameToHex( _attributes.textColor ),
+            headingColor: colourNameToHex( firstInnerBlockAttributes.textColor ),
             iconImage: { url: _attributes.mediaUrl },
+            headFontWeight: firstInnerBlockAttributes?.style?.typography?.fontWeight || '',
+						headFontSize: parseInt( firstInnerBlockAttributes?.style?.typography?.fontSize || '' ),
           } );
         },
       },
