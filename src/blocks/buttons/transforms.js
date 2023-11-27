@@ -8,9 +8,6 @@ const transforms = {
             blocks: ['core/buttons'],
             transform: ( _attributes, innerBlocks ) => {
                 const buttonsArray = [];
-
-                // eslint-disable-next-line no-console
-                console.log( 'innerBlocks', innerBlocks );
                 innerBlocks.forEach( innerBlock => {		
                     const BlockAttributes = innerBlock.attributes;	
                     const buttonBlock = createBlock( 'uagb/buttons-child', {
