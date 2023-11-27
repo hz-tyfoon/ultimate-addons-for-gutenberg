@@ -56,12 +56,15 @@ registerBlockType( 'uagb/blockquote', {
 					return createBlock( 'uagb/blockquote', {
 						descriptionText: attribute.value,
 						author: attribute.citation,
-						descFontSize:parseInt( attribute.style.typography.fontSize ),
+						descFontSize:parseInt( attribute?.style?.typography?.fontSize ),
 						descFontWeight: attribute.style.typography.fontWeight ,
 						align: attribute.align,
 						enableTweet:false,
 						descColor: colourNameToHex( attribute.textColor ),
 						authorColor: colourNameToHex( attribute.textColor ),
+						descFontSize: parseInt( attribute?.style?.typography?.fontSize || '' ),
+                        descFontWeight: attribute?.style?.typography.fontWeight || '' ,
+
 					} );
 				},
 			},

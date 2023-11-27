@@ -48,7 +48,12 @@ registerBlockType( 'uagb/icon-list', {
 						} );
 					} );
 
-					return createBlock( 'uagb/icon-list', {}, iconListChildBlocks );
+					return createBlock( 'uagb/icon-list', {
+						iconColor:colourNameToHex( _attributes.textColor ),
+						fontWeight: _attributes?.style?.typography?.fontWeight || '' ,
+						fontSize: parseInt( _attributes?.style?.typography?.fontSize || '' ),
+					}, 
+					iconListChildBlocks );
 				},
 			},
 		],
