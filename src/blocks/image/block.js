@@ -86,8 +86,8 @@ registerBlockType( 'uagb/image', {
 						alt:_attributes.alt,
 						enableCaption: hasCaption,
 						caption: hasCaption ? firstInnerBlockAttributes.content: '',
-						captionFontWeight: innerBlocks[0].attributes.style.typography.fontWeight,
-						captionFontSize: parseInt( innerBlocks[0].attributes.style.typography.fontSize ),
+						captionFontWeight: firstInnerBlockAttributes?.style?.typography?.fontWeight || '',
+						captionFontSize: parseInt( firstInnerBlockAttributes?.style?.typography?.fontSize || '' ),
 					} );
 				},
 			},
@@ -97,13 +97,15 @@ registerBlockType( 'uagb/image', {
 				transform: ( _attributes, innerBlocks ) => {
 					const firstInnerBlockAttributes = innerBlocks[0]?.attributes || {};
 					const hasCaption = Boolean( firstInnerBlockAttributes.content );
+					// eslint-disable-next-line no-console
+					console.log( innerBlocks[0] );
 					return createBlock( 'uagb/image', {
 						url:_attributes.mediaUrl,
 						alt:_attributes.mediaAlt,
 						enableCaption: hasCaption,
 						caption: hasCaption ? firstInnerBlockAttributes.content: '',
-						captionFontWeight: innerBlocks[0].attributes.style.typography.fontWeight,
-						captionFontSize: parseInt( innerBlocks[0].attributes.style.typography.fontSize ),
+						captionFontWeight: firstInnerBlockAttributes?.style?.typography?.fontWeight || '',
+						captionFontSize: parseInt( firstInnerBlockAttributes?.style?.typography?.fontSize || '' ),
 					} );
 				},
 			},
