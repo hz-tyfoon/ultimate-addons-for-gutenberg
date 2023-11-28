@@ -188,7 +188,9 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 				add_filter( 'ast_block_templates_disable', '__return_true' );
 			}
 
-			// Includes Zip AI library.
+			// Add the filter for the Zip AI Library and include it.
+			add_filter( 'zip_ai_collab_product_details', array( $this, 'add_zip_ai_collab_product_details' ), 20, 1 );
+
 			require_once UAGB_DIR . 'lib/zip-ai/zip-ai.php';
 		}
 
@@ -520,6 +522,27 @@ if ( ! class_exists( 'UAGB_Loader' ) ) {
 			if ( $stored_domain !== $site_domain ) {
 				\UAGB_Admin_Helper::update_admin_settings_option( '__uagb_asset_version', time() );
 			}
+		}
+
+		/**
+		 * Add the Zip AI Collab Product Details.
+		 *
+		 * @param mixed $product_details The previous product details, if any.
+		 * @since x.x.x
+		 * @return array The Spectra product details.
+		 */
+		public function add_zip_ai_collab_product_details( $product_details ) {
+			// Overwrite the product details that were of a lower priority, if any.
+			$product_details = array(
+				'product_name'                          => 'Spectra',
+				'product_logo'                          => file_get_contents( UAGB_DIR . 'assets/images/logos/spectra.svg' ),
+				'product_primary_color'                 => '#5733ff',
+				'ai_assistant_learn_more_url'           => admin_url( 'tools.php?page=zip-ai' ),
+				'ai_assistant_authorized_disable_url'   => admin_url( 'tools.php?page=zip-ai' ),
+				'ai_assistant_unauthorized_disable_url' => admin_url( 'admin.php?page=spectra&path=settings&settings=block-settings' ),
+			);
+			// Return the Spectra product details.
+			return $product_details;
 		}
 	}
 }

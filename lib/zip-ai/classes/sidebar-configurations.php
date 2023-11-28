@@ -284,14 +284,15 @@ class Sidebar_Configurations {
 			$handle,
 			'zip_ai_react',
 			array(
-				'ajax_url'             => admin_url( 'admin-ajax.php' ),
-				'ajax_nonce'           => wp_create_nonce( 'zip_ai_ajax_nonce' ),
-				'admin_nonce'          => wp_create_nonce( 'zip_ai_admin_nonce' ),
-				'current_post_id'      => get_the_ID(),
-				'auth_middleware'      => Helper::get_auth_middleware_url(),
-				'is_authorized'        => Helper::is_authorized(),
-				'is_chat_enabled'      => Module::is_enabled( 'ai_assistant' ),
-				'is_customize_preview' => is_customize_preview(),
+				'ajax_url'               => admin_url( 'admin-ajax.php' ),
+				'ajax_nonce'             => wp_create_nonce( 'zip_ai_ajax_nonce' ),
+				'admin_nonce'            => wp_create_nonce( 'zip_ai_admin_nonce' ),
+				'current_post_id'        => get_the_ID(),
+				'auth_middleware'        => Helper::get_auth_middleware_url(),
+				'is_authorized'          => Helper::is_authorized(),
+				'is_chat_enabled'        => Module::is_enabled( 'ai_assistant' ),
+				'is_customize_preview'   => is_customize_preview(),
+				'collab_product_details' => apply_filters( 'zip_ai_collab_product_details', null ),
 			)
 		);
 	}
