@@ -228,6 +228,7 @@ Our external packages use [Rating Star Component](https://github.com/n49/react-s
 * Fix: Image - Resolved an issue wherein images would not load as intended after migration.
 * Fix: Global - Resolved an issue wherein the WooCommerce and custom template-styles would not load as intended in FSE theme.
 * Fix: Global - Resolved an issue wherein the template styles for custom post types would not load as intended in FSE themes.
+* Fix: Container - Resolved an issue wherein the fallback image would appear repeatedly when the container background is set to video.
 
 = 2.10.1 - SATURDAY, 11th NOVEMBER 2023 =
 * Improvement: Zip AI - Added an option to disable Zip AI.
