@@ -1,5 +1,5 @@
 import { memo } from '@wordpress/element';
-import TypographyControl from '@Components/typography';
+import TypographyControl from '../../components/typography';
 import { __ } from '@wordpress/i18n';
 import Range from '@Components/range/Range.js';
 import AdvancedPopColorControl from '@Components/color-control/advanced-pop-color-control.js';
@@ -432,6 +432,7 @@ const Settings = ( props ) => {
 				setAttributes={ setAttributes }
 			/>
 			<TypographyControl
+            // 
 				label={ __( 'Quote Typography', 'ultimate-addons-for-gutenberg' ) }
 				attributes={ attributes }
 				setAttributes={ setAttributes }

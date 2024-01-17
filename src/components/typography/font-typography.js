@@ -4,7 +4,8 @@
 import { __ } from '@wordpress/i18n';
 import UAGSelectControl from '@Components/select-control';
 import RangeTypographyControl from './range-typography';
-import googleFonts from '@Controls/fonts';
+import googleFonts from '../../../blocks-config/uagb-controls/fonts';
+// 
 import Select from 'react-select';
 
 const { uag_select_font_globally, uag_load_select_font_globally } = uagb_blocks_info;

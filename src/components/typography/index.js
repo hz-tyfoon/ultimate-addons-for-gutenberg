@@ -54,6 +54,7 @@ const TypographyControl = ( props ) => {
 				popupWrap &&
 				! popupWrap?.contains( e.target ) &&
 				! e.target?.parentElement?.parentElement?.classList?.contains( 'uag-font-family-select__menu' ) &&
+                // 
 				! e.target?.classList?.contains( 'uag-responsive-common-button' ) &&
 				! e.target?.closest( '.uag-responsive-common-button' ) &&
 				! e.target?.parentElement?.closest( '.uagb-reset' )
